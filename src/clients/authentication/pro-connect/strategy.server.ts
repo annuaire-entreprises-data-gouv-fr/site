@@ -3,7 +3,20 @@
 
 import { createServerOnlyFn } from "@tanstack/react-start";
 import { getRequestUrl } from "@tanstack/react-start/server";
-import { type BaseClient, generators, Issuer } from "openid-client";
+import {
+  authorizationCodeGrant,
+  buildAuthorizationUrl,
+  buildEndSessionUrl,
+  ClientSecretPost,
+  type Configuration,
+  calculatePKCECodeChallenge,
+  discovery,
+  fetchUserInfo,
+  randomNonce,
+  randomPKCECodeVerifier,
+  randomState,
+  refreshTokenGrant,
+} from "openid-client";
 import { HttpForbiddenError } from "#/clients/exceptions";
 import { InternalError } from "#/models/exceptions";
 import getSession from "#/utils/server-side-helper/get-session";
@@ -14,7 +27,7 @@ import {
 } from "#/utils/session/index.server";
 import { ProConnect2FANeeded, ProConnectReconnexionNeeded } from "./exceptions";
 
-let _client = undefined as BaseClient | undefined;
+let _client = undefined as Configuration | undefined;
 
 // LEGACY
 // Pro Connect was called Agent Connect in the past
@@ -55,16 +68,19 @@ export const getClient = createServerOnlyFn(async () => {
   ) {
     throw new Error("PRO CONNECT ENV variables are not defined");
   }
-  const proConnectIssuer = await Issuer.discover(ISSUER_URL);
-
-  _client = new proConnectIssuer.Client({
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    redirect_uris: [REDIRECT_URI],
-    post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-    id_token_signed_response_alg: "RS256",
-    userinfo_signed_response_alg: "RS256",
-  });
+  _client = await discovery(
+    new URL(ISSUER_URL),
+    CLIENT_ID,
+    {
+      client_secret: CLIENT_SECRET,
+      redirect_uris: [REDIRECT_URI],
+      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
+      id_token_signed_response_alg: "RS256",
+      userinfo_signed_response_alg: "RS256",
+      response_types: ["code"],
+    },
+    ClientSecretPost(CLIENT_SECRET)
+  );
 
   return _client;
 });
@@ -79,35 +95,61 @@ export const proConnectAuthorizeUrl = createServerOnlyFn(
     const client = await getClient();
     const session = await getCurrentSession();
 
-    if (skipStateGeneration && !(session.data.nonce && session.data.state)) {
+    if (
+      skipStateGeneration &&
+      !(
+        session.data.nonce &&
+        session.data.state &&
+        session.data.pkceCodeVerifier
+      )
+    ) {
       throw new InternalError({
         message:
-          "State and nonce are required when skipStateGeneration is true",
+          "State, nonce and PKCE verifier are required when skipStateGeneration is true",
       });
     }
 
-    const nonce = skipStateGeneration ? session.data.nonce : generators.nonce();
-    const state = skipStateGeneration ? session.data.state : generators.state();
+    const nonce = (
+      skipStateGeneration ? session.data.nonce : randomNonce()
+    ) as string;
+    const state = (
+      skipStateGeneration ? session.data.state : randomState()
+    ) as string;
+    const pkceCodeVerifier = skipStateGeneration
+      ? session.data.pkceCodeVerifier
+      : randomPKCECodeVerifier();
+    const codeChallenge = await calculatePKCECodeChallenge(
+      pkceCodeVerifier as string
+    );
 
     if (!skipStateGeneration) {
-      await setStateAndNonce(session, state, nonce);
+      await setStateAndNonce(session, state, nonce, pkceCodeVerifier);
     }
 
-    return client.authorizationUrl({
+    const { REDIRECT_URI } = getConfig();
+    if (!REDIRECT_URI) {
+      throw new InternalError({
+        message: "PRO CONNECT ENV variables are not defined",
+      });
+    }
+    return buildAuthorizationUrl(client, {
+      redirect_uri: REDIRECT_URI,
       scope: SCOPES,
-      acr_values: force2FA ? ACR_VALUES_2FA : undefined,
+      ...(force2FA ? { acr_values: ACR_VALUES_2FA } : {}),
       nonce,
       state,
-      login_hint: loginHint,
-      claims: {
+      code_challenge: codeChallenge,
+      code_challenge_method: "S256",
+      ...(loginHint ? { login_hint: loginHint } : {}),
+      claims: JSON.stringify({
         id_token: {
           amr: {
             essential: true,
           },
           ...(force2FA ? { acr: { essential: true } } : {}),
         },
-      },
-    });
+      }),
+    }).href;
   }
 );
 
@@ -132,15 +174,16 @@ export const proConnectAuthenticate = createServerOnlyFn(
     const client = await getClient();
     const session = await getCurrentSession();
     const url = getRequestUrl();
-    const params = client.callbackParams(url.toString());
-    const { REDIRECT_URI } = getConfig();
 
-    const tokenSet = await client.callback(REDIRECT_URI, params, {
-      nonce: session.data.nonce,
-      state: session.data.state,
+    const tokenSet = await authorizationCodeGrant(client, url, {
+      pkceCodeVerifier: session.data.pkceCodeVerifier,
+      expectedNonce: session.data.nonce,
+      expectedState: session.data.state,
+      idTokenExpected: true,
     });
 
-    const used2FA = tokenSet.claims().amr?.includes("mfa");
+    const claims = tokenSet.claims();
+    const used2FA = Array.isArray(claims?.amr) && claims.amr.includes("mfa");
 
     const accessToken = tokenSet.access_token;
 
@@ -148,7 +191,15 @@ export const proConnectAuthenticate = createServerOnlyFn(
       throw new HttpForbiddenError("No access token");
     }
 
-    const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
+    if (!claims?.sub) {
+      throw new HttpForbiddenError("No subject in id token");
+    }
+
+    const userInfo = (await fetchUserInfo(
+      client,
+      accessToken,
+      claims.sub
+    )) as unknown as IProConnectUserInfo;
 
     if (
       !used2FA &&
@@ -164,7 +215,7 @@ export const proConnectAuthenticate = createServerOnlyFn(
     await setProConnectTokenSet(session, {
       idToken: tokenSet.id_token,
       accessToken: tokenSet.access_token,
-      accessTokenExpiresAt: (tokenSet.expires_at || 0) * 1000,
+      accessTokenExpiresAt: Date.now() + (tokenSet.expires_in || 0) * 1000,
       refreshToken: tokenSet.refresh_token,
     });
 
@@ -176,10 +227,17 @@ export const proConnectLogoutUrl = createServerOnlyFn(async () => {
   const session = await getCurrentSession();
   const client = await getClient();
   const { POST_LOGOUT_REDIRECT_URI } = getConfig();
-  return client.endSessionUrl({
-    id_token_hint: session.data.proConnectTokenSet?.idToken,
+  if (!POST_LOGOUT_REDIRECT_URI) {
+    throw new InternalError({
+      message: "PRO CONNECT ENV variables are not defined",
+    });
+  }
+  return buildEndSessionUrl(client, {
+    ...(session.data.proConnectTokenSet?.idToken
+      ? { id_token_hint: session.data.proConnectTokenSet.idToken }
+      : {}),
     post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,
-  });
+  }).href;
 });
 
 export const proConnectGetOrRefreshAccessToken = createServerOnlyFn(
@@ -208,15 +266,17 @@ export const proConnectGetOrRefreshAccessToken = createServerOnlyFn(
     try {
       const client = await getClient();
 
-      const tokenSet = await client.refresh(
+      const tokenSet = await refreshTokenGrant(
+        client,
         session?.proConnectTokenSet?.refreshToken
       );
 
       session.proConnectTokenSet = {
         idToken: tokenSet.id_token,
         accessToken: tokenSet.access_token,
-        accessTokenExpiresAt: tokenSet.expires_at,
-        refreshToken: tokenSet.refreshToken as string,
+        accessTokenExpiresAt: Date.now() + (tokenSet.expires_in || 0) * 1000,
+        refreshToken:
+          tokenSet.refresh_token || session.proConnectTokenSet.refreshToken,
       };
 
       return tokenSet.access_token as string;

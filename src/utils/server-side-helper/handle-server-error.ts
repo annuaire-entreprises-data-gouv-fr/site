@@ -1,4 +1,4 @@
-import { redirect } from "@tanstack/react-router";
+import { isNotFound, isRedirect, redirect } from "@tanstack/react-router";
 import { ProConnectReconnexionNeeded } from "#/clients/authentication/pro-connect/exceptions";
 import { AgentOverRateLimitException } from "#/clients/authentication/rate-limiter/index.server";
 import { HttpNotFound, HttpUnauthorizedError } from "#/clients/exceptions";
@@ -15,6 +15,10 @@ export class MissingApplicationRightException extends Exception {
 }
 
 export function handleServerError(error: unknown) {
+  if (isRedirect(error) || isNotFound(error)) {
+    throw error;
+  }
+
   if (error instanceof ProConnectReconnexionNeeded) {
     throw redirect({ to: "/api/auth/agent-connect/login" });
   }

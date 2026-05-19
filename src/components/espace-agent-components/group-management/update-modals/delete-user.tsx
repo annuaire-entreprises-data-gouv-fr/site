@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import type { IRolesDataUser } from "#/clients/roles-data/interface";
 import { Warning } from "#/components-ui/alerts";
@@ -25,9 +26,10 @@ export default function DeleteUserButton({
 }) {
   const { showNotification } = useNotification();
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const removeUserFromGroup = useServerFn(removeUserFromGroupFn);
 
   const mutation = useMutation({
-    mutationFn: removeUserFromGroupFn,
+    mutationFn: removeUserFromGroup,
     onSuccess: () => {
       deleteUserFromGroupState(user.email);
       setShowConfirmation(false);
