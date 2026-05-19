@@ -3,7 +3,6 @@ import type { IAgentInfo } from "../agent";
 export interface ISession {
   // FranceConnect hide personal data request
   FC_CONNECT_CHECK?: {
-    codeVerifier: string;
     nonce: string;
     state: string;
   };
@@ -17,7 +16,6 @@ export interface ISession {
   nonce?: string;
   // connexion
   pathFrom?: string;
-  pkceCodeVerifier?: string;
   proConnectTokenSet?: {
     idToken?: string;
     accessToken?: string;

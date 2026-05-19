@@ -1,19 +1,7 @@
 import { randomBytes } from "node:crypto";
 import { createServerOnlyFn } from "@tanstack/react-start";
 import { getRequestUrl } from "@tanstack/react-start/server";
-import {
-  authorizationCodeGrant,
-  buildAuthorizationUrl,
-  buildEndSessionUrl,
-  ClientSecretPost,
-  type Configuration,
-  calculatePKCECodeChallenge,
-  discovery,
-  fetchUserInfo,
-  randomNonce,
-  randomPKCECodeVerifier,
-  randomState,
-} from "openid-client";
+import { type BaseClient, generators, Issuer } from "openid-client";
 import { HttpForbiddenError } from "#/clients/exceptions";
 import { InternalError } from "#/models/exceptions";
 import {
@@ -21,7 +9,7 @@ import {
   getHidePersonalDataRequestFCSession,
 } from "#/utils/session/index.server";
 
-let _client = undefined as Configuration | undefined;
+let _client = undefined as BaseClient | undefined;
 
 const getConfig = () => ({
   CLIENT_ID: process.env.FRANCE_CONNECT_CLIENT_ID,
@@ -53,19 +41,19 @@ export const getClient = createServerOnlyFn(async () => {
       message: "FRANCE CONNECT ENV variables are not defined",
     });
   }
-  _client = await discovery(
-    new globalThis.URL(`${URL}/api/v2/.well-known/openid-configuration`),
-    CLIENT_ID,
-    {
-      client_secret: CLIENT_SECRET,
-      redirect_uris: [REDIRECT_URI],
-      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-      id_token_signed_response_alg: "RS256",
-      userinfo_signed_response_alg: "RS256",
-      response_types: ["code"],
-    },
-    ClientSecretPost(CLIENT_SECRET)
+  const franceConnectIssuer = await Issuer.discover(
+    `${URL}/api/v2/.well-known/openid-configuration`
   );
+
+  _client = new franceConnectIssuer.Client({
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    redirect_uris: [REDIRECT_URI],
+    post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
+    id_token_signed_response_alg: "RS256",
+    userinfo_signed_response_alg: "RS256",
+    response_types: ["code"],
+  });
 
   return _client;
 });
@@ -73,30 +61,17 @@ export const getClient = createServerOnlyFn(async () => {
 export const franceConnectAuthorizeUrl = createServerOnlyFn(async () => {
   const client = await getClient();
   const session = await getCurrentSession();
-  const codeVerifier = randomPKCECodeVerifier();
-  const codeChallenge = await calculatePKCECodeChallenge(codeVerifier);
   const FC_CONNECT_CHECK = {
-    codeVerifier,
-    state: randomState(),
-    nonce: randomNonce(),
+    state: generators.state(),
+    nonce: generators.nonce(),
   };
   await session.update({ FC_CONNECT_CHECK });
 
-  const { REDIRECT_URI } = getConfig();
-  if (!REDIRECT_URI) {
-    throw new InternalError({
-      message: "FRANCE CONNECT ENV variables are not defined",
-    });
-  }
-  return buildAuthorizationUrl(client, {
-    redirect_uri: REDIRECT_URI,
+  return client.authorizationUrl({
     scope: "openid " + franceConnectScope.join(" "),
     acr_values: "eidas1",
-    code_challenge: codeChallenge,
-    code_challenge_method: "S256",
-    state: FC_CONNECT_CHECK.state,
-    nonce: FC_CONNECT_CHECK.nonce,
-  }).href;
+    ...FC_CONNECT_CHECK,
+  });
 });
 const franceConnectScope = ["family_name", "given_name", "birthdate"] as const;
 
@@ -112,12 +87,14 @@ export const franceConnectAuthenticate = createServerOnlyFn(
     const client = await getClient();
     const session = await getCurrentSession();
     const url = getRequestUrl();
-    const tokenSet = await authorizationCodeGrant(client, url, {
-      pkceCodeVerifier: session.data.FC_CONNECT_CHECK?.codeVerifier,
-      expectedNonce: session.data.FC_CONNECT_CHECK?.nonce,
-      expectedState: session.data.FC_CONNECT_CHECK?.state,
-      idTokenExpected: true,
-    });
+    const params = client.callbackParams(url.toString());
+    const { REDIRECT_URI } = getConfig();
+    const tokenSet = await client.callback(
+      // reuse redirect_uri
+      REDIRECT_URI,
+      params,
+      session.data.FC_CONNECT_CHECK
+    );
     await session.update({ FC_CONNECT_CHECK: undefined });
 
     const { access_token, id_token } = tokenSet;
@@ -125,12 +102,8 @@ export const franceConnectAuthenticate = createServerOnlyFn(
       throw new HttpForbiddenError("No access token");
     }
 
-    const claims = tokenSet.claims();
-    if (!claims?.sub) {
-      throw new HttpForbiddenError("No subject in id token");
-    }
-    const userInfo = await fetchUserInfo(client, access_token, claims.sub);
-    return { ...userInfo, id_token, sub: claims.sub };
+    const userInfo = await client.userinfo(access_token);
+    return { ...userInfo, id_token, sub: userInfo.sub };
   }
 );
 
@@ -148,16 +121,11 @@ export const franceConnectLogoutUrl = createServerOnlyFn(async () => {
   await session.update({ franceConnectHidePersonalDataSession: undefined });
 
   const { POST_LOGOUT_REDIRECT_URI, CLIENT_ID } = getConfig();
-  if (!(POST_LOGOUT_REDIRECT_URI && CLIENT_ID)) {
-    throw new InternalError({
-      message: "FRANCE CONNECT ENV variables are not defined",
-    });
-  }
 
-  return buildEndSessionUrl(client, {
+  return client.endSessionUrl({
     post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,
     client_id: CLIENT_ID,
     id_token_hint,
     state,
-  }).href;
+  });
 });

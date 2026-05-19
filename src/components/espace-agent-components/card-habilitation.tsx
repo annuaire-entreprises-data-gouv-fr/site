@@ -1,4 +1,3 @@
-import { useServerFn } from "@tanstack/react-start";
 import { useCallback, useId, useState } from "react";
 import ButtonLink from "#/components-ui/button";
 import { Icon } from "#/components-ui/icon/wrapper";
@@ -25,7 +24,6 @@ export const CardHabilitation = ({
 }: ICardHabilitationProps) => {
   const labelId = useId();
 
-  const triggerGetOrganisationGroups = useServerFn(getOrganizationsGroupsFn);
   const [organisationGroups, setOrganisationGroups] = useState<
     IAgentsOrganizationGroup[] | null
   >(null);
@@ -45,7 +43,7 @@ export const CardHabilitation = ({
     setIsLoadingOrganisationGroups(true);
 
     try {
-      const data = await triggerGetOrganisationGroups();
+      const data = await getOrganizationsGroupsFn();
       const newOrganisationGroups = data
         ? data.filter((group) => !groups.some((g) => g.id === group.id))
         : [];
