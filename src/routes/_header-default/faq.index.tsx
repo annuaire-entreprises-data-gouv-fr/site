@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "#/components/Link";
 import parseMarkdownSync from "#/components/markdown/parse-markdown";
-import StructuredDataFAQ from "#/components/structured-data/faq";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { allFaqArticles, allFaqArticlesByGroup } from "#/models/article/faq";
 import { meta } from "#/utils/seo";
@@ -64,7 +63,6 @@ const config = [
 
 export const Route = createFileRoute("/_header-default/faq/")({
   loader: async () => ({
-    faqArticles: allFaqArticles,
     faqArticlesByGroup: allFaqArticlesByGroup,
   }),
   head: () => {
@@ -83,6 +81,23 @@ export const Route = createFileRoute("/_header-default/faq/")({
           href: canonical,
         },
       ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: allFaqArticles.map(({ title, body }) => ({
+              "@type": "Question",
+              name: title,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: parseMarkdownSync(body).html,
+              },
+            })),
+          }),
+        },
+      ],
     };
   },
   component: RouteComponent,
@@ -90,43 +105,35 @@ export const Route = createFileRoute("/_header-default/faq/")({
 });
 
 function RouteComponent() {
-  const { faqArticles, faqArticlesByGroup } = Route.useLoaderData();
+  const { faqArticlesByGroup } = Route.useLoaderData();
 
   return (
-    <>
-      <StructuredDataFAQ
-        data={faqArticles.map(({ title, body }) => [
-          title,
-          parseMarkdownSync(body).html,
-        ])}
-      />
-      <TextWrapper>
-        <h1>Réponses à vos questions (FAQ) :</h1>
-        {config.map((configItem) => (
-          <>
-            <h2>{configItem.title}</h2>
-            <ul>
-              {(faqArticlesByGroup[configItem.key] || []).map(
-                ({ slug, title }, index) => (
-                  <li key={slug + index}>
-                    <Link params={{ slug }} to="/faq/$slug">
-                      {title}
-                    </Link>
-                  </li>
-                )
-              )}
-              {("additionnalLink" in configItem
-                ? configItem.additionnalLink
-                : []
-              ).map(({ href, label }, index) => (
-                <li key={href + index}>
-                  <Link to={href}>{label}</Link>
+    <TextWrapper>
+      <h1>Réponses à vos questions (FAQ) :</h1>
+      {config.map((configItem) => (
+        <>
+          <h2>{configItem.title}</h2>
+          <ul>
+            {(faqArticlesByGroup[configItem.key] || []).map(
+              ({ slug, title }, index) => (
+                <li key={slug + index}>
+                  <Link params={{ slug }} to="/faq/$slug">
+                    {title}
+                  </Link>
                 </li>
-              ))}
-            </ul>
-          </>
-        ))}
-      </TextWrapper>
-    </>
+              )
+            )}
+            {("additionnalLink" in configItem
+              ? configItem.additionnalLink
+              : []
+            ).map(({ href, label }, index) => (
+              <li key={href + index}>
+                <Link to={href}>{label}</Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      ))}
+    </TextWrapper>
   );
 }

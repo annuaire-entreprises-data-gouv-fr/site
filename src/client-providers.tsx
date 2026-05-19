@@ -13,8 +13,7 @@ export function ClientProviders({
   return (
     <BrowserIsOutdatedBanner>
       <AuthProvider user={user}>
-        {process.env.NODE_ENV === "production" &&
-          import.meta.env.VITE_MATOMO_SITE_ID && <MatomoInit />}
+        <MatomoInit />
         {children}
       </AuthProvider>
     </BrowserIsOutdatedBanner>

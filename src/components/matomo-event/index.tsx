@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 /**
  * Log an event in matomo but rendered from server side
  * @param param0
@@ -11,19 +13,13 @@ const MatomoEvent = ({
   category: string;
   action: string;
   name: string;
-}) => (
-  <script
-    dangerouslySetInnerHTML={{
-      __html: `
-          var _paq = window._paq || [];
-          _paq.push([
-              'trackEvent',
-              '${category}',
-              '${action}',
-              '${name}',
-          ]);
-        `,
-    }}
-  />
-);
+}) => {
+  useEffect(() => {
+    window._paq ??= [];
+
+    window._paq.push(["trackEvent", category, action, name]);
+  }, [category, action, name]);
+
+  return null;
+};
 export default MatomoEvent;

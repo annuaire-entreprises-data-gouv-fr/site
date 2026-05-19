@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import parseMarkdownSync from "#/components/markdown/parse-markdown";
-import StructuredDataFAQ from "#/components/structured-data/faq";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { allDefinitions } from "#/models/article/definitions";
 import { meta } from "#/utils/seo";
@@ -23,6 +22,23 @@ export const Route = createFileRoute("/_header-default/definitions/")({
           href: canonical,
         },
       ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: allDefinitions.map(({ title, body }) => ({
+              "@type": "Question",
+              name: title,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: parseMarkdownSync(body).html,
+              },
+            })),
+          }),
+        },
+      ],
     };
   },
   component: RouteComponent,
@@ -33,28 +49,20 @@ function RouteComponent() {
   const definitions = allDefinitions;
 
   return (
-    <>
-      <StructuredDataFAQ
-        data={definitions.map(({ title, body }) => [
-          title,
-          parseMarkdownSync(body).html,
-        ])}
-      />
-      <TextWrapper>
-        <h1>Définitions</h1>
-        <ul>
-          {definitions.map(({ slug, title }) => (
-            <li key={slug}>
-              <a
-                aria-label={title + ", voir la définition"}
-                href={`/definitions/${slug}`}
-              >
-                {title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </TextWrapper>
-    </>
+    <TextWrapper>
+      <h1>Définitions</h1>
+      <ul>
+        {definitions.map(({ slug, title }) => (
+          <li key={slug}>
+            <a
+              aria-label={title + ", voir la définition"}
+              href={`/definitions/${slug}`}
+            >
+              {title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </TextWrapper>
   );
 }

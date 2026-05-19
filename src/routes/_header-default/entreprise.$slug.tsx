@@ -19,11 +19,11 @@ import { UniteLegaleImmatriculationSection } from "#/components/screens/entrepri
 import UniteLegaleSummarySection from "#/components/screens/entreprise.$slug/summary-section";
 import { NotFound } from "#/components/screens/not-found";
 import ServicePublicSection from "#/components/service-public-section";
-import StructuredDataBreadcrumb from "#/components/structured-data/breadcrumb";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { useAuth } from "#/contexts/auth.context";
+import { EAdministration } from "#/models/administrations/EAdministration";
 import {
   ApplicationRights,
   hasRights,
@@ -35,6 +35,7 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from "#/models/core/types";
+import { FetchRessourceException } from "#/models/exceptions";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { getBaseUrl } from "#/utils/get-base-url";
@@ -46,6 +47,12 @@ import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
+import {
+  getDepartementFromCodePostal,
+  getUrlFromDepartement,
+  libelleFromDepartement,
+} from "#/utils/helpers/formatting/labels";
+import logErrorInSentry from "#/utils/sentry";
 import { meta } from "#/utils/seo";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
@@ -65,6 +72,20 @@ const loadEntreprisePage = createServerFn()
       }),
       getRechercheEntrepriseSourcesLastModified(),
     ]);
+
+    if (!uniteLegale) {
+      logErrorInSentry(
+        new FetchRessourceException({
+          cause: new Error("[DEBUG] UniteLegale not found in serverFn"),
+          ressource: "EmptyUniteLegaleFromEntreprisePageServerFn",
+          context: {
+            slug,
+            page: page.toString(),
+          },
+          administration: EAdministration.DINUM,
+        })
+      );
+    }
 
     if (
       uniteLegale.chemin &&
@@ -121,21 +142,59 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
     redirected: search.redirected,
     page: search.page,
   }),
-  loader: async ({ params, deps }) =>
-    await loadEntreprisePage({
+  loader: async ({ params, deps }) => {
+    const result = await loadEntreprisePage({
       data: {
         slug: params.slug,
         isRedirected: deps.redirected === 1,
         page: deps.page,
       },
-    }),
-  head: ({ loaderData }) => {
+    });
+
+    if (!result.uniteLegale) {
+      logErrorInSentry(
+        new FetchRessourceException({
+          cause: new Error(
+            "[DEBUG] UniteLegale not found but loader did not error"
+          ),
+          ressource: "EmptyUniteLegaleFromEntreprisePageLoader",
+          context: {
+            slug: params.slug,
+            page: deps.page.toString(),
+          },
+          administration: EAdministration.DINUM,
+        })
+      );
+    }
+
+    return result;
+  },
+  head: ({ loaderData, match }) => {
     if (!loaderData) {
       return meta.notFound();
     }
 
     const { uniteLegale } = loaderData;
+
+    if (!uniteLegale) {
+      logErrorInSentry(
+        new FetchRessourceException({
+          cause: new Error("[DEBUG] UniteLegale not found in head"),
+          ressource: "EmptyUniteLegaleFromEntreprisePageHead",
+          context: {
+            slug: match.params.slug,
+            page: match.search.page.toString(),
+          },
+          administration: EAdministration.DINUM,
+        })
+      );
+    }
+
     const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}`;
+    const naf = uniteLegale.activitePrincipale;
+    const dep = getDepartementFromCodePostal(uniteLegale.siege.codePostal);
+    const depUrl = getUrlFromDepartement(dep || "");
+
     return {
       meta: meta({
         title: uniteLegalePageTitle(uniteLegale),
@@ -153,6 +212,38 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
           href: canonical,
         },
       ],
+      scripts:
+        dep && depUrl && naf
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "BreadcrumbList",
+                  itemListElement: [
+                    {
+                      "@type": "ListItem",
+                      position: 1,
+                      name: "Entreprises par départements",
+                      item: "https://annuaire-entreprises.data.gouv.fr/departements/index.html",
+                    },
+                    {
+                      "@type": "ListItem",
+                      position: 2,
+                      name: `${libelleFromDepartement(dep)}`,
+                      item: `https://annuaire-entreprises.data.gouv.fr/departements/${depUrl}/index.html`,
+                    },
+                    {
+                      "@type": "ListItem",
+                      position: 3,
+                      name: naf,
+                      item: `https://annuaire-entreprises.data.gouv.fr/departements/${depUrl}/${naf}/1.html`,
+                    },
+                  ],
+                }),
+              },
+            ]
+          : [],
     };
   },
   component: RouteComponent,
@@ -220,7 +311,6 @@ function RouteComponent() {
           </>
         )}
       </div>
-      <StructuredDataBreadcrumb uniteLegale={uniteLegale} />
     </>
   );
 }
