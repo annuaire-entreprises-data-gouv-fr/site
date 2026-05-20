@@ -76,7 +76,7 @@ const loadEntreprisePage = createServerFn()
     if (!uniteLegale) {
       logErrorInSentry(
         new FetchRessourceException({
-          cause: new Error("[DEBUG] UniteLegale not found in serverFn"),
+          cause: new Error("[DEBUG2] UniteLegale not found in serverFn"),
           ressource: "EmptyUniteLegaleFromEntreprisePageServerFn",
           context: {
             slug,
@@ -155,10 +155,12 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
       logErrorInSentry(
         new FetchRessourceException({
           cause: new Error(
-            "[DEBUG] UniteLegale not found but loader did not error"
+            "[DEBUG2] UniteLegale not found but loader did not error"
           ),
           ressource: "EmptyUniteLegaleFromEntreprisePageLoader",
           context: {
+            loaderData: JSON.stringify(result),
+            loaderDataType: typeof result,
             slug: params.slug,
             page: deps.page.toString(),
           },
@@ -179,9 +181,11 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
     if (!uniteLegale) {
       logErrorInSentry(
         new FetchRessourceException({
-          cause: new Error("[DEBUG] UniteLegale not found in head"),
+          cause: new Error("[DEBUG2] UniteLegale not found in head"),
           ressource: "EmptyUniteLegaleFromEntreprisePageHead",
           context: {
+            loaderData: JSON.stringify(loaderData),
+            loaderDataType: typeof loaderData,
             slug: match.params.slug,
             page: match.search.page.toString(),
           },
