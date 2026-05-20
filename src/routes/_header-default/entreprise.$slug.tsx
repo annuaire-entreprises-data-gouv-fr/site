@@ -57,7 +57,7 @@ import { meta } from "#/utils/seo";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 
-const loadEntreprisePage = createServerFn()
+const loadEntreprisePage = createServerFn({ method: "POST" })
   .inputValidator(
     z.object({
       slug: z.string(),
@@ -72,20 +72,6 @@ const loadEntreprisePage = createServerFn()
       }),
       getRechercheEntrepriseSourcesLastModified(),
     ]);
-
-    if (!uniteLegale) {
-      logErrorInSentry(
-        new FetchRessourceException({
-          cause: new Error("[DEBUG2] UniteLegale not found in serverFn"),
-          ressource: "EmptyUniteLegaleFromEntreprisePageServerFn",
-          context: {
-            slug,
-            page: page.toString(),
-          },
-          administration: EAdministration.DINUM,
-        })
-      );
-    }
 
     if (
       uniteLegale.chemin &&
@@ -152,29 +138,29 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
     });
 
     if (!result.uniteLegale) {
-      logErrorInSentry(
-        new FetchRessourceException({
-          cause: new Error(
-            "[DEBUG2] UniteLegale not found but loader did not error"
-          ),
-          ressource: "EmptyUniteLegaleFromEntreprisePageLoader",
-          context: {
-            slug: params.slug,
-            resultConstructor: result?.constructor?.name,
-            isResponse: (result instanceof Response).toString(),
-            responseStatus:
-              result instanceof Response
-                ? result.status.toString()
-                : `Unknown ${Object.keys(result).join(", ")}`,
-            responseContentType:
-              result instanceof Response
-                ? (result.headers.get("content-type") ?? "")
-                : "",
-            responseUrl: result instanceof Response ? result.url : "",
-          },
-          administration: EAdministration.DINUM,
-        })
-      );
+      const exception = new FetchRessourceException({
+        cause: new Error(
+          "[DEBUG3] UniteLegale not found but loader did not error"
+        ),
+        ressource: "EmptyUniteLegaleFromEntreprisePageLoader",
+        context: {
+          slug: params.slug,
+          resultConstructor: result?.constructor?.name,
+          isResponse: (result instanceof Response).toString(),
+          responseStatus:
+            result instanceof Response
+              ? result.status.toString()
+              : `Unknown ${Object.keys(result).join(", ")}`,
+          responseContentType:
+            result instanceof Response
+              ? (result.headers.get("content-type") ?? "")
+              : "",
+          responseUrl: result instanceof Response ? result.url : "",
+        },
+        administration: EAdministration.DINUM,
+      });
+      logErrorInSentry(exception);
+      throw new Error("loadEntreprisePage returned an unexpected result");
     }
 
     return result;
@@ -189,7 +175,7 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
     if (!uniteLegale) {
       logErrorInSentry(
         new FetchRessourceException({
-          cause: new Error("[DEBUG2] UniteLegale not found in head"),
+          cause: new Error("[DEBUG3] UniteLegale not found in head"),
           ressource: "EmptyUniteLegaleFromEntreprisePageHead",
           context: {
             resultConstructor: loaderData?.constructor?.name,
