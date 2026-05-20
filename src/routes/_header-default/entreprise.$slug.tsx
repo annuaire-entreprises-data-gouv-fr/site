@@ -159,10 +159,18 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
           ),
           ressource: "EmptyUniteLegaleFromEntreprisePageLoader",
           context: {
-            loaderData: JSON.stringify(result),
-            loaderDataType: typeof result,
             slug: params.slug,
-            page: deps.page.toString(),
+            resultConstructor: result?.constructor?.name,
+            isResponse: (result instanceof Response).toString(),
+            responseStatus:
+              result instanceof Response
+                ? result.status.toString()
+                : `Unknown ${Object.keys(result).join(", ")}`,
+            responseContentType:
+              result instanceof Response
+                ? (result.headers.get("content-type") ?? "")
+                : "",
+            responseUrl: result instanceof Response ? result.url : "",
           },
           administration: EAdministration.DINUM,
         })
@@ -184,8 +192,17 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
           cause: new Error("[DEBUG2] UniteLegale not found in head"),
           ressource: "EmptyUniteLegaleFromEntreprisePageHead",
           context: {
-            loaderData: JSON.stringify(loaderData),
-            loaderDataType: typeof loaderData,
+            resultConstructor: loaderData?.constructor?.name,
+            isResponse: (loaderData instanceof Response).toString(),
+            responseStatus:
+              loaderData instanceof Response
+                ? loaderData.status.toString()
+                : "",
+            responseContentType:
+              loaderData instanceof Response
+                ? (loaderData.headers.get("content-type") ?? "")
+                : "",
+            responseUrl: loaderData instanceof Response ? loaderData.url : "",
             slug: match.params.slug,
             page: match.search.page.toString(),
           },

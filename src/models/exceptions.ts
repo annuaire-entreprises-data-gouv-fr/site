@@ -16,8 +16,11 @@ interface IExceptionArgument {
     browser?: string;
     digest?: string;
     domain?: string;
-    loaderData?: any;
-    loaderDataType?: any;
+    resultConstructor?: string;
+    isResponse?: string;
+    responseStatus?: string;
+    responseContentType?: string;
+    responseUrl?: string;
   };
   /** Message of the exception */
   message?: string;

@@ -37,11 +37,11 @@
     "@sentry/tanstackstart-react": "10.53.1",
     "@tanstack/react-devtools": "0.10.5",
     "@tanstack/react-query": "5.100.10",
-    "@tanstack/react-router": "1.170.1",
+    "@tanstack/react-router": "1.170.4",
     "@tanstack/react-router-devtools": "1.167.0",
     "@tanstack/react-router-ssr-query": "1.167.0",
-    "@tanstack/react-start": "1.168.2",
-    "@tanstack/router-plugin": "1.168.2",
+    "@tanstack/react-start": "1.168.6",
+    "@tanstack/router-plugin": "1.168.6",
     "@vcarl/remark-headings": "0.1.0",
     "chart.js": "4.5.1",
     "clsx": "2.1.1",
@@ -90,7 +90,7 @@
     "postcss-preset-env": "11.2.1",
     "typescript": "5.9.3",
     "ultracite": "7.7.0",
-    "vite": "8.0.12",
+    "vite": "8.0.13",
     "vitest": "4.1.6"
   },
   "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
