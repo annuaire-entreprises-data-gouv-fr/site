@@ -11,6 +11,12 @@
 #   site: true
 
 ---
+- date: 20/05/2026
+  target:
+    site: true
+  body: |
+    Le code du site de l'Annuaire des Entreprises a été migré vers le framework Tanstack Start.
+    Cette migration permet de rendre le site plus performant et fluidifier l'expérience utilisateur.
 - date: 12/05/2026
   target:
     agent: true
