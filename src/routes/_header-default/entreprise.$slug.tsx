@@ -57,6 +57,8 @@ import { meta } from "#/utils/seo";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 
+const MAX_RESPONSE_BODY_DEBUG_LENGTH = 10_000;
+
 const loadEntreprisePage = createServerFn({ method: "POST" })
   .inputValidator(
     z.object({
@@ -138,9 +140,11 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
     });
 
     if (!result.uniteLegale) {
+      const responseBody =
+        result instanceof Response ? await getResponseBodyForDebug(result) : "";
       const exception = new FetchRessourceException({
         cause: new Error(
-          "[DEBUG3] UniteLegale not found but loader did not error"
+          "[DEBUG4] UniteLegale not found but loader did not error"
         ),
         ressource: "EmptyUniteLegaleFromEntreprisePageLoader",
         context: {
@@ -159,43 +163,18 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
         },
         administration: EAdministration.DINUM,
       });
-      logErrorInSentry(exception);
+      logErrorInSentry(exception, { responseBody });
       throw new Error("loadEntreprisePage returned an unexpected result");
     }
 
     return result;
   },
-  head: ({ loaderData, match }) => {
+  head: ({ loaderData }) => {
     if (!loaderData) {
       return meta.notFound();
     }
 
     const { uniteLegale } = loaderData;
-
-    if (!uniteLegale) {
-      logErrorInSentry(
-        new FetchRessourceException({
-          cause: new Error("[DEBUG3] UniteLegale not found in head"),
-          ressource: "EmptyUniteLegaleFromEntreprisePageHead",
-          context: {
-            resultConstructor: loaderData?.constructor?.name,
-            isResponse: (loaderData instanceof Response).toString(),
-            responseStatus:
-              loaderData instanceof Response
-                ? loaderData.status.toString()
-                : "",
-            responseContentType:
-              loaderData instanceof Response
-                ? (loaderData.headers.get("content-type") ?? "")
-                : "",
-            responseUrl: loaderData instanceof Response ? loaderData.url : "",
-            slug: match.params.slug,
-            page: match.search.page.toString(),
-          },
-          administration: EAdministration.DINUM,
-        })
-      );
-    }
 
     const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}`;
     const naf = uniteLegale.activitePrincipale;
@@ -257,6 +236,22 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
   errorComponent: HeaderDefaultError,
   notFoundComponent: () => <NotFound withWrapper={false} />,
 });
+
+const getResponseBodyForDebug = async (response: Response) => {
+  try {
+    const body = await response.clone().text();
+    if (body.length <= MAX_RESPONSE_BODY_DEBUG_LENGTH) {
+      return body;
+    }
+    return `${body.slice(0, MAX_RESPONSE_BODY_DEBUG_LENGTH)}
+
+...[truncated ${body.length - MAX_RESPONSE_BODY_DEBUG_LENGTH} characters]`;
+  } catch (e) {
+    return `Failed to read response body: ${
+      e instanceof Error ? e.message : String(e)
+    }`;
+  }
+};
 
 function RouteComponent() {
   const { triggerRedirectedEvent, uniteLegale, isBot, sourcesLastModified } =
