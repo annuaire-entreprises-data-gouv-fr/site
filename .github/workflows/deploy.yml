@@ -86,7 +86,7 @@ jobs:
           app: "site"
           version: "${{ github.sha }}"
           environment: "${{ matrix.environment }}"
-          ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB_APP_DEPLOYER }}
           ssh-host: ${{ secrets[matrix.host] }}
           notify-on-failure: false
           notify-on-success: false
