@@ -8,7 +8,6 @@ ARG BUILD_VERSION=main
 ARG BUILD_REVISION
 ARG MAX_OLD_SPACE_SIZE=2048
 
-
 FROM ${NODE_IMAGE} AS base
 
 LABEL org.opencontainers.image.created="${BUILD_DATE}"

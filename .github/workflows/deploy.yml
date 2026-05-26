@@ -21,7 +21,7 @@ jobs:
           - environment: staging-03
             host: SSH_STAGING_03
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Create .env file
         run: |
           cat > .env << 'EOF'
