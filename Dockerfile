@@ -8,7 +8,8 @@ ARG BUILD_VERSION=main
 ARG BUILD_REVISION
 ARG MAX_OLD_SPACE_SIZE=2048
 
-WORKDIR /app
+
+FROM ${NODE_IMAGE} AS base
 
 LABEL org.opencontainers.image.created="${BUILD_DATE}"
 LABEL org.opencontainers.image.authors="https://github.com/annuaire-entreprises-data-gouv-fr/site/graphs/contributors"
@@ -23,8 +24,6 @@ LABEL org.opencontainers.image.title="Site Annuaire des Entreprises"
 LABEL org.opencontainers.image.description="Image Docker du site de l'Annuaire des Entreprises"
 LABEL org.opencontainers.image.base.name="node:20"
 LABEL org.opencontainers.image.base.digest=""
-
-FROM ${NODE_IMAGE} AS base
 
 ARG PNPM_VERSION
 ENV PNPM_HOME="/pnpm"
