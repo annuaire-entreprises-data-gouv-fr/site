@@ -4,8 +4,8 @@ packages:
 # npm security best practices
 # Source: https://github.com/lirantal/npm-security-best-practices
 
-# SECURITY: block packages newer than 1 days (1440 minutes)
-minimumReleaseAge: 1440
+# SECURITY: block packages newer than 3 days (4320 minutes)
+minimumReleaseAge: 4320
 
 # SECURITY: reject a version whose publishing trust signals regressed
 trustPolicy: no-downgrade
