@@ -22,7 +22,13 @@ export const clientBilansFinanciers = async (
   const response = await odsClient(
     {
       url,
-      config: { params: { q: `siren:${siren}` } },
+      config: {
+        params: {
+          q: `siren:${siren}`,
+          sort: "date_cloture_exercice",
+          rows: 20,
+        },
+      },
     },
     metaDataUrl
   );
