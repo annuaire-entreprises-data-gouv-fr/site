@@ -58,7 +58,7 @@ importers:
         version: 5.24.0
       nitro:
         specifier: 3.0.260429-beta
-        version: 3.0.260429-beta(dotenv@16.6.1)(jiti@2.7.0)(lru-cache@11.3.6)(vite@8.0.13(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
+        version: 3.0.260429-beta(dotenv@17.4.2)(jiti@2.7.0)(lru-cache@11.3.6)(vite@8.0.13(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
       openid-client:
         specifier: ^5.7.1
         version: 5.7.1
@@ -151,8 +151,8 @@ importers:
         specifier: 6.0.2
         version: 6.0.2(vite@8.0.13(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
       dotenv:
-        specifier: 16.6.1
-        version: 16.6.1
+        specifier: 17.4.2
+        version: 17.4.2
       js-yaml:
         specifier: 4.1.1
         version: 4.1.1
@@ -231,6 +231,7 @@ packages:
   '@aws-sdk/core@3.974.11':
     resolution: {integrity: sha512-QpnINq5FZH6EOaDEkmHdT7eUunbvD27pDNQypaWjFyYz7Zl1q3UCMQErBZxpmfGfI7MvI2TlK8KTkgNpv8b1ug==}
     engines: {node: '>=20.0.0'}
+    deprecated: Deprecated due to an error deserialization bug in JSON 1.0 protocol services, see https://github.com/aws/aws-sdk-js-v3/pull/8031. Newer version available.
 
   '@aws-sdk/crc64-nvme@3.972.8':
     resolution: {integrity: sha512-fVfUCL/Xh2zINYMPZvj+iBn6XWouQf0DAnjaWCI9MkmqXzL2Iy5FoQB8O7syFe6gN6AH1ecDDU58T51Ou0kFkA==}
@@ -2556,6 +2557,10 @@ packages:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
 
+  dotenv@17.4.2:
+    resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
+    engines: {node: '>=12'}
+
   earcut@3.0.2:
     resolution: {integrity: sha512-X7hshQbLyMJ/3RPhyObLARM2sNxxmRALLKx1+NVFFnQ9gKzmCrxm9+uLIAdBcvc8FNLpctqlQ2V6AE92Ol9UDQ==}
 
@@ -3858,6 +3863,11 @@ packages:
 
   srvx@0.11.15:
     resolution: {integrity: sha512-iXsux0UcOjdvs0LCMa2Ws3WwcDUozA3JN3BquNXkaFPP7TpRqgunKdEgoZ/uwb1J6xaYHfxtz9Twlh6yzwM6Tg==}
+    engines: {node: '>=20.16.0'}
+    hasBin: true
+
+  srvx@0.11.16:
+    resolution: {integrity: sha512-bp07zRuycfTY43IjAvvTFnmnJi8ikW0VFiHwOhhYcVW/L4xQ1XY4PAd4Nuum1rsA17C39zL7x+CDhrn5AL32Rw==}
     engines: {node: '>=20.16.0'}
     hasBin: true
 
@@ -7055,6 +7065,8 @@ snapshots:
 
   dotenv@16.6.1: {}
 
+  dotenv@17.4.2: {}
+
   earcut@3.0.2: {}
 
   electron-to-chromium@1.5.357: {}
@@ -7228,7 +7240,7 @@ snapshots:
   h3@2.0.1-rc.20(crossws@0.4.5(srvx@0.11.15)):
     dependencies:
       rou3: 0.8.1
-      srvx: 0.11.15
+      srvx: 0.11.16
     optionalDependencies:
       crossws: 0.4.5(srvx@0.11.15)
 
@@ -7792,7 +7804,7 @@ snapshots:
 
   nf3@0.3.17: {}
 
-  nitro@3.0.260429-beta(dotenv@16.6.1)(jiti@2.7.0)(lru-cache@11.3.6)(vite@8.0.13(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0)):
+  nitro@3.0.260429-beta(dotenv@17.4.2)(jiti@2.7.0)(lru-cache@11.3.6)(vite@8.0.13(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       consola: 3.4.2
       crossws: 0.4.5(srvx@0.11.15)
@@ -7809,7 +7821,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       unstorage: 2.0.0-alpha.7(db0@0.3.4)(lru-cache@11.3.6)(ofetch@2.0.0-alpha.3)
     optionalDependencies:
-      dotenv: 16.6.1
+      dotenv: 17.4.2
       jiti: 2.7.0
       vite: 8.0.13(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0)
     transitivePeerDependencies:
@@ -8500,6 +8512,8 @@ snapshots:
   space-separated-tokens@2.0.2: {}
 
   srvx@0.11.15: {}
+
+  srvx@0.11.16: {}
 
   stackback@0.0.2: {}
 

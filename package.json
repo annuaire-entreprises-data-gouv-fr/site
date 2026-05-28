@@ -81,7 +81,7 @@
     "@types/react-dom": "19.2.3",
     "@types/remark-heading-id": "1.0.0",
     "@vitejs/plugin-react": "6.0.2",
-    "dotenv": "16.6.1",
+    "dotenv": "17.4.2",
     "js-yaml": "4.1.1",
     "jsdom": "29.1.1",
     "lefthook": "2.1.6",
