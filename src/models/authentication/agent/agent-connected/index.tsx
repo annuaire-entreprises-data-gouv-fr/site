@@ -21,7 +21,7 @@ export class AgentConnected {
   constructor(userInfo: IProConnectUserInfo) {
     this.domain = this.extractDomain(userInfo?.email || "");
     this.idpId = userInfo.idp_id ?? "";
-    this.email = userInfo.email ?? "";
+    this.email = userInfo.email?.toLowerCase() ?? "";
     this.familyName = userInfo.family_name ?? "";
     this.firstName = userInfo.given_name ?? "";
     this.proConnectSub = userInfo.sub;

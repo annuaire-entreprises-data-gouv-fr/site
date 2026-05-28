@@ -20,7 +20,7 @@ export function GroupManagement({
 
   return groups.map((group) => {
     const currentUserRole = group.users.find(
-      (groupUser) => groupUser.email === user.email
+      (groupUser) => groupUser.email.toLowerCase() === user.email
     );
     const isAdmin = Boolean(currentUserRole?.is_admin);
     const setGroup = (group: IAgentsGroup) => {
