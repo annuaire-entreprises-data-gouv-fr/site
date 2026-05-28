@@ -19,23 +19,50 @@ export const clientBilansFinanciers = async (
   const url = routes.donneesFinancieres.ods.search;
   const metaDataUrl = routes.donneesFinancieres.ods.metadata;
 
-  const response = await odsClient(
-    {
-      url,
-      config: { params: { q: `siren:${siren}` } },
-    },
-    metaDataUrl
-  );
+  const [responseConsolide, responseOther] = await Promise.all([
+    odsClient(
+      {
+        url,
+        config: {
+          params: {
+            q: `siren:${siren} AND type_bilan:K`,
+            sort: "date_cloture_exercice",
+            rows: 10,
+          },
+        },
+      },
+      metaDataUrl
+    ),
+    odsClient(
+      {
+        url,
+        config: {
+          params: {
+            q: `siren:${siren} AND NOT type_bilan:K`,
+            sort: "date_cloture_exercice",
+            rows: 10,
+          },
+        },
+      },
+      metaDataUrl
+    ),
+  ]);
 
-  if (response.records.length === 0) {
+  if (
+    responseConsolide.records.length === 0 &&
+    responseOther.records.length === 0
+  ) {
     throw new HttpNotFound(siren);
   }
 
-  const indicateurs = mapToDomainObject(response.records);
+  const indicateurs = mapToDomainObject([
+    ...responseConsolide.records,
+    ...responseOther.records,
+  ]);
   return {
     indicateurs,
-    hasBilanConsolide: indicateurs[0].estConsolide,
-    lastModified: response.lastModified,
+    hasBilanConsolide: responseConsolide.records.length > 0,
+    lastModified: responseConsolide.lastModified || responseOther.lastModified,
     hasCADGFiP: false,
   };
 };
