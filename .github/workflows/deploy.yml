@@ -6,7 +6,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-
+    inputs:
+      tag:
+        description: "hash de commit ou nom de branche à déployer"
+        type: string
+        default: "${{ github.sha }}"
+        required: true
 jobs:
   build-docker:
     name: Build Docker image
@@ -25,28 +30,10 @@ jobs:
       - name: Create .env file
         run: |
           cat > .env << 'EOF'
-          INSEE_USERNAME=${{ secrets.INSEE_USERNAME }}
-          INSEE_PASSWORD=${{ secrets.INSEE_PASSWORD }}
-          INSEE_CLIENT_ID=${{ secrets.INSEE_CLIENT_ID }}
-          INSEE_CLIENT_SECRET=${{ secrets.INSEE_CLIENT_SECRET }}
-          INSEE_CLIENT_ID_FALLBACK=${{ secrets.INSEE_CLIENT_ID_FALLBACK }}
-          INSEE_CLIENT_SECRET_FALLBACK=${{ secrets.INSEE_CLIENT_SECRET_FALLBACK }}
-          INSEE_USERNAME_EXPORT_CSV=${{ secrets.INSEE_USERNAME_EXPORT_CSV }}
-          INSEE_PASSWORD_EXPORT_CSV=${{ secrets.INSEE_PASSWORD_EXPORT_CSV }}
-          INSEE_CLIENT_ID_EXPORT_CSV=${{ secrets.INSEE_CLIENT_ID_EXPORT_CSV }}
-          INSEE_CLIENT_SECRET_EXPORT_CSV=${{ secrets.INSEE_CLIENT_SECRET_EXPORT_CSV }}
-          INSEE_CLIENT_ID_AGENTS=${{ secrets.INSEE_CLIENT_ID_AGENTS }}
-          INSEE_CLIENT_SECRET_AGENTS=${{ secrets.INSEE_CLIENT_SECRET_AGENTS }}
-          INSEE_USERNAME_AGENTS=${{ secrets.INSEE_USERNAME_AGENTS }}
-          INSEE_PASSWORD_AGENTS=${{ secrets.INSEE_PASSWORD_AGENTS }}
-          INDEXING_ENABLED=enabled
-          MATOMO_ENABLED=disabled
           VITE_MATOMO_SITE_ID=${{ secrets.MATOMO_SITE_ID }}
-          MATOMO_API_SITE_ID=${{ secrets.MATOMO_API_SITE_ID }}
-          MATOMO_TOKEN_AUTH=${{ secrets.MATOMO_TOKEN_AUTH }}
-          VITE_IRON_SESSION_PWD=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-          GRIST_API_KEY=${{ secrets.GRIST_API_KEY }}
-          UPDOWN_IO_API_KEY=${{ secrets.UPDOWN_IO_API_KEY }}
+          VITE_DATAPASS_URL=${{ secrets.DATAPASS_URL }}
+          VITE_SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          VITE_BASE_URL=${{ secrets.BASE_URL }}
           EOF
       - name: Sanitize branch name
         run: echo "branch_name=$(echo '${{ github.ref_name }}' | sed 's/^[^\/]*\///')" >> $GITHUB_OUTPUT
@@ -84,7 +71,7 @@ jobs:
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v2.0
         with:
           app: "site"
-          version: "${{ github.sha }}"
+          version: "${{ inputs.tag }}"
           environment: "${{ matrix.environment }}"
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB_APP_DEPLOYER }}
           ssh-host: ${{ secrets[matrix.host] }}
