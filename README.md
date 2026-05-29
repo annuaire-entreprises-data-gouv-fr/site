@@ -143,7 +143,7 @@ Le code source est publié par la Direction interministérielle du numérique so
 
 ## Remontée d'erreur
 
-Nous utilisons [Sentry](https://errors.data.gouv) pour remonter les erreurs du site. Voici les bonnes pratiques à suivre pour remonter une erreur :
+Nous utilisons [Sentry](https://sentry.io/) pour remonter les erreurs du site. Voici les bonnes pratiques à suivre pour remonter une erreur :
 
 1. **Utiliser le bon niveau d'erreur**
 
