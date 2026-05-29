@@ -16,7 +16,10 @@ import TVAList from "./tva-list";
 const NoTVA = () => (
   <i>
     Pas de{" "}
-    <FAQLink to="/faq/tva-intracommunautaire" tooltipLabel="n° TVA valide">
+    <FAQLink
+      to="/definitions/tva-intracommunautaire"
+      tooltipLabel="n° TVA valide"
+    >
       Cette structure n’est plus en activité, par conséquent elle ne peut pas
       avoir de numéro de TVA valide.
     </FAQLink>
@@ -33,7 +36,7 @@ const TVAInvalide = ({
   <i>
     Pas de{" "}
     <FAQLink
-      to="/faq/tva-intracommunautaire"
+      to="/definitions/tva-intracommunautaire"
       tooltipLabel="n° TVA valide connu"
     >
       Le numéro de TVA {"FR" + formatIntFr(number)} n’est pas validé par

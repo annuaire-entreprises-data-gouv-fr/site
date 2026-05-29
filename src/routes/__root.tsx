@@ -31,6 +31,25 @@ export const Route = createRootRoute({
         title: "L'Annuaire des Entreprises",
         type: "application/opensearchdescription+xml",
       },
+      {
+        rel: "icon",
+        href: "/favicons/favicon.svg",
+        type: "image/svg+xml",
+      },
+      {
+        rel: "shortcut icon",
+        href: "/favicons/favicon.ico",
+        type: "image/x-icon",
+      },
+      {
+        rel: "manifest",
+        href: "/favicons/manifest.webmanifest",
+        crossOrigin: "use-credentials",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/favicons/apple-touch-icon.png",
+      },
     ],
   }),
   headers: () => getDefaultHeaders(),
