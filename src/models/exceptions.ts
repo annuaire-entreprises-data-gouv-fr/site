@@ -34,12 +34,35 @@ interface IExceptionArgument {
 
 export type IExceptionContext = NonNullable<IExceptionArgument["context"]>;
 
+const isObjectLike = (value: unknown): value is Record<string, unknown> =>
+  (typeof value === "object" || typeof value === "function") && value !== null;
+
+const getMessageFromCause = (cause: unknown) => {
+  if (cause === undefined || cause === null) {
+    return;
+  }
+
+  if (!isObjectLike(cause)) {
+    return String(cause);
+  }
+
+  if ("name" in cause && typeof cause.name === "string") {
+    return cause.name === "Error" && typeof cause.message === "string"
+      ? cause.message
+      : cause.name;
+  }
+
+  if ("message" in cause && typeof cause.message === "string") {
+    return cause.message;
+  }
+};
+
 export class Exception extends Error {
   public name: string;
   public context: IExceptionContext;
   constructor({ name, message, cause, context }: IExceptionArgument) {
-    if (message === undefined && cause && "name" in cause) {
-      message = cause.name === "Error" ? cause.message : cause.name;
+    if (message === undefined) {
+      message = getMessageFromCause(cause);
     }
     super(message, { cause });
     this.name = name;
