@@ -90,7 +90,10 @@ const EtablissementSection: React.FC<IProps> = ({
       ? []
       : [
           [
-            <Link params={{ slug: "tva-intracommunautaire" }} to="/faq/$slug">
+            <Link
+              params={{ slug: "tva-intracommunautaire" }}
+              to="/definitions/$slug"
+            >
               N° TVA Intracommunautaire
             </Link>,
             <PrintNever key="siege-social-link">

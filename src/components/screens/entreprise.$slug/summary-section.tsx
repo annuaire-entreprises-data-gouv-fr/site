@@ -77,7 +77,7 @@ const UniteLegaleSummarySection: React.FC<{
       uniteLegale.siege?.siret && formatSiret(uniteLegale.siege?.siret),
     ],
     [
-      <Link params={{ slug: "tva-intracommunautaire" }} to="/faq/$slug">
+      <Link params={{ slug: "tva-intracommunautaire" }} to="/definitions/$slug">
         N° TVA Intracommunautaire
       </Link>,
       <TVACell uniteLegale={uniteLegale} />,
