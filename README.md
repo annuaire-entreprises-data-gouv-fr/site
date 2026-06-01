@@ -48,61 +48,97 @@ Voici la liste des dépôts de code du projet [L'Annuaire des Entreprises](https
 
 ### Outils
 
-Nous utilisons [Commit-lint](https://commitlint.js.org/#/) avec [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#why-use-conventional-commits)
+Le site est une application React construite avec [TanStack Start](https://tanstack.com/start), [TanStack Router](https://tanstack.com/router), Vite et Nitro.
+
+Nous utilisons [pnpm](https://pnpm.io/) comme gestionnaire de paquets, [Vitest](https://vitest.dev/) pour les tests unitaires et [Playwright](https://playwright.dev/) pour les tests end-to-end.
+
+Nous utilisons [Commit-lint](https://commitlint.js.org/#/) avec [conventional-commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#why-use-conventional-commits).
 
 ### Installation
 
 #### Prérequis
 
-Le projet nécessite [node](https://github.com/nvm-sh/nvm) (voir package.json pour la version) pour être lancé en local.
+Le projet nécessite [node](https://github.com/nvm-sh/nvm) et pnpm. Les versions attendues sont déclarées dans `package.json` et `.nvmrc`.
 
 ```bash
-# Installation
-npm i
+# Activer pnpm via Corepack si nécessaire
+corepack enable
+
+# Installer les dépendances
+pnpm install
 
 # Copier le fichier .env
 cp .env.dev .env
 
-# Lancer le site en dev
-npm run dev
+# Lancer le site en développement
+pnpm dev
 
-# Lancer le site en prod
-npm run build && npm run start
+# Compiler et lancer le serveur de production Nitro
+pnpm build && pnpm start
 ```
+
+Le serveur de développement est disponible par défaut sur `http://localhost:3000`.
+
+Les commandes `pnpm dev` et `pnpm build` compilent automatiquement les données YAML en JSON via `pnpm compile:data`.
 
 #### node-gyp error on mac
 
 In some case you might need to update xcode command line tools to install dependencies
+
 ```
 sudo rm -rf /Library/Developer/CommandLineTools
 xcode-select --install
 ```
-
 
 ### Tests
 
 1. Linter
 
 ```bash
-npm run lint
+pnpm lint
 ```
 
-2. Tests unitaires
+2. TypeScript
 
 ```bash
-npm run test:unit
+pnpm typecheck
 ```
 
-3. Tests end2end
+3. Tests unitaires Vitest
 
 ```bash
-npm run test:end2end
+pnpm test:unit
 ```
 
 4. Tests API calls
 
 ```bash
-npm run test:api-clients
+pnpm test:api-clients
+```
+
+5. Tests de génération des fixtures de recherche d'entreprise
+
+```bash
+pnpm test:e2e:api-recherche
+```
+
+Pour mettre à jour les snapshots Vitest associés :
+
+```bash
+pnpm test:api-clients:update-snapshots
+pnpm test:e2e:api-recherche:update-snapshots
+```
+
+6. Tests end-to-end Playwright
+
+```bash
+pnpm test:end2end:run
+```
+
+Pour ouvrir l'interface Playwright :
+
+```bash
+pnpm test:end2end:open
 ```
 
 ## Deploiement
@@ -120,22 +156,14 @@ NB: Si plusieurs déploiements sont déclenchés en même temps, seul le premier
 
 ## Sitemap & scripts SEO
 
-Le script SEO est déclenché deux fois par mois par une github action.
-Il génère :
+Les actions SEO vivent dans le dépôt dédié [annuaire-entreprises-data-gouv-fr/seo](https://github.com/annuaire-entreprises-data-gouv-fr/seo).
+
+Le script SEO est déclenché deux fois par mois par une GitHub Action. Il génère :
 
 - un ensemble de sitemaps listant les ~8M d'unite legales (~200 fichiers)
 - un arbre de page de resultats statiques avec les ~8M d’UL (~200 000 fichiers)
 
 Les fichiers sont compressés puis stockés dans un artifact et téléchargés lors du déploiement sur les différents environnements.
-
-Le script est dans son propre dossier, avec son propre `package.json` et sa propre config `typescript`.
-
-Pour lancer le script :
-
-```bash
-cd seo-script
-npm run build:seo
-```
 
 ## Licence
 
