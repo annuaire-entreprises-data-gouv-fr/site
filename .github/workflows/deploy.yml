@@ -13,8 +13,40 @@ on:
         default: "${{ github.sha }}"
         required: true
 jobs:
-  build-docker:
-    name: Build Docker image
+  build-docker-staging:
+    name: Build staging Docker image
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - name: Create .env file
+        run: |
+          cat > .env << 'EOF'
+          VITE_MATOMO_SITE_ID=${{ secrets.MATOMO_SITE_ID_STAGING }}
+          VITE_DATAPASS_URL=${{ secrets.DATAPASS_URL_STAGING }}
+          VITE_SENTRY_DSN=${{ secrets.SENTRY_DSN_STAGING }}
+          VITE_BASE_URL=${{ secrets.BASE_URL_STAGING }}
+          EOF
+      - name: Sanitize branch name
+        run: echo "branch_name=$(echo '${{ github.ref_name }}' | sed 's/^[^\/]*\///')" >> $GITHUB_OUTPUT
+        id: sanitize
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.GITLAB_REGISTRY_URL }}
+          username: ${{ secrets.GITLAB_REGISTRY_USER }}
+          password: ${{ secrets.GITLAB_REGISTRY_PAT }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ github.sha }}-staging
+            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ steps.sanitize.outputs.branch_name }}-staging
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+  build-docker-production:
+    name: Build production Docker image
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
@@ -49,8 +81,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ github.sha }}
-            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ steps.sanitize.outputs.branch_name }}
+            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ github.sha }}-production
+            ${{ secrets.GITLAB_REGISTRY_URL }}/etalab/data.gouv.fr/infra/ade-site:${{ steps.sanitize.outputs.branch_name }}-production
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -58,7 +90,7 @@ jobs:
     name: Deploy - staging
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs: [build-docker]
+    needs: [build-docker-staging]
     environment:
       name: staging
     strategy:
@@ -71,7 +103,7 @@ jobs:
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v2.0
         with:
           app: "site"
-          version: "${{ inputs.tag }}"
+          version: "${{ inputs.tag }}-staging"
           environment: "${{ matrix.environment }}"
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB_APP_DEPLOYER }}
           ssh-host: ${{ secrets[matrix.host] }}
