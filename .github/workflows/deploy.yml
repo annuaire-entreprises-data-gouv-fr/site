@@ -10,7 +10,6 @@ on:
       tag:
         description: "hash de commit ou nom de branche à déployer"
         type: string
-        default: "${{ github.sha }}"
         required: true
 jobs:
   build-docker-staging:
@@ -103,7 +102,7 @@ jobs:
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v2.0
         with:
           app: "site"
-          version: "${{ inputs.tag }}-staging"
+          version: "${{ (inputs.tag || github.sha) }}-staging"
           environment: "${{ matrix.environment }}"
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB_APP_DEPLOYER }}
           ssh-host: ${{ secrets[matrix.host] }}
