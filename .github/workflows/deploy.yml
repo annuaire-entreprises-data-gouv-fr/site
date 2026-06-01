@@ -18,10 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - environment: staging-01
-            host: SSH_HOST_STAGING_V2
-          - environment: staging-02
-            host: SSH_STAGING_02
           - environment: staging-03
             host: SSH_STAGING_03
           - environment: staging-04
