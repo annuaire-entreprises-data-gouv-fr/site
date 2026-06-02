@@ -167,7 +167,7 @@ export const searchPersonCompanies = async (
   const [dmin, dmax] =
     typeof monthInterval === "string" ? ["", ""] : monthInterval;
 
-  if (!dmin || !dmax) {
+  if (!(dmin && dmax)) {
     logWarningInSentry(
       new Exception({
         name: "SearchDirigeantBadParams",

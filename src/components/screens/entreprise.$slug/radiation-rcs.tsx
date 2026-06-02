@@ -28,9 +28,11 @@ export const UniteLegaleRadiationRCS = ({
     "bodacc_radiation_displayed"
   );
   if (
-    !isBodaccRadiationDisplayed.isEnabled ||
-    !hasRights({ user }, ApplicationRights.isAgent) ||
-    !uniteLegale.bodacc?.radiation?.estRadie
+    !(
+      isBodaccRadiationDisplayed.isEnabled &&
+      hasRights({ user }, ApplicationRights.isAgent) &&
+      uniteLegale.bodacc?.radiation?.estRadie
+    )
   ) {
     return null;
   }

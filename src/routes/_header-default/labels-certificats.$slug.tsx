@@ -144,10 +144,10 @@ function RouteComponent() {
         uniteLegale={uniteLegale}
         user={user}
       />
-      {!checkHasLabelsAndCertificates(uniteLegale) &&
-        !hasRights({ user }, ApplicationRights.protectedCertificats) && (
-          <p>Cette structure ne possède aucun label ou certificat.</p>
-        )}
+      {!(
+        checkHasLabelsAndCertificates(uniteLegale) ||
+        hasRights({ user }, ApplicationRights.protectedCertificats)
+      ) && <p>Cette structure ne possède aucun label ou certificat.</p>}
       {estEss && <CertificationESSSection ess={ess} />}
       {estSocieteMission && <CertificationSocieteMission />}
       {estEntrepriseInclusive && (

@@ -97,8 +97,10 @@ const DirigeantsContent = ({
 }) => {
   // Non diffusible
   if (
-    !estDiffusible(uniteLegale) &&
-    !hasRights({ user }, ApplicationRights.nonDiffusible)
+    !(
+      estDiffusible(uniteLegale) ||
+      hasRights({ user }, ApplicationRights.nonDiffusible)
+    )
   ) {
     return <DonneesPriveesSection title="Dirigeant(s)" />;
   }

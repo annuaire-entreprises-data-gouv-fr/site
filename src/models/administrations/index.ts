@@ -36,7 +36,7 @@ const validateMetaData = (
     a.logoType === "portrait" ||
     a.logoType === "paysage";
 
-  if (!a.site || !a.long || !a.slug || !logoTypeIsValid) {
+  if (!(a.site && a.long && a.slug && logoTypeIsValid)) {
     throw new Error("Invalid administrationMetadata : " + a.slug);
   }
 

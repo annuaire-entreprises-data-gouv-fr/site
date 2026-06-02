@@ -15,8 +15,7 @@ export const clientEtablissementRechercheEntreprise = async (
   });
 
   if (
-    !results.length ||
-    !results[0] ||
+    !(results.length && results[0]) ||
     results[0].matchingEtablissements.length === 0
   ) {
     throw new HttpNotFound(siret);

@@ -48,7 +48,7 @@ const getEtablissementFromSlug = async (
 ): Promise<IEtablissement> => {
   const siret = verifySiret(slug);
 
-  const isBot = options?.isBot || false;
+  const isBot = options?.isBot;
 
   const etablissement = await fetchFromClients(siret, isBot);
 

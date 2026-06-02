@@ -67,5 +67,5 @@ export function hasAnyError<T>(
 export function isDataSuccess<T>(
   toBeDetermined: T | IDataFetchingState | IAPINotRespondingError
 ): toBeDetermined is T {
-  return !isDataLoading(toBeDetermined) && !hasAnyError(toBeDetermined);
+  return !(isDataLoading(toBeDetermined) || hasAnyError(toBeDetermined));
 }

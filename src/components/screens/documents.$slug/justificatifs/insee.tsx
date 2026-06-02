@@ -72,10 +72,8 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
     sources={[EAdministration.INSEE]}
     title="Justificatif d’inscription à l’Insee"
   >
-    {!estDiffusible(uniteLegale) &&
-    !hasRights({ user }, ApplicationRights.nonDiffusible) ? (
-      <AvisSituationNonDiffusible />
-    ) : (
+    {estDiffusible(uniteLegale) ||
+    hasRights({ user }, ApplicationRights.nonDiffusible) ? (
       <>
         <div className="description">
           Chaque établissement immatriculé par l’Insee au répertoire Sirene des
@@ -128,6 +126,8 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
           </>
         )}
       </>
+    ) : (
+      <AvisSituationNonDiffusible />
     )}
   </Section>
 );

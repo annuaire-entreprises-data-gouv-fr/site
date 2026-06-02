@@ -32,8 +32,7 @@ export const UniteLegaleInscriptionIG = ({
   uniteLegale: IUniteLegale;
 }) => {
   if (
-    !uniteLegale.dateMiseAJourInsee &&
-    !uniteLegale.dateMiseAJourInpi &&
+    !(uniteLegale.dateMiseAJourInsee || uniteLegale.dateMiseAJourInpi) &&
     uniteLegale.dateMiseAJourIG
   ) {
     return (

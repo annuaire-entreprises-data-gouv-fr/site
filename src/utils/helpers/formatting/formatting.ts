@@ -329,18 +329,20 @@ export const formatAdresse = ({
   libellePaysEtranger = "",
 }: IAdressFields) => {
   if (
-    !complement &&
-    !numeroVoie &&
-    !dernierNumeroVoie &&
-    !typeVoie &&
-    !libelleCommune &&
-    !distributionSpeciale &&
-    !codePostal &&
-    !codeCedex &&
-    !libelleVoie &&
-    !libelleCommuneEtranger &&
-    !codePaysEtranger &&
-    !libellePaysEtranger
+    !(
+      complement ||
+      numeroVoie ||
+      dernierNumeroVoie ||
+      typeVoie ||
+      libelleCommune ||
+      distributionSpeciale ||
+      codePostal ||
+      codeCedex ||
+      libelleVoie ||
+      libelleCommuneEtranger ||
+      codePaysEtranger ||
+      libellePaysEtranger
+    )
   ) {
     return "";
   }
@@ -370,7 +372,7 @@ export const agregateTripleFields = (
   field2: string | null,
   field3: string | null
 ) => {
-  if (!field1 && !field2 && !field3) {
+  if (!(field1 || field2 || field3)) {
     return null;
   }
   const field = `${field1 || ""} ${field2 || ""} ${field3 || ""}`;

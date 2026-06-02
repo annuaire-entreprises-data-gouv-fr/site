@@ -145,7 +145,7 @@ const verifyAdressConsistency = async (
     const hasDifferences = adress1formatted !== adress2formatted;
 
     if (hasDifferences) {
-      if (!adress1formatted || !adress2formatted) {
+      if (!(adress1formatted && adress2formatted)) {
         return true;
       }
 

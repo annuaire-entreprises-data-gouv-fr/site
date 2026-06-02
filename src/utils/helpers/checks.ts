@@ -12,8 +12,10 @@ const isSocietePersonnePhysiqueFromNatureJuridique = (
 ) => !!natureJuridique?.startsWith("2");
 
 export const isPersonneMoraleFromNatureJuridique = (natureJuridique: string) =>
-  !isEntrepreneurIndividuelFromNatureJuridique(natureJuridique) &&
-  !isSocietePersonnePhysiqueFromNatureJuridique(natureJuridique);
+  !(
+    isEntrepreneurIndividuelFromNatureJuridique(natureJuridique) ||
+    isSocietePersonnePhysiqueFromNatureJuridique(natureJuridique)
+  );
 
 export const isTwoMonthOld = (dateAsString: string) => {
   try {

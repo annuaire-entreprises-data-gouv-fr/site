@@ -181,7 +181,7 @@ const getStats = async (): Promise<IMatomoStats> => {
   const SITE_ID = process.env.VITE_MATOMO_SITE_ID;
   const API_SITE_ID = process.env.MATOMO_API_SITE_ID;
 
-  if (!SITE_ID || !API_SITE_ID) {
+  if (!(SITE_ID && API_SITE_ID)) {
     throw new InternalError({
       message: "Matomo site id (site & API) are required for the stats page",
     });

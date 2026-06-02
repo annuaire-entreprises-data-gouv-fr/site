@@ -21,8 +21,10 @@ export const DataInpiLinkWithExplanations = ({ uniteLegale, user }: IProps) => {
   const siteLink = `${routes.rne.portail.entreprise}${uniteLegale.siren}`;
 
   if (
-    !estDiffusible(uniteLegale) &&
-    !hasRights({ user }, ApplicationRights.nonDiffusible)
+    !(
+      estDiffusible(uniteLegale) ||
+      hasRights({ user }, ApplicationRights.nonDiffusible)
+    )
   ) {
     return (
       <>

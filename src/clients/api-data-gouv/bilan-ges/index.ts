@@ -38,7 +38,7 @@ const mapToDomainObject = (
     nombreSalaries: item.nombre_de_salariesdagents || "",
     region: item.region || "",
     departement: item.departement || "",
-    structureObligee: item.structure_obligee || false,
+    structureObligee: !!item.structure_obligee,
     modeConsolidation: item.mode_de_consolidation || "",
     anneeReporting: item.annee_de_reporting || 0,
     emissionsDirectes:

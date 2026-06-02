@@ -17,7 +17,7 @@ export const clientUniteLegaleRechercheEntreprise = async (
     pageEtablissements,
   });
 
-  if (!results.length || !results[0]) {
+  if (!(results.length && results[0])) {
     throw new HttpNotFound(siren);
   }
   return results[0];

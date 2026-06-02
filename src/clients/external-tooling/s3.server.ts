@@ -34,10 +34,12 @@ export const readFromS3 = createServerOnlyFn(
     const { config, params } = getBucketsLists()[bucketKey];
 
     if (
-      !config.credentials.accessKeyId ||
-      !config.credentials.secretAccessKey ||
-      !params.Bucket ||
-      !params.Key
+      !(
+        config.credentials.accessKeyId &&
+        config.credentials.secretAccessKey &&
+        params.Bucket &&
+        params.Key
+      )
     ) {
       throw new Error("Missing S3 credentials or incomplete params");
     }

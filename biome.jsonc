@@ -38,8 +38,7 @@
         "noBarrelFile": "off"
       },
       "complexity": {
-        "noExcessiveCognitiveComplexity": "off",
-        "useSimplifiedLogicExpression": "off"
+        "noExcessiveCognitiveComplexity": "off"
       },
       "correctness": {
         "useJsxKeyInIterable": "off",

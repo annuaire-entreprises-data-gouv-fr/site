@@ -47,7 +47,7 @@ const clientAPIEntreprise = createServerOnlyFn(
       throw new HttpUnauthorizedError("Missing recipient siret");
     }
 
-    if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
+    if (!(process.env.API_ENTREPRISE_URL && process.env.API_ENTREPRISE_TOKEN)) {
       throw new HttpUnauthorizedError("Missing API Entreprise credentials");
     }
 

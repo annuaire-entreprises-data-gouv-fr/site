@@ -84,7 +84,7 @@ export function sortDirigeants(
       // same role, sort by denomination
       return a.denomination < b.denomination ? -1 : 1;
     }
-    if (!isPersonneMorale(a) && !isPersonneMorale(b)) {
+    if (!(isPersonneMorale(a) || isPersonneMorale(b))) {
       // same role, sort by name
       if (a.nom === b.nom) {
         if (a.prenoms === b.prenoms) {

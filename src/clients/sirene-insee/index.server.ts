@@ -37,11 +37,13 @@ export class httpInseeClient {
     private password: string | undefined
   ) {
     if (
-      (!this.client_id ||
-        !this.client_secret ||
-        !this.token_url ||
-        !this.username ||
-        !this.password) &&
+      !(
+        this.client_id &&
+        this.client_secret &&
+        this.token_url &&
+        this.username &&
+        this.password
+      ) &&
       process.env.NODE_ENV === "production"
     ) {
       throw new HttpServerError("An insee env variable is undefined");

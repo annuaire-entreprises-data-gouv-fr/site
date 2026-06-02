@@ -164,7 +164,7 @@ function mapToAffectationPersonne(
   }));
 }
 function getNom(personne: IAffectationRecord["personne"]) {
-  if (!personne.prenom && !personne.nom) {
+  if (!(personne.prenom || personne.nom)) {
     return null;
   }
   return (

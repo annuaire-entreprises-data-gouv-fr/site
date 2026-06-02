@@ -41,9 +41,11 @@ export const UniteLegaleProcedureCollective = ({
     "bodacc_procedure_collective_displayed"
   );
   if (
-    !isBodaccProcedureCollectiveDisplayed.isEnabled ||
-    !hasRights({ user }, ApplicationRights.isAgent) ||
-    !uniteLegale.bodacc?.procedureCollective?.statut
+    !(
+      isBodaccProcedureCollectiveDisplayed.isEnabled &&
+      hasRights({ user }, ApplicationRights.isAgent) &&
+      uniteLegale.bodacc?.procedureCollective?.statut
+    )
   ) {
     return null;
   }

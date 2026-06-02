@@ -25,7 +25,7 @@ export const Route = createFileRoute(
   beforeLoad: async ({ params }) => {
     const slug = params.slug;
 
-    if (!isSiren(slug) && !isSiret(slug)) {
+    if (!(isSiren(slug) || isSiret(slug))) {
       throw notFound();
     }
   },

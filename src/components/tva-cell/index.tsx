@@ -155,9 +155,7 @@ const VerifyTVA: React.FC<{
         )
       ) : (
         <TVAInvalide
-          multipleNum={
-            tvaUniteLegale?.mayHaveMultipleTVANumber.allTime || false
-          }
+          multipleNum={!!tvaUniteLegale?.mayHaveMultipleTVANumber.allTime}
           number={tvaUniteLegale?.tvaNumber || ""}
         />
       )}

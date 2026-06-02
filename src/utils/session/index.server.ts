@@ -143,9 +143,11 @@ export const getHidePersonalDataRequestFCSession = createServerOnlyFn(
     NonNullable<ISession["franceConnectHidePersonalDataSession"]>
   > | null => {
     if (
-      !session?.franceConnectHidePersonalDataSession?.firstName ||
-      !session.franceConnectHidePersonalDataSession.familyName ||
-      !session.franceConnectHidePersonalDataSession.birthdate
+      !(
+        session?.franceConnectHidePersonalDataSession?.firstName &&
+        session.franceConnectHidePersonalDataSession.familyName &&
+        session.franceConnectHidePersonalDataSession.birthdate
+      )
     ) {
       return null;
     }

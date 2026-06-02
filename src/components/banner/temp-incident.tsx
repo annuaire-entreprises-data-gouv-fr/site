@@ -71,10 +71,12 @@ export default function TempIncidentBanner({
     isProconnectMigrationEnabled && !proconnectMigrationClosed;
 
   if (
-    !isDefaultIncidentEnabled &&
-    !isProconnectIncidentEnabled &&
-    !isPartnersDataIncidentEnabled &&
-    !isProConnectMigrationDisplayed
+    !(
+      isDefaultIncidentEnabled ||
+      isProconnectIncidentEnabled ||
+      isPartnersDataIncidentEnabled ||
+      isProConnectMigrationDisplayed
+    )
   ) {
     return null;
   }

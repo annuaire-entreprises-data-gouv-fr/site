@@ -77,8 +77,7 @@ export default function SubServicesSection({
   uniteLegale: IUniteLegale;
 }) {
   if (
-    !isDataSuccess(servicePublic) ||
-    !servicePublic.subServicesId ||
+    !(isDataSuccess(servicePublic) && servicePublic.subServicesId) ||
     servicePublic.subServicesId.length === 0
   ) {
     return null;

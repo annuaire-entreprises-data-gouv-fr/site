@@ -12,7 +12,7 @@ export function useFetchGeoLoc(etablissement: IEtablissement) {
       fetchData: async () => {
         let { latitude, longitude } = etablissement;
 
-        if (!latitude || !longitude) {
+        if (!(latitude && longitude)) {
           const { lat, long } = await getGeoLoc(etablissement);
           latitude = lat;
           longitude = long;

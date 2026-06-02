@@ -115,7 +115,7 @@ export class SireneQueryBuilder {
       return;
     }
 
-    if (!inclure && !inclureNo && !inclureNonRenseigne) {
+    if (!(inclure || inclureNo || inclureNonRenseigne)) {
       this.conditions.push(`(${field}:O AND ${field}:N)`);
       return;
     }
@@ -175,7 +175,7 @@ export class SireneQueryBuilder {
     headcount: { min: number; max: number },
     isHq?: boolean
   ) => {
-    if (!headcount?.min || !headcount?.max) {
+    if (!(headcount?.min && headcount?.max)) {
       return;
     }
 
@@ -248,10 +248,12 @@ export class SireneQueryBuilder {
     regions?: string[];
   }) => {
     if (
-      !location.codesPostaux?.length &&
-      !location.codesInsee?.length &&
-      !location.departments?.length &&
-      !location.regions?.length
+      !(
+        location.codesPostaux?.length ||
+        location.codesInsee?.length ||
+        location.departments?.length ||
+        location.regions?.length
+      )
     ) {
       return;
     }
@@ -307,7 +309,7 @@ export class SireneQueryBuilder {
     sap?: string[],
     isHq?: boolean
   ) => {
-    if (!naf?.length && !sap?.length) {
+    if (!(naf?.length || sap?.length)) {
       return;
     }
 

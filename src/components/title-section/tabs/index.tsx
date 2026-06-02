@@ -50,9 +50,7 @@ const getUniteLegaleTabs = (
 ): ITab[] => {
   const shouldDisplayFinances =
     // hide for public services
-    (!isServicePublic(uniteLegale) &&
-      // hide for EI
-      !isEntrepreneurIndividuel(uniteLegale)) ||
+    !(isServicePublic(uniteLegale) || isEntrepreneurIndividuel(uniteLegale)) ||
     hasAidesFinancieres(uniteLegale);
 
   return [
