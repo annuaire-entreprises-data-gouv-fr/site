@@ -3,7 +3,7 @@ import { Link } from "#/components/Link";
 import ButtonLink from "#/components-ui/button";
 import constants from "#/models/constants";
 
-const ErrorTemplate: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+const ErrorTemplate: React.FC<PropsWithChildren> = ({ children }) => (
   <div className="content-container">
     {children}
     <p>

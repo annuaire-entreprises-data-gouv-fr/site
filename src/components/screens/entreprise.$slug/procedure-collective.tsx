@@ -11,7 +11,7 @@ import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 import styles from "./style.module.css";
 
-const Wrapper: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+const Wrapper: React.FC<PropsWithChildren> = ({ children }) => (
   <div className={styles["inscriptions-wrapper"]}>
     <div>{children}</div>
   </div>

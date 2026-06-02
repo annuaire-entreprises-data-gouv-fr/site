@@ -11,8 +11,8 @@ import { logFatalErrorInSentry } from "#/utils/sentry";
 
 export interface IAPIEntrepriseResponse<T> {
   data: T;
-  links: {};
-  meta: {};
+  links: Record<string, unknown>;
+  meta: Record<string, unknown>;
 }
 /**
  * Wrapper client to call API Entreprise

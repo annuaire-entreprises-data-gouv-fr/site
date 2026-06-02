@@ -37,12 +37,8 @@
         "useTopLevelRegex": "off",
         "noBarrelFile": "off"
       },
-      "nursery": {
-        "noShadow": "off"
-      },
       "complexity": {
         "noExcessiveCognitiveComplexity": "off",
-        "noBannedTypes": "off",
         "useSimplifiedLogicExpression": "off"
       },
       "correctness": {

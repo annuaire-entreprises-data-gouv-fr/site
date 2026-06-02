@@ -3,7 +3,7 @@ import constants from "#/models/constants";
 
 const formLink = "https://tally.so/r/w478pA";
 
-export const WeNeedYouModal: React.FC<{}> = () => (
+export const WeNeedYouModal: React.FC = () => (
   <>
     <div
       aria-label="Donnez-nous votre avis"

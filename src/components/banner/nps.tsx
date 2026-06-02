@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 
 const NPS_MODAL_ID = "nps-modal-2";
 
-export const NPSBanner: React.FC<{}> = () => {
+export const NPSBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(

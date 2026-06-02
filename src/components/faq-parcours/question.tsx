@@ -228,7 +228,7 @@ export default function Question({
   }
 }
 
-const Answer: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+const Answer: React.FC<PropsWithChildren> = ({ children }) => (
   <>
     <p>
       <strong>Réponse</strong>

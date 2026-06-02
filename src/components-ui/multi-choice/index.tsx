@@ -1,4 +1,3 @@
-import type { ChangeEventHandler } from "react";
 import styles from "./style.module.css";
 
 export interface IProps {
@@ -12,13 +11,13 @@ export interface IProps {
   values: {
     label: string;
     value?: string;
-    onClick?: ChangeEventHandler<HTMLInputElement>;
+    onClick?: () => void;
     href?: string;
     checked?: boolean;
   }[];
 }
 
-const onKeyDown = (event: any, onclick?: Function) => {
+const onKeyDown = (event: any, onclick?: () => void) => {
   if (event.keyCode === 13 && onclick) {
     onclick();
   }
