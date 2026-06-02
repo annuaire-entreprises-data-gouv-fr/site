@@ -45,26 +45,26 @@ export const clientFiness = async (
 const mapJuridiqueToDomainObject = (
   response: IFinessJuridiqueItem
 ): IFiness => ({
-  idFinessJuridique: response["nofiness"] || "",
-  raisonSociale: response["rslongue"] || response["rs"] || "",
-  siren: response["siren"] || "",
+  idFinessJuridique: response.nofiness || "",
+  raisonSociale: response.rslongue || response.rs || "",
+  siren: response.siren || "",
   finessEtablissements: [],
 });
 
 const mapGeoToDomainObject = (
   response: IFinessGeoItem
 ): IFinessEtablissement => ({
-  idFinessGeo: response["nofinesset"] || "",
-  raisonSociale: response["rslongue"] || response["rs"] || "",
-  siret: response["siret"] || "",
-  phone: response["telephone"] || "",
-  category: response["libcategetab"] || "",
-  MFT: response["libmft"] || "",
-  SPH: response["libsph"] || "",
+  idFinessGeo: response.nofinesset || "",
+  raisonSociale: response.rslongue || response.rs || "",
+  siret: response.siret || "",
+  phone: response.telephone || "",
+  category: response.libcategetab || "",
+  MFT: response.libmft || "",
+  SPH: response.libsph || "",
   adresse: formatAdresse({
-    numeroVoie: response["numvoie"],
-    typeVoie: response["typvoie"],
-    libelleVoie: response["voie"],
-    libelleCommuneCedex: response["ligneacheminement"],
+    numeroVoie: response.numvoie,
+    typeVoie: response.typvoie,
+    libelleVoie: response.voie,
+    libelleCommuneCedex: response.ligneacheminement,
   }),
 });

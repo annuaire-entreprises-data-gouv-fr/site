@@ -26,7 +26,7 @@ function parseCSV(csvString: string) {
     });
 
     const output: IAgentMonitoring = {
-      email: row["Agent"],
+      email: row.Agent,
       rateLimits: {
         tenMinutes: Number.parseInt(row["Past 10 minutes"], 10),
         pastHour: Number.parseInt(row["Past hour"], 10),

@@ -43,7 +43,6 @@
         "noShadow": "off"
       },
       "complexity": {
-        "useLiteralKeys": "off",
         "noExcessiveCognitiveComplexity": "off",
         "noBannedTypes": "off",
         "noForEach": "off",

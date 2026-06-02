@@ -39,7 +39,7 @@ const AgentWall: React.FC<{
         <ButtonProConnect event="AGENT_WALL" noFootLink />
         <Link to="/lp/agent-public">⇢ Découvrir l'espace agent public</Link>
       </FloatingModal>
-      <div aria-hidden className={style["blur"]} tab-index="-1">
+      <div aria-hidden className={style.blur} tab-index="-1">
         <p>
           Nous recrutons ! Consultez notre{" "}
           <a href="https://www.numerique.gouv.fr/rejoignez-nous/">

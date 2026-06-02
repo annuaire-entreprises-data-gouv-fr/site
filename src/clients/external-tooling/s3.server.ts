@@ -65,7 +65,7 @@ export const readFromS3 = createServerOnlyFn(
           stream.once("end", () => resolve(responseDataChunks.join("")));
         });
       } catch (err: any) {
-        const statusCode = err["$metadata"]?.httpStatusCode;
+        const statusCode = err.$metadata?.httpStatusCode;
         if (statusCode === 404) {
           throw new HttpNotFound(err.Code);
         }

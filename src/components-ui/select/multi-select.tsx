@@ -35,15 +35,13 @@ export const MultiSelect = ({
     if (typeof defaultValue === "string") {
       return {
         value: defaultValue,
-        label: options.find((option) => option.value === defaultValue)?.[
-          "label"
-        ],
+        label: options.find((option) => option.value === defaultValue)?.label,
       };
     }
     if (Array.isArray(defaultValue)) {
       return defaultValue.map((v) => ({
         value: v,
-        label: options.find((option) => option.value === v)?.["label"],
+        label: options.find((option) => option.value === v)?.label,
       }));
     }
     return null;
@@ -59,7 +57,7 @@ export const MultiSelect = ({
     if (value) {
       return value.map((v) => ({
         value: v,
-        label: options.find((option) => option.value === v)?.["label"],
+        label: options.find((option) => option.value === v)?.label,
       }));
     }
   }, [value, options]);

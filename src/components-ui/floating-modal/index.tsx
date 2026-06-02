@@ -24,7 +24,7 @@ export default forwardRef(function FloatingModal(
       className={
         styles["floating-modal"] +
         " " +
-        (agentColor ? styles["agent"] : "") +
+        (agentColor ? styles.agent : "") +
         " " +
         (props.className ?? "") +
         " " +

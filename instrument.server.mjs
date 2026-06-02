@@ -55,7 +55,7 @@ if (isSentryActivated) {
       if (!event.tags) {
         event.tags = {};
       }
-      event.tags["is_bot"] = isUserAgentABot(
+      event.tags.is_bot = isUserAgentABot(
         event.request.headers["user-agent"] ?? ""
       );
 

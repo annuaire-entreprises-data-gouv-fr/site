@@ -13,8 +13,8 @@ describe("DataStore", () => {
       () => {
         t += 1;
         const m = {} as { [key: string]: boolean };
-        m["foo"] = true;
-        m["bar"] = true;
+        m.foo = true;
+        m.bar = true;
         return m;
       },
       0

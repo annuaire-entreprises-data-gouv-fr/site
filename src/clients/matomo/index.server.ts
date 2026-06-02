@@ -153,7 +153,7 @@ const computeStats = (
     }, [])
     .sort((a, b) => b.count - a.count);
 
-  mostCopied.push({ label: "Autre", count: mostCopiedAggregator["Autre"] });
+  mostCopied.push({ label: "Autre", count: mostCopiedAggregator.Autre });
 
   return {
     copyPasteAction,
@@ -306,12 +306,12 @@ const getNpsRecords = async () => {
     if (!months[monthLabel][userType]) {
       months[monthLabel][userType] = [];
     }
-    if (!months[monthLabel]["all"]) {
-      months[monthLabel]["all"] = [];
+    if (!months[monthLabel].all) {
+      months[monthLabel].all = [];
     }
 
     months[monthLabel][userType].push(mood);
-    months[monthLabel]["all"].push(mood);
+    months[monthLabel].all.push(mood);
 
     totals[userType] = (totals[userType] || 0) + 1;
   });

@@ -229,7 +229,7 @@ function mapToLiens(record: IServicePublicRecord) {
     organigramme: null,
   };
   liens.sitesInternet = (
-    JSON.parse(record["site_internet"] || "[]") as Array<{
+    JSON.parse(record.site_internet || "[]") as Array<{
       valeur: string;
       libelle: string;
     }>
@@ -242,23 +242,23 @@ function mapToLiens(record: IServicePublicRecord) {
     valeur: site.valeur,
   }));
 
-  if (record["formulaire_contact"]) {
+  if (record.formulaire_contact) {
     liens.formulaireContact = {
       libelle: "Accéder au formulaire de contact",
-      valeur: record["formulaire_contact"],
+      valeur: record.formulaire_contact,
     };
   }
 
-  const organigrammes = JSON.parse(record["organigramme"] || "[]") as Array<{
+  const organigrammes = JSON.parse(record.organigramme || "[]") as Array<{
     valeur: string;
     libelle: string;
   }>;
   liens.organigramme = firstArrayElement(organigrammes, null);
 
-  if (record["url_service_public"]) {
+  if (record.url_service_public) {
     liens.annuaireServicePublic = {
       libelle: "Informations supplémentaires (annuaire du service-public)",
-      valeur: record["url_service_public"],
+      valeur: record.url_service_public,
     };
   }
 

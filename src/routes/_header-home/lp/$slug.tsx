@@ -98,7 +98,7 @@ function RouteComponent() {
               className="fr-col-12 fr-col-sm-4 fr-col-md-4"
               key={block.title}
             >
-              <div className={styles["reassurance"]}>
+              <div className={styles.reassurance}>
                 <h2>{block.title}</h2>
                 <RenderMarkdown>{block.body}</RenderMarkdown>
               </div>

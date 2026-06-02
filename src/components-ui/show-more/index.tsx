@@ -23,14 +23,14 @@ export default function ShowMore(props: IProps) {
   const collapsedHeight = props.collapsedHeight ?? "30rem";
   return (
     <div
-      className={isExpanded ? styles["expanded"] : styles["collapsed"]}
+      className={isExpanded ? styles.expanded : styles.collapsed}
       style={
         {
           "--collapsed-height": collapsedHeight,
         } as CSSProperties
       }
     >
-      <div className={styles["content"]}>{props.children}</div>
+      <div className={styles.content}>{props.children}</div>
       <div className={styles["button-container"]}>
         <ButtonLink
           alt
