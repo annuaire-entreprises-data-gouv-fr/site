@@ -31,7 +31,7 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   target = "",
   nofollow = false,
   hideExternalIcon = false,
-  onClick = () => {},
+  onClick,
 }) => {
   const className = clsx("fr-btn", {
     "fr-btn--secondary": alt,

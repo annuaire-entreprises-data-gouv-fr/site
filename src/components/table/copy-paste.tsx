@@ -168,5 +168,7 @@ function logCopyPaste(label: string) {
   try {
     const _paq = window._paq || [];
     _paq.push(["trackEvent", "action", "copyPaste", `${label}`]);
-  } catch {}
+  } catch {
+    // Analytics failures must not interrupt copy-paste behavior.
+  }
 }

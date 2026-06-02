@@ -18,7 +18,9 @@ const safe =
       let argsAsString = "";
       try {
         argsAsString = args.toString();
-      } catch {}
+      } catch {
+        // Keep the formatter fallback empty when arguments cannot be stringified.
+      }
       logErrorInSentry(
         new InternalError({
           message: "Formatting error",

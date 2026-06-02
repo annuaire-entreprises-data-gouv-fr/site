@@ -81,7 +81,9 @@ export const FilterGeo: React.FC<{
       ];
 
       setSuggestsHistory(newSuggestHistory.slice(0, 4));
-    } catch {}
+    } catch {
+      // Suggest history is optional and should not block geo search.
+    }
   };
 
   const onChange = (inputElement: any) => {
@@ -136,19 +138,9 @@ export const FilterGeo: React.FC<{
         type="search"
         value={searchTerm}
       />
-      <input
-        name="cp_dep_label"
-        onChange={() => {}}
-        type="hidden"
-        value={labelDep}
-      />
-      <input
-        name="cp_dep_type"
-        onChange={() => {}}
-        type="hidden"
-        value={typeDep}
-      />
-      <input name="cp_dep" onChange={() => {}} type="hidden" value={dep} />
+      <input name="cp_dep_label" readOnly type="hidden" value={labelDep} />
+      <input name="cp_dep_type" readOnly type="hidden" value={typeDep} />
+      <input name="cp_dep" readOnly type="hidden" value={dep} />
       {issue === Issue.NONE ? (
         <>
           {showSuggestsHistory &&

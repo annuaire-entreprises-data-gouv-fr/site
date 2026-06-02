@@ -30,8 +30,7 @@
         "noArrayIndexKey": "off",
         "useAwait": "off",
         "noConsole": "off",
-        "useIterableCallbackReturn": "off",
-        "noEmptyBlockStatements": "off"
+        "useIterableCallbackReturn": "off"
       },
       "performance": {
         "useTopLevelRegex": "off",

@@ -54,7 +54,9 @@ const mapToDomainObject = (bioItems: IBioItem[]): IEtablissementBio[] => {
     let siret = "";
     try {
       siret = verifySiret(bioItem.siret || "");
-    } catch {}
+    } catch {
+      // Invalid SIRET values are ignored for bio certificates.
+    }
 
     const validCertificates = (bioItem.certificats || []).filter(
       (certif) => certif.etatCertification === "ENGAGEE"

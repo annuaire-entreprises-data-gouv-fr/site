@@ -69,7 +69,7 @@ export const FilterFinances: React.FC<{
           <input
             id="ca-min-input"
             name="ca_min"
-            onChange={() => {}}
+            readOnly
             type="hidden"
             value={CA[valueCA.min]}
           />
@@ -83,7 +83,7 @@ export const FilterFinances: React.FC<{
           <input
             id="ca-max-input"
             name="ca_max"
-            onChange={() => {}}
+            readOnly
             type="hidden"
             value={CA[valueCA.max]}
           />
@@ -97,7 +97,7 @@ export const FilterFinances: React.FC<{
           <input
             id="res-min-input"
             name="res_min"
-            onChange={() => {}}
+            readOnly
             type="hidden"
             value={Res[valueRes.min]}
           />
@@ -111,7 +111,7 @@ export const FilterFinances: React.FC<{
           <input
             id="res-max-input"
             name="res_max"
-            onChange={() => {}}
+            readOnly
             type="hidden"
             value={Res[valueRes.max]}
           />

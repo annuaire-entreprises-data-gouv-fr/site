@@ -7,6 +7,10 @@ import { Link } from "#/components/Link";
 import { Select } from "#/components-ui/select";
 import constants from "#/models/constants";
 
+const disableLegendClick = () => {
+  // Keep stacked NPS segments visible when users click the legend.
+};
+
 export const NpsStats: React.FC<{
   monthlyNps: IMatomoStats["monthlyNps"];
 }> = ({ monthlyNps }) => {
@@ -145,7 +149,7 @@ export const NpsStats: React.FC<{
         height="300px"
         options={{ scales: { y: { min: 1, max: 100 } } }}
         pluginOption={{
-          legend: { onClick: () => {} },
+          legend: { onClick: disableLegendClick },
           tooltip: {
             callbacks: {
               label(context) {
