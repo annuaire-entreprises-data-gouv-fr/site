@@ -17,7 +17,6 @@
       "style": {
         "noMagicNumbers": "off",
         "noNestedTernary": "off",
-        "noEnum": "off",
         "useFilenamingConvention": "off",
         "noDescendingSpecificity": "off"
       },

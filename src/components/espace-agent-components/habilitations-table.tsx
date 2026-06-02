@@ -105,9 +105,9 @@ const tooltipContent: Partial<
   Record<
     Exclude<
       ApplicationRights,
-      | ApplicationRights.administrateur
-      | ApplicationRights.isAgent
-      | ApplicationRights.opendata
+      | typeof ApplicationRights.administrateur
+      | typeof ApplicationRights.isAgent
+      | typeof ApplicationRights.opendata
     >,
     React.ReactNode
   >

@@ -15,13 +15,14 @@ import {
 } from "#/models/authentication/user/rights";
 import type { ISession } from "#/models/authentication/user/session";
 import { logMatomoEvent } from "#/utils/matomo";
-export enum EQuestionType {
-  LOADER = "loader",
-  NONE = "none",
-  MODIFICATION = "modification",
-  CONTACT = "contact",
-  ALL = "all",
-}
+export const EQuestionType = {
+  LOADER: "loader",
+  NONE: "none",
+  MODIFICATION: "modification",
+  CONTACT: "contact",
+  ALL: "all",
+} as const;
+export type EQuestionType = (typeof EQuestionType)[keyof typeof EQuestionType];
 interface IProps {
   questions: IFaqArticle[];
   questionType: EQuestionType;

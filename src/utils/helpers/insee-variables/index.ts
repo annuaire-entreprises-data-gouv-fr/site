@@ -14,7 +14,7 @@ import logErrorInSentry from "../../sentry";
 export const etatFromEtatAdministratifInsee = (
   etatAdministratifInsee: "A" | "C" | "F" | "I" | string,
   _sirenOrSiret: string
-) => {
+): IETATADMINSTRATIF => {
   switch (etatAdministratifInsee) {
     case "A":
       return IETATADMINSTRATIF.ACTIF;

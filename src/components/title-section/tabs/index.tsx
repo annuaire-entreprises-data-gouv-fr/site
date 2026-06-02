@@ -20,19 +20,20 @@ import {
 import styles from "./styles.module.css";
 import TabLink from "./tab-link";
 
-export enum FICHE {
-  INFORMATION = "résumé",
-  DOCUMENTS = "documents",
-  ACTES = "actes & statuts",
-  ANNONCES = "annonces",
-  FINANCES = "finances",
-  CERTIFICATS = "Labels ou certifications",
-  COMPTES = "bilans & comptes",
-  DIRIGEANTS = "dirigeants",
-  DIVERS = "conventions collectives",
-  ETABLISSEMENTS_SCOLAIRES = "établissements scolaires",
-  ETABLISSEMENT = "fiche établissement",
-}
+export const FICHE = {
+  INFORMATION: "résumé",
+  DOCUMENTS: "documents",
+  ACTES: "actes & statuts",
+  ANNONCES: "annonces",
+  FINANCES: "finances",
+  CERTIFICATS: "Labels ou certifications",
+  COMPTES: "bilans & comptes",
+  DIRIGEANTS: "dirigeants",
+  DIVERS: "conventions collectives",
+  ETABLISSEMENTS_SCOLAIRES: "établissements scolaires",
+  ETABLISSEMENT: "fiche établissement",
+} as const;
+export type FICHE = (typeof FICHE)[keyof typeof FICHE];
 
 interface ITab {
   ficheType: FICHE;

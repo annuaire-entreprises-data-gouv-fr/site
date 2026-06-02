@@ -12,11 +12,12 @@ import { isAPI404, isAPINotResponding } from "#/models/api-not-responding";
 import { searchGeoElementByText } from "#/models/geo";
 import { debounce } from "#/utils/helpers/debounce";
 
-enum Issue {
-  NONE = 2,
-  NORESULT = 0,
-  ERROR = 1,
-}
+const Issue = {
+  NONE: 2,
+  NORESULT: 0,
+  ERROR: 1,
+} as const;
+type Issue = (typeof Issue)[keyof typeof Issue];
 
 export const FilterGeo: React.FC<{
   cp_dep?: string;
@@ -27,7 +28,7 @@ export const FilterGeo: React.FC<{
   const [dep, setDep] = useState(cp_dep);
   const [typeDep, setTypeDep] = useState(cp_dep_type);
 
-  const [issue, setIssue] = useState(Issue.NONE);
+  const [issue, setIssue] = useState<Issue>(Issue.NONE);
   const [searchTerm, setSearchTerm] = useState(cp_dep_label);
   const [isLoading, setLoading] = useState(false);
   const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);

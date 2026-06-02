@@ -14,11 +14,12 @@ import { searchGeoElementByText } from "#/models/geo";
 import { debounce } from "#/utils/helpers/debounce";
 import styles from "./styles.module.css";
 
-enum Issue {
-  NONE = 2,
-  NORESULT = 0,
-  ERROR = 1,
-}
+const Issue = {
+  NONE: 2,
+  NORESULT: 0,
+  ERROR: 1,
+} as const;
+type Issue = (typeof Issue)[keyof typeof Issue];
 
 export const LocationFilter: React.FC<{
   onSelect: (type: "cp" | "dep" | "reg", value: string, label: string) => void;
@@ -28,7 +29,7 @@ export const LocationFilter: React.FC<{
     setOpen(false);
   });
 
-  const [issue, setIssue] = useState(Issue.NONE);
+  const [issue, setIssue] = useState<Issue>(Issue.NONE);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);
