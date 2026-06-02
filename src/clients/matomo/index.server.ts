@@ -253,8 +253,8 @@ const createPageViewUrl = (siteId: string) => {
 
 const createAgentPageViewUrl = (siteId: string) => {
   const agentConnecté = encodeURIComponent("Agent connecté");
-  const segment = encodeURIComponent("dimension1==" + agentConnecté);
-  const baseUrl = createPageViewUrl(siteId) + "&segment=" + segment;
+  const segment = encodeURIComponent(`dimension1==${agentConnecté}`);
+  const baseUrl = `${createPageViewUrl(siteId)}&segment=${segment}`;
   return baseUrl;
 };
 

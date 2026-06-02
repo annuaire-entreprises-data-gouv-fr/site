@@ -69,12 +69,12 @@ export const formatPercentage = safe((value: string, digits: number = 1) => {
     return;
   }
 
-  return Number.parseFloat(value).toFixed(digits) + "%";
+  return `${Number.parseFloat(value).toFixed(digits)}%`;
 });
 
 export const formatCurrency = safe(
   (value: string | number | undefined | null) => {
-    const number = Number.parseInt(value + "", 10);
+    const number = Number.parseInt(`${value}`, 10);
     if (!number && number !== 0) {
       return value as string;
     }

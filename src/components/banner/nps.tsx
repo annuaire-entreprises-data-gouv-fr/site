@@ -20,7 +20,7 @@ export const NPSBanner: React.FC = () => {
 
   const [pageViewCount, setPageViewCount] = useStorage(
     "session",
-    "pv-" + NPS_MODAL_ID,
+    `pv-${NPS_MODAL_ID}`,
     "0"
   );
 

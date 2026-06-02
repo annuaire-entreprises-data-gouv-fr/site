@@ -103,7 +103,7 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({
     <table className={styles["two-column-table"]} id={id}>
       <tbody>
         {body.map((row, idx) => (
-          <tr key={"a" + idx}>
+          <tr key={`a${idx}`}>
             <td
               className={styles.cell}
               style={{

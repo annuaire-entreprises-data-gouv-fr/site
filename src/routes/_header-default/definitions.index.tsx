@@ -55,7 +55,7 @@ function RouteComponent() {
         {definitions.map(({ slug, title }) => (
           <li key={slug}>
             <a
-              aria-label={title + ", voir la définition"}
+              aria-label={`${title}, voir la définition`}
               href={`/definitions/${slug}`}
             >
               {title}

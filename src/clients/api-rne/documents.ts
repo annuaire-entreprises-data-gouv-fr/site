@@ -11,7 +11,7 @@ export const clientDocuments = async (
   siren: Siren,
   options?: { disableSensitiveRequestLogger?: boolean }
 ) => {
-  const route = routes.inpi.api.rne.documents.list + siren + "/attachments";
+  const route = `${routes.inpi.api.rne.documents.list + siren}/attachments`;
 
   if (!options?.disableSensitiveRequestLogger) {
     const callerInfos = await sensitiveRequestCallerInfos();

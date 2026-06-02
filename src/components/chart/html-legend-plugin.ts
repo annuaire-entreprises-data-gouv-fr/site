@@ -55,7 +55,7 @@ export const htmlLegendPlugin = (htmlLegendContainerId: string) => {
         const boxSpan = document.createElement("span");
         boxSpan.style.background = item.fillStyle;
         boxSpan.style.borderColor = item.strokeStyle;
-        boxSpan.style.borderWidth = item.lineWidth + "px";
+        boxSpan.style.borderWidth = `${item.lineWidth}px`;
         boxSpan.style.borderRadius = "50px";
 
         boxSpan.style.display = "inline-block";

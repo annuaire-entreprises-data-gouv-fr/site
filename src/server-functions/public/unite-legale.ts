@@ -71,7 +71,7 @@ function handleException(e: unknown, slug: string): never {
         context: { slug },
       })
     );
-    throw redirect({ to: "/erreur/introuvable/" + slug });
+    throw redirect({ to: "/erreur/introuvable/$slug", params: { slug } });
   }
   if (e instanceof FetchRechercheEntrepriseException) {
     logFatalErrorInSentry(e);

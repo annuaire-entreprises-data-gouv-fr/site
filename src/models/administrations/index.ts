@@ -37,7 +37,7 @@ const validateMetaData = (
     a.logoType === "paysage";
 
   if (!(a.site && a.long && a.slug && logoTypeIsValid)) {
-    throw new Error("Invalid administrationMetadata : " + a.slug);
+    throw new Error(`Invalid administrationMetadata : ${a.slug}`);
   }
 
   return {

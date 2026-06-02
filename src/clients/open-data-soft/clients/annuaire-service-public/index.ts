@@ -169,7 +169,7 @@ function getNom(personne: IAffectationRecord["personne"]) {
   }
   return (
     personne.prenom +
-    (personne.nom || personne.prenom ? " " + personne.nom : "")
+    (personne.nom || personne.prenom ? ` ${personne.nom}` : "")
   );
 }
 

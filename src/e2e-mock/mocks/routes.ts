@@ -275,20 +275,20 @@ export const routesHandlers = [
     s3HandlerMonitoring
   ),
   http.post(
-    stripQueryParams(routes.tooling.matomo.report.copyPasteEvents + "*"),
+    stripQueryParams(`${routes.tooling.matomo.report.copyPasteEvents}*`),
     matomoReportHandler
   ),
   http.post(
-    stripQueryParams(routes.tooling.matomo.report.npsEvents + "*"),
+    stripQueryParams(`${routes.tooling.matomo.report.npsEvents}*`),
     matomoReportHandler
   ),
   http.post(
-    stripQueryParams(routes.tooling.matomo.report.bulkRequest + "*"),
+    stripQueryParams(`${routes.tooling.matomo.report.bulkRequest}*`),
     matomoReportHandler
   ),
   http.post(
-    stripQueryParams(routes.tooling.matomo.tracker + "*"),
+    stripQueryParams(`${routes.tooling.matomo.tracker}*`),
     matomoReportHandler
   ),
-  http.get(stripQueryParams(routes.tooling.grist + "*"), gristHandler),
+  http.get(stripQueryParams(`${routes.tooling.grist}*`), gristHandler),
 ];

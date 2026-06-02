@@ -37,7 +37,7 @@ export const JustificatifImmatriculationJOAFE: React.FC<IProps> = ({
         if (typeof annonceCreation === "undefined") {
           return <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />;
         }
-        const downloadLink = annonceCreation.path + "?format=pdf";
+        const downloadLink = `${annonceCreation.path}?format=pdf`;
 
         const data = [
           ["Siren", formatIntFr(uniteLegale.siren)],

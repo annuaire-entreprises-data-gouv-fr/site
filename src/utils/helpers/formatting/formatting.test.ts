@@ -68,7 +68,7 @@ const adresses = [
 
 describe("Check formatAdresse", () => {
   adresses.map((adress) =>
-    test("Success : " + adress.expected, () => {
+    test(`Success : ${adress.expected}`, () => {
       expect(formatAdresse(adress.fields)).toBe(adress.expected);
     })
   );

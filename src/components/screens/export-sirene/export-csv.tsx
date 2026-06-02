@@ -156,8 +156,8 @@ export default function ExportCsv() {
     activity: filters.activity,
     legalUnit: filters.legalUnit,
     legalCategories: [
-      ...filters.legalCategoriesNiveau1.map((cat) => cat + "*"),
-      ...filters.legalCategoriesNiveau2.map((cat) => cat + "*"),
+      ...filters.legalCategoriesNiveau1.map((cat) => `${cat}*`),
+      ...filters.legalCategoriesNiveau2.map((cat) => `${cat}*`),
       ...filters.legalCategoriesNiveau3,
     ],
     siretsAndSirens: filters.siretsAndSirens,

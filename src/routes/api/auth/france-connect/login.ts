@@ -32,7 +32,7 @@ export const Route = createFileRoute("/api/auth/france-connect/login")({
         } catch (e) {
           logFatalErrorInSentry(new FranceConnectFailedException({ cause: e }));
           return redirect({
-            href: getBaseUrl() + "/connexion/echec-connexion",
+            href: `${getBaseUrl()}/connexion/echec-connexion`,
           });
         }
       },

@@ -70,7 +70,7 @@ export const franceConnectAuthorizeUrl = createServerOnlyFn(async () => {
   await session.update({ FC_CONNECT_CHECK });
 
   return client.authorizationUrl({
-    scope: "openid " + franceConnectScope.join(" "),
+    scope: `openid ${franceConnectScope.join(" ")}`,
     acr_values: "eidas1",
     ...FC_CONNECT_CHECK,
   });

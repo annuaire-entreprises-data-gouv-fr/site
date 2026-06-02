@@ -15,7 +15,7 @@ function saveAsPdf(blob: Blob, siren: string) {
   const a = document.createElement("a");
   a.style.display = "none";
   a.href = url;
-  a.download = "extrait_immatriculation_inpi_" + siren + ".pdf";
+  a.download = `extrait_immatriculation_inpi_${siren}.pdf`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

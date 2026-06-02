@@ -152,7 +152,7 @@ export const FilterGeo: React.FC<{
                 {suggestsHistory.map((suggest: IGeoElement) => (
                   <button
                     className="suggest cursor-pointer"
-                    key={"suggest-history-" + suggest.label}
+                    key={`suggest-history-${suggest.label}`}
                     onClick={() => selectDep(suggest)}
                     type="button"
                   >

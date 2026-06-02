@@ -39,7 +39,7 @@ function itShouldMatchSnapshotForSearch(
   it(`Should match snapshot for search ${searchTerms} ${
     pageEtablissements === 1
       ? ""
-      : " and etablissement page " + pageEtablissements
+      : ` and etablissement page ${pageEtablissements}`
   }`, async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
