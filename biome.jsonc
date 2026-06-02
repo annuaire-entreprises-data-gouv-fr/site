@@ -19,7 +19,6 @@
         "noNestedTernary": "off",
         "useTemplate": "off",
         "noEnum": "off",
-        "noParameterProperties": "off",
         "useConsistentMemberAccessibility": "off",
         "useFilenamingConvention": "off",
         "noDescendingSpecificity": "off"

@@ -106,14 +106,17 @@ export class RequestAbortedDuringUnloadException extends Exception {
 }
 
 export class FailToFetchError extends Exception {
+  public status: number;
+
   constructor(
     args: { context: IExceptionContext; cause: any },
-    public status: number
+    status: number
   ) {
     super({
       name: "FailToFetchError",
       ...args,
     });
+    this.status = status;
   }
 }
 

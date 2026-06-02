@@ -425,13 +425,16 @@ export class NotAValidIdRnaError extends Exception {
 
 /** COMMON EXCEPTIONS */
 export class IsLikelyASirenOrSiretException extends Exception {
-  constructor(public sirenOrSiret: string) {
+  public sirenOrSiret: string;
+
+  constructor(sirenOrSiret: string) {
     super({
       name: "IsLikelyASirenOrSiretException",
       context: {
         details: sirenOrSiret,
       },
     });
+    this.sirenOrSiret = sirenOrSiret;
   }
 }
 
