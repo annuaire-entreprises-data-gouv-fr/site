@@ -9,7 +9,7 @@ import {
 } from "#/clients/geo/departements";
 import { clientEpcisByName, clientEpcisBySiren } from "#/clients/geo/epcis";
 import { clientRegionsByName } from "#/clients/geo/regions";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

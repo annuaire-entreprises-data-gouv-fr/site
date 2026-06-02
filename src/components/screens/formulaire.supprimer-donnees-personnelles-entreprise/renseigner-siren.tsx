@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Loader } from "#/components-ui/loader";
 import { isSiren } from "#/utils/helpers";
 

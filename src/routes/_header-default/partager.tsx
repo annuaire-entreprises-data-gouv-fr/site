@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { getBaseUrl } from "#/utils/get-base-url";

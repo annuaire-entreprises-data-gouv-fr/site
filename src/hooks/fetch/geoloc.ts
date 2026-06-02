@@ -1,5 +1,5 @@
 import { checkLatLng } from "#/components/map/check-lat-lng";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IEtablissement } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import { getGeoLoc } from "#/models/geo-loc";

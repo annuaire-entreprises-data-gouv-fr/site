@@ -4,7 +4,7 @@ import { FullTable } from "#/components/table/full";
 import FAQLink from "#/components-ui/faq-link";
 import { SimpleSeparator } from "#/components-ui/horizontal-separator";
 import InformationTooltip from "#/components-ui/information-tooltip";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import type { IEgapro } from "#/models/certifications/egapro";
 

@@ -7,7 +7,7 @@ import { Loader } from "#/components-ui/loader";
 import { Select } from "#/components-ui/select";
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import { isAPI404 } from "#/models/api-not-responding";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";

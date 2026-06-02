@@ -1,5 +1,5 @@
 import { clientBilansFinanciers } from "#/clients/open-data-soft/clients/bilans-financiers";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import type { IUniteLegale } from "#/models/core/types";
 import type { IDataFetchingState } from "#/models/data-fetching";

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Favourites from "#/components/favourites";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import SearchBar from "#/components/search-bar";
 import { LogoAnnuaireWithEasterEgg } from "#/components-ui/logo-annuaire/logo-with-easter-egg";
 import { meta } from "#/utils/seo";

@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import FloatingModal from "#/components-ui/floating-modal";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { getAgentDisplayName } from "#/models/authentication/user/helpers";

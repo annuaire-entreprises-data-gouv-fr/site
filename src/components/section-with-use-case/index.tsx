@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { AskUseCase } from "#/components/section-with-use-case/ask-use-case";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   type ApplicationRights,

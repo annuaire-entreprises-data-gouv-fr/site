@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import AdministrationDescription from "#/components/administrations/administration-description";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { NotFound } from "#/components/screens/not-found";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { administrationsMetaData } from "#/models/administrations";

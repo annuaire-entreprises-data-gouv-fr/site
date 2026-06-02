@@ -1,11 +1,11 @@
 import { escapeString } from "./formatting";
 import { categoriesJuridiquesNiveau3 } from "./metadata/categories-juridiques";
-import { codesNAF1993 } from "./metadata/codes-NAF-1993";
-import { codesNAF2025 } from "./metadata/codes-NAF-2025";
-import { codesNAFRev1 } from "./metadata/codes-NAF-rev-1";
-import { codesNAFRev2 } from "./metadata/codes-NAF-rev-2";
-import { codesNAP } from "./metadata/codes-NAP";
-import { codesSectionNAF } from "./metadata/codes-section-NAF";
+import { codesNAF1993 } from "./metadata/codes-naf-1993";
+import { codesNAF2025 } from "./metadata/codes-naf-2025";
+import { codesNAFRev1 } from "./metadata/codes-naf-rev-1";
+import { codesNAFRev2 } from "./metadata/codes-naf-rev-2";
+import { codesNAP } from "./metadata/codes-nap";
+import { codesSectionNAF } from "./metadata/codes-section-naf";
 import { codesVoies } from "./metadata/codes-voie";
 import { departements } from "./metadata/departements";
 

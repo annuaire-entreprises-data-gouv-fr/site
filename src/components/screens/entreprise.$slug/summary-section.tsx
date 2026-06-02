@@ -9,13 +9,13 @@ import {
 } from "#/components/badges-section/labels-and-certificates";
 import { ProtectedCertificatesBadgesSection } from "#/components/badges-section/labels-and-certificates/protected-certificats";
 import EORICell from "#/components/eori-cell";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { TwoColumnTable } from "#/components/table/simple";
 import TVACell from "#/components/tva-cell";
 import FAQLink from "#/components-ui/faq-link";
 import { Loader } from "#/components-ui/loader";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,

@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import routes from "#/clients/routes";
 import { INPI } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import InpiPartiallyDownWarning from "#/components-ui/alerts-with-explanations/inpi-partially-down";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { getRneDirigeantsFn } from "#/server-functions/public/data-fetching";
 import { pluralize } from "#/utils/helpers";

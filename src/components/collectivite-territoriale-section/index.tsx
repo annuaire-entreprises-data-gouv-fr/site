@@ -1,9 +1,9 @@
 import type React from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { TwoColumnTable } from "#/components/table/simple";
 import FAQLink from "#/components-ui/faq-link";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { ICollectiviteTerritoriale } from "#/models/core/types";
 
 const CollectiviteTerritorialeSection: React.FC<{

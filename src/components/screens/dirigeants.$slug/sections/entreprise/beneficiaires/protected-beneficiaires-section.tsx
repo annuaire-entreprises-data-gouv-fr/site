@@ -7,7 +7,7 @@ import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import FAQLink from "#/components-ui/faq-link";
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { IBeneficiairesEffectif } from "#/models/espace-agent/beneficiaires";

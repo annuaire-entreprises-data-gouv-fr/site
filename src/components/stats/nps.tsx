@@ -3,7 +3,7 @@ import { type ChangeEvent, useState } from "react";
 import type { IMatomoStats } from "#/clients/matomo/index.server";
 import { LineChart } from "#/components/chart/line";
 import { StackedBarChart } from "#/components/chart/stack-bar";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Select } from "#/components-ui/select";
 import constants from "#/models/constants";
 

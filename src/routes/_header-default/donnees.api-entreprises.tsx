@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DINUM, INPI, INSEE } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 

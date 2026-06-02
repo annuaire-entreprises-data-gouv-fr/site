@@ -1,7 +1,7 @@
 import { regions } from "#/utils/helpers/formatting/metadata/regions";
 import { effectifCodes } from "./constants";
 import type { ExportCsvInput } from "./input-validation";
-import { niv1ToNiv5Mapping } from "./niv1ToNiv5Mapping";
+import { niv1ToNiv5Mapping } from "./niv1-to-niv5-mapping";
 
 export class SireneQueryBuilder {
   private readonly conditions: string[] = [];

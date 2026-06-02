@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { AlertError } from "#/components-ui/alerts";
 import FaqLink from "#/components-ui/faq-link";
-import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-NAF-rev-2";
+import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-naf-rev-2";
 import { FileInput } from "./file-input";
 import styles from "./styles.module.css";
 

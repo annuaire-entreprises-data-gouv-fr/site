@@ -6,7 +6,7 @@ import {
 } from "#/models/api-not-responding";
 import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import { EAdministration } from "./administrations/EAdministration";
+import { EAdministration } from "./administrations/e-administration";
 import { FetchRessourceException } from "./exceptions";
 
 export interface IEtablissementsScolaires {

@@ -1,4 +1,4 @@
-import type { EAdministration } from "./administrations/EAdministration";
+import type { EAdministration } from "./administrations/e-administration";
 import type { IDataFetchingState } from "./data-fetching";
 
 export interface IAPINotRespondingError {

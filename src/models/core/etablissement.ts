@@ -18,7 +18,7 @@ import logErrorInSentry, {
   logWarningInSentry,
 } from "#/utils/sentry";
 import getSession from "#/utils/server-side-helper/get-session";
-import { EAdministration } from "../administrations/EAdministration";
+import { EAdministration } from "../administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

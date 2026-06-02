@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { AlertError } from "#/components-ui/alerts";
 import constants from "#/models/constants";
 import { IDataFetchingState } from "#/models/data-fetching";

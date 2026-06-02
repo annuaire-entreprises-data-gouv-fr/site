@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Warning } from "#/components-ui/alerts";
 import { MultiChoice } from "#/components-ui/multi-choice";
 import TextWrapper from "#/components-ui/text-wrapper";

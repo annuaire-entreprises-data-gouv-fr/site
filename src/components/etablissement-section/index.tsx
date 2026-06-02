@@ -3,7 +3,7 @@ import { ConventionCollectivesBadgesSection } from "#/components/badges-section/
 import { labelsAndCertificatesSources } from "#/components/badges-section/labels-and-certificates";
 import AvisSituationLink from "#/components/justificatifs/avis-situation-link";
 import ExtraitRNELink from "#/components/justificatifs/extrait-rne-link";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { CopyPaste } from "#/components/table/copy-paste";
 import { TwoColumnTable } from "#/components/table/simple";
@@ -12,7 +12,7 @@ import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import BreakPageForPrint from "#/components-ui/print-break-page";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { Tag } from "#/components-ui/tag";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { estActif } from "#/models/core/etat-administratif";
 import type { IEtablissement, IUniteLegale } from "#/models/core/types";

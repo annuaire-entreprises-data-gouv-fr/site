@@ -3,7 +3,7 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from "#/components/badges-section/labels-and-certificates";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { PrintNever } from "#/components-ui/print-visibility";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {

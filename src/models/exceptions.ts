@@ -1,4 +1,4 @@
-import type { EAdministration } from "./administrations/EAdministration";
+import type { EAdministration } from "./administrations/e-administration";
 
 interface IExceptionArgument {
   /** The technical error for this exception */

@@ -1,5 +1,5 @@
 import ProtectedSectionWithUseCase from "#/components/section-with-use-case";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IEtablissement } from "#/models/core/types";

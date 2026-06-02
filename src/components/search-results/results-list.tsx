@@ -1,5 +1,5 @@
 import type React from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import UniteLegaleBadge from "#/components/unite-legale-badge";
 import { Icon } from "#/components-ui/icon/wrapper";
 import IsActiveTag from "#/components-ui/tag/is-active-tag";

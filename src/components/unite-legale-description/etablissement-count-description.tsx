@@ -1,5 +1,5 @@
 import type React from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import type { IUniteLegale } from "#/models/core/types";
 
 export const UniteLegaleEtablissementCountDescription: React.FC<{

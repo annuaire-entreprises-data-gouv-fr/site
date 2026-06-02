@@ -1,12 +1,12 @@
 import { type ChangeEvent, useMemo, useState } from "react";
 import { DGFiP } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { FullTable } from "#/components/table/full";
 import { Loader } from "#/components-ui/loader";
 import { Select } from "#/components-ui/select";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import { isAPI404 } from "#/models/api-not-responding";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
@@ -18,8 +18,8 @@ import type {
 import type { UseCase } from "#/models/use-cases";
 import { getAgentLiensCapitalistiquesProtectedFn } from "#/server-functions/agent/data-fetching";
 import { formatIntFr, pluralize } from "#/utils/helpers/formatting/formatting";
-import EtatCivilInfos from "../sections/entreprise/EtatCivilInfos";
-import PersonneMoraleInfos from "../sections/entreprise/PersonneMoraleInfos";
+import EtatCivilInfos from "../sections/entreprise/etat-civil-infos";
+import PersonneMoraleInfos from "../sections/entreprise/personne-morale-infos";
 
 function LiensCapitalistiquesContent({
   uniteLegale,

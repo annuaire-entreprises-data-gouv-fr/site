@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import AgentWall from ".";
 

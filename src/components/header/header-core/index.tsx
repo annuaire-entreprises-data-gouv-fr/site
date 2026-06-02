@@ -1,6 +1,6 @@
 import type React from "react";
 import ReconnectBanner from "#/components/banner/reconnect";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import LoadBar from "#/components/load-bar";
 import SearchBar from "#/components/search-bar";
 import { WelcomeModalAgent } from "#/components/welcome-modal-agent";

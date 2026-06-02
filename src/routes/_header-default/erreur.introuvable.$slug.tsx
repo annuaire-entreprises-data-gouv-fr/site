@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { INPI, INSEE } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import MatomoEvent from "#/components/matomo-event";
 import { NotFound } from "#/components/screens/not-found";
 import {

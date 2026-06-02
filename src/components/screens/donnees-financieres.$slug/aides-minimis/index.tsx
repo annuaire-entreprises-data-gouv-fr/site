@@ -1,6 +1,6 @@
 import AgentWallDocuments from "#/components/espace-agent-components/agent-wall/document";
 import { Section } from "#/components/section";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,

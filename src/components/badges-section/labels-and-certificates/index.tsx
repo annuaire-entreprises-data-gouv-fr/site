@@ -1,4 +1,4 @@
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { LabelWithLinkToSection } from "./label-with-link-to-section";
 

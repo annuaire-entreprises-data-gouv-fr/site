@@ -1,5 +1,5 @@
 import { clientAnnuaireServicePublicByIds } from "#/clients/open-data-soft/clients/annuaire-service-public";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import type { IServicePublic } from "#/models/service-public";

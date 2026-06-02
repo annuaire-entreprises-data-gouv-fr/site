@@ -1,12 +1,12 @@
 import type React from "react";
 import type { PropsWithChildren } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Warning } from "#/components-ui/alerts";
 import { Icon } from "#/components-ui/icon/wrapper";
 import DataSourcesTooltip from "#/components-ui/information-tooltip/data-sources-tooltip";
 import Logo from "#/components-ui/logo";
 import { administrationsMetaData } from "#/models/administrations";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import constants from "#/models/constants";
 import { formatDate, formatDateLong, isTwoMonthOld } from "#/utils/helpers";
 import SectionErrorBoundary from "./section-error-boundary";

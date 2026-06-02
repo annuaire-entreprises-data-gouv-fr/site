@@ -1,5 +1,5 @@
 import { clientAidesADEME } from "#/clients/api-data-gouv/aide-ademe";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import { verifySiren } from "#/utils/helpers";

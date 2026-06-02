@@ -4,7 +4,7 @@ import { FullTable } from "#/components/table/full";
 import InpiPartiallyDownWarning from "#/components-ui/alerts-with-explanations/inpi-partially-down";
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { getRneObservationsFn } from "#/server-functions/public/data-fetching";
 import { formatDate } from "#/utils/helpers";

@@ -1,5 +1,5 @@
 import { INSEE } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatIntFr } from "#/utils/helpers";
 import { Warning } from "../alerts";

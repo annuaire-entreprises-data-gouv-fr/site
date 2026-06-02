@@ -1,6 +1,6 @@
 import { clientDocuments } from "#/clients/api-rne/documents";
 import { HttpNotFound } from "#/clients/exceptions";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { APINotRespondingFactory } from "#/models/api-not-responding";
 import { verifySiren } from "#/utils/helpers";
 

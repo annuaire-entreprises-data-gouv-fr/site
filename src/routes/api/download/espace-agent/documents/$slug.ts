@@ -4,7 +4,7 @@ import {
   clientDownloadBilan,
 } from "#/clients/api-rne/download";
 import { HttpBadRequestError, HttpForbiddenError } from "#/clients/exceptions";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   ApplicationRights,
   hasRights,

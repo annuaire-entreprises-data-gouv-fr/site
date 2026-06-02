@@ -6,7 +6,7 @@ import AssociationAdressAlert from "#/components-ui/alerts-with-explanations/ass
 import FAQLink from "#/components-ui/faq-link";
 import BreakPageForPrint from "#/components-ui/print-break-page";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IDataAssociation } from "#/models/association/types";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { getPersonnalDataAssociation } from "#/models/core/diffusion";

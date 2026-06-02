@@ -3,7 +3,7 @@ import { AsyncDataSectionClient } from "#/components/section/data-section/client
 import { FullTable } from "#/components/table/full";
 import ButtonLink from "#/components-ui/button";
 import { useFetchBODACC } from "#/hooks/fetch/bodacc";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 

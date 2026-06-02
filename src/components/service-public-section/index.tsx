@@ -3,7 +3,7 @@ import NonRenseigne from "#/components/non-renseigne";
 import { DataSectionClient } from "#/components/section/data-section";
 import { TwoColumnTable } from "#/components/table/simple";
 import { useFetchServicePublic } from "#/hooks/fetch/service-public";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IEtablissement, IUniteLegale } from "#/models/core/types";
 import type { IServicePublic } from "#/models/service-public";
 

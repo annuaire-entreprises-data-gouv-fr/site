@@ -2,7 +2,7 @@ import NonRenseigne from "#/components/non-renseigne";
 import { DataSectionClient } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
 import { useFetchServicePublicSubServices } from "#/hooks/fetch/service-public-subservices";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import type { IUniteLegale } from "#/models/core/types";
 import { type IDataFetchingState, isDataSuccess } from "#/models/data-fetching";

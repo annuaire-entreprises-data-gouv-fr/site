@@ -5,7 +5,7 @@ import type {
   MouseEventHandler,
   PropsWithChildren,
 } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import type { IIconsSlug } from "#/components-ui/icon";
 import { Icon } from "#/components-ui/icon/wrapper";
 import styles from "./styles.module.css";

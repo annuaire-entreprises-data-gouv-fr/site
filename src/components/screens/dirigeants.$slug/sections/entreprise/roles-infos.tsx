@@ -1,5 +1,5 @@
 import type { IRole } from "#/models/rne/types";
-import DisambiguationTooltip from "./DisambiguationTooltip";
+import DisambiguationTooltip from "./disambiguation-tooltip";
 
 export default function RolesInfos({ roles }: { roles: IRole[] }) {
   return roles.map((role, index) => (

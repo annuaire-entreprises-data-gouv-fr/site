@@ -6,7 +6,7 @@ import { TwoColumnTable } from "#/components/table/simple";
 import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
 import { Tag } from "#/components-ui/tag";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import type { IRGECertification } from "#/models/certifications/rge";
 import type { IUniteLegale } from "#/models/core/types";

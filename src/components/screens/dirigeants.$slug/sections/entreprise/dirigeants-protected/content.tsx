@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { FullTable } from "#/components/table/full";
 import { SeePersonPageLink } from "#/components-ui/see-personn-page-link";
 import type { IUniteLegale } from "#/models/core/types";
@@ -8,11 +8,11 @@ import type {
   IPersonneMoraleMergedIGInpi,
 } from "#/models/rne/types";
 import { isPersonneMorale } from "#/utils/helpers/is-personne-morale";
-import DisambiguationTooltip from "../DisambiguationTooltip";
 import { sortDirigeants } from "../dirigeants-open/content";
-import EtatCivilInfos from "../EtatCivilInfos";
-import PersonneMoraleInfos from "../PersonneMoraleInfos";
-import RolesInfos from "../RolesInfos";
+import DisambiguationTooltip from "../disambiguation-tooltip";
+import EtatCivilInfos from "../etat-civil-infos";
+import PersonneMoraleInfos from "../personne-morale-infos";
+import RolesInfos from "../roles-infos";
 
 interface IDirigeantContentProps {
   dirigeants: IDirigeantsWithMetadataMergedIGInpi;

@@ -2,7 +2,7 @@ import { clientMonitoring } from "#/clients/monitoring/index.server";
 import { DataStore } from "#/utils/data-store";
 import { logWarningInSentry } from "#/utils/sentry";
 import { administrationsMetaData } from "./administrations";
-import type { EAdministration } from "./administrations/EAdministration";
+import type { EAdministration } from "./administrations/e-administration";
 import type { IAPIMonitorMetaData } from "./administrations/types";
 import { FetchRessourceException } from "./exceptions";
 

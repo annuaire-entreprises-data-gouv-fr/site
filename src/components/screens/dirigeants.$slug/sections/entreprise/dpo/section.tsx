@@ -1,9 +1,9 @@
 import { CNIL } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { TwoColumnTable } from "#/components/table/simple";
 import { useFetchDPO } from "#/hooks/fetch/dpo";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatIntFr, uniteLegaleLabel } from "#/utils/helpers";
 

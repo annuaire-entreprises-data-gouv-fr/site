@@ -2,7 +2,7 @@ import { clientIdccRechercheEntreprise } from "#/clients/recherche-entreprise/id
 import { clientIdccMetadata } from "#/clients/recherche-entreprise/idcc-metadata.server";
 import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import { EAdministration } from "../administrations/EAdministration";
+import { EAdministration } from "../administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

@@ -12,9 +12,7 @@
   "linter": {
     "rules": {
       "style": {
-        "noMagicNumbers": "off",
         "noNestedTernary": "off",
-        "useFilenamingConvention": "off",
         "noDescendingSpecificity": "off"
       },
       "suspicious": {

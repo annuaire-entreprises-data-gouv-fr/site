@@ -1,5 +1,5 @@
 import { Section } from "#/components/section";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 
 export const LabelAchatsResponsables = () => (
   <Section

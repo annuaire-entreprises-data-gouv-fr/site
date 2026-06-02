@@ -1,9 +1,9 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { FullTable } from "#/components/table/full";
 import ButtonProConnect from "#/components-ui/button-pro-connect";
 import FloatingModal from "#/components-ui/floating-modal";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import style from "./style.module.css";
 
 const AgentWall: React.FC<{

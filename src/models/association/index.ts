@@ -13,7 +13,7 @@ import {
 } from "#/utils/helpers";
 import { isAbortError } from "#/utils/helpers/is-abort-error";
 import logErrorInSentry, { logWarningInSentry } from "#/utils/sentry";
-import { EAdministration } from "../administrations/EAdministration";
+import { EAdministration } from "../administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

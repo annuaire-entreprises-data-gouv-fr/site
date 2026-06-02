@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import FloatingHelpButton from "#/components-ui/floating-help-button";
 import { Icon } from "#/components-ui/icon/wrapper";
 

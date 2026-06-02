@@ -6,7 +6,7 @@ import ButtonLink from "#/components-ui/button";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { useFetchJOAFE } from "#/hooks/fetch/joafe";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAssociation } from "#/models/core/types";
 import { formatDate, formatIntFr } from "#/utils/helpers";
 

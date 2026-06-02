@@ -1,4 +1,4 @@
-import { EAdministration } from "./EAdministration";
+import { EAdministration } from "./e-administration";
 import type {
   IAdministrationMetaData,
   IAdministrationsMetaData,

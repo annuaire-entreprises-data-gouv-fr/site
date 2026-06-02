@@ -5,7 +5,7 @@ import { FullTable } from "#/components/table/full";
 import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import ButtonLink from "#/components-ui/button";
 import { useFetchComptesAssociation } from "#/hooks/fetch/comptes-association";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAssociation } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 

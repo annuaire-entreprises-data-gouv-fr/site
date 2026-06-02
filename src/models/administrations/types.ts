@@ -1,4 +1,4 @@
-import type { EAdministration } from "./EAdministration";
+import type { EAdministration } from "./e-administration";
 
 export interface IAdministrationsMetaData {
   [key: string]: IAdministrationMetaData;

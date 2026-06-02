@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import ButtonLink from "#/components-ui/button";
 import constants from "#/models/constants";
 

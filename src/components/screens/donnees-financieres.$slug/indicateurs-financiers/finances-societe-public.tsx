@@ -3,7 +3,7 @@ import { AsyncDataSectionClient } from "#/components/section/data-section/client
 import { AskUseCase } from "#/components/section-with-use-case/ask-use-case";
 import { SimpleSeparator } from "#/components-ui/horizontal-separator";
 import { useFetchFinancesSociete } from "#/hooks/fetch/indicateurs-financiers-societe";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,

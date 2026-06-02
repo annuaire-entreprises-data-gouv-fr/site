@@ -5,7 +5,7 @@ import {
 } from "#/components/section/data-section/client";
 import { useFetchFinancesSociete } from "#/hooks/fetch/indicateurs-financiers-societe";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";

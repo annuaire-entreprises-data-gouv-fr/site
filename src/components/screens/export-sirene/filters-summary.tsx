@@ -1,8 +1,8 @@
 import { categoriesJuridiquesNiveau3 } from "#/utils/helpers/formatting/metadata/categories-juridiques";
 import { categoriesJuridiquesNiveau1 } from "#/utils/helpers/formatting/metadata/categories-juridiques-niveau-1";
 import { categoriesJuridiquesNiveau2 } from "#/utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
-import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-NAF-rev-2";
-import { codesSectionNAF } from "#/utils/helpers/formatting/metadata/codes-section-NAF";
+import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-naf-rev-2";
+import { codesSectionNAF } from "#/utils/helpers/formatting/metadata/codes-section-naf";
 import type { ExtendedExportCsvInput } from "./export-csv";
 import { selectedEffectifLabel } from "./filters";
 

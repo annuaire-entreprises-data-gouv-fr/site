@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import parseMarkdownSync from "#/components/markdown/parse-markdown";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { allFaqArticles, allFaqArticlesByGroup } from "#/models/article/faq";

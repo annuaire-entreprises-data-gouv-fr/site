@@ -1,5 +1,5 @@
 import type React from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { SaveFavourite } from "#/components/save-favourite";
 import { CopyPaste } from "#/components/table/copy-paste";
 import UniteLegaleBadge from "#/components/unite-legale-badge";

@@ -1,12 +1,12 @@
 import { useMemo, useState } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { DataSectionClient } from "#/components/section/data-section";
 import TableFilter from "#/components/table/filter";
 import { FullTable } from "#/components/table/full";
 import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { isDataSuccess } from "#/models/data-fetching";

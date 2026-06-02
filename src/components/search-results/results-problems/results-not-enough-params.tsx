@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { getFaqArticlesByTag } from "#/models/article/faq";
 
 export const NotEnoughParams = () => {

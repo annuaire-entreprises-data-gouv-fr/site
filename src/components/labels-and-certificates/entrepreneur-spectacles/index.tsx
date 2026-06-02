@@ -8,7 +8,7 @@ import FAQLink from "#/components-ui/faq-link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { Tag } from "#/components-ui/tag";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import { formatDate } from "#/utils/helpers";
 import { EntrepreneurSpectaclesPagination } from "./pagination";

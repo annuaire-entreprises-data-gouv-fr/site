@@ -1,5 +1,5 @@
 import { INPI } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Warning } from "#/components-ui/alerts";
 
 export const WarningRBE = () => (

@@ -9,7 +9,7 @@ import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import { Info } from "#/components-ui/alerts";
 import ButtonLink from "#/components-ui/button";
 import { useFetchBODACC } from "#/hooks/fetch/bodacc";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 

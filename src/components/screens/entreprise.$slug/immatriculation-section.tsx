@@ -1,10 +1,10 @@
 import { INPI } from "#/components/administrations";
 import { DataInpiLinkWithExplanations } from "#/components/justificatifs/data-inpi-link";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { TwoColumnTable } from "#/components/table/simple";
 import FAQLink from "#/components-ui/faq-link";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
