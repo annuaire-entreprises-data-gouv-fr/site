@@ -60,7 +60,7 @@ export const CardHabilitation = ({
 
       return [];
     }
-  }, [groups, organisationGroups]);
+  }, [groups, organisationGroups, triggerGetOrganisationGroups]);
 
   const openNewHabilitation = useCallback(() => {
     setIsActiveGroupsModalOpen(false);

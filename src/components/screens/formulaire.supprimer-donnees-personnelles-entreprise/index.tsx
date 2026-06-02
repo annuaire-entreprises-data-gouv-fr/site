@@ -49,6 +49,7 @@ export default function HidePersonalDataPageClient({
     }
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: scroll to top only when formState changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [formState]);

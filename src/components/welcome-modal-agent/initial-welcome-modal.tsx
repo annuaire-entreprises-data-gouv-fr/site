@@ -23,7 +23,11 @@ const useInitialWelcomeModal = () => {
     setIsVisible(true);
     setHasSeenWelcomeModal(true);
     setHasSeenDataAccessReminderModal(true);
-  }, [hasSeenWelcomeModal, setHasSeenWelcomeModal]);
+  }, [
+    hasSeenWelcomeModal,
+    setHasSeenWelcomeModal,
+    setHasSeenDataAccessReminderModal,
+  ]);
 
   return {
     close: () => setIsVisible(false),

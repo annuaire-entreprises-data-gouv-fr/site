@@ -57,6 +57,7 @@ export function useFetchExternalData<T>(
       }
     };
     fetchAndTreatResponse();
+    // biome-ignore lint/correctness/useExhaustiveDependencies: deps is used from params
   }, dependencies);
   return response;
 }

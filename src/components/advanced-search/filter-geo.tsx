@@ -118,7 +118,7 @@ export const FilterGeo: React.FC<{
       return;
     }
     search(searchTerm);
-  }, [searchTerm, setGeoSuggests, setIssue, labelDep, search]);
+  }, [searchTerm, labelDep, search]);
 
   // only show suggest history on browser to avoid rehydration conflict with server rendered html
   useEffect(() => setShowSuggestsHistory(true), []);

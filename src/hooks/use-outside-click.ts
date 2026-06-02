@@ -18,7 +18,7 @@ export const useOutsideClick = (callback: () => void) => {
     return () => {
       document.removeEventListener("click", handleClick, true);
     };
-  }, [callback, ref]);
+  }, [callback]);
 
   return ref;
 };

@@ -91,7 +91,7 @@ export const LocationFilter: React.FC<{
     }
     search(searchTerm);
     setOpen(true);
-  }, [searchTerm, setGeoSuggests, setIssue, search]);
+  }, [searchTerm, search]);
 
   return (
     <div className={styles["location-filter-container"]} ref={ref}>

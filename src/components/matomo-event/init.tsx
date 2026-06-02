@@ -14,6 +14,7 @@ const TRACKER_BASE_URL = "https://stats.data.gouv.fr";
 export function MatomoInit() {
   const { user } = useAuth();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: matomo init only once
   useEffect(() => {
     if (!isMatomoEnabled) {
       return;

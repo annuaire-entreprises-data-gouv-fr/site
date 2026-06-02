@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useStorage } from "#/hooks/use-storage";
 import {
   DATA_ACCESS_REMINDER_COOKIE_MAX_AGE_SECONDS,
@@ -8,7 +9,17 @@ import {
 export const useHasSeenInitialWelcomeModal = () =>
   useStorage("local", INITIAL_WELCOME_MODAL_ID, false);
 
-export const useHasSeenDataAccessReminderModal = () =>
-  useStorage("cookie", DATA_ACCESS_REMINDER_MODAL_ID, false, {
-    maxAge: DATA_ACCESS_REMINDER_COOKIE_MAX_AGE_SECONDS,
-  });
+export const useHasSeenDataAccessReminderModal = () => {
+  const cookieOptions = useMemo(
+    () => ({
+      maxAge: DATA_ACCESS_REMINDER_COOKIE_MAX_AGE_SECONDS,
+    }),
+    []
+  );
+  return useStorage(
+    "cookie",
+    DATA_ACCESS_REMINDER_MODAL_ID,
+    false,
+    cookieOptions
+  );
+};

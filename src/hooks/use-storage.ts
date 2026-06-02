@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   getCookieBrowser,
   type IBrowserCookieOptions,
@@ -87,24 +87,27 @@ export const useStorage = <T>(
     getStorageValue(type, key, initialValue, storageAvailable)
   );
 
-  if (!storageAvailable) {
-    return [storedValue, () => {}];
-  }
-
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to the requested browser storage.
-  const setValue = (value: unknown) => {
-    try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore as T);
-      setStorageValue(type, key, valueToStore, cookieOptions);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const setValue = useCallback(
+    (value: unknown) => {
+      if (!storageAvailable) {
+        setStoredValue(value);
+        return;
+      }
+      try {
+        // Allow value to be a function so we have same API as useState
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        // Save state
+        setStoredValue(valueToStore as T);
+        setStorageValue(type, key, valueToStore, cookieOptions);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [storedValue, type, key, cookieOptions, storageAvailable]
+  );
 
   return [storedValue, setValue];
 };
