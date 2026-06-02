@@ -1,4 +1,4 @@
-interface IDocumentsRNEResponse {
+export interface IDocumentsRNEResponse {
   actes: {
     updatedAt: string; //'2023-10-17T22:37:22+02:00',
     id: string; //'63df98a28eded29cb31823ee',

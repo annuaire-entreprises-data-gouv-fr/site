@@ -1,4 +1,4 @@
-interface IFinessGeoItem {
+export interface IFinessGeoItem {
   categagretab: number; //1102;
   categetab: number; //355;
   codeape: string | null; // "8610Z";
@@ -36,7 +36,7 @@ interface IFinessGeoItem {
   voie: string | null; // "DE PARIS";
 }
 
-interface IFinessJuridiqueItem {
+export interface IFinessJuridiqueItem {
   categetab: string | null; //null;
   codeape: string | null; // "8610Z";
   commune: string | null; // "053";
@@ -61,7 +61,7 @@ interface IFinessJuridiqueItem {
   voie: string | null; // "DE JASSERON";
 }
 
-interface IFinessJuridiqueDatagouvResponse {
+export interface IFinessJuridiqueDatagouvResponse {
   data: IFinessJuridiqueItem[];
   meta: {
     page: number; //1;
@@ -70,7 +70,7 @@ interface IFinessJuridiqueDatagouvResponse {
   };
 }
 
-interface IFinessGeoDatagouvResponse {
+export interface IFinessGeoDatagouvResponse {
   data: IFinessGeoItem[];
   meta: {
     page: number; //1;

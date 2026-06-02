@@ -7,6 +7,12 @@ import type {
 } from "#/models/finess/type";
 import { formatAdresse } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
+import type {
+  IFinessGeoDatagouvResponse,
+  IFinessGeoItem,
+  IFinessJuridiqueDatagouvResponse,
+  IFinessJuridiqueItem,
+} from "./types";
 
 export const clientFiness = async (
   nofinessejList: string[],

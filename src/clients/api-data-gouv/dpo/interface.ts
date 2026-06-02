@@ -1,4 +1,4 @@
-interface IDPOItem {
+export interface IDPOItem {
   __id: number;
   "Adresse postale organisme désignant": string;
   "Adresse postale organisme désigné": string;
@@ -28,7 +28,7 @@ interface IDPOItem {
   "Ville organisme désigné": string;
 }
 
-interface IDPODatagouvResponse {
+export interface IDPODatagouvResponse {
   data: IDPOItem[];
   links: {
     profile: string;
@@ -43,7 +43,7 @@ interface IDPODatagouvResponse {
   };
 }
 
-interface IDPO {
+export interface IDPO {
   contact: {
     email: string;
     url: string;

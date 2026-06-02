@@ -1,4 +1,4 @@
-interface IESSItem {
+export interface IESSItem {
   "Code du département de l'établissement": string; //'35';
   "Code postal": string; //'35390';
   "Département de l'établissement": string; //'ILLE ET VILAINE';
@@ -9,7 +9,7 @@ interface IESSItem {
   SIREN: string; //'923114524';
 }
 
-interface IESSDatagouvResponse {
+export interface IESSDatagouvResponse {
   data: IESSItem[];
   meta: {
     page: number; //1;

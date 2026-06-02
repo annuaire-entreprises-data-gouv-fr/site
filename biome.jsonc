@@ -15,7 +15,6 @@
         "noSvgWithoutTitle": "off"
       },
       "style": {
-        "noHeadElement": "off",
         "noMagicNumbers": "off",
         "noNestedTernary": "off",
         "useTemplate": "off",
@@ -35,7 +34,6 @@
         "noEmptyBlockStatements": "off"
       },
       "performance": {
-        "noImgElement": "off",
         "useTopLevelRegex": "off",
         "noBarrelFile": "off"
       },
@@ -49,11 +47,7 @@
       },
       "correctness": {
         "useJsxKeyInIterable": "off",
-        "noUnusedVariables": "off",
-        "noUnusedFunctionParameters": "off",
-        "noUnknownMediaFeatureName": "off",
-        "noUndeclaredVariables": "off",
-        "noUnknownProperty": "off"
+        "noUnknownMediaFeatureName": "off"
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"

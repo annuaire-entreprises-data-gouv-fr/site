@@ -97,7 +97,7 @@ interface IBilanGesItem {
   une_annee_de_reference_a_ete_calculee: boolean;
 }
 
-interface IBilanGesDatagouvResponse {
+export interface IBilanGesDatagouvResponse {
   next: string | null;
   results: IBilanGesItem[];
   total: number;
@@ -134,7 +134,7 @@ interface IBilanGes {
   typeStructure: string;
 }
 
-interface IBilanGesResponse {
+export interface IBilanGesResponse {
   data: IBilanGes[];
   meta: {
     total: number;

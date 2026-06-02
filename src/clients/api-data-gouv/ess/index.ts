@@ -4,6 +4,7 @@ import type { IESS } from "#/models/certifications/ess";
 import constants from "#/models/constants";
 import type { Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
+import type { IESSDatagouvResponse, IESSItem } from "./interface";
 
 export const clientEss = async (siren: Siren): Promise<IESS> => {
   const response = await httpGet<IESSDatagouvResponse>(

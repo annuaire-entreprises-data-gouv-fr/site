@@ -90,7 +90,7 @@ interface Application {
   versementKey: ApplicationField<string>;
 }
 
-interface IGrantItem {
+export interface IGrantItem {
   application: Application;
   payments: Payment[];
 }

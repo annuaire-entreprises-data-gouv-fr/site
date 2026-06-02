@@ -3,6 +3,7 @@ import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import type { Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
+import type { IBilanGesDatagouvResponse, IBilanGesResponse } from "./interface";
 
 export const clientBilanGes = async (
   siren: Siren,

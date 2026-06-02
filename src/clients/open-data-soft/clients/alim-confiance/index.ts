@@ -2,6 +2,7 @@ import { HttpNotFound } from "#/clients/exceptions";
 import odsClient from "#/clients/open-data-soft";
 import routes from "#/clients/routes";
 import type { Siren } from "#/utils/helpers";
+import type { IAlimConfiance, IAlimConfianceODSResponse } from "./interface";
 
 const PAGE_SIZE = 20;
 
