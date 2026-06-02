@@ -11,7 +11,7 @@ import { logErrorInSentry } from "#/utils/sentry";
 import { defaultHeadersMiddleware } from "./-middlewares";
 
 class APIResponseError extends Error {
-  public data: unknown;
+  data: unknown;
 
   constructor(message: string, data: unknown) {
     super(message);

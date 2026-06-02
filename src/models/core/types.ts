@@ -425,7 +425,7 @@ export class NotAValidIdRnaError extends Exception {
 
 /** COMMON EXCEPTIONS */
 export class IsLikelyASirenOrSiretException extends Exception {
-  public sirenOrSiret: string;
+  sirenOrSiret: string;
 
   constructor(sirenOrSiret: string) {
     super({

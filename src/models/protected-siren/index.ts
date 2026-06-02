@@ -13,7 +13,7 @@ import {
  * See /public/protected-siren.txt
  */
 class ProtectedSirenList {
-  public _list: DataStore<boolean>;
+  _list: DataStore<boolean>;
   // time before protected siren list update
   private readonly TTL = 3_600_000; // 1h
 

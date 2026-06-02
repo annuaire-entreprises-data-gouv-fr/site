@@ -88,19 +88,19 @@ export class LoggerContext {
     this.p99Ms = p99Ms;
   }
 
-  public setContext(context: Partial<IContext>) {
+  setContext(context: Partial<IContext>) {
     this.context = { ...this.context, ...context };
   }
 
-  public setContextKey(key: string, value: IContext[keyof IContext]) {
+  setContextKey(key: string, value: IContext[keyof IContext]) {
     this.context[key] = value;
   }
 
-  public getContextKey(key: string) {
+  getContextKey(key: string) {
     return this.context[key];
   }
 
-  public success(
+  success(
     options: {
       service?: LoggerService;
       statusCode?: number;
@@ -134,7 +134,7 @@ export class LoggerContext {
     }
   }
 
-  public serviceSuccess(options: {
+  serviceSuccess(options: {
     service: LoggerService;
     statusCode?: number;
     startTimeMs?: number;
@@ -166,7 +166,7 @@ export class LoggerContext {
     }
   }
 
-  public error(options: {
+  error(options: {
     error: LoggerError;
     statusCode: number;
     service?: LoggerService;

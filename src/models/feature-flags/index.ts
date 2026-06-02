@@ -18,7 +18,7 @@ type FeatureFlagValue = boolean | string;
  * List of feature flags
  */
 class FeatureFlagsList {
-  public _list: DataStore<FeatureFlagValue>;
+  _list: DataStore<FeatureFlagValue>;
   // time before feature flags list update
   private readonly TTL = 2 * 60 * 1000; // 2 minutes
 

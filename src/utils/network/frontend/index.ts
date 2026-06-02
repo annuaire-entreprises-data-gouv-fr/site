@@ -106,7 +106,7 @@ export class RequestAbortedDuringUnloadException extends Exception {
 }
 
 export class FailToFetchError extends Exception {
-  public status: number;
+  status: number;
 
   constructor(
     args: { context: IExceptionContext; cause: any },

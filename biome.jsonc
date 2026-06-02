@@ -18,7 +18,6 @@
         "noMagicNumbers": "off",
         "noNestedTernary": "off",
         "noEnum": "off",
-        "useConsistentMemberAccessibility": "off",
         "useFilenamingConvention": "off",
         "noDescendingSpecificity": "off"
       },
