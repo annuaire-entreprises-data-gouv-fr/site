@@ -56,7 +56,7 @@ export default function AvocatsSection({
     });
 
     return () => window.cancelAnimationFrame(animationFrame);
-  }, [avocats]);
+  }, []);
 
   return (
     <AsyncDataSectionClient

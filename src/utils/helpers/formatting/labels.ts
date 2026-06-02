@@ -16,7 +16,7 @@ export const getUrlFromDepartement = (dep: string) => {
 };
 
 export const getDepartementFromCodePostal = (codePostal: string) => {
-  if (!codePostal || codePostal.length !== 5 || codePostal.startsWith("00")) {
+  if (codePostal?.length !== 5 || codePostal.startsWith("00")) {
     return null;
   }
 

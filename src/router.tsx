@@ -3,7 +3,6 @@ import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { GlobalError } from "./components/screens/global-error";
 import { NotFound } from "./components/screens/not-found";
 import { routeTree } from "./routeTree.gen";
-import { initSentryClient } from "./utils/sentry/init";
 
 declare global {
   interface Window {
@@ -35,10 +34,6 @@ export function getRouter() {
       return <GlobalError error={props.error} />;
     },
   });
-
-  if (!router.isServer) {
-    initSentryClient();
-  }
 
   return router;
 }

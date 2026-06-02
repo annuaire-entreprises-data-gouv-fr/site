@@ -101,7 +101,7 @@ function MapWithResults({
         }
       });
     });
-  }, [results, shouldColorZipCode, mapContainer, hasSupportedWebGl]);
+  }, [results, shouldColorZipCode, hasSupportedWebGl]);
 
   return (
     <div

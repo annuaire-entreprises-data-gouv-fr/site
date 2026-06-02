@@ -64,7 +64,7 @@ export default function TempIncidentBanner({
         </div>
       ),
     }),
-    [proconnectMigrationClosed]
+    [saveProconnectMigrationClosed]
   );
 
   const isProConnectMigrationDisplayed =

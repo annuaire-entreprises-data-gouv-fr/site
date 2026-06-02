@@ -9,6 +9,6 @@ export function useTimeout(ms: number): boolean {
   useEffect(() => {
     const timeout = setTimeout(() => setReady(true), ms);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [ms]);
   return ready;
 }

@@ -40,7 +40,7 @@ export default function ProtectedBeneficiairesSection({
       siren: uniteLegale.siren,
       useCase,
     }),
-    [useCase]
+    [useCase, uniteLegale.siren]
   );
   const beneficiaires = useServerFnData(
     getAgentBeneficiairesFn,

@@ -91,6 +91,7 @@ function useShowLoadingState<T>(
     before100ms && !isDataLoading(data)
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: check only until 100ms
   useEffect(() => {
     if (!isDataLoading(data) && before100ms) {
       setDataLoadedBefore100ms(true);

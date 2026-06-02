@@ -90,7 +90,7 @@ const ProtectedEtablissementEffectifsMensuelsSection = ({
       year: selectedYear.toString(),
       useCase,
     }),
-    [selectedNatureEffectif, selectedYear, useCase]
+    [selectedNatureEffectif, selectedYear, useCase, etablissement.siret]
   );
   const effectifsMensuelsProtected = useServerFnData(
     getAgentEffectifsMensuelsProtectedFn,
