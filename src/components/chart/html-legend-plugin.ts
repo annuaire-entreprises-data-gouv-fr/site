@@ -29,7 +29,7 @@ export const htmlLegendPlugin = (htmlLegendContainerId: string) => {
       // Reuse the built-in legendItems generator
       const items = chart.options.plugins.legend.labels.generateLabels(chart);
 
-      items.forEach((item: any) => {
+      for (const item of items) {
         const li = document.createElement("li");
         li.style.alignItems = "center";
         li.style.cursor = "pointer";
@@ -82,7 +82,7 @@ export const htmlLegendPlugin = (htmlLegendContainerId: string) => {
         li.appendChild(boxSpan);
         li.appendChild(textContainer);
         listContainer.appendChild(li);
-      });
+      }
     },
   };
 };

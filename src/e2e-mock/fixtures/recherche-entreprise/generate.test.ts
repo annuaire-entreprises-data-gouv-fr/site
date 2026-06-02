@@ -3,7 +3,7 @@ import { clientSearchRechercheEntrepriseRaw } from "#/clients/recherche-entrepri
 import SearchFilterParams from "#/models/search/search-filter-params";
 
 describe("Simple search with searchTerms", () => {
-  [
+  for (const searchTerm of [
     "198100125", // établissement scolaire
     "800329849", // entrepreneur spectacle, asso & ESS
     "130025265", // DINUM (administration)
@@ -36,7 +36,9 @@ describe("Simple search with searchTerms", () => {
     "302474648",
     "533744991",
     "784410607",
-  ].forEach((s) => itShouldMatchSnapshot(s));
+  ]) {
+    itShouldMatchSnapshot(searchTerm);
+  }
 });
 
 describe("Search with searchTerms and filters", () => {

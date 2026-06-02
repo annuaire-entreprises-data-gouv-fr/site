@@ -106,10 +106,9 @@ export const clientUniteLegaleInsee = async (
   }${tmpUniteLegale.sigle ? ` (${tmpUniteLegale.sigle})` : ""}`;
 
   const etablissementsList = allEtablissements?.list || [siege];
-  etablissementsList.forEach(
-    (e) =>
-      (e.ancienSiege = uniteLegale.anciensSiegesSirets.indexOf(e.siret) > -1)
-  );
+  for (const e of etablissementsList) {
+    e.ancienSiege = uniteLegale.anciensSiegesSirets.indexOf(e.siret) > -1;
+  }
 
   const etablissements = createEtablissementsList(
     etablissementsList,

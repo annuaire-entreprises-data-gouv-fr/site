@@ -45,7 +45,6 @@
       "complexity": {
         "noExcessiveCognitiveComplexity": "off",
         "noBannedTypes": "off",
-        "noForEach": "off",
         "useSimplifiedLogicExpression": "off"
       },
       "correctness": {

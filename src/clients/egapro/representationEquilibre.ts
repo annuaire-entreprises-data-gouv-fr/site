@@ -44,7 +44,7 @@ const mapToDomainObject = (
     },
   };
 
-  Object.keys(représentation_équilibrée).forEach((e) => {
+  for (const e of Object.keys(représentation_équilibrée)) {
     const value = représentation_équilibrée[e];
     formatted.years.push(e);
     formatted.scores.pourcentageFemmesCadres.push(
@@ -59,7 +59,7 @@ const mapToDomainObject = (
     formatted.scores.pourcentageHommesMembres.push(
       value.pourcentage_hommes_membres
     );
-  });
+  }
 
   return formatted;
 };

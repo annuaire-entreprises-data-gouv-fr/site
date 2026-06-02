@@ -80,9 +80,9 @@ const loadAllAPI = () =>
   Object.values(administrationsMetaData).reduce<
     Record<string, IAPIMonitorMetaData>
   >((acc, administration) => {
-    (administration.apiMonitors || []).forEach((monitor) => {
+    for (const monitor of administration.apiMonitors || []) {
       acc[monitor.apiSlug] = monitor;
-    });
+    }
     return acc;
   }, {});
 

@@ -81,10 +81,10 @@ const mergeFinancesSocieteWithChiffreAffaires = (
   // - we dont know the bilan type of protected data + we only have last three years
   const indicateurs = financesSociete?.indicateurs || [];
 
-  indicateurs.forEach((i) => {
+  for (const i of indicateurs) {
     // it seems that CADGFIP does not have bilans consolidés
     if (i.type === "K") {
-      return;
+      continue;
     }
     const existingCADGFiP = chiffreAffairesProtected?.find(
       (c) => i.year === c.year
@@ -92,10 +92,10 @@ const mergeFinancesSocieteWithChiffreAffaires = (
     if (existingCADGFiP) {
       i.chiffreAffairesDGFiP = existingCADGFiP.chiffreAffaires;
     }
-  });
+  }
 
   if (chiffreAffairesProtected) {
-    chiffreAffairesProtected.forEach((c) => {
+    for (const c of chiffreAffairesProtected) {
       const existingIndicateursOpenData = financesSociete?.indicateurs.find(
         (i) => i.year === c.year && i.type !== "K"
       );
@@ -109,7 +109,7 @@ const mergeFinancesSocieteWithChiffreAffaires = (
           )
         );
       }
-    });
+    }
   }
 
   indicateurs.sort((a, b) => a.year - b.year);

@@ -18,7 +18,7 @@ import styles from "./style.module.css";
 const formatFinessData = (data: IFiness[]) => {
   const body = [] as any[];
 
-  data.forEach((finessJuridiqueEntity) => {
+  for (const finessJuridiqueEntity of data) {
     if (finessJuridiqueEntity.finessEtablissements.length > 0) {
       body.push([
         <Tag>{finessJuridiqueEntity.idFinessJuridique}</Tag>,
@@ -43,7 +43,10 @@ const formatFinessData = (data: IFiness[]) => {
       ]);
     }
 
-    finessJuridiqueEntity.finessEtablissements.forEach((etab, index) =>
+    for (const [
+      index,
+      etab,
+    ] of finessJuridiqueEntity.finessEtablissements.entries()) {
       body.push([
         <div
           className={
@@ -79,9 +82,9 @@ const formatFinessData = (data: IFiness[]) => {
         >
           Consulter
         </ButtonLink>,
-      ])
-    );
-  });
+      ]);
+    }
+  }
 
   return body;
 };

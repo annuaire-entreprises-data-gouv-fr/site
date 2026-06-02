@@ -82,12 +82,12 @@ const fetchMonitorsByAdministration = async (): Promise<{
     ];
   }
 
-  allMonitorings.forEach((monitorings) => {
+  for (const monitorings of allMonitorings) {
     allMonitoringsByAdministration[monitorings.administrationEnum] = [
       ...(allMonitoringsByAdministration[monitorings.administrationEnum] || []),
       monitorings,
     ];
-  });
+  }
 
   return allMonitoringsByAdministration;
 };
