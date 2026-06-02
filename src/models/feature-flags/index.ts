@@ -20,7 +20,7 @@ type FeatureFlagValue = boolean | string;
 class FeatureFlagsList {
   public _list: DataStore<FeatureFlagValue>;
   // time before feature flags list update
-  private TTL = 2 * 60 * 1000; // 2 minutes
+  private readonly TTL = 2 * 60 * 1000; // 2 minutes
 
   constructor() {
     this._list = new DataStore<FeatureFlagValue>(

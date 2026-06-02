@@ -27,7 +27,7 @@ export interface IParams {
 }
 
 class SearchFilterParams {
-  private params: IParams;
+  private readonly params: IParams;
 
   constructor(query: IParams = {}) {
     const {

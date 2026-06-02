@@ -22,7 +22,6 @@
         "noParameterProperties": "off",
         "useConsistentMemberAccessibility": "off",
         "useFilenamingConvention": "off",
-        "useReadonlyClassProperties": "off",
         "noDescendingSpecificity": "off"
       },
       "suspicious": {

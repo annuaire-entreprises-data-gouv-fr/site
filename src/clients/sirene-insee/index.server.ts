@@ -30,11 +30,11 @@ export class httpInseeClient {
   private _token: IAccessToken | null;
 
   constructor(
-    private token_url: string,
-    private client_id: string | undefined,
-    private client_secret: string | undefined,
-    private username: string | undefined,
-    private password: string | undefined
+    private readonly token_url: string,
+    private readonly client_id: string | undefined,
+    private readonly client_secret: string | undefined,
+    private readonly username: string | undefined,
+    private readonly password: string | undefined
   ) {
     if (
       !(

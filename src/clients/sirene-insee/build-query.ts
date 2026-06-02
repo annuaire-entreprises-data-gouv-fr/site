@@ -4,7 +4,7 @@ import type { ExportCsvInput } from "./input-validation";
 import { niv1ToNiv5Mapping } from "./niv1ToNiv5Mapping";
 
 export class SireneQueryBuilder {
-  private conditions: string[] = [];
+  private readonly conditions: string[] = [];
 
   constructor(params: ExportCsvInput) {
     this.buildQuery(params);
@@ -84,7 +84,7 @@ export class SireneQueryBuilder {
     return this.conditions.join(" AND ");
   }
 
-  private addCategoryConditions = (categories: string[]) => {
+  private readonly addCategoryConditions = (categories: string[]) => {
     if (!categories?.length) {
       return;
     }
@@ -93,7 +93,7 @@ export class SireneQueryBuilder {
     this.conditions.push(`(categorieEntreprise:(${categoryConditions}))`);
   };
 
-  private addESSConditions = (
+  private readonly addESSConditions = (
     {
       inclure,
       inclureNo,
@@ -150,7 +150,7 @@ export class SireneQueryBuilder {
     }
   };
 
-  private addSirenSiretConditions = (siretsAndSirens: string[]) => {
+  private readonly addSirenSiretConditions = (siretsAndSirens: string[]) => {
     if (!siretsAndSirens?.length) {
       return;
     }
@@ -171,7 +171,7 @@ export class SireneQueryBuilder {
     }
   };
 
-  private addEffectifConditions = (
+  private readonly addEffectifConditions = (
     headcount: { min: number; max: number },
     isHq?: boolean
   ) => {
@@ -196,7 +196,7 @@ export class SireneQueryBuilder {
     this.conditions.push(`(${rangeConditions.join(" OR ")})`);
   };
 
-  private addLegalCategoryConditions = (legalCategories: string[]) => {
+  private readonly addLegalCategoryConditions = (legalCategories: string[]) => {
     if (!legalCategories?.length) {
       return;
     }
@@ -207,7 +207,7 @@ export class SireneQueryBuilder {
     this.conditions.push(`(${legalCategoriesConditions.join(" OR ")})`);
   };
 
-  private addDateCreationConditions = (
+  private readonly addDateCreationConditions = (
     creationDate: {
       to?: string;
       from?: string;
@@ -223,7 +223,7 @@ export class SireneQueryBuilder {
     );
   };
 
-  private addDateMajConditions = (
+  private readonly addDateMajConditions = (
     updateDate: {
       to?: string;
       from?: string;
@@ -241,7 +241,7 @@ export class SireneQueryBuilder {
     );
   };
 
-  private addLocationConditions = (location: {
+  private readonly addLocationConditions = (location: {
     codesPostaux?: string[];
     codesInsee?: string[];
     departments?: string[];
@@ -304,7 +304,7 @@ export class SireneQueryBuilder {
     );
   };
 
-  private addActivityConditions = (
+  private readonly addActivityConditions = (
     naf?: string[],
     sap?: string[],
     isHq?: boolean
@@ -344,7 +344,7 @@ export class SireneQueryBuilder {
     }
   };
 
-  private buildQuery = (params: ExportCsvInput) => {
+  private readonly buildQuery = (params: ExportCsvInput) => {
     // Etat administratif de l'établissement
     if (params.activity === "active") {
       this.conditions.push(

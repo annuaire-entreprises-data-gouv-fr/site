@@ -3,8 +3,8 @@ import type { IRolesDataRoles } from "#/clients/roles-data/interface";
 import { DataStore } from "#/utils/data-store";
 
 class RolesmetadataStore {
-  private _rolesDataStore: DataStore<IRolesDataRoles[]>;
-  private TTL = 36_000_000; // 10h
+  private readonly _rolesDataStore: DataStore<IRolesDataRoles[]>;
+  private readonly TTL = 36_000_000; // 10h
 
   constructor() {
     this._rolesDataStore = new DataStore<IRolesDataRoles[]>(

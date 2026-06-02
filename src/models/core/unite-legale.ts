@@ -70,9 +70,9 @@ export const getUniteLegaleFromSlug = async (
 };
 
 class UniteLegaleBuilder {
-  private _siren: Siren;
-  private _isBot: boolean;
-  private _page: number;
+  private readonly _siren: Siren;
+  private readonly _isBot: boolean;
+  private readonly _page: number;
 
   constructor(slug: string, isBot = false, page = 1) {
     this._siren = verifySiren(slug);

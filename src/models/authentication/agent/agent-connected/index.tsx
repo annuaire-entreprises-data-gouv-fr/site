@@ -10,13 +10,13 @@ import { AgentOrganisation } from "../organisation";
 import { defaultAgentScopes, type IAgentScope } from "../scopes/constants";
 
 export class AgentConnected {
-  private domain;
-  private idpId;
-  private email;
-  private familyName;
-  private firstName;
-  private proConnectSub;
-  private siret;
+  private readonly domain;
+  private readonly idpId;
+  private readonly email;
+  private readonly familyName;
+  private readonly firstName;
+  private readonly proConnectSub;
+  private readonly siret;
 
   constructor(userInfo: IProConnectUserInfo) {
     this.domain = this.extractDomain(userInfo?.email || "");
