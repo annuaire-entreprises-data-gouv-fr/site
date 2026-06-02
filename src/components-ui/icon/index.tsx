@@ -4,6 +4,7 @@
 
 const communityFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -18,6 +19,7 @@ const communityFill = (
 
 const user = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     viewBox="0 0 24 24"
@@ -30,6 +32,7 @@ const user = (
 
 const moneyCircle = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -44,6 +47,7 @@ const moneyCircle = (
 
 const buildingFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -58,6 +62,7 @@ const buildingFill = (
 
 const administrationFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -72,6 +77,7 @@ const administrationFill = (
 
 const awardFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -85,6 +91,7 @@ const awardFill = (
 );
 const collectiviteFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -99,6 +106,7 @@ const collectiviteFill = (
 
 const building = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -113,6 +121,7 @@ const building = (
 
 const alertFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -127,6 +136,7 @@ const alertFill = (
 
 const lockFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -140,6 +150,7 @@ const lockFill = (
 
 const open = (
   <svg
+    aria-hidden="true"
     fill="#326f00"
     height="100%"
     stroke="#326f00"
@@ -152,6 +163,7 @@ const open = (
 );
 const closed = (
   <svg
+    aria-hidden="true"
     fill="#914141"
     height="100%"
     stroke="#914141"
@@ -165,6 +177,7 @@ const closed = (
 
 const questionFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -183,6 +196,7 @@ const questionFill = (
 
 const download = (
   <svg
+    aria-hidden="true"
     fill="none"
     height="100%"
     stroke="currentColor"
@@ -201,6 +215,7 @@ const download = (
 
 const listUnordered = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -215,6 +230,7 @@ const listUnordered = (
 
 const mapPin = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -229,6 +245,7 @@ const mapPin = (
 
 const mapPinFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="currentColor"
@@ -243,6 +260,7 @@ const mapPinFill = (
 
 const information = (
   <svg
+    aria-hidden="true"
     height="100%"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -259,6 +277,7 @@ const information = (
 
 const linkedin = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -277,6 +296,7 @@ const linkedin = (
 
 const qrCode = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -292,6 +312,7 @@ const qrCode = (
 
 const print = (
   <svg
+    aria-hidden="true"
     fill="none"
     height="100%"
     stroke="currentColor"
@@ -310,6 +331,7 @@ const print = (
 
 const mail = (
   <svg
+    aria-hidden="true"
     fill="none"
     height="100%"
     stroke="currentColor"
@@ -327,6 +349,7 @@ const mail = (
 
 const file = (
   <svg
+    aria-hidden="true"
     fill="none"
     height="100%"
     viewBox="0 0 14 16"
@@ -344,6 +367,7 @@ const file = (
 
 const fileFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     viewBox="0 0 24 24"
@@ -356,6 +380,7 @@ const fileFill = (
 
 const lightbulbFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     viewBox="0 0 24 24"
@@ -368,6 +393,7 @@ const lightbulbFill = (
 
 const errorFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     viewBox="0 0 24 24"
@@ -380,6 +406,7 @@ const errorFill = (
 
 const successFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     viewBox="0 0 24 24"
@@ -392,6 +419,7 @@ const successFill = (
 
 const discussion = (
   <svg
+    aria-hidden="true"
     fill="none"
     height="100%"
     viewBox="0 0 42 42"
@@ -407,6 +435,7 @@ const discussion = (
 
 const chat3Fill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -420,6 +449,7 @@ const chat3Fill = (
 
 const accountLine = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -433,6 +463,7 @@ const accountLine = (
 
 const present = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -446,6 +477,7 @@ const present = (
 
 const giftFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -459,6 +491,7 @@ const giftFill = (
 
 const searchLine = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -472,6 +505,7 @@ const searchLine = (
 
 const groupFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -485,6 +519,7 @@ const groupFill = (
 
 const calendarFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -498,6 +533,7 @@ const calendarFill = (
 
 const scaleFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -511,6 +547,7 @@ const scaleFill = (
 
 const ballPenFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -524,6 +561,7 @@ const ballPenFill = (
 
 const bookletFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -537,6 +575,7 @@ const bookletFill = (
 
 const editBoxFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -550,6 +589,7 @@ const editBoxFill = (
 
 const book2Fill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -563,6 +603,7 @@ const book2Fill = (
 
 const infoFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -576,6 +617,7 @@ const infoFill = (
 
 const checkLine = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -589,6 +631,7 @@ const checkLine = (
 
 const closeCircleFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -602,6 +645,7 @@ const closeCircleFill = (
 
 const chevronDown = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -615,6 +659,7 @@ const chevronDown = (
 
 const chevronUp = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"
@@ -628,6 +673,7 @@ const chevronUp = (
 
 const shieldFill = (
   <svg
+    aria-hidden="true"
     fill="currentColor"
     height="100%"
     stroke="none"

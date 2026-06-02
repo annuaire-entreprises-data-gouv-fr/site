@@ -11,9 +11,6 @@
   },
   "linter": {
     "rules": {
-      "a11y": {
-        "noSvgWithoutTitle": "off"
-      },
       "style": {
         "noMagicNumbers": "off",
         "noNestedTernary": "off",

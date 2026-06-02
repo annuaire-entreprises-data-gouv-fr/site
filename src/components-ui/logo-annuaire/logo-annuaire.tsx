@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 
 export const diamond = (
   <svg
+    aria-hidden="true"
     fill="none"
     height="100"
     viewBox="0 0 53 61"

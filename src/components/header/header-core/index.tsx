@@ -98,6 +98,7 @@ export const HeaderCore: React.FC<IProps> = ({
                             width={140}
                             xmlns="http://www.w3.org/2000/svg"
                           >
+                            <title>Annuaire des Entreprises</title>
                             <path
                               d="m26.5 0 26.4 15.3v30.4L26.5 61 .1 45.7V15.3L26.5 0Z"
                               fill="#E8EDFF"

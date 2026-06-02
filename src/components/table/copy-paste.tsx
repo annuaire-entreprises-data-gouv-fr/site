@@ -131,6 +131,7 @@ function CopySVG() {
     <svg
       fill="none"
       height="15"
+      role="img"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -139,6 +140,7 @@ function CopySVG() {
       width="15"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>Copier</title>
       <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
       <rect height="4" rx="1" ry="1" width="8" x="8" y="2" />
     </svg>
@@ -150,6 +152,7 @@ function CheckMarkSVG() {
     <svg
       fill="none"
       height="15px"
+      role="img"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -159,6 +162,7 @@ function CheckMarkSVG() {
       width="15"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>Copié</title>
       <path d="M4 16L11 23 27 7" />
     </svg>
   );

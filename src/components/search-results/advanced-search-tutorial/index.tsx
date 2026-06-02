@@ -6,6 +6,7 @@ import styles from "./style.module.css";
 export const AdvancedSearchTutorial = () => (
   <div className={styles["advanced-search-tutorial"]}>
     <svg
+      aria-hidden="true"
       fill="#c53721"
       stroke="#c53721"
       strokeWidth="0"
