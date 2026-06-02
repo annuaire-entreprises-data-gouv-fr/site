@@ -29,8 +29,7 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "useAwait": "off",
-        "noConsole": "off",
-        "useIterableCallbackReturn": "off"
+        "noConsole": "off"
       },
       "performance": {
         "useTopLevelRegex": "off",
