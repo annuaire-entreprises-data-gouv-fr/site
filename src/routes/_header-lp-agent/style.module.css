@@ -64,6 +64,10 @@
   align-items: flex-start;
 }
 
+.data-card li {
+  margin-bottom: 0.35rem;
+}
+
 .data-card-content ul li {
   display: flex;
   flex-wrap: wrap;
@@ -96,10 +100,6 @@
   padding-left: 0;
   margin: 0;
   list-style: none;
-}
-
-.data-card li {
-  margin-bottom: 0.35rem;
 }
 
 .data-card-footer {

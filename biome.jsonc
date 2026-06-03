@@ -12,8 +12,7 @@
   "linter": {
     "rules": {
       "style": {
-        "noNestedTernary": "off",
-        "noDescendingSpecificity": "off"
+        "noNestedTernary": "off"
       },
       "suspicious": {
         "noExplicitAny": "off",
