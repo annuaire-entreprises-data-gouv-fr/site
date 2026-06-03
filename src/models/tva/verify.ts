@@ -1,6 +1,6 @@
 import { clientTVA } from "#/clients/api-proxy/tva";
 import { HttpNotFound } from "#/clients/exceptions";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

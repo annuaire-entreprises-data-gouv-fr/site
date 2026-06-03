@@ -13,10 +13,10 @@ const SECONDS_IN_A_DAY = 3600 * 24;
  * Converts a series of downtime into a series of daily uptimeRatio
  */
 export class DailyUptimeRatioConverter {
-  private _days: {
+  private readonly _days: {
     [key: string]: ILog;
   } = {};
-  private _from: Date;
+  private readonly _from: Date;
 
   constructor(from: Date) {
     this._from = from;

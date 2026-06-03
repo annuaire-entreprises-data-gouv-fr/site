@@ -1,6 +1,6 @@
 import { DataInpiLinkWithExplanations } from "#/components/justificatifs/data-inpi-link";
 import { Section } from "#/components/section";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import type { IUniteLegale } from "#/models/core/types";
 

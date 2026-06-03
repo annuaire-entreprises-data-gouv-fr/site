@@ -10,13 +10,13 @@ import { AgentOrganisation } from "../organisation";
 import { defaultAgentScopes, type IAgentScope } from "../scopes/constants";
 
 export class AgentConnected {
-  private domain;
-  private idpId;
-  private email;
-  private familyName;
-  private firstName;
-  private proConnectSub;
-  private siret;
+  private readonly domain;
+  private readonly idpId;
+  private readonly email;
+  private readonly familyName;
+  private readonly firstName;
+  private readonly proConnectSub;
+  private readonly siret;
 
   constructor(userInfo: IProConnectUserInfo) {
     this.domain = this.extractDomain(userInfo?.email || "");
@@ -28,7 +28,7 @@ export class AgentConnected {
 
     const siretAsString = (userInfo.siret || "").replaceAll(" ", "");
 
-    if (!siretAsString || !isSiret(siretAsString)) {
+    if (!(siretAsString && isSiret(siretAsString))) {
       throw new NeedASiretException(
         "The user doesn‘t have a siret",
         `${this.domain} - ${this.idpId}`
@@ -120,7 +120,7 @@ export class AgentConnected {
 
     const groups = await getAgentGroups({ allowProConnectRedirection: false });
 
-    groups.forEach((agentGroup) => {
+    for (const agentGroup of groups) {
       const groupsNewScopes = agentGroup.scopes.filter(
         (scope) => !superAgentScopes.hasScope(scope)
       );
@@ -130,7 +130,7 @@ export class AgentConnected {
       }
 
       superAgentScopes.add(agentGroup.scopes);
-    });
+    }
 
     if (superAgentScopes.hasScopes()) {
       return {

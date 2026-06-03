@@ -83,8 +83,8 @@ export function AsyncDataSectionClient<T>({
 
 /** Contains the logic that prevents flickering of UI */
 function useShowLoadingState<T>(
-  data: IDataFetchingState.LOADING | T
-): data is IDataFetchingState.LOADING {
+  data: typeof IDataFetchingState.LOADING | T
+): data is typeof IDataFetchingState.LOADING {
   const before100ms = !useTimeout(100);
   const before800ms = !useTimeout(800);
   const [dataLoadedBefore100ms, setDataLoadedBefore100ms] = useState(

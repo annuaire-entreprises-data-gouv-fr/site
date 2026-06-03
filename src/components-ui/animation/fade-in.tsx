@@ -20,8 +20,8 @@ export const FadeIn = ({
       className={clsx(className, "fade-in-wrapper")}
       style={{
         ...(style || {}),
-        animationDuration: duration + "ms",
-        animationDelay: delay + "ms",
+        animationDuration: `${duration}ms`,
+        animationDelay: `${delay}ms`,
       }}
     >
       {children}

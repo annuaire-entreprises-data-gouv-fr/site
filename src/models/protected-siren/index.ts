@@ -13,9 +13,9 @@ import {
  * See /public/protected-siren.txt
  */
 class ProtectedSirenList {
-  public _list: DataStore<boolean>;
+  _list: DataStore<boolean>;
   // time before protected siren list update
-  private TTL = 3_600_000; // 1h
+  private readonly TTL = 3_600_000; // 1h
 
   constructor() {
     this._list = new DataStore<boolean>(

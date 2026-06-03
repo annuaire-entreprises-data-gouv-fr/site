@@ -47,11 +47,13 @@ export const getClient = createServerOnlyFn(async () => {
     POST_LOGOUT_REDIRECT_URI,
   } = getConfig();
   if (
-    !CLIENT_ID ||
-    !ISSUER_URL ||
-    !CLIENT_SECRET ||
-    !REDIRECT_URI ||
-    !POST_LOGOUT_REDIRECT_URI
+    !(
+      CLIENT_ID &&
+      ISSUER_URL &&
+      CLIENT_SECRET &&
+      REDIRECT_URI &&
+      POST_LOGOUT_REDIRECT_URI
+    )
   ) {
     throw new Error("PRO CONNECT ENV variables are not defined");
   }

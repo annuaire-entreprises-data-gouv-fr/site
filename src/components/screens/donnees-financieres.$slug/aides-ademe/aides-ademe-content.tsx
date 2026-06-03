@@ -6,7 +6,7 @@ import LocalPageCounter from "#/components/search-results/results-pagination/loc
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { FullTable } from "#/components/table/full";
 import { useFetchAidesADEME } from "#/hooks/fetch/aides-ademe";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatCurrency, formatDate } from "#/utils/helpers";
 

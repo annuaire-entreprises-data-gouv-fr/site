@@ -36,7 +36,7 @@ export const Route = createFileRoute("/_header-lp-agent/lp/agent-public")({
 
 function RouteComponent() {
   return (
-    <div className={styles["page"]}>
+    <div className={styles.page}>
       <FullWidthContainer
         style={{
           background: `radial-gradient(circle at 15% 25%, #f5efff 0, transparent 40%),
@@ -44,7 +44,7 @@ function RouteComponent() {
            linear-gradient(180deg, #f7f8ff 0%, #e9f5ff 65%, #ffffff 100%)`,
         }}
       >
-        <section className={styles["hero"]}>
+        <section className={styles.hero}>
           <div className={styles["hero-content"]}>
             <h1>
               L’Annuaire de référence pour les agents publics

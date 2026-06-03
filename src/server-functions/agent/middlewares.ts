@@ -25,7 +25,7 @@ interface UseCaseInput {
 export const withUseCase = createMiddleware({ type: "function" }).server(
   async ({ next, data }) => {
     const useCase = data ? (data as UseCaseInput).useCase : null;
-    if (!useCase || !Object.values(UseCase).includes(useCase)) {
+    if (!(useCase && Object.values(UseCase).includes(useCase))) {
       throw new HttpBadRequestError("Invalid useCase");
     }
 

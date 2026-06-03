@@ -13,7 +13,7 @@ import { HeaderDefaultError } from "./-error";
 export const Route = createFileRoute("/_header-default/definitions/$slug")({
   loader: async ({ params }) => {
     const definition = getDefinition(params.slug);
-    if (!definition?.body || !definition.title) {
+    if (!(definition?.body && definition.title)) {
       // should not happen as we prebuild
       logWarningInSentry(
         new Exception({

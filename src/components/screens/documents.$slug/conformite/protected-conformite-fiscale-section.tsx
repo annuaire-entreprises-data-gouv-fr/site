@@ -3,7 +3,7 @@ import { AsyncDataSectionClient } from "#/components/section/data-section/client
 import { TwoColumnTable } from "#/components/table/simple";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";

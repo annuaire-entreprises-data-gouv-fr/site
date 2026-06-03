@@ -27,7 +27,7 @@ export interface IParams {
 }
 
 class SearchFilterParams {
-  private params: IParams;
+  private readonly params: IParams;
 
   constructor(query: IParams = {}) {
     const {
@@ -82,11 +82,11 @@ class SearchFilterParams {
     };
   }
 
-  public toJSON() {
+  toJSON() {
     return { ...this.params };
   }
 
-  public toApiURI() {
+  toApiURI() {
     const { cp_dep, cp_dep_type, ca_max, ca_min } = this.params;
     const departement = cp_dep_type === "dep" ? cp_dep : "";
     const region = cp_dep_type === "reg" ? cp_dep : "";
@@ -135,7 +135,7 @@ class SearchFilterParams {
     });
   }
 
-  public extractFilters = () => {
+  extractFilters = () => {
     const f = {
       dirigeantFilter: {
         icon: "user",

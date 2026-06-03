@@ -64,7 +64,7 @@ export const Route = createFileRoute("/api/auth/agent-connect/callback")({
               return redirect({ href: newAuthUrl });
             } catch {
               return redirect({
-                href: getBaseUrl() + "/connexion/echec-connexion",
+                href: `${getBaseUrl()}/connexion/echec-connexion`,
               });
             }
           }
@@ -80,7 +80,7 @@ export const Route = createFileRoute("/api/auth/agent-connect/callback")({
 
           if (e instanceof PrestataireException) {
             return redirect({
-              href: getBaseUrl() + "/connexion/habilitation/prestataires",
+              href: `${getBaseUrl()}/connexion/habilitation/prestataires`,
             });
           }
           if (e instanceof CanRequestAuthorizationException) {
@@ -108,7 +108,7 @@ export const Route = createFileRoute("/api/auth/agent-connect/callback")({
           }
 
           return redirect({
-            href: getBaseUrl() + "/connexion/echec-connexion",
+            href: `${getBaseUrl()}/connexion/echec-connexion`,
           });
         }
       },

@@ -1,5 +1,5 @@
 import type React from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import FAQLink from "#/components-ui/faq-link";
 import { estNonDiffusibleStrict } from "#/models/core/diffusion";
 import { estActif, IETATADMINSTRATIF } from "#/models/core/etat-administratif";

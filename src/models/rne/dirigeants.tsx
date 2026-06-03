@@ -1,7 +1,7 @@
 import { clientRNEImmatriculation } from "#/clients/api-proxy/rne";
 import { HttpNotFound } from "#/clients/exceptions";
 import { clientDirigeantsRechercheEntreprise } from "#/clients/recherche-entreprise/dirigeants";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

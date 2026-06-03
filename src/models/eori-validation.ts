@@ -2,7 +2,7 @@ import { clientEORI } from "#/clients/api-proxy/eori";
 import { verifySiret } from "#/utils/helpers";
 import { isAbortError } from "#/utils/helpers/is-abort-error";
 import logErrorInSentry from "#/utils/sentry";
-import { EAdministration } from "./administrations/EAdministration";
+import { EAdministration } from "./administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

@@ -1,13 +1,13 @@
 import type React from "react";
 import { INSEE } from "#/components/administrations";
 import AvisSituationLink from "#/components/justificatifs/avis-situation-link";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { FullTable } from "#/components/table/full";
 import ButtonLink from "#/components-ui/button";
 import { Tag } from "#/components-ui/tag";
 import IsActiveTag from "#/components-ui/tag/is-active-tag";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
@@ -72,10 +72,8 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
     sources={[EAdministration.INSEE]}
     title="Justificatif d’inscription à l’Insee"
   >
-    {!estDiffusible(uniteLegale) &&
-    !hasRights({ user }, ApplicationRights.nonDiffusible) ? (
-      <AvisSituationNonDiffusible />
-    ) : (
+    {estDiffusible(uniteLegale) ||
+    hasRights({ user }, ApplicationRights.nonDiffusible) ? (
       <>
         <div className="description">
           Chaque établissement immatriculé par l’Insee au répertoire Sirene des
@@ -128,6 +126,8 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
           </>
         )}
       </>
+    ) : (
+      <AvisSituationNonDiffusible />
     )}
   </Section>
 );

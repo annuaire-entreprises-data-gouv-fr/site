@@ -15,7 +15,7 @@ export interface IDataSectionContentProps<T> {
 }
 
 export function DataSectionContent<
-  T extends Exclude<unknown, IDataFetchingState.LOADING>,
+  T extends Exclude<unknown, typeof IDataFetchingState.LOADING>,
 >({
   data,
   notFoundInfo,

@@ -1,5 +1,5 @@
 import { INSEE } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,

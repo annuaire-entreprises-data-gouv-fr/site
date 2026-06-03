@@ -21,7 +21,7 @@ const FAQLink: React.FC<
     width={width}
   >
     <LinkOrSpan ariaLabel={`En savoir plus sur ${tooltipLabel}`} to={to}>
-      <span className={styles.label + " " + (to ? styles.link : "")}>
+      <span className={`${styles.label} ${to ? styles.link : ""}`}>
         {tooltipLabel}{" "}
         <Icon color={constants.colors.frBlue} size={12} slug="information" />
       </span>

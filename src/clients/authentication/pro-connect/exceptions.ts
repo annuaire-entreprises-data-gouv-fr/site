@@ -10,7 +10,7 @@ export class ProConnectReconnexionNeeded extends Exception {
 }
 
 export class ProConnect2FANeeded extends Exception {
-  public loginHint: string;
+  loginHint: string;
 
   constructor(args: {
     message: string;

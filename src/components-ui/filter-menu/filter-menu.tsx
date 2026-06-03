@@ -79,9 +79,9 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
         )}
       </div>
       <FloatingModal
-        aria-label={"Les filtres de " + activeFilter.label}
+        aria-label={`Les filtres de ${activeFilter.label}`}
         aria-modal={false}
-        className={styles["container"]}
+        className={styles.container}
         style={{ display: open ? "block" : "none" }}
       >
         <div className={styles["filter-container"]}>{children}</div>

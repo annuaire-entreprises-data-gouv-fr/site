@@ -1,5 +1,5 @@
 import type React from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import UniteLegaleBadge from "#/components/unite-legale-badge";
 import { Icon } from "#/components-ui/icon/wrapper";
 import IsActiveTag from "#/components-ui/tag/is-active-tag";
@@ -80,7 +80,7 @@ const ResultItem: React.FC<{
         params={{ slug: result.chemin }}
         to="/entreprise/$slug"
       >
-        <div className={styles["title"]}>
+        <div className={styles.title}>
           <span>{`${result.nomComplet}`}</span>
           <UniteLegaleBadge
             defaultBadgeShouldBeHid
@@ -108,7 +108,7 @@ const ResultItem: React.FC<{
         />
         <div>
           <Icon slug="mapPin">
-            <span className={styles["adress"]}>
+            <span className={styles.adress}>
               <AddressWithColouredZip
                 adress={result.siege.adressePostale}
                 zip={(shouldColorSiege && result.siege.codePostal) || ""}
@@ -123,14 +123,14 @@ const ResultItem: React.FC<{
           .map((etablissement) => (
             <li key={etablissement.siret}>
               <a
-                className={styles["adress"]}
+                className={styles.adress}
                 href={`/etablissement/${etablissement.siret}`}
               >
                 <AddressWithColouredZip
                   adress={etablissement.adressePostale}
                   zip={(shouldColorZipCode && etablissement.codePostal) || ""}
                 />
-                <span className={styles["down"]} />
+                <span className={styles.down} />
               </a>
             </li>
           ))}

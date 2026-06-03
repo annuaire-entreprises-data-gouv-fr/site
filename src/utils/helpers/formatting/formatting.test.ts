@@ -68,7 +68,7 @@ const adresses = [
 
 describe("Check formatAdresse", () => {
   adresses.map((adress) =>
-    test("Success : " + adress.expected, () => {
+    test(`Success : ${adress.expected}`, () => {
       expect(formatAdresse(adress.fields)).toBe(adress.expected);
     })
   );
@@ -90,7 +90,7 @@ describe("Check formatCurrency", () => {
     "hello skelz",
   ];
 
-  [
+  for (const [index, value] of [
     -100_000_000_000,
     -9_999_999,
     -1000,
@@ -103,11 +103,11 @@ describe("Check formatCurrency", () => {
     null,
     "",
     "hello skelz",
-  ].map((value, index) => {
+  ].entries()) {
     test(`${value} : ${formatCurrency(value)} - ${expected[index]}`, () => {
       expect(formatCurrency(value)).toBe(expected[index]);
     });
-  });
+  }
 });
 
 describe("Check escapeString", () => {

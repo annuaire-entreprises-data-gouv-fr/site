@@ -10,6 +10,7 @@ import type { IdRna, Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
 import { sensitiveRequestCallerInfos } from "#/utils/network/utils/sensitive-request-caller-infos";
 import { sensitiveRequestLogger } from "#/utils/network/utils/sensitive-request-logger";
+import type { IGrantItem } from "./interface";
 
 /**
  * Data Subvention

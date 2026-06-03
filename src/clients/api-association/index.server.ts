@@ -54,7 +54,7 @@ export const clientAPIAssociationPrivate = createServerOnlyFn(
     siretSiege: string,
     signal?: AbortSignal
   ) => {
-    if (!process.env.API_ASSOCIATION_URL || !process.env.API_ASSOCIATION_KEY) {
+    if (!(process.env.API_ASSOCIATION_URL && process.env.API_ASSOCIATION_KEY)) {
       throw new HttpUnauthorizedError("Missing API Association credentials");
     }
 

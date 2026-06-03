@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { clientMatomoStats } from "#/clients/matomo/index.server";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { NpsStats } from "#/components/stats/nps";
 import { TraficStats } from "#/components/stats/trafic";
 import { UsageStats } from "#/components/stats/usage";

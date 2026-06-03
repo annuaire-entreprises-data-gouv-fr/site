@@ -1,4 +1,4 @@
-interface APIInclusionResponse {
+export interface APIInclusionResponse {
   address: string; // '1 Avenue de la Bauxite';
   brand: string; // 'Elise Méditerranée MARSEILLE IDDEE13';
   city: string; // 'Marseille';

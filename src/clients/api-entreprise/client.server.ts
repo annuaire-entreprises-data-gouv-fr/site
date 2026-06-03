@@ -11,8 +11,8 @@ import { logFatalErrorInSentry } from "#/utils/sentry";
 
 export interface IAPIEntrepriseResponse<T> {
   data: T;
-  links: {};
-  meta: {};
+  links: Record<string, unknown>;
+  meta: Record<string, unknown>;
 }
 /**
  * Wrapper client to call API Entreprise
@@ -47,7 +47,7 @@ const clientAPIEntreprise = createServerOnlyFn(
       throw new HttpUnauthorizedError("Missing recipient siret");
     }
 
-    if (!process.env.API_ENTREPRISE_URL || !process.env.API_ENTREPRISE_TOKEN) {
+    if (!(process.env.API_ENTREPRISE_URL && process.env.API_ENTREPRISE_TOKEN)) {
       throw new HttpUnauthorizedError("Missing API Entreprise credentials");
     }
 

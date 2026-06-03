@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { TwoColumnTable } from "#/components/table/simple";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";

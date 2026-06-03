@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/style/noDescendingSpecificity: to refactor later */
 .mapboxgl-map,
 .maplibregl-map {
   font:

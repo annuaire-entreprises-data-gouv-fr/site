@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../../-error";

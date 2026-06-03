@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { ConnexionSubLayout } from "#/components-ui/connexion-layout";
 import logoutPicture from "#/components-ui/illustrations/logout";
 import { meta } from "#/utils/seo";

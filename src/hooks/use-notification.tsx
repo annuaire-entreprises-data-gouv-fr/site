@@ -1,9 +1,11 @@
 import { createContext, useContext } from "react";
 
-export enum NotificationTypeEnum {
-  SUCCESS = "success",
-  ERROR = "error",
-}
+export const NotificationTypeEnum = {
+  SUCCESS: "success",
+  ERROR: "error",
+} as const;
+export type NotificationTypeEnum =
+  (typeof NotificationTypeEnum)[keyof typeof NotificationTypeEnum];
 
 export interface INotification {
   id: string;

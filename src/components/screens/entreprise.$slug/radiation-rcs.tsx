@@ -11,7 +11,7 @@ import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 import styles from "./style.module.css";
 
-const Wrapper: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+const Wrapper: React.FC<PropsWithChildren> = ({ children }) => (
   <div className={styles["inscriptions-wrapper"]}>
     <div>{children}</div>
   </div>
@@ -28,9 +28,11 @@ export const UniteLegaleRadiationRCS = ({
     "bodacc_radiation_displayed"
   );
   if (
-    !isBodaccRadiationDisplayed.isEnabled ||
-    !hasRights({ user }, ApplicationRights.isAgent) ||
-    !uniteLegale.bodacc?.radiation?.estRadie
+    !(
+      isBodaccRadiationDisplayed.isEnabled &&
+      hasRights({ user }, ApplicationRights.isAgent) &&
+      uniteLegale.bodacc?.radiation?.estRadie
+    )
   ) {
     return null;
   }

@@ -1,5 +1,5 @@
 import { clientDCA } from "#/clients/open-data-soft/clients/journal-officiel-associations";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale as IAssociation } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import type { IdRna } from "#/utils/helpers";

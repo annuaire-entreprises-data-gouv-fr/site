@@ -18,7 +18,9 @@ const safe =
       let argsAsString = "";
       try {
         argsAsString = args.toString();
-      } catch {}
+      } catch {
+        // Keep the formatter fallback empty when arguments cannot be stringified.
+      }
       logErrorInSentry(
         new InternalError({
           message: "Formatting error",
@@ -67,12 +69,12 @@ export const formatPercentage = safe((value: string, digits: number = 1) => {
     return;
   }
 
-  return Number.parseFloat(value).toFixed(digits) + "%";
+  return `${Number.parseFloat(value).toFixed(digits)}%`;
 });
 
 export const formatCurrency = safe(
   (value: string | number | undefined | null) => {
-    const number = Number.parseInt(value + "", 10);
+    const number = Number.parseInt(`${value}`, 10);
     if (!number && number !== 0) {
       return value as string;
     }
@@ -329,18 +331,20 @@ export const formatAdresse = ({
   libellePaysEtranger = "",
 }: IAdressFields) => {
   if (
-    !complement &&
-    !numeroVoie &&
-    !dernierNumeroVoie &&
-    !typeVoie &&
-    !libelleCommune &&
-    !distributionSpeciale &&
-    !codePostal &&
-    !codeCedex &&
-    !libelleVoie &&
-    !libelleCommuneEtranger &&
-    !codePaysEtranger &&
-    !libellePaysEtranger
+    !(
+      complement ||
+      numeroVoie ||
+      dernierNumeroVoie ||
+      typeVoie ||
+      libelleCommune ||
+      distributionSpeciale ||
+      codePostal ||
+      codeCedex ||
+      libelleVoie ||
+      libelleCommuneEtranger ||
+      codePaysEtranger ||
+      libellePaysEtranger
+    )
   ) {
     return "";
   }
@@ -370,7 +374,7 @@ export const agregateTripleFields = (
   field2: string | null,
   field3: string | null
 ) => {
-  if (!field1 && !field2 && !field3) {
+  if (!(field1 || field2 || field3)) {
     return null;
   }
   const field = `${field1 || ""} ${field2 || ""} ${field3 || ""}`;

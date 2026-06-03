@@ -42,7 +42,7 @@ export const Route = createFileRoute("/api/auth/agent-connect/login")({
             new AgentConnectionFailedException({ cause: e })
           );
           return redirect({
-            href: getBaseUrl() + "/connexion/echec-connexion",
+            href: `${getBaseUrl()}/connexion/echec-connexion`,
           });
         }
       },

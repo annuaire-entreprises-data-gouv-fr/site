@@ -95,7 +95,7 @@ export const UsageStats: React.FC<{
                         previousValue + currentValue,
                       0
                     );
-                    return Math.round((context.parsed * 100) / total) + "%";
+                    return `${Math.round((context.parsed * 100) / total)}%`;
                   },
                 },
               },

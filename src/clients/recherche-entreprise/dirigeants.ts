@@ -19,7 +19,7 @@ export const clientDirigeantsRechercheEntreprise = async (
     signal
   );
 
-  if (!results.length || !results[0]) {
+  if (!(results.length && results[0])) {
     return [];
   }
 

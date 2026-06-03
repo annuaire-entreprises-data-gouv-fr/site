@@ -4,7 +4,7 @@ import { LineChart } from "#/components/chart/line";
 import { DataSectionClient } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import constants from "#/models/constants";
 import type { IAssociation } from "#/models/core/types";
 import { getAssociationFn } from "#/server-functions/public/data-fetching";

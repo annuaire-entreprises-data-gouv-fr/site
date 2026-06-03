@@ -6,7 +6,7 @@ import {
 import { IETATADMINSTRATIF } from "#/models/core/etat-administratif";
 import type { IEtatCivil } from "#/models/rne/types";
 import type { IdRna, Siren, Siret } from "#/utils/helpers";
-import { EAdministration } from "../administrations/EAdministration";
+import { EAdministration } from "../administrations/e-administration";
 import {
   Exception,
   FetchRessourceException,
@@ -425,13 +425,16 @@ export class NotAValidIdRnaError extends Exception {
 
 /** COMMON EXCEPTIONS */
 export class IsLikelyASirenOrSiretException extends Exception {
-  constructor(public sirenOrSiret: string) {
+  sirenOrSiret: string;
+
+  constructor(sirenOrSiret: string) {
     super({
       name: "IsLikelyASirenOrSiretException",
       context: {
         details: sirenOrSiret,
       },
     });
+    this.sirenOrSiret = sirenOrSiret;
   }
 }
 

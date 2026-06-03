@@ -2,7 +2,7 @@ import type React from "react";
 import type { PropsWithChildren } from "react";
 import AvisSituationLink from "#/components/justificatifs/avis-situation-link";
 import ExtraitRNELink from "#/components/justificatifs/extrait-rne-link";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { OpenClosedTag } from "#/components-ui/badge/frequent";
 import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
@@ -32,8 +32,7 @@ export const UniteLegaleInscriptionIG = ({
   uniteLegale: IUniteLegale;
 }) => {
   if (
-    !uniteLegale.dateMiseAJourInsee &&
-    !uniteLegale.dateMiseAJourInpi &&
+    !(uniteLegale.dateMiseAJourInsee || uniteLegale.dateMiseAJourInpi) &&
     uniteLegale.dateMiseAJourIG
   ) {
     return (

@@ -22,6 +22,8 @@ export function checkLatLng(
       lat,
       lng,
     };
-  } catch {}
+  } catch {
+    // Invalid coordinates are represented as a missing marker.
+  }
   return null;
 }

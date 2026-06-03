@@ -25,8 +25,7 @@ export const agentAuthGuardFn = createServerFn()
     const session = await getCurrentSession();
 
     if (
-      !session.data.user ||
-      !hasRights(session.data, ApplicationRights.isAgent)
+      !(session.data.user && hasRights(session.data, ApplicationRights.isAgent))
     ) {
       throw redirect({ to: "/lp/agent-public" });
     }

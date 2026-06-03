@@ -23,7 +23,7 @@ import {
   logWarningInSentry,
 } from "#/utils/sentry";
 import getSession from "#/utils/server-side-helper/get-session";
-import { EAdministration } from "../administrations/EAdministration";
+import { EAdministration } from "../administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,
@@ -70,9 +70,9 @@ export const getUniteLegaleFromSlug = async (
 };
 
 class UniteLegaleBuilder {
-  private _siren: Siren;
-  private _isBot: boolean;
-  private _page: number;
+  private readonly _siren: Siren;
+  private readonly _isBot: boolean;
+  private readonly _page: number;
 
   constructor(slug: string, isBot = false, page = 1) {
     this._siren = verifySiren(slug);
@@ -134,7 +134,7 @@ class UniteLegaleBuilder {
         // checks for inconsistency in recherche response - needs a validation from sirene API
         // - no dateMiseAJourInsee CAN mean there are two siren for this UL
         // - no siege siret means CAN mean siege might be corrupted
-        return !ul.dateMiseAJourInsee || !ul.siege.siret;
+        return !(ul.dateMiseAJourInsee && ul.siege.siret);
       }
     );
 

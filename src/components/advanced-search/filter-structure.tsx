@@ -38,7 +38,7 @@ export const FilterStructure: React.FC<{
       <input
         id="structure-type-input"
         name="type"
-        onChange={() => {}}
+        readOnly
         type="hidden"
         value={structureType}
       />
@@ -81,7 +81,7 @@ export const FilterStructure: React.FC<{
       <input
         id="structure-label-input"
         name="label"
-        onChange={() => {}}
+        readOnly
         type="hidden"
         value={labelsSelected.join(",")}
       />

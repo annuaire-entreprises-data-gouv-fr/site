@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

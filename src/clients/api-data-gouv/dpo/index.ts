@@ -3,6 +3,7 @@ import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import type { Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
+import type { IDPO, IDPODatagouvResponse, IDPOItem } from "./interface";
 
 export const clientDPO = async (siren: Siren): Promise<IDPO> => {
   const response = await httpGet<IDPODatagouvResponse>(

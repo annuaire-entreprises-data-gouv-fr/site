@@ -1,11 +1,11 @@
 import { useCallback, useId, useState } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { FullTable } from "#/components/table/full";
 import { Tag } from "#/components-ui/tag";
 import { useFetchAlimConfiance } from "#/hooks/fetch/alim-confiance";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate, formatSiret } from "#/utils/helpers";
 

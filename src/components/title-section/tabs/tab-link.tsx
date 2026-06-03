@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import styles from "./styles.module.css";
 
 interface IProps extends ComponentProps<typeof Link> {

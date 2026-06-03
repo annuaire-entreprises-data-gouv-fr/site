@@ -76,7 +76,8 @@ export const libelleEffectifForDescription = (uniteLegale: IUniteLegale) => {
   const libelle = trancheEffectif ? codesEffectifs[trancheEffectif] : null;
 
   const shouldAddYear =
-    !anneeCategorieEntreprise && !categorieEntreprise && !!anneeTrancheEffectif;
+    !(anneeCategorieEntreprise || categorieEntreprise) &&
+    !!anneeTrancheEffectif;
 
   const yearPrefix = `${
     shouldAddYear ? ` En ${anneeTrancheEffectif}, e` : " E"

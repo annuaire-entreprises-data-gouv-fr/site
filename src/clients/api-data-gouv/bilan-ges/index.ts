@@ -3,6 +3,7 @@ import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import type { Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
+import type { IBilanGesDatagouvResponse, IBilanGesResponse } from "./interface";
 
 export const clientBilanGes = async (
   siren: Siren,
@@ -37,7 +38,7 @@ const mapToDomainObject = (
     nombreSalaries: item.nombre_de_salariesdagents || "",
     region: item.region || "",
     departement: item.departement || "",
-    structureObligee: item.structure_obligee || false,
+    structureObligee: !!item.structure_obligee,
     modeConsolidation: item.mode_de_consolidation || "",
     anneeReporting: item.annee_de_reporting || 0,
     emissionsDirectes:

@@ -1,6 +1,6 @@
 import { useLocation } from "@tanstack/react-router";
 import type { ComponentProps } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 
 export default function AgentNavigationLink({
   id,

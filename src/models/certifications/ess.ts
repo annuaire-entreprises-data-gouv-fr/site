@@ -1,6 +1,6 @@
 import { clientEss } from "#/clients/api-data-gouv/ess";
 import { HttpNotFound } from "#/clients/exceptions";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

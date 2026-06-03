@@ -3,7 +3,7 @@ import LocalPageCounter from "#/components/search-results/results-pagination/loc
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { FullTable } from "#/components/table/full";
 import { useFetchBilanGes } from "#/hooks/fetch/bilan-ges";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 
 interface IProps {

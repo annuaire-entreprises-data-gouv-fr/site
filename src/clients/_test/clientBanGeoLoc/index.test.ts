@@ -2,12 +2,14 @@ import { clientBanGeoLoc } from "#/clients/base-adresse-nationale";
 import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot";
 
 describe("clientBanGeoLoc", () => {
-  [
+  for (const address of [
     "rue jules ferry, 64110 mazeres-lezons",
     "rue jules ferry 64110 mazeres-lezons",
     "16 rue de tolbiac, 75013 paris 13e",
     "16 rue de tolbiac 75013 paris 13",
-  ].forEach(expectClientToMatchSnapshotWithAddress);
+  ]) {
+    expectClientToMatchSnapshotWithAddress(address);
+  }
 });
 
 function expectClientToMatchSnapshotWithAddress(address: string) {

@@ -3,7 +3,7 @@ import { useCallback, useMemo } from "react";
 import type { TNatureEffectif } from "#/clients/api-entreprise/effectifs/types";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import type { IEtablissement } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
 import { getAgentEffectifsMensuelsProtectedFn } from "#/server-functions/agent/data-fetching";

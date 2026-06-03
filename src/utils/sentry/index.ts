@@ -10,21 +10,21 @@ type SentryExtra = Record<string, unknown>;
 
 // scope allows to log stuff in tags in sentry
 function getScope(exception: Exception, scope: Scope, extra?: SentryExtra) {
-  Object.entries(exception.context).forEach(([key, value]) => {
+  for (let [key, value] of Object.entries(exception.context)) {
     try {
       value = (value || "N/A").slice(0, 195);
       scope.setTag(key, value);
     } catch {
       scope.setTag(key, "Serialization failed");
     }
-  });
+  }
   if (exception instanceof FetchRessourceException) {
     scope.setTag("administration", exception.administration);
   }
   if (extra) {
-    Object.entries(extra).forEach(([key, value]) => {
+    for (const [key, value] of Object.entries(extra)) {
       scope.setExtra(key, value);
-    });
+    }
   }
 
   return scope;

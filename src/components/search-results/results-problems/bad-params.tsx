@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import constants from "#/models/constants";
 
 export const BadParams = () => (

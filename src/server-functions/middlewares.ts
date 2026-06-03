@@ -57,9 +57,11 @@ export const agentFnMiddleware = createMiddleware({ type: "function" })
     const session = await getSession();
 
     if (
-      !hasRights(session, ApplicationRights.isAgent) ||
-      !session?.user?.email ||
-      !session?.user?.proConnectSub
+      !(
+        hasRights(session, ApplicationRights.isAgent) &&
+        session?.user?.email &&
+        session?.user?.proConnectSub
+      )
     ) {
       throw new HttpUnauthorizedError("Unauthorized: Agent access required");
     }

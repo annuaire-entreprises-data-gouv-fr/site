@@ -4,6 +4,7 @@ import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import type { Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
+import type { APIInclusionResponse } from "./interface";
 
 /**
  * API Inclusion

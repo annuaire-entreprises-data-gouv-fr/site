@@ -100,14 +100,14 @@ function RouteComponent() {
       <main className="fr-container">
         <HiddenH1 title="Résultats de recherche" />
         <div className="content-container">
-          {!hasSearchParam(searchFilterParamsJSON) && !searchTerm ? (
-            <AdvancedSearchTutorial />
-          ) : (
+          {hasSearchParam(searchFilterParamsJSON) || searchTerm ? (
             <SearchResults
               results={searchResults}
               searchFilterParams={searchFilterParamsJSON}
               searchTerm={searchTerm}
             />
+          ) : (
+            <AdvancedSearchTutorial />
           )}
         </div>
       </main>

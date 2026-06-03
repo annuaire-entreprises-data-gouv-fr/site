@@ -131,9 +131,9 @@ export const searchWithoutProtectedSiren = async (
       if (isProtected) {
         currentResult.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
         currentResult.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-        currentResult.matchingEtablissements.forEach((etablissement) => {
+        for (const etablissement of currentResult.matchingEtablissements) {
           etablissement.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-        });
+        }
       }
 
       newResults.push(anonymiseUniteLegale(currentResult, session));
@@ -167,7 +167,7 @@ export const searchPersonCompanies = async (
   const [dmin, dmax] =
     typeof monthInterval === "string" ? ["", ""] : monthInterval;
 
-  if (!dmin || !dmax) {
+  if (!(dmin && dmax)) {
     logWarningInSentry(
       new Exception({
         name: "SearchDirigeantBadParams",

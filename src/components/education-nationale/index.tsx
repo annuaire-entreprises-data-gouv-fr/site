@@ -5,7 +5,7 @@ import ResultsPagination from "#/components/search-results/results-pagination";
 import { DataSection } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
 import { Tag } from "#/components-ui/tag";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import type { IEtablissementsScolaires } from "#/models/etablissements-scolaires";
 import { pluralize } from "#/utils/helpers";

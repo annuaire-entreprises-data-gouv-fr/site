@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { ConnexionSubLayout } from "#/components-ui/connexion-layout";
 import connexionRefusedPicture from "#/components-ui/illustrations/connexion-refused";
 import { queryString } from "#/utils/query";

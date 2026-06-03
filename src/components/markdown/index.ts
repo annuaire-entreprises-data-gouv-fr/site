@@ -1,1 +1,1 @@
-export { default as RenderMarkdown } from "./RenderMarkdown";
+export { default as RenderMarkdown } from "./render-markdown";

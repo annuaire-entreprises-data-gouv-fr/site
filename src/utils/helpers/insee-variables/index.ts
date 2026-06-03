@@ -1,4 +1,4 @@
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { ISTATUTDIFFUSION } from "#/models/core/diffusion";
 import { IETATADMINSTRATIF } from "#/models/core/etat-administratif";
 import { Exception } from "#/models/exceptions";
@@ -14,7 +14,7 @@ import logErrorInSentry from "../../sentry";
 export const etatFromEtatAdministratifInsee = (
   etatAdministratifInsee: "A" | "C" | "F" | "I" | string,
   _sirenOrSiret: string
-) => {
+): IETATADMINSTRATIF => {
   switch (etatAdministratifInsee) {
     case "A":
       return IETATADMINSTRATIF.ACTIF;

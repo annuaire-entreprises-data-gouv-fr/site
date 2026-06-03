@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import type { IPersonneMorale } from "#/models/rne/types";
 import { formatIntFr } from "#/utils/helpers";
 

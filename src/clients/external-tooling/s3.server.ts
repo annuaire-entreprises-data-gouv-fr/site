@@ -34,10 +34,12 @@ export const readFromS3 = createServerOnlyFn(
     const { config, params } = getBucketsLists()[bucketKey];
 
     if (
-      !config.credentials.accessKeyId ||
-      !config.credentials.secretAccessKey ||
-      !params.Bucket ||
-      !params.Key
+      !(
+        config.credentials.accessKeyId &&
+        config.credentials.secretAccessKey &&
+        params.Bucket &&
+        params.Key
+      )
     ) {
       throw new Error("Missing S3 credentials or incomplete params");
     }
@@ -65,7 +67,7 @@ export const readFromS3 = createServerOnlyFn(
           stream.once("end", () => resolve(responseDataChunks.join("")));
         });
       } catch (err: any) {
-        const statusCode = err["$metadata"]?.httpStatusCode;
+        const statusCode = err.$metadata?.httpStatusCode;
         if (statusCode === 404) {
           throw new HttpNotFound(err.Code);
         }

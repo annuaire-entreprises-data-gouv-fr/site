@@ -9,28 +9,31 @@ import type { ISession } from "./session";
 /**
  * Application scopes designate specific parts or section of the UI / app
  */
-export enum ApplicationRights {
-  opendata = "Données en open data",
-  isAgent = "Compte agent public",
-  nonDiffusible = "Données des entreprises non diffusibles",
-  actesRne = "Actes au RNE",
-  bilansRne = "Bilans au RNE",
-  documentsRne = "Documents au RNE",
-  protectedCertificats = "Certificats Qualifelec, Qualibat et OPQIBI",
-  associationProtected = "Actes, statuts et données des dirigeants des associations",
-  mandatairesRCS = "État civil complet des dirigeants d’entreprise",
-  beneficiaires = "Registre des Bénéficiaires Effectifs",
-  conformiteFiscale = "Attestation de conformité fiscale (DGFiP)",
-  conformiteSociale = "Attestations de conformité sociale (Urssaf & MSA)",
-  subventionsAssociation = "Données des subventions des associations",
-  effectifs = "Effectifs (RCD)",
-  bilansBDF = "Accès aux bilans (Banque de France)",
-  chiffreAffaires = "Accès aux chiffres d’affaires (DGFiP)",
-  liensCapitalistiques = "Accès aux liens capitalistiques (DGFiP)",
-  travauxPublics = "Accès aux données relatives aux travaux publics",
-  administrateur = "Administrateur",
-  liassesFiscales = "Accès aux liasses fiscales (DGFiP)",
-}
+export const ApplicationRights = {
+  opendata: "Données en open data",
+  isAgent: "Compte agent public",
+  nonDiffusible: "Données des entreprises non diffusibles",
+  actesRne: "Actes au RNE",
+  bilansRne: "Bilans au RNE",
+  documentsRne: "Documents au RNE",
+  protectedCertificats: "Certificats Qualifelec, Qualibat et OPQIBI",
+  associationProtected:
+    "Actes, statuts et données des dirigeants des associations",
+  mandatairesRCS: "État civil complet des dirigeants d’entreprise",
+  beneficiaires: "Registre des Bénéficiaires Effectifs",
+  conformiteFiscale: "Attestation de conformité fiscale (DGFiP)",
+  conformiteSociale: "Attestations de conformité sociale (Urssaf & MSA)",
+  subventionsAssociation: "Données des subventions des associations",
+  effectifs: "Effectifs (RCD)",
+  bilansBDF: "Accès aux bilans (Banque de France)",
+  chiffreAffaires: "Accès aux chiffres d’affaires (DGFiP)",
+  liensCapitalistiques: "Accès aux liens capitalistiques (DGFiP)",
+  travauxPublics: "Accès aux données relatives aux travaux publics",
+  administrateur: "Administrateur",
+  liassesFiscales: "Accès aux liasses fiscales (DGFiP)",
+} as const;
+export type ApplicationRights =
+  (typeof ApplicationRights)[keyof typeof ApplicationRights];
 
 export const ApplicationRightsToScopes: Record<
   ApplicationRights,

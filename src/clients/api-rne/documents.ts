@@ -5,12 +5,13 @@ import type { Siren } from "#/utils/helpers";
 import { sensitiveRequestCallerInfos } from "#/utils/network/utils/sensitive-request-caller-infos";
 import { sensitiveRequestLogger } from "#/utils/network/utils/sensitive-request-logger";
 import { actesApiRneClient } from "./auth.server";
+import type { IDocumentsRNEResponse } from "./interface";
 
 export const clientDocuments = async (
   siren: Siren,
   options?: { disableSensitiveRequestLogger?: boolean }
 ) => {
-  const route = routes.inpi.api.rne.documents.list + siren + "/attachments";
+  const route = `${routes.inpi.api.rne.documents.list + siren}/attachments`;
 
   if (!options?.disableSensitiveRequestLogger) {
     const callerInfos = await sensitiveRequestCallerInfos();

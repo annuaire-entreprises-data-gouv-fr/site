@@ -293,7 +293,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     trancheEffectif,
     anneeTrancheEffectif: annee_tranche_effectif_salarie,
     chemin: result.admin?.slug || result.siren,
-    aAccesEspaceAgent: result.admin?.a_acces_espace_agent || false,
+    aAccesEspaceAgent: !!result.admin?.a_acces_espace_agent,
     natureJuridique: nature_juridique || "",
     libelleActivitePrincipale: libelleFromCodeNAFWithoutNomenclature(
       result.activite_principale,

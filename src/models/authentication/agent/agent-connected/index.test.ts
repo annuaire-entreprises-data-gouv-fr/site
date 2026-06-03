@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/complexity/useLiteralKeys: needed to test private properties */
 import { vi } from "vitest";
 import { AgentOrganisation } from "#/models/authentication/agent/organisation";
 import type { IAgentScope } from "#/models/authentication/agent/scopes/constants";

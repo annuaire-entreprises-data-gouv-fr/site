@@ -104,7 +104,7 @@ export const initSentryClient = createClientOnlyFn(() => {
       if (!event.tags) {
         event.tags = {};
       }
-      event.tags["is_bot"] = isUserAgentABot(navigator.userAgent || "");
+      event.tags.is_bot = isUserAgentABot(navigator.userAgent || "");
 
       return event;
     },

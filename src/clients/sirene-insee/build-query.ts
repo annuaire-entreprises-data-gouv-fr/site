@@ -1,10 +1,10 @@
 import { regions } from "#/utils/helpers/formatting/metadata/regions";
 import { effectifCodes } from "./constants";
 import type { ExportCsvInput } from "./input-validation";
-import { niv1ToNiv5Mapping } from "./niv1ToNiv5Mapping";
+import { niv1ToNiv5Mapping } from "./niv1-to-niv5-mapping";
 
 export class SireneQueryBuilder {
-  private conditions: string[] = [];
+  private readonly conditions: string[] = [];
 
   constructor(params: ExportCsvInput) {
     this.buildQuery(params);
@@ -84,7 +84,7 @@ export class SireneQueryBuilder {
     return this.conditions.join(" AND ");
   }
 
-  private addCategoryConditions = (categories: string[]) => {
+  private readonly addCategoryConditions = (categories: string[]) => {
     if (!categories?.length) {
       return;
     }
@@ -93,7 +93,7 @@ export class SireneQueryBuilder {
     this.conditions.push(`(categorieEntreprise:(${categoryConditions}))`);
   };
 
-  private addESSConditions = (
+  private readonly addESSConditions = (
     {
       inclure,
       inclureNo,
@@ -115,7 +115,7 @@ export class SireneQueryBuilder {
       return;
     }
 
-    if (!inclure && !inclureNo && !inclureNonRenseigne) {
+    if (!(inclure || inclureNo || inclureNonRenseigne)) {
       this.conditions.push(`(${field}:O AND ${field}:N)`);
       return;
     }
@@ -150,7 +150,7 @@ export class SireneQueryBuilder {
     }
   };
 
-  private addSirenSiretConditions = (siretsAndSirens: string[]) => {
+  private readonly addSirenSiretConditions = (siretsAndSirens: string[]) => {
     if (!siretsAndSirens?.length) {
       return;
     }
@@ -171,11 +171,11 @@ export class SireneQueryBuilder {
     }
   };
 
-  private addEffectifConditions = (
+  private readonly addEffectifConditions = (
     headcount: { min: number; max: number },
     isHq?: boolean
   ) => {
-    if (!headcount?.min || !headcount?.max) {
+    if (!(headcount?.min && headcount?.max)) {
       return;
     }
 
@@ -196,7 +196,7 @@ export class SireneQueryBuilder {
     this.conditions.push(`(${rangeConditions.join(" OR ")})`);
   };
 
-  private addLegalCategoryConditions = (legalCategories: string[]) => {
+  private readonly addLegalCategoryConditions = (legalCategories: string[]) => {
     if (!legalCategories?.length) {
       return;
     }
@@ -207,7 +207,7 @@ export class SireneQueryBuilder {
     this.conditions.push(`(${legalCategoriesConditions.join(" OR ")})`);
   };
 
-  private addDateCreationConditions = (
+  private readonly addDateCreationConditions = (
     creationDate: {
       to?: string;
       from?: string;
@@ -223,7 +223,7 @@ export class SireneQueryBuilder {
     );
   };
 
-  private addDateMajConditions = (
+  private readonly addDateMajConditions = (
     updateDate: {
       to?: string;
       from?: string;
@@ -241,17 +241,19 @@ export class SireneQueryBuilder {
     );
   };
 
-  private addLocationConditions = (location: {
+  private readonly addLocationConditions = (location: {
     codesPostaux?: string[];
     codesInsee?: string[];
     departments?: string[];
     regions?: string[];
   }) => {
     if (
-      !location.codesPostaux?.length &&
-      !location.codesInsee?.length &&
-      !location.departments?.length &&
-      !location.regions?.length
+      !(
+        location.codesPostaux?.length ||
+        location.codesInsee?.length ||
+        location.departments?.length ||
+        location.regions?.length
+      )
     ) {
       return;
     }
@@ -260,30 +262,32 @@ export class SireneQueryBuilder {
     const allCodesPostaux = new Set<string>();
 
     if (location.codesPostaux?.length) {
-      location.codesPostaux.forEach((codePostal) => {
+      for (const codePostal of location.codesPostaux) {
         allCodesPostaux.add(codePostal);
-      });
+      }
     }
 
     if (location.codesInsee?.length) {
-      location.codesInsee.forEach((codeInsee) => {
+      for (const codeInsee of location.codesInsee) {
         allCodesCommunes.add(codeInsee);
-      });
+      }
     }
 
     if (location.departments?.length) {
-      location.departments.forEach((dept) => allCodesCommunes.add(`${dept}*`));
+      for (const dept of location.departments) {
+        allCodesCommunes.add(`${dept}*`);
+      }
     }
 
     if (location.regions?.length) {
-      location.regions.forEach((region) => {
+      for (const region of location.regions) {
         const regionData = regions.find((r) => r.code === region);
         if (regionData) {
-          regionData.departments.forEach((dept) =>
-            allCodesCommunes.add(`${dept.code}*`)
-          );
+          for (const dept of regionData.departments) {
+            allCodesCommunes.add(`${dept.code}*`);
+          }
         }
-      });
+      }
     }
 
     const codesCommunesConditions = Array.from(allCodesCommunes).map(
@@ -300,29 +304,29 @@ export class SireneQueryBuilder {
     );
   };
 
-  private addActivityConditions = (
+  private readonly addActivityConditions = (
     naf?: string[],
     sap?: string[],
     isHq?: boolean
   ) => {
-    if (!naf?.length && !sap?.length) {
+    if (!(naf?.length || sap?.length)) {
       return;
     }
 
     const allLevels = new Set<string>();
 
     if (naf?.length) {
-      naf.forEach((naf) => {
-        allLevels.add(naf);
-      });
+      for (const nafItem of naf) {
+        allLevels.add(nafItem);
+      }
     }
 
     if (sap?.length) {
-      sap.forEach((sap) => {
-        niv1ToNiv5Mapping[sap].forEach((naf) => {
+      for (const sapItem of sap) {
+        for (const naf of niv1ToNiv5Mapping[sapItem]) {
           allLevels.add(naf);
-        });
-      });
+        }
+      }
     }
 
     const field = isHq
@@ -340,7 +344,7 @@ export class SireneQueryBuilder {
     }
   };
 
-  private buildQuery = (params: ExportCsvInput) => {
+  private readonly buildQuery = (params: ExportCsvInput) => {
     // Etat administratif de l'établissement
     if (params.activity === "active") {
       this.conditions.push(

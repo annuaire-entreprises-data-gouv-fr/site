@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 
 const NPS_MODAL_ID = "nps-modal-2";
 
-export const NPSBanner: React.FC<{}> = () => {
+export const NPSBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const [hasAlreadyBeenTriggered, setHasAlreadyBeenTriggered] = useStorage(
@@ -20,7 +20,7 @@ export const NPSBanner: React.FC<{}> = () => {
 
   const [pageViewCount, setPageViewCount] = useStorage(
     "session",
-    "pv-" + NPS_MODAL_ID,
+    `pv-${NPS_MODAL_ID}`,
     "0"
   );
 

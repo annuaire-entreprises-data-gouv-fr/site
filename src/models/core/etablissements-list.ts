@@ -36,7 +36,7 @@ export const createEtablissementsList = (
     .filter((e) => estActif(e) && !estNonDiffusibleStrict(e))
     .sort((a) => (a.estSiege ? -1 : 1));
 
-  const closed = all.filter((e) => !estActif(e) && !estNonDiffusibleStrict(e));
+  const closed = all.filter((e) => !(estActif(e) || estNonDiffusibleStrict(e)));
 
   const unknown = all.filter((e) => estNonDiffusibleStrict(e));
 

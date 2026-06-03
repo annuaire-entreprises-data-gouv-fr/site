@@ -41,7 +41,7 @@ function generateAsciiGraph(data) {
   }
   graph += "┘ 0\n";
 
-  graph += "  " + Object.keys(frequencyMap).join("  ");
+  graph += `  ${Object.keys(frequencyMap).join("  ")}`;
 
   return graph;
 }

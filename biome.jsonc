@@ -11,51 +11,25 @@
   },
   "linter": {
     "rules": {
-      "a11y": {
-        "noSvgWithoutTitle": "off"
-      },
       "style": {
-        "noHeadElement": "off",
-        "noMagicNumbers": "off",
-        "noNestedTernary": "off",
-        "useTemplate": "off",
-        "noEnum": "off",
-        "noParameterProperties": "off",
-        "useConsistentMemberAccessibility": "off",
-        "useFilenamingConvention": "off",
-        "useReadonlyClassProperties": "off",
-        "noDescendingSpecificity": "off"
+        "noNestedTernary": "off"
       },
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "useAwait": "off",
-        "noConsole": "off",
-        "useIterableCallbackReturn": "off",
-        "noEmptyBlockStatements": "off"
+        "noConsole": "off"
       },
       "performance": {
-        "noImgElement": "off",
         "useTopLevelRegex": "off",
         "noBarrelFile": "off"
       },
-      "nursery": {
-        "noShadow": "off"
-      },
       "complexity": {
-        "useLiteralKeys": "off",
-        "noExcessiveCognitiveComplexity": "off",
-        "noBannedTypes": "off",
-        "noForEach": "off",
-        "useSimplifiedLogicExpression": "off"
+        "noExcessiveCognitiveComplexity": "off"
       },
       "correctness": {
         "useJsxKeyInIterable": "off",
-        "noUnusedVariables": "off",
-        "noUnusedFunctionParameters": "off",
-        "noUnknownMediaFeatureName": "off",
-        "noUndeclaredVariables": "off",
-        "noUnknownProperty": "off"
+        "noUnknownMediaFeatureName": "off"
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"

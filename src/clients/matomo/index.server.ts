@@ -94,7 +94,7 @@ const computeStats = (
   const redirectedSiren = [] as IMatomoStats["redirectedSiren"];
   const copyPasteAction = [] as IMatomoStats["copyPasteAction"];
 
-  lastTwelveMonths().forEach(({ label, number }, index) => {
+  for (const [index, { label, number }] of lastTwelveMonths().entries()) {
     const {
       nb_uniq_visitors_returning: visitorReturning,
       nb_uniq_visitors_new: visitorUnknown,
@@ -134,15 +134,15 @@ const computeStats = (
         matomoEventsCategory[index].find((e) => e.label === "action")
           ?.nb_events || 0,
     });
-  });
+  }
 
   const mostCopiedAggregator = {} as { [key: string]: number };
 
-  matomoCopyPasteEventStats.forEach((copyPasteStat, index) => {
+  for (const [index, copyPasteStat] of matomoCopyPasteEventStats.entries()) {
     const label = getLabel(copyPasteStat.label, index);
     mostCopiedAggregator[label] =
       (mostCopiedAggregator[label] || 0) + copyPasteStat.nb_events;
-  });
+  }
 
   const mostCopied = Object.keys(mostCopiedAggregator)
     .reduce((acc: { label: string; count: number }[], key) => {
@@ -153,7 +153,7 @@ const computeStats = (
     }, [])
     .sort((a, b) => b.count - a.count);
 
-  mostCopied.push({ label: "Autre", count: mostCopiedAggregator["Autre"] });
+  mostCopied.push({ label: "Autre", count: mostCopiedAggregator.Autre });
 
   return {
     copyPasteAction,
@@ -181,7 +181,7 @@ const getStats = async (): Promise<IMatomoStats> => {
   const SITE_ID = process.env.VITE_MATOMO_SITE_ID;
   const API_SITE_ID = process.env.MATOMO_API_SITE_ID;
 
-  if (!SITE_ID || !API_SITE_ID) {
+  if (!(SITE_ID && API_SITE_ID)) {
     throw new InternalError({
       message: "Matomo site id (site & API) are required for the stats page",
     });
@@ -241,30 +241,30 @@ export const clientMatomoStats = createServerOnlyFn(
  */
 const createPageViewUrl = (siteId: string) => {
   let baseUrl = routes.tooling.matomo.report.bulkRequest;
-  lastTwelveMonths().forEach((month, index) => {
+  for (const [index, month] of lastTwelveMonths().entries()) {
     baseUrl += `&urls[${index}]=`;
     const subRequest = `idSite=${siteId}&period=month&method=VisitFrequency.get&module=VisitFrequency&date=${month.firstDay}`;
 
     baseUrl += encodeURIComponent(subRequest);
-  });
+  }
 
   return baseUrl;
 };
 
 const createAgentPageViewUrl = (siteId: string) => {
   const agentConnecté = encodeURIComponent("Agent connecté");
-  const segment = encodeURIComponent("dimension1==" + agentConnecté);
-  const baseUrl = createPageViewUrl(siteId) + "&segment=" + segment;
+  const segment = encodeURIComponent(`dimension1==${agentConnecté}`);
+  const baseUrl = `${createPageViewUrl(siteId)}&segment=${segment}`;
   return baseUrl;
 };
 
 const createEventsCategoryUrl = (siteId: string) => {
   let baseUrl = routes.tooling.matomo.report.bulkRequest;
-  lastTwelveMonths().forEach((month, index) => {
+  for (const [index, month] of lastTwelveMonths().entries()) {
     baseUrl += `&urls[${index}]=`;
     const subRequest = `idSite=${siteId}&period=month&method=Events.getCategory&module=API&date=${month.firstDay}`;
     baseUrl += encodeURIComponent(subRequest);
-  });
+  }
   return baseUrl;
 };
 
@@ -282,11 +282,11 @@ const getNpsRecords = async () => {
     [userTypeKey: string]: number;
   } = {};
 
-  npsRecords.forEach((record) => {
+  for (const record of npsRecords) {
     const mood = Number.parseInt(record.mood, 10);
 
     if (mood === -1 || Number.isNaN(mood)) {
-      return;
+      continue;
     }
 
     const date = new Date(record.date);
@@ -306,15 +306,15 @@ const getNpsRecords = async () => {
     if (!months[monthLabel][userType]) {
       months[monthLabel][userType] = [];
     }
-    if (!months[monthLabel]["all"]) {
-      months[monthLabel]["all"] = [];
+    if (!months[monthLabel].all) {
+      months[monthLabel].all = [];
     }
 
     months[monthLabel][userType].push(mood);
-    months[monthLabel]["all"].push(mood);
+    months[monthLabel].all.push(mood);
 
     totals[userType] = (totals[userType] || 0) + 1;
-  });
+  }
 
   const nps = { months, totals };
   const npsData: any = {};
@@ -348,13 +348,13 @@ const getNpsRecords = async () => {
   }
 
   const monthlyNps: IMatomoStats["monthlyNps"] = [];
-  lastTwelveMonths().forEach(({ label, number }) => {
+  for (const { label, number } of lastTwelveMonths()) {
     monthlyNps.push({
       number,
       label,
       values: npsData[label] ?? {},
     });
-  });
+  }
   return { monthlyNps, userResponses: nps.totals };
 };
 

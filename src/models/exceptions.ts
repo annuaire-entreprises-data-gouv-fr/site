@@ -1,4 +1,4 @@
-import type { EAdministration } from "./administrations/EAdministration";
+import type { EAdministration } from "./administrations/e-administration";
 
 interface IExceptionArgument {
   /** The technical error for this exception */
@@ -58,8 +58,8 @@ const getMessageFromCause = (cause: unknown) => {
 };
 
 export class Exception extends Error {
-  public name: string;
-  public context: IExceptionContext;
+  name: string;
+  context: IExceptionContext;
   constructor({ name, message, cause, context }: IExceptionArgument) {
     if (message === undefined) {
       message = getMessageFromCause(cause);
@@ -85,7 +85,7 @@ type IFetchRessourceExceptionArgument = {
 } & Omit<IExceptionArgument, "name">;
 
 export class FetchRessourceException extends Exception {
-  public administration: EAdministration | undefined;
+  administration: EAdministration | undefined;
   constructor({
     administration,
     ressource,

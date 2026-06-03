@@ -1,6 +1,6 @@
 import routes from "#/clients/routes";
 import { INPI } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import ButtonLink from "#/components-ui/button";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { PrintNever } from "#/components-ui/print-visibility";
@@ -21,8 +21,10 @@ export const DataInpiLinkWithExplanations = ({ uniteLegale, user }: IProps) => {
   const siteLink = `${routes.rne.portail.entreprise}${uniteLegale.siren}`;
 
   if (
-    !estDiffusible(uniteLegale) &&
-    !hasRights({ user }, ApplicationRights.nonDiffusible)
+    !(
+      estDiffusible(uniteLegale) ||
+      hasRights({ user }, ApplicationRights.nonDiffusible)
+    )
   ) {
     return (
       <>

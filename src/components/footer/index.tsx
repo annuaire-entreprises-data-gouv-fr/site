@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import Logo from "#/components-ui/logo";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { administrationsMetaData } from "#/models/administrations";

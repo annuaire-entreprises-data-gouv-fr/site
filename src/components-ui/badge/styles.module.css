@@ -18,6 +18,13 @@
   border: 2px dashed var(--annuaire-colors-frBlue) !important;
 }
 
+.badgeLabel {
+  font-weight: bold;
+  background-color: #eee;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
 .badgeWrapper .badgeLabel {
   color: var(--text-default-grey);
 }
@@ -40,11 +47,4 @@ a.badgeWrapper:active {
   justify-content: center;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
-}
-
-.badgeLabel {
-  font-weight: bold;
-  background-color: #eee;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
 }

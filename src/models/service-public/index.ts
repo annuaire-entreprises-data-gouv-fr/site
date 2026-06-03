@@ -3,7 +3,7 @@ import {
   clientAnnuaireServicePublicByName,
   clientAnnuaireServicePublicBySiret,
 } from "#/clients/open-data-soft/clients/annuaire-service-public";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

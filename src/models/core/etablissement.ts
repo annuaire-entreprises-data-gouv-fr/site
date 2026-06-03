@@ -18,7 +18,7 @@ import logErrorInSentry, {
   logWarningInSentry,
 } from "#/utils/sentry";
 import getSession from "#/utils/server-side-helper/get-session";
-import { EAdministration } from "../administrations/EAdministration";
+import { EAdministration } from "../administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,
@@ -48,7 +48,7 @@ const getEtablissementFromSlug = async (
 ): Promise<IEtablissement> => {
   const siret = verifySiret(slug);
 
-  const isBot = options?.isBot || false;
+  const isBot = options?.isBot;
 
   const etablissement = await fetchFromClients(siret, isBot);
 

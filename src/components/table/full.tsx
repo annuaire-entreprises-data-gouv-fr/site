@@ -36,11 +36,11 @@ export const FullTable: React.FC<ISectionProps> = ({
       </thead>
       <tbody>
         {body.map((row, bodyIndex) => (
-          <tr className={styles.row} key={"row-" + bodyIndex}>
+          <tr className={styles.row} key={`row-${bodyIndex}`}>
             {row.map((cell, rowIndex) => (
               <td
                 className={styles.cell}
-                key={"cell-" + rowIndex}
+                key={`cell-${rowIndex}`}
                 style={{
                   verticalAlign,
                   ...(columnWidths?.[rowIndex]

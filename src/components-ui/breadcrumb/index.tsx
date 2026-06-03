@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 
 interface IBreadcrumbLink extends ComponentProps<typeof Link> {
   label: string;

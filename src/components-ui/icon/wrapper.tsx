@@ -23,11 +23,11 @@ export const Icon: React.FC<PropsWithChildren<IProps>> = ({
     console.error(`Error in <Icon/> : ${slug} icon does not exists`);
   }
   return (
-    <span className={styles.icon + " " + className} id={id}>
+    <span className={`${styles.icon} ${className}`} id={id}>
       <span
         style={{
-          height: size + "px",
-          width: size + "px",
+          height: `${size}px`,
+          width: `${size}px`,
           color: color || "inherit",
           marginRight: children ? "5px" : "0",
           flexShrink: "0",

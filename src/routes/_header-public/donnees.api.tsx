@@ -2,7 +2,7 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { Fragment, useEffect } from "react";
 import ApiMonitoring from "#/components/api-monitoring";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { administrationsMetaData } from "#/models/administrations";
 import { getMonitorsByAdministration } from "#/models/monitoring";

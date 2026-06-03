@@ -9,25 +9,25 @@ describe("clientAllEtablissementsInsee", () => {
   // Hovewer, we don't test them for regression because the result
   // of the pagination changes systematically between API calls.
 
-  ["908595879", "883010316"].forEach((siren) =>
-    expectClientToMatchSnapshotWithSiren(siren)
-  );
+  for (const siren of ["908595879", "883010316"]) {
+    expectClientToMatchSnapshotWithSiren(siren);
+  }
 });
 
 function expectClientToMatchSnapshotWithSiren(siren: string, page = 1) {
   it(`Should match snapshot with siren ${siren}${
-    page === 1 ? "" : " and page " + page
+    page === 1 ? "" : ` and page ${page}`
   }`, async () => {
     await expectClientToMatchSnapshot({
       __dirname,
       client: clientAllEtablissementsInsee,
       args: [siren, page, false],
-      snapshotFile: `siren-${siren}${page === 1 ? "" : "-page-" + page}.json`,
+      snapshotFile: `siren-${siren}${page === 1 ? "" : `-page-${page}`}.json`,
       simplifyParams,
       postProcessResult: (result) => {
-        result.list.forEach((etablissement) => {
+        for (const etablissement of result.list) {
           etablissement.dateDerniereMiseAJour = "2024-12-11T16:09:12.625Z";
-        });
+        }
       },
     });
   });

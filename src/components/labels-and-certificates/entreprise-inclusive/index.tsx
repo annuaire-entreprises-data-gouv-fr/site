@@ -1,11 +1,11 @@
 import type React from "react";
 import { MarcheInclusion } from "#/components/administrations";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { DataSection } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
 import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { ICertifications } from "#/models/certifications";
 import { formatSiret } from "#/utils/helpers";
 

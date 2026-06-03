@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import ChangelogWithFilters from "#/components/screens/historique-des-modifications";
 import FAQLink from "#/components-ui/faq-link";
 import { useAuth } from "#/contexts/auth.context";

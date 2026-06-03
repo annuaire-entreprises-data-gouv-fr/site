@@ -21,12 +21,12 @@ function parseCSV(csvString: string) {
   const data = lines.slice(1).map((line) => {
     const values = line.split(",").map((value) => value.trim());
     const row: { [key: string]: string } = {};
-    headers.forEach((header, index) => {
+    for (const [index, header] of headers.entries()) {
       row[header] = values[index];
-    });
+    }
 
     const output: IAgentMonitoring = {
-      email: row["Agent"],
+      email: row.Agent,
       rateLimits: {
         tenMinutes: Number.parseInt(row["Past 10 minutes"], 10),
         pastHour: Number.parseInt(row["Past hour"], 10),

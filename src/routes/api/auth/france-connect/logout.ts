@@ -32,7 +32,7 @@ export const Route = createFileRoute("/api/auth/france-connect/logout")({
           logErrorInSentry(
             new FranceConnectLogoutFailedException({ cause: e })
           );
-          return redirect({ href: getBaseUrl() + "/connexion/au-revoir" });
+          return redirect({ href: `${getBaseUrl()}/connexion/au-revoir` });
         }
       },
     },

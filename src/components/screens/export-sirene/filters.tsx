@@ -9,8 +9,8 @@ import { categoriesEntreprisesOptions } from "#/utils/helpers/formatting/categor
 import { categoriesJuridiquesNiveau3 } from "#/utils/helpers/formatting/metadata/categories-juridiques";
 import { categoriesJuridiquesNiveau1 } from "#/utils/helpers/formatting/metadata/categories-juridiques-niveau-1";
 import { categoriesJuridiquesNiveau2 } from "#/utils/helpers/formatting/metadata/categories-juridiques-niveau-2";
-import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-NAF-rev-2";
-import { codesSectionNAF } from "#/utils/helpers/formatting/metadata/codes-section-NAF";
+import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-naf-rev-2";
+import { codesSectionNAF } from "#/utils/helpers/formatting/metadata/codes-section-naf";
 import { CategoriesJuridiquesFileInput } from "./categories-juridiques-file-input";
 import { getEffectifLabel } from "./constants";
 import type { ExtendedExportCsvInput } from "./export-csv";
@@ -602,7 +602,7 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      checked={filters.ess?.inclure || false}
+                      checked={filters.ess?.inclure}
                       id="ess-inclure"
                       name="ess-inclure"
                       onChange={(e) =>
@@ -610,9 +610,9 @@ export default function Filters({
                           ...prev,
                           ess: {
                             inclure: e.target.checked,
-                            inclureNo: prev.ess?.inclureNo || false,
+                            inclureNo: !!prev.ess?.inclureNo,
                             inclureNonRenseigne:
-                              prev.ess?.inclureNonRenseigne || false,
+                              !!prev.ess?.inclureNonRenseigne,
                           },
                         }))
                       }
@@ -626,17 +626,17 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      checked={filters.ess?.inclureNo || false}
+                      checked={filters.ess?.inclureNo}
                       id="ess-inclure-no"
                       name="ess-inclure-no"
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
                           ess: {
-                            inclure: prev.ess?.inclure || false,
+                            inclure: !!prev.ess?.inclure,
                             inclureNo: e.target.checked,
                             inclureNonRenseigne:
-                              prev.ess?.inclureNonRenseigne || false,
+                              !!prev.ess?.inclureNonRenseigne,
                           },
                         }))
                       }
@@ -650,15 +650,15 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      checked={filters.ess?.inclureNonRenseigne || false}
+                      checked={filters.ess?.inclureNonRenseigne}
                       id="ess-inclure-non-renseigne"
                       name="ess-inclure-non-renseigne"
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
                           ess: {
-                            inclure: prev.ess?.inclure || false,
-                            inclureNo: prev.ess?.inclureNo || false,
+                            inclure: !!prev.ess?.inclure,
+                            inclureNo: !!prev.ess?.inclureNo,
                             inclureNonRenseigne: e.target.checked,
                           },
                         }))
@@ -700,7 +700,7 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      checked={filters.mission?.inclure || false}
+                      checked={filters.mission?.inclure}
                       id="mission-inclure"
                       name="mission-inclure"
                       onChange={(e) =>
@@ -708,9 +708,9 @@ export default function Filters({
                           ...prev,
                           mission: {
                             inclure: e.target.checked,
-                            inclureNo: prev.mission?.inclureNo || false,
+                            inclureNo: !!prev.mission?.inclureNo,
                             inclureNonRenseigne:
-                              prev.mission?.inclureNonRenseigne || false,
+                              !!prev.mission?.inclureNonRenseigne,
                           },
                         }))
                       }
@@ -724,17 +724,17 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      checked={filters.mission?.inclureNo || false}
+                      checked={filters.mission?.inclureNo}
                       id="mission-inclure-no"
                       name="mission-inclure-no"
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
                           mission: {
-                            inclure: prev.mission?.inclure || false,
+                            inclure: !!prev.mission?.inclure,
                             inclureNo: e.target.checked,
                             inclureNonRenseigne:
-                              prev.mission?.inclureNonRenseigne || false,
+                              !!prev.mission?.inclureNonRenseigne,
                           },
                         }))
                       }
@@ -748,15 +748,15 @@ export default function Filters({
                 <div className="fr-fieldset__element">
                   <div className="fr-checkbox-group">
                     <input
-                      checked={filters.mission?.inclureNonRenseigne || false}
+                      checked={filters.mission?.inclureNonRenseigne}
                       id="mission-inclure-non-renseigne"
                       name="mission-inclure-non-renseigne"
                       onChange={(e) =>
                         setFilters((prev) => ({
                           ...prev,
                           mission: {
-                            inclure: prev.mission?.inclure || false,
-                            inclureNo: prev.mission?.inclureNo || false,
+                            inclure: !!prev.mission?.inclure,
+                            inclureNo: !!prev.mission?.inclureNo,
                             inclureNonRenseigne: e.target.checked,
                           },
                         }))

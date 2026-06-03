@@ -1,7 +1,7 @@
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import PageCounter from "#/components/search-results/results-pagination";
 import { FullTable } from "#/components/table/full";
 import { Info } from "#/components-ui/alerts";

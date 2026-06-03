@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import Logo from "#/components-ui/logo";
 import { administrationsMetaData } from "#/models/administrations";
 import styles from "./style.module.css";

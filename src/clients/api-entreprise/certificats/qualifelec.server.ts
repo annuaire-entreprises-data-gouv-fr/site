@@ -46,8 +46,8 @@ export type IAPIEntrepriseQualifelec = IAPIEntrepriseResponse<
         date_fin: string; // "2024-12-31"
       };
     };
-    links: {};
-    meta: {};
+    links: Record<string, unknown>;
+    meta: Record<string, unknown>;
   }>
 >;
 

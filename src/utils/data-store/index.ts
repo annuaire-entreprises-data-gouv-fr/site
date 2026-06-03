@@ -11,8 +11,12 @@ import { logWarningInSentry } from "#/utils/sentry";
 export class DataStore<T> {
   private data: { [key: string]: T } | null;
   private onGoingRefresh: Promise<T> | null;
-  private shouldAttemptRefresh: boolean;
+  private readonly shouldAttemptRefresh: boolean;
   private timeoutId: NodeJS.Timeout | null;
+  private readonly fetchData: () => Promise<any>;
+  private readonly storeName: string;
+  private readonly mapToDomainObject: (result: any) => { [key: string]: T };
+  private readonly TTR: number;
 
   /**
    * @param getData
@@ -21,18 +25,22 @@ export class DataStore<T> {
    * @param TTR Time To Refresh | default is 24h, set 0 to deactivate refresh
    */
   constructor(
-    private fetchData: () => Promise<any>,
-    private storeName: string,
-    private mapToDomainObject: (result: any) => { [key: string]: T },
-    private TTR = 86_400_000
+    fetchData: () => Promise<any>,
+    storeName: string,
+    mapToDomainObject: (result: any) => { [key: string]: T },
+    TTR = 86_400_000
   ) {
+    this.fetchData = fetchData;
+    this.storeName = storeName;
+    this.mapToDomainObject = mapToDomainObject;
+    this.TTR = TTR;
     this.data = null;
     this.onGoingRefresh = null;
     this.shouldAttemptRefresh = this.TTR > 0;
     this.timeoutId = null;
   }
 
-  private refresh = async () => {
+  private readonly refresh = async () => {
     try {
       if (!this.onGoingRefresh) {
         this.onGoingRefresh = this.fetchData();

@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { FullTable } from "#/components/table/full";
 import { SeePersonPageLink } from "#/components-ui/see-personn-page-link";
 import type { IUniteLegale } from "#/models/core/types";
@@ -8,8 +8,8 @@ import type {
   IPersonneMorale,
 } from "#/models/rne/types";
 import { isPersonneMorale } from "#/utils/helpers/is-personne-morale";
-import EtatCivilInfos from "../EtatCivilInfos";
-import PersonneMoraleInfos from "../PersonneMoraleInfos";
+import EtatCivilInfos from "../etat-civil-infos";
+import PersonneMoraleInfos from "../personne-morale-infos";
 
 interface IDirigeantContentProps {
   dirigeants: IDirigeantsWithMetadata;
@@ -84,7 +84,7 @@ export function sortDirigeants(
       // same role, sort by denomination
       return a.denomination < b.denomination ? -1 : 1;
     }
-    if (!isPersonneMorale(a) && !isPersonneMorale(b)) {
+    if (!(isPersonneMorale(a) || isPersonneMorale(b))) {
       // same role, sort by name
       if (a.nom === b.nom) {
         if (a.prenoms === b.prenoms) {

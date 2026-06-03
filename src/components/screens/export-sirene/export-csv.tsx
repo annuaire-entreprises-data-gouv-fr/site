@@ -156,8 +156,8 @@ export default function ExportCsv() {
     activity: filters.activity,
     legalUnit: filters.legalUnit,
     legalCategories: [
-      ...filters.legalCategoriesNiveau1.map((cat) => cat + "*"),
-      ...filters.legalCategoriesNiveau2.map((cat) => cat + "*"),
+      ...filters.legalCategoriesNiveau1.map((cat) => `${cat}*`),
+      ...filters.legalCategoriesNiveau2.map((cat) => `${cat}*`),
       ...filters.legalCategoriesNiveau3,
     ],
     siretsAndSirens: filters.siretsAndSirens,
@@ -231,7 +231,7 @@ export default function ExportCsv() {
 
   const handleCsvExport = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!countResult || !filename) {
+    if (!(countResult && filename)) {
       return;
     }
 
@@ -277,27 +277,7 @@ export default function ExportCsv() {
     }
   };
 
-  return !showResults || !countResult ? (
-    <div className={styles.exportCsv}>
-      <h1>
-        Générez une liste d’établissements au format CSV à partir des données du
-        répertoire Sirene
-      </h1>
-      <InfoSection />
-      <form onSubmit={handleCountSubmit}>
-        <Filters filters={filters} setFilters={setFilters} />
-        <div className={styles.buttonContainer}>
-          <ButtonLink alt={true} onClick={resetFilters} type="button">
-            Réinitialiser les critères
-          </ButtonLink>
-          <ButtonLink disabled={isCountLoading} type="submit">
-            {isCountLoading ? "Calcul en cours..." : "Calculer les résultats"}
-          </ButtonLink>
-        </div>
-      </form>
-      {error && <div className={styles.errorMessage}>{error}</div>}
-    </div>
-  ) : (
+  return showResults && countResult ? (
     <div>
       <h1 className={styles.title}>Résultats de votre recherche</h1>
       <p>
@@ -376,6 +356,26 @@ export default function ExportCsv() {
         ) : null}
       </div>
 
+      {error && <div className={styles.errorMessage}>{error}</div>}
+    </div>
+  ) : (
+    <div className={styles.exportCsv}>
+      <h1>
+        Générez une liste d’établissements au format CSV à partir des données du
+        répertoire Sirene
+      </h1>
+      <InfoSection />
+      <form onSubmit={handleCountSubmit}>
+        <Filters filters={filters} setFilters={setFilters} />
+        <div className={styles.buttonContainer}>
+          <ButtonLink alt={true} onClick={resetFilters} type="button">
+            Réinitialiser les critères
+          </ButtonLink>
+          <ButtonLink disabled={isCountLoading} type="submit">
+            {isCountLoading ? "Calcul en cours..." : "Calculer les résultats"}
+          </ButtonLink>
+        </div>
+      </form>
       {error && <div className={styles.errorMessage}>{error}</div>}
     </div>
   );

@@ -1,7 +1,7 @@
 import routes from "#/clients/routes";
 import { Tag } from "#/components-ui/tag";
 import usePDFDownloader from "#/hooks/fetch/download-pdf";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { isAPI404 } from "#/models/api-not-responding";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
 import { FetchRessourceException } from "#/models/exceptions";
@@ -15,7 +15,7 @@ function saveAsPdf(blob: Blob, siren: string) {
   const a = document.createElement("a");
   a.style.display = "none";
   a.href = url;
-  a.download = "extrait_immatriculation_inpi_" + siren + ".pdf";
+  a.download = `extrait_immatriculation_inpi_${siren}.pdf`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

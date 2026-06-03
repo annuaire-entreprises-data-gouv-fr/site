@@ -40,12 +40,12 @@ export const Route = createFileRoute(
           if (pathFrom) {
             return redirect({ href: getBaseUrl() + pathFrom });
           }
-          return redirect({ href: getBaseUrl() + "/connexion/au-revoir" });
+          return redirect({ href: `${getBaseUrl()}/connexion/au-revoir` });
         } catch (e) {
           logErrorInSentry(
             new FranceConnectLogoutFailedException({ cause: e })
           );
-          return redirect({ href: getBaseUrl() + "/connexion/au-revoir" });
+          return redirect({ href: `${getBaseUrl()}/connexion/au-revoir` });
         }
       },
     },

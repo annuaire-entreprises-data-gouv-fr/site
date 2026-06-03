@@ -1,5 +1,5 @@
 import type React from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import type { IAdministrationMetaData } from "#/models/administrations/types";
 import constants from "#/models/constants";

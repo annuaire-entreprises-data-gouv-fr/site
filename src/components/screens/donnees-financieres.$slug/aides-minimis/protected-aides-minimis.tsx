@@ -5,7 +5,7 @@ import LocalPageCounter from "#/components/search-results/results-pagination/loc
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import { FullTable } from "#/components/table/full";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { getAgentAidesMinimisFn } from "#/server-functions/agent/data-fetching";
 import { formatCurrency, formatDate } from "#/utils/helpers";

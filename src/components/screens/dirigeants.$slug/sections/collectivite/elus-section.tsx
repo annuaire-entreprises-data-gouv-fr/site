@@ -2,7 +2,7 @@ import type React from "react";
 import NonRenseigne from "#/components/non-renseigne";
 import { Section } from "#/components/section";
 import { FullTable } from "#/components/table/full";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   type IUniteLegale,
   isCollectiviteTerritoriale,

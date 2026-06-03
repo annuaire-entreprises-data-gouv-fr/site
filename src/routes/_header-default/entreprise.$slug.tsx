@@ -23,7 +23,7 @@ import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { useAuth } from "#/contexts/auth.context";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   ApplicationRights,
   hasRights,

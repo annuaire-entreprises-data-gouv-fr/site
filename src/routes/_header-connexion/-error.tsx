@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { ConnexionSubLayout } from "#/components-ui/connexion-layout";
 import connexionFailedPicture from "#/components-ui/illustrations/connexion-failed";
 import { useLogFatalErrorAppClient } from "#/hooks/use-log-fatal-error-app-client";

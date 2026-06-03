@@ -4,7 +4,7 @@ import { expectClientToMatchSnapshot } from "../expect-client-to-match-snapshot"
 import simplifyParams from "./simplify-params";
 
 describe("clientSearchRechercheEntreprise : simple search with searchTerms", () => {
-  [
+  for (const searchTerm of [
     "198100125", // établissement scolaire
     "800329849", // entrepreneur spectacle, asso & ESS
     "130025265", // DINUM (administration)
@@ -27,7 +27,9 @@ describe("clientSearchRechercheEntreprise : simple search with searchTerms", () 
     "123456789",
     "12345678900003",
     "41154066900016",
-  ].forEach((s) => itShouldMatchSnapshotForSearch(s, 1));
+  ]) {
+    itShouldMatchSnapshotForSearch(searchTerm, 1);
+  }
 });
 
 function itShouldMatchSnapshotForSearch(
@@ -37,7 +39,7 @@ function itShouldMatchSnapshotForSearch(
   it(`Should match snapshot for search ${searchTerms} ${
     pageEtablissements === 1
       ? ""
-      : " and etablissement page " + pageEtablissements
+      : ` and etablissement page ${pageEtablissements}`
   }`, async () => {
     await expectClientToMatchSnapshot({
       client: clientSearchRechercheEntreprise,
@@ -55,9 +57,9 @@ function itShouldMatchSnapshotForSearch(
       }.json`,
       simplifyParams,
       postProcessResult: (result) => {
-        result.results.forEach((searchResult) => {
+        for (const searchResult of result.results) {
           searchResult.dateDerniereMiseAJour = "2023-09-21T03:34:50";
-        });
+        }
       },
     });
   });

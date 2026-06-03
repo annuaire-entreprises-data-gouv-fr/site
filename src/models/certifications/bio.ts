@@ -1,7 +1,7 @@
 import { clientProfessionnelBio } from "#/clients/api-bio";
 import type { IBioResponse } from "#/clients/api-bio/interface";
 import { HttpNotFound } from "#/clients/exceptions";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { APINotRespondingFactory } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
 import logErrorInSentry from "#/utils/sentry";

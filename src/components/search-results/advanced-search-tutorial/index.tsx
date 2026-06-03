@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import constants from "#/models/constants";
 import styles from "./style.module.css";
@@ -6,6 +6,7 @@ import styles from "./style.module.css";
 export const AdvancedSearchTutorial = () => (
   <div className={styles["advanced-search-tutorial"]}>
     <svg
+      aria-hidden="true"
       fill="#c53721"
       stroke="#c53721"
       strokeWidth="0"

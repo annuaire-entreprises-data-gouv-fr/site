@@ -26,7 +26,7 @@ export const Route = createFileRoute("/api/auth/agent-connect/logout")({
           return redirect({ href: url });
         } catch (e) {
           logErrorInSentry(new AgentConnectionFailedException({ cause: e }));
-          return redirect({ href: getBaseUrl() + "/connexion/au-revoir" });
+          return redirect({ href: `${getBaseUrl()}/connexion/au-revoir` });
         }
       },
     },

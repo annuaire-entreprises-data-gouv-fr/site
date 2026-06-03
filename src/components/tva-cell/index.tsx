@@ -39,7 +39,7 @@ const TVAInvalide = ({
       to="/definitions/tva-intracommunautaire"
       tooltipLabel="n° TVA valide connu"
     >
-      Le numéro de TVA {"FR" + formatIntFr(number)} n’est pas validé par
+      Le numéro de TVA {`FR${formatIntFr(number)}`} n’est pas validé par
       l’administration fiscale.
       <br />
       Plusieurs explications sont possibles :
@@ -61,7 +61,7 @@ const TVAInvalide = ({
 
 const CopyCell = ({ number }: { number: string }) => (
   <CopyPaste id="tva-cell-result" label="TVA" shouldRemoveSpace={true}>
-    {"FR" + formatIntFr(number)}
+    {`FR${formatIntFr(number)}`}
   </CopyPaste>
 );
 
@@ -155,9 +155,7 @@ const VerifyTVA: React.FC<{
         )
       ) : (
         <TVAInvalide
-          multipleNum={
-            tvaUniteLegale?.mayHaveMultipleTVANumber.allTime || false
-          }
+          multipleNum={!!tvaUniteLegale?.mayHaveMultipleTVANumber.allTime}
           number={tvaUniteLegale?.tvaNumber || ""}
         />
       )}

@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Warning } from "#/components-ui/alerts";
 import { MultiChoice } from "#/components-ui/multi-choice";
 import TextWrapper from "#/components-ui/text-wrapper";
@@ -15,13 +15,14 @@ import {
 } from "#/models/authentication/user/rights";
 import type { ISession } from "#/models/authentication/user/session";
 import { logMatomoEvent } from "#/utils/matomo";
-export enum EQuestionType {
-  LOADER = "loader",
-  NONE = "none",
-  MODIFICATION = "modification",
-  CONTACT = "contact",
-  ALL = "all",
-}
+export const EQuestionType = {
+  LOADER: "loader",
+  NONE: "none",
+  MODIFICATION: "modification",
+  CONTACT: "contact",
+  ALL: "all",
+} as const;
+export type EQuestionType = (typeof EQuestionType)[keyof typeof EQuestionType];
 interface IProps {
   questions: IFaqArticle[];
   questionType: EQuestionType;
@@ -228,7 +229,7 @@ export default function Question({
   }
 }
 
-const Answer: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+const Answer: React.FC<PropsWithChildren> = ({ children }) => (
   <>
     <p>
       <strong>Réponse</strong>

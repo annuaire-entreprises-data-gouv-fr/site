@@ -4,7 +4,7 @@ import { TwoColumnTable } from "#/components/table/simple";
 import FAQLink from "#/components-ui/faq-link";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import type { EAdministration } from "#/models/administrations/EAdministration";
+import type { EAdministration } from "#/models/administrations/e-administration";
 import {
   type IAPINotRespondingError,
   isAPI404,

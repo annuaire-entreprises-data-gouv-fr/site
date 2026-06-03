@@ -6,7 +6,7 @@ import { UniteLegalePageLink } from "#/components/unite-legale-page-link";
 import { Info } from "#/components-ui/alerts";
 import InpiPartiallyDownWarning from "#/components-ui/alerts-with-explanations/inpi-partially-down";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import {
   type IUniteLegale,

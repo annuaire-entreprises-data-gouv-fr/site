@@ -46,7 +46,7 @@ export const logInGrist = createServerOnlyFn(
         url: getGristUrl(tableKey),
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + process.env.GRIST_API_KEY,
+          Authorization: `Bearer ${process.env.GRIST_API_KEY}`,
         },
         data: {
           records: data.map((d) => ({ fields: d })),
@@ -66,7 +66,7 @@ export const readFromGrist = createServerOnlyFn(
       method: "GET",
       url: getGristUrl(tableKey),
       headers: {
-        Authorization: "Bearer " + process.env.GRIST_API_KEY,
+        Authorization: `Bearer ${process.env.GRIST_API_KEY}`,
       },
       timeout: constants.timeout.XXL,
     });

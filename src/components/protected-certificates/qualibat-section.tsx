@@ -3,7 +3,7 @@ import { DataSectionClient } from "#/components/section/data-section";
 import { TwoColumnTable } from "#/components/table/simple";
 import ButtonLink from "#/components-ui/button";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { getAgentQualibatFn } from "#/server-functions/agent/data-fetching";

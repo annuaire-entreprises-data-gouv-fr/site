@@ -1,5 +1,5 @@
 import { HttpNotFound } from "#/clients/exceptions";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { APINotRespondingFactory } from "#/models/api-not-responding";
 import {
   FetchRessourceException,
@@ -89,12 +89,12 @@ export const mergeDirigeants = ({
       mergerolesData[currentDirigeantKey] = {};
     } else if (isInInpi) {
       foundDirigeant.isInInpi = true;
-      if (!isPersonneMorale(dirigeant) && !isPersonneMorale(foundDirigeant)) {
+      if (!(isPersonneMorale(dirigeant) || isPersonneMorale(foundDirigeant))) {
         foundDirigeant.nom = dirigeant.nom;
       }
     } else if (isInIg) {
       foundDirigeant.isInIg = true;
-      if (!isPersonneMorale(dirigeant) && !isPersonneMorale(foundDirigeant)) {
+      if (!(isPersonneMorale(dirigeant) || isPersonneMorale(foundDirigeant))) {
         foundDirigeant.dateNaissance = dirigeant.dateNaissance;
         foundDirigeant.lieuNaissance = dirigeant.lieuNaissance;
       }

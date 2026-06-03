@@ -20,6 +20,20 @@
   margin: 30px 0;
 }
 
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 3px;
+  font-size: 1.1rem;
+  color: var(--annuaire-colors-frBlue);
+  text-decoration: none;
+}
+
+.title > span:first-of-type {
+  margin-right: 10px;
+}
+
 .result-item a {
   background-image: none;
 }
@@ -35,19 +49,6 @@ a.adress:hover,
   color: #333;
   text-decoration: none;
   border: none;
-}
-.title {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 3px;
-  font-size: 1.1rem;
-  color: var(--annuaire-colors-frBlue);
-  text-decoration: none;
-}
-
-.title > span:first-of-type {
-  margin-right: 10px;
 }
 
 .matching-etablissement {

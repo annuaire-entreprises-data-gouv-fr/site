@@ -1,4 +1,4 @@
-import { EAdministration } from "./EAdministration";
+import { EAdministration } from "./e-administration";
 import type {
   IAdministrationMetaData,
   IAdministrationsMetaData,
@@ -36,8 +36,8 @@ const validateMetaData = (
     a.logoType === "portrait" ||
     a.logoType === "paysage";
 
-  if (!a.site || !a.long || !a.slug || !logoTypeIsValid) {
-    throw new Error("Invalid administrationMetadata : " + a.slug);
+  if (!(a.site && a.long && a.slug && logoTypeIsValid)) {
+    throw new Error(`Invalid administrationMetadata : ${a.slug}`);
   }
 
   return {
@@ -80,9 +80,9 @@ const loadAllAPI = () =>
   Object.values(administrationsMetaData).reduce<
     Record<string, IAPIMonitorMetaData>
   >((acc, administration) => {
-    (administration.apiMonitors || []).forEach((monitor) => {
+    for (const monitor of administration.apiMonitors || []) {
       acc[monitor.apiSlug] = monitor;
-    });
+    }
     return acc;
   }, {});
 

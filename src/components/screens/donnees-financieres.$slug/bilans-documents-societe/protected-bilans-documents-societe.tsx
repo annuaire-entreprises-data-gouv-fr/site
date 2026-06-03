@@ -6,7 +6,7 @@ import { Warning } from "#/components-ui/alerts";
 import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import {
   type IUniteLegale,

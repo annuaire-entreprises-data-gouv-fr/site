@@ -21,11 +21,11 @@ import { clientUniteLegaleRechercheEntreprise } from "./recherche-entreprise/sir
 import { clientUniteLegaleInsee } from "./sirene-insee/siren";
 
 export class APISlugNotFound extends Error {
-  constructor(
-    public status: number,
-    public message: string
-  ) {
-    super();
+  status: number;
+
+  constructor(status: number, message: string) {
+    super(message);
+    this.status = status;
   }
 }
 

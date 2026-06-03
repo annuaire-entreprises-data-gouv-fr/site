@@ -14,12 +14,14 @@ import {
   isPersonnePhysique,
 } from "../types";
 
-export enum ISTATUTDIFFUSION {
-  PROTECTED = "protégé en diffusion",
-  PARTIAL = "partiellement diffusible",
-  NON_DIFF_STRICT = "non-diffusible",
-  DIFFUSIBLE = "diffusible",
-}
+export const ISTATUTDIFFUSION = {
+  PROTECTED: "protégé en diffusion",
+  PARTIAL: "partiellement diffusible",
+  NON_DIFF_STRICT: "non-diffusible",
+  DIFFUSIBLE: "diffusible",
+} as const;
+export type ISTATUTDIFFUSION =
+  (typeof ISTATUTDIFFUSION)[keyof typeof ISTATUTDIFFUSION];
 
 interface IUniteLegaleOrEtablissement {
   statutDiffusion: ISTATUTDIFFUSION;

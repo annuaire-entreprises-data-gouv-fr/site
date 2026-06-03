@@ -12,11 +12,12 @@ import { isAPI404, isAPINotResponding } from "#/models/api-not-responding";
 import { searchGeoElementByText } from "#/models/geo";
 import { debounce } from "#/utils/helpers/debounce";
 
-enum Issue {
-  NONE = 2,
-  NORESULT = 0,
-  ERROR = 1,
-}
+const Issue = {
+  NONE: 2,
+  NORESULT: 0,
+  ERROR: 1,
+} as const;
+type Issue = (typeof Issue)[keyof typeof Issue];
 
 export const FilterGeo: React.FC<{
   cp_dep?: string;
@@ -27,7 +28,7 @@ export const FilterGeo: React.FC<{
   const [dep, setDep] = useState(cp_dep);
   const [typeDep, setTypeDep] = useState(cp_dep_type);
 
-  const [issue, setIssue] = useState(Issue.NONE);
+  const [issue, setIssue] = useState<Issue>(Issue.NONE);
   const [searchTerm, setSearchTerm] = useState(cp_dep_label);
   const [isLoading, setLoading] = useState(false);
   const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);
@@ -81,7 +82,9 @@ export const FilterGeo: React.FC<{
       ];
 
       setSuggestsHistory(newSuggestHistory.slice(0, 4));
-    } catch {}
+    } catch {
+      // Suggest history is optional and should not block geo search.
+    }
   };
 
   const onChange = (inputElement: any) => {
@@ -136,19 +139,9 @@ export const FilterGeo: React.FC<{
         type="search"
         value={searchTerm}
       />
-      <input
-        name="cp_dep_label"
-        onChange={() => {}}
-        type="hidden"
-        value={labelDep}
-      />
-      <input
-        name="cp_dep_type"
-        onChange={() => {}}
-        type="hidden"
-        value={typeDep}
-      />
-      <input name="cp_dep" onChange={() => {}} type="hidden" value={dep} />
+      <input name="cp_dep_label" readOnly type="hidden" value={labelDep} />
+      <input name="cp_dep_type" readOnly type="hidden" value={typeDep} />
+      <input name="cp_dep" readOnly type="hidden" value={dep} />
       {issue === Issue.NONE ? (
         <>
           {showSuggestsHistory &&
@@ -160,7 +153,7 @@ export const FilterGeo: React.FC<{
                 {suggestsHistory.map((suggest: IGeoElement) => (
                   <button
                     className="suggest cursor-pointer"
-                    key={"suggest-history-" + suggest.label}
+                    key={`suggest-history-${suggest.label}`}
                     onClick={() => selectDep(suggest)}
                     type="button"
                   >

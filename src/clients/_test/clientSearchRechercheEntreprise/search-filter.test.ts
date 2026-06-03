@@ -33,8 +33,8 @@ describe("clientSearchRechercheEntreprise : use of search filters", () => {
 });
 
 function postProcessResult(result: ISearchResults) {
-  result.results.forEach((searchResult) => {
+  for (const searchResult of result.results) {
     searchResult.dateDerniereMiseAJour = "2024-09-21T03:34:50";
     searchResult.dateMiseAJourInpi = "2024-09-21T03:34:50";
-  });
+  }
 }

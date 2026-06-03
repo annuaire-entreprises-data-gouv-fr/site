@@ -17,8 +17,8 @@ export default function EtatCivilInfos({
         {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
           ? `, né(e) ${
               dirigeant.dateNaissance
-                ? "le " + formatDateLong(dirigeant.dateNaissance)
-                : "en " + formatDatePartial(dirigeant.dateNaissancePartial)
+                ? `le ${formatDateLong(dirigeant.dateNaissance)}`
+                : `en ${formatDatePartial(dirigeant.dateNaissancePartial)}`
             }${dirigeant.lieuNaissance ? `, à ${dirigeant.lieuNaissance}` : ""}`
           : ""}
       </span>

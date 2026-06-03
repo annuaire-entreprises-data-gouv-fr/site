@@ -1,5 +1,5 @@
 import { clientApiEntrepriseMandatairesRCS } from "#/clients/api-entreprise/mandataires-rcs/index.server";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import {
   APINotRespondingFactory,
   type IAPINotRespondingError,

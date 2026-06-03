@@ -73,7 +73,7 @@ const mapToDomainObject = (rge: IRGEResponse) => {
 
   const certifications: IRGECertification["certifications"] = [];
 
-  rge.results.forEach((result) => {
+  for (const result of rge.results) {
     const findCertification = certifications.findIndex(
       (certification) => certification.nomCertificat === result.nom_certificat
     );
@@ -100,7 +100,7 @@ const mapToDomainObject = (rge: IRGEResponse) => {
       domaines.add(result.domaine);
       certifications[findCertification].domaines = Array.from(domaines);
     }
-  });
+  }
   return {
     companyInfo,
     certifications,

@@ -18,7 +18,7 @@ const organisationHabilitation = {
 };
 
 export class AgentOrganisation {
-  private siren: Siren;
+  private readonly siren: Siren;
 
   constructor(siret: Siret) {
     this.siren = extractSirenFromSiret(siret);

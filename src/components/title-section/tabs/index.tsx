@@ -3,7 +3,7 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from "#/components/badges-section/labels-and-certificates";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { PrintNever } from "#/components-ui/print-visibility";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
@@ -20,19 +20,20 @@ import {
 import styles from "./styles.module.css";
 import TabLink from "./tab-link";
 
-export enum FICHE {
-  INFORMATION = "résumé",
-  DOCUMENTS = "documents",
-  ACTES = "actes & statuts",
-  ANNONCES = "annonces",
-  FINANCES = "finances",
-  CERTIFICATS = "Labels ou certifications",
-  COMPTES = "bilans & comptes",
-  DIRIGEANTS = "dirigeants",
-  DIVERS = "conventions collectives",
-  ETABLISSEMENTS_SCOLAIRES = "établissements scolaires",
-  ETABLISSEMENT = "fiche établissement",
-}
+export const FICHE = {
+  INFORMATION: "résumé",
+  DOCUMENTS: "documents",
+  ACTES: "actes & statuts",
+  ANNONCES: "annonces",
+  FINANCES: "finances",
+  CERTIFICATS: "Labels ou certifications",
+  COMPTES: "bilans & comptes",
+  DIRIGEANTS: "dirigeants",
+  DIVERS: "conventions collectives",
+  ETABLISSEMENTS_SCOLAIRES: "établissements scolaires",
+  ETABLISSEMENT: "fiche établissement",
+} as const;
+export type FICHE = (typeof FICHE)[keyof typeof FICHE];
 
 interface ITab {
   ficheType: FICHE;
@@ -50,9 +51,7 @@ const getUniteLegaleTabs = (
 ): ITab[] => {
   const shouldDisplayFinances =
     // hide for public services
-    (!isServicePublic(uniteLegale) &&
-      // hide for EI
-      !isEntrepreneurIndividuel(uniteLegale)) ||
+    !(isServicePublic(uniteLegale) || isEntrepreneurIndividuel(uniteLegale)) ||
     hasAidesFinancieres(uniteLegale);
 
   return [

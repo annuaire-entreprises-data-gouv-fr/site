@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import ButtonLink from "#/components-ui/button";
 import { MultiChoice } from "#/components-ui/multi-choice";
 import { useAuth } from "#/contexts/auth.context";

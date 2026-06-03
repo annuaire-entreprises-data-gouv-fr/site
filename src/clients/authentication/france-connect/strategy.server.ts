@@ -31,11 +31,13 @@ export const getClient = createServerOnlyFn(async () => {
     POST_LOGOUT_REDIRECT_URI,
   } = getConfig();
   if (
-    !CLIENT_ID ||
-    !URL ||
-    !CLIENT_SECRET ||
-    !REDIRECT_URI ||
-    !POST_LOGOUT_REDIRECT_URI
+    !(
+      CLIENT_ID &&
+      URL &&
+      CLIENT_SECRET &&
+      REDIRECT_URI &&
+      POST_LOGOUT_REDIRECT_URI
+    )
   ) {
     throw new InternalError({
       message: "FRANCE CONNECT ENV variables are not defined",
@@ -68,7 +70,7 @@ export const franceConnectAuthorizeUrl = createServerOnlyFn(async () => {
   await session.update({ FC_CONNECT_CHECK });
 
   return client.authorizationUrl({
-    scope: "openid " + franceConnectScope.join(" "),
+    scope: `openid ${franceConnectScope.join(" ")}`,
     acr_values: "eidas1",
     ...FC_CONNECT_CHECK,
   });
@@ -98,7 +100,7 @@ export const franceConnectAuthenticate = createServerOnlyFn(
     await session.update({ FC_CONNECT_CHECK: undefined });
 
     const { access_token, id_token } = tokenSet;
-    if (!access_token || !id_token) {
+    if (!(access_token && id_token)) {
       throw new HttpForbiddenError("No access token");
     }
 

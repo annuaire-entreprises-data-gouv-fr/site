@@ -1,4 +1,4 @@
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { AlertError } from "#/components-ui/alerts";
 import constants from "#/models/constants";
 import { IDataFetchingState } from "#/models/data-fetching";
@@ -7,10 +7,10 @@ export default function DataFetchErrorExplanation({
   fetchErrorType,
 }: {
   fetchErrorType:
-    | IDataFetchingState.CONNECTIVITY_ERROR
-    | IDataFetchingState.AGENT_OVER_RATE_LIMITS
-    | IDataFetchingState.TOO_MANY_REQUESTS
-    | IDataFetchingState.MODEL_ERROR;
+    | typeof IDataFetchingState.CONNECTIVITY_ERROR
+    | typeof IDataFetchingState.AGENT_OVER_RATE_LIMITS
+    | typeof IDataFetchingState.TOO_MANY_REQUESTS
+    | typeof IDataFetchingState.MODEL_ERROR;
 }) {
   if (fetchErrorType === IDataFetchingState.CONNECTIVITY_ERROR) {
     return (

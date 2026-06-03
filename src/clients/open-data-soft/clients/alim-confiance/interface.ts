@@ -1,4 +1,4 @@
-interface IAlimConfianceODSItem {
+export interface IAlimConfianceODSItem {
   adresse_1_ua: string | null;
   adresse_2_ua: string;
   adresse_3_ua: string | null;
@@ -57,7 +57,7 @@ interface IAlimConfianceODSItem {
   type_suite: string;
 }
 
-interface IAlimConfianceODSResponse {
+export interface IAlimConfianceODSResponse {
   lastModified: string | null;
   meta: {
     page: number;
@@ -67,7 +67,7 @@ interface IAlimConfianceODSResponse {
   records: IAlimConfianceODSItem[];
 }
 
-interface IAlimConfianceItem {
+export interface IAlimConfianceItem {
   adresse: string;
   code: number;
   codePostal: string;
@@ -79,7 +79,7 @@ interface IAlimConfianceItem {
   syntheseEvaluation: string;
 }
 
-interface IAlimConfiance {
+export interface IAlimConfiance {
   data: IAlimConfianceItem[];
   meta: {
     page: number;

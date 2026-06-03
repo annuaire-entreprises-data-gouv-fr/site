@@ -13,12 +13,12 @@ const faqModules = import.meta.glob("../../../data/faq/*.json", {
 export const loadAllFaqArticlesByGroup = () => {
   const articlesByGroup: { [key: string]: IFaqArticle[] } = {};
 
-  allFaqArticles.forEach((article) => {
+  for (const article of allFaqArticles) {
     articlesByGroup[article.group || "default"] = [
       ...(articlesByGroup[article.group || "default"] || []),
       article,
     ];
-  });
+  }
 
   return articlesByGroup;
 };
@@ -28,13 +28,13 @@ export const getFaqArticle = (slug: string) =>
 
 export const getFaqArticlesByTag = (tagList: string[]): IFaqArticle[] => {
   const filteredArticles = new Set<IFaqArticle>();
-  allFaqArticles.forEach((article) => {
-    tagList.forEach((tag) => {
+  for (const article of allFaqArticles) {
+    for (const tag of tagList) {
       if (article.administrations.indexOf(tag) > -1) {
         filteredArticles.add(article);
       }
-    });
-  });
+    }
+  }
 
   return Array.from(filteredArticles);
 };

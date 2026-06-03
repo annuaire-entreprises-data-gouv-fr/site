@@ -28,20 +28,33 @@ interface IAccessToken {
 
 export class httpInseeClient {
   private _token: IAccessToken | null;
+  private readonly token_url: string;
+  private readonly client_id: string | undefined;
+  private readonly client_secret: string | undefined;
+  private readonly username: string | undefined;
+  private readonly password: string | undefined;
 
   constructor(
-    private token_url: string,
-    private client_id: string | undefined,
-    private client_secret: string | undefined,
-    private username: string | undefined,
-    private password: string | undefined
+    token_url: string,
+    client_id: string | undefined,
+    client_secret: string | undefined,
+    username: string | undefined,
+    password: string | undefined
   ) {
+    this.token_url = token_url;
+    this.client_id = client_id;
+    this.client_secret = client_secret;
+    this.username = username;
+    this.password = password;
+
     if (
-      (!this.client_id ||
-        !this.client_secret ||
-        !this.token_url ||
-        !this.username ||
-        !this.password) &&
+      !(
+        this.client_id &&
+        this.client_secret &&
+        this.token_url &&
+        this.username &&
+        this.password
+      ) &&
       process.env.NODE_ENV === "production"
     ) {
       throw new HttpServerError("An insee env variable is undefined");

@@ -3,9 +3,13 @@ import { type ChangeEvent, useState } from "react";
 import type { IMatomoStats } from "#/clients/matomo/index.server";
 import { LineChart } from "#/components/chart/line";
 import { StackedBarChart } from "#/components/chart/stack-bar";
-import { Link } from "#/components/Link";
+import { Link } from "#/components/link";
 import { Select } from "#/components-ui/select";
 import constants from "#/models/constants";
+
+const disableLegendClick = () => {
+  // Keep stacked NPS segments visible when users click the legend.
+};
 
 export const NpsStats: React.FC<{
   monthlyNps: IMatomoStats["monthlyNps"];
@@ -14,7 +18,7 @@ export const NpsStats: React.FC<{
 
   const totalAvg =
     monthlyNps.reduce(
-      (sum, { values }) => sum + (values["all"]?.[statsType] || 0),
+      (sum, { values }) => sum + (values.all?.[statsType] || 0),
       0
     ) / 12;
   const npsMaxRange = statsType === "avg" ? 10 : 100;
@@ -35,9 +39,7 @@ export const NpsStats: React.FC<{
       {
         backgroundColor: constants.chartColors[2],
         borderColor: constants.chartColors[2],
-        data: monthlyNps.map(
-          ({ values }) => values["all"]?.[statsType] || null
-        ),
+        data: monthlyNps.map(({ values }) => values.all?.[statsType] || null),
         label: `${npsPrefixLabel} de tous les utilisateurs`,
         tension: 0.3,
       },
@@ -68,7 +70,7 @@ export const NpsStats: React.FC<{
       label: userType.label,
       data: monthlyNps.map(({ label, values }) => {
         const response = values[userType.label]?.count || 0;
-        const userResponse = values["all"]?.count || 0;
+        const userResponse = values.all?.count || 0;
         return {
           y: userResponse ? (response * 100) / userResponse : 0,
           x: label,
@@ -147,7 +149,7 @@ export const NpsStats: React.FC<{
         height="300px"
         options={{ scales: { y: { min: 1, max: 100 } } }}
         pluginOption={{
-          legend: { onClick: () => {} },
+          legend: { onClick: disableLegendClick },
           tooltip: {
             callbacks: {
               label(context) {

@@ -40,12 +40,12 @@ interface LoggerUser {
 const DEFAULT_P99_MS = 1000 * 60 * 5; // 5 minutes
 
 export class LoggerContext {
-  private event: LoggerEvent;
-  private url: LoggerUrl;
-  private request: LoggerRequest;
-  private user: LoggerUser | null = null;
-  private startTimeMs: number;
-  private p99Ms: number;
+  private readonly event: LoggerEvent;
+  private readonly url: LoggerUrl;
+  private readonly request: LoggerRequest;
+  private readonly user: LoggerUser | null = null;
+  private readonly startTimeMs: number;
+  private readonly p99Ms: number;
   private context: IContext = {};
 
   constructor(options: {
@@ -88,19 +88,19 @@ export class LoggerContext {
     this.p99Ms = p99Ms;
   }
 
-  public setContext(context: Partial<IContext>) {
+  setContext(context: Partial<IContext>) {
     this.context = { ...this.context, ...context };
   }
 
-  public setContextKey(key: string, value: IContext[keyof IContext]) {
+  setContextKey(key: string, value: IContext[keyof IContext]) {
     this.context[key] = value;
   }
 
-  public getContextKey(key: string) {
+  getContextKey(key: string) {
     return this.context[key];
   }
 
-  public success(
+  success(
     options: {
       service?: LoggerService;
       statusCode?: number;
@@ -134,7 +134,7 @@ export class LoggerContext {
     }
   }
 
-  public serviceSuccess(options: {
+  serviceSuccess(options: {
     service: LoggerService;
     statusCode?: number;
     startTimeMs?: number;
@@ -166,7 +166,7 @@ export class LoggerContext {
     }
   }
 
-  public error(options: {
+  error(options: {
     error: LoggerError;
     statusCode: number;
     service?: LoggerService;

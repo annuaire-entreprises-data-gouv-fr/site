@@ -13,9 +13,11 @@ const ActiveButRadieeRCSAlert: React.FC<{
   user: IAgentInfo | null;
 }> = ({ uniteLegale, user }) => {
   if (
-    !hasRights({ user }, ApplicationRights.isAgent) ||
-    !uniteLegale.bodacc?.radiation?.estRadie ||
-    !estActif(uniteLegale) ||
+    !(
+      hasRights({ user }, ApplicationRights.isAgent) &&
+      uniteLegale.bodacc?.radiation?.estRadie &&
+      estActif(uniteLegale)
+    ) ||
     uniteLegale.immatriculation?.dateRadiation
   ) {
     return null;

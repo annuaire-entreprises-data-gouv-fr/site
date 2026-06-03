@@ -9,7 +9,7 @@ import FAQLink from "#/components-ui/faq-link";
 import { Select } from "#/components-ui/select";
 import { Tag } from "#/components-ui/tag";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IAssociation } from "#/models/core/types";
 import { isDataSuccess, isUnauthorized } from "#/models/data-fetching";

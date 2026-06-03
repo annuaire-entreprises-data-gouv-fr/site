@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import routes from "#/clients/routes";
-import { EAdministration } from "#/models/administrations/EAdministration";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { FetchRessourceException } from "#/models/exceptions";
 import logErrorInSentry from "#/utils/sentry";
 import { defaultHeadersMiddleware } from "./-middlewares";

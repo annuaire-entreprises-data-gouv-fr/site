@@ -50,7 +50,7 @@ function MapWithResults({
       return;
     }
 
-    results.results.forEach((result) => {
+    for (const result of results.results) {
       const coordsSiege = checkLatLng(
         result.siege.latitude,
         result.siege.longitude
@@ -74,9 +74,9 @@ function MapWithResults({
           .addTo(mapInstance);
       }
 
-      result.matchingEtablissements.forEach((match) => {
+      for (const match of result.matchingEtablissements) {
         if (match.estSiege) {
-          return null;
+          continue;
         }
 
         const coordsEtab = checkLatLng(match.latitude, match.longitude);
@@ -99,8 +99,8 @@ function MapWithResults({
             .setPopup(popup)
             .addTo(mapInstance);
         }
-      });
-    });
+      }
+    }
   }, [results, shouldColorZipCode, hasSupportedWebGl]);
 
   return (
