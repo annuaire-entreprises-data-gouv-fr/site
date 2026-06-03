@@ -15,7 +15,12 @@ const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     devtools(),
-    tanstackStart(),
+    tanstackStart({
+      serverFns: {
+        generateFunctionId: ({ functionName }) =>
+          functionName.replace("_createServerFn_handler", ""),
+      },
+    }),
     viteReact(),
     nitro(),
     sentryTanstackStart({
