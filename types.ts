@@ -5,6 +5,19 @@ export type Entries<T> = {
 declare global {
   interface Window {
     _paq: any[];
+    matomoAbTesting: {
+      getVariation(
+        name: keyof Window["matomoAbTesting"]["variations"]
+      ): "original" | "Variation1";
+      setVariation(
+        name: keyof Window["matomoAbTesting"]["variations"],
+        variation: "original" | "Variation1"
+      ): void;
+      subscribe(listener: () => void): () => void;
+      variations: {
+        AdvancedSearchFilters: "original" | "Variation1";
+      };
+    };
   }
 }
 

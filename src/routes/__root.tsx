@@ -58,20 +58,13 @@ export const Route = createRootRoute({
     scripts: isMatomoEnabled
       ? [
           {
+            src: "/matomo-init.js",
+            "data-user-type": getAgentUserType({ user: loaderData?.user }),
+            "data-site-id": import.meta.env.VITE_MATOMO_SITE_ID,
             type: "text/javascript",
-            children: `
-          window._paq = window._paq || [];
-          ${loaderData?.user ? `window._paq.push(["setCustomDimension", "1", "${getAgentUserType({ user: loaderData.user })}"]);` : ""}
-          window._paq.push(["setTrackerUrl", "https://stats.data.gouv.fr/piwik.php"]);
-          window._paq.push(["setSiteId", "${import.meta.env.VITE_MATOMO_SITE_ID}"]);
-          window._paq.push(["trackPageView"]);
-          window._paq.push(["enableLinkTracking"]);
-        `,
           },
           {
             src: "https://stats.data.gouv.fr/piwik.js",
-            async: false,
-            defer: false,
             type: "text/javascript",
           },
         ]
