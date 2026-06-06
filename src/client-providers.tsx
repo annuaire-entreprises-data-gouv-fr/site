@@ -1,5 +1,4 @@
 import { BrowserIsOutdatedBanner } from "./components/banner/browser-is-outdated";
-import { MatomoInit } from "./components/matomo-event/init";
 import { AuthProvider } from "./contexts/auth.context";
 import type { ISession } from "./models/authentication/user/session";
 
@@ -12,10 +11,7 @@ export function ClientProviders({
 }) {
   return (
     <BrowserIsOutdatedBanner>
-      <AuthProvider user={user}>
-        <MatomoInit />
-        {children}
-      </AuthProvider>
+      <AuthProvider user={user}>{children}</AuthProvider>
     </BrowserIsOutdatedBanner>
   );
 }

@@ -2,11 +2,15 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { ClientProviders } from "#/client-providers";
+import { getAgentUserType } from "#/models/authentication/user/helpers";
 import { getCurrentUserFn } from "#/server-functions/public/auth";
 import dsfrCss from "#/style/dsfr.min.css?url";
 import appCss from "#/style/globals.css?url";
 import { getDefaultHeaders } from "#/utils/headers/default";
 import { meta } from "#/utils/seo";
+
+const isMatomoEnabled =
+  import.meta.env.PROD && import.meta.env.VITE_MATOMO_SITE_ID;
 
 export const Route = createRootRoute({
   loader: async () => {
@@ -14,7 +18,7 @@ export const Route = createRootRoute({
 
     return { user };
   },
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: meta({}),
     links: [
       {
@@ -51,6 +55,20 @@ export const Route = createRootRoute({
         href: "/favicons/apple-touch-icon.png",
       },
     ],
+    scripts: isMatomoEnabled
+      ? [
+          {
+            src: "/matomo-init.js",
+            "data-user-type": getAgentUserType({ user: loaderData?.user }),
+            "data-site-id": import.meta.env.VITE_MATOMO_SITE_ID,
+            type: "text/javascript",
+          },
+          {
+            src: "https://stats.data.gouv.fr/piwik.js",
+            type: "text/javascript",
+          },
+        ]
+      : [],
   }),
   headers: () => getDefaultHeaders(),
   shellComponent: RootDocument,
