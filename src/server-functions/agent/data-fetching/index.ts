@@ -239,8 +239,12 @@ export const getAgentEffectifsAnnuelsProtectedFn = createServerFn()
   ])
   .inputValidator(getAgentEffectifsAnnuelsProtectedSchema)
   .handler(async ({ data }) => {
-    const { siren } = data;
-    return await getEffectifsAnnuelsProtected(siren);
+    const { siren, useCase, natureEffectif, profondeur } = data;
+    return await getEffectifsAnnuelsProtected(siren, {
+      useCase,
+      natureEffectif,
+      profondeur,
+    });
   });
 
 export const getAgentEffectifsMensuelsProtectedFn = createServerFn()

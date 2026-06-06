@@ -11,8 +11,12 @@ export type TNatureEffectif =
 
 interface EffectifAnnuel {
   date_derniere_mise_a_jour: string | null;
-  nature: string;
-  regime: string;
+  nature:
+    | "effectif_moyen_annuel"
+    | "effectif_boeth_annuel"
+    | "effectif_ecap_annuel"
+    | "effectif_assujettissement_oeth_annuel";
+  regime: "regime_general" | "regime_agricole";
   value: number | null;
 }
 
