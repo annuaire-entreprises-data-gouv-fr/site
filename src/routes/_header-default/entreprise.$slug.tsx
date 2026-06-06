@@ -21,6 +21,8 @@ import { NotFound } from "#/components/screens/not-found";
 import ServicePublicSection from "#/components/service-public-section";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
+import UniteLegaleEffectifsAnnuelsSection from "#/components/unite-legale-effectifs-annuels-section";
+import { natureEffectifAnnuelValues } from "#/components/unite-legale-effectifs-annuels-section/protected-effectifs-annuels-section";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { useAuth } from "#/contexts/auth.context";
 import { EAdministration } from "#/models/administrations/e-administration";
@@ -108,9 +110,20 @@ export const Route = createFileRoute("/_header-default/entreprise/$slug")({
     redirected: z.literal(1).optional().catch(undefined),
     page: z.number().min(1).optional().default(1).catch(1),
     "avocats-page": z.number().min(1).optional().default(1).catch(1),
+    "effectifs-annuels-nature-effectif": z
+      .enum(natureEffectifAnnuelValues)
+      .optional()
+      .default("moyen")
+      .catch("moyen"),
   }),
   search: {
-    middlewares: [stripSearchParams({ page: 1, "avocats-page": 1 })],
+    middlewares: [
+      stripSearchParams({
+        page: 1,
+        "avocats-page": 1,
+        "effectifs-annuels-nature-effectif": "moyen",
+      }),
+    ],
   },
   beforeLoad: async ({ params }) => {
     const slug = params.slug;
@@ -300,6 +313,10 @@ function RouteComponent() {
               <AssociationSection uniteLegale={uniteLegale} user={user} />
             )}
             <HorizontalSeparator />
+            <UniteLegaleEffectifsAnnuelsSection
+              uniteLegale={uniteLegale}
+              user={user}
+            />
             {uniteLegale.siege && (
               <EtablissementSection
                 etablissement={uniteLegale.siege}

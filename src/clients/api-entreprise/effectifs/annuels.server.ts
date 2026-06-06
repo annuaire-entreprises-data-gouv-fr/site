@@ -37,8 +37,6 @@ export async function clientApiEntrepriseEffectifsAnnuels(
 const mapToDomainObject = ({
   data: { effectifs_annuel, annee },
 }: IAPIEntrepriseRcpEffectifsAnnuels): IEffectifsAnnuelsProtected => {
-  console.log("effectifs_annuel", effectifs_annuel);
-
   const mappedEffectifs = effectifs_annuel.map((effectif) => ({
     nature: effectif.nature,
     value: effectif.value,
