@@ -1,5 +1,5 @@
 import { clientApiEntrepriseEffectifsMensuels } from "#/clients/api-entreprise/effectifs/mensuels.server";
-import type { TNatureEffectif } from "#/clients/api-entreprise/effectifs/types";
+import { TNatureEffectif } from "#/clients/api-entreprise/effectifs/types";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import {
   ApplicationRights,
@@ -25,13 +25,6 @@ export interface IEffectifsMensuelsProtected {
   effectifsRegimeGeneral: IEffectifMensuelItem[];
 }
 
-const allowedNatureEffectifs = [
-  "assujettissement_oeth",
-  "boeth",
-  "ecap",
-  "moyen",
-] as const satisfies readonly TNatureEffectif[];
-
 export const getEffectifsMensuelsProtected = async (
   maybeSiret: string,
   params: {
@@ -47,7 +40,7 @@ export const getEffectifsMensuelsProtected = async (
   const defaultYear = currentMonth === 0 ? currentYear - 1 : currentYear;
   const parsedYear = Number.parseInt(params.year ?? "", 10);
   const year = Number.isNaN(parsedYear) ? defaultYear : parsedYear;
-  const natureEffectif = allowedNatureEffectifs.includes(
+  const natureEffectif = Object.values(TNatureEffectif).includes(
     params.natureEffectif ?? "moyen"
   )
     ? params.natureEffectif

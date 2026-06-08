@@ -76,6 +76,9 @@ export const getAgentAssociationProtectedSchema = z.object({
 
 export const getAgentEffectifsAnnuelsProtectedSchema = z.object({
   siren: z.string().min(1, "Siren is required"),
+  useCase: z.enum(UseCase),
+  natureEffectif: z.enum(TNatureEffectif),
+  profondeur: z.number(),
 });
 
 export const getAgentEffectifsMensuelsProtectedSchema = z.object({

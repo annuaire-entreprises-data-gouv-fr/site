@@ -1,9 +1,13 @@
 import routes from "#/clients/routes";
 import type { IAgentScope } from "#/models/authentication/agent/scopes/constants";
 import type { IEffectifsAnnuelsProtected } from "#/models/espace-agent/effectifs/annuels";
+import type { UseCase } from "#/models/use-cases";
 import type { Siren } from "#/utils/helpers";
 import clientAPIEntreprise from "../client.server";
-import type { IAPIEntrepriseRcpEffectifsAnnuels } from "./types";
+import type {
+  IAPIEntrepriseRcpEffectifsAnnuels,
+  TNatureEffectif,
+} from "./types";
 
 /**
  * GET effectifs from API Entreprise
@@ -11,26 +15,41 @@ import type { IAPIEntrepriseRcpEffectifsAnnuels } from "./types";
 export async function clientApiEntrepriseEffectifsAnnuels(
   siren: Siren,
   year: number,
-  scope: IAgentScope | null
+  scope: IAgentScope | null,
+  useCase: UseCase,
+  filters: {
+    nature_effectif: TNatureEffectif;
+  }
 ) {
   return await clientAPIEntreprise<
     IAPIEntrepriseRcpEffectifsAnnuels,
     IEffectifsAnnuelsProtected
-  >(routes.apiEntreprise.effectifs.annuels(siren, year), mapToDomainObject, {
-    scope,
-  });
+  >(
+    `${routes.apiEntreprise.effectifs.annuels(siren, year)}?nature_effectif=${filters.nature_effectif}`,
+    mapToDomainObject,
+    {
+      scope,
+      useCase,
+    }
+  );
 }
 
 const mapToDomainObject = ({
   data: { effectifs_annuel, annee },
 }: IAPIEntrepriseRcpEffectifsAnnuels): IEffectifsAnnuelsProtected => {
-  const trancheEffectif = effectifs_annuel.reduce(
-    (sum, item) => sum + (item.value || 0),
-    0
-  );
+  const mappedEffectifs = effectifs_annuel.map((effectif) => ({
+    nature: effectif.nature,
+    value: effectif.value,
+    regime: effectif.regime,
+  }));
 
   return {
-    effectif: trancheEffectif, // can be a float
+    effectifsRegimeGeneral: mappedEffectifs.filter(
+      (effectif) => effectif.regime === "regime_general"
+    ),
+    effectifsRegimeAgricole: mappedEffectifs.filter(
+      (effectif) => effectif.regime === "regime_agricole"
+    ),
     anneeEffectif: annee,
   };
 };
