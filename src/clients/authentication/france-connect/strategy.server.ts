@@ -1,15 +1,27 @@
 import { randomBytes } from "node:crypto";
 import { createServerOnlyFn } from "@tanstack/react-start";
 import { getRequestUrl } from "@tanstack/react-start/server";
-import { type BaseClient, generators, Issuer } from "openid-client";
+import {
+  authorizationCodeGrant,
+  buildAuthorizationUrl,
+  buildEndSessionUrl,
+  fetchUserInfo,
+  randomNonce,
+  randomState,
+} from "openid-client";
 import { HttpForbiddenError } from "#/clients/exceptions";
 import { InternalError } from "#/models/exceptions";
 import {
   getCurrentSession,
   getHidePersonalDataRequestFCSession,
 } from "#/utils/session/index.server";
+import {
+  discoverClient,
+  getAuthorizationCallbackUrl,
+  type OpenIdClientConfiguration,
+} from "../openid-client-v6.server";
 
-let _client = undefined as BaseClient | undefined;
+let _client = undefined as OpenIdClientConfiguration | undefined;
 
 const getConfig = () => ({
   CLIENT_ID: process.env.FRANCE_CONNECT_CLIENT_ID,
@@ -43,19 +55,18 @@ export const getClient = createServerOnlyFn(async () => {
       message: "FRANCE CONNECT ENV variables are not defined",
     });
   }
-  const franceConnectIssuer = await Issuer.discover(
-    `${URL}/api/v2/.well-known/openid-configuration`
+  _client = await discoverClient(
+    `${URL}/api/v2/.well-known/openid-configuration`,
+    CLIENT_ID,
+    CLIENT_SECRET,
+    {
+      redirect_uris: [REDIRECT_URI],
+      post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
+      id_token_signed_response_alg: "RS256",
+      userinfo_signed_response_alg: "RS256",
+      response_types: ["code"],
+    }
   );
-
-  _client = new franceConnectIssuer.Client({
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    redirect_uris: [REDIRECT_URI],
-    post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
-    id_token_signed_response_alg: "RS256",
-    userinfo_signed_response_alg: "RS256",
-    response_types: ["code"],
-  });
 
   return _client;
 });
@@ -63,17 +74,19 @@ export const getClient = createServerOnlyFn(async () => {
 export const franceConnectAuthorizeUrl = createServerOnlyFn(async () => {
   const client = await getClient();
   const session = await getCurrentSession();
+  const { REDIRECT_URI } = getConfig();
   const FC_CONNECT_CHECK = {
-    state: generators.state(),
-    nonce: generators.nonce(),
+    state: randomState(),
+    nonce: randomNonce(),
   };
   await session.update({ FC_CONNECT_CHECK });
 
-  return client.authorizationUrl({
+  return buildAuthorizationUrl(client, {
     scope: `openid ${franceConnectScope.join(" ")}`,
+    redirect_uri: REDIRECT_URI as string,
     acr_values: "eidas1",
     ...FC_CONNECT_CHECK,
-  });
+  }).toString();
 });
 const franceConnectScope = ["family_name", "given_name", "birthdate"] as const;
 
@@ -89,23 +102,29 @@ export const franceConnectAuthenticate = createServerOnlyFn(
     const client = await getClient();
     const session = await getCurrentSession();
     const url = getRequestUrl();
-    const params = client.callbackParams(url.toString());
     const { REDIRECT_URI } = getConfig();
-    const tokenSet = await client.callback(
-      // reuse redirect_uri
-      REDIRECT_URI,
-      params,
-      session.data.FC_CONNECT_CHECK
+    const tokenSet = await authorizationCodeGrant(
+      client,
+      getAuthorizationCallbackUrl(REDIRECT_URI as string, url),
+      {
+        expectedNonce: session.data.FC_CONNECT_CHECK?.nonce,
+        expectedState: session.data.FC_CONNECT_CHECK?.state,
+      }
     );
     await session.update({ FC_CONNECT_CHECK: undefined });
 
     const { access_token, id_token } = tokenSet;
-    if (!(access_token && id_token)) {
+    const claims = tokenSet.claims();
+    if (!(access_token && id_token && claims?.sub)) {
       throw new HttpForbiddenError("No access token");
     }
 
-    const userInfo = await client.userinfo(access_token);
-    return { ...userInfo, id_token, sub: userInfo.sub };
+    const userInfo = await fetchUserInfo(client, access_token, claims.sub);
+    return {
+      ...userInfo,
+      id_token,
+      sub: userInfo.sub,
+    } as IFranceConnectUserInfo;
   }
 );
 
@@ -124,10 +143,10 @@ export const franceConnectLogoutUrl = createServerOnlyFn(async () => {
 
   const { POST_LOGOUT_REDIRECT_URI, CLIENT_ID } = getConfig();
 
-  return client.endSessionUrl({
-    post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,
-    client_id: CLIENT_ID,
+  return buildEndSessionUrl(client, {
+    post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI as string,
+    client_id: CLIENT_ID as string,
     id_token_hint,
     state,
-  });
+  }).toString();
 });
