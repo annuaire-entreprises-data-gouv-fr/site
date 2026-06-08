@@ -3,7 +3,15 @@
 
 import { createServerOnlyFn } from "@tanstack/react-start";
 import { getRequestUrl } from "@tanstack/react-start/server";
-import { type BaseClient, generators, Issuer } from "openid-client";
+import {
+  authorizationCodeGrant,
+  buildAuthorizationUrl,
+  buildEndSessionUrl,
+  fetchUserInfo,
+  randomNonce,
+  randomState,
+  refreshTokenGrant,
+} from "openid-client";
 import { HttpForbiddenError } from "#/clients/exceptions";
 import { InternalError } from "#/models/exceptions";
 import getSession from "#/utils/server-side-helper/get-session";
@@ -12,9 +20,15 @@ import {
   setProConnectTokenSet,
   setStateAndNonce,
 } from "#/utils/session/index.server";
+import {
+  discoverClient,
+  getAccessTokenExpiresAt,
+  getAuthorizationCallbackUrl,
+  type OpenIdClientConfiguration,
+} from "../openid-client-v6.server";
 import { ProConnect2FANeeded, ProConnectReconnexionNeeded } from "./exceptions";
 
-let _client = undefined as BaseClient | undefined;
+let _client = undefined as OpenIdClientConfiguration | undefined;
 
 // LEGACY
 // Pro Connect was called Agent Connect in the past
@@ -57,11 +71,7 @@ export const getClient = createServerOnlyFn(async () => {
   ) {
     throw new Error("PRO CONNECT ENV variables are not defined");
   }
-  const proConnectIssuer = await Issuer.discover(ISSUER_URL);
-
-  _client = new proConnectIssuer.Client({
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
+  _client = await discoverClient(ISSUER_URL, CLIENT_ID, CLIENT_SECRET, {
     redirect_uris: [REDIRECT_URI],
     post_logout_redirect_uris: [POST_LOGOUT_REDIRECT_URI],
     id_token_signed_response_alg: "RS256",
@@ -80,6 +90,7 @@ export const proConnectAuthorizeUrl = createServerOnlyFn(
     const { force2FA, loginHint, skipStateGeneration } = params;
     const client = await getClient();
     const session = await getCurrentSession();
+    const { REDIRECT_URI } = getConfig();
 
     if (skipStateGeneration && !(session.data.nonce && session.data.state)) {
       throw new InternalError({
@@ -88,28 +99,39 @@ export const proConnectAuthorizeUrl = createServerOnlyFn(
       });
     }
 
-    const nonce = skipStateGeneration ? session.data.nonce : generators.nonce();
-    const state = skipStateGeneration ? session.data.state : generators.state();
+    const nonce = skipStateGeneration ? session.data.nonce : randomNonce();
+    const state = skipStateGeneration ? session.data.state : randomState();
 
     if (!skipStateGeneration) {
       await setStateAndNonce(session, state, nonce);
     }
 
-    return client.authorizationUrl({
-      scope: SCOPES,
-      acr_values: force2FA ? ACR_VALUES_2FA : undefined,
-      nonce,
-      state,
-      login_hint: loginHint,
-      claims: {
-        id_token: {
-          amr: {
-            essential: true,
-          },
-          ...(force2FA ? { acr: { essential: true } } : {}),
+    const claims = {
+      id_token: {
+        amr: {
+          essential: true,
         },
+        ...(force2FA ? { acr: { essential: true } } : {}),
       },
-    });
+    };
+
+    const authorizationParameters: Record<string, string> = {
+      scope: SCOPES,
+      redirect_uri: REDIRECT_URI as string,
+      nonce: nonce as string,
+      state: state as string,
+      claims: JSON.stringify(claims),
+    };
+
+    if (force2FA) {
+      authorizationParameters.acr_values = ACR_VALUES_2FA;
+    }
+
+    if (loginHint) {
+      authorizationParameters.login_hint = loginHint;
+    }
+
+    return buildAuthorizationUrl(client, authorizationParameters).toString();
   }
 );
 
@@ -134,23 +156,31 @@ export const proConnectAuthenticate = createServerOnlyFn(
     const client = await getClient();
     const session = await getCurrentSession();
     const url = getRequestUrl();
-    const params = client.callbackParams(url.toString());
     const { REDIRECT_URI } = getConfig();
 
-    const tokenSet = await client.callback(REDIRECT_URI, params, {
-      nonce: session.data.nonce,
-      state: session.data.state,
-    });
+    const tokenSet = await authorizationCodeGrant(
+      client,
+      getAuthorizationCallbackUrl(REDIRECT_URI as string, url),
+      {
+        expectedNonce: session.data.nonce,
+        expectedState: session.data.state,
+      }
+    );
 
-    const used2FA = tokenSet.claims().amr?.includes("mfa");
+    const claims = tokenSet.claims();
+    const used2FA = Array.isArray(claims?.amr) && claims.amr.includes("mfa");
 
     const accessToken = tokenSet.access_token;
 
-    if (!accessToken) {
+    if (!(accessToken && claims?.sub)) {
       throw new HttpForbiddenError("No access token");
     }
 
-    const userInfo = (await client.userinfo(tokenSet)) as IProConnectUserInfo;
+    const userInfo = (await fetchUserInfo(
+      client,
+      accessToken,
+      claims.sub
+    )) as unknown as IProConnectUserInfo;
 
     if (
       !used2FA &&
@@ -166,7 +196,7 @@ export const proConnectAuthenticate = createServerOnlyFn(
     await setProConnectTokenSet(session, {
       idToken: tokenSet.id_token,
       accessToken: tokenSet.access_token,
-      accessTokenExpiresAt: (tokenSet.expires_at || 0) * 1000,
+      accessTokenExpiresAt: getAccessTokenExpiresAt(tokenSet),
       refreshToken: tokenSet.refresh_token,
     });
 
@@ -178,10 +208,15 @@ export const proConnectLogoutUrl = createServerOnlyFn(async () => {
   const session = await getCurrentSession();
   const client = await getClient();
   const { POST_LOGOUT_REDIRECT_URI } = getConfig();
-  return client.endSessionUrl({
-    id_token_hint: session.data.proConnectTokenSet?.idToken,
-    post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI,
-  });
+  const logoutParameters: Record<string, string> = {
+    post_logout_redirect_uri: POST_LOGOUT_REDIRECT_URI as string,
+  };
+
+  if (session.data.proConnectTokenSet?.idToken) {
+    logoutParameters.id_token_hint = session.data.proConnectTokenSet.idToken;
+  }
+
+  return buildEndSessionUrl(client, logoutParameters).toString();
 });
 
 export const proConnectGetOrRefreshAccessToken = createServerOnlyFn(
@@ -209,16 +244,15 @@ export const proConnectGetOrRefreshAccessToken = createServerOnlyFn(
 
     try {
       const client = await getClient();
+      const refreshToken = session.proConnectTokenSet.refreshToken;
 
-      const tokenSet = await client.refresh(
-        session?.proConnectTokenSet?.refreshToken
-      );
+      const tokenSet = await refreshTokenGrant(client, refreshToken);
 
       session.proConnectTokenSet = {
         idToken: tokenSet.id_token,
         accessToken: tokenSet.access_token,
-        accessTokenExpiresAt: tokenSet.expires_at,
-        refreshToken: tokenSet.refreshToken as string,
+        accessTokenExpiresAt: getAccessTokenExpiresAt(tokenSet),
+        refreshToken: tokenSet.refresh_token ?? refreshToken,
       };
 
       return tokenSet.access_token as string;
