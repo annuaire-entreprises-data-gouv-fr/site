@@ -68,21 +68,45 @@ function RouteComponent() {
               "213 000 €",
               "375 000 €",
               "433 000 €",
+              "455 000 €",
             ],
-            ["Déploiement", "5 000 €", "98 000 €", "157 000 €", "255 000 €"],
-            ["Design", "25 000 €", "25 000 €", "43 000 €", "60 000 €"],
-            ["Logiciels", "-", "12 000 €", "12 000 €", "12 000"],
-            ["Expertise sécurité", "-", "-", "-", "15 000 €"],
-            ["Hébergement", "1000 €", "3000 €", "3000 €", "25 000 €"],
+            [
+              "Déploiement & Support",
+              "5 000 €",
+              "98 000 €",
+              "157 000 €",
+              "255 000 €",
+              "40 000 €",
+            ],
+            [
+              "Design",
+              "25 000 €",
+              "25 000 €",
+              "43 000 €",
+              "60 000 €",
+              "35 000 €",
+            ],
+            ["Logiciels", "-", "12 000 €", "12 000 €", "12 000", "-"],
+            ["Expertise sécurité", "-", "-", "-", "15 000 €", "-"],
+            [
+              "Hébergement",
+              "1000 €",
+              "3000 €",
+              "3000 €",
+              "25 000 €",
+              "35 000 €",
+            ],
+            ["Management & Produit", "-", "-", "-", "-", "210 000 €"],
             [
               <strong>Total TTC</strong>,
               <strong>196 000 €</strong>,
               <strong>350 000 €</strong>,
               <strong>590 000 €</strong>,
               <strong>800 000 €</strong>,
+              <strong>775 000 €</strong>,
             ],
           ]}
-          head={["Poste de dépense", "2021", "2022", "2023", "2024"]}
+          head={["Poste de dépense", "2021", "2022", "2023", "2024", "2025"]}
         />
         <p>
           <strong>NB :</strong> contrairement aux entreprises du secteur privé,
@@ -102,18 +126,27 @@ function RouteComponent() {
               "Fiches “entreprise” consultées",
               "768 000",
               "2 788 000",
-              "12 934 000",
-              "52 000 000",
+              "12 935 000",
+              "28 394 000",
+              "42 595 000",
             ],
-            ["・€ / page", "0,25 €", "0,11 €", "0,04 €", "0,015 €"],
+            ["・€ / page", "0,25 €", "0,11 €", "0,04 €", "0,02 €", "0,018 €"],
             [
-              "Visiteurs uniques",
-              "156 000",
-              "781 000",
-              "3 775 000",
-              "12 000 000",
+              "Visiteurs uniques / mois",
+              "50 000",
+              "100 000",
+              "791 000",
+              "3 484 000",
+              "6 075 000",
             ],
-            ["・€ / visiteur unique", "1,2 €", "0,45 €", "0,15 €", "0,06 €"],
+            [
+              "・€ / visiteur unique / mois",
+              "0,32 €",
+              "0,29 €",
+              "0,06 €",
+              "0,019 €",
+              "0,010 €",
+            ],
           ]}
           head={[
             "Mesure d’impact pour le grand public",
@@ -121,6 +154,7 @@ function RouteComponent() {
             "2022",
             "2023",
             "2024",
+            "2025",
           ]}
         />
         <br />
@@ -137,11 +171,15 @@ function RouteComponent() {
         </p>
         <FullTable
           body={[
-            ["Fiches “entreprise” consultées par des agents", "728 000"],
-            ["Agents publics uniques", "21 000"],
-            ["・€ / agent public / mois", "3,17 €"],
+            [
+              "Fiches “entreprise” consultées par des agents",
+              "530 000",
+              "1 071 000",
+            ],
+            ["Agents publics uniques / mois", "13 000", "20 000"],
+            ["・€ / agent public / mois", "5,13 €", "3,22 €"],
           ]}
-          head={["Mesure d’impact pour les agents publics", "2024"]}
+          head={["Mesure d’impact pour les agents publics", "2024", "2025"]}
         />
         <p>
           Le détail de nos mesures d’impact est disponible sur notre{" "}
