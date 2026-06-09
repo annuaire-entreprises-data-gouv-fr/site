@@ -55,6 +55,7 @@ import { Route as HeaderDefaultFaqSlugRouteImport } from './routes/_header-defau
 import { Route as HeaderDefaultEtablissementsScolairesSlugRouteImport } from './routes/_header-default/etablissements-scolaires.$slug'
 import { Route as HeaderDefaultEtablissementSlugRouteImport } from './routes/_header-default/etablissement.$slug'
 import { Route as HeaderDefaultEntrepriseSlugRouteImport } from './routes/_header-default/entreprise.$slug'
+import { Route as HeaderDefaultEffectifsSlugRouteImport } from './routes/_header-default/effectifs.$slug'
 import { Route as HeaderDefaultDonneesSourcesRouteImport } from './routes/_header-default/donnees.sources'
 import { Route as HeaderDefaultDonneesApiEntreprisesRouteImport } from './routes/_header-default/donnees.api-entreprises'
 import { Route as HeaderDefaultDonneesFinancieresSlugRouteImport } from './routes/_header-default/donnees-financieres.$slug'
@@ -334,6 +335,12 @@ const HeaderDefaultEntrepriseSlugRoute =
     path: '/entreprise/$slug',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
+const HeaderDefaultEffectifsSlugRoute =
+  HeaderDefaultEffectifsSlugRouteImport.update({
+    id: '/effectifs/$slug',
+    path: '/effectifs/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
 const HeaderDefaultDonneesSourcesRoute =
   HeaderDefaultDonneesSourcesRouteImport.update({
     id: '/donnees/sources',
@@ -577,6 +584,7 @@ export interface FileRoutesByFullPath {
   '/donnees-financieres/$slug': typeof HeaderDefaultDonneesFinancieresSlugRoute
   '/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
+  '/effectifs/$slug': typeof HeaderDefaultEffectifsSlugRoute
   '/entreprise/$slug': typeof HeaderDefaultEntrepriseSlugRoute
   '/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
   '/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
@@ -652,6 +660,7 @@ export interface FileRoutesByTo {
   '/donnees-financieres/$slug': typeof HeaderDefaultDonneesFinancieresSlugRoute
   '/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
+  '/effectifs/$slug': typeof HeaderDefaultEffectifsSlugRoute
   '/entreprise/$slug': typeof HeaderDefaultEntrepriseSlugRoute
   '/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
   '/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
@@ -736,6 +745,7 @@ export interface FileRoutesById {
   '/_header-default/donnees-financieres/$slug': typeof HeaderDefaultDonneesFinancieresSlugRoute
   '/_header-default/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/_header-default/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
+  '/_header-default/effectifs/$slug': typeof HeaderDefaultEffectifsSlugRoute
   '/_header-default/entreprise/$slug': typeof HeaderDefaultEntrepriseSlugRoute
   '/_header-default/etablissement/$slug': typeof HeaderDefaultEtablissementSlugRoute
   '/_header-default/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
@@ -813,6 +823,7 @@ export interface FileRouteTypes {
     | '/donnees-financieres/$slug'
     | '/donnees/api-entreprises'
     | '/donnees/sources'
+    | '/effectifs/$slug'
     | '/entreprise/$slug'
     | '/etablissement/$slug'
     | '/etablissements-scolaires/$slug'
@@ -888,6 +899,7 @@ export interface FileRouteTypes {
     | '/donnees-financieres/$slug'
     | '/donnees/api-entreprises'
     | '/donnees/sources'
+    | '/effectifs/$slug'
     | '/entreprise/$slug'
     | '/etablissement/$slug'
     | '/etablissements-scolaires/$slug'
@@ -971,6 +983,7 @@ export interface FileRouteTypes {
     | '/_header-default/donnees-financieres/$slug'
     | '/_header-default/donnees/api-entreprises'
     | '/_header-default/donnees/sources'
+    | '/_header-default/effectifs/$slug'
     | '/_header-default/entreprise/$slug'
     | '/_header-default/etablissement/$slug'
     | '/_header-default/etablissements-scolaires/$slug'
@@ -1369,6 +1382,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultEntrepriseSlugRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
+    '/_header-default/effectifs/$slug': {
+      id: '/_header-default/effectifs/$slug'
+      path: '/effectifs/$slug'
+      fullPath: '/effectifs/$slug'
+      preLoaderRoute: typeof HeaderDefaultEffectifsSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
     '/_header-default/donnees/sources': {
       id: '/_header-default/donnees/sources'
       path: '/donnees/sources'
@@ -1677,6 +1697,7 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultDonneesFinancieresSlugRoute: typeof HeaderDefaultDonneesFinancieresSlugRoute
   HeaderDefaultDonneesApiEntreprisesRoute: typeof HeaderDefaultDonneesApiEntreprisesRoute
   HeaderDefaultDonneesSourcesRoute: typeof HeaderDefaultDonneesSourcesRoute
+  HeaderDefaultEffectifsSlugRoute: typeof HeaderDefaultEffectifsSlugRoute
   HeaderDefaultEntrepriseSlugRoute: typeof HeaderDefaultEntrepriseSlugRoute
   HeaderDefaultEtablissementSlugRoute: typeof HeaderDefaultEtablissementSlugRoute
   HeaderDefaultEtablissementsScolairesSlugRoute: typeof HeaderDefaultEtablissementsScolairesSlugRoute
@@ -1721,6 +1742,7 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
   HeaderDefaultDonneesApiEntreprisesRoute:
     HeaderDefaultDonneesApiEntreprisesRoute,
   HeaderDefaultDonneesSourcesRoute: HeaderDefaultDonneesSourcesRoute,
+  HeaderDefaultEffectifsSlugRoute: HeaderDefaultEffectifsSlugRoute,
   HeaderDefaultEntrepriseSlugRoute: HeaderDefaultEntrepriseSlugRoute,
   HeaderDefaultEtablissementSlugRoute: HeaderDefaultEtablissementSlugRoute,
   HeaderDefaultEtablissementsScolairesSlugRoute:

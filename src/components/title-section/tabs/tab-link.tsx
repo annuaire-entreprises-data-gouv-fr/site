@@ -19,6 +19,7 @@ export default function TabLink({
     <Link
       className={`${active ? styles.activeLink : ""} no-style-link`}
       rel={noFollow ? "nofollow" : ""}
+      resetScroll={false}
       style={{ width }}
       {...props}
     >

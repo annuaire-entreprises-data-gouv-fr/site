@@ -25,6 +25,7 @@ export const FICHE = {
   DOCUMENTS: "documents",
   ACTES: "actes & statuts",
   ANNONCES: "annonces",
+  EFFECTIFS: "effectifs",
   FINANCES: "finances",
   CERTIFICATS: "Labels ou certifications",
   COMPTES: "bilans & comptes",
@@ -106,6 +107,15 @@ const getUniteLegaleTabs = (
       noFollow: false,
       shouldDisplay: true,
       width: uniteLegale.dateMiseAJourInpi ? "130px" : "90px",
+    },
+    {
+      ficheType: FICHE.EFFECTIFS,
+      params: { slug: uniteLegale.siren },
+      to: "/effectifs/$slug",
+      label: "Effectifs",
+      noFollow: false,
+      shouldDisplay: true,
+      width: "90px",
     },
     {
       ficheType: FICHE.CERTIFICATS,
