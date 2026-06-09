@@ -114,7 +114,7 @@ const getUniteLegaleTabs = (
       to: "/effectifs/$slug",
       label: "Effectifs",
       noFollow: false,
-      shouldDisplay: true,
+      shouldDisplay: hasRights({ user }, ApplicationRights.effectifs),
       width: "90px",
     },
     {
