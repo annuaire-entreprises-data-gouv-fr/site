@@ -6,7 +6,7 @@ commit-msg:
 pre-commit:
   parallel: true
   jobs:
-    - run: npx ultracite fix
+    - run: pnpm lint:fix
       glob:
         - "*.js"
         - "*.jsx"
@@ -16,7 +16,7 @@ pre-commit:
         - "*.jsonc"
         - "*.css"
       stage_fixed: true
-    - run: npm run test:unit
+    - run: pnpm test:unit
       glob:
         - "*.js"
         - "*.jsx"
@@ -25,7 +25,7 @@ pre-commit:
         - "*.json"
         - "*.jsonc"
         - "*.css"
-    - run: npm run typecheck
+    - run: pnpm typecheck
       glob:
         - "*.js"
         - "*.jsx"
