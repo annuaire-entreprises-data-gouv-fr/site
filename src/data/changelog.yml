@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 09/06/2026
+  target:
+    agent: true
+  body: |
+    Ajout d'un onglet "Effectifs" dans la page entreprise, permettant aux agents publics de consulter les effectifs annuels de l'entreprise.
 - date: 20/05/2026
   target:
     site: true
