@@ -19,7 +19,7 @@ const matomoAbTestingListeners = new Set();
 
 window.matomoAbTesting = {
   variations: {
-    AdvancedSearchFilters: "original",
+    FiltresAvances: "original",
   },
   getVariation(name) {
     return this.variations[name] ?? "original";
@@ -43,7 +43,7 @@ window.matomoAbTesting = {
 window._paq.push([
   "AbTesting::create",
   {
-    name: "AdvancedSearchFilters",
+    name: "FiltresAvances",
     percentage: 100,
     includedTargets: [
       {
@@ -65,12 +65,15 @@ window._paq.push([
         },
       },
       {
-        name: "Variation1",
+        name: "VariationA",
         activate() {
-          window.matomoAbTesting.setVariation(
-            "AdvancedSearchFilters",
-            "Variation1"
-          );
+          window.matomoAbTesting.setVariation("FiltresAvances", "VariationA");
+        },
+      },
+      {
+        name: "VariationB",
+        activate() {
+          window.matomoAbTesting.setVariation("FiltresAvances", "VariationB");
         },
       },
     ],
