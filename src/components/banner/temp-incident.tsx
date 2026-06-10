@@ -33,8 +33,8 @@ export default function TempIncidentBanner({
   const TEMP_INCIDENT_BANNER = useMemo(
     () => ({
       default: `
-  🚨 Nous rencontrons actuellement des difficultés techniques, le service peut être temporairement indisponible.
-    Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
+  🚨 Le téléchargement des avis de situation connaît actuellement des perturbations en raison d’un problème technique rencontré par notre partenaire, l’Insee.
+     Nous vous prions de nous excuser pour la gêne occasionnée.`,
       proconnect: `
   🚨 Notre partenaire ProConnect rencontre actuellement des difficultés techniques, le service de connexion à l'espace agent public peut être temporairement indisponible.
     Nos équipes sont mobilisées pour résoudre ce problème, nous vous prions de nous excuser pour la gêne occasionnée.`,
