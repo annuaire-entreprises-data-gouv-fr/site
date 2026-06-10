@@ -10,7 +10,7 @@ import { getDefaultHeaders } from "#/utils/headers/default";
 import { meta } from "#/utils/seo";
 
 const isMatomoEnabled =
-  import.meta.env.PROD && import.meta.env.VITE_MATOMO_SITE_ID;
+  (import.meta.env.PROD && import.meta.env.VITE_MATOMO_SITE_ID) || 1 == 1;
 
 export const Route = createRootRoute({
   loader: async () => {
