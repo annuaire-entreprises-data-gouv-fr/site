@@ -1,6 +1,7 @@
 import type React from "react";
+import { Activity, useState } from "react";
 import { FilterMenu } from "#/components-ui/filter-menu";
-import { SimpleSeparator } from "#/components-ui/horizontal-separator";
+import { Icon } from "#/components-ui/icon/wrapper";
 import { MultiSelect } from "#/components-ui/select/multi-select";
 import SearchFilterParams, {
   type IParams,
@@ -10,11 +11,11 @@ import { codesEffectifsOptions } from "#/utils/helpers/formatting/codes-effectif
 import { categoriesJuridiquesNiveau3 } from "#/utils/helpers/formatting/metadata/categories-juridiques";
 import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-naf-rev-2";
 import { codesSectionNAF } from "#/utils/helpers/formatting/metadata/codes-section-naf";
+import { FilterEtat } from "./filter-etat";
 import { FilterFinances } from "./filter-finances";
 import { FilterGeoVariationA } from "./filter-geo-variation-a";
 import { FilterLabel } from "./filter-label";
 import { FilterStructureVariationA } from "./filter-structure-variation-a";
-import styles from "./style.module.css";
 
 const SearchFiltersVariationA: React.FC<{
   searchParams?: IParams;
@@ -43,15 +44,17 @@ const SearchFiltersVariationA: React.FC<{
   } = searchParams || {};
 
   const filters = new SearchFilterParams(searchParams || {});
-  const filtersWithoutEtat = new SearchFilterParams({
-    ...searchParams,
-    etat: "",
-  });
 
-  const { dirigeantFilter, structureFilter, labelFilter, financeFilter } =
-    filters.extractFilters("VariationA");
-  const { administrativeFilter } =
-    filtersWithoutEtat.extractFilters("VariationA");
+  const {
+    dirigeantFilter,
+    structureFilter,
+    labelFilter,
+    financeFilter,
+    domaineActiviteFilter,
+    codeNAFFilter,
+    natureJuridiqueFilter,
+    effectifSalarieFilter,
+  } = filters.extractFilters("VariationA");
 
   /**
    * For the search api `nature_juridique` must be a string
@@ -64,6 +67,9 @@ const SearchFiltersVariationA: React.FC<{
         value: categorie,
         label: categoriesJuridiquesNiveau3[categorie],
       }));
+
+  const hasExpandableFilters = filters.hasExpandableFilters();
+  const [isExpanded, setIsExpanded] = useState(hasExpandableFilters);
 
   return (
     <>
@@ -166,22 +172,54 @@ const SearchFiltersVariationA: React.FC<{
         <FilterStructureVariationA type={type} />
       </FilterMenu>
       <FilterMenu
-        activeFilter={labelFilter}
+        activeFilter={codeNAFFilter}
         addSaveClearButton
-        label="Labels et certificats"
+        label="Code NAF"
         searchParams={searchParams}
         searchTerm={searchTerm}
       >
-        <FilterLabel label={label} />
+        <label htmlFor="naf-multi-select">Code NAF/APE :</label>
+        <MultiSelect
+          defaultValue={naf}
+          id="naf-multi-select"
+          instanceId="naf-multi-select"
+          menuPosition="fixed"
+          name="naf"
+          options={Object.keys(codesNAFRev2).map((code) => ({
+            value: code,
+            label: `${code} - ${codesNAFRev2[code]}`,
+          }))}
+          placeholder="Choisir un code NAF/APE"
+        />
       </FilterMenu>
-      <FilterMenu
-        activeFilter={administrativeFilter}
-        addSaveClearButton
-        label="Situation administrative"
-        searchParams={searchParams}
-        searchTerm={searchTerm}
-      >
-        <div className="select">
+      <FilterEtat etat={etat} />
+      {!hasExpandableFilters && (
+        <button
+          className="fr-btn fr-btn--tertiary-no-outline fr-btn--sm"
+          onClick={() => setIsExpanded((prev) => !prev)}
+          type="button"
+        >
+          <Icon slug={isExpanded ? "chevronUp" : "chevronDown"} />
+          {isExpanded ? "moins de filtres" : "plus de filtres"}
+        </button>
+      )}
+      <Activity mode={isExpanded ? "visible" : "hidden"}>
+        <FilterMenu
+          activeFilter={labelFilter}
+          addSaveClearButton
+          label="Labels et certificats"
+          searchParams={searchParams}
+          searchTerm={searchTerm}
+        >
+          <FilterLabel label={label} />
+        </FilterMenu>
+        <FilterMenu
+          activeFilter={domaineActiviteFilter}
+          addSaveClearButton
+          label="Domaine d'activité"
+          searchParams={searchParams}
+          searchTerm={searchTerm}
+        >
           <label htmlFor="sap-multi-select">Domaine d‘activité :</label>
           <MultiSelect
             defaultValue={sap}
@@ -195,22 +233,64 @@ const SearchFiltersVariationA: React.FC<{
             }))}
             placeholder="Choisir un domaine d'activité"
           />
-          <label htmlFor="naf-multi-select">Code NAF/APE :</label>
-          <MultiSelect
-            defaultValue={naf}
-            id="naf-multi-select"
-            instanceId="naf-multi-select"
-            menuPosition="fixed"
-            name="naf"
-            options={Object.keys(codesNAFRev2).map((code) => ({
-              value: code,
-              label: `${code} - ${codesNAFRev2[code]}`,
-            }))}
-            placeholder="Choisir un code NAF/APE"
+        </FilterMenu>
+        <FilterMenu
+          activeFilter={financeFilter}
+          addSaveClearButton
+          label="Financier"
+          searchParams={searchParams}
+          searchTerm={searchTerm}
+        >
+          <FilterFinances
+            ca_max={ca_max}
+            ca_min={ca_min}
+            res_max={res_max}
+            res_min={res_min}
           />
-        </div>
-        <SimpleSeparator />
-        <div>
+        </FilterMenu>
+        <FilterMenu
+          activeFilter={effectifSalarieFilter}
+          addSaveClearButton
+          label="Taille et effectif"
+          searchParams={searchParams}
+          searchTerm={searchTerm}
+        >
+          <div>
+            <label htmlFor="effectif-salarie-multi-select">
+              Effectif salarié
+            </label>
+            <MultiSelect
+              defaultValue={tranche_effectif_salarie}
+              id="effectif-salarie-multi-select"
+              instanceId="effectif-salarie-multi-select"
+              menuPosition="fixed"
+              name="tranche_effectif_salarie"
+              options={codesEffectifsOptions}
+              placeholder="Choisir une tranche d'effectif"
+            />
+          </div>
+          <div>
+            <label htmlFor="categorie-entreprise-multi-select">
+              Taille d’entreprise
+            </label>
+            <MultiSelect
+              defaultValue={categorie_entreprise}
+              id="categorie-entreprise-multi-select"
+              instanceId="categorie-entreprise-multi-select"
+              menuPosition="fixed"
+              name="categorie_entreprise"
+              options={categoriesEntreprisesOptions}
+              placeholder="Choisir une catégorie d'entreprise"
+            />
+          </div>
+        </FilterMenu>
+        <FilterMenu
+          activeFilter={natureJuridiqueFilter}
+          addSaveClearButton
+          label="Forme juridique"
+          searchParams={searchParams}
+          searchTerm={searchTerm}
+        >
           <label htmlFor="nature-juridique-multi-select">
             Forme juridique :
           </label>
@@ -223,63 +303,8 @@ const SearchFiltersVariationA: React.FC<{
             options={getNaturesJuridiques()}
             placeholder="Choisir une forme juridique"
           />
-        </div>
-        <SimpleSeparator />
-        <div>
-          <label htmlFor="effectif-salarie-multi-select">
-            Effectif salarié
-          </label>
-          <MultiSelect
-            defaultValue={tranche_effectif_salarie}
-            id="effectif-salarie-multi-select"
-            instanceId="effectif-salarie-multi-select"
-            menuPosition="fixed"
-            name="tranche_effectif_salarie"
-            options={codesEffectifsOptions}
-            placeholder="Choisir une tranche d'effectif"
-          />
-        </div>
-        <div>
-          <label htmlFor="categorie-entreprise-multi-select">
-            Taille d’entreprise
-          </label>
-          <MultiSelect
-            defaultValue={categorie_entreprise}
-            id="categorie-entreprise-multi-select"
-            instanceId="categorie-entreprise-multi-select"
-            menuPosition="fixed"
-            name="categorie_entreprise"
-            options={categoriesEntreprisesOptions}
-            placeholder="Choisir une catégorie d'entreprise"
-          />
-        </div>
-      </FilterMenu>
-      <FilterMenu
-        activeFilter={financeFilter}
-        addSaveClearButton
-        label="Financier"
-        searchParams={searchParams}
-        searchTerm={searchTerm}
-      >
-        <FilterFinances
-          ca_max={ca_max}
-          ca_min={ca_min}
-          res_max={res_max}
-          res_min={res_min}
-        />
-      </FilterMenu>
-      <select
-        className={styles.etatSelect}
-        data-etat={etat || ""}
-        defaultValue={etat || ""}
-        id="etat-select"
-        name="etat"
-        onChange={(event) => event.currentTarget.form?.requestSubmit()}
-      >
-        <option value="">tout état</option>
-        <option value="A">en activité</option>
-        <option value="C">cessée</option>
-      </select>
+        </FilterMenu>
+      </Activity>
       <style>{`
         fieldset {
           border: none;
