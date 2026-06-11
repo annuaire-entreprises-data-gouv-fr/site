@@ -178,7 +178,7 @@ class SearchFilterParams {
         excludeParams: ["cp_dep", "cp_dep_label", "cp_dep_type"],
       },
       domaineActiviteFilter: {
-        icon: "building",
+        icon: "collage",
         label: "",
         excludeParams: ["sap"],
       },
@@ -188,12 +188,12 @@ class SearchFilterParams {
         excludeParams: ["naf"],
       },
       natureJuridiqueFilter: {
-        icon: "file",
+        icon: "building2",
         label: "",
         excludeParams: ["nature_juridique"],
       },
       effectifSalarieFilter: {
-        icon: "user",
+        icon: "team",
         label: "",
         excludeParams: ["tranche_effectif_salarie", "categorie_entreprise"],
       },

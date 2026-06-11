@@ -119,6 +119,21 @@ const building = (
   </svg>
 );
 
+const building2 = (
+  <svg
+    aria-hidden="true"
+    fill="currentColor"
+    height="100%"
+    stroke="currentColor"
+    strokeWidth="0"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M21 20H23V22H1V20H3V3C3 2.44772 3.44772 2 4 2H20C20.5523 2 21 2.44772 21 3V20ZM19 20V4H5V20H19ZM8 11H11V13H8V11ZM8 7H11V9H8V7ZM8 15H11V17H8V15ZM13 15H16V17H13V15ZM13 11H16V13H13V11ZM13 7H16V9H13V7Z" />
+  </svg>
+);
+
 const alertFill = (
   <svg
     aria-hidden="true"
@@ -690,6 +705,36 @@ const shieldFill = (
   </svg>
 );
 
+const collage = (
+  <svg
+    aria-hidden="true"
+    fill="currentColor"
+    height="100%"
+    stroke="currentColor"
+    strokeWidth="0"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M20 3.10669C20.5523 3.10669 21 3.5544 21 4.10669V20.1067C21 20.659 20.5523 21.1067 20 21.1067H4C3.44772 21.1067 3 20.659 3 20.1067V4.10669C3 3.5544 3.44772 3.10669 4 3.10669H20ZM11.1888 13.2651L5 14.3557V19.1067H12.218L11.1888 13.2651ZM19 5.10669H11.781L14.249 19.1067H19V5.10669ZM9.75 5.10669H5V12.3247L10.8415 11.2955L9.75 5.10669Z" />
+  </svg>
+);
+
+const team = (
+  <svg
+    aria-hidden="true"
+    fill="currentColor"
+    height="100%"
+    stroke="currentColor"
+    strokeWidth="0"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 11a5 5 0 0 1 5 5v6h-2v-6a3 3 0 0 0-2.824-2.995L12 13a3 3 0 0 0-2.995 2.824L9 16v6H7v-6a5 5 0 0 1 5-5Zm-6.5 3c.279 0 .55.033.81.094a5.947 5.947 0 0 0-.301 1.575L6 16v.086a1.492 1.492 0 0 0-.356-.08L5.5 16a1.5 1.5 0 0 0-1.493 1.356L4 17.5V22H2v-4.5A3.5 3.5 0 0 1 5.5 14Zm13 0a3.5 3.5 0 0 1 3.5 3.5V22h-2v-4.5a1.5 1.5 0 0 0-1.356-1.493L18.5 16c-.175 0-.343.03-.5.085V16c0-.666-.108-1.306-.309-1.904A3.42 3.42 0 0 1 18.5 14Zm-13-6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm13 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-13 2a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1Zm13 0a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1ZM12 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
+  </svg>
+);
+
 export const icons = {
   searchLine,
   accountLine,
@@ -698,6 +743,7 @@ export const icons = {
   awardFill,
   building,
   buildingFill,
+  building2,
   closed,
   collectiviteFill,
   communityFill,
@@ -737,5 +783,7 @@ export const icons = {
   chevronDown,
   chevronUp,
   shieldFill,
+  collage,
+  team,
 };
 export type IIconsSlug = keyof typeof icons;
