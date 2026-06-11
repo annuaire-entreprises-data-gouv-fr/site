@@ -35,6 +35,7 @@
   width: 110px;
   height: 32px;
   padding: 0 18px;
+  margin-right: 6px;
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--text-default-grey);
@@ -53,6 +54,11 @@
 
 .etatSelect[data-etat="C"] {
   width: 92px;
+}
+
+.etatSelectWithValue {
+  background-color: var(--annuaire-colors-pastelBlue);
+  border: 1px solid var(--annuaire-colors-frBlue);
 }
 
 .etatSelect:hover {

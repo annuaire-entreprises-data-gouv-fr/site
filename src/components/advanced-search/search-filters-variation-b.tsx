@@ -10,10 +10,10 @@ import { codesEffectifsOptions } from "#/utils/helpers/formatting/codes-effectif
 import { categoriesJuridiquesNiveau3 } from "#/utils/helpers/formatting/metadata/categories-juridiques";
 import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-naf-rev-2";
 import { codesSectionNAF } from "#/utils/helpers/formatting/metadata/codes-section-naf";
+import { FilterEtat } from "./filter-etat";
 import { FilterFinances } from "./filter-finances";
 import { FilterGeo } from "./filter-geo";
 import { FilterStructure } from "./filter-structure";
-import styles from "./style.module.css";
 
 const SearchFiltersVariationB: React.FC<{
   searchParams?: IParams;
@@ -268,18 +268,7 @@ const SearchFiltersVariationB: React.FC<{
           res_min={res_min}
         />
       </FilterMenu>
-      <select
-        className={styles.etatSelect}
-        data-etat={etat || ""}
-        defaultValue={etat || ""}
-        id="etat-select"
-        name="etat"
-        onChange={(event) => event.currentTarget.form?.requestSubmit()}
-      >
-        <option value="">tout état</option>
-        <option value="A">en activité</option>
-        <option value="C">cessée</option>
-      </select>
+      <FilterEtat etat={etat} />
       <style>{`
         fieldset {
           border: none;
