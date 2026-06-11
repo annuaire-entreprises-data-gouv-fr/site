@@ -1,7 +1,6 @@
 import type React from "react";
 import { FilterMenu } from "#/components-ui/filter-menu";
 import { SimpleSeparator } from "#/components-ui/horizontal-separator";
-import { Select } from "#/components-ui/select";
 import { MultiSelect } from "#/components-ui/select/multi-select";
 import SearchFilterParams, {
   type IParams,
@@ -12,10 +11,11 @@ import { categoriesJuridiquesNiveau3 } from "#/utils/helpers/formatting/metadata
 import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-naf-rev-2";
 import { codesSectionNAF } from "#/utils/helpers/formatting/metadata/codes-section-naf";
 import { FilterFinances } from "./filter-finances";
-import { FilterGeo } from "./filter-geo";
+import { FilterGeoVariationA } from "./filter-geo-variation-a";
 import { FilterStructure } from "./filter-structure";
+import styles from "./style.module.css";
 
-const SearchFilters: React.FC<{
+const SearchFiltersVariationA: React.FC<{
   searchParams?: IParams;
   searchTerm?: string;
 }> = ({ searchParams = {}, searchTerm = "" }) => {
@@ -42,14 +42,18 @@ const SearchFilters: React.FC<{
   } = searchParams || {};
 
   const filters = new SearchFilterParams(searchParams || {});
+  const filtersWithoutEtat = new SearchFilterParams({
+    ...searchParams,
+    etat: "",
+  });
 
   const {
     localisationFilter,
     dirigeantFilter,
-    administrativeFilter,
     structureFilter,
     financeFilter,
   } = filters.extractFilters();
+  const { administrativeFilter } = filtersWithoutEtat.extractFilters();
 
   /**
    * For the search api `nature_juridique` must be a string
@@ -65,20 +69,13 @@ const SearchFilters: React.FC<{
 
   return (
     <>
-      <FilterMenu
-        activeFilter={localisationFilter}
-        addSaveClearButton
-        label="Zone géographique"
+      <FilterGeoVariationA
+        cp_dep={cp_dep}
+        cp_dep_label={cp_dep_label}
+        cp_dep_type={cp_dep_type}
         searchParams={searchParams}
         searchTerm={searchTerm}
-      >
-        <label htmlFor="geo-search-input">Ville, département ou région :</label>
-        <FilterGeo
-          cp_dep={cp_dep}
-          cp_dep_label={cp_dep_label}
-          cp_dep_type={cp_dep_type}
-        />
-      </FilterMenu>
+      />
       <FilterMenu
         activeFilter={dirigeantFilter}
         addSaveClearButton
@@ -171,37 +168,12 @@ const SearchFilters: React.FC<{
         <FilterStructure label={label} type={type} />
       </FilterMenu>
       <FilterMenu
-        activeFilter={financeFilter}
-        addSaveClearButton
-        label="Financier"
-        searchParams={searchParams}
-        searchTerm={searchTerm}
-      >
-        <FilterFinances
-          ca_max={ca_max}
-          ca_min={ca_min}
-          res_max={res_max}
-          res_min={res_min}
-        />
-      </FilterMenu>
-      <FilterMenu
         activeFilter={administrativeFilter}
         addSaveClearButton
         label="Situation administrative"
         searchParams={searchParams}
         searchTerm={searchTerm}
       >
-        <Select
-          defaultValue={etat}
-          label="Etat administratif :"
-          name="etat"
-          options={[
-            { value: "A", label: "En activité" },
-            { value: "C", label: "Cessée" },
-          ]}
-          placeholder="Choisir un état administratif"
-        />
-        <SimpleSeparator />
         <div className="select">
           <label htmlFor="sap-multi-select">Domaine d‘activité :</label>
           <MultiSelect
@@ -275,6 +247,32 @@ const SearchFilters: React.FC<{
           />
         </div>
       </FilterMenu>
+      <FilterMenu
+        activeFilter={financeFilter}
+        addSaveClearButton
+        label="Financier"
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+      >
+        <FilterFinances
+          ca_max={ca_max}
+          ca_min={ca_min}
+          res_max={res_max}
+          res_min={res_min}
+        />
+      </FilterMenu>
+      <select
+        className={styles.etatSelect}
+        data-etat={etat || ""}
+        defaultValue={etat || ""}
+        id="etat-select"
+        name="etat"
+        onChange={(event) => event.currentTarget.form?.requestSubmit()}
+      >
+        <option value="">tout état</option>
+        <option value="A">en activité</option>
+        <option value="C">cessée</option>
+      </select>
       <style>{`
         fieldset {
           border: none;
@@ -293,4 +291,4 @@ const SearchFilters: React.FC<{
   );
 };
 
-export default SearchFilters;
+export default SearchFiltersVariationA;
