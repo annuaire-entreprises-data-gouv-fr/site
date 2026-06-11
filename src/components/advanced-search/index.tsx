@@ -1,3 +1,4 @@
+import { ClientOnly } from "@tanstack/react-router";
 import { SearchFilters } from "#/components/advanced-search/search-filters";
 import type { IParams } from "#/models/search/search-filter-params";
 import styles from "./style.module.css";
@@ -15,10 +16,12 @@ export const AdvancedSearch: React.FC<IProps> = ({
   <div className={styles["search-filters-container"]}>
     <div className="fr-container">
       <div className={styles["filter-container"]}>
-        <SearchFilters
-          searchParams={searchParams}
-          searchTerm={currentSearchTerm}
-        />
+        <ClientOnly>
+          <SearchFilters
+            searchParams={searchParams}
+            searchTerm={currentSearchTerm}
+          />
+        </ClientOnly>
       </div>
     </div>
   </div>

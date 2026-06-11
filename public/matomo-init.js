@@ -50,7 +50,7 @@ window._paq.push([
         attribute: "url",
         inverted: "0",
         type: "regexp",
-        value: "^(.*)/rechercher$",
+        value: "^(.*)/rechercher(?:\\?.*)?$",
       },
     ],
     excludedTargets: [],
