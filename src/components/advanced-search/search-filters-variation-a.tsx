@@ -12,7 +12,8 @@ import { codesNAFRev2 } from "#/utils/helpers/formatting/metadata/codes-naf-rev-
 import { codesSectionNAF } from "#/utils/helpers/formatting/metadata/codes-section-naf";
 import { FilterFinances } from "./filter-finances";
 import { FilterGeoVariationA } from "./filter-geo-variation-a";
-import { FilterStructure } from "./filter-structure";
+import { FilterLabel } from "./filter-label";
+import { FilterStructureVariationA } from "./filter-structure-variation-a";
 import styles from "./style.module.css";
 
 const SearchFiltersVariationA: React.FC<{
@@ -47,13 +48,10 @@ const SearchFiltersVariationA: React.FC<{
     etat: "",
   });
 
-  const {
-    localisationFilter,
-    dirigeantFilter,
-    structureFilter,
-    financeFilter,
-  } = filters.extractFilters();
-  const { administrativeFilter } = filtersWithoutEtat.extractFilters();
+  const { dirigeantFilter, structureFilter, labelFilter, financeFilter } =
+    filters.extractFilters("VariationA");
+  const { administrativeFilter } =
+    filtersWithoutEtat.extractFilters("VariationA");
 
   /**
    * For the search api `nature_juridique` must be a string
@@ -161,11 +159,20 @@ const SearchFiltersVariationA: React.FC<{
       <FilterMenu
         activeFilter={structureFilter}
         addSaveClearButton
-        label="Structure"
+        label="Type de structure"
         searchParams={searchParams}
         searchTerm={searchTerm}
       >
-        <FilterStructure label={label} type={type} />
+        <FilterStructureVariationA type={type} />
+      </FilterMenu>
+      <FilterMenu
+        activeFilter={labelFilter}
+        addSaveClearButton
+        label="Labels et certificats"
+        searchParams={searchParams}
+        searchTerm={searchTerm}
+      >
+        <FilterLabel label={label} />
       </FilterMenu>
       <FilterMenu
         activeFilter={administrativeFilter}

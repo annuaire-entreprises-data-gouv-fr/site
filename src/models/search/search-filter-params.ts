@@ -135,7 +135,9 @@ class SearchFilterParams {
     });
   }
 
-  extractFilters = () => {
+  extractFilters = (
+    abTestVariation: "original" | "VariationA" = "original"
+  ) => {
     const f = {
       dirigeantFilter: {
         icon: "user",
@@ -157,7 +159,13 @@ class SearchFilterParams {
       structureFilter: {
         icon: "building",
         label: "",
-        excludeParams: ["type", "label"],
+        excludeParams:
+          abTestVariation === "original" ? ["type", "label"] : ["type"],
+      },
+      labelFilter: {
+        icon: "awardFill",
+        label: "",
+        excludeParams: ["label"],
       },
       financeFilter: {
         icon: "moneyCircle",
@@ -247,10 +255,14 @@ class SearchFilterParams {
       const labelTexts = labels.map(
         (label) => structureLabels[label] || "filtre sur le label"
       );
-      if (f.structureFilter.label) {
-        f.structureFilter.label += " + ";
+      if (abTestVariation === "VariationA") {
+        f.labelFilter.label = labelTexts.join(" + ");
+      } else {
+        if (f.structureFilter.label) {
+          f.structureFilter.label += " + ";
+        }
+        f.structureFilter.label += labelTexts.join(" + ");
       }
-      f.structureFilter.label += labelTexts.join(" + ");
     }
 
     if (this.params.cp_dep_label) {
