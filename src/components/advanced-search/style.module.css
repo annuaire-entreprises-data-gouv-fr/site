@@ -76,11 +76,11 @@
 }
 
 .filterGeoVariationAInput {
-  width: 210px;
+  width: 224px;
   height: 32px;
   padding-right: 6px;
   padding-left: 12px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   line-height: 1.5rem;
   color: var(--text-default-grey);
   background-color: var(--background-contrast-grey);
