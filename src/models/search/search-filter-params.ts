@@ -6,7 +6,7 @@ export interface IParams {
   ageMin?: number | string;
   ca_max?: number | null;
   ca_min?: number | null;
-  categorie_entreprise?: string;
+  categorie_entreprise?: string | string[];
   cp_dep?: string;
   cp_dep_label?: string;
   cp_dep_type?: string;
@@ -17,12 +17,12 @@ export interface IParams {
   isEmpty?: boolean;
   label?: string;
   n?: string;
-  naf?: string;
-  nature_juridique?: string;
+  naf?: string | string[];
+  nature_juridique?: string | string[];
   res_max?: number | null;
   res_min?: number | null;
-  sap?: string;
-  tranche_effectif_salarie?: string;
+  sap?: string | string[];
+  tranche_effectif_salarie?: string | string[];
   type?: string;
 }
 
@@ -135,7 +135,9 @@ class SearchFilterParams {
     });
   }
 
-  extractFilters = () => {
+  extractFilters = (
+    abTestVariation: "original" | "VariationA" = "original"
+  ) => {
     const f = {
       dirigeantFilter: {
         icon: "user",
@@ -157,7 +159,13 @@ class SearchFilterParams {
       structureFilter: {
         icon: "building",
         label: "",
-        excludeParams: ["type", "label"],
+        excludeParams:
+          abTestVariation === "original" ? ["type", "label"] : ["type"],
+      },
+      labelFilter: {
+        icon: "awardFill",
+        label: "",
+        excludeParams: ["label"],
       },
       financeFilter: {
         icon: "moneyCircle",
@@ -168,6 +176,26 @@ class SearchFilterParams {
         icon: "mapPin",
         label: "",
         excludeParams: ["cp_dep", "cp_dep_label", "cp_dep_type"],
+      },
+      domaineActiviteFilter: {
+        icon: "collage",
+        label: "",
+        excludeParams: ["sap"],
+      },
+      codeNAFFilter: {
+        icon: "file",
+        label: "",
+        excludeParams: ["naf"],
+      },
+      natureJuridiqueFilter: {
+        icon: "building2",
+        label: "",
+        excludeParams: ["nature_juridique"],
+      },
+      effectifSalarieFilter: {
+        icon: "team",
+        label: "",
+        excludeParams: ["tranche_effectif_salarie", "categorie_entreprise"],
       },
     } as { [key: string]: ISearchFilter };
 
@@ -199,18 +227,23 @@ class SearchFilterParams {
     let administrativeFilterCounter = 0;
     if (this.params.sap) {
       administrativeFilterCounter += 1;
+      f.domaineActiviteFilter.label = `Domaine d'activité : ${this.params.sap.length} filtre${this.params.sap.length > 1 ? "s" : ""}`;
     }
     if (this.params.naf) {
       administrativeFilterCounter += 1;
+      f.codeNAFFilter.label = `Code NAF : ${this.params.naf.length} filtre${this.params.naf.length > 1 ? "s" : ""}`;
     }
     if (this.params.nature_juridique) {
       administrativeFilterCounter += 1;
+      f.natureJuridiqueFilter.label = `Forme juridique : ${this.params.nature_juridique.length} filtre${this.params.nature_juridique.length > 1 ? "s" : ""}`;
     }
     if (this.params.categorie_entreprise) {
       administrativeFilterCounter += 1;
+      f.effectifSalarieFilter.label = `Taille d'entreprise : ${this.params.categorie_entreprise.length} filtre${this.params.categorie_entreprise.length > 1 ? "s" : ""}`;
     }
     if (this.params.tranche_effectif_salarie) {
       administrativeFilterCounter += 1;
+      f.effectifSalarieFilter.label = `Effectif salarié : ${this.params.tranche_effectif_salarie.length} filtre${this.params.tranche_effectif_salarie.length > 1 ? "s" : ""}`;
     }
 
     if (administrativeFilterCounter > 0) {
@@ -247,10 +280,14 @@ class SearchFilterParams {
       const labelTexts = labels.map(
         (label) => structureLabels[label] || "filtre sur le label"
       );
-      if (f.structureFilter.label) {
-        f.structureFilter.label += " + ";
+      if (abTestVariation === "VariationA") {
+        f.labelFilter.label = labelTexts.join(" + ");
+      } else {
+        if (f.structureFilter.label) {
+          f.structureFilter.label += " + ";
+        }
+        f.structureFilter.label += labelTexts.join(" + ");
       }
-      f.structureFilter.label += labelTexts.join(" + ");
     }
 
     if (this.params.cp_dep_label) {
@@ -267,6 +304,19 @@ class SearchFilterParams {
     }
     return f;
   };
+
+  hasExpandableFilters = () =>
+    !!(
+      this.params.label ||
+      this.params.sap ||
+      this.params.nature_juridique ||
+      this.params.categorie_entreprise ||
+      this.params.tranche_effectif_salarie ||
+      this.params.ca_max ||
+      this.params.ca_min ||
+      this.params.res_max ||
+      this.params.res_min
+    );
 }
 
 const serializeParams = (
