@@ -7,8 +7,6 @@ import SearchFiltersVariationB from "./search-filters-variation-b";
 export function SearchFilters({ searchParams, searchTerm }: IProps) {
   const variation = useAdvancedSearchFiltersAbTest();
 
-  console.log("variation", variation);
-
   if (variation === "VariationA") {
     return (
       <SearchFiltersVariationA
