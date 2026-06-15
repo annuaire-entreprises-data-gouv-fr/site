@@ -205,7 +205,7 @@ const UniteLegaleSummarySection: React.FC<{
         lastModified={uniteLegale.dateDerniereMiseAJour}
         sources={[
           EAdministration.INSEE,
-          EAdministration.VIES,
+          EAdministration.DGFIP,
           EAdministration.DOUANES,
           ...labelsAndCertificatesSources(uniteLegale),
           ...(isAssociation(uniteLegale)
