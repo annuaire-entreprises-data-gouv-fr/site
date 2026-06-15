@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 15/06/2026
+  target:
+    site: true
+  body: |
+    Utilisation du référentiel des numéros de TVA intracommunautaire français actifs, publié par la DGFiP, en substitution de la vérification en temps réel via le système VIES.
 - date: 09/06/2026
   target:
     agent: true
