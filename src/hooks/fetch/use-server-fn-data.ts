@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
+import type { Expand } from "@tanstack/react-router";
 import {
   type IntersectAllValidatorInputs,
   type RequiredFetcher,
   useServerFn,
 } from "@tanstack/react-start";
-import type { Expand } from "node_modules/@tanstack/react-router/dist/cjs/index.d.cts";
 import { useAuth } from "#/contexts/auth.context";
 import {
   ApplicationRights,
