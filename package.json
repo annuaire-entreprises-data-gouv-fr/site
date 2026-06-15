@@ -45,7 +45,7 @@
     "@vcarl/remark-headings": "0.1.0",
     "chart.js": "4.5.1",
     "clsx": "2.1.1",
-    "crawler-user-agents": "1.45.0",
+    "crawler-user-agents": "1.50.0",
     "fast-xml-parser": "5.8.0",
     "maplibre-gl": "5.24.0",
     "nitro": "3.0.260522-beta",

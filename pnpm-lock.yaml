@@ -48,8 +48,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1
       crawler-user-agents:
-        specifier: 1.45.0
-        version: 1.45.0
+        specifier: 1.50.0
+        version: 1.50.0
       fast-xml-parser:
         specifier: 5.8.0
         version: 5.8.0
@@ -2399,8 +2399,8 @@ packages:
       typescript:
         optional: true
 
-  crawler-user-agents@1.45.0:
-    resolution: {integrity: sha512-Cwdn+s3tYtubrtEnZ+cxqQcdYxYRZo+EpxosYCQm44UCr3ojfm/lbMq3lt9NCV1qcRDPDyeG6q7JsfrrgjvY7g==}
+  crawler-user-agents@1.50.0:
+    resolution: {integrity: sha512-bfP20Ustlq/NCUfjS4na+fVilCkDcUDoQioIVLcgQAcZPPgvs8+1mn6f+hLLtV8TpQF80Ywr6VajqWpFwCeYeQ==}
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -6712,7 +6712,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  crawler-user-agents@1.45.0: {}
+  crawler-user-agents@1.50.0: {}
 
   cross-spawn@7.0.6:
     dependencies:
