@@ -60,6 +60,9 @@
           "tranche_effectif_salarie": "NN",
           "type_voie": "RUE"
         },
+        "tva": [
+          "FR27552032534"
+        ],
         "activite_principale": "70.10Z",
         "activite_principale_naf25": "70.10Y",
         "categorie_entreprise": "GE",
