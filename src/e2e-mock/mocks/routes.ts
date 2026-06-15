@@ -55,16 +55,11 @@ import {
   rneObservationsFallbackHandler,
 } from "./handlers/rne";
 import { s3HandlerMonitoring } from "./handlers/s3";
-import { tvaHandler } from "./handlers/tva";
 import { upDownIoHandler } from "./handlers/up-down-io";
 
 const stripQueryParams = (url: string) => url.split("?")[0];
 
 export const routesHandlers = [
-  http.get(
-    stripQueryParams(`${process.env.PROXY_API_URL}${routes.proxy.tva("*")}`),
-    tvaHandler
-  ),
   http.get(
     stripQueryParams(`${process.env.PROXY_API_URL}${routes.proxy.eori("*")}`),
     eoriHandler

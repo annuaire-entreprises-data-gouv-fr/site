@@ -4,14 +4,12 @@ import { ApplicationRights } from "#/models/authentication/user/rights";
 import { getEORIValidation } from "#/models/eori-validation";
 import { getDirigeantsRNE } from "#/models/rne/dirigeants";
 import { getRNEObservations } from "#/models/rne/observations";
-import { buildAndVerifyTVA } from "#/models/tva/verify";
 import { withApplicationRight } from "../../middlewares";
 import {
   getAssociationSchema,
   getDirigeantsSchema,
   getObservationsSchema,
   validateEORISchema,
-  verifyTvaSchema,
 } from "./schemas";
 
 export const getRneDirigeantsFn = createServerFn()
@@ -36,14 +34,6 @@ export const getAssociationFn = createServerFn()
   .handler(async ({ data }) => {
     const { slug } = data;
     return await getAssociationFromSlug(slug, {});
-  });
-
-export const verifyTvaFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(verifyTvaSchema)
-  .handler(async ({ data }) => {
-    const { slug } = data;
-    return await buildAndVerifyTVA(slug, {});
   });
 
 export const validateEORIFn = createServerFn()

@@ -238,7 +238,6 @@ const routes = {
       },
     },
     association: (rnaOrSiren: string) => `/association/${rnaOrSiren}`,
-    tva: (tvaNumber: string) => `/tva/${tvaNumber}`,
     eori: (siret: string) => `/eori/${siret}`,
     featureFlags: "/feature-flags",
   },

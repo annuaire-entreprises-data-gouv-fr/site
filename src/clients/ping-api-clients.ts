@@ -1,10 +1,4 @@
-import { tvaNumber } from "#/models/tva/utils";
-import {
-  verifyIdRna,
-  verifySiren,
-  verifySiret,
-  verifyTVANumber,
-} from "#/utils/helpers";
+import { verifyIdRna, verifySiren, verifySiret } from "#/utils/helpers";
 import {
   clientAPIAssociationPrivate,
   clientAPIAssociationPublic,
@@ -12,7 +6,6 @@ import {
 import { clientAPIInclusion } from "./api-inclusion/index.server";
 import { clientEORI } from "./api-proxy/eori";
 import { clientUniteLegaleIG } from "./api-proxy/greffe";
-import { clientTVA } from "./api-proxy/tva";
 import { clientDocuments } from "./api-rne/documents";
 import { clientBodacc } from "./open-data-soft/clients/bodacc";
 import { clientJOAFE } from "./open-data-soft/clients/journal-officiel-associations";
@@ -48,10 +41,6 @@ const ping = async (slug: string | string[]) => {
       return await clientAPIAssociationPrivate(verifyIdRna("W551000280"), "");
     case "api-marche-inclusion":
       return await clientAPIInclusion(sirenInclusion);
-    case "api-tva": {
-      const tva = verifyTVANumber(tvaNumber(sirenDanone));
-      return await clientTVA(tva, false);
-    }
     case "api-eori":
       return await clientEORI(siretGanymede);
     case "api-recherche":
