@@ -204,7 +204,7 @@ const EtablissementSection: React.FC<IProps> = ({
         lastModified={etablissement.dateDerniereMiseAJour}
         sources={[
           EAdministration.INSEE,
-          EAdministration.VIES,
+          EAdministration.DGFIP,
           ...labelsAndCertificatesSources(uniteLegale),
         ]}
         title={

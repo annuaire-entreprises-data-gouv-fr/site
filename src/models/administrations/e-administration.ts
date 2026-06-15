@@ -12,7 +12,6 @@ export const EAdministration = {
   INSEE: "insee",
   MTPEI: "mtpei",
   MI: "mi",
-  VIES: "vies",
   DJEPVA: "djepva",
   ESSFRANCE: "ess-france",
   MARCHE_INCLUSION: "marche-inclusion",

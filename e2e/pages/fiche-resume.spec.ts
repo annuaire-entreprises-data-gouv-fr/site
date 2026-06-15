@@ -20,7 +20,7 @@ test.describe("Fiche résumé DANONE", () => {
     await expect(
       page.getByText("N° TVA Intracommunautaire").first()
     ).toBeVisible();
-    await expect(page.getByText("FR12 345 678 901").first()).toBeVisible();
+    await expect(page.getByText("FR27 552 032 534").first()).toBeVisible();
     await expect(page.getByText("N° EORI").first()).toBeVisible();
     await expect(page.getByText("FR123 456 789 0").first()).toBeVisible();
     await expect(page.getByText("Effectif salarié").first()).toBeVisible();
@@ -65,8 +65,6 @@ test.describe("TVA number special cases", () => {
     await expect(page.getByText("Pas de n° TVA valide").first()).toBeVisible();
 
     await goto(page, "/entreprise/423208180");
-    await expect(
-      page.getByText("Pas de n° TVA valide connu").first()
-    ).toBeVisible();
+    await expect(page.getByText("Pas de n° TVA valide").first()).toBeVisible();
   });
 });
