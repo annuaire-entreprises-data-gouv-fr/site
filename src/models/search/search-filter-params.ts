@@ -227,23 +227,42 @@ class SearchFilterParams {
     let administrativeFilterCounter = 0;
     if (this.params.sap) {
       administrativeFilterCounter += 1;
-      f.domaineActiviteFilter.label = `Domaine d'activité : ${this.params.sap.length} filtre${this.params.sap.length > 1 ? "s" : ""}`;
+      const sapLength = Array.isArray(this.params.sap)
+        ? this.params.sap.length
+        : 1;
+      f.domaineActiviteFilter.label = `Domaine d'activité : ${sapLength} filtre${sapLength > 1 ? "s" : ""}`;
     }
     if (this.params.naf) {
       administrativeFilterCounter += 1;
-      f.codeNAFFilter.label = `Code NAF : ${this.params.naf.length} filtre${this.params.naf.length > 1 ? "s" : ""}`;
+      const nafLength = Array.isArray(this.params.naf)
+        ? this.params.naf.length
+        : 1;
+      f.codeNAFFilter.label = `Code NAF : ${nafLength} filtre${nafLength > 1 ? "s" : ""}`;
     }
     if (this.params.nature_juridique) {
       administrativeFilterCounter += 1;
-      f.natureJuridiqueFilter.label = `Forme juridique : ${this.params.nature_juridique.length} filtre${this.params.nature_juridique.length > 1 ? "s" : ""}`;
+      const natureJuridiqueLength = Array.isArray(this.params.nature_juridique)
+        ? this.params.nature_juridique.length
+        : 1;
+      f.natureJuridiqueFilter.label = `Forme juridique : ${natureJuridiqueLength} filtre${natureJuridiqueLength > 1 ? "s" : ""}`;
     }
     if (this.params.categorie_entreprise) {
       administrativeFilterCounter += 1;
-      f.effectifSalarieFilter.label = `Taille d'entreprise : ${this.params.categorie_entreprise.length} filtre${this.params.categorie_entreprise.length > 1 ? "s" : ""}`;
+      const categorieEntrepriseLength = Array.isArray(
+        this.params.categorie_entreprise
+      )
+        ? this.params.categorie_entreprise.length
+        : 1;
+      f.effectifSalarieFilter.label = `Taille d'entreprise : ${categorieEntrepriseLength} filtre${categorieEntrepriseLength > 1 ? "s" : ""}`;
     }
     if (this.params.tranche_effectif_salarie) {
       administrativeFilterCounter += 1;
-      f.effectifSalarieFilter.label = `Effectif salarié : ${this.params.tranche_effectif_salarie.length} filtre${this.params.tranche_effectif_salarie.length > 1 ? "s" : ""}`;
+      const trancheEffectifSalarieLength = Array.isArray(
+        this.params.tranche_effectif_salarie
+      )
+        ? this.params.tranche_effectif_salarie.length
+        : 1;
+      f.effectifSalarieFilter.label = `Effectif salarié : ${trancheEffectifSalarieLength} filtre${trancheEffectifSalarieLength > 1 ? "s" : ""}`;
     }
 
     if (administrativeFilterCounter > 0) {
