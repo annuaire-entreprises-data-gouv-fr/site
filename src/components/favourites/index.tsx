@@ -27,7 +27,9 @@ export default function Favourites() {
               <Tag
                 key={siren}
                 link={{
-                  href: path || `/entreprise/${siren}`,
+                  ...(path
+                    ? { to: path }
+                    : { to: "/entreprise/$slug", params: { slug: siren } }),
                   "aria-label": `Consulter la page de ${fullName}`,
                 }}
                 maxWidth="300px"

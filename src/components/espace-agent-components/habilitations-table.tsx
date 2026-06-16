@@ -36,7 +36,8 @@ export function HabilitationsTable({ groups }: IHabilitationsTableProps) {
                   color="success"
                   key={group.id}
                   link={{
-                    href: `/compte/mes-groupes#group-${group.id}`,
+                    to: "/compte/mes-groupes",
+                    hash: `group-${group.id}`,
                     "aria-label": `Voir le groupe ${group.name}`,
                   }}
                 >

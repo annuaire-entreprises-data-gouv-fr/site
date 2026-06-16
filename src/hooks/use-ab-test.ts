@@ -1,27 +1,33 @@
 import { useSyncExternalStore } from "react";
+import type { MatomoAbTestVariations } from "../../types";
 
-const ORIGINAL_VARIATION = "original";
+const ORIGINAL_VARIATION =
+  "original" satisfies MatomoAbTestVariations[keyof MatomoAbTestVariations];
 
-interface IAbTestProps {
-  name: keyof Window["matomoAbTesting"]["variations"];
+interface IAbTestProps<T extends keyof MatomoAbTestVariations> {
+  name: T;
 }
 
 function subscribe(listener: () => void) {
   return window.matomoAbTesting?.subscribe(listener) ?? (() => undefined);
 }
 
-function getServerSnapshot() {
-  return ORIGINAL_VARIATION;
+function getServerSnapshot<T extends keyof MatomoAbTestVariations>() {
+  return ORIGINAL_VARIATION as MatomoAbTestVariations[T];
 }
 
-function useAbTest({ name }: IAbTestProps) {
+function useAbTest<T extends keyof MatomoAbTestVariations>({
+  name,
+}: IAbTestProps<T>): MatomoAbTestVariations[T] {
   return useSyncExternalStore(
     subscribe,
-    () => window.matomoAbTesting?.getVariation(name) ?? ORIGINAL_VARIATION,
-    getServerSnapshot
+    () =>
+      window.matomoAbTesting?.getVariation(name) ??
+      (ORIGINAL_VARIATION as MatomoAbTestVariations[T]),
+    getServerSnapshot<T>
   );
 }
 
 export function useAdvancedSearchFiltersAbTest() {
-  return useAbTest({ name: "AdvancedSearchFilters" });
+  return useAbTest({ name: "FiltresAvances" });
 }

@@ -1,6 +1,8 @@
+import type { LinkProps } from "@tanstack/react-router";
 import { clsx } from "clsx";
 import type React from "react";
 import type { CSSProperties, PropsWithChildren } from "react";
+import { Link } from "#/components/link";
 import styles from "./styles.module.css";
 
 interface ITagProps {
@@ -19,10 +21,7 @@ interface ITagProps {
     | "cafeCreme";
   id?: string;
   // title?: string;
-  link?: {
-    href: string;
-    "aria-label": string;
-  };
+  link?: LinkProps & { "aria-label": string };
   maxWidth?: string;
   size?: "medium" | "small";
 }
@@ -40,15 +39,9 @@ function TagContainer({
   style?: CSSProperties;
 }>) {
   return link ? (
-    <a
-      aria-label={link["aria-label"]}
-      className={className}
-      href={link.href}
-      id={id}
-      style={style}
-    >
+    <Link className={className} id={id} style={style} {...link}>
       {children}
-    </a>
+    </Link>
   ) : (
     <span className={className} id={id} role="status" style={style}>
       {children}
