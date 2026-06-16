@@ -7,9 +7,24 @@ interface IUseMatomoInitProps {
   user: ISession["user"] | null;
 }
 
+function isDoNotTrackEnabled() {
+  if (typeof navigator === "undefined" || typeof window === "undefined") {
+    return false;
+  }
+
+  const doNotTrack =
+    navigator.doNotTrack ??
+    (window as { doNotTrack?: string }).doNotTrack ??
+    (navigator as { msDoNotTrack?: string }).msDoNotTrack;
+
+  return doNotTrack === "1" || doNotTrack === "yes";
+}
+
 export function useMatomoInit({ user }: IUseMatomoInitProps) {
   const siteId = import.meta.env.VITE_MATOMO_SITE_ID;
-  const isMatomoEnabled = import.meta.env.PROD && siteId;
+  const isMatomoEnabled =
+    import.meta.env.PROD && siteId && !isDoNotTrackEnabled();
+
   const userType = getAgentUserType({ user });
   const matomoAbTestingListeners = useRef(new Set<() => void>());
   const router = useRouter();
