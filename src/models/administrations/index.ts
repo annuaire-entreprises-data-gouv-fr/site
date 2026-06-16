@@ -5,6 +5,9 @@ import type {
   IAPIMonitorMetaData,
 } from "./types";
 
+// This is necessary because loading a file named cnil.json from client can be blocked by adblockers
+const fileToSlugMap: Record<string, string> = { conainli: "cnil" };
+
 const administrationModules = import.meta.glob(
   "../../data/administrations/*.json",
   { eager: true, import: "default" }
@@ -16,7 +19,7 @@ const administrationBySlug = (): Record<string, IAdministrationMetaData> => {
   for (const [path, data] of Object.entries(administrationModules)) {
     const fileName = path.slice(Math.max(0, path.lastIndexOf("/") + 1));
     const slug = fileName.replace(/\.json$/i, "");
-    bySlug[slug] = data;
+    bySlug[fileToSlugMap[slug] || slug] = data;
   }
 
   return bySlug;

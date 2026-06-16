@@ -6,7 +6,9 @@ export const AvocatTag = ({ uniteLegale }: { uniteLegale: IUniteLegale }) =>
     <Tag
       color="brownOpera"
       link={{
-        href: `/entreprise/${uniteLegale.chemin}#avocats`,
+        to: "/entreprise/$slug",
+        params: { slug: uniteLegale.chemin },
+        hash: "avocats",
         "aria-label": "Voir la section Avocats",
       }}
       size="medium"

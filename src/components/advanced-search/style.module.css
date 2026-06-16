@@ -32,12 +32,12 @@
 }
 
 .etatSelect {
-  width: 110px;
+  width: 115px;
   height: 32px;
-  padding: 0 18px;
+  padding: 0 12px;
   margin-right: 6px;
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 1.8rem;
   color: var(--text-default-grey);
   text-align: center;
   text-align-last: center;
@@ -48,20 +48,12 @@
   box-shadow: none;
 }
 
-.etatSelect[data-etat="A"] {
-  width: 120px;
-}
-
-.etatSelect[data-etat="C"] {
-  width: 92px;
-}
-
 .etatSelectWithValue {
-  background-color: var(--annuaire-colors-pastelBlue);
-  border: 1px solid var(--annuaire-colors-frBlue);
+  background-color: var(--annuaire-colors-pastelBlue) !important;
+  border: 1px solid var(--annuaire-colors-frBlue) !important;
 }
 
-.etatSelect:hover {
+.etatSelect:not(.etatSelectWithValue):hover {
   border-color: #b5b5b5;
 }
 

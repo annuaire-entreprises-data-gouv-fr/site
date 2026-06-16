@@ -205,7 +205,11 @@ export const FilterGeoVariationA: React.FC<{
       >
         {issue === Issue.NONE ? (
           <>
-            {geoSuggests.length === 0 && !!searchTerm && (
+            {geoSuggests.length === 0 &&
+              (!showSuggestsHistory || suggestsHistory.length === 0) && (
+                <p>Rechercher une ville, département ou région (ex: Rennes)</p>
+              )}
+            {geoSuggests.length === 0 && !!dep && (
               <a
                 className="fr-btn fr-btn--tertiary-no-outline fr-btn--sm"
                 href={clearFilterLink}
