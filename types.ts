@@ -9,7 +9,7 @@ export interface MatomoAbTestVariations {
 declare global {
   interface Window {
     _paq: any[];
-    matomoAbTesting: {
+    matomoAbTesting?: {
       getVariation<T extends keyof MatomoAbTestVariations>(
         name: T
       ): MatomoAbTestVariations[T];
