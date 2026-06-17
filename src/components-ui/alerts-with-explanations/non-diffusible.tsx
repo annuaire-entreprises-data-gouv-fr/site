@@ -25,6 +25,17 @@ const DefaultNonDiffusibleAlert = () => (
   </Info>
 );
 
+const NonDiffusibleStrictAlert = () => (
+  <Info full>
+    Cette structure est totalement non-diffusible. Cela signifie qu'aucune
+    information la concernant n'est publiquement accessible.
+    <br />
+    <br />
+    Ces informations ne sont pas non plus consultables par les{" "}
+    <strong>agents publics</strong> via l'espace agent public.
+  </Info>
+);
+
 const ProtectedSirenAlert = () => (
   <Info full>
     Les dirigeant(e)s de cette structure se sont opposé(e)s à la diffusion de
@@ -72,6 +83,9 @@ export default function NonDiffusibleAlert({
 
   if (statutDiffusion === ISTATUTDIFFUSION.PROTECTED) {
     return <ProtectedSirenAlert />;
+  }
+  if (statutDiffusion === ISTATUTDIFFUSION.NON_DIFF_STRICT) {
+    return <NonDiffusibleStrictAlert />;
   }
   return <DefaultNonDiffusibleAlert />;
 }
