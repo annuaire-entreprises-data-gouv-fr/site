@@ -48,7 +48,6 @@ const mapToDomainObject = (
     idEtablissement: fields.identifiant_de_l_etablissement || "",
     libelleAcademie: fields.libelle_academie || "",
     mail: fields.mail || "",
-    nombreEleves: fields.nombre_d_eleves || 0,
     nomCommune: fields.nom_commune || "",
     nomEtablissement: fields.nom_etablissement || "",
     siret: fields.siren_siret || "",

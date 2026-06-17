@@ -19,7 +19,6 @@ export interface IEtablissementsScolaires {
     idEtablissement: string;
     libelleAcademie: string;
     mail: string;
-    nombreEleves: number;
     nomCommune: string;
     nomEtablissement: string;
     siret: string;
