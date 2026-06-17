@@ -45,7 +45,6 @@ export const EtablissementsScolairesSection: React.FC<{
                 codePostal,
                 libelleAcademie,
                 mail,
-                nombreEleves,
                 nomCommune,
                 nomEtablissement,
                 telephone,
@@ -64,10 +63,9 @@ export const EtablissementsScolairesSection: React.FC<{
                   <br />
                   <a href={`tel:${telephone}`}>{telephone}</a>
                 </>,
-                nombreEleves,
               ]
             )}
-            head={["N° UAI", "Académie", "Détails", "Contact", "Nb d’élèves"]}
+            head={["N° UAI", "Académie", "Détails", "Contact"]}
           />
           {etablissements.pageCount > 1 && (
             <ResultsPagination
