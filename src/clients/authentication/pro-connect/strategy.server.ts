@@ -45,8 +45,6 @@ const SCOPES = "openid given_name usual_name email siret idp_id";
 const ACR_VALUES_2FA = [
   "eidas2", // login / pwd + 2FA
   "eidas3", // physical card with PIN + certificates
-  "https://proconnect.gouv.fr/assurance/self-asserted-2fa", // declarative identity + 2FA
-  "https://proconnect.gouv.fr/assurance/consistency-checked-2fa", // verified identity + 2FA
   "eidas0-mfa", // declarative identity + 2FA
   "eidas1-mfa", // verified identity + 2FA
 ].join(" ");
