@@ -31,11 +31,6 @@ dataSources:
     datagouvLink: https://www.data.gouv.fr/fr/datasets/base-adresse-nationale/
     data:
       - label: Géolocalisation des adresses
-  - label: Numéro de TVA intracommunautaire
-    apiSlug: recherche-entreprise
-    datagouvLink: https://www.data.gouv.fr/datasets/numeros-de-tva-intracommunautaire-francais
-    data:
-      - label: Numéro de TVA intracommunautaire
   - label: Liste des administrations françaises
     apiSlug: recherche-entreprise
     datagouvLink: https://www.data.gouv.fr/fr/datasets/liste-des-administrations-francaises/
