@@ -1,0 +1,56 @@
+title: Radiations et procédures collectives
+
+seo:
+  title: Radiations et procédures collectives - définition - L’Annuaire des Entreprises
+  description: Les informations sur les radiations au RCS et les procédures collectives sont issues du BODACC (Bulletin Officiel des Annonces Civiles et Commerciales), publié par la Direction de l'information légale et administrative (DILA).
+
+body: |
+  Les informations sur les radiations au RCS et les procédures collectives sont issues du BODACC (Bulletin Officiel des Annonces Civiles et Commerciales), publié par la Direction de l'information légale et administrative (DILA).
+
+  ## **Qu'est-ce qu'une radiation du RCS ?**
+  Une radiation correspond à la suppression d'une entreprise du registre du commerce et des sociétés (RCS). Pour une personne morale elle consiste en sa disparition.
+
+  ## **Qu'est-ce qu'une procédure collective ?**
+  Une procédure collective est une procédure judiciaire ouverte lorsqu'une entreprise est en difficulté financière. Il en existe plusieurs types :
+  * Sauvegarde : l'entreprise anticipe des difficultés qu'elle ne peut pas encore surmonter seule
+  * Redressement judiciaire : l'entreprise est en cessation de paiements mais son redressement est possible
+  * Liquidation judiciaire : l'entreprise est en cessation de paiements et son redressement est manifestement impossible
+  
+  La liquidation judiciaire peut déboucher sur deux décisions :
+  * Une insuffisance d’actifs
+  * Une extinction du passif
+  
+  La radiation d'office aura lieu uniquement dans le cas d'insuffisance d'actifs.
+
+  ## **Comment ces données sont-elles mises à jour ?**
+  Les annonces sont collectés quotidiennement depuis le site officiel du BODACC. Elles couvrent l'ensemble des annonces publiées depuis l'ouverture des données le 1er janvier 2008.
+
+  ***À noter** : les annonces prennent généralement plusieurs jours pour être publiées au BODACC suite au jugement ou à la formalité.*
+
+  ## **Pourquoi une procédure collective n'apparaît-elle pas ?**
+  Les procédures clôturées et celles dont la date de jugement remonte à plus de 10 ans ne sont pas affichées.
+
+  ## **Pourquoi une radiation n'apparaît-elle pas alors qu'il existe une annonce de radiation ?**
+  Dans certains cas, une radiation publiée au BODACC n'est pas affichée sur l'Annuaire des Entreprises car d'autres sources indiquent que l'entreprise est toujours active.
+
+  ## **Les données affichées sont incorrectes ou incomplètes, que faire ?**
+  En cas d'erreur sur les annonces du BODACC, il convient de contacter directement le greffe du tribunal de commerce compétent.
+  Dans le cas où une entreprise est identifiée comme radiée au RCS ou en procédure collective à tort sur l'Annuaire des Entreprises veuillez contacter notre support.
+
+
+more:
+  - label: 'BODACC'
+    href: '/definitions/bodacc'
+
+  - label: 'Consulter le site du BODACC'
+    href: 'https://www.bodacc.fr/pages/home/'
+
+  - label: 'Consulter le site du PPLE'
+    href: 'https://www.pple.fr/'
+
+  - label: 'FAQ BODACC'
+    href: 'https://www.bodacc.fr/pages/faq-annonces-commerciales/'
+
+  - label: "Qu'est ce qu'une procédure collective ?"
+    href: 'https://bpifrance-creation.fr/encyclopedie/prevenir-traiter-difficultes/traitement-difficultes/procedures-collectives-generalites'
+
