@@ -20,6 +20,10 @@ dataSources:
     apiSlug: api-entreprise
     data:
       - label: Liens capitalistiques
+  - label: Numéro de TVA intracommunautaire
+    datagouvLink: https://www.data.gouv.fr/datasets/numeros-de-tva-intracommunautaire-francais
+    data:
+      - label: Numéro de TVA intracommunautaire
 logoType: portrait
 description: |
   La Direction Générale des Finances Publiques (DGFiP) est la direction de l'administration française qui gère la fiscalité de l’État français et des collectivités territoriales. Elle gère l’imposition des particuliers et des entreprises, en définit les règles juridiques, en assure le recouvrement et en instruit les contentieux fiscaux.
