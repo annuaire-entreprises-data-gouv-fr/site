@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 22/06/2026
+  target:
+    api: true
+  body: |
+    Intégrer les numéros TVA dans la réponse de l'API Recherche d'Entreprises.
 - date: 15/06/2026
   target:
     site: true
