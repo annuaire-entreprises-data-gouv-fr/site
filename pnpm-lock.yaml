@@ -48,8 +48,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1
       crawler-user-agents:
-        specifier: 1.50.0
-        version: 1.50.0
+        specifier: 1.52.0
+        version: 1.52.0
       fast-xml-parser:
         specifier: 5.8.0
         version: 5.8.0
@@ -2307,8 +2307,8 @@ packages:
       typescript:
         optional: true
 
-  crawler-user-agents@1.50.0:
-    resolution: {integrity: sha512-bfP20Ustlq/NCUfjS4na+fVilCkDcUDoQioIVLcgQAcZPPgvs8+1mn6f+hLLtV8TpQF80Ywr6VajqWpFwCeYeQ==}
+  crawler-user-agents@1.52.0:
+    resolution: {integrity: sha512-Ac4K+SFtVsaCQEuq6F7g27eELrYJ0zfKSJc+xEl7aoTPqRRtYwHxUrkjhXIv5WP6LvRE0E/P71lFjHSgQa/pHA==}
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -3662,8 +3662,8 @@ packages:
     engines: {node: '>=20.16.0'}
     hasBin: true
 
-  srvx@0.11.16:
-    resolution: {integrity: sha512-bp07zRuycfTY43IjAvvTFnmnJi8ikW0VFiHwOhhYcVW/L4xQ1XY4PAd4Nuum1rsA17C39zL7x+CDhrn5AL32Rw==}
+  srvx@0.11.17:
+    resolution: {integrity: sha512-43yM4luKfCJamyCMhrUeHUPOrf8TdZe7kN8s5zayZCH5OeprYqi49Aso5ZvHXR4aB+DHaRNO/diNFgZSMNG8Xw==}
     engines: {node: '>=20.16.0'}
     hasBin: true
 
@@ -6563,7 +6563,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  crawler-user-agents@1.50.0: {}
+  crawler-user-agents@1.52.0: {}
 
   cross-spawn@7.0.6:
     dependencies:
@@ -6812,7 +6812,7 @@ snapshots:
   h3@2.0.1-rc.20(crossws@0.4.5(srvx@0.11.15)):
     dependencies:
       rou3: 0.8.1
-      srvx: 0.11.16
+      srvx: 0.11.17
     optionalDependencies:
       crossws: 0.4.5(srvx@0.11.15)
 
@@ -8012,7 +8012,7 @@ snapshots:
 
   srvx@0.11.15: {}
 
-  srvx@0.11.16: {}
+  srvx@0.11.17: {}
 
   stackback@0.0.2: {}
 
