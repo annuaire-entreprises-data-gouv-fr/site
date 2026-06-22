@@ -106,6 +106,7 @@ jobs:
   deploy-staging:
     name: Deploy - staging
     runs-on: ubuntu-latest
+    needs: [deploy-staging-new]
     timeout-minutes: 15
     environment:
       name: staging
@@ -117,6 +118,10 @@ jobs:
             host: SSH_STAGING_03
     steps:
       - uses: actions/checkout@v6
+      - name: Setup Wireguard
+        uses: niklaskeerl/easy-wireguard-action@v2
+        with:
+          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
         with:
           app-to-deploy: "annuaire-entreprises-site"
@@ -139,6 +144,7 @@ jobs:
       name: production
     timeout-minutes: 15
     strategy:
+      max-parallel: 1
       matrix:
         include:
           - environment: production-01
@@ -149,6 +155,10 @@ jobs:
             host: SSH_PRODUCTION_03
     steps:
       - uses: actions/checkout@v6
+      - name: Setup Wireguard
+        uses: niklaskeerl/easy-wireguard-action@v2
+        with:
+          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
         with:
           app-to-deploy: "annuaire-entreprises-site"
