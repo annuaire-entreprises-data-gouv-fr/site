@@ -12,7 +12,6 @@ export const clientDirigeantsRechercheEntreprise = async (
       pageResultatsRecherche: 1,
       inclureEtablissements: false,
       inclureImmatriculation: false,
-      inclureTVA: false,
       inclureBodacc: false,
       pageEtablissements: 1,
     },

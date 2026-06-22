@@ -49,7 +49,6 @@ const ping = async (slug: string | string[]) => {
         pageResultatsRecherche: 1,
         searchFilterParams: undefined,
         inclureEtablissements: false,
-        inclureTVA: false,
         inclureBodacc: false,
       });
     case "api-rne":
