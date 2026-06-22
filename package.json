@@ -61,7 +61,7 @@
     "remark-heading-id": "1.0.1",
     "remark-parse": "11.0.0",
     "remark-rehype": "11.1.2",
-    "undici": "7.25.0",
+    "undici": "8.5.0",
     "unified": "11.0.5",
     "zod": "4.4.3"
   },
