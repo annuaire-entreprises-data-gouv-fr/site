@@ -117,6 +117,10 @@ jobs:
             host: SSH_STAGING_03
     steps:
       - uses: actions/checkout@v6
+      - name: Setup Wireguard
+        uses: niklaskeerl/easy-wireguard-action@v2
+        with:
+          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
         with:
           app-to-deploy: "annuaire-entreprises-site"
@@ -149,6 +153,10 @@ jobs:
             host: SSH_PRODUCTION_03
     steps:
       - uses: actions/checkout@v6
+      - name: Setup Wireguard
+        uses: niklaskeerl/easy-wireguard-action@v2
+        with:
+          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v1.1
         with:
           app-to-deploy: "annuaire-entreprises-site"
