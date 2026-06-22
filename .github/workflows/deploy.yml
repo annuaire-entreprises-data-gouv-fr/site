@@ -144,6 +144,7 @@ jobs:
       name: production
     timeout-minutes: 15
     strategy:
+      max-parallel: 1
       matrix:
         include:
           - environment: production-01
