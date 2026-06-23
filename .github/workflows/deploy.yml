@@ -91,6 +91,10 @@ jobs:
             host: SSH_STAGING_04
     steps:
       - uses: actions/checkout@v6
+      - name: Setup Wireguard
+        uses: niklaskeerl/easy-wireguard-action@v2
+        with:
+          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v2.0
         with:
           app: "site"
