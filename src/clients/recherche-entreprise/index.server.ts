@@ -40,7 +40,6 @@ interface ClientSearchRechercheEntreprise {
   inclureBodacc?: boolean;
   inclureEtablissements?: boolean;
   inclureImmatriculation?: boolean;
-  inclureTVA?: boolean;
   pageEtablissements?: number;
   pageResultatsRecherche?: number;
   searchFilterParams?: SearchFilterParams;
@@ -57,7 +56,6 @@ export const clientSearchRechercheEntrepriseRaw = createServerOnlyFn(
       searchFilterParams,
       inclureEtablissements = false,
       inclureImmatriculation = false,
-      inclureTVA = false,
       inclureBodacc = false,
       pageResultatsRecherche = 1,
       pageEtablissements = 1,
@@ -82,10 +80,6 @@ export const clientSearchRechercheEntrepriseRaw = createServerOnlyFn(
     }`;
 
     url += "&include_admin=admin";
-
-    if (inclureTVA) {
-      url += ",tva";
-    }
 
     if (inclureBodacc) {
       url += ",bodacc";
@@ -125,7 +119,6 @@ const clientSearchRechercheEntreprise = async (
     searchFilterParams,
     inclureEtablissements = false,
     inclureImmatriculation = false,
-    inclureTVA = false,
     inclureBodacc = false,
     pageResultatsRecherche = 1,
     pageEtablissements = 1,
@@ -138,7 +131,6 @@ const clientSearchRechercheEntreprise = async (
       searchFilterParams,
       inclureEtablissements,
       inclureImmatriculation,
-      inclureTVA,
       inclureBodacc,
       pageResultatsRecherche,
       pageEtablissements,
