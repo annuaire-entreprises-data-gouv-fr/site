@@ -140,12 +140,21 @@ jobs:
           tchap-url: ${{ secrets.TCHAP_URL }}
           tchap-token: ${{ secrets.TCHAP_TOKEN }}
 
-  deploy-production:
-    name: Deploy - production
+  trigger-production-deployment:
+    name: Trigger production deployment
     runs-on: ubuntu-latest
     needs: [deploy-staging]
     environment:
       name: production
+    timeout-minutes: 2
+    steps:
+      - run: echo "Deploying to production..." 
+        name: Deploy gate
+
+  deploy-production:
+    name: Deploy - production
+    runs-on: ubuntu-latest
+    needs: [trigger-production-deployment]
     timeout-minutes: 15
     strategy:
       max-parallel: 1
