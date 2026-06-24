@@ -1,6 +1,37 @@
 import { init } from "@sentry/tanstackstart-react";
 import crawlers from "crawler-user-agents";
 
+const IGNORED_SERVER_EXCEPTION_NAMES = new Set([
+  "SirenNotFoundOrInvalid",
+  "FetchUniteLegaleRechercheException",
+  "RefreshingInseeToken",
+]);
+
+const getOriginalExceptionName = (exception) => {
+  if (
+    typeof exception === "object" &&
+    exception !== null &&
+    "name" in exception
+  ) {
+    return exception.name;
+  }
+};
+
+const shouldIgnoreServerException = (event, originalException) => {
+  const originalExceptionName = getOriginalExceptionName(originalException);
+  if (
+    typeof originalExceptionName === "string" &&
+    IGNORED_SERVER_EXCEPTION_NAMES.has(originalExceptionName)
+  ) {
+    return true;
+  }
+
+  return (event.exception?.values ?? []).some(
+    (exception) =>
+      exception.type && IGNORED_SERVER_EXCEPTION_NAMES.has(exception.type)
+  );
+};
+
 const isUserAgentABot = (userAgent) => {
   if (!userAgent) {
     return false;
@@ -19,11 +50,20 @@ export const isSentryActivated =
 if (isSentryActivated) {
   init({
     dsn: process.env.VITE_SENTRY_DSN,
+    initialScope: {
+      tags: {
+        "app.runtime": "server",
+      },
+    },
     tracesSampleRate: 0.005,
     maxBreadcrumbs: 0, // dont log breadcrumb
     beforeSend(event, hint) {
       // Grouping logic for custom exceptions
       const originalException = hint.originalException;
+      if (shouldIgnoreServerException(event, originalException)) {
+        return null;
+      }
+
       if (
         // The exception is an instance of our custom Exception class
         // (instanceof does not work in this case)

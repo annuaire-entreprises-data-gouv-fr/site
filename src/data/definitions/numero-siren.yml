@@ -64,7 +64,7 @@ more:
     href: '/definitions/numero-siret'
 
   - label: 'Numéro de TVA intracommunautaire'
-    href: '/definitions/numero-tva-intracommunautaire'
+    href: '/definitions/tva-intracommunautaire'
 
   - label: 'Kbis'
     href: '/definitions/kbis'

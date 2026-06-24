@@ -30,6 +30,11 @@ export const initSentryClient = createClientOnlyFn(() => {
   }
   init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
+    initialScope: {
+      tags: {
+        "app.runtime": "browser",
+      },
+    },
     tracesSampleRate: 0.005,
     maxBreadcrumbs: 2,
     // An error can be thrown when a fetch request is aborted during a page unload
