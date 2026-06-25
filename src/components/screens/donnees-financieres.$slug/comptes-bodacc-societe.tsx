@@ -25,7 +25,7 @@ export function ComptesBodaccSociete({
         <>
           {bodacc.comptes.length === 0 ? (
             <div>
-              Aucun dépôt de compte publié au{" "}
+              Aucun dépôt de comptes n'a été publié au{" "}
               <a
                 aria-label="Bulletin Officiel Des Annonces Civiles et Commerciales"
                 href={routes.bodacc.site.recherche}
