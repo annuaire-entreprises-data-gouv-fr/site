@@ -13,31 +13,31 @@ importers:
         version: 3.1048.0
       '@react-spring/web':
         specifier: 10.1.0
-        version: 10.1.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 10.1.0(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@sentry/tanstackstart-react':
         specifier: 10.57.0
         version: 10.57.0(react@19.2.6)
       '@tanstack/react-devtools':
         specifier: 0.10.5
-        version: 0.10.5(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(csstype@3.2.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(solid-js@1.9.13)
+        version: 0.10.5(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(csstype@3.2.3)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)(solid-js@1.9.13)
       '@tanstack/react-query':
         specifier: 5.101.0
         version: 5.101.0(react@19.2.6)
       '@tanstack/react-router':
         specifier: 1.170.9
-        version: 1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/react-router-devtools':
         specifier: 1.167.0
-        version: 1.167.0(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.7)(csstype@3.2.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 1.167.0(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.7)(csstype@3.2.3)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/react-router-ssr-query':
         specifier: 1.167.0
-        version: 1.167.0(@tanstack/query-core@5.101.0)(@tanstack/react-query@5.101.0(react@19.2.6))(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.7)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 1.167.0(@tanstack/query-core@5.101.0)(@tanstack/react-query@5.101.0(react@19.2.6))(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.7)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/react-start':
         specifier: 1.168.16
-        version: 1.168.16(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
+        version: 1.168.16(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.7(react@19.2.6))(react@19.2.6)(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
       '@tanstack/router-plugin':
         specifier: 1.168.12
-        version: 1.168.12(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
+        version: 1.168.12(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
       '@vcarl/remark-headings':
         specifier: 0.1.0
         version: 0.1.0
@@ -72,14 +72,14 @@ importers:
         specifier: 5.3.1
         version: 5.3.1(chart.js@4.5.1)(react@19.2.6)
       react-dom:
-        specifier: 19.2.6
-        version: 19.2.6(react@19.2.6)
+        specifier: 19.2.7
+        version: 19.2.7(react@19.2.6)
       react-error-boundary:
         specifier: 6.1.1
         version: 6.1.1(react@19.2.6)
       react-select:
         specifier: 5.10.2
-        version: 5.10.2(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 5.10.2(@types/react@19.2.15)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       rehype-autolink-headings:
         specifier: 7.1.0
         version: 7.1.0
@@ -128,7 +128,7 @@ importers:
         version: 10.4.1
       '@testing-library/react':
         specifier: 16.3.2
-        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@types/js-yaml':
         specifier: 4.0.9
         version: 4.0.9
@@ -2600,6 +2600,7 @@ packages:
   git-raw-commits@5.0.1:
     resolution: {integrity: sha512-Y+csSm2GD/PCSh6Isd/WiMjNAydu0VBiG9J7EdQsNA5P9uXvLayqjmTsNlK5Gs9IhblFZqOU0yid5Il5JPoLiQ==}
     engines: {node: '>=18'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   gl-matrix@3.4.4:
@@ -3484,10 +3485,10 @@ packages:
       chart.js: ^4.1.1
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  react-dom@19.2.6:
-    resolution: {integrity: sha512-0prMI+hvBbPjsWnxDLxlCGyM8PN6UuWjEUCYmZhO67xIV9Xasa/r/vDnq+Xyq4Lo27g8QSbO5YzARu0D1Sps3g==}
+  react-dom@19.2.7:
+    resolution: {integrity: sha512-t0BRVXvbiE/o20Hfw669rLbMCDWtYZLvmJigy2f0MxsXF+71pxhR3xOkspmsO8h3ZlNzyibAmtCa3l4lYKk6gQ==}
     peerDependencies:
-      react: ^19.2.6
+      react: ^19.2.7
 
   react-error-boundary@6.1.1:
     resolution: {integrity: sha512-BrYwPOdXi5mqkk5lw+Uvt0ThHx32rCt3BkukS4X23A2AIWDPSGX6iaWTc0y9TU/mHDA/6qOSGel+B2ERkOvD1w==}
@@ -5573,7 +5574,7 @@ snapshots:
 
   '@react-spring/types@10.1.0': {}
 
-  '@react-spring/web@10.1.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@react-spring/web@10.1.0(react-dom@19.2.7(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@react-spring/animated': 10.1.0(react@19.2.6)
       '@react-spring/core': 10.1.0(react@19.2.6)
@@ -5581,7 +5582,7 @@ snapshots:
       '@react-spring/types': 10.1.0
       csstype: 3.2.3
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
 
   '@rolldown/binding-android-arm64@1.0.3':
     optional: true
@@ -5948,13 +5949,13 @@ snapshots:
 
   '@tanstack/query-core@5.101.0': {}
 
-  '@tanstack/react-devtools@0.10.5(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(csstype@3.2.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(solid-js@1.9.13)':
+  '@tanstack/react-devtools@0.10.5(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(csstype@3.2.3)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)(solid-js@1.9.13)':
     dependencies:
       '@tanstack/devtools': 0.12.2(csstype@3.2.3)(solid-js@1.9.13)
       '@types/react': 19.2.15
       '@types/react-dom': 19.2.3(@types/react@19.2.15)
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
     transitivePeerDependencies:
       - bufferutil
       - csstype
@@ -5966,59 +5967,59 @@ snapshots:
       '@tanstack/query-core': 5.101.0
       react: 19.2.6
 
-  '@tanstack/react-router-devtools@1.167.0(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.7)(csstype@3.2.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@tanstack/react-router-devtools@1.167.0(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.7)(csstype@3.2.3)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)':
     dependencies:
-      '@tanstack/react-router': 1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-router': 1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/router-devtools-core': 1.168.0(@tanstack/router-core@1.171.7)(csstype@3.2.3)
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
     optionalDependencies:
       '@tanstack/router-core': 1.171.7
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/react-router-ssr-query@1.167.0(@tanstack/query-core@5.101.0)(@tanstack/react-query@5.101.0(react@19.2.6))(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.7)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@tanstack/react-router-ssr-query@1.167.0(@tanstack/query-core@5.101.0)(@tanstack/react-query@5.101.0(react@19.2.6))(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(@tanstack/router-core@1.171.7)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@tanstack/query-core': 5.101.0
       '@tanstack/react-query': 5.101.0(react@19.2.6)
-      '@tanstack/react-router': 1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-router': 1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/router-ssr-query-core': 1.169.0(@tanstack/query-core@5.101.0)(@tanstack/router-core@1.171.7)
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
     transitivePeerDependencies:
       - '@tanstack/router-core'
 
-  '@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@tanstack/history': 1.162.0
-      '@tanstack/react-store': 0.9.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-store': 0.9.3(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/router-core': 1.171.7
       isbot: 5.1.40
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
 
-  '@tanstack/react-start-client@1.168.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@tanstack/react-start-client@1.168.6(react-dom@19.2.7(react@19.2.6))(react@19.2.6)':
     dependencies:
-      '@tanstack/react-router': 1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-router': 1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/router-core': 1.171.7
       '@tanstack/start-client-core': 1.170.5
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
 
-  '@tanstack/react-start-rsc@0.1.15(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))':
+  '@tanstack/react-start-rsc@0.1.15(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.7(react@19.2.6))(react@19.2.6)(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
-      '@tanstack/react-router': 1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@tanstack/react-start-server': 1.167.11(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-router': 1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-start-server': 1.167.11(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/router-core': 1.171.7
       '@tanstack/router-utils': 1.162.1
       '@tanstack/start-client-core': 1.170.5
       '@tanstack/start-fn-stubs': 1.162.0
-      '@tanstack/start-plugin-core': 1.171.8(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(crossws@0.4.5(srvx@0.11.15))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
+      '@tanstack/start-plugin-core': 1.171.8(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(crossws@0.4.5(srvx@0.11.15))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
       '@tanstack/start-server-core': 1.169.6(crossws@0.4.5(srvx@0.11.15))
       '@tanstack/start-storage-context': 1.167.9
       pathe: 2.0.3
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
     transitivePeerDependencies:
       - '@rsbuild/core'
       - crossws
@@ -6027,31 +6028,31 @@ snapshots:
       - vite-plugin-solid
       - webpack
 
-  '@tanstack/react-start-server@1.167.11(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@tanstack/react-start-server@1.167.11(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.7(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@tanstack/history': 1.162.0
-      '@tanstack/react-router': 1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-router': 1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/router-core': 1.171.7
       '@tanstack/start-client-core': 1.170.5
       '@tanstack/start-server-core': 1.169.6(crossws@0.4.5(srvx@0.11.15))
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
     transitivePeerDependencies:
       - crossws
 
-  '@tanstack/react-start@1.168.16(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))':
+  '@tanstack/react-start@1.168.16(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.7(react@19.2.6))(react@19.2.6)(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
-      '@tanstack/react-router': 1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@tanstack/react-start-client': 1.168.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@tanstack/react-start-rsc': 0.1.15(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
-      '@tanstack/react-start-server': 1.167.11(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-router': 1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-start-client': 1.168.6(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-start-rsc': 0.1.15(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.7(react@19.2.6))(react@19.2.6)(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
+      '@tanstack/react-start-server': 1.167.11(crossws@0.4.5(srvx@0.11.15))(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       '@tanstack/router-utils': 1.162.1
       '@tanstack/start-client-core': 1.170.5
-      '@tanstack/start-plugin-core': 1.171.8(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(crossws@0.4.5(srvx@0.11.15))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
+      '@tanstack/start-plugin-core': 1.171.8(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(crossws@0.4.5(srvx@0.11.15))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
       '@tanstack/start-server-core': 1.169.6(crossws@0.4.5(srvx@0.11.15))
       pathe: 2.0.3
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
     optionalDependencies:
       vite: 8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0)
     transitivePeerDependencies:
@@ -6062,11 +6063,11 @@ snapshots:
       - vite-plugin-solid
       - webpack
 
-  '@tanstack/react-store@0.9.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@tanstack/react-store@0.9.3(react-dom@19.2.7(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@tanstack/store': 0.9.3
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
       use-sync-external-store: 1.6.0(react@19.2.6)
 
   '@tanstack/router-core@1.171.7':
@@ -6097,7 +6098,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tanstack/router-plugin@1.168.12(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))':
+  '@tanstack/router-plugin@1.168.12(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.29.0)
@@ -6113,7 +6114,7 @@ snapshots:
       unplugin: 3.0.0
       zod: 4.4.3
     optionalDependencies:
-      '@tanstack/react-router': 1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@tanstack/react-router': 1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       vite: 8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0)
     transitivePeerDependencies:
       - supports-color
@@ -6146,7 +6147,7 @@ snapshots:
 
   '@tanstack/start-fn-stubs@1.162.0': {}
 
-  '@tanstack/start-plugin-core@1.171.8(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(crossws@0.4.5(srvx@0.11.15))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))':
+  '@tanstack/start-plugin-core@1.171.8(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(crossws@0.4.5(srvx@0.11.15))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
       '@babel/code-frame': 7.27.1
       '@babel/core': 7.29.0
@@ -6154,7 +6155,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.1
       '@tanstack/router-core': 1.171.7
       '@tanstack/router-generator': 1.167.11
-      '@tanstack/router-plugin': 1.168.12(@tanstack/react-router@1.170.9(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
+      '@tanstack/router-plugin': 1.168.12(@tanstack/react-router@1.170.9(react-dom@19.2.7(react@19.2.6))(react@19.2.6))(vite@8.0.16(@types/node@22.18.13)(jiti@2.7.0)(yaml@2.9.0))
       '@tanstack/router-utils': 1.162.1
       '@tanstack/start-client-core': 1.170.5
       '@tanstack/start-server-core': 1.169.6(crossws@0.4.5(srvx@0.11.15))
@@ -6210,12 +6211,12 @@ snapshots:
       picocolors: 1.1.1
       pretty-format: 27.5.1
 
-  '@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.7(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@babel/runtime': 7.29.2
       '@testing-library/dom': 10.4.1
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
     optionalDependencies:
       '@types/react': 19.2.15
       '@types/react-dom': 19.2.3(@types/react@19.2.15)
@@ -7823,7 +7824,7 @@ snapshots:
       chart.js: 4.5.1
       react: 19.2.6
 
-  react-dom@19.2.6(react@19.2.6):
+  react-dom@19.2.7(react@19.2.6):
     dependencies:
       react: 19.2.6
       scheduler: 0.27.0
@@ -7836,7 +7837,7 @@ snapshots:
 
   react-is@17.0.2: {}
 
-  react-select@5.10.2(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  react-select@5.10.2(@types/react@19.2.15)(react-dom@19.2.7(react@19.2.6))(react@19.2.6):
     dependencies:
       '@babel/runtime': 7.29.2
       '@emotion/cache': 11.14.0
@@ -7846,21 +7847,21 @@ snapshots:
       memoize-one: 6.0.0
       prop-types: 15.8.1
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-      react-transition-group: 4.4.5(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
+      react-transition-group: 4.4.5(react-dom@19.2.7(react@19.2.6))(react@19.2.6)
       use-isomorphic-layout-effect: 1.2.1(@types/react@19.2.15)(react@19.2.6)
     transitivePeerDependencies:
       - '@types/react'
       - supports-color
 
-  react-transition-group@4.4.5(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  react-transition-group@4.4.5(react-dom@19.2.7(react@19.2.6))(react@19.2.6):
     dependencies:
       '@babel/runtime': 7.29.2
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
       react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react-dom: 19.2.7(react@19.2.6)
 
   react@19.2.6: {}
 

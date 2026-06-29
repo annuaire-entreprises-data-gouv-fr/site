@@ -53,7 +53,7 @@
     "qrcode": "1.5.4",
     "react": "19.2.6",
     "react-chartjs-2": "5.3.1",
-    "react-dom": "19.2.6",
+    "react-dom": "19.2.7",
     "react-error-boundary": "6.1.1",
     "react-select": "5.10.2",
     "rehype-autolink-headings": "7.1.0",
