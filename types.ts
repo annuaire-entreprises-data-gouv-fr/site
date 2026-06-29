@@ -4,6 +4,7 @@ export type Entries<T> = {
 
 export interface MatomoAbTestVariations {
   AgentHeader: "original" | "VariationA";
+  AgentWall: "original" | "VariationA" | "VariationB";
   FiltresAvances: "original" | "VariationA" | "VariationB";
 }
 
