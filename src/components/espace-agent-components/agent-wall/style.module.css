@@ -2,6 +2,184 @@
   display: none;
 }
 
+.agent-wall-card {
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.agent-wall-variation-a {
+  width: min(275px, calc(100vw - 32px));
+  padding: 20px;
+  color: var(--annuaire-colors-frBlue);
+  text-align: center;
+  background: linear-gradient(135deg, #dfe6ff 0%, #f0edff 58%, #ffe9f6 100%);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 12px 21px rgba(0, 0, 0, 0.24);
+}
+
+.agent-wall-kicker {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 20px;
+  padding: 0 7px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  color: #6b604f;
+  letter-spacing: 0;
+  background: #ffedbd;
+  border-radius: 4px;
+}
+
+.agent-wall-lock {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin: 12px auto 0;
+}
+
+.agent-wall-title-a {
+  margin: 17px 0 0 !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 1.58 !important;
+  color: var(--annuaire-colors-frBlue) !important;
+  letter-spacing: 0 !important;
+}
+
+.agent-wall-text-a {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--annuaire-colors-frBlue);
+  letter-spacing: 0;
+}
+
+.agent-wall-proconnect {
+  margin-top: 23px;
+}
+
+.agent-wall-proconnect form,
+.agent-wall-proconnect [class~="fr-connect-group"] {
+  width: 100%;
+  margin: 0;
+}
+
+.agent-wall-proconnect [class~="fr-connect"] {
+  width: 100%;
+  min-height: 58px;
+  margin: 0;
+  font-size: 16px;
+  filter: none;
+}
+
+.agent-wall-discover-a {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--annuaire-colors-frBlue);
+  text-decoration: none;
+  background-image: none;
+}
+
+.agent-wall-discover-a:hover,
+.agent-wall-discover-a:active {
+  color: var(--annuaire-colors-frBlue);
+}
+
+.agent-wall-terms-a,
+.agent-wall-terms-b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-image: none;
+}
+
+.agent-wall-terms-a {
+  gap: 5px;
+  margin-top: 31px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--annuaire-colors-frBlue);
+}
+
+.agent-wall-terms-a > span,
+.agent-wall-terms-b > span {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.agent-wall-terms-a::after,
+.agent-wall-terms-b::after {
+  display: none;
+  content: none;
+}
+
+.agent-wall-variation-b {
+  width: min(275px, calc(100vw - 24px));
+  min-height: 410px;
+  padding: 26px 19px;
+  color: #1e1e1e;
+  background: #fff;
+  border: 2px solid var(--annuaire-colors-frBlue);
+  border-radius: 4px;
+  box-shadow: 0 8px 18px rgba(0, 0, 18, 0.28);
+}
+
+.agent-wall-title-b {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1e1e1e;
+  letter-spacing: 0;
+}
+
+.agent-wall-text-b {
+  margin: 15px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #1e1e1e;
+  letter-spacing: 0;
+}
+
+.agent-wall-variation-b .agent-wall-proconnect {
+  margin-top: 22px;
+}
+
+.agent-wall-discover-b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 32px;
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--annuaire-colors-frBlue);
+  background: #fff;
+  box-shadow: inset 0 0 0 2px var(--annuaire-colors-frBlue);
+}
+
+.agent-wall-terms-b {
+  gap: 6px;
+  margin-top: 25px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #1e1e1e;
+}
+
 @media only screen and (min-width: 768px) {
   .cta-wrapper {
     position: relative;
@@ -22,5 +200,25 @@
 
   .cta-actes > h3 {
     margin: 10px;
+  }
+
+  .agent-wall-card {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+  }
+
+  .agent-wall-variation-a,
+  .agent-wall-variation-b {
+    top: -16px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .agent-wall-variation-a,
+  .agent-wall-variation-b {
+    margin: 0 auto;
   }
 }

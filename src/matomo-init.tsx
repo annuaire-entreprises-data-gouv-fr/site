@@ -123,26 +123,51 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
       },
     ]);
 
+    window._paq.push([
+      "AbTesting::create",
+      {
+        name: "AgentWall",
+        percentage: 100,
+        includedTargets: [
+          { attribute: "url", inverted: "0", type: "any", value: "" },
+        ],
+        excludedTargets: [],
+        variations: [
+          {
+            name: "original",
+            activate() {
+              window.matomoAbTesting?.setVariation("AgentWall", "original");
+            },
+          },
+          {
+            name: "VariationA",
+            activate() {
+              window.matomoAbTesting?.setVariation("AgentWall", "VariationA");
+            },
+          },
+          {
+            name: "VariationB",
+            activate() {
+              window.matomoAbTesting?.setVariation("AgentWall", "VariationB");
+            },
+          },
+        ],
+        trigger() {
+          return true;
+        },
+      },
+    ]);
+
     window._paq.push(["trackPageView"]);
   }, []);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: onMount effect
   useEffect(() => {
-    if (!isMatomoEnabled) {
-      return;
-    }
-
-    window._paq = window._paq || [];
-    if (userType) {
-      window._paq.push(["setCustomDimension", "1", userType]);
-    }
-    window._paq.push(["setTrackerUrl", "https://stats.data.gouv.fr/piwik.php"]);
-    window._paq.push(["setSiteId", siteId]);
-
     window.matomoAbTesting = {
       variations: {
         FiltresAvances: "original",
         AgentHeader: "original",
+        AgentWall: "original",
       },
       getVariation(name) {
         return this.variations[name] ?? "original";
@@ -162,6 +187,17 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
         return () => matomoAbTestingListeners.current.delete(listener);
       },
     };
+
+    if (!isMatomoEnabled) {
+      return;
+    }
+
+    window._paq = window._paq || [];
+    if (userType) {
+      window._paq.push(["setCustomDimension", "1", userType]);
+    }
+    window._paq.push(["setTrackerUrl", "https://stats.data.gouv.fr/piwik.php"]);
+    window._paq.push(["setSiteId", siteId]);
 
     trackPageView(router.state.location.href);
     window._paq.push(["enableLinkTracking"]);
