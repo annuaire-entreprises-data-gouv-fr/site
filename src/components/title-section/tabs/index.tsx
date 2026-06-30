@@ -38,6 +38,7 @@ export const FICHE = {
 export type FICHE = (typeof FICHE)[keyof typeof FICHE];
 
 interface ITab {
+  className?: string;
   ficheType: FICHE;
   label: string;
   noFollow: boolean;
@@ -156,6 +157,7 @@ const getUniteLegaleTabs = (
       noFollow: false,
       shouldDisplay: isCollectiviteTerritoriale(uniteLegale),
       width: "130px",
+      className: styles.collectiviteTab,
     },
   ];
 };
@@ -171,17 +173,28 @@ export const Tabs: React.FC<{
       <div className={styles.titleTabs}>
         {tabs
           .filter(({ shouldDisplay }) => shouldDisplay)
-          .map(({ to, params, ficheType, label, noFollow, width = "auto" }) => (
-            <TabLink
-              active={currentFicheType === ficheType}
-              key={label}
-              label={label}
-              noFollow={noFollow}
-              params={params}
-              to={to}
-              width={width}
-            />
-          ))}
+          .map(
+            ({
+              to,
+              params,
+              ficheType,
+              label,
+              noFollow,
+              width = "auto",
+              className,
+            }) => (
+              <TabLink
+                active={currentFicheType === ficheType}
+                className={className}
+                key={label}
+                label={label}
+                noFollow={noFollow}
+                params={params}
+                to={to}
+                width={width}
+              />
+            )
+          )}
       </div>
     </PrintNever>
   );
