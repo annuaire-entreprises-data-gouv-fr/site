@@ -45,6 +45,7 @@ import { Route as HeaderDefaultAProposCommentCaMarcheRouteImport } from './route
 import { Route as HeaderDefaultAProposDonneesExtraitKbisRouteImport } from './routes/_header-default/a-propos/donnees-extrait-kbis'
 import { Route as HeaderDefaultAdministrationIndexRouteImport } from './routes/_header-default/administration.index'
 import { Route as HeaderDefaultAdministrationSlugRouteImport } from './routes/_header-default/administration.$slug'
+import { Route as HeaderDefaultCollectiviteSlugRouteImport } from './routes/_header-default/collectivite.$slug'
 import { Route as HeaderDefaultDefinitionsIndexRouteImport } from './routes/_header-default/definitions.index'
 import { Route as HeaderDefaultDefinitionsSlugRouteImport } from './routes/_header-default/definitions.$slug'
 import { Route as HeaderDefaultDonneesApiEntreprisesRouteImport } from './routes/_header-default/donnees.api-entreprises'
@@ -284,6 +285,12 @@ const HeaderDefaultAdministrationSlugRoute =
   HeaderDefaultAdministrationSlugRouteImport.update({
     id: '/administration/$slug',
     path: '/administration/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
+const HeaderDefaultCollectiviteSlugRoute =
+  HeaderDefaultCollectiviteSlugRouteImport.update({
+    id: '/collectivite/$slug',
+    path: '/collectivite/$slug',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
 const HeaderDefaultDefinitionsIndexRoute =
@@ -624,6 +631,7 @@ export interface FileRoutesByFullPath {
   '/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
+  '/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
@@ -706,6 +714,7 @@ export interface FileRoutesByTo {
   '/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
+  '/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
@@ -799,6 +808,7 @@ export interface FileRoutesById {
   '/_header-default/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/_header-default/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/_header-default/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
+  '/_header-default/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/_header-default/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/_header-default/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/_header-default/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
@@ -885,6 +895,7 @@ export interface FileRouteTypes {
     | '/a-propos/comment-ca-marche'
     | '/a-propos/donnees-extrait-kbis'
     | '/administration/$slug'
+    | '/collectivite/$slug'
     | '/definitions/$slug'
     | '/donnees/api-entreprises'
     | '/donnees/sources'
@@ -967,6 +978,7 @@ export interface FileRouteTypes {
     | '/a-propos/comment-ca-marche'
     | '/a-propos/donnees-extrait-kbis'
     | '/administration/$slug'
+    | '/collectivite/$slug'
     | '/definitions/$slug'
     | '/donnees/api-entreprises'
     | '/donnees/sources'
@@ -1059,6 +1071,7 @@ export interface FileRouteTypes {
     | '/_header-default/a-propos/comment-ca-marche'
     | '/_header-default/a-propos/donnees-extrait-kbis'
     | '/_header-default/administration/$slug'
+    | '/_header-default/collectivite/$slug'
     | '/_header-default/definitions/$slug'
     | '/_header-default/donnees/api-entreprises'
     | '/_header-default/donnees/sources'
@@ -1402,6 +1415,13 @@ declare module '@tanstack/react-router' {
       path: '/administration/$slug'
       fullPath: '/administration/$slug'
       preLoaderRoute: typeof HeaderDefaultAdministrationSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
+    '/_header-default/collectivite/$slug': {
+      id: '/_header-default/collectivite/$slug'
+      path: '/collectivite/$slug'
+      fullPath: '/collectivite/$slug'
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-default/definitions/': {
@@ -1837,6 +1857,7 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultAProposCommentCaMarcheRoute: typeof HeaderDefaultAProposCommentCaMarcheRoute
   HeaderDefaultAProposDonneesExtraitKbisRoute: typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   HeaderDefaultAdministrationSlugRoute: typeof HeaderDefaultAdministrationSlugRoute
+  HeaderDefaultCollectiviteSlugRoute: typeof HeaderDefaultCollectiviteSlugRoute
   HeaderDefaultDefinitionsSlugRoute: typeof HeaderDefaultDefinitionsSlugRoute
   HeaderDefaultDonneesApiEntreprisesRoute: typeof HeaderDefaultDonneesApiEntreprisesRoute
   HeaderDefaultDonneesSourcesRoute: typeof HeaderDefaultDonneesSourcesRoute
@@ -1871,6 +1892,7 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
   HeaderDefaultAProposDonneesExtraitKbisRoute:
     HeaderDefaultAProposDonneesExtraitKbisRoute,
   HeaderDefaultAdministrationSlugRoute: HeaderDefaultAdministrationSlugRoute,
+  HeaderDefaultCollectiviteSlugRoute: HeaderDefaultCollectiviteSlugRoute,
   HeaderDefaultDefinitionsSlugRoute: HeaderDefaultDefinitionsSlugRoute,
   HeaderDefaultDonneesApiEntreprisesRoute:
     HeaderDefaultDonneesApiEntreprisesRoute,
