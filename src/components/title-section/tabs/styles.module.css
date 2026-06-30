@@ -5,7 +5,7 @@
 
   @media only screen and (min-width: 1px) and (max-width: 768px) {
     line-height: 1.8rem !important;
-    border-bottom: 2px solid var(--annuaire-colors-pastelBlue) !important;
+    border-bottom: 2px solid #ebe7f7 !important;
   }
 }
 
@@ -13,7 +13,7 @@
   display: flex;
   flex-grow: 1;
   font-size: 0.9rem;
-  border-bottom: 2px solid var(--annuaire-colors-pastelBlue);
+  border-bottom: 2px solid #ebe7f7;
 
   @media only screen and (min-width: 1px) and (max-width: 768px) {
     flex-direction: column;
@@ -29,11 +29,12 @@
   margin: 0 4px;
   margin-bottom: -2px;
   text-align: center;
-  background-color: #efeffb;
-  border: 2px solid var(--annuaire-colors-pastelBlue);
+  /* background-color: #efeffb; */
+  background-color: #ebe7f7;
+  border: 2px solid #ebe7f7;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  box-shadow: 0 -8px 5px -5px var(--annuaire-colors-pastelBlue) inset;
+  box-shadow: 0 -8px 5px -5px #ebe7f7 inset;
 }
 
 .titleTabs > a > h2 {
@@ -47,7 +48,7 @@
   font-size: 0.9rem;
   font-weight: bold;
   line-height: 1.1rem;
-  color: var(--annuaire-colors-frBlue);
+  color: #1d0d4b;
 
   @media only screen and (min-width: 1px) and (max-width: 768px) {
     width: auto !important;
@@ -59,7 +60,7 @@
 
 .titleTabs > a:hover,
 .titleTabs > a:focus {
-  background-color: var(--annuaire-colors-pastelBlue);
+  background-color: #fff;
 }
 
 .titleTabsEtablissement a h2 {

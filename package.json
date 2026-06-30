@@ -43,6 +43,7 @@
     "@tanstack/react-start": "1.168.27",
     "@tanstack/router-plugin": "1.168.18",
     "@vcarl/remark-headings": "0.1.0",
+    "carte-facile": "0.9.0",
     "chart.js": "4.5.1",
     "clsx": "2.1.1",
     "crawler-user-agents": "1.54.0",

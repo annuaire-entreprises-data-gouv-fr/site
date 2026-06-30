@@ -63,6 +63,7 @@ import { Route as HeaderDefaultDocumentsSlugRouteImport } from './routes/_header
 import { Route as HeaderDefaultDiversSlugRouteImport } from './routes/_header-default/divers.$slug'
 import { Route as HeaderDefaultDirigeantsSlugRouteImport } from './routes/_header-default/dirigeants.$slug'
 import { Route as HeaderDefaultDefinitionsSlugRouteImport } from './routes/_header-default/definitions.$slug'
+import { Route as HeaderDefaultCollectiviteSlugRouteImport } from './routes/_header-default/collectivite.$slug'
 import { Route as HeaderDefaultAnnoncesSlugRouteImport } from './routes/_header-default/annonces.$slug'
 import { Route as HeaderDefaultAdministrationSlugRouteImport } from './routes/_header-default/administration.$slug'
 import { Route as HeaderDefaultAProposDonneesExtraitKbisRouteImport } from './routes/_header-default/a-propos/donnees-extrait-kbis'
@@ -382,6 +383,12 @@ const HeaderDefaultDefinitionsSlugRoute =
     path: '/definitions/$slug',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
+const HeaderDefaultCollectiviteSlugRoute =
+  HeaderDefaultCollectiviteSlugRouteImport.update({
+    id: '/collectivite/$slug',
+    path: '/collectivite/$slug',
+    getParentRoute: () => HeaderDefaultRouteRoute,
+  } as any)
 const HeaderDefaultAnnoncesSlugRoute =
   HeaderDefaultAnnoncesSlugRouteImport.update({
     id: '/annonces/$slug',
@@ -577,6 +584,7 @@ export interface FileRoutesByFullPath {
   '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
   '/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
+  '/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/dirigeants/$slug': typeof HeaderDefaultDirigeantsSlugRoute
   '/divers/$slug': typeof HeaderDefaultDiversSlugRoute
@@ -653,6 +661,7 @@ export interface FileRoutesByTo {
   '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
   '/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
+  '/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/dirigeants/$slug': typeof HeaderDefaultDirigeantsSlugRoute
   '/divers/$slug': typeof HeaderDefaultDiversSlugRoute
@@ -738,6 +747,7 @@ export interface FileRoutesById {
   '/_header-default/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/_header-default/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
   '/_header-default/annonces/$slug': typeof HeaderDefaultAnnoncesSlugRoute
+  '/_header-default/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/_header-default/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/_header-default/dirigeants/$slug': typeof HeaderDefaultDirigeantsSlugRoute
   '/_header-default/divers/$slug': typeof HeaderDefaultDiversSlugRoute
@@ -816,6 +826,7 @@ export interface FileRouteTypes {
     | '/a-propos/donnees-extrait-kbis'
     | '/administration/$slug'
     | '/annonces/$slug'
+    | '/collectivite/$slug'
     | '/definitions/$slug'
     | '/dirigeants/$slug'
     | '/divers/$slug'
@@ -892,6 +903,7 @@ export interface FileRouteTypes {
     | '/a-propos/donnees-extrait-kbis'
     | '/administration/$slug'
     | '/annonces/$slug'
+    | '/collectivite/$slug'
     | '/definitions/$slug'
     | '/dirigeants/$slug'
     | '/divers/$slug'
@@ -976,6 +988,7 @@ export interface FileRouteTypes {
     | '/_header-default/a-propos/donnees-extrait-kbis'
     | '/_header-default/administration/$slug'
     | '/_header-default/annonces/$slug'
+    | '/_header-default/collectivite/$slug'
     | '/_header-default/definitions/$slug'
     | '/_header-default/dirigeants/$slug'
     | '/_header-default/divers/$slug'
@@ -1438,6 +1451,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultDefinitionsSlugRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
+    '/_header-default/collectivite/$slug': {
+      id: '/_header-default/collectivite/$slug'
+      path: '/collectivite/$slug'
+      fullPath: '/collectivite/$slug'
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugRouteImport
+      parentRoute: typeof HeaderDefaultRouteRoute
+    }
     '/_header-default/annonces/$slug': {
       id: '/_header-default/annonces/$slug'
       path: '/annonces/$slug'
@@ -1690,6 +1710,7 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultAProposDonneesExtraitKbisRoute: typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   HeaderDefaultAdministrationSlugRoute: typeof HeaderDefaultAdministrationSlugRoute
   HeaderDefaultAnnoncesSlugRoute: typeof HeaderDefaultAnnoncesSlugRoute
+  HeaderDefaultCollectiviteSlugRoute: typeof HeaderDefaultCollectiviteSlugRoute
   HeaderDefaultDefinitionsSlugRoute: typeof HeaderDefaultDefinitionsSlugRoute
   HeaderDefaultDirigeantsSlugRoute: typeof HeaderDefaultDirigeantsSlugRoute
   HeaderDefaultDiversSlugRoute: typeof HeaderDefaultDiversSlugRoute
@@ -1733,6 +1754,7 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
     HeaderDefaultAProposDonneesExtraitKbisRoute,
   HeaderDefaultAdministrationSlugRoute: HeaderDefaultAdministrationSlugRoute,
   HeaderDefaultAnnoncesSlugRoute: HeaderDefaultAnnoncesSlugRoute,
+  HeaderDefaultCollectiviteSlugRoute: HeaderDefaultCollectiviteSlugRoute,
   HeaderDefaultDefinitionsSlugRoute: HeaderDefaultDefinitionsSlugRoute,
   HeaderDefaultDirigeantsSlugRoute: HeaderDefaultDirigeantsSlugRoute,
   HeaderDefaultDiversSlugRoute: HeaderDefaultDiversSlugRoute,
