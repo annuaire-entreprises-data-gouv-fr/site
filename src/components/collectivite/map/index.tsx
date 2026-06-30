@@ -1,10 +1,11 @@
 import { addOverlay, mapStyles, Overlay, SearchControl } from "carte-facile";
-import maplibregl from "maplibre-gl";
-import { useEffect, useState } from "react";
-import type { IUniteLegale } from "#/models/core/types";
+import maplibregl, { type GeoJSONSource } from "maplibre-gl";
+import { useEffect, useRef, useState } from "react";
+import type { ICollectiviteTerritoriale } from "#/models/core/types";
 
 interface ICollectiviteMapProps {
-  uniteLegale: IUniteLegale;
+  geoCommune: GeoResponse;
+  uniteLegale: ICollectiviteTerritoriale;
 }
 
 interface INavigationItem {
@@ -14,7 +15,46 @@ interface INavigationItem {
   label: string;
 }
 
+export interface GeoResponse {
+  centre: {
+    type: "Point";
+    coordinates: [number, number];
+  };
+  code: string;
+  codesPostaux: string[];
+  contour: {
+    type: "Polygon";
+    coordinates: [number, number][][];
+  };
+  departement: {
+    code: string;
+    nom: string;
+  };
+  epci: {
+    code: string;
+    nom: string;
+  };
+  mairie: {
+    type: "Point";
+    coordinates: [number, number];
+  };
+  nom: string;
+  population: number;
+  region: {
+    code: string;
+    nom: string;
+  };
+  siren: string;
+  surface: number;
+  type: string;
+}
+
 const navigationItems: INavigationItem[] = [
+  {
+    href: "#identite",
+    id: "identite",
+    label: "Identité de la collectivité",
+  },
   {
     children: [
       {
@@ -43,6 +83,14 @@ const navigationItems: INavigationItem[] = [
 
 const defaultActiveHref = navigationItems[0].href;
 const defaultExpandedSectionIds = [navigationItems[0].id];
+const communeFillLayerId = "collectivite-commune-fill";
+const communeLineLayerId = "collectivite-commune-line";
+const communeSourceId = "collectivite-commune";
+
+interface CommuneContour {
+  coordinates: [number, number][][];
+  type: "Polygon";
+}
 
 function collapseClassName(isExpanded: boolean) {
   return `fr-collapse${isExpanded ? " fr-collapse--expanded" : ""}`;
@@ -85,7 +133,85 @@ function hasNavigationHref(href: string, items = navigationItems): boolean {
   );
 }
 
-export function CollectiviteMap({ uniteLegale }: ICollectiviteMapProps) {
+function buildCommuneFeature(
+  contour: CommuneContour
+): GeoJSON.Feature<GeoJSON.Polygon> {
+  return {
+    geometry: contour,
+    properties: {},
+    type: "Feature",
+  };
+}
+
+function getCommuneBounds(contour: CommuneContour) {
+  const bounds = new maplibregl.LngLatBounds();
+
+  for (const ring of contour.coordinates) {
+    for (const coordinate of ring) {
+      bounds.extend(coordinate);
+    }
+  }
+
+  return bounds;
+}
+
+function drawCommuneOnMap(map: maplibregl.Map, contour: CommuneContour) {
+  const communeFeature = buildCommuneFeature(contour);
+  const source = map.getSource(communeSourceId) as GeoJSONSource | undefined;
+
+  if (source) {
+    source.setData(communeFeature);
+  } else {
+    map.addSource(communeSourceId, {
+      data: communeFeature,
+      type: "geojson",
+    });
+  }
+
+  if (!map.getLayer(communeFillLayerId)) {
+    map.addLayer({
+      id: communeFillLayerId,
+      paint: {
+        "fill-color": "#000091",
+        "fill-opacity": 0.16,
+      },
+      source: communeSourceId,
+      type: "fill",
+    });
+  }
+
+  if (!map.getLayer(communeLineLayerId)) {
+    map.addLayer({
+      id: communeLineLayerId,
+      layout: {
+        "line-cap": "round",
+        "line-join": "round",
+      },
+      paint: {
+        "line-color": "#000091",
+        "line-width": 3,
+      },
+      source: communeSourceId,
+      type: "line",
+    });
+  }
+
+  const bounds = getCommuneBounds(contour);
+
+  if (!bounds.isEmpty()) {
+    map.fitBounds(bounds, {
+      duration: 0,
+      maxZoom: 13,
+      padding: 48,
+    });
+  }
+}
+
+export function CollectiviteMap({
+  uniteLegale,
+  geoCommune,
+}: ICollectiviteMapProps) {
+  const mapRef = useRef<maplibregl.Map | null>(null);
   const [activeHref, setActiveHref] = useState(defaultActiveHref);
   const [expandedSectionIds, setExpandedSectionIds] = useState(
     () => new Set(defaultExpandedSectionIds)
@@ -101,6 +227,8 @@ export function CollectiviteMap({ uniteLegale }: ICollectiviteMapProps) {
         maxZoom: 18.9, // niveau de zoom maximum, adapté aux cartes utilisant les données IGN
       });
 
+      mapRef.current = map;
+
       map.addControl(
         new SearchControl({
           placeholder: "Rechercher une adresse…",
@@ -114,10 +242,32 @@ export function CollectiviteMap({ uniteLegale }: ICollectiviteMapProps) {
       addOverlay(map, Overlay.administrativeBoundaries);
 
       return () => {
+        mapRef.current = null;
         map.remove();
       };
     }
   }, [uniteLegale.colter]);
+
+  useEffect(() => {
+    if (!(geoCommune.contour && mapRef.current)) {
+      return;
+    }
+
+    const map = mapRef.current;
+    const drawCommune = () => {
+      drawCommuneOnMap(map, geoCommune.contour);
+    };
+
+    if (map.isStyleLoaded()) {
+      drawCommune();
+    } else {
+      map.once("load", drawCommune);
+    }
+
+    return () => {
+      map.off("load", drawCommune);
+    };
+  }, [geoCommune]);
 
   useEffect(() => {
     const updateActiveHrefFromHash = () => {

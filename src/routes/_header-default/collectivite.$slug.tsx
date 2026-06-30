@@ -21,6 +21,7 @@ import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "carte-facile/carte-facile.css";
+import { clientGeo } from "#/clients/api-geo";
 import { CollectiviteMap } from "#/components/collectivite/map";
 
 const loadEntreprisePage = createServerFn({ method: "POST" })
@@ -35,7 +36,19 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
       getRechercheEntrepriseSourcesLastModified(),
     ]);
 
-    return { uniteLegale, sourcesLastModified };
+    if (
+      !isCollectiviteTerritoriale(uniteLegale) ||
+      uniteLegale.colter.niveau !== "Commune"
+    ) {
+      throw redirect({
+        to: "/entreprise/$slug",
+        params: { slug: uniteLegale.siren },
+      });
+    }
+
+    const geoCommune = await clientGeo(uniteLegale.colter.codeInsee);
+
+    return { uniteLegale, sourcesLastModified, geoCommune };
   });
 
 export const Route = createFileRoute("/_header-default/collectivite/$slug")({
@@ -59,13 +72,6 @@ export const Route = createFileRoute("/_header-default/collectivite/$slug")({
         slug: params.slug,
       },
     });
-
-    if (!isCollectiviteTerritoriale(result.uniteLegale)) {
-      throw redirect({
-        to: "/entreprise/$slug",
-        params: { slug: result.uniteLegale.siren },
-      });
-    }
 
     return result;
   },
@@ -101,7 +107,7 @@ export const Route = createFileRoute("/_header-default/collectivite/$slug")({
 });
 
 function RouteComponent() {
-  const { uniteLegale } = Route.useLoaderData();
+  const { uniteLegale, geoCommune } = Route.useLoaderData();
   const { user } = useAuth();
 
   return (
@@ -114,7 +120,7 @@ function RouteComponent() {
       {estNonDiffusibleStrict(uniteLegale) ? (
         <NonDiffusibleStrictSection />
       ) : (
-        <CollectiviteMap uniteLegale={uniteLegale} />
+        <CollectiviteMap geoCommune={geoCommune} uniteLegale={uniteLegale} />
       )}
     </div>
   );
