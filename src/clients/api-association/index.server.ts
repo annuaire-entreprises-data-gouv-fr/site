@@ -1,15 +1,11 @@
 import { createServerOnlyFn } from "@tanstack/react-start";
-import { XMLParser } from "fast-xml-parser";
-import { HttpNotFound, HttpUnauthorizedError } from "#/clients/exceptions";
+import { HttpUnauthorizedError } from "#/clients/exceptions";
 import routes from "#/clients/routes";
 import type { IDataAssociation } from "#/models/association/types";
 import constants from "#/models/constants";
 import { formatAdresse, type IdRna, type Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
-import type {
-  IAssociationPartenairesResponse,
-  IAssociationResponse,
-} from "./types";
+import type { IAssociationResponse } from "./types";
 
 /**
  * Wrapper client to call API Association (public API)
@@ -60,7 +56,7 @@ export const clientAPIAssociationPrivate = createServerOnlyFn(
 
     const url = `${process.env.API_ASSOCIATION_URL}${routes.apiAssociation.associationPartenaires(encodeURIComponent(rnaOrSiren))}`;
 
-    const response = await httpGet<string>(url, {
+    const response = await httpGet<IAssociationResponse>(url, {
       headers: {
         "X-Gravitee-Api-Key": process.env.API_ASSOCIATION_KEY,
       },
@@ -68,40 +64,15 @@ export const clientAPIAssociationPrivate = createServerOnlyFn(
       signal,
     });
 
-    return mapToDomainObject(mapPrivateToPublicResponse(response), siretSiege);
+    return mapToDomainObject(response, siretSiege);
   }
 );
-
-const mapToArray = <T>(obj: T | T[] | undefined): T[] => {
-  if (Array.isArray(obj)) {
-    return obj;
-  }
-  return obj ? [obj] : [];
-};
-
-const mapPrivateToPublicResponse = (response: string): IAssociationResponse => {
-  const parser = new XMLParser();
-  const jsonResponse = parser.parse(
-    response
-  ) as IAssociationPartenairesResponse;
-
-  if (!jsonResponse.asso) {
-    throw new HttpNotFound("Association not found");
-  }
-
-  return {
-    ...jsonResponse.asso,
-    etablissement: mapToArray(jsonResponse.asso.etablissements?.etablissement),
-    agrement: mapToArray(jsonResponse.asso.agrements?.agrement),
-    compte: mapToArray(jsonResponse.asso.comptes?.compte),
-  };
-};
 
 const mapToDomainObject = (
   association: IAssociationResponse,
   siretSiege: string
 ): IDataAssociation => {
-  const { agrement = [] } = association;
+  const { agrements = [] } = association;
   const { objet = "", lib_famille1 = "" } = association.activites || {};
   const {
     id_rna,
@@ -143,7 +114,7 @@ const mapToDomainObject = (
     objet,
     libelleFamille: lib_famille1,
     siteWeb,
-    agrement: agrement.map((agr) => ({
+    agrement: agrements.map((agr) => ({
       ...agr,
       dateAttribution: agr.date_attribution,
     })),
@@ -169,7 +140,7 @@ const mapToDomainObject = (
       libelleCommune: communeGestion,
     }),
     adresseInconsistency: false,
-    bilans: (association.compte || [])
+    bilans: (association.comptes || [])
       // id_siret type can be a number !
       .filter((c) => c.annee > 0 && Number(c.id_siret) === Number(siretSiege))
       .map(

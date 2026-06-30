@@ -1,35 +1,20 @@
 export interface IAssociationResponse {
   activites?: Activites;
-  adherent_personne_morale?: AdherentPersonneMorale[];
-  agrement?: Agrement[];
-  commentaire?: Commentaire;
-  compte: Compte[];
+  adherents_personnes_morales?: AdherentPersonneMorale[];
+  agrements?: Agrement[];
+  commentaire: string;
+  comptes?: Compte[];
   coordonnees?: Coordonnees;
-  document_dac: any[];
-  document_rna: any[];
-  etablissement?: Etablissement[];
-  identite: Identite;
-  nbDocDac: number;
-  nbDocRna: number;
-  nbEtabsActifs: number;
-  representant_legal: any[];
-  reseau_affiliation?: ReseauAffiliation[];
-  rh?: Rh[];
-  rib: any[];
-}
-
-export interface IAssociationPartenairesResponse {
-  asso: Omit<IAssociationResponse, "etablissement"> & {
-    etablissements?: {
-      etablissement: Etablissement[] | Etablissement;
-    };
-    agrements?: {
-      agrement: Agrement[] | Agrement;
-    };
-    comptes?: {
-      compte: Compte[] | Compte;
-    };
+  documents: {
+    nbDocDac: number;
+    document_dac: any[];
+    nbDocRna: number;
+    document_rna: any[];
   };
+  etablissements?: Etablissement[];
+  identite: Identite;
+  rhs?: Rh[];
+  ribs: any[];
 }
 
 interface Identite {
@@ -110,31 +95,6 @@ interface AdresseGestion {
 
 interface AdresseSiegeSirene {
   code_insee: string;
-  commune: string;
-  cp: string;
-  cplt_3: string;
-  num_voie: string;
-  type_voie: string;
-  voie: string;
-}
-
-interface Commentaire {
-  note: string;
-}
-
-interface ReseauAffiliation {
-  adresse: Adresse;
-  id_correspondance: number;
-  id_rna: string;
-  id_siret: string;
-  nb_licencies: number;
-  nb_licencies_f: number;
-  nb_licencies_h: number;
-  nom: string;
-  objet: string;
-}
-
-interface Adresse {
   commune: string;
   cp: string;
   cplt_3: string;
