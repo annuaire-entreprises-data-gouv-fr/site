@@ -71,3 +71,7 @@
   font-weight: bold;
   line-height: 1rem;
 }
+
+.collectiviteTab {
+  margin-left: auto !important;
+}
