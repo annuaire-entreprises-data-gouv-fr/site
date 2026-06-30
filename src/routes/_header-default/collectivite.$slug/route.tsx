@@ -1,4 +1,9 @@
-import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  notFound,
+  Outlet,
+  redirect,
+} from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
 import { NonDiffusibleStrictSection } from "#/components/non-diffusible-section";
@@ -18,11 +23,11 @@ import {
   uniteLegalePageTitle,
 } from "#/utils/helpers";
 import { meta } from "#/utils/seo";
-import { HeaderDefaultError } from "./-error";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "carte-facile/carte-facile.css";
 import { clientGeo } from "#/clients/api-geo";
-import { CollectiviteMap } from "#/components/collectivite/map";
+import { CollectiviteSidenav } from "#/components/collectivite/sidenav";
+import { HeaderDefaultError } from "../-error";
 
 const loadEntreprisePage = createServerFn({ method: "POST" })
   .inputValidator(
@@ -107,7 +112,7 @@ export const Route = createFileRoute("/_header-default/collectivite/$slug")({
 });
 
 function RouteComponent() {
-  const { uniteLegale, geoCommune } = Route.useLoaderData();
+  const { uniteLegale } = Route.useLoaderData();
   const { user } = useAuth();
 
   return (
@@ -120,7 +125,14 @@ function RouteComponent() {
       {estNonDiffusibleStrict(uniteLegale) ? (
         <NonDiffusibleStrictSection />
       ) : (
-        <CollectiviteMap geoCommune={geoCommune} uniteLegale={uniteLegale} />
+        <div className="fr-grid-row fr-grid-row--gutters fr-mt-4w">
+          <div className="fr-col-12 fr-col-md-8">
+            <Outlet />
+          </div>
+          <div className="fr-col-12 fr-col-md-4">
+            <CollectiviteSidenav />
+          </div>
+        </div>
       )}
     </div>
   );
