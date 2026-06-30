@@ -33,6 +33,7 @@ export const FICHE = {
   DIVERS: "conventions collectives",
   ETABLISSEMENTS_SCOLAIRES: "établissements scolaires",
   ETABLISSEMENT: "fiche établissement",
+  COLLECTIVITE: "Collectivité",
 } as const;
 export type FICHE = (typeof FICHE)[keyof typeof FICHE];
 
@@ -145,6 +146,15 @@ const getUniteLegaleTabs = (
       label: "Conventions collectives",
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
+      width: "130px",
+    },
+    {
+      ficheType: FICHE.COLLECTIVITE,
+      params: { slug: uniteLegale.siren },
+      to: "/collectivite/$slug",
+      label: "Collectivité",
+      noFollow: false,
+      shouldDisplay: isCollectiviteTerritoriale(uniteLegale),
       width: "130px",
     },
   ];

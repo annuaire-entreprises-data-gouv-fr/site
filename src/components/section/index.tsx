@@ -62,7 +62,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           </div>
         )}
         <div className={style["section-header"]}>
-          <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
+          <h2 style={{ color: "#1d0d4b", backgroundColor: "#ebe7f7" }}>
             {title}
           </h2>
           <div className={style["section-logo-wrapper"]}>

@@ -41,6 +41,9 @@ importers:
       '@vcarl/remark-headings':
         specifier: 0.1.0
         version: 0.1.0
+      carte-facile:
+        specifier: 0.9.0
+        version: 0.9.0(maplibre-gl@5.24.0)
       chart.js:
         specifier: 4.5.1
         version: 4.5.1
@@ -2182,6 +2185,11 @@ packages:
   caniuse-lite@1.0.30001792:
     resolution: {integrity: sha512-hVLMUZFgR4JJ6ACt1uEESvQN1/dBVqPAKY0hgrV70eN3391K6juAfTjKZLKvOMsx8PxA7gsY1/tLMMTcfFLLpw==}
 
+  carte-facile@0.9.0:
+    resolution: {integrity: sha512-4A1exoMsAflb7LK/aUZJINY4bHeFRLdl1l3L5GMW+Yz6QfY5L3jax40XDjfNH1iZNXq6fFnarh8J3z9zuuC/yA==}
+    peerDependencies:
+      maplibre-gl: ^5.0.0
+
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
 
@@ -2600,6 +2608,7 @@ packages:
   git-raw-commits@5.0.1:
     resolution: {integrity: sha512-Y+csSm2GD/PCSh6Isd/WiMjNAydu0VBiG9J7EdQsNA5P9uXvLayqjmTsNlK5Gs9IhblFZqOU0yid5Il5JPoLiQ==}
     engines: {node: '>=18'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   gl-matrix@3.4.4:
@@ -6452,6 +6461,10 @@ snapshots:
   camelcase@5.3.1: {}
 
   caniuse-lite@1.0.30001792: {}
+
+  carte-facile@0.9.0(maplibre-gl@5.24.0):
+    dependencies:
+      maplibre-gl: 5.24.0
 
   ccount@2.0.1: {}
 
