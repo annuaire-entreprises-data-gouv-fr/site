@@ -148,6 +148,8 @@ const routes = {
     site: "https://www.education.gouv.fr/annuaire",
   },
   geo: {
+    commune: (codeInsee: string) =>
+      `https://geo.api.gouv.fr/communes/${codeInsee}?fields=code,nom,siren,codesPostaux,departement,region,population,type,epci,surface,centre,contour,mairie,bbox`,
     communes: "https://geo.api.gouv.fr/communes",
     departements: "https://geo.api.gouv.fr/departements",
     regions: "https://geo.api.gouv.fr/regions",
