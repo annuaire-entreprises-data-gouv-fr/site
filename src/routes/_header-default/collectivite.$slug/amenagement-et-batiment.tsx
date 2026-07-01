@@ -14,7 +14,7 @@ export const Route = createFileRoute(
 function RouteComponent() {
   const { geoCommune } = CollectiviteRoute.useLoaderData();
 
-  const { onMapLoad } = useRnbBuildings();
+  const { onMapLoad, onMapUnload } = useRnbBuildings();
 
   return (
     <Section
@@ -29,6 +29,7 @@ function RouteComponent() {
       <CollectiviteMap
         geoCommune={geoCommune}
         onMapReady={onMapLoad}
+        onMapUnload={onMapUnload}
         withCadastre
         withSearch
       />
