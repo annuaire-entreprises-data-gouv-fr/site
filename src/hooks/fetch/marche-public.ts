@@ -5,24 +5,31 @@ import { FetchRessourceException } from "#/models/exceptions";
 import logErrorInSentry from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
-export function useFetchMarchePublic(uniteLegale: ICollectiviteTerritoriale) {
+export function useFetchMarchePublic(
+  uniteLegale: ICollectiviteTerritoriale,
+  page = 1
+) {
   return useFetchExternalData(
     {
-      fetchData: async () => await clientMarchePublic(uniteLegale.siren),
-      administration: EAdministration.DINUM,
+      fetchData: () => clientMarchePublic(uniteLegale.siren, page),
+      administration: EAdministration.MEF,
       logError: (e: any) => {
+        if (e.status === 404) {
+          return;
+        }
         logErrorInSentry(
           new FetchRessourceException({
             ressource: "MarchePublic",
-            administration: EAdministration.DINUM,
+            administration: EAdministration.MEF,
             cause: e,
             context: {
               siren: uniteLegale.siren,
+              page: `${page}`,
             },
           })
         );
       },
     },
-    [uniteLegale]
+    [uniteLegale, page]
   );
 }
