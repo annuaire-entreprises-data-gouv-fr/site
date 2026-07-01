@@ -45,7 +45,7 @@ import { Route as HeaderDefaultAProposCommentCaMarcheRouteImport } from './route
 import { Route as HeaderDefaultAProposDonneesExtraitKbisRouteImport } from './routes/_header-default/a-propos/donnees-extrait-kbis'
 import { Route as HeaderDefaultAdministrationIndexRouteImport } from './routes/_header-default/administration.index'
 import { Route as HeaderDefaultAdministrationSlugRouteImport } from './routes/_header-default/administration.$slug'
-import { Route as HeaderDefaultCollectiviteSlugRouteImport } from './routes/_header-default/collectivite.$slug'
+import { Route as HeaderDefaultCollectiviteSlugRouteRouteImport } from './routes/_header-default/collectivite.$slug/route'
 import { Route as HeaderDefaultDefinitionsIndexRouteImport } from './routes/_header-default/definitions.index'
 import { Route as HeaderDefaultDefinitionsSlugRouteImport } from './routes/_header-default/definitions.$slug'
 import { Route as HeaderDefaultDonneesApiEntreprisesRouteImport } from './routes/_header-default/donnees.api-entreprises'
@@ -86,6 +86,8 @@ import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } 
 import { Route as HeaderConnexionConnexionHabilitationRefuseeRouteImport } from './routes/_header-connexion/connexion.habilitation.refusee'
 import { Route as HeaderConnexionConnexionHabilitationRequiseRouteImport } from './routes/_header-connexion/connexion.habilitation.requise'
 import { Route as HeaderDefaultAProposEquipeIndexRouteImport } from './routes/_header-default/a-propos/equipe/index'
+import { Route as HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport } from './routes/_header-default/collectivite.$slug/economie-locale'
+import { Route as HeaderDefaultCollectiviteSlugIdentiteRouteImport } from './routes/_header-default/collectivite.$slug/identite'
 import { Route as HeaderDefaultErreurIntrouvableSlugRouteImport } from './routes/_header-default/erreur.introuvable.$slug'
 import { Route as HeaderDefaultFaqModifierIndexRouteImport } from './routes/_header-default/faq.modifier.index'
 import { Route as HeaderDefaultFaqModifierSlugRouteImport } from './routes/_header-default/faq.modifier.$slug'
@@ -287,8 +289,8 @@ const HeaderDefaultAdministrationSlugRoute =
     path: '/administration/$slug',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
-const HeaderDefaultCollectiviteSlugRoute =
-  HeaderDefaultCollectiviteSlugRouteImport.update({
+const HeaderDefaultCollectiviteSlugRouteRoute =
+  HeaderDefaultCollectiviteSlugRouteRouteImport.update({
     id: '/collectivite/$slug',
     path: '/collectivite/$slug',
     getParentRoute: () => HeaderDefaultRouteRoute,
@@ -519,6 +521,18 @@ const HeaderDefaultAProposEquipeIndexRoute =
     path: '/a-propos/equipe/',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
+const HeaderDefaultCollectiviteSlugEconomieLocaleRoute =
+  HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport.update({
+    id: '/economie-locale',
+    path: '/economie-locale',
+    getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
+  } as any)
+const HeaderDefaultCollectiviteSlugIdentiteRoute =
+  HeaderDefaultCollectiviteSlugIdentiteRouteImport.update({
+    id: '/identite',
+    path: '/identite',
+    getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
+  } as any)
 const HeaderDefaultErreurIntrouvableSlugRoute =
   HeaderDefaultErreurIntrouvableSlugRouteImport.update({
     id: '/erreur/introuvable/$slug',
@@ -632,7 +646,6 @@ export interface FileRoutesByFullPath {
   '/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
-  '/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
@@ -673,6 +686,8 @@ export interface FileRoutesByFullPath {
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
   '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
@@ -685,7 +700,6 @@ export interface FileRoutesByFullPath {
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
   '/a-propos/equipe/': typeof HeaderDefaultAProposEquipeIndexRoute
-  '/collectivite/$slug/': typeof HeaderDefaultCollectiviteSlugIndexRoute
   '/faq/modifier/': typeof HeaderDefaultFaqModifierIndexRoute
   '/formulaire/nps/': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
@@ -708,6 +722,7 @@ export interface FileRoutesByTo {
   '/api/hide-personal-data': typeof ApiHidePersonalDataRoute
   '/api/inpi-pdf': typeof ApiInpiPdfRoute
   '/api/protected-siren': typeof ApiProtectedSirenRoute
+  '/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRouteRouteWithChildren
   '/compte/accueil': typeof HeaderCompteCompteAccueilRoute
   '/compte/mes-groupes': typeof HeaderCompteCompteMesGroupesRoute
   '/connexion/au-revoir': typeof HeaderConnexionConnexionAuRevoirRoute
@@ -716,7 +731,6 @@ export interface FileRoutesByTo {
   '/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
-  '/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
@@ -757,6 +771,8 @@ export interface FileRoutesByTo {
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
   '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
@@ -769,7 +785,6 @@ export interface FileRoutesByTo {
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
   '/a-propos/equipe': typeof HeaderDefaultAProposEquipeIndexRoute
-  '/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugIndexRoute
   '/faq/modifier': typeof HeaderDefaultFaqModifierIndexRoute
   '/formulaire/nps': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
@@ -812,7 +827,6 @@ export interface FileRoutesById {
   '/_header-default/a-propos/comment-ca-marche': typeof HeaderDefaultAProposCommentCaMarcheRoute
   '/_header-default/a-propos/donnees-extrait-kbis': typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   '/_header-default/administration/$slug': typeof HeaderDefaultAdministrationSlugRoute
-  '/_header-default/collectivite/$slug': typeof HeaderDefaultCollectiviteSlugRoute
   '/_header-default/definitions/$slug': typeof HeaderDefaultDefinitionsSlugRoute
   '/_header-default/donnees/api-entreprises': typeof HeaderDefaultDonneesApiEntreprisesRoute
   '/_header-default/donnees/sources': typeof HeaderDefaultDonneesSourcesRoute
@@ -853,6 +867,8 @@ export interface FileRoutesById {
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/_header-connexion/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/_header-connexion/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/_header-default/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/_header-default/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/_header-default/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/_header-default/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
   '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
@@ -865,7 +881,6 @@ export interface FileRoutesById {
   '/api/auth/france-connect/logout-callback': typeof ApiAuthFranceConnectLogoutCallbackRoute
   '/api/share/button/$slug': typeof ApiShareButtonSlugRoute
   '/_header-default/a-propos/equipe/': typeof HeaderDefaultAProposEquipeIndexRoute
-  '/_header-default/collectivite/$slug/': typeof HeaderDefaultCollectiviteSlugIndexRoute
   '/_header-default/faq/modifier/': typeof HeaderDefaultFaqModifierIndexRoute
   '/_header-minimal/formulaire/nps/': typeof HeaderMinimalFormulaireNpsIndexRoute
   '/api/download/espace-agent/documents/$slug': typeof ApiDownloadEspaceAgentDocumentsSlugRoute
@@ -901,7 +916,6 @@ export interface FileRouteTypes {
     | '/a-propos/comment-ca-marche'
     | '/a-propos/donnees-extrait-kbis'
     | '/administration/$slug'
-    | '/collectivite/$slug'
     | '/definitions/$slug'
     | '/donnees/api-entreprises'
     | '/donnees/sources'
@@ -942,6 +956,8 @@ export interface FileRouteTypes {
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
     | '/connexion/habilitation/requise'
+    | '/collectivite/$slug/economie-locale'
+    | '/collectivite/$slug/identite'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
     | '/api/auth/agent-connect/callback'
@@ -954,7 +970,6 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
     | '/a-propos/equipe/'
-    | '/collectivite/$slug/'
     | '/faq/modifier/'
     | '/formulaire/nps/'
     | '/api/download/espace-agent/documents/$slug'
@@ -977,6 +992,7 @@ export interface FileRouteTypes {
     | '/api/hide-personal-data'
     | '/api/inpi-pdf'
     | '/api/protected-siren'
+    | '/collectivite/$slug'
     | '/compte/accueil'
     | '/compte/mes-groupes'
     | '/connexion/au-revoir'
@@ -985,7 +1001,6 @@ export interface FileRouteTypes {
     | '/a-propos/comment-ca-marche'
     | '/a-propos/donnees-extrait-kbis'
     | '/administration/$slug'
-    | '/collectivite/$slug'
     | '/definitions/$slug'
     | '/donnees/api-entreprises'
     | '/donnees/sources'
@@ -1026,6 +1041,8 @@ export interface FileRouteTypes {
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
     | '/connexion/habilitation/requise'
+    | '/collectivite/$slug/economie-locale'
+    | '/collectivite/$slug/identite'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
     | '/api/auth/agent-connect/callback'
@@ -1038,7 +1055,6 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
     | '/a-propos/equipe'
-    | '/collectivite/$slug'
     | '/faq/modifier'
     | '/formulaire/nps'
     | '/api/download/espace-agent/documents/$slug'
@@ -1080,7 +1096,6 @@ export interface FileRouteTypes {
     | '/_header-default/a-propos/comment-ca-marche'
     | '/_header-default/a-propos/donnees-extrait-kbis'
     | '/_header-default/administration/$slug'
-    | '/_header-default/collectivite/$slug'
     | '/_header-default/definitions/$slug'
     | '/_header-default/donnees/api-entreprises'
     | '/_header-default/donnees/sources'
@@ -1121,6 +1136,8 @@ export interface FileRouteTypes {
     | '/_header-connexion/connexion/habilitation/prestataires'
     | '/_header-connexion/connexion/habilitation/refusee'
     | '/_header-connexion/connexion/habilitation/requise'
+    | '/_header-default/collectivite/$slug/economie-locale'
+    | '/_header-default/collectivite/$slug/identite'
     | '/_header-default/erreur/introuvable/$slug'
     | '/_header-default/faq/modifier/$slug'
     | '/api/auth/agent-connect/callback'
@@ -1133,7 +1150,6 @@ export interface FileRouteTypes {
     | '/api/auth/france-connect/logout-callback'
     | '/api/share/button/$slug'
     | '/_header-default/a-propos/equipe/'
-    | '/_header-default/collectivite/$slug/'
     | '/_header-default/faq/modifier/'
     | '/_header-minimal/formulaire/nps/'
     | '/api/download/espace-agent/documents/$slug'
@@ -1431,7 +1447,7 @@ declare module '@tanstack/react-router' {
       id: '/_header-default/collectivite/$slug'
       path: '/collectivite/$slug'
       fullPath: '/collectivite/$slug'
-      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugRouteImport
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugRouteRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-default/definitions/': {
@@ -1714,6 +1730,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultAProposEquipeIndexRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
+    '/_header-default/collectivite/$slug/economie-locale': {
+      id: '/_header-default/collectivite/$slug/economie-locale'
+      path: '/economie-locale'
+      fullPath: '/collectivite/$slug/economie-locale'
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport
+      parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
+    }
+    '/_header-default/collectivite/$slug/identite': {
+      id: '/_header-default/collectivite/$slug/identite'
+      path: '/identite'
+      fullPath: '/collectivite/$slug/identite'
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugIdentiteRouteImport
+      parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
+    }
     '/_header-default/erreur/introuvable/$slug': {
       id: '/_header-default/erreur/introuvable/$slug'
       path: '/erreur/introuvable/$slug'
@@ -1855,13 +1885,16 @@ const HeaderConnexionRouteRouteWithChildren =
   HeaderConnexionRouteRoute._addFileChildren(HeaderConnexionRouteRouteChildren)
 
 interface HeaderDefaultCollectiviteSlugRouteRouteChildren {
-  HeaderDefaultCollectiviteSlugIndexRoute: typeof HeaderDefaultCollectiviteSlugIndexRoute
+  HeaderDefaultCollectiviteSlugEconomieLocaleRoute: typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  HeaderDefaultCollectiviteSlugIdentiteRoute: typeof HeaderDefaultCollectiviteSlugIdentiteRoute
 }
 
 const HeaderDefaultCollectiviteSlugRouteRouteChildren: HeaderDefaultCollectiviteSlugRouteRouteChildren =
   {
-    HeaderDefaultCollectiviteSlugIndexRoute:
-      HeaderDefaultCollectiviteSlugIndexRoute,
+    HeaderDefaultCollectiviteSlugEconomieLocaleRoute:
+      HeaderDefaultCollectiviteSlugEconomieLocaleRoute,
+    HeaderDefaultCollectiviteSlugIdentiteRoute:
+      HeaderDefaultCollectiviteSlugIdentiteRoute,
   }
 
 const HeaderDefaultCollectiviteSlugRouteRouteWithChildren =
@@ -1883,7 +1916,6 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultAProposCommentCaMarcheRoute: typeof HeaderDefaultAProposCommentCaMarcheRoute
   HeaderDefaultAProposDonneesExtraitKbisRoute: typeof HeaderDefaultAProposDonneesExtraitKbisRoute
   HeaderDefaultAdministrationSlugRoute: typeof HeaderDefaultAdministrationSlugRoute
-  HeaderDefaultCollectiviteSlugRoute: typeof HeaderDefaultCollectiviteSlugRoute
   HeaderDefaultDefinitionsSlugRoute: typeof HeaderDefaultDefinitionsSlugRoute
   HeaderDefaultDonneesApiEntreprisesRoute: typeof HeaderDefaultDonneesApiEntreprisesRoute
   HeaderDefaultDonneesSourcesRoute: typeof HeaderDefaultDonneesSourcesRoute
@@ -1920,7 +1952,6 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
   HeaderDefaultAProposDonneesExtraitKbisRoute:
     HeaderDefaultAProposDonneesExtraitKbisRoute,
   HeaderDefaultAdministrationSlugRoute: HeaderDefaultAdministrationSlugRoute,
-  HeaderDefaultCollectiviteSlugRoute: HeaderDefaultCollectiviteSlugRoute,
   HeaderDefaultDefinitionsSlugRoute: HeaderDefaultDefinitionsSlugRoute,
   HeaderDefaultDonneesApiEntreprisesRoute:
     HeaderDefaultDonneesApiEntreprisesRoute,

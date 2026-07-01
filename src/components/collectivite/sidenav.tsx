@@ -1,137 +1,91 @@
-import { useEffect, useState } from "react";
+import { useMatchRoute } from "@tanstack/react-router";
+import { type ComponentProps, useState } from "react";
+import { Link } from "../link";
 
-interface INavigationItem {
+interface INavigationItem
+  extends Omit<ComponentProps<typeof Link>, "children"> {
   children?: INavigationItem[];
-  href: string;
   id: string;
   label: string;
 }
 const navigationItems: INavigationItem[] = [
   {
-    href: "#identite",
+    to: "/collectivite/$slug/identite",
     id: "identite",
     label: "Identité de la collectivité",
   },
   {
     children: [
       {
-        href: "#adresses-bati",
+        to: "/collectivite/$slug/adresses-bati" as any,
         id: "adresses-bati",
         label: "Adresses & bâti",
       },
-      { href: "#urbanisme", id: "urbanisme", label: "Urbanisme" },
+      {
+        to: "/collectivite/$slug/urbanisme" as any,
+        id: "urbanisme",
+        label: "Urbanisme",
+      },
     ],
-    href: "#amenagement-du-territoire",
     id: "amenagement-du-territoire",
     label: "Aménagement du territoire",
   },
-  { href: "#transport", id: "transport", label: "Transport" },
-  { href: "#education", id: "education", label: "Éducation" },
-  { href: "#environnement", id: "environnement", label: "Environnement" },
-  { href: "#elections", id: "elections", label: "Élections" },
   {
-    href: "#economie-locale",
+    to: "/collectivite/$slug/transport" as any,
+    id: "transport",
+    label: "Transport",
+  },
+  {
+    to: "/collectivite/$slug/education" as any,
+    id: "education",
+    label: "Éducation",
+  },
+  {
+    to: "/collectivite/$slug/environnement" as any,
+    id: "environnement",
+    label: "Environnement",
+  },
+  {
+    to: "/collectivite/$slug/elections" as any,
+    id: "elections",
+    label: "Élections",
+  },
+  {
+    to: "/collectivite/$slug/economie-locale",
     id: "economie-locale",
     label: "Économie locale",
   },
-  { href: "#demographie", id: "demographie", label: "Démographie" },
-  { href: "#finances", id: "finances", label: "Finances" },
+  {
+    to: "/collectivite/$slug/demographie" as any,
+    id: "demographie",
+    label: "Démographie",
+  },
+  {
+    to: "/collectivite/$slug/finances" as any,
+    id: "finances",
+    label: "Finances",
+  },
 ];
-
-const defaultActiveHref = navigationItems[0].href;
-const defaultExpandedSectionIds = [navigationItems[0].id];
 
 function collapseClassName(isExpanded: boolean) {
   return `fr-collapse${isExpanded ? " fr-collapse--expanded" : ""}`;
-}
-
-function findParentSectionIds(
-  href: string,
-  items = navigationItems,
-  parentIds: string[] = []
-): string[] {
-  for (const item of items) {
-    if (item.href === href) {
-      return parentIds;
-    }
-
-    if (item.children) {
-      const parents = findParentSectionIds(href, item.children, [
-        ...parentIds,
-        item.id,
-      ]);
-
-      if (parents.length > 0) {
-        return parents;
-      }
-    }
-  }
-
-  return [];
 }
 
 function getSidemenuItemClassName(isActive: boolean) {
   return `fr-sidemenu__item${isActive ? " fr-sidemenu__item--active" : ""}`;
 }
 
-function hasNavigationHref(href: string, items = navigationItems): boolean {
-  return items.some(
-    (item) =>
-      item.href === href ||
-      (item.children ? hasNavigationHref(href, item.children) : false)
-  );
+interface CollectiviteSidenavProps {
+  slug: string;
 }
 
-export function CollectiviteSidenav() {
-  const [activeHref, setActiveHref] = useState(defaultActiveHref);
-  const [expandedSectionIds, setExpandedSectionIds] = useState(
-    () => new Set(defaultExpandedSectionIds)
-  );
+export function CollectiviteSidenav(props: CollectiviteSidenavProps) {
+  const { slug } = props;
+  const [expandedSectionIds, setExpandedSectionIds] = useState(() => new Set());
   const [isMenuExpanded, setIsMenuExpanded] = useState(true);
-
-  useEffect(() => {
-    const updateActiveHrefFromHash = () => {
-      const hash = window.location.hash;
-
-      if (!hasNavigationHref(hash)) {
-        return;
-      }
-
-      setActiveHref(hash);
-      setExpandedSectionIds((currentExpandedSectionIds) => {
-        const nextExpandedSectionIds = new Set(currentExpandedSectionIds);
-
-        for (const sectionId of findParentSectionIds(hash)) {
-          nextExpandedSectionIds.add(sectionId);
-        }
-
-        return nextExpandedSectionIds;
-      });
-    };
-
-    updateActiveHrefFromHash();
-    window.addEventListener("hashchange", updateActiveHrefFromHash);
-
-    return () => {
-      window.removeEventListener("hashchange", updateActiveHrefFromHash);
-    };
-  }, []);
-
-  const handleLinkClick = (href: string) => {
-    setActiveHref(href);
-    setExpandedSectionIds((currentExpandedSectionIds) => {
-      const nextExpandedSectionIds = new Set(currentExpandedSectionIds);
-
-      for (const sectionId of findParentSectionIds(href)) {
-        nextExpandedSectionIds.add(sectionId);
-      }
-
-      return nextExpandedSectionIds;
-    });
-  };
+  const matchRoute = useMatchRoute();
 
   const handleSectionClick = (item: INavigationItem) => {
-    setActiveHref(item.href);
     setExpandedSectionIds((currentExpandedSectionIds) => {
       const nextExpandedSectionIds = new Set(currentExpandedSectionIds);
 
@@ -167,10 +121,8 @@ export function CollectiviteSidenav() {
           <ul className="fr-sidemenu__list">
             {navigationItems.map((item) => {
               const hasChildren = !!item.children?.length;
-              const isActive =
-                activeHref === item.href ||
-                !!item.children?.some((child) => child.href === activeHref);
-              const isExpanded = expandedSectionIds.has(item.id);
+              const isActive = false;
+              const isExpanded = expandedSectionIds.has(item.id) || isActive;
               const submenuId = `sidemenu-${item.id}`;
 
               return (
@@ -198,36 +150,40 @@ export function CollectiviteSidenav() {
                           {item.children?.map((child) => (
                             <li
                               className={getSidemenuItemClassName(
-                                activeHref === child.href
+                                child.to
+                                  ? !!matchRoute({ to: child.to })
+                                  : false
                               )}
                               key={child.id}
                             >
-                              <a
+                              <Link
                                 aria-current={
-                                  activeHref === child.href ? "page" : undefined
+                                  child.to && matchRoute({ to: child.to })
+                                    ? "page"
+                                    : undefined
                                 }
                                 className="fr-sidemenu__link"
-                                href={child.href}
-                                onClick={() => handleLinkClick(child.href)}
+                                params={{ slug }}
+                                resetScroll={false}
+                                to={child.to}
                               >
                                 {child.label}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
                       </div>
                     </>
                   ) : (
-                    <a
-                      aria-current={
-                        activeHref === item.href ? "page" : undefined
-                      }
+                    <Link
+                      aria-current={isActive ? "page" : undefined}
                       className="fr-sidemenu__link"
-                      href={item.href}
-                      onClick={() => handleLinkClick(item.href)}
+                      params={{ slug }}
+                      resetScroll={false}
+                      to={item.to}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   )}
                 </li>
               );

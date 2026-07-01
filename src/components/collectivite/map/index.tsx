@@ -6,6 +6,8 @@ import type { ICollectiviteTerritoriale } from "#/models/core/types";
 
 interface ICollectiviteMapProps {
   geoCommune: IGeoCommune;
+  onMapReady?: (map: maplibregl.Map) => void;
+  onMapUnload?: () => void;
   uniteLegale: ICollectiviteTerritoriale;
 }
 
@@ -95,9 +97,10 @@ function drawCommuneOnMap(map: maplibregl.Map, contour: CommuneContour) {
 export function CollectiviteMap({
   uniteLegale,
   geoCommune,
+  onMapReady,
+  onMapUnload,
 }: ICollectiviteMapProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
-  const mairieMarkerRef = useRef<maplibregl.Marker | null>(null);
 
   useEffect(() => {
     if (uniteLegale.colter) {
@@ -123,13 +126,12 @@ export function CollectiviteMap({
       addOverlay(map, Overlay.administrativeBoundaries);
 
       return () => {
-        mairieMarkerRef.current?.remove();
-        mairieMarkerRef.current = null;
+        onMapUnload?.();
         mapRef.current = null;
         map.remove();
       };
     }
-  }, [uniteLegale.colter]);
+  }, [uniteLegale.colter, onMapUnload]);
 
   useEffect(() => {
     if (!(geoCommune.contour && mapRef.current)) {
@@ -139,16 +141,7 @@ export function CollectiviteMap({
     const map = mapRef.current;
     const drawCommune = () => {
       drawCommuneOnMap(map, geoCommune.contour);
-
-      mairieMarkerRef.current?.remove();
-      mairieMarkerRef.current = new maplibregl.Marker({ color: "#000091" })
-        .setLngLat(geoCommune.mairie.coordinates)
-        .setPopup(
-          new maplibregl.Popup({ offset: 16 }).setText(
-            `Mairie de ${geoCommune.nom}`
-          )
-        )
-        .addTo(map);
+      onMapReady?.(map);
     };
 
     if (map.isStyleLoaded()) {
@@ -159,10 +152,9 @@ export function CollectiviteMap({
 
     return () => {
       map.off("load", drawCommune);
-      mairieMarkerRef.current?.remove();
-      mairieMarkerRef.current = null;
+      onMapUnload?.();
     };
-  }, [geoCommune]);
+  }, [geoCommune, onMapReady, onMapUnload]);
 
   return <div id="collectivite-map" style={{ height: "500px" }} />;
 }
