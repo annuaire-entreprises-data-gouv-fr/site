@@ -130,7 +130,7 @@ function RouteComponent() {
             <Outlet />
           </div>
           <div className="fr-col-12 fr-col-md-4">
-            <CollectiviteSidenav />
+            <CollectiviteSidenav slug={uniteLegale.siren} />
           </div>
         </div>
       )}

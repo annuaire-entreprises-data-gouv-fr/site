@@ -152,7 +152,7 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.COLLECTIVITE,
       params: { slug: uniteLegale.siren },
-      to: "/collectivite/$slug",
+      to: "/collectivite/$slug/identite",
       label: "Collectivité",
       noFollow: false,
       shouldDisplay: isCollectiviteTerritoriale(uniteLegale),
