@@ -1,0 +1,92 @@
+.mapLayout {
+  position: relative;
+  height: 500px;
+}
+
+.detailsOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: min(22rem, calc(100% - 2rem));
+}
+
+.detailsPanel {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  background:
+    linear-gradient(
+      180deg,
+      var(--background-alt-blue-france) 0,
+      var(--background-default-grey) 8rem
+    ),
+    var(--background-default-grey);
+  border: 1px solid var(--border-default-grey);
+  border-left: 0.25rem solid var(--border-action-high-blue-france);
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 18, 0.08);
+}
+
+.panelHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--background-alt-blue-france);
+  border-bottom: 1px solid var(--border-default-grey);
+}
+
+.eyebrow {
+  color: var(--text-mention-grey);
+}
+
+.rnbId {
+  overflow-wrap: anywhere;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  padding: 0;
+}
+
+.closeButtonSymbol {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.stateMessage {
+  color: var(--text-mention-grey);
+}
+
+.detailBlock {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-default-grey);
+}
+
+.detailLabel {
+  color: var(--text-label-grey);
+}
+
+.detailValue {
+  overflow-wrap: anywhere;
+}
+
+.detailList {
+  list-style: none;
+}
+
+.detailListItem {
+  padding: 0.5rem 0;
+  overflow-wrap: anywhere;
+  border-top: 1px solid var(--border-default-grey);
+}
+
+.detailListItem:first-child {
+  padding-top: 0;
+  border-top: 0;
+}

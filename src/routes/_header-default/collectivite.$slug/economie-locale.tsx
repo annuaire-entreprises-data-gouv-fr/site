@@ -10,7 +10,8 @@ import { Route as CollectiviteRoute } from "./route";
 
 const loadRouteData = createServerFn().handler(async () => {
   const effectifs = await httpGet<CollectiviteEconomieLocaleEffectifsResponse>(
-    "https://ade.s3.sbg.io.cloud.ovh.net/ae/dev/adc/13101.json"
+    "https://ade.s3.sbg.io.cloud.ovh.net/ae/dev/adc/44109.json"
+    // "https://ade.s3.sbg.io.cloud.ovh.net/ae/dev/adc/13101.json"
   );
 
   return {

@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { RnbBuildingDetailsPanel } from "#/components/collectivite/amenagement-et-batiment/rnb-building-details-panel";
+import styles from "#/components/collectivite/amenagement-et-batiment/styles.module.css";
 import { useRnbBuildings } from "#/components/collectivite/amenagement-et-batiment/use-rnb-buildings";
 import { CollectiviteMap } from "#/components/collectivite/map";
 import { Section } from "#/components/section";
@@ -14,7 +16,9 @@ export const Route = createFileRoute(
 function RouteComponent() {
   const { geoCommune } = CollectiviteRoute.useLoaderData();
 
-  const { onMapLoad, onMapUnload } = useRnbBuildings();
+  const { clearSelectedBuilding, onMapLoad, onMapUnload, selectedBuilding } =
+    useRnbBuildings();
+  const hasSelectedBuilding = selectedBuilding.state !== "idle";
 
   return (
     <Section
@@ -26,13 +30,23 @@ function RouteComponent() {
         Zoomez dans la commune pour afficher les bâtiments référencés par le RNB
         et leurs identifiants, ainsi que le cadastre.
       </p>
-      <CollectiviteMap
-        geoCommune={geoCommune}
-        onMapReady={onMapLoad}
-        onMapUnload={onMapUnload}
-        withCadastre
-        withSearch
-      />
+      <div className={styles.mapLayout}>
+        {hasSelectedBuilding && (
+          <div className={styles.detailsOverlay}>
+            <RnbBuildingDetailsPanel
+              onClose={clearSelectedBuilding}
+              selection={selectedBuilding}
+            />
+          </div>
+        )}
+        <CollectiviteMap
+          geoCommune={geoCommune}
+          onMapReady={onMapLoad}
+          onMapUnload={onMapUnload}
+          withCadastre
+          withSearch
+        />
+      </div>
     </Section>
   );
 }
