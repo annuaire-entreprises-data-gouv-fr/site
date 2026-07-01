@@ -88,6 +88,7 @@ import { Route as ApiAuthAgentConnectCallbackRouteImport } from './routes/api/au
 import { Route as HeaderDefaultFaqModifierSlugRouteImport } from './routes/_header-default/faq.modifier.$slug'
 import { Route as HeaderDefaultErreurIntrouvableSlugRouteImport } from './routes/_header-default/erreur.introuvable.$slug'
 import { Route as HeaderDefaultCollectiviteSlugIdentiteRouteImport } from './routes/_header-default/collectivite.$slug/identite'
+import { Route as HeaderDefaultCollectiviteSlugFinancesRouteImport } from './routes/_header-default/collectivite.$slug/finances'
 import { Route as HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport } from './routes/_header-default/collectivite.$slug/economie-locale'
 import { Route as HeaderDefaultCollectiviteSlugAmenagementEtBatimentRouteImport } from './routes/_header-default/collectivite.$slug/amenagement-et-batiment'
 import { Route as HeaderConnexionConnexionHabilitationRequiseRouteImport } from './routes/_header-connexion/connexion.habilitation.requise'
@@ -535,6 +536,12 @@ const HeaderDefaultCollectiviteSlugIdentiteRoute =
     path: '/identite',
     getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
   } as any)
+const HeaderDefaultCollectiviteSlugFinancesRoute =
+  HeaderDefaultCollectiviteSlugFinancesRouteImport.update({
+    id: '/finances',
+    path: '/finances',
+    getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
+  } as any)
 const HeaderDefaultCollectiviteSlugEconomieLocaleRoute =
   HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport.update({
     id: '/economie-locale',
@@ -641,6 +648,7 @@ export interface FileRoutesByFullPath {
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
@@ -721,6 +729,7 @@ export interface FileRoutesByTo {
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
@@ -810,6 +819,7 @@ export interface FileRoutesById {
   '/_header-connexion/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/_header-default/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/_header-default/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/_header-default/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/_header-default/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/_header-default/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/_header-default/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
@@ -892,6 +902,7 @@ export interface FileRouteTypes {
     | '/connexion/habilitation/requise'
     | '/collectivite/$slug/amenagement-et-batiment'
     | '/collectivite/$slug/economie-locale'
+    | '/collectivite/$slug/finances'
     | '/collectivite/$slug/identite'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
@@ -972,6 +983,7 @@ export interface FileRouteTypes {
     | '/connexion/habilitation/requise'
     | '/collectivite/$slug/amenagement-et-batiment'
     | '/collectivite/$slug/economie-locale'
+    | '/collectivite/$slug/finances'
     | '/collectivite/$slug/identite'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
@@ -1060,6 +1072,7 @@ export interface FileRouteTypes {
     | '/_header-connexion/connexion/habilitation/requise'
     | '/_header-default/collectivite/$slug/amenagement-et-batiment'
     | '/_header-default/collectivite/$slug/economie-locale'
+    | '/_header-default/collectivite/$slug/finances'
     | '/_header-default/collectivite/$slug/identite'
     | '/_header-default/erreur/introuvable/$slug'
     | '/_header-default/faq/modifier/$slug'
@@ -1665,6 +1678,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultCollectiviteSlugIdentiteRouteImport
       parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
     }
+    '/_header-default/collectivite/$slug/finances': {
+      id: '/_header-default/collectivite/$slug/finances'
+      path: '/finances'
+      fullPath: '/collectivite/$slug/finances'
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugFinancesRouteImport
+      parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
+    }
     '/_header-default/collectivite/$slug/economie-locale': {
       id: '/_header-default/collectivite/$slug/economie-locale'
       path: '/economie-locale'
@@ -1759,6 +1779,7 @@ const HeaderConnexionRouteRouteWithChildren =
 interface HeaderDefaultCollectiviteSlugRouteRouteChildren {
   HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute: typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   HeaderDefaultCollectiviteSlugEconomieLocaleRoute: typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  HeaderDefaultCollectiviteSlugFinancesRoute: typeof HeaderDefaultCollectiviteSlugFinancesRoute
   HeaderDefaultCollectiviteSlugIdentiteRoute: typeof HeaderDefaultCollectiviteSlugIdentiteRoute
 }
 
@@ -1768,6 +1789,8 @@ const HeaderDefaultCollectiviteSlugRouteRouteChildren: HeaderDefaultCollectivite
       HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute,
     HeaderDefaultCollectiviteSlugEconomieLocaleRoute:
       HeaderDefaultCollectiviteSlugEconomieLocaleRoute,
+    HeaderDefaultCollectiviteSlugFinancesRoute:
+      HeaderDefaultCollectiviteSlugFinancesRoute,
     HeaderDefaultCollectiviteSlugIdentiteRoute:
       HeaderDefaultCollectiviteSlugIdentiteRoute,
   }

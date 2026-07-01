@@ -124,6 +124,14 @@ const routes = {
         "https://data.economie.gouv.fr/api/records/1.0/search/?dataset=ratios_inpi_bce",
     },
   },
+  marchePublic: {
+    ods: {
+      metadata:
+        "https://data.economie.gouv.fr/api/datasets/1.0/decp-2022-marches-valides/",
+      search:
+        "https://data.economie.gouv.fr/api/records/1.0/search/?dataset=decp-2022-marches-valides",
+    },
+  },
   dgefp: {
     metadata:
       "https://dgefp.opendatasoft.com/api/datasets/1.0/liste-publique-des-of-v2",

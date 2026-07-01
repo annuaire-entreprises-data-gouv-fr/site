@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import maplibregl from "maplibre-gl";
 import { useCallback, useRef } from "react";
-import { CollectiviteGeoSection } from "#/components/collectivite/geo-section";
+import { CollectiviteGeoSection } from "#/components/collectivite/identite/geo-section";
 import { CollectiviteMap } from "#/components/collectivite/map";
 import { Route as CollectiviteRoute } from "./route";
 
