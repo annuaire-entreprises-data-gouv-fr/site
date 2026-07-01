@@ -17,9 +17,9 @@ const navigationItems: INavigationItem[] = [
   {
     children: [
       {
-        to: "/collectivite/$slug/adresses-bati" as any,
-        id: "adresses-bati",
-        label: "Adresses & bâti",
+        to: "/collectivite/$slug/amenagement-et-batiment",
+        id: "amenagement-et-batiment",
+        label: "Aménagement et bâtiment",
       },
       {
         to: "/collectivite/$slug/urbanisme" as any,
@@ -121,8 +121,14 @@ export function CollectiviteSidenav(props: CollectiviteSidenavProps) {
           <ul className="fr-sidemenu__list">
             {navigationItems.map((item) => {
               const hasChildren = !!item.children?.length;
-              const isActive = false;
-              const isExpanded = expandedSectionIds.has(item.id) || isActive;
+              const isActive = !!(item.to && matchRoute({ to: item.to }));
+              const hasActiveChildren = !!item.children?.some(
+                (child) => child.to && matchRoute({ to: child.to })
+              );
+              const isExpanded =
+                expandedSectionIds.has(item.id) ||
+                isActive ||
+                hasActiveChildren;
               const submenuId = `sidemenu-${item.id}`;
 
               return (

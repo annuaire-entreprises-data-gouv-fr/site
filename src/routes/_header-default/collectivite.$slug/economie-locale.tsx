@@ -30,12 +30,12 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  const { uniteLegale, geoCommune } = CollectiviteRoute.useLoaderData();
+  const { geoCommune } = CollectiviteRoute.useLoaderData();
   const { effectifs } = Route.useLoaderData();
 
   return (
     <>
-      <CollectiviteMap geoCommune={geoCommune} uniteLegale={uniteLegale} />
+      <CollectiviteMap geoCommune={geoCommune} />
       <CollectiviteEconomieLocaleSection effectifs={effectifs} />
     </>
   );

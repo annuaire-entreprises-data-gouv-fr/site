@@ -1,18 +1,18 @@
 import { addOverlay, mapStyles, Overlay, SearchControl } from "carte-facile";
 import maplibregl, { type GeoJSONSource } from "maplibre-gl";
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 import type { IGeoCommune } from "#/clients/api-geo/interface";
-import type { ICollectiviteTerritoriale } from "#/models/core/types";
 
 interface ICollectiviteMapProps {
   geoCommune: IGeoCommune;
   onMapReady?: (map: maplibregl.Map) => void;
   onMapUnload?: () => void;
-  uniteLegale: ICollectiviteTerritoriale;
+  withCadastre?: boolean;
+  withSearch?: boolean;
 }
 
 const communeFillLayerId = "collectivite-commune-fill";
-const communeLineLayerId = "collectivite-commune-line";
+export const communeLineLayerId = "collectivite-commune-line";
 const communeSourceId = "collectivite-commune";
 
 interface CommuneContour {
@@ -95,24 +95,26 @@ function drawCommuneOnMap(map: maplibregl.Map, contour: CommuneContour) {
 }
 
 export function CollectiviteMap({
-  uniteLegale,
   geoCommune,
   onMapReady,
   onMapUnload,
+  withCadastre = false,
+  withSearch = false,
 }: ICollectiviteMapProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
+  const mapContainerId = useId();
 
   useEffect(() => {
-    if (uniteLegale.colter) {
-      // Création la carte
-      const map = new maplibregl.Map({
-        container: "collectivite-map", // id du conteneur de la carte
-        style: mapStyles.simple, // style de carte
-        maxZoom: 18.9, // niveau de zoom maximum, adapté aux cartes utilisant les données IGN
-      });
+    // Création la carte
+    const map = new maplibregl.Map({
+      container: mapContainerId, // id du conteneur de la carte
+      style: mapStyles.simple, // style de carte
+      maxZoom: 18.9, // niveau de zoom maximum, adapté aux cartes utilisant les données IGN
+    });
 
-      mapRef.current = map;
+    mapRef.current = map;
 
+    if (withSearch) {
       map.addControl(
         new SearchControl({
           placeholder: "Rechercher une adresse…",
@@ -122,16 +124,21 @@ export function CollectiviteMap({
         }),
         "top-right"
       );
-
-      addOverlay(map, Overlay.administrativeBoundaries);
-
-      return () => {
-        onMapUnload?.();
-        mapRef.current = null;
-        map.remove();
-      };
     }
-  }, [uniteLegale.colter, onMapUnload]);
+
+    addOverlay(
+      map,
+      withCadastre
+        ? [Overlay.administrativeBoundaries, Overlay.cadastre]
+        : Overlay.administrativeBoundaries
+    );
+
+    return () => {
+      onMapUnload?.();
+      mapRef.current = null;
+      map.remove();
+    };
+  }, [mapContainerId, onMapUnload, withCadastre, withSearch]);
 
   useEffect(() => {
     if (!(geoCommune.contour && mapRef.current)) {
@@ -156,5 +163,5 @@ export function CollectiviteMap({
     };
   }, [geoCommune, onMapReady, onMapUnload]);
 
-  return <div id="collectivite-map" style={{ height: "500px" }} />;
+  return <div id={mapContainerId} style={{ height: "500px" }} />;
 }
