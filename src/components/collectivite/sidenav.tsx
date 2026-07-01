@@ -61,7 +61,7 @@ const navigationItems: INavigationItem[] = [
     label: "Démographie",
   },
   {
-    to: "/collectivite/$slug/finances" as any,
+    to: "/collectivite/$slug/finances",
     id: "finances",
     label: "Finances",
   },

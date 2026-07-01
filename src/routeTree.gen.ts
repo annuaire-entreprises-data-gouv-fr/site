@@ -688,6 +688,7 @@ export interface FileRoutesByFullPath {
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
@@ -774,6 +775,7 @@ export interface FileRoutesByTo {
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
@@ -871,6 +873,7 @@ export interface FileRoutesById {
   '/_header-connexion/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
   '/_header-default/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/_header-default/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  '/_header-default/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/_header-default/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/_header-default/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/_header-default/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
@@ -961,6 +964,7 @@ export interface FileRouteTypes {
     | '/connexion/habilitation/requise'
     | '/collectivite/$slug/amenagement-et-batiment'
     | '/collectivite/$slug/economie-locale'
+    | '/collectivite/$slug/finances'
     | '/collectivite/$slug/identite'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
@@ -1047,6 +1051,7 @@ export interface FileRouteTypes {
     | '/connexion/habilitation/requise'
     | '/collectivite/$slug/amenagement-et-batiment'
     | '/collectivite/$slug/economie-locale'
+    | '/collectivite/$slug/finances'
     | '/collectivite/$slug/identite'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
@@ -1143,6 +1148,7 @@ export interface FileRouteTypes {
     | '/_header-connexion/connexion/habilitation/requise'
     | '/_header-default/collectivite/$slug/amenagement-et-batiment'
     | '/_header-default/collectivite/$slug/economie-locale'
+    | '/_header-default/collectivite/$slug/finances'
     | '/_header-default/collectivite/$slug/identite'
     | '/_header-default/erreur/introuvable/$slug'
     | '/_header-default/faq/modifier/$slug'
@@ -1893,6 +1899,7 @@ const HeaderConnexionRouteRouteWithChildren =
 interface HeaderDefaultCollectiviteSlugRouteRouteChildren {
   HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute: typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   HeaderDefaultCollectiviteSlugEconomieLocaleRoute: typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
+  HeaderDefaultCollectiviteSlugFinancesRoute: typeof HeaderDefaultCollectiviteSlugFinancesRoute
   HeaderDefaultCollectiviteSlugIdentiteRoute: typeof HeaderDefaultCollectiviteSlugIdentiteRoute
 }
 
@@ -1902,6 +1909,8 @@ const HeaderDefaultCollectiviteSlugRouteRouteChildren: HeaderDefaultCollectivite
       HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute,
     HeaderDefaultCollectiviteSlugEconomieLocaleRoute:
       HeaderDefaultCollectiviteSlugEconomieLocaleRoute,
+    HeaderDefaultCollectiviteSlugFinancesRoute:
+      HeaderDefaultCollectiviteSlugFinancesRoute,
     HeaderDefaultCollectiviteSlugIdentiteRoute:
       HeaderDefaultCollectiviteSlugIdentiteRoute,
   }
