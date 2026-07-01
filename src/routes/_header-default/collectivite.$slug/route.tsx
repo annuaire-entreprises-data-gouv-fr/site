@@ -126,10 +126,10 @@ function RouteComponent() {
         <NonDiffusibleStrictSection />
       ) : (
         <div className="fr-grid-row fr-grid-row--gutters fr-mt-4w">
-          <div className="fr-col-12 fr-col-md-8">
+          <div className="fr-col-12 fr-col-md-9">
             <Outlet />
           </div>
-          <div className="fr-col-12 fr-col-md-4">
+          <div className="fr-col-12 fr-col-md-3">
             <CollectiviteSidenav slug={uniteLegale.siren} />
           </div>
         </div>
