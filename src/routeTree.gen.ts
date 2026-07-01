@@ -686,6 +686,7 @@ export interface FileRoutesByFullPath {
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
   '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
@@ -771,6 +772,7 @@ export interface FileRoutesByTo {
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
   '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
@@ -867,6 +869,7 @@ export interface FileRoutesById {
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/_header-connexion/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
   '/_header-connexion/connexion/habilitation/requise': typeof HeaderConnexionConnexionHabilitationRequiseRoute
+  '/_header-default/collectivite/$slug/amenagement-et-batiment': typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   '/_header-default/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
   '/_header-default/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
   '/_header-default/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
@@ -956,6 +959,7 @@ export interface FileRouteTypes {
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
     | '/connexion/habilitation/requise'
+    | '/collectivite/$slug/amenagement-et-batiment'
     | '/collectivite/$slug/economie-locale'
     | '/collectivite/$slug/identite'
     | '/erreur/introuvable/$slug'
@@ -1041,6 +1045,7 @@ export interface FileRouteTypes {
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
     | '/connexion/habilitation/requise'
+    | '/collectivite/$slug/amenagement-et-batiment'
     | '/collectivite/$slug/economie-locale'
     | '/collectivite/$slug/identite'
     | '/erreur/introuvable/$slug'
@@ -1136,6 +1141,7 @@ export interface FileRouteTypes {
     | '/_header-connexion/connexion/habilitation/prestataires'
     | '/_header-connexion/connexion/habilitation/refusee'
     | '/_header-connexion/connexion/habilitation/requise'
+    | '/_header-default/collectivite/$slug/amenagement-et-batiment'
     | '/_header-default/collectivite/$slug/economie-locale'
     | '/_header-default/collectivite/$slug/identite'
     | '/_header-default/erreur/introuvable/$slug'
@@ -1885,12 +1891,15 @@ const HeaderConnexionRouteRouteWithChildren =
   HeaderConnexionRouteRoute._addFileChildren(HeaderConnexionRouteRouteChildren)
 
 interface HeaderDefaultCollectiviteSlugRouteRouteChildren {
+  HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute: typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute
   HeaderDefaultCollectiviteSlugEconomieLocaleRoute: typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
   HeaderDefaultCollectiviteSlugIdentiteRoute: typeof HeaderDefaultCollectiviteSlugIdentiteRoute
 }
 
 const HeaderDefaultCollectiviteSlugRouteRouteChildren: HeaderDefaultCollectiviteSlugRouteRouteChildren =
   {
+    HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute:
+      HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute,
     HeaderDefaultCollectiviteSlugEconomieLocaleRoute:
       HeaderDefaultCollectiviteSlugEconomieLocaleRoute,
     HeaderDefaultCollectiviteSlugIdentiteRoute:

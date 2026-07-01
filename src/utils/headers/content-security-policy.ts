@@ -28,6 +28,7 @@ const cspDirectives = {
     "https://openmaptiles.data.gouv.fr/",
     "https://geo.api.gouv.fr",
     "https://data.geopf.fr",
+    "https://rnb-api.beta.gouv.fr",
     "https://tabular-api.data.gouv.fr",
     "https://koumoul.com",
     "https://dgal.opendatasoft.com",
