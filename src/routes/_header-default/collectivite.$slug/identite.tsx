@@ -12,7 +12,7 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  const { uniteLegale, geoCommune } = CollectiviteRoute.useLoaderData();
+  const { geoCommune } = CollectiviteRoute.useLoaderData();
   const mairieMarkerRef = useRef<maplibregl.Marker | null>(null);
 
   const onMapReady = useCallback(
@@ -41,7 +41,6 @@ function RouteComponent() {
         geoCommune={geoCommune}
         onMapReady={onMapReady}
         onMapUnload={onMapUnload}
-        uniteLegale={uniteLegale}
       />
       <CollectiviteGeoSection geoCommune={geoCommune} />
     </>
