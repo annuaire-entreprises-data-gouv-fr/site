@@ -12,6 +12,12 @@ interface CollectiviteEconomieLocaleEffectif {
 
 export interface CollectiviteEconomieLocaleEffectifsResponse {
   effectif_salaries: Record<string, CollectiviteEconomieLocaleEffectif[]>;
+  etablissements_sirene: {
+    nom: string;
+    siret: string;
+    lat: number;
+    lon: number;
+  }[];
 }
 
 function sortYears(left: string, right: string) {

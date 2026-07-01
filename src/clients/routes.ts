@@ -131,7 +131,7 @@ const routes = {
       metadata:
         "https://data.economie.gouv.fr/api/datasets/1.0/decp-2022-marches-valides/",
       search:
-        "https://data.economie.gouv.fr/api/records/1.0/search/?dataset=decp-2022-marches-valides",
+        "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/decp-2022-marches-valides/records/",
     },
   },
   dgefp: {

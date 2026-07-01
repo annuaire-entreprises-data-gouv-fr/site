@@ -15,9 +15,10 @@ export const clientMarchePublic = async (
       url: routes.marchePublic.ods.search,
       config: {
         params: {
-          where: `startsWith(titulaire_id_1,"${siren}")`,
+          where: `startsWith(acheteur_id,"${siren}")`,
           limit: PAGE_SIZE,
           offset: (page - 1) * PAGE_SIZE,
+          order_by: "-datenotification",
         },
       },
     },
