@@ -126,6 +126,8 @@ export function CollectiviteMap({
       );
     }
 
+    map.addControl(new maplibregl.NavigationControl());
+
     addOverlay(
       map,
       withCadastre
