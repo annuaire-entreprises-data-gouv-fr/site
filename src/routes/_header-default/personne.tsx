@@ -7,6 +7,9 @@ import { FullTable } from "#/components/table/full";
 import { Info } from "#/components-ui/alerts";
 import FAQLink from "#/components-ui/faq-link";
 import { SeePersonPageLink } from "#/components-ui/see-personn-page-link";
+import { isAPINotResponding } from "#/models/api-not-responding";
+import { getMandatairesRCS } from "#/models/espace-agent/mandataires-rcs";
+import type { IEtatCivil } from "#/models/rne/types";
 import { searchPersonCompanies } from "#/models/search";
 import {
   convertDateToAge,
@@ -31,18 +34,63 @@ const loadPersonnesPage = createServerFn()
   )
   .handler(async ({ data: { page, sirenFrom, partialDate, fn, nom } }) => {
     const { prenom, prenoms } = formatFirstNames(fn, ", ");
-    const results = await searchPersonCompanies(
-      nom,
-      prenom,
-      prenoms,
-      partialDate,
-      sirenFrom,
-      page
+    const [results, sirenFromDirigeants] = await Promise.all([
+      searchPersonCompanies(nom, prenom, prenoms, partialDate, sirenFrom, page),
+      getMandatairesRCS(sirenFrom, "agent"),
+    ]);
+
+    if (isAPINotResponding(sirenFromDirigeants)) {
+      throw sirenFromDirigeants;
+    }
+
+    const dirigeantsInfo = sirenFromDirigeants.find(
+      (dirigeant) =>
+        "prenom" in dirigeant &&
+        dirigeant.prenom.toLowerCase() === prenom.toLowerCase() &&
+        dirigeant.nom.toLowerCase() === nom.toLowerCase()
+    ) as IEtatCivil | undefined;
+
+    if (!dirigeantsInfo) {
+      throw new Error("Dirigeant non trouvé");
+    }
+
+    const allResultsDirigeants = await Promise.all(
+      results.results.map(async (result) => {
+        const dirigeants = await getMandatairesRCS(result.siren, "agent");
+
+        if (isAPINotResponding(dirigeants)) {
+          throw dirigeants;
+        }
+
+        return dirigeants;
+      })
+    );
+
+    const filteredResults = results.results.filter((_, index) =>
+      allResultsDirigeants[index].some(
+        (dirigeant) =>
+          "prenom" in dirigeant &&
+          dirigeant.prenom.toLowerCase() ===
+            dirigeantsInfo.prenom.toLowerCase() &&
+          dirigeant.nom.toLowerCase() === dirigeantsInfo.nom.toLowerCase() &&
+          dirigeant.dateNaissance === dirigeantsInfo.dateNaissance
+      )
+    );
+
+    console.log("dirigeantsInfo", JSON.stringify(dirigeantsInfo, null, 2));
+    console.log(
+      "allResultsDirigeants",
+      JSON.stringify(allResultsDirigeants, null, 2)
     );
 
     const urlComplements = `fn=${fn}&n=${nom}&partialDate=${partialDate}&sirenFrom=${sirenFrom}`;
 
-    return { results, urlComplements, prenom, prenoms };
+    return {
+      results: { ...results, results: filteredResults },
+      urlComplements,
+      prenom,
+      prenoms,
+    };
   });
 
 export const Route = createFileRoute("/_header-default/personne")({
