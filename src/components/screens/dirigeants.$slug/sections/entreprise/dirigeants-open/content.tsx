@@ -60,7 +60,7 @@ export default function DirigeantsContent({
             <div className="fr-mb-2w">
               Cette action devient réservée aux agents publics connectés.
             </div>
-            <Link to="/lp/agent-public">Espace agent public</Link>
+            <Link to="/lp/agent-public">Découvrir l'espace agent public</Link>
           </FAQLink>
         )
       );
