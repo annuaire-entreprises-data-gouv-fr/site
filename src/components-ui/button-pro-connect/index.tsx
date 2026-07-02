@@ -16,7 +16,7 @@ const ButtonProConnect: React.FC<IProps> = ({
   noFootLink = false,
 }) => {
   const [referrer, setReferrer] = useState<string | null>(null);
-  const currentPath = useLocation().pathname;
+  const currentPath = useLocation().href;
 
   useEffect(() => {
     setReferrer(document.referrer);

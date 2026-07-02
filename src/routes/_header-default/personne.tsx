@@ -1,6 +1,7 @@
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import AgentWall from "#/components/espace-agent-components/agent-wall";
 import { Link } from "#/components/link";
 import PageCounter from "#/components/search-results/results-pagination";
 import { FullTable } from "#/components/table/full";
@@ -8,6 +9,7 @@ import { Info } from "#/components-ui/alerts";
 import FAQLink from "#/components-ui/faq-link";
 import { SeePersonPageLink } from "#/components-ui/see-personn-page-link";
 import { searchPersonCompanies } from "#/models/search";
+import { getCurrentUserFn } from "#/server-functions/public/auth";
 import {
   convertDateToAge,
   formatDatePartial,
@@ -74,6 +76,12 @@ export const Route = createFileRoute("/_header-default/personne")({
   loader: async ({ deps }) => {
     const { page, sirenFrom, partialDate, fn, n: nom } = deps;
 
+    const user = await getCurrentUserFn();
+
+    if (!user) {
+      return null;
+    }
+
     return await loadPersonnesPage({
       data: { page, sirenFrom, partialDate, fn, nom },
     });
@@ -136,8 +144,14 @@ export const Route = createFileRoute("/_header-default/personne")({
 });
 
 function RouteComponent() {
-  const { results, urlComplements, prenom, prenoms } = Route.useLoaderData();
+  const data = Route.useLoaderData();
   const { sirenFrom, partialDate, n: nom } = Route.useSearch();
+
+  if (!data) {
+    return <AgentWall title="Liste des structures associées à un individu" />;
+  }
+
+  const { results, urlComplements, prenom, prenoms } = data;
 
   const age = convertDateToAge(partialDate);
   const structureCountLabel =
