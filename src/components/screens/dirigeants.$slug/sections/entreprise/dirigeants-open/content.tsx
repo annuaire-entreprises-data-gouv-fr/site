@@ -1,6 +1,12 @@
 import { Link } from "#/components/link";
 import { FullTable } from "#/components/table/full";
+import FAQLink from "#/components-ui/faq-link";
 import { SeePersonPageLink } from "#/components-ui/see-personn-page-link";
+import { useAuth } from "#/contexts/auth.context";
+import {
+  ApplicationRights,
+  hasRights,
+} from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import type {
   IDirigeantsWithMetadata,
@@ -20,6 +26,8 @@ export default function DirigeantsContent({
   dirigeants,
   uniteLegale,
 }: IDirigeantContentProps) {
+  const { user } = useAuth();
+
   const formatDirigeant = (dirigeant: IEtatCivil | IPersonneMorale) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
@@ -45,7 +53,16 @@ export default function DirigeantsContent({
 
     if (dirigeant.dateNaissancePartial) {
       infos.push(
-        <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
+        hasRights({ user }, ApplicationRights.isAgent) ? (
+          <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />
+        ) : (
+          <FAQLink tooltipLabel="→ voir ses entreprises">
+            <div className="fr-mb-2w">
+              Cette action devient réservée aux agents publics.
+            </div>
+            <Link to="/lp/agent-public">Espace agent public</Link>
+          </FAQLink>
+        )
       );
     }
     return infos;
