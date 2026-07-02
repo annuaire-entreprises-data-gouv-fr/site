@@ -58,7 +58,7 @@ export default function DirigeantsContent({
         ) : (
           <FAQLink tooltipLabel="→ voir ses entreprises">
             <div className="fr-mb-2w">
-              Cette action devient réservée aux agents publics.
+              Cette action devient réservée aux agents publics connectés.
             </div>
             <Link to="/lp/agent-public">Espace agent public</Link>
           </FAQLink>
