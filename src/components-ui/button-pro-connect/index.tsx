@@ -1,22 +1,35 @@
 import { useLocation } from "@tanstack/react-router";
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getBaseUrl } from "#/utils/get-base-url";
 import { logConversionEvent } from "#/utils/matomo";
 
 interface IProps {
   event: string;
+  hash?: string;
   noFootLink?: boolean;
   shouldRedirectToReferer?: boolean;
 }
 
 const ButtonProConnect: React.FC<IProps> = ({
+  hash,
   shouldRedirectToReferer = false,
   event = "BTN_DEFAULT",
   noFootLink = false,
 }) => {
   const [referrer, setReferrer] = useState<string | null>(null);
   const currentPath = useLocation().href;
+
+  const currentPathWithHash = useMemo(() => {
+    if (!hash) {
+      return currentPath;
+    }
+
+    const url = new URL(`https://example.fr${currentPath}`);
+    url.hash = hash;
+
+    return `${url.pathname}${url.search}${url.hash}`;
+  }, [currentPath, hash]);
 
   useEffect(() => {
     setReferrer(document.referrer);
@@ -28,7 +41,7 @@ const ButtonProConnect: React.FC<IProps> = ({
   const pathFrom =
     shouldRedirectToReferer && isFromSite
       ? new URL(referrer).pathname
-      : currentPath;
+      : currentPathWithHash;
 
   return (
     <form action="/api/auth/agent-connect/login" method="get">

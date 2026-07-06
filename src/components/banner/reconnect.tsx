@@ -18,7 +18,7 @@ export default function ReconnectBanner({
 }) {
   const [shouldDisplayBanner, setShouldDisplayBanner] = useState(false);
   const currentlyLoggedIn = isLoggedIn({ user });
-  const currentPath = useLocation().pathname;
+  const currentPath = useLocation().href;
 
   useEffect(() => {
     const wasLoggedIn = getCookieBrowser("user-was-logged-in") === "true";
@@ -56,7 +56,9 @@ export default function ReconnectBanner({
           <Icon color={constants.colors.espaceAgent} slug="lockFill">
             Pour des raisons de sécurité, vous avez été automatiquement
             déconnecté après 24 heures.{" "}
-            <a href={`/api/auth/agent-connect/login?pathFrom=${currentPath}`}>
+            <a
+              href={`/api/auth/agent-connect/login?pathFrom=${encodeURIComponent(currentPath)}`}
+            >
               Voulez-vous vous reconnecter ?
             </a>
           </Icon>

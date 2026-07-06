@@ -224,7 +224,7 @@ function RouteComponent() {
             <p>
               Pour accéder aux données, il ne reste plus qu’à vous connecter !
             </p>
-            <ButtonProConnect event="BTN_LP_HERO" />
+            <ButtonProConnect event="BTN_LP_HERO" shouldRedirectToReferer />
           </div>
         </div>
       </section>

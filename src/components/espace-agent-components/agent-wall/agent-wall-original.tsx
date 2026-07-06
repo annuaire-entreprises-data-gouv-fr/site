@@ -4,8 +4,9 @@ import FloatingModal from "#/components-ui/floating-modal";
 import style from "./style.module.css";
 
 export const AgentWallOriginal: React.FC<{
+  sectionId?: string;
   modalFooter?: React.JSX.Element | null;
-}> = ({ modalFooter = null }) => (
+}> = ({ sectionId, modalFooter = null }) => (
   <FloatingModal
     agentColor
     className={style["cta-actes"]}
@@ -26,7 +27,7 @@ export const AgentWallOriginal: React.FC<{
       </a>
       .
     </p>
-    <ButtonProConnect event="AGENT_WALL" noFootLink />
+    <ButtonProConnect event="AGENT_WALL" hash={sectionId} noFootLink />
     <Link to="/lp/agent-public">⇢ Découvrir l'espace agent public</Link>
   </FloatingModal>
 );

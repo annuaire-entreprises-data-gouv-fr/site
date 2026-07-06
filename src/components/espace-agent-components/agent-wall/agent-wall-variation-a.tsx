@@ -6,8 +6,9 @@ import { Icon } from "#/components-ui/icon/wrapper";
 import style from "./style.module.css";
 
 export const AgentWallVariationA: React.FC<{
+  sectionId?: string;
   modalFooter?: React.JSX.Element | null;
-}> = ({ modalFooter = null }) => (
+}> = ({ sectionId, modalFooter = null }) => (
   <FloatingModal
     className={clsx(style["agent-wall-card"], style["agent-wall-variation-a"])}
     footer={modalFooter}
@@ -30,7 +31,7 @@ export const AgentWallVariationA: React.FC<{
       contenu protégé.
     </p>
     <div className={style["agent-wall-proconnect"]}>
-      <ButtonProConnect event="AGENT_WALL" noFootLink />
+      <ButtonProConnect event="AGENT_WALL" hash={sectionId} noFootLink />
     </div>
     <Link className={style["agent-wall-discover-a"]} to="/lp/agent-public">
       <Icon
