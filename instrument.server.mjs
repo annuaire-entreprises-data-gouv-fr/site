@@ -5,6 +5,7 @@ const IGNORED_SERVER_EXCEPTION_NAMES = new Set([
   "SirenNotFoundOrInvalid",
   "FetchUniteLegaleRechercheException",
   "RefreshingInseeToken",
+  "RefreshingAgentMonitoringList",
 ]);
 
 const getOriginalExceptionName = (exception) => {

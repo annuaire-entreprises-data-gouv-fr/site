@@ -3,6 +3,7 @@ export type Entries<T> = {
 }[keyof T][];
 
 export interface MatomoAbTestVariations {
+  AgentHeader: "original" | "VariationA";
   FiltresAvances: "original" | "VariationA" | "VariationB";
 }
 
