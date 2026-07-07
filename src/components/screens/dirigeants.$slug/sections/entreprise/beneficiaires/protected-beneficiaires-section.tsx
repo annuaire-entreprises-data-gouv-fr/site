@@ -266,7 +266,7 @@ function BénéficiairesContent({
           <p>
             Cette entreprise possède {beneficiaires.length}{" "}
             <a
-              href="https://www.inpi.fr/fr/faq/qu-est-ce-qu-un-beneficiaire-effectif"
+              href="https://www.inpi.fr/ressources/formalites-dentreprises/beneficiaires-effectifs-dune-societe"
               rel="noreferrer noopener"
               target="_blank"
             >
