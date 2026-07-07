@@ -21,10 +21,10 @@ const AgentWall: React.FC<{
       {sectionIntro}
       <div className={style["cta-wrapper"]}>
         {variation === "original" && (
-          <AgentWallOriginal modalFooter={modalFooter} />
+          <AgentWallOriginal modalFooter={modalFooter} sectionId={id} />
         )}
-        {variation === "VariationA" && <AgentWallVariationA />}
-        {variation === "VariationB" && <AgentWallVariationB />}
+        {variation === "VariationA" && <AgentWallVariationA sectionId={id} />}
+        {variation === "VariationB" && <AgentWallVariationB sectionId={id} />}
         <div aria-hidden className={style.blur} tab-index="-1">
           <p>
             Nous recrutons ! Consultez notre{" "}
