@@ -112,7 +112,11 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
               return;
             }
             if (
-              extraitKbis.dateRadiation !== uniteLegale.bodacc?.radiation?.date
+              (uniteLegale.complements.estPersonneMorale &&
+                !extraitKbis.dateRadiation) ||
+              (!uniteLegale.complements.estPersonneMorale &&
+                extraitKbis.dateRadiation !==
+                  uniteLegale.bodacc?.radiation?.date)
             ) {
               logErrorInSentry(
                 new Exception({
