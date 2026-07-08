@@ -103,10 +103,7 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
     const userAgent = getRequestHeader("user-agent") || "";
     const isBot = isUserAgentABot(userAgent);
 
-    if (
-      uniteLegale.bodacc?.radiation?.estRadie &&
-      uniteLegale.bodacc?.radiation?.date
-    ) {
+    if (uniteLegale.bodacc?.radiation?.estRadie) {
       const session = await getSession();
       if (session?.user) {
         getExtraitKbis(uniteLegale.siren, null)
