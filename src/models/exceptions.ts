@@ -21,6 +21,8 @@ interface IExceptionArgument {
     responseStatus?: string;
     responseContentType?: string;
     responseUrl?: string;
+    dateRadiationRCS?: string;
+    dateRadiationBodacc?: string;
   };
   /** Message of the exception */
   message?: string;
