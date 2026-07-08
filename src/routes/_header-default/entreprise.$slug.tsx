@@ -24,6 +24,7 @@ import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { useAuth } from "#/contexts/auth.context";
 import { EAdministration } from "#/models/administrations/e-administration";
+import { isAPINotResponding } from "#/models/api-not-responding";
 import {
   ApplicationRights,
   hasRights,
@@ -35,7 +36,8 @@ import {
   isCollectiviteTerritoriale,
   isServicePublic,
 } from "#/models/core/types";
-import { FetchRessourceException } from "#/models/exceptions";
+import { getExtraitKbis } from "#/models/espace-agent/extrait-kbis";
+import { Exception, FetchRessourceException } from "#/models/exceptions";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { getBaseUrl } from "#/utils/get-base-url";
@@ -54,6 +56,7 @@ import {
 } from "#/utils/helpers/formatting/labels";
 import logErrorInSentry from "#/utils/sentry";
 import { meta } from "#/utils/seo";
+import getSession from "#/utils/server-side-helper/get-session";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 
@@ -99,6 +102,40 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
 
     const userAgent = getRequestHeader("user-agent") || "";
     const isBot = isUserAgentABot(userAgent);
+
+    if (
+      uniteLegale.bodacc?.radiation?.estRadie &&
+      uniteLegale.bodacc?.radiation?.date
+    ) {
+      const session = await getSession();
+      if (session?.user) {
+        getExtraitKbis(uniteLegale.siren, null)
+          .then((extraitKbis) => {
+            if (isAPINotResponding(extraitKbis)) {
+              return;
+            }
+            if (
+              extraitKbis.dateRadiation !== uniteLegale.bodacc?.radiation?.date
+            ) {
+              logErrorInSentry(
+                new Exception({
+                  name: "ExtraitKbisDateRadiationMismatch",
+                  message: "Extrait Kbis date radiation mismatch",
+                  context: {
+                    siren: uniteLegale.siren,
+                    dateRadiationRCS: extraitKbis.dateRadiation ?? "null",
+                    dateRadiationBodacc:
+                      uniteLegale.bodacc?.radiation?.date ?? "null",
+                  },
+                })
+              );
+            }
+          })
+          .catch(() => {
+            // ignore error
+          });
+      }
+    }
 
     return { uniteLegale, triggerRedirectedEvent, isBot, sourcesLastModified };
   });

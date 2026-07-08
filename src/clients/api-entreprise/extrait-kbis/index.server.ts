@@ -98,6 +98,10 @@ export interface IAPIEntrepriseExtraitKbisData {
 export type IAPIEntrepriseExtraitKbis =
   IAPIEntrepriseResponse<IAPIEntrepriseExtraitKbisData>;
 
+export interface IExtraitKbis {
+  dateRadiation: string | null;
+}
+
 /**
  * GET extrait Kbis from API Entreprise
  */
@@ -105,11 +109,14 @@ export const clientApiEntrepriseExtraitKbis = async (
   siren: Siren,
   scope: IAgentScope | null
 ) =>
-  await clientAPIEntreprise<
-    IAPIEntrepriseExtraitKbis,
-    IAPIEntrepriseExtraitKbisData
-  >(routes.apiEntreprise.extraitKbis(siren), mapToDomainObject, { scope });
+  await clientAPIEntreprise<IAPIEntrepriseExtraitKbis, IExtraitKbis>(
+    routes.apiEntreprise.extraitKbis(siren),
+    mapToDomainObject,
+    { scope }
+  );
 
 const mapToDomainObject = (
   response: IAPIEntrepriseExtraitKbis
-): IAPIEntrepriseExtraitKbisData => response.data;
+): IExtraitKbis => ({
+  dateRadiation: response.data.date_radiation,
+});
