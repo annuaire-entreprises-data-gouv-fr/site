@@ -1,10 +1,10 @@
 import { httpGet } from "#/utils/network";
 import routes from "../routes";
-import type { IFondation, IFondationResponse } from "./interface";
+import type { IFondationResponse, IFondationResult } from "./interface";
 
 export const clientSIAFFondation = async (
   idRNF: string
-): Promise<IFondation> => {
+): Promise<IFondationResult> => {
   const response = await httpGet<IFondationResponse>(
     routes.siaf.getFondationById(idRNF),
     {
@@ -17,7 +17,7 @@ export const clientSIAFFondation = async (
   return mapToDomainObject(response);
 };
 
-const mapToDomainObject = (response: IFondationResponse): IFondation => ({
+const mapToDomainObject = (response: IFondationResponse): IFondationResult => ({
   id: response.id,
   state: response.state,
   stateEffectiveAt: response.stateEffectiveAt,
