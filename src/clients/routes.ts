@@ -268,6 +268,7 @@ const routes = {
   },
   rechercheEntreprise: {
     rechercheUniteLegale: "/search",
+    rechercheFondations: "/fondation",
     idcc: {
       metadata: "/idcc/metadata",
       getBySiren: (siren: string) => `/idcc/${siren}`,

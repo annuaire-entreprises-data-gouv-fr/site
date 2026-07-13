@@ -69,7 +69,7 @@ export interface IFondationResponse {
   website: string | null;
 }
 
-export interface IFondation {
+export interface IFondationResult {
   address: {
     oneLine: string;
     coordinates: [number, number];

@@ -182,3 +182,24 @@ export interface IElu {
   prenoms: string;
   sexe: string;
 }
+
+export interface ISearchFondationsResponse {
+  execution_time?: number;
+  page: unknown;
+  per_page: number;
+  results: IFondationResult[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface IFondationResult {
+  adresse: string;
+  code_postal: string;
+  date_creation: string;
+  numero_rnf: string;
+  siren: string;
+  siret: string;
+  titre: string;
+  type_organisme: string;
+  ville: string;
+}
