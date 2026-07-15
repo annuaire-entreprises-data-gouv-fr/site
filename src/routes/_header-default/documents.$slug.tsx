@@ -19,6 +19,7 @@ import {
   hasRights,
 } from "#/models/authentication/user/rights";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
+import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -68,7 +69,7 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={getUniteLegaleTheme(uniteLegale)}>
       <Title
         ficheType={FICHE.DOCUMENTS}
         uniteLegale={uniteLegale}

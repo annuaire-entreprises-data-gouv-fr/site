@@ -7,6 +7,7 @@ import UniteLegaleEffectifsAnnuelsSection from "#/components/unite-legale-effect
 import { natureEffectifAnnuelValues } from "#/components/unite-legale-effectifs-annuels-section/protected-effectifs-annuels-section";
 import { useAuth } from "#/contexts/auth.context";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
+import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -71,7 +72,7 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={getUniteLegaleTheme(uniteLegale)}>
       <Title
         ficheType={FICHE.EFFECTIFS}
         uniteLegale={uniteLegale}

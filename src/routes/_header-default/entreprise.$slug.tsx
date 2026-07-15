@@ -41,6 +41,7 @@ import { Exception, FetchRessourceException } from "#/models/exceptions";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { getBaseUrl } from "#/utils/get-base-url";
+import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import {
   extractSirenOrSiretSlugFromUrl,
   isLikelyASiren,
@@ -306,7 +307,10 @@ function RouteComponent() {
       {triggerRedirectedEvent && (
         <MatomoEventFromRedirected sirenOrSiret={uniteLegale.siren} />
       )}
-      <div className="content-container">
+      <div
+        className="content-container"
+        style={getUniteLegaleTheme(uniteLegale)}
+      >
         <Title
           ficheType={FICHE.INFORMATION}
           uniteLegale={uniteLegale}

@@ -9,6 +9,7 @@ import { useAuth } from "#/contexts/auth.context";
 import { getAllIdccWithMetadata } from "#/models/conventions-collectives";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
+import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -73,7 +74,7 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={getUniteLegaleTheme(uniteLegale)}>
       <Title ficheType={FICHE.DIVERS} uniteLegale={uniteLegale} user={user} />
       <ConventionsCollectivesSection
         ccLastModified={sourcesLastModified.idcc}

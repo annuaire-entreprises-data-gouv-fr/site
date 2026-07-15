@@ -8,6 +8,7 @@ import { FICHE } from "#/components/title-section/tabs";
 import { useAuth } from "#/contexts/auth.context";
 import { isAssociation } from "#/models/core/types";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
+import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -68,7 +69,7 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={getUniteLegaleTheme(uniteLegale)}>
       <Title ficheType={FICHE.FINANCES} uniteLegale={uniteLegale} user={user} />
       {isAssociation(uniteLegale) ? (
         <DonneesFinancieresAssociation uniteLegale={uniteLegale} user={user} />

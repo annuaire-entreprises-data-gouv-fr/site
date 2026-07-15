@@ -27,6 +27,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "carte-facile/carte-facile.css";
 import { clientGeo } from "#/clients/api-geo";
 import { CollectiviteSidenav } from "#/components/collectivite/sidenav";
+import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import { HeaderDefaultError } from "../-error";
 
 const loadEntreprisePage = createServerFn({ method: "POST" })
@@ -116,7 +117,7 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
+    <div className="content-container" style={getUniteLegaleTheme(uniteLegale)}>
       <Title
         ficheType={FICHE.COLLECTIVITE}
         uniteLegale={uniteLegale}
