@@ -48,55 +48,6 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
     window._paq.push([
       "AbTesting::create",
       {
-        name: "FiltresAvances",
-        percentage: 100,
-        includedTargets: [
-          {
-            attribute: "url",
-            inverted: "0",
-            type: "regexp",
-            value: "^(.*)/rechercher(?:\\?.*)?$",
-          },
-        ],
-        excludedTargets: [],
-        variations: [
-          {
-            name: "original",
-            activate() {
-              window.matomoAbTesting?.setVariation(
-                "FiltresAvances",
-                "original"
-              );
-            },
-          },
-          {
-            name: "VariationA",
-            activate() {
-              window.matomoAbTesting?.setVariation(
-                "FiltresAvances",
-                "VariationA"
-              );
-            },
-          },
-          {
-            name: "VariationB",
-            activate() {
-              window.matomoAbTesting?.setVariation(
-                "FiltresAvances",
-                "VariationB"
-              );
-            },
-          },
-        ],
-        trigger() {
-          return true;
-        },
-      },
-    ]);
-
-    window._paq.push([
-      "AbTesting::create",
-      {
         name: "AgentHeader",
         percentage: 100,
         includedTargets: [
@@ -165,7 +116,6 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
   useEffect(() => {
     window.matomoAbTesting = {
       variations: {
-        FiltresAvances: "original",
         AgentHeader: "original",
         AgentWall: "original",
       },

@@ -28,10 +28,6 @@ function useAbTest<T extends keyof MatomoAbTestVariations>({
   );
 }
 
-export function useAdvancedSearchFiltersAbTest() {
-  return useAbTest({ name: "FiltresAvances" });
-}
-
 export function useAgentHeaderAbTest() {
   return useAbTest({ name: "AgentHeader" });
 }
