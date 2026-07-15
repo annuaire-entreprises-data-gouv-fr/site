@@ -7,6 +7,8 @@ import {
   CollectiviteEconomieLocaleSection,
 } from "#/components/collectivite/economie-locale";
 import { CollectiviteMap } from "#/components/collectivite/map";
+import { Section } from "#/components/section";
+import { EAdministration } from "#/models/administrations/e-administration";
 import { httpGet } from "#/utils/network";
 import { Route as CollectiviteRoute } from "./route";
 
@@ -196,11 +198,17 @@ function RouteComponent() {
 
   return (
     <>
-      <CollectiviteMap
-        geoCommune={geoCommune}
-        onMapReady={onMapLoad}
-        onMapUnload={cleanupEtablissementsLayer}
-      />
+      <Section
+        id="economie-locale-etablissements"
+        sources={[EAdministration.DINUM]}
+        title="Établissements de la collectivité"
+      >
+        <CollectiviteMap
+          geoCommune={geoCommune}
+          onMapReady={onMapLoad}
+          onMapUnload={cleanupEtablissementsLayer}
+        />
+      </Section>
       <CollectiviteEconomieLocaleSection effectifs={effectifs} />
     </>
   );
