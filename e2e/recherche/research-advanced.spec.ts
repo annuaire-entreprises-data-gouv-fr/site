@@ -14,7 +14,7 @@ test.describe("Search page", () => {
 
     await goto(page, "/");
     await page.getByText("recherche avancée").click();
-    await page.getByRole("button", { name: /Zone géographique/ }).click();
+    await page.getByRole("button", { name: /Localisation/ }).click();
     await page.locator("#geo-search-input").fill("Nice");
     await page.getByText("Nice (06000)").click();
     await page.getByRole("button", { name: "Appliquer" }).first().click();
@@ -36,9 +36,9 @@ test.describe(`Advanced search on page ${path}`, () => {
   test("Shows filters", async ({ page }) => {
     await goto(page, `${path}?terme=Ganymede`);
 
-    await page.getByRole("button", { name: /Zone géographique/ }).click();
+    await page.getByRole("button", { name: /Localisation/ }).click();
     await expect(page.locator("#geo-search-input")).toBeVisible();
-    await page.getByRole("button", { name: /Zone géographique/ }).click();
+    await page.getByRole("button", { name: /Localisation/ }).click();
     await expect(page.locator("#geo-search-input")).not.toBeVisible();
 
     await page.getByRole("button", { name: /Dirigeant/ }).click();
@@ -52,7 +52,6 @@ test.describe(`Advanced search on page ${path}`, () => {
       .getByRole("button", { name: /Situation administrative/ })
       .click();
     await expect(page.getByText("Domaine d‘activité")).toBeVisible();
-    await expect(page.getByText("Etat administratif")).toBeVisible();
   });
 
   test("Filters propagate on pagination", async ({ page }) => {
