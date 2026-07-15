@@ -42,10 +42,10 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
   const borderColor = isProtected
     ? constants.colors.espaceAgentPastel
-    : constants.colors.pastelBlue;
+    : "var(--unite-legale-theme-background)";
   const titleColor = isProtected
     ? constants.colors.espaceAgent
-    : constants.colors.frBlue;
+    : "var(--unite-legale-theme-text)";
 
   return (
     <SectionErrorBoundary title={title}>
@@ -62,7 +62,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           </div>
         )}
         <div className={style["section-header"]}>
-          <h2 style={{ color: "#1d0d4b", backgroundColor: "#ebe7f7" }}>
+          <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
             {title}
           </h2>
           <div className={style["section-logo-wrapper"]}>
