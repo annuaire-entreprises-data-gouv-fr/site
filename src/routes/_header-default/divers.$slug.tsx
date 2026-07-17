@@ -17,7 +17,7 @@ import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 const loadDiversPage = createServerFn()
-  .inputValidator(
+  .validator(
     z.object({
       slug: z.string(),
     })

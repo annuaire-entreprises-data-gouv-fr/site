@@ -40,7 +40,7 @@ import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 const loadLabelsCertificatsPage = createServerFn()
-  .inputValidator(
+  .validator(
     z.object({ slug: z.string(), entrepreneurSpectaclesPage: z.number() })
   )
   .handler(async ({ data: { slug, entrepreneurSpectaclesPage } }) => {

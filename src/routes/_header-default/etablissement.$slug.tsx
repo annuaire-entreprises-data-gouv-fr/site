@@ -33,7 +33,7 @@ import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 
 const loadEtablissementPage = createServerFn()
-  .inputValidator(z.object({ slug: z.string(), isRedirected: z.boolean() }))
+  .validator(z.object({ slug: z.string(), isRedirected: z.boolean() }))
   .handler(async ({ data: { slug, isRedirected } }) => {
     const { etablissement, uniteLegale } =
       await getEtablissementWithUniteLegaleFromSlugFn({

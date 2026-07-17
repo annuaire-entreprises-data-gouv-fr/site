@@ -63,7 +63,7 @@ import { HeaderDefaultError } from "./-error";
 const MAX_RESPONSE_BODY_DEBUG_LENGTH = 10_000;
 
 const loadEntreprisePage = createServerFn({ method: "POST" })
-  .inputValidator(
+  .validator(
     z.object({
       slug: z.string(),
       isRedirected: z.boolean(),
