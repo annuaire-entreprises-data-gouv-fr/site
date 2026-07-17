@@ -15,6 +15,7 @@ import {
 import { clientAPIProxy } from "../client.server";
 import type {
   IRNEEtatCivilProxyResponse,
+  IRNEImmatriculationDateProxyResponse,
   IRNEObservationsFallbackProxyResponse,
   IRNEPersonneMoraleProxyResponse,
   IRNEProxyResponse,
@@ -36,6 +37,24 @@ export const clientRNEImmatriculation = async (
     }
   );
   return mapToDomainObject(response);
+};
+
+/**
+ * RNE through the API proxy - API RNE - Immatriculation Date
+ * @param siren
+ */
+export const clientRNEImmatriculationDate = async (
+  siren: Siren,
+  signal?: AbortSignal
+) => {
+  const response = await clientAPIProxy<IRNEImmatriculationDateProxyResponse>(
+    routes.proxy.rne.immatriculation.date(siren),
+    {
+      timeout: constants.timeout.XS,
+      signal,
+    }
+  );
+  return response;
 };
 
 /**

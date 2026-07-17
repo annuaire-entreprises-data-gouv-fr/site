@@ -23,5 +23,9 @@ export interface IRNEProxyResponse {
   observations: IRNEObservationsProxyResponse;
 }
 
+export interface IRNEImmatriculationDateProxyResponse {
+  dateMiseAJourInpi: string;
+}
+
 export type IRNEObservationsFallbackProxyResponse =
   IRNEObservationsProxyResponse;

@@ -1,4 +1,5 @@
 import { clientUniteLegaleIG } from "#/clients/api-proxy/greffe";
+import { clientRNEImmatriculationDate } from "#/clients/api-proxy/rne";
 import {
   HttpBadRequestError,
   HttpForbiddenError,
@@ -203,7 +204,18 @@ class UniteLegaleBuilder {
           },
         })
       );
-      return uniteLegaleInsee;
+
+      try {
+        const { dateMiseAJourInpi } = await clientRNEImmatriculationDate(
+          this._siren
+        );
+        return {
+          ...uniteLegaleInsee,
+          dateMiseAJourInpi,
+        };
+      } catch {
+        return uniteLegaleInsee;
+      }
     }
 
     /**

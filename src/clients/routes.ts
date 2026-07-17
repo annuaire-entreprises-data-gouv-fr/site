@@ -234,6 +234,7 @@ const routes = {
     rne: {
       immatriculation: {
         default: (siren: string) => `/rne/${siren}`,
+        date: (siren: string) => `/rne/${siren}/date`,
       },
       observations: {
         fallback: (siren: string) => `/rne/observations/fallback/${siren}`,
