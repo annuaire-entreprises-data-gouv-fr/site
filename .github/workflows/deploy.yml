@@ -132,8 +132,6 @@ jobs:
         include:
           - environment: production-01
             host: SSH_PRODUCTION_01
-          - environment: production-02
-            host: SSH_PRODUCTION_02
           - environment: production-03
             host: SSH_PRODUCTION_03
     steps:
@@ -150,6 +148,34 @@ jobs:
           version: "main"
           environment: "${{ matrix.environment }}"
           ssh-key: ${{ secrets.SSH_MACHINE_USER_PRIVATE_KEY }}
+          ssh-host: ${{ secrets[matrix.host] }}
+          notify-on-failure: true
+          notify-on-success: true
+          tchap-url: ${{ secrets.TCHAP_URL }}
+          tchap-token: ${{ secrets.TCHAP_TOKEN }}
+  deploy-production-new:
+    name: Deploy - production new
+    runs-on: ubuntu-latest
+    needs: [deploy-production]
+    timeout-minutes: 15
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - environment: production-02
+            host: SSH_PRODUCTION_02
+    steps:
+      - uses: actions/checkout@v6
+      - name: Setup Wireguard
+        uses: niklaskeerl/easy-wireguard-action@v2
+        with:
+          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
+      - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v2.0
+        with:
+          app: "site"
+          version: "${{ (inputs.tag || github.sha) }}-production"
+          environment: "${{ matrix.environment }}"
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY_GITHUB_APP_DEPLOYER }}
           ssh-host: ${{ secrets[matrix.host] }}
           notify-on-failure: true
           notify-on-success: true
