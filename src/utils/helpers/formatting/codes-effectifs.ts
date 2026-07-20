@@ -84,8 +84,8 @@ export const libelleEffectifForDescription = (uniteLegale: IUniteLegale) => {
   }`;
   if (trancheEffectif === "NN" || !libelle) {
     // means characterEmployeurUniteLegale ='N'
-    return `${yearPrefix}lle ne possédait pas de salariés.`;
+    return `${yearPrefix}lle ne comptait pas de salariés.`;
   }
 
-  return `${yearPrefix}lle possédait ${libelle}.`;
+  return `${yearPrefix}lle comptait ${libelle}.`;
 };
