@@ -1,4 +1,3 @@
-import { ClientOnly } from "@tanstack/react-router";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { isLoggedIn } from "#/models/authentication/user/rights";
 import type { ISession } from "#/models/authentication/user/session";
@@ -10,9 +9,7 @@ const Menu: React.FC<{
   useAgentCTA: boolean;
 }> = ({ user, useAgentCTA }) =>
   isLoggedIn({ user }) ? (
-    <ClientOnly>
-      <LoggedInMenu user={user as IAgentInfo} />
-    </ClientOnly>
+    <LoggedInMenu user={user as IAgentInfo} />
   ) : useAgentCTA ? (
     <EspaceAgentLink />
   ) : null;
