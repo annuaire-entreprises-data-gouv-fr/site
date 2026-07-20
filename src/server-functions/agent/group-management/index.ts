@@ -18,7 +18,7 @@ import {
 
 export const addUserToGroupFn = createServerFn({ method: "POST" })
   .middleware([agentFnMiddleware])
-  .inputValidator(addUserToGroupSchema)
+  .validator(addUserToGroupSchema)
   .handler(async ({ data }) => {
     const { groupId, userEmail, roleId } = data;
     return await addUserToGroup(groupId, userEmail, roleId);
@@ -26,7 +26,7 @@ export const addUserToGroupFn = createServerFn({ method: "POST" })
 
 export const removeUserFromGroupFn = createServerFn({ method: "POST" })
   .middleware([agentFnMiddleware])
-  .inputValidator(removeUserFromGroupSchema)
+  .validator(removeUserFromGroupSchema)
   .handler(async ({ data }) => {
     const { groupId, userId } = data;
     return await removeUserFromGroup(groupId, userId);
@@ -34,7 +34,7 @@ export const removeUserFromGroupFn = createServerFn({ method: "POST" })
 
 export const updateGroupNameFn = createServerFn({ method: "POST" })
   .middleware([agentFnMiddleware])
-  .inputValidator(updateGroupNameSchema)
+  .validator(updateGroupNameSchema)
   .handler(async ({ data }) => {
     const { groupId, groupName } = data;
     return await updateGroupName(groupId, groupName);
@@ -42,7 +42,7 @@ export const updateGroupNameFn = createServerFn({ method: "POST" })
 
 export const updateUserRoleInGroupFn = createServerFn({ method: "POST" })
   .middleware([agentFnMiddleware])
-  .inputValidator(updateUserRoleInGroupSchema)
+  .validator(updateUserRoleInGroupSchema)
   .handler(async ({ data }) => {
     const { groupId, userId, roleId } = data;
     return await updateUserRoleInGroup(groupId, userId, roleId);

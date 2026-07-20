@@ -22,7 +22,7 @@ import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 const loadPersonnesPage = createServerFn()
-  .inputValidator(
+  .validator(
     z.object({
       page: z.number(),
       sirenFrom: z.string(),
