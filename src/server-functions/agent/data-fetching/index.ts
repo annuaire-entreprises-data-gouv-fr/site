@@ -53,7 +53,7 @@ export const getAgentBeneficiairesFn = createServerFn()
     withRateLimiting,
     withUseCase,
   ])
-  .inputValidator(getAgentBeneficiairesSchema)
+  .validator(getAgentBeneficiairesSchema)
   .handler(async ({ data }) => {
     const { siren, useCase } = data;
     return await getBeneficiaires(siren, { useCase });
@@ -66,7 +66,7 @@ export const getAgentConformiteSocialeEntrepriseFn = createServerFn()
     withRateLimiting,
     withUseCase,
   ])
-  .inputValidator(getAgentConformiteSocialeEntrepriseSchema)
+  .validator(getAgentConformiteSocialeEntrepriseSchema)
   .handler(async ({ data }) => {
     const { siret, useCase } = data;
     return await getConformiteSocialeEntreprise(siret, { useCase });
@@ -79,7 +79,7 @@ export const getAgentConformiteFiscaleEntrepriseFn = createServerFn()
     withRateLimiting,
     withUseCase,
   ])
-  .inputValidator(getAgentConformiteFiscaleEntrepriseSchema)
+  .validator(getAgentConformiteFiscaleEntrepriseSchema)
   .handler(async ({ data }) => {
     const { siret, useCase } = data;
     return await getConformiteFiscaleEntreprise(siret, { useCase });
@@ -92,7 +92,7 @@ export const getAgentBilansProtectedFn = createServerFn()
     withRateLimiting,
     withUseCase,
   ])
-  .inputValidator(getAgentBilansProtectedSchema)
+  .validator(getAgentBilansProtectedSchema)
   .handler(async ({ data }) => {
     const { siren, useCase } = data;
     return await getBilansProtected(siren, { useCase });
@@ -105,7 +105,7 @@ export const getAgentChiffreAffairesProtectedFn = createServerFn()
     withRateLimiting,
     withUseCase,
   ])
-  .inputValidator(getAgentChiffreAffairesProtectedSchema)
+  .validator(getAgentChiffreAffairesProtectedSchema)
   .handler(async ({ data }) => {
     const { siret, useCase } = data;
     return await getChiffreAffairesProtected(siret, { useCase });
@@ -118,7 +118,7 @@ export const getAgentTravauxPublicsFn = createServerFn()
     withRateLimiting,
     withUseCase,
   ])
-  .inputValidator(getAgentTravauxPublicsSchema)
+  .validator(getAgentTravauxPublicsSchema)
   .handler(async ({ data }) => {
     const { siret, useCase } = data;
     return await getTravauxPublic(siret, { useCase });
@@ -131,7 +131,7 @@ export const getAgentLiassesFiscalesProtectedFn = createServerFn()
     withRateLimiting,
     withUseCase,
   ])
-  .inputValidator(getAgentLiassesFiscalesProtectedSchema)
+  .validator(getAgentLiassesFiscalesProtectedSchema)
   .handler(async ({ data }) => {
     const { siren, year, useCase } = data;
     return await getLiassesFiscalesProtected(siren, { year, useCase });
@@ -144,7 +144,7 @@ export const getAgentLiensCapitalistiquesProtectedFn = createServerFn()
     withRateLimiting,
     withUseCase,
   ])
-  .inputValidator(getAgentLiensCapitalistiquesProtectedSchema)
+  .validator(getAgentLiensCapitalistiquesProtectedSchema)
   .handler(async ({ data }) => {
     const { siren, year, useCase } = data;
     return await getLiensCapitalistiquesProtected(siren, { year, useCase });
@@ -152,7 +152,7 @@ export const getAgentLiensCapitalistiquesProtectedFn = createServerFn()
 
 export const getAgentAidesMinimisFn = createServerFn()
   .middleware([agentFnMiddleware, withRateLimiting])
-  .inputValidator(getAgentAidesMinimisSchema)
+  .validator(getAgentAidesMinimisSchema)
   .handler(async ({ data }) => {
     const { siren, page } = data;
     return await clientMinimis(siren, page);
@@ -166,7 +166,7 @@ export const getAgentOpqibiFn = createServerFn()
     withApplicationRight(ApplicationRights.protectedCertificats),
     withRateLimiting,
   ])
-  .inputValidator(getAgentOpqibiSchema)
+  .validator(getAgentOpqibiSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
     return await getOpqibi(siren);
@@ -178,7 +178,7 @@ export const getAgentQualibatFn = createServerFn()
     withApplicationRight(ApplicationRights.protectedCertificats),
     withRateLimiting,
   ])
-  .inputValidator(getAgentQualibatSchema)
+  .validator(getAgentQualibatSchema)
   .handler(async ({ data }) => {
     const { siret } = data;
     return await getQualibat(siret);
@@ -190,7 +190,7 @@ export const getAgentQualifelecFn = createServerFn()
     withApplicationRight(ApplicationRights.protectedCertificats),
     withRateLimiting,
   ])
-  .inputValidator(getAgentQualifelecSchema)
+  .validator(getAgentQualifelecSchema)
   .handler(async ({ data }) => {
     const { siret } = data;
     return await getQualifelec(siret);
@@ -202,7 +202,7 @@ export const getAgentDirigeantsProtectedFn = createServerFn()
     withApplicationRight(ApplicationRights.mandatairesRCS),
     withRateLimiting,
   ])
-  .inputValidator(getAgentDirigeantsProtectedSchema)
+  .validator(getAgentDirigeantsProtectedSchema)
   .handler(async ({ data }) => {
     const { siren, isEI } = data;
     return await getDirigeantsProtected(siren, { isEI });
@@ -214,7 +214,7 @@ export const getAgentRneDocumentsFn = createServerFn()
     withApplicationRight(ApplicationRights.documentsRne),
     withRateLimiting,
   ])
-  .inputValidator(getAgentDocumentsRNEProtectedSchema)
+  .validator(getAgentDocumentsRNEProtectedSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
     return await getDocumentsRNEProtected(siren);
@@ -225,7 +225,7 @@ export const getAgentAssociationProtectedFn = createServerFn()
     agentFnMiddleware,
     withApplicationRight(ApplicationRights.associationProtected),
   ])
-  .inputValidator(getAgentAssociationProtectedSchema)
+  .validator(getAgentAssociationProtectedSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
     return await getAssociationProtected(siren);
@@ -237,7 +237,7 @@ export const getAgentEffectifsAnnuelsProtectedFn = createServerFn()
     withApplicationRight(ApplicationRights.effectifs),
     withRateLimiting,
   ])
-  .inputValidator(getAgentEffectifsAnnuelsProtectedSchema)
+  .validator(getAgentEffectifsAnnuelsProtectedSchema)
   .handler(async ({ data }) => {
     const { siren, useCase, natureEffectif, profondeur } = data;
     return await getEffectifsAnnuelsProtected(siren, {
@@ -253,7 +253,7 @@ export const getAgentEffectifsMensuelsProtectedFn = createServerFn()
     withApplicationRight(ApplicationRights.effectifs),
     withRateLimiting,
   ])
-  .inputValidator(getAgentEffectifsMensuelsProtectedSchema)
+  .validator(getAgentEffectifsMensuelsProtectedSchema)
   .handler(async ({ data }) => {
     const { siret, year, useCase, natureEffectif } = data;
     return await getEffectifsMensuelsProtected(siret, {
@@ -269,7 +269,7 @@ export const getSubventionsAssociationFn = createServerFn()
     withApplicationRight(ApplicationRights.subventionsAssociation),
     withRateLimiting,
   ])
-  .inputValidator(getSubventionsAssociationSchema)
+  .validator(getSubventionsAssociationSchema)
   .handler(async ({ data }) => {
     const { slug } = data;
     return await getSubventionsAssociationFromSlug(slug);

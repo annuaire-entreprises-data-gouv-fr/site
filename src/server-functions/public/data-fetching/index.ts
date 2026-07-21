@@ -14,7 +14,7 @@ import {
 
 export const getRneDirigeantsFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(getDirigeantsSchema)
+  .validator(getDirigeantsSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
     return await getDirigeantsRNE(siren, {});
@@ -22,7 +22,7 @@ export const getRneDirigeantsFn = createServerFn()
 
 export const getRneObservationsFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(getObservationsSchema)
+  .validator(getObservationsSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
     return await getRNEObservations(siren, {});
@@ -30,7 +30,7 @@ export const getRneObservationsFn = createServerFn()
 
 export const getAssociationFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(getAssociationSchema)
+  .validator(getAssociationSchema)
   .handler(async ({ data }) => {
     const { slug } = data;
     return await getAssociationFromSlug(slug, {});
@@ -38,7 +38,7 @@ export const getAssociationFn = createServerFn()
 
 export const validateEORIFn = createServerFn()
   .middleware([withApplicationRight(ApplicationRights.opendata)])
-  .inputValidator(validateEORISchema)
+  .validator(validateEORISchema)
   .handler(async ({ data }) => {
     const { siret } = data;
     return await getEORIValidation(siret, {});

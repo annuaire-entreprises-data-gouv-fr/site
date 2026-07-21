@@ -32,7 +32,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.1079.0",
+    "@aws-sdk/client-s3": "3.1089.0",
     "@react-spring/web": "10.1.2",
     "@sentry/tanstackstart-react": "10.62.0",
     "@tanstack/react-devtools": "0.10.8",
@@ -45,7 +45,7 @@
     "@vcarl/remark-headings": "0.1.0",
     "chart.js": "4.5.1",
     "clsx": "2.1.1",
-    "crawler-user-agents": "1.54.0",
+    "crawler-user-agents": "1.56.0",
     "fast-xml-parser": "5.9.3",
     "maplibre-gl": "5.24.0",
     "nitro": "3.0.260610-beta",
@@ -84,7 +84,7 @@
     "dotenv": "16.6.1",
     "js-yaml": "4.2.0",
     "jsdom": "29.1.1",
-    "lefthook": "2.1.9",
+    "lefthook": "2.1.10",
     "msw": "2.14.6",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "11.3.0",

@@ -86,7 +86,7 @@ export const searchQueryParamsSchema = z.object({
 });
 
 export const searchFn = createServerFn()
-  .inputValidator(searchQueryParamsSchema)
+  .validator(searchQueryParamsSchema)
   .handler(async ({ data }) => {
     const searchFilterParams = new SearchFilterParams(data);
 

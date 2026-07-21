@@ -16,7 +16,7 @@ import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
 const loadEtablissementsScolairesPage = createServerFn()
-  .inputValidator(z.object({ slug: z.string(), page: z.number() }))
+  .validator(z.object({ slug: z.string(), page: z.number() }))
   .handler(async ({ data: { slug, page } }) => {
     const uniteLegale = await getUniteLegaleFromSlugFn({
       data: { slug },

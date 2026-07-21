@@ -18,7 +18,7 @@ import { logFatalErrorInSentry, logWarningInSentry } from "#/utils/sentry";
 import isUserAgentABot from "#/utils/user-agent";
 
 export const getUniteLegaleFromSlugFn = createServerFn()
-  .inputValidator(z.object({ slug: z.string(), page: z.number().default(1) }))
+  .validator(z.object({ slug: z.string(), page: z.number().default(1) }))
   .handler(async ({ data: { slug, page } }) => {
     const sirenSlug = extractSirenOrSiretSlugFromUrl(slug);
     const userAgent = getRequestHeader("user-agent") || "";
@@ -35,7 +35,7 @@ export const getUniteLegaleFromSlugFn = createServerFn()
   });
 
 export const getEtablissementWithUniteLegaleFromSlugFn = createServerFn()
-  .inputValidator(z.object({ slug: z.string() }))
+  .validator(z.object({ slug: z.string() }))
   .handler(async ({ data: { slug } }) => {
     const siretSlug = extractSirenOrSiretSlugFromUrl(slug);
     const userAgent = getRequestHeader("user-agent") || "";

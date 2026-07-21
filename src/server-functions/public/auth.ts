@@ -14,7 +14,7 @@ export const getCurrentUserFn = createServerFn().handler(async () => {
 });
 
 export const agentAuthGuardFn = createServerFn()
-  .inputValidator(
+  .validator(
     z
       .object({
         onlySuperAgent: z.boolean().optional(),
