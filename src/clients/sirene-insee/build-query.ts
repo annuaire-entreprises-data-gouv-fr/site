@@ -382,7 +382,7 @@ export class SireneQueryBuilder {
 
     // Tranche d'effectifs
     if (params.headcount) {
-      this.addEffectifConditions(params.headcount);
+      this.addEffectifConditions(params.headcount, params.legalUnit === "hq");
     }
 
     // Date de création
