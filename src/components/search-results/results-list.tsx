@@ -2,9 +2,9 @@ import type React from "react";
 import { Link } from "#/components/link";
 import UniteLegaleBadge from "#/components/unite-legale-badge";
 import { Icon } from "#/components-ui/icon/wrapper";
-import IsActiveTag from "#/components-ui/tag/is-active-tag";
+import IsActiveTag, { EtatTag } from "#/components-ui/tag/is-active-tag";
 import { estDiffusible } from "#/models/core/diffusion";
-import { estActif } from "#/models/core/etat-administratif";
+import { estActif, IETATADMINSTRATIF } from "#/models/core/etat-administratif";
 import { isCollectiviteTerritoriale } from "#/models/core/types";
 import type { IDirigeants } from "#/models/rne/types";
 import type { ISearchResult } from "#/models/search";
@@ -130,6 +130,13 @@ const ResultItem: React.FC<{
                   adress={etablissement.adressePostale}
                   zip={(shouldColorZipCode && etablissement.codePostal) || ""}
                 />
+                {etablissement.etatAdministratif ===
+                  IETATADMINSTRATIF.FERME && (
+                  <EtatTag
+                    size="small"
+                    state={etablissement.etatAdministratif}
+                  />
+                )}
                 <span className={styles.down} />
               </a>
             </li>

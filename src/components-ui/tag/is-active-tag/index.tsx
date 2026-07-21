@@ -20,7 +20,7 @@ const classFromState = (state: IETATADMINSTRATIF) => {
   }
 };
 
-const EtatTag: React.FC<{
+export const EtatTag: React.FC<{
   state: IETATADMINSTRATIF;
   since?: string;
   size?: "medium" | "small";

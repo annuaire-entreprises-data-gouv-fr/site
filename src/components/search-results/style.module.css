@@ -78,6 +78,9 @@ a.adress:hover,
 }
 
 .adress {
+  display: flex;
+  gap: 2px;
+  align-items: center;
   font-size: 0.9rem;
   color: #707070;
 }
