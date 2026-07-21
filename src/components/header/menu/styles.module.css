@@ -44,6 +44,12 @@
   background: #f8f8f8;
 }
 
+.email {
+  height: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--annuaire-colors-pastelBlue);
+}
+
 @media only screen and (min-width: 1px) and (max-width: 992px) {
   .menuText {
     display: none;

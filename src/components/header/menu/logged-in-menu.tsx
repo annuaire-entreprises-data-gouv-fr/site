@@ -3,6 +3,7 @@ import { Link } from "#/components/link";
 import FloatingModal from "#/components-ui/floating-modal";
 import { Icon } from "#/components-ui/icon/wrapper";
 import type { IAgentInfo } from "#/models/authentication/agent";
+import { getAgentEmail } from "#/models/authentication/user/helpers";
 import constants from "#/models/constants";
 import styles from "./styles.module.css";
 
@@ -36,6 +37,9 @@ export function LoggedInMenu({ user }: ILoggedInMenuVariationAProps) {
         id="menu-modal"
         role="dialog"
       >
+        <div className={clsx("fr-text--sm fr-text--bold", styles.email)}>
+          {getAgentEmail({ user })}
+        </div>
         <Link
           aria-label="Gestion de mon compte agent public"
           to="/compte/accueil"
