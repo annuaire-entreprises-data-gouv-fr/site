@@ -48,35 +48,6 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
     window._paq.push([
       "AbTesting::create",
       {
-        name: "AgentHeader",
-        percentage: 100,
-        includedTargets: [
-          { attribute: "url", inverted: "0", type: "any", value: "" },
-        ],
-        excludedTargets: [],
-        variations: [
-          {
-            name: "original",
-            activate() {
-              window.matomoAbTesting?.setVariation("AgentHeader", "original");
-            },
-          },
-          {
-            name: "VariationA",
-            activate() {
-              window.matomoAbTesting?.setVariation("AgentHeader", "VariationA");
-            },
-          },
-        ],
-        trigger() {
-          return true;
-        },
-      },
-    ]);
-
-    window._paq.push([
-      "AbTesting::create",
-      {
         name: "AgentWall",
         percentage: 100,
         includedTargets: [
@@ -116,7 +87,6 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
   useEffect(() => {
     window.matomoAbTesting = {
       variations: {
-        AgentHeader: "original",
         AgentWall: "original",
       },
       getVariation(name) {

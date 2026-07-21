@@ -28,9 +28,6 @@ function useAbTest<T extends keyof MatomoAbTestVariations>({
   );
 }
 
-export function useAgentHeaderAbTest() {
-  return useAbTest({ name: "AgentHeader" });
-}
 export function useAgentWallAbTest() {
   return useAbTest({ name: "AgentWall" });
 }
