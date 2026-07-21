@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Create .env file
         run: |
-          cat > .env << 'EOF'
+          cat > docker.env << 'EOF'
           VITE_MATOMO_SITE_ID=${{ secrets.MATOMO_SITE_ID_STAGING }}
           VITE_DATAPASS_URL=${{ secrets.DATAPASS_URL_STAGING }}
           VITE_SENTRY_DSN=${{ secrets.SENTRY_DSN_STAGING }}
@@ -52,7 +52,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Create .env file
         run: |
-          cat > .env << 'EOF'
+          cat > docker.env << 'EOF'
           VITE_MATOMO_SITE_ID=${{ secrets.MATOMO_SITE_ID }}
           VITE_DATAPASS_URL=${{ secrets.DATAPASS_URL }}
           VITE_SENTRY_DSN=${{ secrets.SENTRY_DSN }}

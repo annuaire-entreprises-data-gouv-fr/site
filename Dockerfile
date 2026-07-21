@@ -44,6 +44,7 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
 FROM deps AS build
 
 COPY . .
+COPY docker.env* .env
 
 ENV NODE_ENV=production
 
