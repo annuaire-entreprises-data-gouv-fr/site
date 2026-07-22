@@ -15,7 +15,7 @@
   target:
     site: true
   body: |
-    Dans les résultats d'une recherche, vous pouvez désormais voir quels établissements affichés sont fermés.
+ Dans les résultats d'une recherche, il est désormais possible de voir quels établissements affichés sont fermés.
 - date: 21/07/2026
   target:
     site: true
