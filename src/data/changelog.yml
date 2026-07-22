@@ -11,6 +11,21 @@
 #   site: true
 
 ---
+- date: 22/07/2026
+  target:
+    site: true
+  body: |
+    Dans les résultats d'une recherche, il est désormais possible de voir quels établissements affichés sont fermés.
+- date: 21/07/2026
+  target:
+    site: true
+  body: |
+    Lors de la recherche avancée, un filtre permet de sélectionner en un clic uniquement les entreprises en activité.
+- date: 21/07/2026
+  target:
+    agent: true
+  body: |
+    Le menu de gestion de l’espace agent évolue et devient plus accessible.
 - date: 22/06/2026
   target:
     api: true

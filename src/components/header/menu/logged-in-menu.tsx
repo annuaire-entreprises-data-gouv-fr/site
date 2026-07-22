@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useCallback } from "react";
 import { Link } from "#/components/link";
 import FloatingModal from "#/components-ui/floating-modal";
 import { Icon } from "#/components-ui/icon/wrapper";
@@ -12,6 +13,13 @@ interface ILoggedInMenuVariationAProps {
 }
 
 export function LoggedInMenu({ user }: ILoggedInMenuVariationAProps) {
+  const onLinkClicked = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.currentTarget.blur();
+    },
+    []
+  );
+
   return (
     <div className={clsx(styles.menuLogout, "fr-link")}>
       <div>
@@ -42,12 +50,17 @@ export function LoggedInMenu({ user }: ILoggedInMenuVariationAProps) {
         </div>
         <Link
           aria-label="Gestion de mon compte agent public"
+          onClick={onLinkClicked}
           to="/compte/accueil"
         >
           <Icon slug="shieldLine">Mes droits</Icon>
         </Link>
         {user?.isSuperAgent && (
-          <Link aria-label="Gestion de mes groupes" to="/compte/mes-groupes">
+          <Link
+            aria-label="Gestion de mes groupes"
+            onClick={onLinkClicked}
+            to="/compte/mes-groupes"
+          >
             <Icon slug="team">Mes groupes</Icon>
           </Link>
         )}
