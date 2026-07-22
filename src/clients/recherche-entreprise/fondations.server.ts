@@ -9,6 +9,7 @@ import routes from "../routes";
 import type { IFondationResult, ISearchFondationsResponse } from "./interface";
 
 interface ClientFondationsRechercheEntreprise {
+  pageEtablissements?: number;
   pageResultatsRecherche?: number;
   searchFilterParams?: SearchFondationsFilterParams;
   searchTerms: string;
@@ -19,6 +20,7 @@ export const clientSearchFondationsRechercheEntreprise = async (
     searchTerms,
     pageResultatsRecherche = 1,
     searchFilterParams,
+    pageEtablissements,
   }: ClientFondationsRechercheEntreprise,
   signal?: AbortSignal
 ): Promise<ISearchFondationsResults> => {
@@ -32,9 +34,13 @@ export const clientSearchFondationsRechercheEntreprise = async (
 
   const route = `${process.env.API_RECHERCHE_ENTREPRISE_URL}${routes.rechercheEntreprise.rechercheFondations}`;
 
-  const url = `${route}?per_page=10&page=${pageResultatsRecherche}&q=${encodedTerms}&limite_matching_etablissements=3&mtm_campaign=annuaire-entreprises-site${
+  let url = `${route}?per_page=10&page=${pageResultatsRecherche}&q=${encodedTerms}&limite_matching_etablissements=3&mtm_campaign=annuaire-entreprises-site${
     searchFilterParams?.toApiURI() || ""
   }`;
+
+  if (pageEtablissements) {
+    url += `&page_etablissements=${pageEtablissements}`;
+  }
 
   const timeout = constants.timeout.L;
 
