@@ -7,6 +7,7 @@ interface IExceptionArgument {
   /** Contextual information about the exception */
   context?: {
     siren?: string;
+    idRnf?: string;
     idRna?: string | null;
     siret?: string;
     slug?: string;
