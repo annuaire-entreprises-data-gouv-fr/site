@@ -20,7 +20,7 @@
   target:
     site: true
   body: |
-    Lors de la recherche avancée, un filtre vous permet en un clic de ne sélectionner que les entreprises en activité.
+    Lors de la recherche avancée, un filtre permet de sélectionner en un clic uniquement les entreprises en activité.
 - date: 21/07/2026
   target:
     agent: true
