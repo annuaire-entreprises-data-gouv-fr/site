@@ -22,6 +22,7 @@ import {
   isAssociation,
   isCollectiviteTerritoriale,
   isServicePublic,
+  isServicePublicImmatriculeeAuRNE,
 } from "#/models/core/types";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
@@ -116,7 +117,10 @@ const DirigeantsContent = ({
   }
 
   // Service public
-  if (isServicePublic(uniteLegale)) {
+  if (
+    isServicePublic(uniteLegale) &&
+    !isServicePublicImmatriculeeAuRNE(uniteLegale)
+  ) {
     return <ResponsablesServicePublicSection uniteLegale={uniteLegale} />;
   }
 

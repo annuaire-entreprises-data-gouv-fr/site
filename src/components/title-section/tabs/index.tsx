@@ -16,6 +16,7 @@ import {
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
   isServicePublic,
+  isServicePublicImmatriculeeAuRNE,
 } from "#/models/core/types";
 import styles from "./styles.module.css";
 import TabLink from "./tab-link";
@@ -73,7 +74,8 @@ const getUniteLegaleTabs = (
       shouldDisplay: true,
       ...(isCollectiviteTerritoriale(uniteLegale)
         ? { label: "Élus & organigramme", width: "120px" }
-        : isServicePublic(uniteLegale)
+        : isServicePublic(uniteLegale) &&
+            !isServicePublicImmatriculeeAuRNE(uniteLegale)
           ? { label: "Responsables & organigramme", width: "130px" }
           : hasRights({ user }, ApplicationRights.liensCapitalistiques)
             ? { label: "Dirigeants & actionnariat", width: "120px" }
