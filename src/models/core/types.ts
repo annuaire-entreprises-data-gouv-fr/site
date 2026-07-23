@@ -291,6 +291,13 @@ export const isAssociation = (
 export const isServicePublic = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estAdministration;
 
+export const isServicePublicImmatriculeeAuRNE = (
+  uniteLegale: IUniteLegale
+): boolean =>
+  isServicePublic(uniteLegale) &&
+  (!!uniteLegale.dateMiseAJourInpi ||
+    !!uniteLegale.immatriculation?.dateImmatriculation);
+
 export const isAvocat = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estAvocat;
 
