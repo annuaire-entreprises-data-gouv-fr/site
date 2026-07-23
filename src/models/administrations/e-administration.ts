@@ -10,6 +10,7 @@ export const EAdministration = {
   MSS: "mss",
   INPI: "inpi",
   INSEE: "insee",
+  SIAF: "siaf",
   MTPEI: "mtpei",
   MI: "mi",
   DJEPVA: "djepva",
