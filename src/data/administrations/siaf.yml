@@ -1,0 +1,11 @@
+slug: siaf
+short: SIAF
+site: https://francearchives.gouv.fr
+long: Le service interministériel des Archives de France (SIAF)
+contact: https://francearchives.gouv.fr/fr/contact
+apiMonitors:
+  - apiName: API Liste des fondations
+    apiSlug: liste-fondations
+estServicePublic: true
+description: |
+  Le service interministériel des Archives de France est un des services composant la direction générale des patrimoines et de l'architecture (avec les musées, le patrimoine et l’architecture).
