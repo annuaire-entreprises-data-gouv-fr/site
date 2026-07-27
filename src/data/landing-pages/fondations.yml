@@ -23,7 +23,7 @@ published: true
 description: Retrouvez les infos de fondations, fondations d'entreprise
 
   et fonds de dotation en France
-searchPath: /recherche/fondations
+searchPath: /rechercher/fondations
 seo:
   title: Rechercher un organisme philanthropique
   description: Retrouvez les informations légales des fondations en France

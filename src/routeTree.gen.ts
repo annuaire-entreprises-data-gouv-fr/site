@@ -41,6 +41,7 @@ import { Route as HeaderDefaultAdministrationIndexRouteImport } from './routes/_
 import { Route as ApiTestSessionRouteImport } from './routes/api/test/session'
 import { Route as ApiPingSlugRouteImport } from './routes/api/ping/$slug'
 import { Route as ApiFeedbackNpsRouteImport } from './routes/api/feedback/nps'
+import { Route as HeaderSearchRechercherFondationsRouteImport } from './routes/_header-search/rechercher/fondations'
 import { Route as HeaderSearchRechercherCarteRouteImport } from './routes/_header-search/rechercher/carte'
 import { Route as HeaderPublicDonneesApiRouteImport } from './routes/_header-public/donnees.api'
 import { Route as HeaderPublicAProposStatsRouteImport } from './routes/_header-public/a-propos.stats'
@@ -252,6 +253,12 @@ const ApiFeedbackNpsRoute = ApiFeedbackNpsRouteImport.update({
   path: '/api/feedback/nps',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HeaderSearchRechercherFondationsRoute =
+  HeaderSearchRechercherFondationsRouteImport.update({
+    id: '/rechercher/fondations',
+    path: '/rechercher/fondations',
+    getParentRoute: () => HeaderSearchRouteRoute,
+  } as any)
 const HeaderSearchRechercherCarteRoute =
   HeaderSearchRechercherCarteRouteImport.update({
     id: '/rechercher/carte',
@@ -599,6 +606,7 @@ export interface FileRoutesByFullPath {
   '/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
+  '/rechercher/fondations': typeof HeaderSearchRechercherFondationsRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/api/test/session': typeof ApiTestSessionRoute
@@ -675,6 +683,7 @@ export interface FileRoutesByTo {
   '/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
+  '/rechercher/fondations': typeof HeaderSearchRechercherFondationsRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/api/test/session': typeof ApiTestSessionRoute
@@ -760,6 +769,7 @@ export interface FileRoutesById {
   '/_header-public/a-propos/stats': typeof HeaderPublicAProposStatsRoute
   '/_header-public/donnees/api': typeof HeaderPublicDonneesApiRoute
   '/_header-search/rechercher/carte': typeof HeaderSearchRechercherCarteRoute
+  '/_header-search/rechercher/fondations': typeof HeaderSearchRechercherFondationsRoute
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/api/test/session': typeof ApiTestSessionRoute
@@ -838,6 +848,7 @@ export interface FileRouteTypes {
     | '/a-propos/stats'
     | '/donnees/api'
     | '/rechercher/carte'
+    | '/rechercher/fondations'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
     | '/api/test/session'
@@ -914,6 +925,7 @@ export interface FileRouteTypes {
     | '/a-propos/stats'
     | '/donnees/api'
     | '/rechercher/carte'
+    | '/rechercher/fondations'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
     | '/api/test/session'
@@ -998,6 +1010,7 @@ export interface FileRouteTypes {
     | '/_header-public/a-propos/stats'
     | '/_header-public/donnees/api'
     | '/_header-search/rechercher/carte'
+    | '/_header-search/rechercher/fondations'
     | '/api/feedback/nps'
     | '/api/ping/$slug'
     | '/api/test/session'
@@ -1283,6 +1296,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/feedback/nps'
       preLoaderRoute: typeof ApiFeedbackNpsRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_header-search/rechercher/fondations': {
+      id: '/_header-search/rechercher/fondations'
+      path: '/rechercher/fondations'
+      fullPath: '/rechercher/fondations'
+      preLoaderRoute: typeof HeaderSearchRechercherFondationsRouteImport
+      parentRoute: typeof HeaderSearchRouteRoute
     }
     '/_header-search/rechercher/carte': {
       id: '/_header-search/rechercher/carte'
@@ -1821,11 +1841,13 @@ const HeaderPublicRouteRouteWithChildren =
 
 interface HeaderSearchRouteRouteChildren {
   HeaderSearchRechercherCarteRoute: typeof HeaderSearchRechercherCarteRoute
+  HeaderSearchRechercherFondationsRoute: typeof HeaderSearchRechercherFondationsRoute
   HeaderSearchRechercherIndexRoute: typeof HeaderSearchRechercherIndexRoute
 }
 
 const HeaderSearchRouteRouteChildren: HeaderSearchRouteRouteChildren = {
   HeaderSearchRechercherCarteRoute: HeaderSearchRechercherCarteRoute,
+  HeaderSearchRechercherFondationsRoute: HeaderSearchRechercherFondationsRoute,
   HeaderSearchRechercherIndexRoute: HeaderSearchRechercherIndexRoute,
 }
 

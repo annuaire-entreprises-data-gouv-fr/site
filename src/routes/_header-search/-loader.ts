@@ -3,6 +3,8 @@ import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
 import { searchWithoutProtectedSiren } from "#/models/search";
 import SearchFilterParams from "#/models/search/search-filter-params";
+import { searchFondations } from "#/models/search-fondations";
+import SearchFondationsFilterParams from "#/models/search-fondations/search-filter-params";
 import {
   extractSirenOrSiretFromRechercherUrl,
   isLikelyASiren,
@@ -130,3 +132,25 @@ export const searchLoaderDeps = ({
   res_min: search.res_min,
   res_max: search.res_max,
 });
+
+/**
+ * Fondations
+ */
+
+export const searchFondationsFn = createServerFn()
+  .validator(searchQueryParamsSchema)
+  .handler(async ({ data }) => {
+    const searchFilterParams = new SearchFondationsFilterParams(data);
+
+    const searchResults = await searchFondations(
+      data.terme,
+      data.page,
+      searchFilterParams
+    );
+
+    return {
+      searchResults,
+      searchFilterParamsJSON: searchFilterParams.toJSON(),
+      searchTerm: data.terme,
+    };
+  });
