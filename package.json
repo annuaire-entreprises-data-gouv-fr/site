@@ -46,7 +46,7 @@
     "chart.js": "4.5.1",
     "clsx": "2.1.1",
     "crawler-user-agents": "1.56.0",
-    "fast-xml-parser": "5.9.3",
+    "fast-xml-parser": "5.10.1",
     "maplibre-gl": "5.24.0",
     "nitro": "3.0.260610-beta",
     "openid-client": "6.8.4",
