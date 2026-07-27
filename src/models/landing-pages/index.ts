@@ -2,7 +2,7 @@ export interface ILandingPage {
   body: string;
   datasources: string[];
   description: string;
-  filter: {
+  filter?: {
     name: string;
     value: string;
   };
@@ -10,6 +10,7 @@ export interface ILandingPage {
   isServicePublic: boolean;
   published: boolean;
   reassurance: { title: string; body: string }[];
+  searchPath?: string;
   seo: {
     title: string;
     description: string;

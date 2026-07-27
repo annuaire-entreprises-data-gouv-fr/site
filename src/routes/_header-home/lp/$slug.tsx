@@ -57,6 +57,7 @@ function RouteComponent() {
     title,
     description,
     filter,
+    searchPath,
     reassurance = [],
     datasources = [],
     body,
@@ -64,7 +65,7 @@ function RouteComponent() {
   return (
     <>
       <form
-        action={"/rechercher"}
+        action={searchPath || "/rechercher"}
         className={`${styles["centered-search"]} layout-center`}
         id="search-bar-form"
         method="get"
@@ -77,12 +78,14 @@ function RouteComponent() {
           {title}
         </h1>
         <h2 className={styles["sub-title"]}>{description}</h2>
-        <input
-          name={filter.name}
-          readOnly
-          style={{ display: "none" }}
-          value={filter.value}
-        />
+        {filter && (
+          <input
+            name={filter.name}
+            readOnly
+            style={{ display: "none" }}
+            value={filter.value}
+          />
+        )}
         <div className={styles["search-bar-wrapper"]}>
           <SearchBar
             autoFocus={true}
