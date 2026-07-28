@@ -22,7 +22,7 @@ const AdministrationDescription: React.FC<{
   } = administrationsMetaData[slug];
 
   return (
-    <div className={styles["administration-wrapper"]} id={slug}>
+    <div className={styles["administration-wrapper"]} id={`${slug}-section`}>
       <div>
         <Logo
           alt={`Logo ${short}`}
@@ -43,7 +43,7 @@ const AdministrationDescription: React.FC<{
                 {dataSources.map(({ data = [] }) =>
                   data.map(({ label }) => (
                     <li key={label}>
-                      <Link hash={slug} to="/donnees/sources">
+                      <Link hash={`${slug}-section`} to="/donnees/sources">
                         {label}
                       </Link>
                     </li>
@@ -53,7 +53,7 @@ const AdministrationDescription: React.FC<{
             </div>
           )}
           <p>
-            <Link hash={slug} to="/donnees/sources">
+            <Link hash={`${slug}-section`} to="/donnees/sources">
               → Télécharger ou réutiliser ces données
             </Link>
             <br />

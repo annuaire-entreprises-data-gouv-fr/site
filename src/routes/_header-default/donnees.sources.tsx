@@ -89,7 +89,7 @@ function RouteComponent() {
       {allAdministrations.map(
         ({ dataSources, administrationEnum, contact, slug, long, short }) => (
           <Fragment key={slug}>
-            <h2 id={slug}>{long}</h2>
+            <h2 id={`${slug}-section`}>{long}</h2>
             {dataSources.map((source, sourceIndex) => {
               const { label, datagouvLink, data, apiSlug } = source;
               const api = allAPI[apiSlug];
