@@ -115,7 +115,10 @@ function RouteComponent() {
         <ul>
           {allAdministrations.map((administration) => (
             <li key={administration.slug}>
-              <Link hash={administration.slug} to="/administration">
+              <Link
+                hash={`${administration.slug}-section`}
+                to="/administration"
+              >
                 {administration.long}
               </Link>
             </li>
