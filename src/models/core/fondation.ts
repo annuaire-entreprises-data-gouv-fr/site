@@ -19,17 +19,16 @@ import { IdRnfNotFoundError, type IFondation } from "./fondations.types";
  */
 
 interface IFondationOptions {
-  isBot: boolean;
   page?: number;
 }
 
 /**
- * Return an uniteLegale if and only if siren is valid and exists otherwise throw SirenInvalid or SirenNotFound errors
+ * Return a fondation if and only if idRnf is valid and exists otherwise throw IdRnfInvalid or IdRnfNotFound errors
  *
  */
 export const getFondationFromSlug = async (
   slug: string,
-  options: IFondationOptions
+  options: IFondationOptions = { page: 1 }
 ): Promise<IFondation> => {
   const { page = 1 } = options;
   const builder = new FondationBuilder(slug, page);
