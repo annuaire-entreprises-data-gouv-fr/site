@@ -3,15 +3,13 @@ import HiddenH1 from "#/components/a11y-components/hidden-h1";
 import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
 import Footer from "#/components/footer";
-import { HeaderWithAdvancedSearch } from "#/components/header/header-advanced-search";
+import { Header } from "#/components/header/header";
 import SearchFondationsResults from "#/components/search-fondations-results";
-import { AdvancedSearchTutorial } from "#/components/search-results/advanced-search-tutorial";
 import SocialNetworks from "#/components/social-network";
-import { hasSearchParam } from "#/models/search/search-filter-params";
 import { meta } from "#/utils/seo";
 import { HeaderSearchError } from "../-error";
 import {
-  beforeLoadCheckTerme,
+  beforeLoadFondationsCheckTerme,
   searchDefaultParams,
   searchFondationsFn,
   searchLoaderDeps,
@@ -46,7 +44,7 @@ export const Route = createFileRoute("/_header-search/rechercher/fondations")({
   beforeLoad: async (ctx) => {
     const searchTerm = ctx.search.terme;
 
-    beforeLoadCheckTerme(searchTerm);
+    beforeLoadFondationsCheckTerme(searchTerm);
   },
   loader: async ({ deps }) => await searchFondationsFn({ data: deps }),
   component: RouteComponent,
@@ -61,25 +59,23 @@ function RouteComponent() {
     <>
       <NPSBanner />
       <BannerManager />
-      <HeaderWithAdvancedSearch
+      <Header
         currentSearchTerm={searchTerm}
-        searchParams={searchFilterParamsJSON}
-        useAgentCTA={true}
+        searchPath="/rechercher/fondations"
+        useAgentBanner={false}
+        useAgentCTA
+        useLogo={false}
         useMap={false}
-        useSearchBar={true}
+        useSearchBar
       />
       <main className="fr-container">
         <HiddenH1 title="Résultats de recherche" />
         <div className="content-container">
-          {hasSearchParam(searchFilterParamsJSON) || searchTerm ? (
-            <SearchFondationsResults
-              results={searchResults}
-              searchFilterParams={searchFilterParamsJSON}
-              searchTerm={searchTerm}
-            />
-          ) : (
-            <AdvancedSearchTutorial />
-          )}
+          <SearchFondationsResults
+            results={searchResults}
+            searchFilterParams={searchFilterParamsJSON}
+            searchTerm={searchTerm}
+          />
         </div>
       </main>
       <SocialNetworks />

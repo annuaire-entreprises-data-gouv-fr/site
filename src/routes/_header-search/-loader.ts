@@ -10,6 +10,7 @@ import {
   isLikelyASiren,
   isLikelyASiret,
 } from "#/utils/helpers";
+import { isIdRnf } from "#/utils/helpers/fondations";
 import { queryString } from "#/utils/query";
 
 export function beforeLoadCheckTerme(searchTerm: string | undefined) {
@@ -136,6 +137,24 @@ export const searchLoaderDeps = ({
 /**
  * Fondations
  */
+
+export function beforeLoadFondationsCheckTerme(searchTerm: string | undefined) {
+  if (!searchTerm) {
+    return;
+  }
+
+  if (isIdRnf(searchTerm)) {
+    throw redirect(
+      {
+        to: "/fondation/$slug",
+        params: { slug: searchTerm },
+        search: {
+          redirected: 1,
+        },
+      } as any /* TODO: fix type once the page is created */
+    );
+  }
+}
 
 export const searchFondationsFn = createServerFn()
   .validator(searchQueryParamsSchema)

@@ -1,9 +1,9 @@
 import type { IParams } from "#/models/search/search-filter-params";
 import type { ISearchFondationsResults } from "#/models/search-fondations";
-import ResultsCounter from "../search-results/results-counter";
 import ResultsPagination from "../search-results/results-pagination";
 import { BadParams } from "../search-results/results-problems/bad-params";
 import { NotEnoughParams } from "../search-results/results-problems/results-not-enough-params";
+import ResultsCounter from "./results-counter";
 import ResultsList from "./results-list";
 
 const SearchFondationsResults: React.FC<{

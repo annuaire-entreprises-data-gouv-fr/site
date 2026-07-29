@@ -1,3 +1,4 @@
+import type { LinkProps as TanStackLinkProps } from "@tanstack/react-router";
 import type React from "react";
 import ReconnectBanner from "#/components/banner/reconnect";
 import { Link } from "#/components/link";
@@ -22,6 +23,7 @@ import styles from "./styles.module.css";
 interface IProps {
   currentSearchTerm?: string;
   plugin?: React.JSX.Element;
+  searchPath?: TanStackLinkProps["to"];
   useAgentBanner?: boolean;
   useAgentCTA?: boolean;
   useAgentDocumentation?: boolean;
@@ -35,6 +37,7 @@ interface IProps {
 }
 
 export const HeaderCore: React.FC<IProps> = ({
+  searchPath,
   currentSearchTerm = "",
   useLogo = false,
   useSearchBar = false,
@@ -57,7 +60,7 @@ export const HeaderCore: React.FC<IProps> = ({
     >
       <PrintNever>
         <form
-          action={useMap ? "/rechercher/carte" : "/rechercher"}
+          action={searchPath || (useMap ? "/rechercher/carte" : "/rechercher")}
           id="search-bar-form"
           method="get"
         >
