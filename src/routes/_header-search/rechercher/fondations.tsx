@@ -62,6 +62,7 @@ function RouteComponent() {
       <Header
         currentSearchTerm={searchTerm}
         searchPath="/rechercher/fondations"
+        searchPlaceholder="Nom, adresse, n° RNF..."
         useAgentBanner={false}
         useAgentCTA
         useLogo={false}

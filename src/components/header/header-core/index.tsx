@@ -24,6 +24,7 @@ interface IProps {
   currentSearchTerm?: string;
   plugin?: React.JSX.Element;
   searchPath?: TanStackLinkProps["to"];
+  searchPlaceholder?: string;
   useAgentBanner?: boolean;
   useAgentCTA?: boolean;
   useAgentDocumentation?: boolean;
@@ -38,6 +39,7 @@ interface IProps {
 
 export const HeaderCore: React.FC<IProps> = ({
   searchPath,
+  searchPlaceholder,
   currentSearchTerm = "",
   useLogo = false,
   useSearchBar = false,
@@ -125,7 +127,10 @@ export const HeaderCore: React.FC<IProps> = ({
                   </div>
                   {useSearchBar ? (
                     <div className={styles.notFrSearch}>
-                      <SearchBar defaultValue={currentSearchTerm} />
+                      <SearchBar
+                        defaultValue={currentSearchTerm}
+                        placeholder={searchPlaceholder}
+                      />
                     </div>
                   ) : null}
                 </div>

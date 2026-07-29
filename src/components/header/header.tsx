@@ -6,6 +6,7 @@ interface IProps {
   currentSearchTerm?: string;
   plugin?: React.JSX.Element;
   searchPath?: TanStackLinkProps["to"];
+  searchPlaceholder?: string;
   useAgentBanner?: boolean;
   useAgentCTA?: boolean;
   useAgentDocumentation?: boolean;
@@ -18,6 +19,7 @@ interface IProps {
 
 export const Header: React.FC<IProps> = ({
   searchPath,
+  searchPlaceholder,
   useLogo = false,
   useSearchBar = false,
   useMap = false,
@@ -36,6 +38,7 @@ export const Header: React.FC<IProps> = ({
       currentSearchTerm={currentSearchTerm}
       plugin={plugin}
       searchPath={searchPath}
+      searchPlaceholder={searchPlaceholder}
       useAgentBanner={useAgentBanner}
       useAgentCTA={useAgentCTA}
       useAgentDocumentation={useAgentDocumentation}

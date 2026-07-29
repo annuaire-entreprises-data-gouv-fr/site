@@ -61,6 +61,7 @@ function RouteComponent() {
     reassurance = [],
     datasources = [],
     body,
+    searchPlaceholder,
   } = landingPage;
   return (
     <>
@@ -90,7 +91,7 @@ function RouteComponent() {
           <SearchBar
             autoFocus={true}
             defaultValue=""
-            placeholder="Nom, adresse, n° SIRET/SIREN..."
+            placeholder={searchPlaceholder || "Nom, adresse, n° SIRET/SIREN..."}
           />
         </div>
       </form>

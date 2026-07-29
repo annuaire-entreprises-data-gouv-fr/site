@@ -11,6 +11,7 @@ export interface ILandingPage {
   published: boolean;
   reassurance: { title: string; body: string }[];
   searchPath?: string;
+  searchPlaceholder?: string;
   seo: {
     title: string;
     description: string;
