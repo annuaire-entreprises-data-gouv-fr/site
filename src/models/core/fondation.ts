@@ -1,3 +1,4 @@
+import { decodeHTML } from "entities/decode";
 import { HttpNotFound, HttpServerError } from "#/clients/exceptions";
 import { clientFondationRechercheEntreprise } from "#/clients/recherche-entreprise/rnf";
 import { clientSIAFFondation } from "#/clients/siaf/index.server";
@@ -85,7 +86,7 @@ class FondationBuilder {
     }
 
     const fondationSiafResult: IFondation = {
-      address: fondationSiaf.address.oneLine,
+      address: decodeHTML(fondationSiaf.address.oneLine),
       creationDate: fondationSiaf.creationAt,
       department: fondationSiaf.department,
       foundationType: fondationSiaf.foundationType,
@@ -94,10 +95,10 @@ class FondationBuilder {
       id: fondationSiaf.id,
       postalCode: fondationSiaf.address.dsAddress.postalCode,
       siret: fondationSiaf.siret,
-      socialObject: fondationSiaf.socialObject,
+      socialObject: decodeHTML(fondationSiaf.socialObject),
       state: fondationSiaf.state,
       stateEffectiveAt: fondationSiaf.stateEffectiveAt,
-      title: fondationSiaf.title,
+      title: decodeHTML(fondationSiaf.title),
     };
 
     if (isAPINotResponding(fondationRechercheEntreprise)) {
