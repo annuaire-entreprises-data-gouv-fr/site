@@ -3,6 +3,7 @@ import { HttpNotFound, HttpServerError } from "#/clients/exceptions";
 import { clientFondationRechercheEntreprise } from "#/clients/recherche-entreprise/rnf";
 import { clientSIAFFondation } from "#/clients/siaf/index.server";
 import type { IFondationResult } from "#/clients/siaf/interface";
+import { extractSirenFromSiret } from "#/utils/helpers";
 import { verifyIdRnf } from "#/utils/helpers/fondations";
 import { logFatalErrorInSentry, logWarningInSentry } from "#/utils/sentry";
 import { EAdministration } from "../administrations/e-administration";
@@ -95,6 +96,9 @@ class FondationBuilder {
       id: fondationSiaf.id,
       postalCode: fondationSiaf.address.dsAddress.postalCode,
       siret: fondationSiaf.siret,
+      siren: fondationSiaf.siret
+        ? extractSirenFromSiret(fondationSiaf.siret)
+        : null,
       socialObject: decodeHTML(fondationSiaf.socialObject),
       state: fondationSiaf.state,
       stateEffectiveAt: fondationSiaf.stateEffectiveAt,
@@ -125,6 +129,8 @@ class FondationBuilder {
     return {
       ...fondationRechercheEntreprise,
       ...fondationSiafResult,
+      siret: fondationSiafResult.siret || fondationRechercheEntreprise.siret,
+      siren: fondationSiafResult.siren || fondationRechercheEntreprise.siren,
     };
   };
 }
