@@ -79,5 +79,5 @@ const mapToFondationResult = (result: IFondationResult): IFondation => ({
   socialObject: null,
   state: null,
   stateEffectiveAt: null,
-  title: result.titre,
+  title: result.denomination,
 });
