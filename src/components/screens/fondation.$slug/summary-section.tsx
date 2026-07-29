@@ -220,7 +220,6 @@ const FondationSummarySection: React.FC<{
     ...(uniteLegale
       ? [["Date de création", formatDate(uniteLegale.dateCreation)]]
       : []),
-    ["Date de création RNF", formatDate(fondation.creationDate)],
     ...(uniteLegale && estActif(uniteLegale)
       ? []
       : uniteLegale
@@ -272,9 +271,13 @@ const FondationSummarySection: React.FC<{
         lastModified={uniteLegale?.dateDerniereMiseAJour}
         sources={[
           EAdministration.MI,
-          EAdministration.INSEE,
-          EAdministration.DGFIP,
-          EAdministration.DOUANES,
+          ...(uniteLegale
+            ? [
+                EAdministration.INSEE,
+                EAdministration.DGFIP,
+                EAdministration.DOUANES,
+              ]
+            : []),
           ...(uniteLegale ? labelsAndCertificatesSources(uniteLegale) : []),
           ...(uniteLegale && isAssociation(uniteLegale)
             ? [EAdministration.DILA]
