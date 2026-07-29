@@ -196,10 +196,10 @@ export interface IFondationResult {
   adresse: string;
   code_postal: string;
   date_creation: string;
+  denomination: string;
   numero_rnf: string;
   siren: string;
   siret: string;
-  titre: string;
   type_organisme: string;
   ville: string;
 }
