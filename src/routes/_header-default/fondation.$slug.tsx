@@ -5,6 +5,7 @@ import z from "zod";
 import EspaceAgentSummarySection from "#/components/espace-agent-components/summary-section";
 import EtablissementListeSection from "#/components/etablissement-liste-section";
 import EtablissementSection from "#/components/etablissement-section";
+import FondationSummarySection from "#/components/screens/fondation.$slug/summary-section";
 import { NotFound } from "#/components/screens/not-found";
 import { TitleFondation } from "#/components/title-fondation-section";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
@@ -127,6 +128,11 @@ function RouteComponent() {
   return (
     <div className="content-container">
       <TitleFondation
+        fondation={fondation}
+        uniteLegale={uniteLegale}
+        user={user}
+      />
+      <FondationSummarySection
         fondation={fondation}
         uniteLegale={uniteLegale}
         user={user}
