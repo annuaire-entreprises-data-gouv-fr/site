@@ -4,6 +4,6 @@ export const NotEnoughParams = () => (
     permettre
     <br />
     de vous proposer un résultat, veuillez utiliser un terme de recherche plus
-    long (au moins 3 lettres)
+    long (au moins 3 lettres).
   </h3>
 );
