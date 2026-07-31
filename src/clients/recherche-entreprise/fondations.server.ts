@@ -76,6 +76,7 @@ const mapToFondationResult = (result: IFondationResult): IFondation => ({
   id: result.numero_rnf,
   postalCode: result.code_postal,
   siret: result.siret,
+  siren: result.siren,
   socialObject: null,
   state: null,
   stateEffectiveAt: null,
