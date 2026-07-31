@@ -3,16 +3,17 @@ import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { Exception } from "#/models/exceptions";
 import { isSiren } from "#/utils/helpers";
+import { isIdRnf } from "#/utils/helpers/fondations";
 import { logWarningInSentry } from "#/utils/sentry";
 
 interface QrCodeProps {
-  siren: string;
+  id: string;
 }
 
-export function QrCode({ siren }: QrCodeProps) {
+export function QrCode({ id }: QrCodeProps) {
   const onDownload = useCallback(async () => {
     try {
-      const path = `${isSiren(siren) ? "entreprise" : "etablissement"}/${siren}`;
+      const path = `${isIdRnf(id) ? "fondation" : isSiren(id) ? "entreprise" : "etablissement"}/${id}`;
       const uri = encodeURI(
         `https://annuaire-entreprises.data.gouv.fr/${path}?mtm_campaign=qr-code`
       );
@@ -20,7 +21,7 @@ export function QrCode({ siren }: QrCodeProps) {
       const qrCodeUrl = URL.createObjectURL(qrCode);
       const a = document.createElement("a");
       a.href = qrCodeUrl;
-      a.download = `QR_code_page_${siren}.png`;
+      a.download = `QR_code_page_${id}.png`;
       a.click();
       URL.revokeObjectURL(qrCodeUrl);
     } catch (e) {
@@ -31,7 +32,7 @@ export function QrCode({ siren }: QrCodeProps) {
         })
       );
     }
-  }, [siren]);
+  }, [id]);
 
   return (
     <span>
