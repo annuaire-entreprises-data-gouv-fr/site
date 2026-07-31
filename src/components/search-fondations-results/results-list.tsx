@@ -31,33 +31,31 @@ const AddressWithColouredZip = ({ adress = "", zip = "" }) => {
 const ResultItem: React.FC<{
   result: IFondation;
   shouldColorZipCode: boolean;
-}> = ({ result, shouldColorZipCode }) => {
-  return (
-    <div className={styles["result-item"]}>
-      <Link
-        className="result-link no-style-link"
-        data-id-rnf={result.id}
-        key={result.id}
-        params={{ slug: result.id }}
-        to={"/fondations/$slug" as any /* TODO: fix this */}
-      >
-        <div className={styles.title}>
-          <span>{`${result.title}`}</span>
-        </div>
-        <div>
-          <Icon slug="mapPin">
-            <span className={styles.adress}>
-              <AddressWithColouredZip
-                adress={result.address ?? undefined}
-                zip={(shouldColorZipCode && result.postalCode) || ""}
-              />
-            </span>
-          </Icon>
-        </div>
-      </Link>
-    </div>
-  );
-};
+}> = ({ result, shouldColorZipCode }) => (
+  <div className={styles["result-item"]}>
+    <Link
+      className="result-link no-style-link"
+      data-id-rnf={result.id}
+      key={result.id}
+      params={{ slug: result.id }}
+      to="/fondation/$slug"
+    >
+      <div className={styles.title}>
+        <span>{`${result.title}`}</span>
+      </div>
+      <div>
+        <Icon slug="mapPin">
+          <span className={styles.adress}>
+            <AddressWithColouredZip
+              adress={result.address ?? undefined}
+              zip={(shouldColorZipCode && result.postalCode) || ""}
+            />
+          </span>
+        </Icon>
+      </div>
+    </Link>
+  </div>
+);
 
 const ResultsList: React.FC<IProps> = ({
   results,
