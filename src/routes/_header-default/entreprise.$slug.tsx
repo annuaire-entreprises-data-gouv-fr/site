@@ -35,6 +35,7 @@ import {
   isAssociation,
   isAvocat,
   isCollectiviteTerritoriale,
+  isFondation,
   isServicePublic,
 } from "#/models/core/types";
 import { getExtraitKbis } from "#/models/espace-agent/extrait-kbis";
@@ -78,6 +79,17 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
       }),
       getRechercheEntrepriseSourcesLastModified(),
     ]);
+
+    if (isFondation(uniteLegale)) {
+      throw redirect({
+        to: "/fondation/$slug",
+        params: { slug: uniteLegale.complements.numeroRnf },
+        search: {
+          page,
+        },
+        statusCode: 308,
+      });
+    }
 
     if (
       uniteLegale.chemin &&
