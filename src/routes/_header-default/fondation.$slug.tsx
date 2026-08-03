@@ -67,7 +67,6 @@ const loadFondationPage = createServerFn({ method: "POST" })
 
 export const Route = createFileRoute("/_header-default/fondation/$slug")({
   validateSearch: z.object({
-    redirected: z.literal(1).optional().catch(undefined),
     page: z.number().min(1).optional().default(1).catch(1),
   }),
   search: {
@@ -78,7 +77,6 @@ export const Route = createFileRoute("/_header-default/fondation/$slug")({
     ],
   },
   loaderDeps: ({ search }) => ({
-    redirected: search.redirected,
     page: search.page,
   }),
   loader: async ({ params, deps }) => {
