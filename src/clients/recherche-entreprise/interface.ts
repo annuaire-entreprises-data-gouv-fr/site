@@ -152,6 +152,7 @@ export interface IComplements {
   identifiant_association: string;
   liste_finess_juridique: string[];
   liste_idcc: string[];
+  numero_rnf: string | null;
   statut_entrepreneur_spectacle: "invalide" | "valide";
   type_siae: string;
 }
