@@ -155,12 +155,7 @@ function RouteComponent() {
       )}
       {checkHasQuality(uniteLegale) && <HorizontalSeparator />}
       {estFiness && <FinessSection uniteLegale={uniteLegale} />}
-      {estRge && (
-        <CertificationsRGESection
-          certificationsRGE={rge}
-          uniteLegale={uniteLegale}
-        />
-      )}
+      {estRge && <CertificationsRGESection certificationsRGE={rge} />}
       {hasRights({ user }, ApplicationRights.protectedCertificats) && (
         <>
           <QualibatSection uniteLegale={uniteLegale} />

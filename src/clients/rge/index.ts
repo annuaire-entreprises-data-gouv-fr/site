@@ -8,7 +8,7 @@ import type { Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
 import { getCertificatLogoPath } from "../../utils/helpers/certifications/certificats-logo";
 
-interface IRGEResponse {
+export interface IRGEResponse {
   results: {
     adresse: string;
     code_postal: string;
@@ -35,7 +35,7 @@ interface IRGEResponse {
 export const clientRGE = async (siren: Siren): Promise<IRGECertification> => {
   const route = routes.certifications.rge.api;
   const data = await httpGet<IRGEResponse>(route, {
-    params: { qs: `siret:${siren}*` },
+    params: { qs: `siret:${siren}*`, size: 500 },
   });
 
   if (!data.results.length) {
@@ -46,35 +46,44 @@ export const clientRGE = async (siren: Siren): Promise<IRGECertification> => {
   return mapToDomainObject(data);
 };
 
-const mapToDomainObject = (rge: IRGEResponse) => {
-  const [firstResult] = rge.results;
-
-  const {
-    adresse = "",
-    code_postal = "",
-    commune = "",
-    nom_entreprise = "",
-    particulier = false,
-    siret,
-    telephone = "",
-    site_internet = "",
-    email = "",
-  } = firstResult;
-
-  const companyInfo = {
-    adresse: `${adresse}, ${code_postal}, ${commune}`,
-    email,
-    nomEntreprise: nom_entreprise,
-    siret,
-    siteInternet: site_internet,
-    telephone,
-    workingWithIndividual: particulier,
-  };
-
-  const certifications: IRGECertification["certifications"] = [];
+export const mapToDomainObject = (rge: IRGEResponse): IRGECertification => {
+  const etablissements = new Map<
+    string,
+    IRGECertification["etablissements"][number]
+  >();
 
   for (const result of rge.results) {
-    const findCertification = certifications.findIndex(
+    let etablissement = etablissements.get(result.siret);
+
+    if (!etablissement) {
+      const {
+        adresse = "",
+        code_postal = "",
+        commune = "",
+        email = "",
+        nom_entreprise = "",
+        particulier = false,
+        site_internet = "",
+        siret,
+        telephone = "",
+      } = result;
+
+      etablissement = {
+        certifications: [],
+        companyInfo: {
+          adresse: `${adresse}, ${code_postal}, ${commune}`,
+          email,
+          nomEntreprise: nom_entreprise,
+          siret,
+          siteInternet: site_internet,
+          telephone,
+          workingWithIndividual: particulier,
+        },
+      };
+      etablissements.set(siret, etablissement);
+    }
+
+    const findCertification = etablissement.certifications.findIndex(
       (certification) => certification.nomCertificat === result.nom_certificat
     );
     if (findCertification === -1) {
@@ -86,7 +95,7 @@ const mapToDomainObject = (rge: IRGEResponse) => {
         organisme = "",
         url_qualification = "",
       } = result;
-      certifications.push({
+      etablissement.certifications.push({
         logoPath: getCertificatLogoPath(nom_certificat),
         codeQualification: code_qualification,
         domaines: [domaine],
@@ -96,13 +105,16 @@ const mapToDomainObject = (rge: IRGEResponse) => {
         urlQualification: url_qualification,
       });
     } else if (result.domaine !== "Inconnu") {
-      const domaines = new Set(certifications[findCertification].domaines);
+      const domaines = new Set(
+        etablissement.certifications[findCertification].domaines
+      );
       domaines.add(result.domaine);
-      certifications[findCertification].domaines = Array.from(domaines);
+      etablissement.certifications[findCertification].domaines =
+        Array.from(domaines);
     }
   }
+
   return {
-    companyInfo,
-    certifications,
+    etablissements: Array.from(etablissements.values()),
   };
 };
