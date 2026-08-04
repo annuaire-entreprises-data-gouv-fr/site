@@ -6,9 +6,9 @@ describe("clientRGE", () => {
   it("Should match snapshot Certificat Qualifelec", async () => {
     await expectClientToMatchSnapshot({
       client: clientRGE,
-      args: ["487444697" as Siren],
+      args: ["333482651" as Siren],
       __dirname: import.meta.dirname,
-      snapshotFile: "certificat-487444697.json",
+      snapshotFile: "certificat-333482651.json",
     });
   });
   it("Should match snapshot QUALIBAT-RGE", async () => {
