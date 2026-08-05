@@ -41,14 +41,18 @@ const EtablissementRGE = ({
         style={{ alignItems: "baseline", justifyContent: "space-between" }}
       >
         <h3 className="fr-mb-0 fr-mt-0 fr-mr-2w">
-          SIRET&nbsp;:{" "}
-          <Link params={{ slug: siret }} to="/etablissement/$slug">
+          Établissement certifié&nbsp;:{" "}
+          <Link
+            className="fr-text--regular"
+            params={{ slug: siret }}
+            to="/etablissement/$slug"
+          >
             {formatSiret(siret)}
           </Link>
         </h3>
         {linkFranceRenov && (
           <a href={linkFranceRenov} rel="noreferrer noopener" target="_blank">
-            Consulter cet établissement sur le site France Rénov’.
+            Voir sur France Rénov’
           </a>
         )}
       </div>
@@ -85,7 +89,7 @@ const EtablissementRGE = ({
           </ButtonLink>,
         ])}
         columnWidths={["300px", "1fr", "140px"]}
-        head={["Certificat", "Domaine(s) certifié(s)", "Lien"]}
+        head={["Certificat", "Domaine(s) certifié(s)", "Lien du certificat"]}
       />
       {!isLast && <hr className="fr-pb-1w" />}
     </div>
