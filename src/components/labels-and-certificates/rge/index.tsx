@@ -4,10 +4,8 @@ import { Link } from "#/components/link";
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
 import { DataSection } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
-import { TwoColumnTable } from "#/components/table/simple";
 import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
-import { Tag } from "#/components-ui/tag";
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import type { IRGECertification } from "#/models/certifications/rge";
@@ -31,35 +29,15 @@ const EtablissementRGE = ({
   etablissement: IRGECertification["etablissements"][number];
 }) => {
   const { certifications, companyInfo } = etablissement;
-  const {
-    adresse,
-    email,
-    siret,
-    siteInternet,
-    telephone,
-    workingWithIndividual,
-  } = companyInfo;
+  const { siret } = companyInfo;
   const linkFranceRenov = renovLink(siret);
-  const data = [
-    ["Adresse", adresse],
-    ["Téléphone", telephone && <a href={`tel:${telephone}`}>{telephone}</a>],
-    [
-      "Site internet",
-      siteInternet && <a href={siteInternet}>{siteInternet}</a>,
-    ],
-    ["Email", email && <a href={`mailto:${email}`}>{email}</a>],
-    [
-      "Travaille avec",
-      <div>
-        <Tag color="info">Professionnels</Tag>
-        {workingWithIndividual && <Tag color="info">Particuliers</Tag>}
-      </div>,
-    ],
-  ];
 
   return (
     <div className="fr-mb-4w">
-      <div className="layout-left fr-mb-1w" style={{ alignItems: "baseline" }}>
+      <div
+        className="layout-left fr-mb-3w"
+        style={{ alignItems: "baseline", justifyContent: "space-between" }}
+      >
         <h3 className="fr-mb-0 fr-mr-2w">
           SIRET&nbsp;:{" "}
           <Link params={{ slug: siret }} to="/etablissement/$slug">
@@ -72,11 +50,6 @@ const EtablissementRGE = ({
           </a>
         )}
       </div>
-      <TwoColumnTable body={data} />
-      <p>
-        Cet établissement possède <strong>{certifications.length}</strong>{" "}
-        certificat{pluralize(certifications)}&nbsp;:
-      </p>
       <FullTable
         body={certifications.map((certification) => [
           <div className="layout-left font-small">
@@ -109,6 +82,7 @@ const EtablissementRGE = ({
             ⇢&nbsp;Consulter
           </ButtonLink>,
         ])}
+        columnWidths={["300px", "1fr", "140px"]}
         head={["Certificat", "Domaine(s) certifié(s)", "Lien"]}
       />
     </div>

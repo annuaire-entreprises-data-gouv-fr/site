@@ -13,9 +13,6 @@ test.describe("Label et certificats", () => {
           "Isolation par l'intérieur des murs ou rampants de toitures ou plafonds"
         )
       ).toBeVisible();
-      await expect(
-        page.getByText(/\d{2} \d{2} \d{2} \d{2} \d{2}/).first()
-      ).toBeVisible();
     });
   });
 
