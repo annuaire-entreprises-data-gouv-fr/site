@@ -25,20 +25,22 @@ const renovLink = (slug: string) => {
 
 const EtablissementRGE = ({
   etablissement,
+  isLast,
 }: {
   etablissement: IRGECertification["etablissements"][number];
+  isLast: boolean;
 }) => {
   const { certifications, companyInfo } = etablissement;
   const { siret } = companyInfo;
   const linkFranceRenov = renovLink(siret);
 
   return (
-    <div className="fr-mb-4w">
+    <div className="fr-mb-2w">
       <div
         className="layout-left fr-mb-3w"
         style={{ alignItems: "baseline", justifyContent: "space-between" }}
       >
-        <h3 className="fr-mb-0 fr-mr-2w">
+        <h3 className="fr-mb-0 fr-mt-0 fr-mr-2w">
           SIRET&nbsp;:{" "}
           <Link params={{ slug: siret }} to="/etablissement/$slug">
             {formatSiret(siret)}
@@ -85,6 +87,7 @@ const EtablissementRGE = ({
         columnWidths={["300px", "1fr", "140px"]}
         head={["Certificat", "Domaine(s) certifié(s)", "Lien"]}
       />
+      {!isLast && <hr className="fr-pb-1w" />}
     </div>
   );
 };
@@ -135,9 +138,10 @@ const RGEContent = ({
         <strong>{etablissements.length}</strong> établissement
         {pluralize(etablissements)}&nbsp;:
       </p>
-      {etablissementsDeLaPage.map((etablissement) => (
+      {etablissementsDeLaPage.map((etablissement, index) => (
         <EtablissementRGE
           etablissement={etablissement}
+          isLast={index === etablissementsDeLaPage.length - 1}
           key={etablissement.companyInfo.siret}
         />
       ))}
