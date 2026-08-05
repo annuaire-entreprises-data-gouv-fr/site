@@ -1,16 +1,17 @@
-import type React from "react";
+import { useCallback, useId, useState } from "react";
 import routes from "#/clients/routes";
+import { Link } from "#/components/link";
+import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
 import { DataSection } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
-import { TwoColumnTable } from "#/components/table/simple";
 import ButtonLink from "#/components-ui/button";
 import FAQLink from "#/components-ui/faq-link";
-import { Tag } from "#/components-ui/tag";
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import type { IRGECertification } from "#/models/certifications/rge";
-import type { IUniteLegale } from "#/models/core/types";
-import { pluralize } from "#/utils/helpers";
+import { formatSiret, pluralize } from "#/utils/helpers";
+
+const ETABLISSEMENTS_PER_PAGE = 10;
 
 const renovLink = (slug: string) => {
   try {
@@ -22,10 +23,145 @@ const renovLink = (slug: string) => {
   }
 };
 
+const EtablissementRGE = ({
+  etablissement,
+  isLast,
+}: {
+  etablissement: IRGECertification["etablissements"][number];
+  isLast: boolean;
+}) => {
+  const { certifications, companyInfo } = etablissement;
+  const { siret } = companyInfo;
+  const linkFranceRenov = renovLink(siret);
+
+  return (
+    <div className="fr-mb-2w">
+      <div
+        className="layout-left fr-mb-3w"
+        style={{ alignItems: "baseline", justifyContent: "space-between" }}
+      >
+        <h3 className="fr-mb-0 fr-mt-0 fr-mr-2w">
+          Établissement certifié&nbsp;:{" "}
+          <Link
+            className="fr-text--regular"
+            params={{ slug: siret }}
+            to="/etablissement/$slug"
+          >
+            {formatSiret(siret)}
+          </Link>
+        </h3>
+        {linkFranceRenov && (
+          <a href={linkFranceRenov} rel="noreferrer noopener" target="_blank">
+            Voir sur France Rénov’
+          </a>
+        )}
+      </div>
+      <FullTable
+        body={certifications.map((certification) => [
+          <div className="layout-left font-small">
+            {certification.logoPath && (
+              <div style={{ width: 72 }}>
+                <img
+                  alt={`Logo ${certification.nomCertificat}`}
+                  height="100%"
+                  src={certification.logoPath}
+                  title={`Logo ${certification.nomCertificat}`}
+                  width="100%"
+                />
+              </div>
+            )}
+            <div> {certification.nomCertificat}</div>
+          </div>,
+          <ul>
+            {certification.domaines.map((domaine) => (
+              <li className="font-small" key={domaine}>
+                {domaine}
+              </li>
+            ))}
+          </ul>,
+          <ButtonLink
+            alt
+            small
+            target="_blank"
+            to={certification.urlQualification}
+          >
+            ⇢&nbsp;Consulter
+          </ButtonLink>,
+        ])}
+        columnWidths={["300px", "1fr", "140px"]}
+        head={["Certificat", "Domaine(s) certifié(s)", "Lien du certificat"]}
+      />
+      {!isLast && <hr className="fr-pb-1w" />}
+    </div>
+  );
+};
+
+const RGEContent = ({
+  certificationsRGE,
+}: {
+  certificationsRGE: IRGECertification;
+}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const id = useId();
+  const { etablissements } = certificationsRGE;
+  const totalCertifications = etablissements.reduce(
+    (total, etablissement) => total + etablissement.certifications.length,
+    0
+  );
+  const totalPages = Math.ceil(etablissements.length / ETABLISSEMENTS_PER_PAGE);
+  const start = (currentPage - 1) * ETABLISSEMENTS_PER_PAGE;
+  const etablissementsDeLaPage = etablissements.slice(
+    start,
+    start + ETABLISSEMENTS_PER_PAGE
+  );
+
+  const onChangePage = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    },
+    [id]
+  );
+
+  return (
+    <div id={id}>
+      Cette structure est une entreprise{" "}
+      <FAQLink
+        to="/faq/reconnu-garant-environnement"
+        tooltipLabel="certifiée RGE - Reconnu Garant de l’Environnement"
+      >
+        La certification RGE est accordée par les pouvoirs publics aux
+        professionnels du bâtiment spécialisés dans les travaux de rénovation
+        énergétique.
+      </FAQLink>
+      .
+      <p>
+        Cette structure possède <strong>{totalCertifications}</strong>{" "}
+        certificat{totalCertifications > 1 ? "s" : ""} réparti
+        {totalCertifications > 1 ? "s" : ""} dans{" "}
+        <strong>{etablissements.length}</strong> établissement
+        {pluralize(etablissements)}&nbsp;:
+      </p>
+      {etablissementsDeLaPage.map((etablissement, index) => (
+        <EtablissementRGE
+          etablissement={etablissement}
+          isLast={index === etablissementsDeLaPage.length - 1}
+          key={etablissement.companyInfo.siret}
+        />
+      ))}
+      <LocalPageCounter
+        compact={true}
+        currentPage={currentPage}
+        onPageChange={onChangePage}
+        totalPages={totalPages}
+      />
+    </div>
+  );
+};
+
 export const CertificationsRGESection: React.FC<{
-  uniteLegale: IUniteLegale;
   certificationsRGE: IRGECertification | IAPINotRespondingError;
-}> = ({ uniteLegale, certificationsRGE }) => (
+}> = ({ certificationsRGE }) => (
   <DataSection
     data={certificationsRGE}
     id="rge"
@@ -43,107 +179,8 @@ export const CertificationsRGESection: React.FC<{
     sources={[EAdministration.ADEME]}
     title="RGE - Reconnu Garant de l'Environnement"
   >
-    {(certificationsRGE) => {
-      const {
-        adresse,
-        telephone,
-        siret,
-        siteInternet,
-        email,
-        workingWithIndividual,
-      } = certificationsRGE.companyInfo;
-
-      const data = [
-        ["Dénomination", uniteLegale.nomComplet],
-        ["Adresse", adresse],
-        [
-          "Téléphone",
-          telephone && <a href={`tel:${telephone}`}>{telephone}</a>,
-        ],
-        [
-          "Site internet",
-          siteInternet && <a href={siteInternet}>{siteInternet}</a>,
-        ],
-        ["Email", email && <a href={`mailto:${email}`}>{email}</a>],
-        [
-          "Travaille avec",
-          <div>
-            <Tag color="info">Professionnels</Tag>
-            {workingWithIndividual && <Tag color="info">Particuliers</Tag>}
-          </div>,
-        ],
-      ];
-
-      const plural = pluralize(certificationsRGE.certifications);
-      const linkFranceRenov = renovLink(siret);
-
-      return (
-        <>
-          Cette structure est une entreprise{" "}
-          <FAQLink
-            to="/faq/reconnu-garant-environnement"
-            tooltipLabel="certifiée RGE - Reconnu Garant de l’Environnement"
-          >
-            La certification RGE est accordée par les pouvoirs publics aux
-            professionnels du bâtiment spécialisés dans les travaux
-            de rénovation énergétique.
-          </FAQLink>
-          .
-          {linkFranceRenov && (
-            <p>
-              Vous pouvez consulter{" "}
-              <a
-                href={linkFranceRenov}
-                rel="noreferrer noopener"
-                target="_blank"
-              >
-                sa fiche sur le site France Renov.
-              </a>
-            </p>
-          )}
-          <TwoColumnTable body={data} />
-          <p>
-            Cette structure possède{" "}
-            <strong>{certificationsRGE.certifications.length}</strong>{" "}
-            certificat
-            {plural}&nbsp;:
-          </p>
-          <FullTable
-            body={certificationsRGE.certifications.map((certification) => [
-              <div className="layout-left font-small">
-                {certification.logoPath && (
-                  <div style={{ width: 72 }}>
-                    <img
-                      alt={`Logo ${certification.nomCertificat}`}
-                      height="100%"
-                      src={certification.logoPath}
-                      title={`Logo ${certification.nomCertificat}`}
-                      width="100%"
-                    />
-                  </div>
-                )}
-                <div> {certification.nomCertificat}</div>
-              </div>,
-              <ul>
-                {certification.domaines.map((domaine) => (
-                  <li className="font-small" key={domaine}>
-                    {domaine}
-                  </li>
-                ))}
-              </ul>,
-              <ButtonLink
-                alt
-                small
-                target="_blank"
-                to={certification.urlQualification}
-              >
-                ⇢&nbsp;Consulter
-              </ButtonLink>,
-            ])}
-            head={["Certificat", "Domaine(s) certifié(s)", "Lien"]}
-          />
-        </>
-      );
-    }}
+    {(certificationsRGE) => (
+      <RGEContent certificationsRGE={certificationsRGE} />
+    )}
   </DataSection>
 );

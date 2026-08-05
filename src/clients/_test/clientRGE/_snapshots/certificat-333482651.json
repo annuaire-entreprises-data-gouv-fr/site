@@ -1,0 +1,34 @@
+{
+  "args": [
+    "333482651"
+  ],
+  "result": {
+    "etablissements": [
+      {
+        "certifications": [
+          {
+            "logoPath": "/images/rge/logo-rge-qualifelec.jpg",
+            "codeQualification": "43SPVRGE",
+            "domaines": [
+              "Panneaux solaires photovoltaïques",
+              "Radiateurs électriques, dont régulation."
+            ],
+            "nomCertificat": "Certificat Qualifelec RGE",
+            "nomQualification": "Panneaux Solaires Photovoltaïques (43SPVRGE)",
+            "organisme": "qualifelec",
+            "urlQualification": "https://www.qualifelec.fr/certifmoteur/1041/738188.pdf"
+          }
+        ],
+        "companyInfo": {
+          "adresse": "420 RUE LAVOISIER, 01960, PERONNAS",
+          "email": "sbe@sbelec.com",
+          "nomEntreprise": "SOCIETE BRESSANE D ELECTRICITE",
+          "siret": "33348265100036",
+          "siteInternet": "",
+          "telephone": "06 81 53 61 24",
+          "workingWithIndividual": true
+        }
+      }
+    ]
+  }
+}
