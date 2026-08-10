@@ -12,11 +12,10 @@ import type { IAgentInfo } from "#/models/authentication/agent";
 import { getPersonnalDataAssociation } from "#/models/core/diffusion";
 import type { IAssociation, IUniteLegale } from "#/models/core/types";
 import { getAssociationFn } from "#/server-functions/public/data-fetching";
-import { formatDate, formatIntFr, type IdRna } from "#/utils/helpers";
+import { formatDate, formatIntFr } from "#/utils/helpers";
 import { AssociationNotFound } from "./association-not-found";
 
 const getTableData = (
-  idAssociation: string | IdRna,
   association: IDataAssociation,
   uniteLegale: IUniteLegale,
   user: IAgentInfo | null
@@ -40,7 +39,7 @@ const getTableData = (
   } = association || {};
 
   return [
-    ["N°RNA", formatIntFr(idAssociation)],
+    ["N°RNA", formatIntFr(association.idAssociation)],
     ["Nom", nomComplet],
     ["Famille", libelleFamille],
     ["Objet", objet],
@@ -120,8 +119,6 @@ const AssociationSection = ({
   uniteLegale: IAssociation;
   user: IAgentInfo | null;
 }) => {
-  const { idAssociation = "" } = uniteLegale.association;
-
   const input = useMemo(
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
@@ -156,12 +153,7 @@ const AssociationSection = ({
                 &nbsp;:
               </p>
               <TwoColumnTable
-                body={getTableData(
-                  idAssociation,
-                  association,
-                  uniteLegale,
-                  user
-                )}
+                body={getTableData(association, uniteLegale, user)}
               />
             </>
           ) : (
