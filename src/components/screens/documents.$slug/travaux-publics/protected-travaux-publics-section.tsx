@@ -117,7 +117,7 @@ export default function ProtectedTravauxPublicsSection({
                   <div>
                     <DocumentDownloader
                       administration="CIBTP"
-                      data={data.cnetp}
+                      data={data.cibtp}
                     />
                   </div>
                 </>,
