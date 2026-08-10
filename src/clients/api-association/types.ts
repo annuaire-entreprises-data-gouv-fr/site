@@ -40,6 +40,7 @@ interface Identite {
   nom: string;
   nom_sirene: string;
   regime: string;
+  rna_siren: string;
   sigle: string;
   sigle_sirene: string;
   util_publique: boolean;
