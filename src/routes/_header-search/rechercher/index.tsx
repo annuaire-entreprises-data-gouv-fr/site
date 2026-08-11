@@ -7,6 +7,7 @@ import { HeaderWithAdvancedSearch } from "#/components/header/header-advanced-se
 import SearchResults from "#/components/search-results";
 import { AdvancedSearchTutorial } from "#/components/search-results/advanced-search-tutorial";
 import SocialNetworks from "#/components/social-network";
+import { BackToTop } from "#/components-ui/back-to-top";
 import { hasSearchParam } from "#/models/search/search-filter-params";
 import { meta } from "#/utils/seo";
 import { HeaderSearchError } from "../-error";
@@ -113,6 +114,7 @@ function RouteComponent() {
       </main>
       <SocialNetworks />
       <Footer />
+      <BackToTop />
     </>
   );
 }
