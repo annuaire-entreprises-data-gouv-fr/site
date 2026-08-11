@@ -33,6 +33,7 @@ Allow: /personne/
 Allow: /divers/
 Allow: /erreur/
 Allow: /formulaire/
+Allow: /api/share/qr/
 Disallow: /api/
 Disallow: /admin/
 
