@@ -9,16 +9,68 @@ import {
   ApplicationRights,
   ApplicationRightsToScopes,
 } from "#/models/authentication/user/rights";
-import { InternalError } from "#/models/exceptions";
+import { Exception, InternalError } from "#/models/exceptions";
 import { getDirigeantsRNE } from "#/models/rne/dirigeants";
 import type {
+  IDirigeants,
   IDirigeantsMergedIGInpi,
   IDirigeantsWithMetadataMergedIGInpi,
+  IEtatCivil,
 } from "#/models/rne/types";
 import { verifySiren } from "#/utils/helpers";
+import { isPersonneMorale } from "#/utils/helpers/is-personne-morale";
 import logErrorInSentry from "#/utils/sentry";
 import { getMandatairesRCS } from "./mandataires-rcs";
 import { mergeDirigeants } from "./utils";
+
+const normalizeComparableValue = (value: string | null | undefined) =>
+  (value ?? "")
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLocaleLowerCase("fr-FR")
+    .replaceAll("œ", "oe")
+    .replaceAll("æ", "ae")
+    .replace(/[^\p{Letter}\p{Number}]/gu, "");
+
+const getComparableBirthdate = (dirigeant: IEtatCivil) =>
+  normalizeComparableValue(
+    dirigeant.dateNaissancePartial || dirigeant.dateNaissance
+  );
+
+// RNE and RCS expose different source-specific fields. Compare the business
+// fields they share, at the birthdate precision available in both sources.
+const normalizeDirigeant = (dirigeant: IDirigeants[number]) => {
+  if (isPersonneMorale(dirigeant)) {
+    return JSON.stringify({
+      type: "personneMorale",
+      siren: normalizeComparableValue(dirigeant.siren),
+      denomination: normalizeComparableValue(dirigeant.denomination),
+      role: normalizeComparableValue(dirigeant.role),
+    });
+  }
+
+  return JSON.stringify({
+    type: "personnePhysique",
+    nom: normalizeComparableValue(dirigeant.nom),
+    prenom: normalizeComparableValue(dirigeant.prenom),
+    prenoms: normalizeComparableValue(dirigeant.prenoms),
+    role: normalizeComparableValue(dirigeant.role),
+    dateNaissance: getComparableBirthdate(dirigeant),
+  });
+};
+
+const haveSameDirigeants = (rneData: IDirigeants, rcsData: IDirigeants) => {
+  if (rneData.length !== rcsData.length) {
+    return false;
+  }
+
+  const normalizedRNE = rneData.map(normalizeDirigeant).sort();
+  const normalizedRCS = rcsData.map(normalizeDirigeant).sort();
+
+  return normalizedRNE.every(
+    (dirigeant, index) => dirigeant === normalizedRCS[index]
+  );
+};
 
 export const getDirigeantsProtected = async (
   maybeSiren: string,
@@ -58,6 +110,16 @@ export const getDirigeantsProtected = async (
       }
     } else {
       dirigeantMerged = mergeDirigeants({ rne: rneData, rcs: rcsData });
+
+      if (!haveSameDirigeants(rneData, rcsData)) {
+        logErrorInSentry(
+          new Exception({
+            name: "DirigeantsRNERCSMismatch",
+            message: "Dirigeants RNE/RCS mismatch",
+            context: { siren },
+          })
+        );
+      }
     }
 
     return {
