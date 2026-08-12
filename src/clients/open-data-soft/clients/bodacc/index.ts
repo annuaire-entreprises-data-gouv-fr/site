@@ -123,16 +123,21 @@ const extractDetails = (annonce: IBodaccRecords): string => {
     if ((annonce as IBodaccA).acte) {
       const acte = JSON.parse((annonce as IBodaccA).acte || "{}");
 
-      const detail = acte.creation?.categorieCreation; // || acte.descriptif; descriptif is usually very long
+      const detail =
+        acte.creation?.categorieCreation ||
+        acte.immatriculation?.categorieImmatriculation; // || acte.descriptif; descriptif is usually very long
       const dateDebutActivite = formatDate(acte.dateCommencementActivite);
       const dateImmatriculation = formatDate(acte.dateImmatriculation);
-      return `${detail || ""} ${
-        dateImmatriculation ? `, immatriculée le ${dateImmatriculation}` : ""
-      } ${
+
+      return [
+        detail,
+        dateImmatriculation ? `immatriculée le ${dateImmatriculation}` : "",
         dateDebutActivite
-          ? `, dont l'activité a commencé le ${dateDebutActivite}`
-          : ""
-      }`;
+          ? `dont l'activité a commencé le ${dateDebutActivite}`
+          : "",
+      ]
+        .filter(Boolean)
+        .join(", ");
     }
 
     if ((annonce as IBodaccC).depot) {
