@@ -59,6 +59,18 @@
   list-style: none;
 }
 
+.previewItem {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.protectedIcon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--annuaire-colors-espaceAgent);
+}
+
 .viewAll {
   width: fit-content;
   font-size: 0.9rem;
