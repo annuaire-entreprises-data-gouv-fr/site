@@ -29,6 +29,29 @@ test.describe("Fiche résumé DANONE", () => {
     ).toBeVisible();
   });
 
+  test("Should link the reminder cards to the available tabs", async ({
+    page,
+  }) => {
+    await goto(page, "/entreprise/danone-552032534");
+
+    const reminder = page.getByRole("region", {
+      name: "À découvrir aussi pour cette structure :",
+    });
+    await expect(reminder.getByRole("link")).toHaveCount(6);
+    await expect(
+      reminder.getByRole("link", { name: /Dirigeants inscrits au RNE/ })
+    ).toHaveAttribute("href", "/dirigeants/552032534");
+    await expect(
+      reminder.getByRole("link", { name: /Justificatifs d’immatriculation/ })
+    ).toHaveAttribute("href", "/documents/552032534");
+    await expect(
+      reminder.getByRole("link", { name: /^Effectifs\b/ })
+    ).toHaveCount(0);
+
+    await reminder.getByText("Justificatifs d’immatriculation").click();
+    await expect(page).toHaveURL(/\/documents\/552032534$/);
+  });
+
   test("[LOGGED] Should display basic infos", async ({ page, context }) => {
     await login(page, context);
     await goto(page, "/entreprise/danone-552032534");
