@@ -47,6 +47,14 @@ test.describe("Fiche résumé DANONE", () => {
     await expect(
       reminder.getByRole("link", { name: /^Effectifs\b/ })
     ).toHaveCount(0);
+    await expect(
+      reminder.getByRole("img", { name: "Réservé aux agents publics" })
+    ).toHaveCount(3);
+    await expect(
+      reminder
+        .getByRole("link", { name: /^Documents/ })
+        .getByRole("img", { name: "Réservé aux agents publics" })
+    ).toBeVisible();
 
     await reminder.getByText("Justificatifs d’immatriculation").click();
     await expect(page).toHaveURL(/\/documents\/552032534$/);
@@ -66,6 +74,19 @@ test.describe("Fiche résumé DANONE", () => {
     await expect(page.getByText("Documents juridiques").first()).toBeVisible();
     await expect(
       page.getByText("Consulter les Actes et les Statuts constitutifs")
+    ).toBeVisible();
+
+    const reminder = page.getByRole("region", {
+      name: "À découvrir aussi pour cette structure :",
+    });
+    await expect(reminder.getByRole("link")).toHaveCount(7);
+    await expect(
+      reminder.getByRole("img", { name: "Réservé aux agents publics" })
+    ).toHaveCount(4);
+    await expect(
+      reminder
+        .getByRole("link", { name: /^Effectifs/ })
+        .getByRole("img", { name: "Réservé aux agents publics" })
     ).toBeVisible();
   });
 });

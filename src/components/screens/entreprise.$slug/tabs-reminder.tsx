@@ -1,5 +1,6 @@
 import { Link } from "#/components/link";
 import { FICHE, getUniteLegaleTabs } from "#/components/title-section/tabs";
+import { Icon } from "#/components-ui/icon/wrapper";
 import { PrintNever } from "#/components-ui/print-visibility";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
@@ -17,9 +18,16 @@ interface ITabsReminderProps {
   user: IAgentInfo | null;
 }
 
+interface ITabPreview {
+  isProtected?: boolean;
+  label: string;
+}
+
+const AGENT_ONLY_LABEL = "Réservé aux agents publics";
+
 const getLabelsAndCertificatesPreview = (
   uniteLegale: IUniteLegale
-): string[] => {
+): ITabPreview[] => {
   const {
     bilanGesRenseigne,
     egaproRenseignee,
@@ -37,7 +45,7 @@ const getLabelsAndCertificatesPreview = (
     estSocieteMission,
   } = uniteLegale.complements;
 
-  return [
+  const labels = [
     estRge && "RGE",
     estQualiopi && "Qualiopi",
     estBio && "Professionnel du Bio",
@@ -53,58 +61,78 @@ const getLabelsAndCertificatesPreview = (
     estAlimConfiance && "Alim’Confiance",
     bilanGesRenseigne && "Bilans GES",
   ].filter((label): label is string => Boolean(label));
+
+  return labels.map((label) => ({ label }));
 };
 
 const getTabPreview = (
   ficheType: FICHE,
   uniteLegale: IUniteLegale
-): string[] => {
+): ITabPreview[] => {
   switch (ficheType) {
     case FICHE.DOCUMENTS:
-      return ["Justificatifs d’immatriculation", "Actes et statuts"];
+      return [
+        { label: "Justificatifs d’immatriculation" },
+        { isProtected: true, label: "Actes et statuts" },
+      ];
     case FICHE.DIRIGEANTS:
       if (isCollectiviteTerritoriale(uniteLegale)) {
-        return ["Élus", "Organigramme"];
+        return [{ label: "Élus" }, { label: "Organigramme" }];
       }
       if (
         isServicePublic(uniteLegale) &&
         !isServicePublicImmatriculeeAuRNE(uniteLegale)
       ) {
-        return ["Responsables", "Organigramme"];
+        return [{ label: "Responsables" }, { label: "Organigramme" }];
       }
       if (isAssociation(uniteLegale)) {
-        return ["Dirigeants de l’association", "Bénéficiaires effectifs"];
+        return [{ isProtected: true, label: "Dirigeants de l’association" }];
       }
-      return ["Dirigeants inscrits au RNE", "Bénéficiaires effectifs"];
+      return [
+        { label: "Dirigeants inscrits au RNE" },
+        { isProtected: true, label: "Bénéficiaires effectifs" },
+      ];
     case FICHE.FINANCES:
       if (
         isServicePublic(uniteLegale) ||
         isEntrepreneurIndividuel(uniteLegale)
       ) {
         return [
-          uniteLegale.complements.aAideMinimis && "Aides Minimis",
-          uniteLegale.complements.aAideADEME && "Aides ADEME",
-        ].filter((label): label is string => Boolean(label));
+          uniteLegale.complements.aAideMinimis && {
+            isProtected: true,
+            label: "Aides Minimis",
+          },
+          uniteLegale.complements.aAideADEME && { label: "Aides ADEME" },
+        ].filter((item): item is ITabPreview => Boolean(item));
       }
-      return ["Indicateurs financiers", "Bilans et comptes"];
+      if (isAssociation(uniteLegale)) {
+        return [
+          { label: "Indicateurs financiers" },
+          { isProtected: true, label: "Subventions reçues" },
+        ];
+      }
+      return [
+        { label: "Indicateurs financiers" },
+        { isProtected: true, label: "Bilans au format PDF" },
+      ];
     case FICHE.ANNONCES:
       return [
-        "Annonces au BODACC",
-        uniteLegale.dateMiseAJourInpi && "Observations au RNE",
-        isAssociation(uniteLegale) && "Annonces au JOAFE",
-      ].filter((label): label is string => Boolean(label));
+        { label: "Annonces au BODACC" },
+        uniteLegale.dateMiseAJourInpi && { label: "Observations au RNE" },
+        isAssociation(uniteLegale) && { label: "Annonces au JOAFE" },
+      ].filter((item): item is ITabPreview => Boolean(item));
     case FICHE.EFFECTIFS:
-      return ["Effectifs annuels"];
+      return [{ isProtected: true, label: "Effectifs annuels" }];
     case FICHE.CERTIFICATS: {
       const labels = getLabelsAndCertificatesPreview(uniteLegale);
       return labels.length > 0
         ? labels.slice(0, 2)
-        : ["Certificats professionnels"];
+        : [{ isProtected: true, label: "Certificats professionnels" }];
     }
     case FICHE.ETABLISSEMENTS_SCOLAIRES:
-      return ["Liste des établissements scolaires"];
+      return [{ label: "Liste des établissements scolaires" }];
     case FICHE.DIVERS:
-      return ["Détail des conventions collectives"];
+      return [{ label: "Détail des conventions collectives" }];
     default:
       return [];
   }
@@ -137,7 +165,19 @@ export const TabsReminder = ({ uniteLegale, user }: ITabsReminderProps) => {
                 <h3>{label}</h3>
                 <ul className={styles.preview}>
                   {getTabPreview(ficheType, uniteLegale).map((item) => (
-                    <li key={item}>{item}</li>
+                    <li className={styles.previewItem} key={item.label}>
+                      <span>{item.label}</span>
+                      {item.isProtected && (
+                        <span
+                          aria-label={AGENT_ONLY_LABEL}
+                          className={styles.protectedIcon}
+                          role="img"
+                          title={AGENT_ONLY_LABEL}
+                        >
+                          <Icon size={12} slug="lockFill" />
+                        </span>
+                      )}
+                    </li>
                   ))}
                 </ul>
                 <span className={styles.viewAll}>→ Tout voir</span>
