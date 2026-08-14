@@ -85,7 +85,7 @@
     "js-yaml": "5.2.2",
     "jsdom": "29.1.1",
     "lefthook": "2.1.10",
-    "msw": "2.14.6",
+    "msw": "2.15.0",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "11.3.0",
     "typescript": "7.0.2",
