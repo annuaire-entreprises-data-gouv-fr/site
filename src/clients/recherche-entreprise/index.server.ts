@@ -191,7 +191,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     est_organisme_formation = false,
     est_qualiopi = false,
     est_entrepreneur_spectacle = false,
-    numero_rnf = null,
     est_ess = false,
     est_finess = false,
     est_rge = false,
@@ -323,7 +322,6 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       aAideMinimis: a_aide_minimis,
       aAideADEME: a_aide_ademe,
       estAvocat: est_avocat,
-      numeroRnf: numero_rnf,
     },
     immatriculation: mapToImmatriculation(immatriculation),
     association: {

@@ -3,14 +3,11 @@ import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
 import { searchWithoutProtectedSiren } from "#/models/search";
 import SearchFilterParams from "#/models/search/search-filter-params";
-import { searchFondations } from "#/models/search-fondations";
-import SearchFondationsFilterParams from "#/models/search-fondations/search-filter-params";
 import {
   extractSirenOrSiretFromRechercherUrl,
   isLikelyASiren,
   isLikelyASiret,
 } from "#/utils/helpers";
-import { isIdRnf } from "#/utils/helpers/fondations";
 import { queryString } from "#/utils/query";
 
 export function beforeLoadCheckTerme(searchTerm: string | undefined) {
@@ -133,43 +130,3 @@ export const searchLoaderDeps = ({
   res_min: search.res_min,
   res_max: search.res_max,
 });
-
-/**
- * Fondations
- */
-
-export function beforeLoadFondationsCheckTerme(searchTerm: string | undefined) {
-  if (!searchTerm) {
-    return;
-  }
-
-  if (isIdRnf(searchTerm)) {
-    throw redirect(
-      {
-        to: "/fondation/$slug",
-        params: { slug: searchTerm },
-        search: {
-          redirected: 1,
-        },
-      } as any /* TODO: fix type once the page is created */
-    );
-  }
-}
-
-export const searchFondationsFn = createServerFn()
-  .validator(searchQueryParamsSchema)
-  .handler(async ({ data }) => {
-    const searchFilterParams = new SearchFondationsFilterParams(data);
-
-    const searchResults = await searchFondations(
-      data.terme,
-      data.page,
-      searchFilterParams
-    );
-
-    return {
-      searchResults,
-      searchFilterParamsJSON: searchFilterParams.toJSON(),
-      searchTerm: data.terme,
-    };
-  });

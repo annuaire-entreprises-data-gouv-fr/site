@@ -221,7 +221,6 @@ export interface IUniteLegaleComplements {
   estSocieteMission: boolean;
   estUai: boolean;
   idFinessJuridiques: string[];
-  numeroRnf: string | null;
   statutEntrepreneurSpectacle: string;
   typeEntrepriseInclusive: string;
 }
@@ -253,7 +252,6 @@ export const createDefaultUniteLegaleComplements =
     aAideMinimis: false,
     aAideADEME: false,
     estAvocat: false,
-    numeroRnf: null,
   });
 
 export interface IEtablissementComplements {
@@ -302,17 +300,6 @@ export const isServicePublicImmatriculeeAuRNE = (
 
 export const isAvocat = (uniteLegale: IUniteLegale): boolean =>
   uniteLegale.complements.estAvocat;
-
-type IUniteLegaleWithNumeroRnf = IUniteLegale & {
-  complements: IUniteLegale["complements"] & {
-    numeroRnf: string;
-  };
-};
-
-export const isFondation = (
-  uniteLegale: IUniteLegale
-): uniteLegale is IUniteLegaleWithNumeroRnf =>
-  !!uniteLegale.complements.numeroRnf;
 
 export const isEntrepreneurIndividuel = (
   uniteLegaleOrEtablissement: IUniteLegale | IEtablissement

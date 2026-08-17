@@ -11,7 +11,6 @@ import { estActif } from "#/models/core/etat-administratif";
 import {
   type IUniteLegale,
   isAssociation,
-  isFondation,
   isServicePublic,
 } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
@@ -149,11 +148,7 @@ export const UniteLegaleInscriptionRNE = ({
   user: IAgentInfo | null;
 }) => {
   if (!uniteLegale.dateMiseAJourInpi) {
-    if (
-      isServicePublic(uniteLegale) ||
-      isAssociation(uniteLegale) ||
-      isFondation(uniteLegale)
-    ) {
+    if (isServicePublic(uniteLegale) || isAssociation(uniteLegale)) {
       return null;
     }
     return (
