@@ -17,14 +17,14 @@
 # datasources: la liste des administrations concernées (pour connaître la liste possible voir la liste des fichiers administrations dans https://github.com/annuaire-entreprises-data-gouv-fr/site/tree/main/data/administrations)
 # body: le corps du texte, en markdown
 slug: fondations
-title: un organisme philanthropique
-footerLabel: Fondations
+title: un fonds ou une fondation
+footerLabel: Fonds et fondations
 published: true
 description: Retrouvez les infos de fondations, fondations d'entreprise
 
   et fonds de dotation en France
 searchPath: /rechercher/fondations
-searchPlaceholder: Nom, adresse, n° RNF...
+searchPlaceholder: Nom, adresse, n° RNF, n° SIRET/SIREN...
 seo:
   title: Rechercher un organisme philanthropique
   description: Retrouvez les informations légales des fondations en France
