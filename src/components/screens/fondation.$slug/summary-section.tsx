@@ -1,4 +1,5 @@
 import type React from "react";
+import { ConventionCollectivesBadgesSection } from "#/components/badges-section/convention-collectives";
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
@@ -41,6 +42,7 @@ const FondationSummarySection: React.FC<{
   const hasLabelsAndCertificates = uniteLegale
     ? checkHasLabelsAndCertificates(uniteLegale)
     : false;
+  const conventionsCollectives = uniteLegale ? uniteLegale.listeIdcc : [];
 
   const data = [
     [
@@ -137,6 +139,18 @@ const FondationSummarySection: React.FC<{
         ? [["Date de fermeture", formatDate(uniteLegale.dateFermeture)]]
         : []),
     ["Objet social", <ClampedText>{fondation.socialObject}</ClampedText>],
+    ["", <br />],
+    ...(uniteLegale
+      ? [
+          [
+            "Convention(s) collective(s)",
+            <ConventionCollectivesBadgesSection
+              conventionCollectives={conventionsCollectives}
+              siren={uniteLegale.siren}
+            />,
+          ],
+        ]
+      : []),
     // agents : we dont know yet if there are labels and certifs
     ...(uniteLegale &&
     hasRights({ user }, ApplicationRights.protectedCertificats)
@@ -172,6 +186,7 @@ const FondationSummarySection: React.FC<{
           EAdministration.DGFIP,
           EAdministration.DOUANES,
           ...(uniteLegale ? labelsAndCertificatesSources(uniteLegale) : []),
+          ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
         ]}
         title={`Informations légales de ${fondation.title}`}
       >

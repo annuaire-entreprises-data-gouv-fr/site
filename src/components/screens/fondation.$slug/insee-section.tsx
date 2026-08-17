@@ -1,5 +1,4 @@
 import type React from "react";
-import { ConventionCollectivesBadgesSection } from "#/components/badges-section/convention-collectives";
 import { Section } from "#/components/section";
 import { TwoColumnTable } from "#/components/table/simple";
 import FAQLink from "#/components-ui/faq-link";
@@ -19,8 +18,6 @@ const FondationInseeSection: React.FC<{
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }> = ({ uniteLegale, user }) => {
-  const conventionsCollectives = uniteLegale ? uniteLegale.listeIdcc : [];
-
   const data = [
     ["Dénomination", uniteLegale.nomComplet],
     ["Activité principale (NAF/APE)", uniteLegale.libelleActivitePrincipale],
@@ -84,14 +81,6 @@ const FondationInseeSection: React.FC<{
     ...(estActif(uniteLegale)
       ? []
       : [["Date de fermeture", formatDate(uniteLegale.dateFermeture)]]),
-    ["", <br />],
-    [
-      "Convention(s) collective(s)",
-      <ConventionCollectivesBadgesSection
-        conventionCollectives={conventionsCollectives}
-        siren={uniteLegale.siren}
-      />,
-    ],
   ];
 
   return (
@@ -100,7 +89,6 @@ const FondationInseeSection: React.FC<{
         lastModified={uniteLegale?.dateDerniereMiseAJour}
         sources={[
           EAdministration.INSEE,
-          ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
           ...(hasRights({ user }, ApplicationRights.effectifs)
             ? [EAdministration.GIP_MDS]
             : []),
