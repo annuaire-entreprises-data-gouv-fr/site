@@ -5,7 +5,7 @@ import z from "zod";
 import EspaceAgentSummarySection from "#/components/espace-agent-components/summary-section";
 import EtablissementListeSection from "#/components/etablissement-liste-section";
 import EtablissementSection from "#/components/etablissement-section";
-import FondationRNFSection from "#/components/screens/fondation.$slug/rnf-section";
+import FondationInseeSection from "#/components/screens/fondation.$slug/insee-section";
 import FondationSummarySection from "#/components/screens/fondation.$slug/summary-section";
 import { NotFound } from "#/components/screens/not-found";
 import { TitleFondation } from "#/components/title-fondation-section";
@@ -136,9 +136,9 @@ function RouteComponent() {
         uniteLegale={uniteLegale}
         user={user}
       />
-      <FondationRNFSection fondation={fondation} />
       {!!uniteLegale && (
         <>
+          <FondationInseeSection uniteLegale={uniteLegale} user={user} />
           {hasRights({ user }, ApplicationRights.isAgent) && (
             <EspaceAgentSummarySection uniteLegale={uniteLegale} user={user} />
           )}
