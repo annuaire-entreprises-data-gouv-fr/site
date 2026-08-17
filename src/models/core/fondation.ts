@@ -87,11 +87,15 @@ class FondationBuilder {
     }
 
     const fondationSiafResult: IFondation = {
-      address: decodeHTML(fondationSiaf.address.oneLine),
+      address:
+        fondationSiaf.address.oneLine &&
+        decodeHTML(fondationSiaf.address.oneLine),
       creationDate: fondationSiaf.creationAt,
       department: fondationSiaf.department,
       foundationType: fondationSiaf.foundationType,
-      generalInterestDomain: fondationSiaf.generalInterestDomain,
+      generalInterestDomain:
+        fondationSiaf.generalInterestDomain &&
+        decodeHTML(fondationSiaf.generalInterestDomain),
       hasInternationalActivity: fondationSiaf.hasInternationalActivity,
       id: fondationSiaf.id,
       postalCode: fondationSiaf.address.dsAddress.postalCode,
@@ -99,10 +103,11 @@ class FondationBuilder {
       siren: fondationSiaf.siret
         ? extractSirenFromSiret(fondationSiaf.siret)
         : null,
-      socialObject: decodeHTML(fondationSiaf.socialObject),
+      socialObject:
+        fondationSiaf.socialObject && decodeHTML(fondationSiaf.socialObject),
       state: fondationSiaf.state,
       stateEffectiveAt: fondationSiaf.stateEffectiveAt,
-      title: decodeHTML(fondationSiaf.title),
+      title: fondationSiaf.title && decodeHTML(fondationSiaf.title),
     };
 
     if (isAPINotResponding(fondationRechercheEntreprise)) {
