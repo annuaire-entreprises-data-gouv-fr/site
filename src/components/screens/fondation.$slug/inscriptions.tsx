@@ -26,7 +26,10 @@ export const FondationInscriptionRNF = ({
       label={"Cette fondation est enregistrée au RNF."}
       tabIndex={undefined}
     >
-      <OpenClosedTag icon="open" label="Enregistrée au RNF">
+      <OpenClosedTag
+        icon="open"
+        label="Enregistrée au RNF (Ministère de l'Intérieur)"
+      >
         le {formatDate(fondation.creationDate)}
       </OpenClosedTag>
     </InformationTooltip>

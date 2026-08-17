@@ -4,6 +4,7 @@ import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { TwoColumnTable } from "#/components/table/simple";
 import TVACell from "#/components/tva-cell";
+import ClampedText from "#/components-ui/clamped-text";
 import FAQLink from "#/components-ui/faq-link";
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
@@ -120,10 +121,7 @@ const FondationSummarySection: React.FC<{
       : uniteLegale
         ? [["Date de fermeture", formatDate(uniteLegale.dateFermeture)]]
         : []),
-    [
-      "Objet social",
-      <p style={{ textAlign: "justify" }}>{fondation.socialObject}</p>,
-    ],
+    ["Objet social", <ClampedText>{fondation.socialObject}</ClampedText>],
   ];
 
   return (
