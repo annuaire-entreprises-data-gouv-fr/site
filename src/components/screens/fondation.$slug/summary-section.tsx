@@ -130,7 +130,11 @@ const FondationSummarySection: React.FC<{
     <div id="entreprise">
       <Section
         lastModified={uniteLegale?.dateDerniereMiseAJour}
-        sources={[EAdministration.MI]}
+        sources={[
+          EAdministration.MI,
+          EAdministration.DGFIP,
+          EAdministration.DOUANES,
+        ]}
         title={`Informations légales de ${fondation.title}`}
       >
         <TwoColumnTable body={data} />
