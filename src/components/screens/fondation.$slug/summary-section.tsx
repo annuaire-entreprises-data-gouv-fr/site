@@ -1,4 +1,11 @@
 import type React from "react";
+import {
+  checkHasLabelsAndCertificates,
+  checkHasQuality,
+  LabelsAndCertificatesBadgesSection,
+  labelsAndCertificatesSources,
+} from "#/components/badges-section/labels-and-certificates";
+import { ProtectedCertificatesBadgesSection } from "#/components/badges-section/labels-and-certificates/protected-certificats";
 import EORICell from "#/components/eori-cell";
 import { Link } from "#/components/link";
 import { Section } from "#/components/section";
@@ -8,6 +15,10 @@ import ClampedText from "#/components-ui/clamped-text";
 import FAQLink from "#/components-ui/faq-link";
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
+import {
+  ApplicationRights,
+  hasRights,
+} from "#/models/authentication/user/rights";
 import { estActif } from "#/models/core/etat-administratif";
 import type { IFondation } from "#/models/core/fondations.types";
 import type { IUniteLegale } from "#/models/core/types";
@@ -27,6 +38,10 @@ const FondationSummarySection: React.FC<{
   uniteLegale: IUniteLegale | null;
   user: IAgentInfo | null;
 }> = ({ fondation, uniteLegale, user }) => {
+  const hasLabelsAndCertificates = uniteLegale
+    ? checkHasLabelsAndCertificates(uniteLegale)
+    : false;
+
   const data = [
     [
       <FAQLink tooltipLabel="État des inscriptions">
@@ -122,6 +137,30 @@ const FondationSummarySection: React.FC<{
         ? [["Date de fermeture", formatDate(uniteLegale.dateFermeture)]]
         : []),
     ["Objet social", <ClampedText>{fondation.socialObject}</ClampedText>],
+    // agents : we dont know yet if there are labels and certifs
+    ...(uniteLegale &&
+    hasRights({ user }, ApplicationRights.protectedCertificats)
+      ? [
+          ["", <br />],
+          [
+            `${
+              checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
+            }abels et certificats`,
+            <ProtectedCertificatesBadgesSection uniteLegale={uniteLegale} />,
+          ],
+        ]
+      : uniteLegale && hasLabelsAndCertificates
+        ? [
+            ["", <br />],
+            [
+              `${
+                checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
+              }abels et certificats`,
+              <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
+            ],
+          ]
+        : //  open data and no certif : we can hide the whole line
+          []),
   ];
 
   return (
@@ -132,6 +171,7 @@ const FondationSummarySection: React.FC<{
           EAdministration.MI,
           EAdministration.DGFIP,
           EAdministration.DOUANES,
+          ...(uniteLegale ? labelsAndCertificatesSources(uniteLegale) : []),
         ]}
         title={`Informations légales de ${fondation.title}`}
       >

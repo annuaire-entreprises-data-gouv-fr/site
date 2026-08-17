@@ -1,12 +1,5 @@
 import type React from "react";
 import { ConventionCollectivesBadgesSection } from "#/components/badges-section/convention-collectives";
-import {
-  checkHasLabelsAndCertificates,
-  checkHasQuality,
-  LabelsAndCertificatesBadgesSection,
-  labelsAndCertificatesSources,
-} from "#/components/badges-section/labels-and-certificates";
-import { ProtectedCertificatesBadgesSection } from "#/components/badges-section/labels-and-certificates/protected-certificats";
 import { Section } from "#/components/section";
 import { TwoColumnTable } from "#/components/table/simple";
 import FAQLink from "#/components-ui/faq-link";
@@ -26,9 +19,6 @@ const FondationInseeSection: React.FC<{
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }> = ({ uniteLegale, user }) => {
-  const hasLabelsAndCertificates = uniteLegale
-    ? checkHasLabelsAndCertificates(uniteLegale)
-    : false;
   const conventionsCollectives = uniteLegale ? uniteLegale.listeIdcc : [];
 
   const data = [
@@ -102,29 +92,6 @@ const FondationInseeSection: React.FC<{
         siren={uniteLegale.siren}
       />,
     ],
-    // agents : we dont know yet if there are labels and certifs
-    ...(hasRights({ user }, ApplicationRights.protectedCertificats)
-      ? [
-          ["", <br />],
-          [
-            `${
-              checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
-            }abels et certificats`,
-            <ProtectedCertificatesBadgesSection uniteLegale={uniteLegale} />,
-          ],
-        ]
-      : hasLabelsAndCertificates
-        ? [
-            ["", <br />],
-            [
-              `${
-                checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
-              }abels et certificats`,
-              <LabelsAndCertificatesBadgesSection uniteLegale={uniteLegale} />,
-            ],
-          ]
-        : //  open data and no certif : we can hide the whole line
-          []),
   ];
 
   return (
@@ -133,7 +100,6 @@ const FondationInseeSection: React.FC<{
         lastModified={uniteLegale?.dateDerniereMiseAJour}
         sources={[
           EAdministration.INSEE,
-          ...labelsAndCertificatesSources(uniteLegale),
           ...(conventionsCollectives.length > 0 ? [EAdministration.MTPEI] : []),
           ...(hasRights({ user }, ApplicationRights.effectifs)
             ? [EAdministration.GIP_MDS]
