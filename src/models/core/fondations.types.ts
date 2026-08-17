@@ -9,7 +9,6 @@ export interface IFondation {
   hasInternationalActivity: boolean | null;
   id: string;
   postalCode: string;
-  siren: string | null;
   siret: string | null;
   socialObject: string | null;
   state: string | null;

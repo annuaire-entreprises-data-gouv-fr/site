@@ -153,7 +153,6 @@ const TitleEtablissementWithDenomination: React.FC<{
     </div>
     <br />
     <SocialMedia
-      id={etablissement.siret}
       label={
         etablissement.enseigne ||
         etablissement.denomination ||

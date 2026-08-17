@@ -152,7 +152,6 @@ export interface IComplements {
   identifiant_association: string;
   liste_finess_juridique: string[];
   liste_idcc: string[];
-  numero_rnf: string | null;
   statut_entrepreneur_spectacle: "invalide" | "valide";
   type_siae: string;
 }
@@ -197,10 +196,10 @@ export interface IFondationResult {
   adresse: string;
   code_postal: string;
   date_creation: string;
-  denomination: string;
   numero_rnf: string;
   siren: string;
   siret: string;
+  titre: string;
   type_organisme: string;
   ville: string;
 }

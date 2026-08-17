@@ -4,7 +4,6 @@ import {
   CollectiviteTerritorialeBadge,
   DefaultStructureBadge,
   EntrepriseIndividuelleBadge,
-  FondationBadge,
   ServicePublicBadge,
 } from "#/components-ui/badge/frequent";
 import {
@@ -12,7 +11,6 @@ import {
   isAssociation,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
-  isFondation,
   isServicePublic,
 } from "#/models/core/types";
 
@@ -35,9 +33,6 @@ const UniteLegaleBadge: React.FC<{
 
   if (isCollectiviteTerritoriale(uniteLegale)) {
     badges.push(<CollectiviteTerritorialeBadge small={small} />);
-  }
-  if (isFondation(uniteLegale)) {
-    badges.push(<FondationBadge small={small} />);
   }
 
   if (badges.length > 0) {

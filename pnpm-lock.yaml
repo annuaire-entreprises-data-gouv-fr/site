@@ -50,9 +50,6 @@ importers:
       crawler-user-agents:
         specifier: 1.56.0
         version: 1.56.0
-      entities:
-        specifier: 8.0.0
-        version: 8.0.0
       fast-xml-parser:
         specifier: 5.10.1
         version: 5.10.1

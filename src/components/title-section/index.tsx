@@ -75,9 +75,9 @@ const Title: React.FC<IProps> = ({
       )}
     </div>
     <SocialMedia
-      id={uniteLegale.siren}
       label={uniteLegale.nomComplet}
       path={`https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`}
+      siren={uniteLegale.siren}
     />
     {estNonDiffusibleStrict(uniteLegale) ? (
       <p>Les informations concernant cette entreprise ne sont pas publiques.</p>
