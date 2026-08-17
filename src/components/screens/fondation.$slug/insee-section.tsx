@@ -10,7 +10,7 @@ import {
 } from "#/models/authentication/user/rights";
 import { estActif } from "#/models/core/etat-administratif";
 import type { IUniteLegale } from "#/models/core/types";
-import { formatDate } from "#/utils/helpers";
+import { formatDate, formatIntFr, formatSiret } from "#/utils/helpers";
 import { libelleCategorieEntreprise } from "#/utils/helpers/formatting/categories-entreprise";
 import { EffectifCell } from "../entreprise.$slug/effectif-cell";
 
@@ -20,6 +20,11 @@ const FondationInseeSection: React.FC<{
 }> = ({ uniteLegale, user }) => {
   const data = [
     ["Dénomination", uniteLegale.nomComplet],
+    ["SIREN", formatIntFr(uniteLegale.siren)],
+    [
+      "SIRET du siège social",
+      uniteLegale.siege?.siret && formatSiret(uniteLegale.siege?.siret),
+    ],
     ["Activité principale (NAF/APE)", uniteLegale.libelleActivitePrincipale],
     ["Code NAF/APE", uniteLegale.activitePrincipale],
     [
