@@ -81,6 +81,21 @@ export const ServicePublicBadge = ({
     small={small}
   />
 );
+export const FondationBadge = ({
+  small = false,
+  isSelected = false,
+  onClick,
+}: IPartialBadgeProps) => (
+  <Badge
+    backgroundColor="#99C221"
+    fontColor="#2a401a"
+    icon="buildingLine"
+    isSelected={isSelected}
+    label="Fondation"
+    onClick={onClick}
+    small={small}
+  />
+);
 export const DefaultStructureBadge = ({
   label = "Unité légale",
   small = false,

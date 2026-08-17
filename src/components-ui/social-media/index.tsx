@@ -3,7 +3,6 @@ import type React from "react";
 import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { PrintNever } from "#/components-ui/print-visibility";
-import type { Siren } from "#/utils/helpers";
 import PrintButton from "./print-button";
 import { QrCode } from "./qr-code";
 import styles from "./styles.module.css";
@@ -11,8 +10,8 @@ import styles from "./styles.module.css";
 const SocialMedia: React.FC<{
   path: string;
   label: string;
-  siren?: Siren;
-}> = ({ path, label, siren }) => (
+  id: string;
+}> = ({ path, label, id }) => (
   <PrintNever>
     <div className={clsx(styles.socialMedia, "layout-right")}>
       <span>
@@ -47,7 +46,7 @@ const SocialMedia: React.FC<{
           </a>
         </InformationTooltip>
       </span>
-      {siren && <QrCode siren={siren} />}
+      <QrCode id={id} />
       <span>
         <PrintButton />
       </span>
