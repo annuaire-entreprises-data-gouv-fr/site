@@ -134,6 +134,21 @@ const building2 = (
   </svg>
 );
 
+const buildingLine = (
+  <svg
+    aria-hidden="true"
+    fill="currentColor"
+    height="100%"
+    stroke="currentColor"
+    strokeWidth="0"
+    viewBox="0 0 24 24"
+    width="100%"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M14 3a1 1 0 0 1 1 1v15h4v-8h-2V9h3a1 1 0 0 1 1 1v9h2v2H1v-2h2V4a1 1 0 0 1 1-1h10Zm-1 2H5v14h8V5Zm-2 6v2H7v-2h4Zm0-4v2H7V7h4Z" />
+  </svg>
+);
+
 const alertFill = (
   <svg
     aria-hidden="true"
@@ -783,6 +798,7 @@ export const icons = {
   building,
   buildingFill,
   building2,
+  buildingLine,
   closed,
   collectiviteFill,
   communityFill,
