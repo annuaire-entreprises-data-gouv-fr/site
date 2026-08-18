@@ -313,14 +313,6 @@ function RouteComponent() {
               <td>https://www.ovh.com/fr/protection-donnees-personnelles/</td>
             </tr>
             <tr>
-              <td>Scalingo</td>
-              <td>France</td>
-              <td>Hébergement de test</td>
-              <td>
-                https://scalingo.com/fr/contrat-gestion-traitements-donnees-personnelles
-              </td>
-            </tr>
-            <tr>
               <td>Crisp</td>
               <td>France</td>
               <td>Gestion du support</td>
