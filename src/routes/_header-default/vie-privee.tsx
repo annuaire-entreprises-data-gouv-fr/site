@@ -374,7 +374,7 @@ function RouteComponent() {
         Des cookies relatifs aux statistiques publiques et anonymes sont
         également déposés.
       </p>
-      <p>Cookies recensés sur l’Annuaire des entreprises :</p>
+      <p>Cookies recensés sur l’Annuaire des Entreprises :</p>
       <div className="fr-table">
         <table>
           <caption>Résumé des cookies</caption>
