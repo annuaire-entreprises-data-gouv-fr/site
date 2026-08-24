@@ -71,7 +71,7 @@ function RouteComponent() {
       <div className="fr-table">
         <table>
           <caption>
-            Résumé des différentes durées de conservation des données
+            Résumé des différentes données à caractère personnel
           </caption>
           <thead>
             <tr>
@@ -100,6 +100,15 @@ function RouteComponent() {
                 numérique via ProConnect
               </td>
               <td>Nom, prénom, adresse e-mail professionnelle</td>
+            </tr>
+            <tr>
+              <td>
+                Données relatives à la connexion des agents publics au service
+                numérique
+              </td>
+              <td>
+                Adresse e-mail professionnelle, adresse IP, logs d'utilisation
+              </td>
             </tr>
           </tbody>
         </table>
@@ -154,7 +163,7 @@ function RouteComponent() {
               </td>
               <td>
                 Jusqu’à 10 ans suivant la cessation de l’activité de
-                l’entreprise, l’association ou l’administration concerné
+                l’entreprise, l’association ou l’administration concerné.
               </td>
             </tr>
             <tr>
@@ -164,7 +173,7 @@ function RouteComponent() {
               </td>
               <td>
                 Jusqu’à 10 ans suivant la cessation de l’activité de
-                l’entreprise, l’association ou l’administration concerné
+                l’entreprise, l’association ou l’administration concerné.
               </td>
             </tr>
             <tr>
@@ -177,6 +186,16 @@ function RouteComponent() {
                 données sont détruites sans délai. En cas de déconnexion ou
                 d’expiration de la session, l’Agent doit dès lors se reconnecter
                 à l’aide de ses identifiants.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Données relatives à la connexion des agents publics au service
+                numérique
+              </td>
+              <td>
+                Durant 1 an, pour assurer la sécurité du compte (article 32 du
+                RGPD).
               </td>
             </tr>
           </tbody>
@@ -294,14 +313,6 @@ function RouteComponent() {
               <td>https://www.ovh.com/fr/protection-donnees-personnelles/</td>
             </tr>
             <tr>
-              <td>Scalingo</td>
-              <td>France</td>
-              <td>Hébergement de test</td>
-              <td>
-                https://scalingo.com/fr/contrat-gestion-traitements-donnees-personnelles
-              </td>
-            </tr>
-            <tr>
               <td>Crisp</td>
               <td>France</td>
               <td>Gestion du support</td>
@@ -355,7 +366,7 @@ function RouteComponent() {
         Des cookies relatifs aux statistiques publiques et anonymes sont
         également déposés.
       </p>
-      <p>Cookies recensés sur l’Annuaire des entreprises :</p>
+      <p>Cookies recensés sur l’Annuaire des Entreprises :</p>
       <div className="fr-table">
         <table>
           <caption>Résumé des cookies</caption>

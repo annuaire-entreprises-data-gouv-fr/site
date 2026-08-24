@@ -24,7 +24,7 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             <p>
               Votre demande a été refusée. Cela est vraisemblablement dû au fait
               que vous n’apparaissez pas comme dirigeant de l’entreprise.
-              Veuillez contacter le support de l’annuaire des entreprises pour
+              Veuillez contacter le support de l’Annuaire des Entreprises pour
               plus d’informations.
             </p>
           </AlertError>
@@ -43,7 +43,7 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
             <p>
               Une précédente demande concernant cette entreprise a déjà été
               traitée : les informations personnelles de dirigeant ne sont plus
-              affichées sur l’annuaire des entreprises.
+              affichées sur l’Annuaire des Entreprises.
             </p>
           </Success>
         ) : (

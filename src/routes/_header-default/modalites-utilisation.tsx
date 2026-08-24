@@ -189,7 +189,20 @@ function RouteComponent() {
         civile qui pourraient être engagées à l’encontre de l’utilisateur ou
         l’utilisatrice.
       </p>
-      <h3>6.2 Open Source et Licences</h3>
+      <h3>
+        6.2 Conservation des données de connexion et de consultation des données
+      </h3>
+      <p>
+        En application de l'article 32 du RGPD, la DINUM est tenue de conserver
+        les données d'identification et de connexion afin d'assurer la sécurité
+        des comptes et des données.
+      </p>
+      <p>
+        Cette conservation comprend également les données et traces techniques
+        permettant d'identifier les données, informations ou ressources
+        auxquelles chaque personne a accédé au sein de son espace.
+      </p>
+      <h3>6.3 Open Source et Licences</h3>
       <p>
         Le code source de la plateforme est libre, sous licence MIT, et
         disponible ici :
