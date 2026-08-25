@@ -40,8 +40,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_REGISTRY_URL }}/{{ secrets.DOCKER_REGISTRY_NAMESPACE }}/{{ secrets.DOCKER_REGISTRY_IMAGE }}:${{ github.sha }}-staging
-            ${{ secrets.DOCKER_REGISTRY_URL }}/{{ secrets.DOCKER_REGISTRY_NAMESPACE }}/{{ secrets.DOCKER_REGISTRY_IMAGE }}:${{ steps.sanitize.outputs.branch_name }}-staging
+            ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.DOCKER_REGISTRY_NAMESPACE }}/${{ secrets.DOCKER_REGISTRY_IMAGE }}:${{ github.sha }}-staging
+            ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.DOCKER_REGISTRY_NAMESPACE }}/${{ secrets.DOCKER_REGISTRY_IMAGE }}:${{ steps.sanitize.outputs.branch_name }}-staging
           cache-from: type=gha
           cache-to: type=gha,mode=max
   build-docker-production:
@@ -72,8 +72,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_REGISTRY_URL }}/{{ secrets.DOCKER_REGISTRY_NAMESPACE }}/{{ secrets.DOCKER_REGISTRY_IMAGE }}:${{ github.sha }}-production
-            ${{ secrets.DOCKER_REGISTRY_URL }}/{{ secrets.DOCKER_REGISTRY_NAMESPACE }}/{{ secrets.DOCKER_REGISTRY_IMAGE }}:${{ steps.sanitize.outputs.branch_name }}-production
+            ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.DOCKER_REGISTRY_NAMESPACE }}/${{ secrets.DOCKER_REGISTRY_IMAGE }}:${{ github.sha }}-production
+            ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.DOCKER_REGISTRY_NAMESPACE }}/${{ secrets.DOCKER_REGISTRY_IMAGE }}:${{ steps.sanitize.outputs.branch_name }}-production
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
