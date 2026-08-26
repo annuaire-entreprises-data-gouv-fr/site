@@ -10,6 +10,7 @@ import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
 import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
+import { Link } from "#/components/link";
 import { Question } from "#/components/question";
 import { NotFound } from "#/components/screens/not-found";
 import SocialNetworks from "#/components/social-network";
@@ -22,6 +23,7 @@ import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale
 import { extractSirenFromSiret } from "#/utils/helpers";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
+import styles from "./style.module.css";
 
 const loadFondationPage = createServerFn({ method: "POST" })
   .validator(
@@ -100,6 +102,15 @@ function RouteComponent() {
 
   return (
     <>
+      {!uniteLegale && (
+        <div className={styles.leaveFondations}>
+          <div className="fr-container">
+            <Link to="/">
+              ← Quitter les Fondations et revenir sur l'Annuaire des Entreprises
+            </Link>
+          </div>
+        </div>
+      )}
       <NPSBanner />
       <BannerManager />
       <Header
