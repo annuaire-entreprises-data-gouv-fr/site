@@ -16,7 +16,6 @@ import { NotFound } from "#/components/screens/not-found";
 import SocialNetworks from "#/components/social-network";
 import { BackToTop } from "#/components-ui/back-to-top";
 import type { IUniteLegale } from "#/models/core/types";
-import { getLandingPage } from "#/models/landing-pages";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getFondationFromSlugFn } from "#/server-functions/public/fondation";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
@@ -61,8 +60,6 @@ const loadFondationPage = createServerFn({ method: "POST" })
       sourcesLastModified,
     };
   });
-
-const fondationsLandingPage = getLandingPage("fondations");
 
 export const Route = createFileRoute("/_header-fondation")({
   validateSearch: z.object({
@@ -114,9 +111,9 @@ function RouteComponent() {
       <NPSBanner />
       <BannerManager />
       <Header
-        searchPath={uniteLegale ? undefined : fondationsLandingPage?.searchPath}
+        searchPath={uniteLegale ? undefined : "/rechercher/fondations"}
         searchPlaceholder={
-          uniteLegale ? undefined : fondationsLandingPage?.searchPlaceholder
+          uniteLegale ? undefined : "Chercher un fonds ou une fondation"
         }
         useAgentBanner={true}
         useAgentCTA={true}

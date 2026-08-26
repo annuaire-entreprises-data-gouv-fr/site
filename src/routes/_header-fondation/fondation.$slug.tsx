@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import EspaceAgentSummarySection from "#/components/espace-agent-components/summary-section";
 import EtablissementListeSection from "#/components/etablissement-liste-section";
 import EtablissementSection from "#/components/etablissement-section";
@@ -6,6 +6,7 @@ import FondationInseeSection from "#/components/screens/fondation.$slug/insee-se
 import FondationSummarySection from "#/components/screens/fondation.$slug/summary-section";
 import { TitleFondation } from "#/components/title-fondation-section";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
+import { Icon } from "#/components-ui/icon/wrapper";
 import { useAuth } from "#/contexts/auth.context";
 import {
   ApplicationRights,
@@ -18,6 +19,7 @@ import {
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 import { Route as FondationLayoutRoute } from "./route";
+import styles from "./style.module.css";
 
 export const Route = createFileRoute("/_header-fondation/fondation/$slug")({
   loader: async ({ parentMatchPromise }) => {
@@ -73,6 +75,15 @@ function RouteComponent() {
       />
       {!!uniteLegale && (
         <>
+          <div className={styles.leaveUniteLegale}>
+            <Icon size={24} slug="lightbulbFill" />
+            <span>
+              Retrouvez encore plus de Fonds et Fondations avec{" "}
+              <Link params={{ slug: "fondations" }} to="/lp/$slug">
+                notre moteur de recherche dédié
+              </Link>
+            </span>
+          </div>
           <FondationInseeSection uniteLegale={uniteLegale} user={user} />
           {hasRights({ user }, ApplicationRights.isAgent) && (
             <EspaceAgentSummarySection uniteLegale={uniteLegale} user={user} />

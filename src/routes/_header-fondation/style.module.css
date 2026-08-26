@@ -4,3 +4,14 @@
   color: var(--annuaire-colors-frBlue);
   background-color: var(--annuaire-colors-fondation);
 }
+
+.leaveUniteLegale {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 12px 10px;
+  font-size: 1.1rem;
+  color: var(--annuaire-colors-frBlue);
+  background-color: var(--annuaire-colors-fondation);
+}
