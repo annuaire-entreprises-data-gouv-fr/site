@@ -87,9 +87,9 @@ export const FondationBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
-    backgroundColor="#99C221"
-    fontColor="#2a401a"
-    icon="buildingLine"
+    backgroundColor="#70E39D"
+    fontColor="#3d0d71"
+    icon="serviceLine"
     isSelected={isSelected}
     label="Fondation"
     onClick={onClick}
