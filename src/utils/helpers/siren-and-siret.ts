@@ -144,15 +144,23 @@ export const extractSirenOrSiretFromRechercherUrl = (terme: string) => {
     }
   })();
 
-  const digits = searchTerm.replace(/\D/g, "");
+  const alphanumeric = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
+  const digitGroups = alphanumeric.match(/\d+/g) ?? [];
 
-  if (searchTerm.startsWith("FR") && digits.length === 11) {
-    return digits.slice(2);
+  for (const digits of digitGroups) {
+    if (searchTerm.startsWith("FR") && digits.length === 11) {
+      return digits.slice(2);
+    }
+
+    if (digits.length >= 14) {
+      return digits.slice(0, 14);
+    }
+
+    const sirenOrSiret = extractSirenOrSiretSlugFromUrl(digits);
+    if (sirenOrSiret) {
+      return sirenOrSiret;
+    }
   }
 
-  if (digits.length >= 14) {
-    return digits.slice(0, 14);
-  }
-
-  return extractSirenOrSiretSlugFromUrl(digits);
+  return "";
 };
