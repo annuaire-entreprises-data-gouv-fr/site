@@ -17,6 +17,7 @@ import { Route as HeaderPublicRouteRouteImport } from './routes/_header-public/r
 import { Route as HeaderMinimalRouteRouteImport } from './routes/_header-minimal/route'
 import { Route as HeaderLpAgentRouteRouteImport } from './routes/_header-lp-agent/route'
 import { Route as HeaderHomeRouteRouteImport } from './routes/_header-home/route'
+import { Route as HeaderFondationRouteRouteImport } from './routes/_header-fondation/route'
 import { Route as HeaderDefaultRouteRouteImport } from './routes/_header-default/route'
 import { Route as HeaderConnexionRouteRouteImport } from './routes/_header-connexion/route'
 import { Route as HeaderCompteRouteRouteImport } from './routes/_header-compte/route'
@@ -48,10 +49,10 @@ import { Route as HeaderPublicAProposStatsRouteImport } from './routes/_header-p
 import { Route as HeaderMinimalFormulaireMerciRouteImport } from './routes/_header-minimal/formulaire/merci'
 import { Route as HeaderLpAgentLpAgentPublicRouteImport } from './routes/_header-lp-agent/lp.agent-public'
 import { Route as HeaderHomeLpSlugRouteImport } from './routes/_header-home/lp/$slug'
+import { Route as HeaderFondationFondationSlugRouteImport } from './routes/_header-fondation/fondation.$slug'
 import { Route as HeaderDefaultLabelsCertificatsSlugRouteImport } from './routes/_header-default/labels-certificats.$slug'
 import { Route as HeaderDefaultJustificatifImmatriculationPdfSlugRouteImport } from './routes/_header-default/justificatif-immatriculation-pdf.$slug'
 import { Route as HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRouteImport } from './routes/_header-default/formulaire.supprimer-donnees-personnelles-entreprise'
-import { Route as HeaderDefaultFondationSlugRouteImport } from './routes/_header-default/fondation.$slug'
 import { Route as HeaderDefaultFaqParcoursRouteImport } from './routes/_header-default/faq.parcours'
 import { Route as HeaderDefaultFaqSlugRouteImport } from './routes/_header-default/faq.$slug'
 import { Route as HeaderDefaultEtablissementsScolairesSlugRouteImport } from './routes/_header-default/etablissements-scolaires.$slug'
@@ -127,6 +128,10 @@ const HeaderLpAgentRouteRoute = HeaderLpAgentRouteRouteImport.update({
 } as any)
 const HeaderHomeRouteRoute = HeaderHomeRouteRouteImport.update({
   id: '/_header-home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeaderFondationRouteRoute = HeaderFondationRouteRouteImport.update({
+  id: '/_header-fondation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HeaderDefaultRouteRoute = HeaderDefaultRouteRouteImport.update({
@@ -294,6 +299,12 @@ const HeaderHomeLpSlugRoute = HeaderHomeLpSlugRouteImport.update({
   path: '/lp/$slug',
   getParentRoute: () => HeaderHomeRouteRoute,
 } as any)
+const HeaderFondationFondationSlugRoute =
+  HeaderFondationFondationSlugRouteImport.update({
+    id: '/fondation/$slug',
+    path: '/fondation/$slug',
+    getParentRoute: () => HeaderFondationRouteRoute,
+  } as any)
 const HeaderDefaultLabelsCertificatsSlugRoute =
   HeaderDefaultLabelsCertificatsSlugRouteImport.update({
     id: '/labels-certificats/$slug',
@@ -314,12 +325,6 @@ const HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute =
       getParentRoute: () => HeaderDefaultRouteRoute,
     } as any,
   )
-const HeaderDefaultFondationSlugRoute =
-  HeaderDefaultFondationSlugRouteImport.update({
-    id: '/fondation/$slug',
-    path: '/fondation/$slug',
-    getParentRoute: () => HeaderDefaultRouteRoute,
-  } as any)
 const HeaderDefaultFaqParcoursRoute =
   HeaderDefaultFaqParcoursRouteImport.update({
     id: '/faq/parcours',
@@ -604,10 +609,10 @@ export interface FileRoutesByFullPath {
   '/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
   '/faq/$slug': typeof HeaderDefaultFaqSlugRoute
   '/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
-  '/fondation/$slug': typeof HeaderDefaultFondationSlugRoute
   '/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
   '/labels-certificats/$slug': typeof HeaderDefaultLabelsCertificatsSlugRoute
+  '/fondation/$slug': typeof HeaderFondationFondationSlugRoute
   '/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
@@ -682,10 +687,10 @@ export interface FileRoutesByTo {
   '/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
   '/faq/$slug': typeof HeaderDefaultFaqSlugRoute
   '/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
-  '/fondation/$slug': typeof HeaderDefaultFondationSlugRoute
   '/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
   '/labels-certificats/$slug': typeof HeaderDefaultLabelsCertificatsSlugRoute
+  '/fondation/$slug': typeof HeaderFondationFondationSlugRoute
   '/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
@@ -725,6 +730,7 @@ export interface FileRoutesById {
   '/_header-compte': typeof HeaderCompteRouteRouteWithChildren
   '/_header-connexion': typeof HeaderConnexionRouteRouteWithChildren
   '/_header-default': typeof HeaderDefaultRouteRouteWithChildren
+  '/_header-fondation': typeof HeaderFondationRouteRouteWithChildren
   '/_header-home': typeof HeaderHomeRouteRouteWithChildren
   '/_header-lp-agent': typeof HeaderLpAgentRouteRouteWithChildren
   '/_header-minimal': typeof HeaderMinimalRouteRouteWithChildren
@@ -769,10 +775,10 @@ export interface FileRoutesById {
   '/_header-default/etablissements-scolaires/$slug': typeof HeaderDefaultEtablissementsScolairesSlugRoute
   '/_header-default/faq/$slug': typeof HeaderDefaultFaqSlugRoute
   '/_header-default/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
-  '/_header-default/fondation/$slug': typeof HeaderDefaultFondationSlugRoute
   '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/_header-default/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
   '/_header-default/labels-certificats/$slug': typeof HeaderDefaultLabelsCertificatsSlugRoute
+  '/_header-fondation/fondation/$slug': typeof HeaderFondationFondationSlugRoute
   '/_header-home/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/_header-lp-agent/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/_header-minimal/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
@@ -849,10 +855,10 @@ export interface FileRouteTypes {
     | '/etablissements-scolaires/$slug'
     | '/faq/$slug'
     | '/faq/parcours'
-    | '/fondation/$slug'
     | '/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/justificatif-immatriculation-pdf/$slug'
     | '/labels-certificats/$slug'
+    | '/fondation/$slug'
     | '/lp/$slug'
     | '/lp/agent-public'
     | '/formulaire/merci'
@@ -927,10 +933,10 @@ export interface FileRouteTypes {
     | '/etablissements-scolaires/$slug'
     | '/faq/$slug'
     | '/faq/parcours'
-    | '/fondation/$slug'
     | '/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/justificatif-immatriculation-pdf/$slug'
     | '/labels-certificats/$slug'
+    | '/fondation/$slug'
     | '/lp/$slug'
     | '/lp/agent-public'
     | '/formulaire/merci'
@@ -969,6 +975,7 @@ export interface FileRouteTypes {
     | '/_header-compte'
     | '/_header-connexion'
     | '/_header-default'
+    | '/_header-fondation'
     | '/_header-home'
     | '/_header-lp-agent'
     | '/_header-minimal'
@@ -1013,10 +1020,10 @@ export interface FileRouteTypes {
     | '/_header-default/etablissements-scolaires/$slug'
     | '/_header-default/faq/$slug'
     | '/_header-default/faq/parcours'
-    | '/_header-default/fondation/$slug'
     | '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/_header-default/justificatif-immatriculation-pdf/$slug'
     | '/_header-default/labels-certificats/$slug'
+    | '/_header-fondation/fondation/$slug'
     | '/_header-home/lp/$slug'
     | '/_header-lp-agent/lp/agent-public'
     | '/_header-minimal/formulaire/merci'
@@ -1056,6 +1063,7 @@ export interface RootRouteChildren {
   HeaderCompteRouteRoute: typeof HeaderCompteRouteRouteWithChildren
   HeaderConnexionRouteRoute: typeof HeaderConnexionRouteRouteWithChildren
   HeaderDefaultRouteRoute: typeof HeaderDefaultRouteRouteWithChildren
+  HeaderFondationRouteRoute: typeof HeaderFondationRouteRouteWithChildren
   HeaderHomeRouteRoute: typeof HeaderHomeRouteRouteWithChildren
   HeaderLpAgentRouteRoute: typeof HeaderLpAgentRouteRouteWithChildren
   HeaderMinimalRouteRoute: typeof HeaderMinimalRouteRouteWithChildren
@@ -1140,6 +1148,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof HeaderHomeRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_header-fondation': {
+      id: '/_header-fondation'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof HeaderFondationRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_header-default': {
@@ -1359,6 +1374,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderHomeLpSlugRouteImport
       parentRoute: typeof HeaderHomeRouteRoute
     }
+    '/_header-fondation/fondation/$slug': {
+      id: '/_header-fondation/fondation/$slug'
+      path: '/fondation/$slug'
+      fullPath: '/fondation/$slug'
+      preLoaderRoute: typeof HeaderFondationFondationSlugRouteImport
+      parentRoute: typeof HeaderFondationRouteRoute
+    }
     '/_header-default/labels-certificats/$slug': {
       id: '/_header-default/labels-certificats/$slug'
       path: '/labels-certificats/$slug'
@@ -1378,13 +1400,6 @@ declare module '@tanstack/react-router' {
       path: '/formulaire/supprimer-donnees-personnelles-entreprise'
       fullPath: '/formulaire/supprimer-donnees-personnelles-entreprise'
       preLoaderRoute: typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRouteImport
-      parentRoute: typeof HeaderDefaultRouteRoute
-    }
-    '/_header-default/fondation/$slug': {
-      id: '/_header-default/fondation/$slug'
-      path: '/fondation/$slug'
-      fullPath: '/fondation/$slug'
-      preLoaderRoute: typeof HeaderDefaultFondationSlugRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
     '/_header-default/faq/parcours': {
@@ -1743,7 +1758,6 @@ interface HeaderDefaultRouteRouteChildren {
   HeaderDefaultEtablissementsScolairesSlugRoute: typeof HeaderDefaultEtablissementsScolairesSlugRoute
   HeaderDefaultFaqSlugRoute: typeof HeaderDefaultFaqSlugRoute
   HeaderDefaultFaqParcoursRoute: typeof HeaderDefaultFaqParcoursRoute
-  HeaderDefaultFondationSlugRoute: typeof HeaderDefaultFondationSlugRoute
   HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute: typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   HeaderDefaultJustificatifImmatriculationPdfSlugRoute: typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
   HeaderDefaultLabelsCertificatsSlugRoute: typeof HeaderDefaultLabelsCertificatsSlugRoute
@@ -1790,7 +1804,6 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
     HeaderDefaultEtablissementsScolairesSlugRoute,
   HeaderDefaultFaqSlugRoute: HeaderDefaultFaqSlugRoute,
   HeaderDefaultFaqParcoursRoute: HeaderDefaultFaqParcoursRoute,
-  HeaderDefaultFondationSlugRoute: HeaderDefaultFondationSlugRoute,
   HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute:
     HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute,
   HeaderDefaultJustificatifImmatriculationPdfSlugRoute:
@@ -1809,6 +1822,17 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
 
 const HeaderDefaultRouteRouteWithChildren =
   HeaderDefaultRouteRoute._addFileChildren(HeaderDefaultRouteRouteChildren)
+
+interface HeaderFondationRouteRouteChildren {
+  HeaderFondationFondationSlugRoute: typeof HeaderFondationFondationSlugRoute
+}
+
+const HeaderFondationRouteRouteChildren: HeaderFondationRouteRouteChildren = {
+  HeaderFondationFondationSlugRoute: HeaderFondationFondationSlugRoute,
+}
+
+const HeaderFondationRouteRouteWithChildren =
+  HeaderFondationRouteRoute._addFileChildren(HeaderFondationRouteRouteChildren)
 
 interface HeaderHomeRouteRouteChildren {
   HeaderHomeIndexRoute: typeof HeaderHomeIndexRoute
@@ -1880,6 +1904,7 @@ const rootRouteChildren: RootRouteChildren = {
   HeaderCompteRouteRoute: HeaderCompteRouteRouteWithChildren,
   HeaderConnexionRouteRoute: HeaderConnexionRouteRouteWithChildren,
   HeaderDefaultRouteRoute: HeaderDefaultRouteRouteWithChildren,
+  HeaderFondationRouteRoute: HeaderFondationRouteRouteWithChildren,
   HeaderHomeRouteRoute: HeaderHomeRouteRouteWithChildren,
   HeaderLpAgentRouteRoute: HeaderLpAgentRouteRouteWithChildren,
   HeaderMinimalRouteRoute: HeaderMinimalRouteRouteWithChildren,
