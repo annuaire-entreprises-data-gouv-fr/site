@@ -1,4 +1,3 @@
-import type { LinkProps as TanStackLinkProps } from "@tanstack/react-router";
 import type React from "react";
 import ReconnectBanner from "#/components/banner/reconnect";
 import { Link } from "#/components/link";
@@ -23,7 +22,7 @@ import styles from "./styles.module.css";
 interface IProps {
   currentSearchTerm?: string;
   plugin?: React.JSX.Element;
-  searchPath?: TanStackLinkProps["to"];
+  searchPath?: string;
   searchPlaceholder?: string;
   useAgentBanner?: boolean;
   useAgentCTA?: boolean;

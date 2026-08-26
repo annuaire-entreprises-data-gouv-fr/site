@@ -1,21 +1,21 @@
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Outlet,
+  stripSearchParams,
+} from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeader } from "@tanstack/react-start/server";
 import z from "zod";
-import EspaceAgentSummarySection from "#/components/espace-agent-components/summary-section";
-import EtablissementListeSection from "#/components/etablissement-liste-section";
-import EtablissementSection from "#/components/etablissement-section";
-import FondationInseeSection from "#/components/screens/fondation.$slug/insee-section";
-import FondationSummarySection from "#/components/screens/fondation.$slug/summary-section";
+import { BannerManager } from "#/components/banner/banner-manager";
+import { NPSBanner } from "#/components/banner/nps";
+import Footer from "#/components/footer";
+import { Header } from "#/components/header/header";
+import { Question } from "#/components/question";
 import { NotFound } from "#/components/screens/not-found";
-import { TitleFondation } from "#/components/title-fondation-section";
-import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
-import { useAuth } from "#/contexts/auth.context";
-import {
-  ApplicationRights,
-  hasRights,
-} from "#/models/authentication/user/rights";
+import SocialNetworks from "#/components/social-network";
+import { BackToTop } from "#/components-ui/back-to-top";
 import type { IUniteLegale } from "#/models/core/types";
+import { getLandingPage } from "#/models/landing-pages";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getFondationFromSlugFn } from "#/server-functions/public/fondation";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
@@ -65,7 +65,9 @@ const loadFondationPage = createServerFn({ method: "POST" })
     };
   });
 
-export const Route = createFileRoute("/_header-default/fondation/$slug")({
+const fondationsLandingPage = getLandingPage("fondations");
+
+export const Route = createFileRoute("/_header-fondation")({
   validateSearch: z.object({
     page: z.number().min(1).optional().default(1).catch(1),
   }),
@@ -79,15 +81,19 @@ export const Route = createFileRoute("/_header-default/fondation/$slug")({
   loaderDeps: ({ search }) => ({
     page: search.page,
   }),
-  loader: async ({ params, deps }) => {
-    const result = await loadFondationPage({
-      data: {
-        slug: params.slug,
-        page: deps.page,
-      },
-    });
+  shouldReload: true,
+  loader: {
+    staleReloadMode: "blocking",
+    handler: async ({ params, deps }) => {
+      const { slug } = z.object({ slug: z.string() }).parse(params);
 
-    return result;
+      return await loadFondationPage({
+        data: {
+          slug,
+          page: deps.page,
+        },
+      });
+    },
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -121,40 +127,28 @@ export const Route = createFileRoute("/_header-default/fondation/$slug")({
 });
 
 function RouteComponent() {
-  const { fondation, uniteLegale } = Route.useLoaderData();
-  const { user } = useAuth();
+  const { uniteLegale } = Route.useLoaderData();
 
   return (
-    <div className="content-container">
-      <TitleFondation
-        fondation={fondation}
-        uniteLegale={uniteLegale}
-        user={user}
+    <>
+      <NPSBanner />
+      <BannerManager />
+      <Header
+        searchPath={uniteLegale ? undefined : fondationsLandingPage?.searchPath}
+        searchPlaceholder={
+          uniteLegale ? undefined : fondationsLandingPage?.searchPlaceholder
+        }
+        useAgentBanner={true}
+        useAgentCTA={true}
+        useSearchBar={true}
       />
-      <FondationSummarySection
-        fondation={fondation}
-        uniteLegale={uniteLegale}
-        user={user}
-      />
-      {!!uniteLegale && (
-        <>
-          <FondationInseeSection uniteLegale={uniteLegale} user={user} />
-          {hasRights({ user }, ApplicationRights.isAgent) && (
-            <EspaceAgentSummarySection uniteLegale={uniteLegale} user={user} />
-          )}
-          <HorizontalSeparator />
-          {uniteLegale.siege && (
-            <EtablissementSection
-              etablissement={uniteLegale.siege}
-              uniteLegale={uniteLegale}
-              usedInEntreprisePage={true}
-              user={user}
-              withDenomination={false}
-            />
-          )}
-          <EtablissementListeSection uniteLegale={uniteLegale} />
-        </>
-      )}
-    </div>
+      <main className="fr-container">
+        <Outlet />
+      </main>
+      <SocialNetworks />
+      <Question />
+      <Footer />
+      <BackToTop />
+    </>
   );
 }
