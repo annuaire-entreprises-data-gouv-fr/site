@@ -110,6 +110,12 @@ describe("Siren or siret extraction from rechercher url", () => {
     ).toBe("");
   });
 
+  test("It works with a siren spaced between digit groups", () => {
+    expect(
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=880 878 145")
+    ).toBe("880878145");
+  });
+
   test("It works with siret", () => {
     expect(
       extractSirenOrSiretFromRechercherUrl("/rechercher?terme=88087814500015")
