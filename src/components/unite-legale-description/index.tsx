@@ -14,13 +14,16 @@ import { UniteLegaleEtablissementCountDescription } from "./etablissement-count-
 export const UniteLegaleDescription: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  const ageCreation = uniteLegale.dateCreation
-    ? formatAge(uniteLegale.dateCreation)
-    : null;
+  const ageCreation =
+    uniteLegale.dateCreation && new Date(uniteLegale.dateCreation) < new Date()
+      ? formatAge(uniteLegale.dateCreation)
+      : null;
 
-  const ageFermeture = uniteLegale.dateFermeture
-    ? formatAge(uniteLegale.dateFermeture)
-    : null;
+  const ageFermeture =
+    uniteLegale.dateFermeture &&
+    new Date(uniteLegale.dateFermeture) < new Date()
+      ? formatAge(uniteLegale.dateFermeture)
+      : null;
 
   return (
     <>
