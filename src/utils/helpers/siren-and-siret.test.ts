@@ -110,6 +110,12 @@ describe("Siren or siret extraction from rechercher url", () => {
     ).toBe("");
   });
 
+  test("It works with a siren spaced between digit groups", () => {
+    expect(
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=880 878 145")
+    ).toBe("880878145");
+  });
+
   test("It works with siret", () => {
     expect(
       extractSirenOrSiretFromRechercherUrl("/rechercher?terme=88087814500015")
@@ -136,6 +142,36 @@ describe("Siren or siret extraction from rechercher url", () => {
 
     expect(
       extractSirenOrSiretFromRechercherUrl("/rechercher?terme=FR70850285")
+    ).toBe("");
+  });
+
+  test("It extracts each digit group separately when letters split them", () => {
+    expect(
+      extractSirenOrSiretFromRechercherUrl(
+        "/rechercher?terme=12abc88087814500015"
+      )
+    ).toBe("88087814500015");
+
+    expect(
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=12def880878145")
+    ).toBe("880878145");
+
+    expect(
+      extractSirenOrSiretFromRechercherUrl("/rechercher?terme=abc12def345")
+    ).toBe("");
+  });
+
+  test("It returns empty string for address searches", () => {
+    expect(
+      extractSirenOrSiretFromRechercherUrl(
+        "/rechercher?terme=1456 avenue du test 75015"
+      )
+    ).toBe("");
+
+    expect(
+      extractSirenOrSiretFromRechercherUrl(
+        "/rechercher?terme=145 avenue du test 75015 Paris 15"
+      )
     ).toBe("");
   });
 });
