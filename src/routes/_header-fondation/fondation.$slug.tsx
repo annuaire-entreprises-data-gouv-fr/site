@@ -11,10 +11,46 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
+import {
+  fondationPageDescription,
+  fondationPageTitle,
+} from "#/utils/helpers/formatting/fondation-label";
+import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 import { Route as FondationLayoutRoute } from "./route";
 
 export const Route = createFileRoute("/_header-fondation/fondation/$slug")({
+  loader: async ({ parentMatchPromise }) => {
+    const { loaderData } = await parentMatchPromise;
+
+    return loaderData;
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) {
+      return meta.notFound();
+    }
+
+    const { fondation } = loaderData;
+
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/fondation/${fondation.id}`;
+
+    return {
+      meta: meta({
+        title: fondationPageTitle(fondation),
+        description: fondationPageDescription(fondation),
+        robots: "index, follow",
+        alternates: {
+          canonical,
+        },
+      }),
+      links: [
+        {
+          rel: "canonical",
+          href: canonical,
+        },
+      ],
+    };
+  },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
 });

@@ -20,11 +20,6 @@ import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-en
 import { getFondationFromSlugFn } from "#/server-functions/public/fondation";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { extractSirenFromSiret } from "#/utils/helpers";
-import {
-  fondationPageDescription,
-  fondationPageTitle,
-} from "#/utils/helpers/formatting/fondation-label";
-import { meta } from "#/utils/seo";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
 
@@ -94,32 +89,6 @@ export const Route = createFileRoute("/_header-fondation")({
         },
       });
     },
-  },
-  head: ({ loaderData }) => {
-    if (!loaderData) {
-      return meta.notFound();
-    }
-
-    const { fondation } = loaderData;
-
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/fondation/${fondation.id}`;
-
-    return {
-      meta: meta({
-        title: fondationPageTitle(fondation),
-        description: fondationPageDescription(fondation),
-        robots: "index, follow",
-        alternates: {
-          canonical,
-        },
-      }),
-      links: [
-        {
-          rel: "canonical",
-          href: canonical,
-        },
-      ],
-    };
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
