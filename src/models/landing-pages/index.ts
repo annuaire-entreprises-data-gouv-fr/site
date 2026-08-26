@@ -1,3 +1,5 @@
+import type { LinkProps as TanStackLinkProps } from "@tanstack/react-router";
+
 export interface ILandingPage {
   body: string;
   datasources: string[];
@@ -10,7 +12,7 @@ export interface ILandingPage {
   isServicePublic: boolean;
   published: boolean;
   reassurance: { title: string; body: string }[];
-  searchPath?: string;
+  searchPath?: TanStackLinkProps["to"];
   searchPlaceholder?: string;
   seo: {
     title: string;

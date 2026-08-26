@@ -1,10 +1,11 @@
+import type { LinkProps as TanStackLinkProps } from "@tanstack/react-router";
 import { useAuth } from "#/contexts/auth.context";
 import { HeaderCore } from "./header-core";
 
 interface IProps {
   currentSearchTerm?: string;
   plugin?: React.JSX.Element;
-  searchPath?: string;
+  searchPath?: TanStackLinkProps["to"];
   searchPlaceholder?: string;
   useAgentBanner?: boolean;
   useAgentCTA?: boolean;
