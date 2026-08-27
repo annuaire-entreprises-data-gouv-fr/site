@@ -1,11 +1,11 @@
 import type React from "react";
-import { Link } from "#/components/link";
+import { Link, type LinkProps } from "#/components/link";
 import UniteLegaleBadge from "#/components/unite-legale-badge";
 import { Icon } from "#/components-ui/icon/wrapper";
 import IsActiveTag, { EtatTag } from "#/components-ui/tag/is-active-tag";
 import { estDiffusible } from "#/models/core/diffusion";
 import { estActif, IETATADMINSTRATIF } from "#/models/core/etat-administratif";
-import { isCollectiviteTerritoriale } from "#/models/core/types";
+import { isCollectiviteTerritoriale, isFondation } from "#/models/core/types";
 import type { IDirigeants } from "#/models/rne/types";
 import type { ISearchResult } from "#/models/search";
 import { isPersonneMorale } from "#/utils/helpers/is-personne-morale";
@@ -70,6 +70,18 @@ const ResultItem: React.FC<{
 }> = ({ result, shouldColorZipCode }) => {
   const shouldColorSiege =
     shouldColorZipCode && result.matchingEtablissements.find((e) => e.estSiege);
+  const shouldLinkToFondation = isFondation(result);
+  const linkProps: Pick<LinkProps, "params" | "search" | "to"> =
+    shouldLinkToFondation
+      ? {
+          params: { slug: result.complements.numeroRnf },
+          search: { from: "entreprise" },
+          to: "/fondation/$slug",
+        }
+      : {
+          params: { slug: result.chemin },
+          to: "/entreprise/$slug",
+        };
 
   return (
     <div className={styles["result-item"]}>
@@ -77,8 +89,7 @@ const ResultItem: React.FC<{
         className="result-link no-style-link"
         data-siren={result.siren}
         key={result.siren}
-        params={{ slug: result.chemin }}
-        to="/entreprise/$slug"
+        {...linkProps}
       >
         <div className={styles.title}>
           <span>{`${result.nomComplet}`}</span>
