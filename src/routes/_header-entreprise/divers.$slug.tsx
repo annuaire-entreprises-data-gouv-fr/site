@@ -1,42 +1,47 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
 import ConventionsCollectivesSection from "#/components/conventions-collectives-section";
 import { NotFound } from "#/components/screens/not-found";
-import Title from "#/components/title-section";
-import { FICHE } from "#/components/title-section/tabs";
-import { useAuth } from "#/contexts/auth.context";
 import { getAllIdccWithMetadata } from "#/models/conventions-collectives";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
-import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
+  type Siren,
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
 import { meta } from "#/utils/seo";
-import { HeaderDefaultError } from "./-error";
+import { HeaderDefaultError } from "../_header-default/-error";
 
 const loadDiversPage = createServerFn()
   .validator(
     z.object({
-      slug: z.string(),
+      siren: z.string(),
     })
   )
-  .handler(async ({ data: { slug } }) => {
-    const [uniteLegale, sourcesLastModified] = await Promise.all([
-      getUniteLegaleFromSlugFn({
-        data: { slug },
-      }),
-      getRechercheEntrepriseSourcesLastModified(),
-    ]);
-    const ccWithMetadata = await getAllIdccWithMetadata(uniteLegale.siren);
+  .handler(async ({ data: { siren } }) => {
+    const sourcesLastModified =
+      await getRechercheEntrepriseSourcesLastModified();
+    const ccWithMetadata = await getAllIdccWithMetadata(siren as Siren);
 
-    return { uniteLegale, ccWithMetadata, sourcesLastModified };
+    return { ccWithMetadata, sourcesLastModified };
   });
 
-export const Route = createFileRoute("/_header-default/divers/$slug")({
-  loader: async ({ params }) =>
-    await loadDiversPage({ data: { slug: params.slug } }),
+export const Route = createFileRoute("/_header-entreprise/divers/$slug")({
+  shouldReload: true,
+  loader: async ({ parentMatchPromise }) => {
+    const { loaderData } = await parentMatchPromise;
+
+    if (!loaderData) {
+      throw notFound();
+    }
+
+    const pageData = await loadDiversPage({
+      data: { siren: loaderData.uniteLegale.siren },
+    });
+
+    return { ...pageData, uniteLegale: loaderData.uniteLegale };
+  },
   head: ({ loaderData }) => {
     if (!loaderData) {
       return meta.notFound();
@@ -67,18 +72,12 @@ export const Route = createFileRoute("/_header-default/divers/$slug")({
 });
 
 function RouteComponent() {
-  const { uniteLegale, ccWithMetadata, sourcesLastModified } =
-    Route.useLoaderData();
-
-  const { user } = useAuth();
+  const { ccWithMetadata, sourcesLastModified } = Route.useLoaderData();
 
   return (
-    <div className="content-container">
-      <Title ficheType={FICHE.DIVERS} uniteLegale={uniteLegale} user={user} />
-      <ConventionsCollectivesSection
-        ccLastModified={sourcesLastModified.idcc}
-        ccWithMetadata={ccWithMetadata}
-      />
-    </div>
+    <ConventionsCollectivesSection
+      ccLastModified={sourcesLastModified.idcc}
+      ccWithMetadata={ccWithMetadata}
+    />
   );
 }

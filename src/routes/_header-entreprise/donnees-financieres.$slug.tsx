@@ -1,22 +1,23 @@
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  notFound,
+  stripSearchParams,
+} from "@tanstack/react-router";
 import z from "zod";
 import DonneesFinancieresAssociation from "#/components/screens/donnees-financieres.$slug/donnees-financieres-association";
 import DonneesFinancieresSociete from "#/components/screens/donnees-financieres.$slug/donnees-financieres-societe";
 import { NotFound } from "#/components/screens/not-found";
-import Title from "#/components/title-section";
-import { FICHE } from "#/components/title-section/tabs";
 import { useAuth } from "#/contexts/auth.context";
 import { isAssociation } from "#/models/core/types";
-import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
 import { meta } from "#/utils/seo";
-import { HeaderDefaultError } from "./-error";
+import { HeaderDefaultError } from "../_header-default/-error";
 
 export const Route = createFileRoute(
-  "/_header-default/donnees-financieres/$slug"
+  "/_header-entreprise/donnees-financieres/$slug"
 )({
   validateSearch: z.object({
     "aides-ademe-page": z.number().min(1).optional().default(1).catch(1),
@@ -27,12 +28,15 @@ export const Route = createFileRoute(
       stripSearchParams({ "aides-ademe-page": 1, "aides-minimis-page": 1 }),
     ],
   },
-  loader: async ({ params }) => {
-    const uniteLegale = await getUniteLegaleFromSlugFn({
-      data: { slug: params.slug },
-    });
+  shouldReload: true,
+  loader: async ({ parentMatchPromise }) => {
+    const { loaderData } = await parentMatchPromise;
 
-    return { uniteLegale };
+    if (!loaderData) {
+      throw notFound();
+    }
+
+    return loaderData;
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -68,13 +72,12 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
-      <Title ficheType={FICHE.FINANCES} uniteLegale={uniteLegale} user={user} />
+    <>
       {isAssociation(uniteLegale) ? (
         <DonneesFinancieresAssociation uniteLegale={uniteLegale} user={user} />
       ) : (
         <DonneesFinancieresSociete uniteLegale={uniteLegale} user={user} />
       )}
-    </div>
+    </>
   );
 }

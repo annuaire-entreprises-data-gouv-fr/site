@@ -15,6 +15,7 @@ import {
   type IUniteLegale,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
+  isFondation,
   isServicePublic,
   isServicePublicImmatriculeeAuRNE,
 } from "#/models/core/types";
@@ -60,8 +61,12 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.INFORMATION,
       label: "Fiche résumé",
-      params: { slug: uniteLegale.chemin },
-      to: "/entreprise/$slug",
+      params: {
+        slug: isFondation(uniteLegale)
+          ? uniteLegale.complements.numeroRnf
+          : uniteLegale.chemin,
+      },
+      to: isFondation(uniteLegale) ? "/fondation/$slug" : "/entreprise/$slug",
       noFollow: false,
       shouldDisplay: true,
       width: "80px",
@@ -170,6 +175,7 @@ export const Tabs: React.FC<{
               label={label}
               noFollow={noFollow}
               params={params}
+              search={(search) => ({ from: search.from })}
               to={to}
               width={width}
             />

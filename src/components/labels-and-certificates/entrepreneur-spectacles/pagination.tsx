@@ -4,7 +4,7 @@ import type { IEntrepreneursSpectacles } from "#/clients/api-data-gouv/entrepren
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
 
 const entrepreneurSpectaclesRoute = getRouteApi(
-  "/_header-default/labels-certificats/$slug"
+  "/_header-entreprise/labels-certificats/$slug"
 );
 
 export function EntrepreneurSpectaclesPagination({
