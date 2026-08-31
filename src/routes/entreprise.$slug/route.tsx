@@ -59,17 +59,14 @@ export const Route = createFileRoute("/entreprise/$slug")({
       throw notFound();
     }
   },
-  loader: {
-    staleReloadMode: "blocking",
-    handler: async ({ params }) => {
-      const { slug } = z.object({ slug: z.string() }).parse(params);
+  loader: async ({ params }) => {
+    const { slug } = z.object({ slug: z.string() }).parse(params);
 
-      const uniteLegale = await getUniteLegaleFromSlugFn({
-        data: { slug, page: 1 },
-      });
+    const uniteLegale = await getUniteLegaleFromSlugFn({
+      data: { slug, page: 1 },
+    });
 
-      return { uniteLegale };
-    },
+    return { uniteLegale };
   },
   head: ({ match }) =>
     match.status === "error" || match.status === "notFound"

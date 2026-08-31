@@ -81,18 +81,15 @@ export const Route = createFileRoute("/fondation/$slug")({
     page: search.page,
   }),
   shouldReload: true,
-  loader: {
-    staleReloadMode: "blocking",
-    handler: async ({ params, deps }) => {
-      const { slug } = z.object({ slug: z.string() }).parse(params);
+  loader: async ({ params, deps }) => {
+    const { slug } = z.object({ slug: z.string() }).parse(params);
 
-      return await loadFondationLayout({
-        data: {
-          slug,
-          page: deps.page,
-        },
-      });
-    },
+    return await loadFondationLayout({
+      data: {
+        slug,
+        page: deps.page,
+      },
+    });
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,
