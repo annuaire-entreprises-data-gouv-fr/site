@@ -2,7 +2,7 @@ import { expect, goto, test } from "../support/test";
 
 test.describe("Élus VILLE DE PARIS", () => {
   test("Should display élus", async ({ page }) => {
-    await goto(page, "/dirigeants/217500016");
+    await goto(page, "/entreprise/217500016/dirigeants");
 
     await expect(page.getByText("Élus").first()).toBeVisible();
     await expect(

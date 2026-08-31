@@ -23,7 +23,7 @@ import {
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 
-export const Route = createFileRoute("/_header-entreprise/annonces/$slug")({
+export const Route = createFileRoute("/entreprise/$slug/annonces")({
   validateSearch: z.object({
     "annonces-bodacc-page": z.number().min(1).optional().default(1).catch(1),
   }),
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/_header-entreprise/annonces/$slug")({
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/annonces/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/annonces`;
     return {
       meta: meta({
         title: `Annonces légales (BODACC, JOAFE) - ${uniteLegalePageTitle(

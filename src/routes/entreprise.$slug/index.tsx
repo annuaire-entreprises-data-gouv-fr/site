@@ -120,7 +120,7 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
     return { triggerRedirectedEvent, isBot, sourcesLastModified };
   });
 
-export const Route = createFileRoute("/_header-entreprise/entreprise/$slug")({
+export const Route = createFileRoute("/entreprise/$slug/")({
   validateSearch: z.object({
     redirected: z.literal(1).optional().catch(undefined),
     "avocats-page": z.number().min(1).optional().default(1).catch(1),

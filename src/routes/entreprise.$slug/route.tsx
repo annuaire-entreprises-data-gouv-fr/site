@@ -29,7 +29,7 @@ import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 import { ENTREPRISE_TAB_TO_FICHE, entrepriseFicheSchema } from "./-loader";
 
-export const Route = createFileRoute("/_header-entreprise")({
+export const Route = createFileRoute("/entreprise/$slug")({
   validateSearch: z.object({
     from: z
       .union([z.literal("entreprise"), z.literal("fondation")])
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/_header-entreprise")({
     }
 
     const layoutMatch = matches.find(
-      ({ routeId }) => routeId === "/_header-entreprise"
+      ({ routeId }) => routeId === "/entreprise/$slug"
     );
     const loaderData = z
       .object({ uniteLegale: z.object({ siren: z.string() }) })
@@ -139,7 +139,7 @@ function EntrepriseLayout({
   const { from } = Route.useSearch();
 
   const fiche = useMemo(() => {
-    const result = entrepriseFicheSchema.safeParse(pathname.split("/")[1]);
+    const result = entrepriseFicheSchema.safeParse(pathname.split("/")[3]);
     if (!result.success) {
       return "entreprise";
     }

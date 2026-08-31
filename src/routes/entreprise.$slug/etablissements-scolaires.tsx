@@ -28,7 +28,7 @@ const loadEtablissementsScolairesPage = createServerFn()
   });
 
 export const Route = createFileRoute(
-  "/_header-entreprise/etablissements-scolaires/$slug"
+  "/entreprise/$slug/etablissements-scolaires"
 )({
   validateSearch: z.object({
     page: z.number().min(1).optional().default(1).catch(1),
@@ -59,7 +59,7 @@ export const Route = createFileRoute(
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/etablissements-scolaires/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/etablissements-scolaires`;
     return {
       meta: meta({
         title: `Établissements scolaires - ${uniteLegalePageTitle(uniteLegale)}`,

@@ -15,7 +15,7 @@ import {
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 
-export const Route = createFileRoute("/_header-entreprise/effectifs/$slug")({
+export const Route = createFileRoute("/entreprise/$slug/effectifs")({
   validateSearch: z.object({
     "effectifs-annuels-nature-effectif": z
       .enum(natureEffectifAnnuelValues)
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/_header-entreprise/effectifs/$slug")({
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/effectifs/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/effectifs`;
     return {
       meta: meta({
         title: `Effectifs - ${uniteLegalePageTitle(uniteLegale)}`,

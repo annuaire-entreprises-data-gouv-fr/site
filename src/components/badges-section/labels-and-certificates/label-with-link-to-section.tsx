@@ -19,7 +19,7 @@ export function LabelWithLinkToSection({
         link={{
           hash: sectionId,
           params: { slug: siren },
-          to: "/labels-certificats/$slug",
+          to: "/entreprise/$slug/labels-certificats",
           "aria-label": `Consulter la section ${label} pour cette structure`,
         }}
       />

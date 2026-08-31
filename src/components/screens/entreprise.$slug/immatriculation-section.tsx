@@ -99,8 +99,8 @@ export const UniteLegaleImmatriculationSection = ({
                 [
                   "Dirigeants",
                   <Link
-                    params={{ slug: uniteLegale.siren }}
-                    to="/dirigeants/$slug"
+                    params={{ slug: uniteLegale.chemin }}
+                    to="/entreprise/$slug/dirigeants"
                   >
                     → Consulter la liste des dirigeants
                   </Link>,
@@ -113,8 +113,8 @@ export const UniteLegaleImmatriculationSection = ({
                     radiation et dépôt des comptes)
                   </FAQLink>,
                   <Link
-                    params={{ slug: uniteLegale.siren }}
-                    to="/annonces/$slug"
+                    params={{ slug: uniteLegale.chemin }}
+                    to="/entreprise/$slug/annonces"
                   >
                     → Consulter les annonces
                   </Link>,

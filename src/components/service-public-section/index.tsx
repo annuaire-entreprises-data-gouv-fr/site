@@ -76,7 +76,7 @@ const getTableData = (
       servicePublic.affectationPersonne && [
         "Responsable(s)",
         <a
-          href={`/dirigeants/${uniteLegale.siren}#responsables-service-public`}
+          href={`/entreprise/${uniteLegale.chemin}/dirigeants#responsables-service-public`}
         >
           → voir les {servicePublic.affectationPersonne.length} responsable(s)
         </a>,
