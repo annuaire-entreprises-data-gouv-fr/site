@@ -154,6 +154,27 @@ export function beforeLoadFondationsCheckTerme(searchTerm: string | undefined) {
       } as any /* TODO: fix type once the page is created */
     );
   }
+
+  const sirenOrSiretParam = extractSirenOrSiretFromRechercherUrl(searchTerm);
+
+  if (isLikelyASiret(sirenOrSiretParam)) {
+    throw redirect({
+      to: "/etablissement/$slug",
+      params: { slug: sirenOrSiretParam },
+      search: {
+        redirected: 1,
+      },
+    });
+  }
+  if (isLikelyASiren(sirenOrSiretParam)) {
+    throw redirect({
+      to: "/entreprise/$slug",
+      params: { slug: sirenOrSiretParam },
+      search: {
+        redirected: 1,
+      },
+    });
+  }
 }
 
 export const searchFondationsFn = createServerFn()
