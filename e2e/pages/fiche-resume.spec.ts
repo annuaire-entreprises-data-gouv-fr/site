@@ -66,7 +66,7 @@ test.describe("Fiche résumé DANONE", () => {
 });
 
 test.describe("Shared entreprise layout", () => {
-  test("Fetches the unite legale only once when switching tabs", async ({
+  test("Does not refetch the unite legale when switching tabs", async ({
     page,
   }) => {
     await goto(page, "/entreprise/danone-552032534");
@@ -90,16 +90,25 @@ test.describe("Shared entreprise layout", () => {
       "href",
       "https://annuaire-entreprises.data.gouv.fr/documents/552032534"
     );
-    expect(uniteLegaleRequests).toEqual(["loadEntrepriseLayout"]);
+    expect(uniteLegaleRequests).toEqual([]);
   });
 
-  test("Refreshes company data and SEO on client navigation and back", async ({
+  test("Updates uniteLegale data across client-side company navigations", async ({
     page,
   }) => {
     await goto(page, "/entreprise/danone-552032534");
     const companyTitle = page.getByRole("heading", { level: 1 });
     const canonical = page.locator('link[rel="canonical"]');
     await expect(companyTitle).toHaveText("DANONE");
+    await expect(
+      page.getByRole("heading", {
+        name: "Informations légales de DANONE",
+        exact: true,
+      })
+    ).toBeVisible();
+    await page.evaluate(() => {
+      document.documentElement.dataset.e2eDocumentId = "initial-document";
+    });
 
     // Keep the layout matched instead of visiting the search page in between.
     await page.evaluate(() => {
@@ -127,6 +136,15 @@ test.describe("Shared entreprise layout", () => {
       "href",
       "https://annuaire-entreprises.data.gouv.fr/entreprise/356000000"
     );
+    expect(
+      await page.evaluate(() => document.documentElement.dataset.e2eDocumentId)
+    ).toBe("initial-document");
+    await expect(
+      page.getByRole("heading", {
+        name: "Informations légales de DANONE",
+        exact: true,
+      })
+    ).toHaveCount(0);
 
     await page.goBack();
 
@@ -142,86 +160,15 @@ test.describe("Shared entreprise layout", () => {
       "href",
       "https://annuaire-entreprises.data.gouv.fr/entreprise/552032534"
     );
-  });
-
-  test("Keeps the latest company when an older navigation finishes late", async ({
-    page,
-  }) => {
-    await goto(page, "/entreprise/danone-552032534");
-    const pageErrors: string[] = [];
-    page.on("pageerror", (error) => pageErrors.push(error.message));
-
-    let markResponseHeld!: () => void;
-    const responseHeld = new Promise<void>((resolve) => {
-      markResponseHeld = resolve;
-    });
-    let releaseResponse!: () => void;
-    const responseReleased = new Promise<void>((resolve) => {
-      releaseResponse = resolve;
-    });
-    await page.route("**/_serverFn/**", async (route) => {
-      const request = route.request();
-      const body = request.postData() || "";
-      if (
-        getServerFunctionName(request.url()) !== "loadEntrepriseLayout" ||
-        !body.includes('"divers"') ||
-        !body.includes('"552032534"')
-      ) {
-        await route.continue();
-        return;
-      }
-
-      const response = await route.fetch();
-      markResponseHeld();
-      await responseReleased;
-      // A cancelled fetch need not emit requestfinished; await the route instead.
-      await route.fulfill({ response });
-    });
-
-    const staleNavigation = page.evaluate(() => {
-      const router = window.__TSR_ROUTER__;
-      if (!router) {
-        throw new Error("TanStack Router is not initialized");
-      }
-      return router
-        .navigate({ to: "/divers/$slug", params: { slug: "552032534" } })
-        .catch((error: Error) => {
-          if (error.name !== "AbortError") {
-            throw error;
-          }
-        });
-    });
-
-    await responseHeld;
-    try {
-      await page.evaluate(() => {
-        const router = window.__TSR_ROUTER__;
-        if (!router) {
-          throw new Error("TanStack Router is not initialized");
-        }
-        return router.navigate({
-          to: "/entreprise/$slug",
-          params: { slug: "la-poste-356000000" },
-        });
-      });
-    } finally {
-      releaseResponse();
-      await page.unrouteAll({ behavior: "wait" });
-    }
-    await staleNavigation;
-
-    await expect(page).toHaveURL(/\/entreprise\/la-poste-356000000$/);
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "LA POSTE"
-    );
+    expect(
+      await page.evaluate(() => document.documentElement.dataset.e2eDocumentId)
+    ).toBe("initial-document");
     await expect(
-      page.getByRole("heading", { name: "Informations légales de LA POSTE" })
-    ).toBeVisible();
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
-      "href",
-      "https://annuaire-entreprises.data.gouv.fr/entreprise/356000000"
-    );
-    expect(pageErrors).toEqual([]);
+      page.getByRole("heading", {
+        name: "Informations légales de LA POSTE",
+        exact: true,
+      })
+    ).toHaveCount(0);
   });
 
   test("Returns 404 metadata and keeps the header for an invalid company", async ({

@@ -44,7 +44,7 @@ export const Route = createFileRoute("/_header-entreprise")({
       }),
     ],
   },
-  beforeLoad: ({ params }) => {
+  beforeLoad: ({ params, matches }) => {
     const { slug } = z.object({ slug: z.string() }).parse(params);
 
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
@@ -58,7 +58,21 @@ export const Route = createFileRoute("/_header-entreprise")({
     if (!isLikelyASiren(sirenOrSiretSlug)) {
       throw notFound();
     }
+
+    const layoutMatch = matches.find(
+      ({ routeId }) => routeId === "/_header-entreprise"
+    );
+    const loaderData = z
+      .object({ uniteLegale: z.object({ siren: z.string() }) })
+      .safeParse(layoutMatch?.loaderData);
+
+    return {
+      shouldReloadUniteLegale:
+        !loaderData.success ||
+        loaderData.data.uniteLegale.siren !== sirenOrSiretSlug,
+    };
   },
+  shouldReload: ({ context }) => context.shouldReloadUniteLegale,
   loader: {
     staleReloadMode: "blocking",
     handler: async ({ params }) => {
