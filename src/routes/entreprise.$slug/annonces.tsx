@@ -30,7 +30,6 @@ export const Route = createFileRoute("/entreprise/$slug/annonces")({
   search: {
     middlewares: [stripSearchParams({ "annonces-bodacc-page": 1 })],
   },
-  shouldReload: true,
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 

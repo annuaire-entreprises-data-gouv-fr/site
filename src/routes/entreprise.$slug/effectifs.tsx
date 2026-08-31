@@ -30,7 +30,6 @@ export const Route = createFileRoute("/entreprise/$slug/effectifs")({
       }),
     ],
   },
-  shouldReload: true,
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 

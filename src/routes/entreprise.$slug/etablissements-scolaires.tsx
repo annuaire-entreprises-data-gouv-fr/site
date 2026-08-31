@@ -37,7 +37,6 @@ export const Route = createFileRoute(
     middlewares: [stripSearchParams({ page: 1 })],
   },
   loaderDeps: ({ search }) => ({ page: search.page }),
-  shouldReload: true,
   loader: async ({ parentMatchPromise, deps }) => {
     const { loaderData } = await parentMatchPromise;
 

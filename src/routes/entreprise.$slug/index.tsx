@@ -135,7 +135,6 @@ export const Route = createFileRoute("/entreprise/$slug/")({
   loaderDeps: ({ search }) => ({
     redirected: search.redirected,
   }),
-  shouldReload: true,
   loader: async ({ parentMatchPromise, params: { slug }, deps }) => {
     const { loaderData } = await parentMatchPromise;
 

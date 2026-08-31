@@ -26,7 +26,6 @@ export const Route = createFileRoute("/entreprise/$slug/donnees-financieres")({
       stripSearchParams({ "aides-ademe-page": 1, "aides-minimis-page": 1 }),
     ],
   },
-  shouldReload: true,
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 

@@ -83,7 +83,6 @@ export const Route = createFileRoute("/entreprise/$slug/labels-certificats")({
   loaderDeps: ({ search }) => ({
     entrepreneurSpectaclesPage: search["entrepreneur-spectacles-page"],
   }),
-  shouldReload: true,
   loader: async ({ parentMatchPromise, deps }) => {
     const { loaderData } = await parentMatchPromise;
 

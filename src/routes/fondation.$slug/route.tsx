@@ -80,7 +80,6 @@ export const Route = createFileRoute("/fondation/$slug")({
   loaderDeps: ({ search }) => ({
     page: search.page,
   }),
-  shouldReload: true,
   loader: async ({ params, deps }) => {
     const { slug } = z.object({ slug: z.string() }).parse(params);
 

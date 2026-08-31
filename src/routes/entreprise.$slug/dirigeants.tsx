@@ -30,7 +30,6 @@ import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 
 export const Route = createFileRoute("/entreprise/$slug/dirigeants")({
-  shouldReload: true,
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 

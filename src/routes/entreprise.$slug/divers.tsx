@@ -28,7 +28,6 @@ const loadDiversPage = createServerFn()
   });
 
 export const Route = createFileRoute("/entreprise/$slug/divers")({
-  shouldReload: true,
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 
