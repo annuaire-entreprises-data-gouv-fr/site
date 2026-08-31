@@ -26,34 +26,46 @@ interface IAccessToken {
   tokenExpiryTime: number;
 }
 
-export class httpInseeClient {
+class HttpInseeAccountUnavailableError extends HttpUnauthorizedError {
+  constructor() {
+    super("ACCOUNT_UNAVAILABLE");
+  }
+}
+
+export class HttpInseeClient {
   private _token: IAccessToken | null;
   private readonly token_url: string;
-  private readonly client_id: string | undefined;
-  private readonly client_secret: string | undefined;
-  private readonly username: string | undefined;
-  private readonly password: string | undefined;
+  private readonly credentials: {
+    client_id: string | undefined;
+    client_secret: string | undefined;
+    username: string | undefined;
+    password: string | undefined;
+  };
+  private readonly fallbackClient?: HttpInseeClient;
+  private _forceFallbackUntil: Date | null = null;
+  private _newTokenPromise: Promise<void> | null = null;
 
   constructor(
     token_url: string,
-    client_id: string | undefined,
-    client_secret: string | undefined,
-    username: string | undefined,
-    password: string | undefined
+    credentials: {
+      client_id: string | undefined;
+      client_secret: string | undefined;
+      username: string | undefined;
+      password: string | undefined;
+    },
+    fallbackClient?: HttpInseeClient
   ) {
     this.token_url = token_url;
-    this.client_id = client_id;
-    this.client_secret = client_secret;
-    this.username = username;
-    this.password = password;
+    this.credentials = credentials;
+    this.fallbackClient = fallbackClient;
 
     if (
       !(
-        this.client_id &&
-        this.client_secret &&
+        this.credentials.client_id &&
+        this.credentials.client_secret &&
         this.token_url &&
-        this.username &&
-        this.password
+        this.credentials.username &&
+        this.credentials.password
       ) &&
       process.env.NODE_ENV === "production"
     ) {
@@ -63,6 +75,10 @@ export class httpInseeClient {
   }
 
   newToken = async () => {
+    let resolvePromise: () => void = () => undefined;
+    this._newTokenPromise = new Promise<void>((resolve) => {
+      resolvePromise = resolve;
+    });
     try {
       const data = await httpClient<IAccessToken["data"]>({
         url: this.token_url,
@@ -72,12 +88,12 @@ export class httpInseeClient {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         data: new URLSearchParams({
-          client_id: this.client_id || "",
-          client_secret: this.client_secret || "",
+          client_id: this.credentials.client_id || "",
+          client_secret: this.credentials.client_secret || "",
           grant_type: "password",
           validity_period: "604800",
-          username: this.username || "",
-          password: this.password || "",
+          username: this.credentials.username || "",
+          password: this.credentials.password || "",
         }).toString(),
       });
       this._token = {
@@ -86,6 +102,9 @@ export class httpInseeClient {
       };
     } catch {
       this._token = null;
+    } finally {
+      resolvePromise();
+      this._newTokenPromise = null;
     }
   };
 
@@ -104,38 +123,91 @@ export class httpInseeClient {
           message: "Refreshing Insee token",
         })
       );
-      await this.newToken();
+
+      if (this._newTokenPromise) {
+        await this._newTokenPromise;
+      } else {
+        // newToken sets _newTokenPromise synchronously before the first await
+        await this.newToken();
+      }
+
       if (!this._token) {
-        throw new HttpUnauthorizedError("Failed to refresh token");
+        throw new HttpInseeAccountUnavailableError();
       }
     }
     return this._token;
   };
 
-  get = async (url: string, config: IDefaultRequestConfig) => {
-    const token = await this.getToken();
+  get = async <T>(
+    url: string,
+    config: IDefaultRequestConfig,
+    useFallback = false
+  ): Promise<T> => {
+    if (
+      this.fallbackClient &&
+      (useFallback ||
+        (this._forceFallbackUntil && this._forceFallbackUntil > new Date()))
+    ) {
+      return this.fallbackClient?.get(url, config);
+    }
 
-    return httpGet(url, {
-      timeout: constants.timeout.M,
-      ...config,
-      headers: {
-        ...config.headers,
-        Authorization: `Bearer ${token.data.access_token}`,
-      },
-    });
+    try {
+      const token = await this.getToken();
+
+      return httpGet(url, {
+        timeout: constants.timeout.M,
+        ...config,
+        headers: {
+          ...config.headers,
+          Authorization: `Bearer ${token.data.access_token}`,
+        },
+      });
+    } catch (error) {
+      if (
+        error instanceof HttpInseeAccountUnavailableError &&
+        this.fallbackClient
+      ) {
+        this._forceFallbackUntil = oneHourFromNow();
+        return this.fallbackClient.get(url, config);
+      }
+      throw error;
+    }
   };
 
-  post = async (url: string, config: IDefaultRequestConfig) => {
-    const token = await this.getToken();
+  post = async <T>(
+    url: string,
+    config: IDefaultRequestConfig,
+    useFallback = false
+  ): Promise<T> => {
+    if (
+      this.fallbackClient &&
+      (useFallback ||
+        (this._forceFallbackUntil && this._forceFallbackUntil > new Date()))
+    ) {
+      return this.fallbackClient?.post(url, config);
+    }
 
-    return httpPost(url, {
-      timeout: constants.timeout.M,
-      ...config,
-      headers: {
-        ...config.headers,
-        Authorization: `Bearer ${token.data.access_token}`,
-      },
-    });
+    try {
+      const token = await this.getToken();
+
+      return httpPost(url, {
+        timeout: constants.timeout.M,
+        ...config,
+        headers: {
+          ...config.headers,
+          Authorization: `Bearer ${token.data.access_token}`,
+        },
+      });
+    } catch (error) {
+      if (
+        error instanceof HttpInseeAccountUnavailableError &&
+        this.fallbackClient
+      ) {
+        this._forceFallbackUntil = oneHourFromNow();
+        return this.fallbackClient.post(url, config);
+      }
+      throw error;
+    }
   };
 }
 
@@ -150,40 +222,84 @@ export class httpInseeClient {
  * NB: we want to limit instance to share the /token authentication calls
  */
 
+// Insee client used as a fallback in case public or agent calls fail
+const grandPublicFallbackClient = new HttpInseeClient(routes.sireneInsee.auth, {
+  client_id: process.env.INSEE_GRAND_PUBLIC_FALLBACK_CLIENT_ID,
+  client_secret: process.env.INSEE_GRAND_PUBLIC_FALLBACK_CLIENT_SECRET,
+  username: process.env.INSEE_GRAND_PUBLIC_FALLBACK_USERNAME,
+  password: process.env.INSEE_GRAND_PUBLIC_FALLBACK_PASSWORD,
+});
+
 // Insee client used for public calls, will fallback to fallbackClient on failure
-const defaultClient = new httpInseeClient(
+const grandPublicClient = new HttpInseeClient(
   routes.sireneInsee.auth,
-  process.env.INSEE_CLIENT_ID,
-  process.env.INSEE_CLIENT_SECRET,
-  process.env.INSEE_USERNAME,
-  process.env.INSEE_PASSWORD
+  {
+    client_id: process.env.INSEE_GRAND_PUBLIC_MAIN_CLIENT_ID,
+    client_secret: process.env.INSEE_GRAND_PUBLIC_MAIN_CLIENT_SECRET,
+    username: process.env.INSEE_GRAND_PUBLIC_MAIN_USERNAME,
+    password: process.env.INSEE_GRAND_PUBLIC_MAIN_PASSWORD,
+  },
+  grandPublicFallbackClient
 );
 
-// Insee client used as a fallback in case public or agent calls fail
-const fallbackClient = new httpInseeClient(
-  routes.sireneInsee.auth,
-  process.env.INSEE_CLIENT_ID_FALLBACK,
-  process.env.INSEE_CLIENT_SECRET_FALLBACK,
-  process.env.INSEE_USERNAME,
-  process.env.INSEE_PASSWORD
-);
+// Insee client used as a fallback in case export csv calls fail
+const exportCsvFallbackClient = new HttpInseeClient(routes.sireneInsee.auth, {
+  client_id: process.env.INSEE_EXPORT_SIRENE_FALLBACK_CLIENT_ID,
+  client_secret: process.env.INSEE_EXPORT_SIRENE_FALLBACK_CLIENT_SECRET,
+  username: process.env.INSEE_EXPORT_SIRENE_FALLBACK_USERNAME,
+  password: process.env.INSEE_EXPORT_SIRENE_FALLBACK_PASSWORD,
+});
 
 // Insee client used for export csv calls
-const exportCsvClient = new httpInseeClient(
+const exportCsvClient = new HttpInseeClient(
   routes.sireneInsee.auth,
-  process.env.INSEE_CLIENT_ID_EXPORT_CSV,
-  process.env.INSEE_CLIENT_SECRET_EXPORT_CSV,
-  process.env.INSEE_USERNAME_EXPORT_CSV,
-  process.env.INSEE_PASSWORD_EXPORT_CSV
+  {
+    client_id: process.env.INSEE_EXPORT_SIRENE_MAIN_CLIENT_ID,
+    client_secret: process.env.INSEE_EXPORT_SIRENE_MAIN_CLIENT_SECRET,
+    username: process.env.INSEE_EXPORT_SIRENE_MAIN_USERNAME,
+    password: process.env.INSEE_EXPORT_SIRENE_MAIN_PASSWORD,
+  },
+  exportCsvFallbackClient
 );
 
+// Insee client used as a fallback in case agent calls fail
+const agentsFallbackClient = new HttpInseeClient(routes.sireneInsee.auth, {
+  client_id: process.env.INSEE_ESPACE_AGENT_FALLBACK_CLIENT_ID,
+  client_secret: process.env.INSEE_ESPACE_AGENT_FALLBACK_CLIENT_SECRET,
+  username: process.env.INSEE_ESPACE_AGENT_FALLBACK_USERNAME,
+  password: process.env.INSEE_ESPACE_AGENT_FALLBACK_PASSWORD,
+});
+
 // Insee client used for agent calls, will fallback to fallbackClient on failure
-const agentsClient = new httpInseeClient(
+const agentsClient = new HttpInseeClient(
   routes.sireneInsee.auth,
-  process.env.INSEE_CLIENT_ID_AGENTS,
-  process.env.INSEE_CLIENT_SECRET_AGENTS,
-  process.env.INSEE_USERNAME_AGENTS,
-  process.env.INSEE_PASSWORD_AGENTS
+  {
+    client_id: process.env.INSEE_ESPACE_AGENT_MAIN_CLIENT_ID,
+    client_secret: process.env.INSEE_ESPACE_AGENT_MAIN_CLIENT_SECRET,
+    username: process.env.INSEE_ESPACE_AGENT_MAIN_USERNAME,
+    password: process.env.INSEE_ESPACE_AGENT_MAIN_PASSWORD,
+  },
+  agentsFallbackClient
+);
+
+function oneHourFromNow() {
+  return new Date(Date.now() + 1000 * 60 * 60);
+}
+
+export const inseeAgentsClientGet = createServerOnlyFn(
+  async <T>(
+    route: string,
+    config: IDefaultRequestConfig = {},
+    useFallback = false
+  ): Promise<T> =>
+    (await agentsClient.get(
+      route,
+      {
+        timeout: constants.timeout.S,
+        ...config,
+      },
+      useFallback
+    )) as T
 );
 
 /**
@@ -202,15 +318,18 @@ export const inseeClientGet = createServerOnlyFn(
   ): Promise<T> => {
     const session = await getSession();
 
-    const baseClient = hasRights(session, ApplicationRights.isAgent)
-      ? agentsClient
-      : defaultClient;
+    if (hasRights(session, ApplicationRights.isAgent)) {
+      return inseeAgentsClientGet(route, config, useFallback);
+    }
 
-    const client = useFallback ? fallbackClient : baseClient;
-    return (await client.get(route, {
-      timeout: constants.timeout.S,
-      ...config,
-    })) as T;
+    return (await grandPublicClient.get(
+      route,
+      {
+        timeout: constants.timeout.S,
+        ...config,
+      },
+      useFallback
+    )) as T;
   }
 );
 
