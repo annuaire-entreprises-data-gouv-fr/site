@@ -21,7 +21,7 @@ import { HeaderDefaultError } from "./-error";
 import { Route as FondationLayoutRoute } from "./route";
 import styles from "./style.module.css";
 
-export const Route = createFileRoute("/_header-fondation/fondation/$slug")({
+export const Route = createFileRoute("/fondation/$slug/")({
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 

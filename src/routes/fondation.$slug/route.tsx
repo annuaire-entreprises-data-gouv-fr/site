@@ -60,7 +60,7 @@ const loadFondationLayout = createServerFn({ method: "POST" })
     };
   });
 
-export const Route = createFileRoute("/_header-fondation")({
+export const Route = createFileRoute("/fondation/$slug")({
   validateSearch: z.object({
     page: z.number().min(1).optional().default(1).catch(1),
     from: z
