@@ -44,7 +44,7 @@ export const Route = createFileRoute("/entreprise/$slug")({
       }),
     ],
   },
-  beforeLoad: ({ params, matches }) => {
+  beforeLoad: ({ params }) => {
     const { slug } = z.object({ slug: z.string() }).parse(params);
 
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
@@ -58,21 +58,7 @@ export const Route = createFileRoute("/entreprise/$slug")({
     if (!isLikelyASiren(sirenOrSiretSlug)) {
       throw notFound();
     }
-
-    const layoutMatch = matches.find(
-      ({ routeId }) => routeId === "/entreprise/$slug"
-    );
-    const loaderData = z
-      .object({ uniteLegale: z.object({ siren: z.string() }) })
-      .safeParse(layoutMatch?.loaderData);
-
-    return {
-      shouldReloadUniteLegale:
-        !loaderData.success ||
-        loaderData.data.uniteLegale.siren !== sirenOrSiretSlug,
-    };
   },
-  shouldReload: ({ context }) => context.shouldReloadUniteLegale,
   loader: {
     staleReloadMode: "blocking",
     handler: async ({ params }) => {
