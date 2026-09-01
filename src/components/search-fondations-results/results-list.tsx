@@ -38,6 +38,7 @@ const ResultItem: React.FC<{
       data-id-rnf={result.id}
       key={result.id}
       params={{ slug: result.id }}
+      search={{ from: "fondation" }}
       to="/fondation/$slug"
     >
       <div className={styles.title}>

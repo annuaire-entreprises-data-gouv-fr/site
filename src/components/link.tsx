@@ -4,9 +4,9 @@ import {
 } from "@tanstack/react-router";
 import type { AnchorHTMLAttributes } from "react";
 
-type Props = TanStackLinkProps &
+export type LinkProps = TanStackLinkProps &
   Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof TanStackLinkProps>;
 
-export function Link(props: Props) {
+export function Link(props: LinkProps) {
   return <TanStackLink {...props} />;
 }
