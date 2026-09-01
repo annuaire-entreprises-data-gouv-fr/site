@@ -30,9 +30,7 @@ const AidesADEMETable = ({
   />
 );
 
-const aidesADEMERoute = getRouteApi(
-  "/_header-entreprise/donnees-financieres/$slug"
-);
+const aidesADEMERoute = getRouteApi("/entreprise/$slug/donnees-financieres");
 
 export default function AidesADEMEContent({
   uniteLegale,

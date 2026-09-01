@@ -23,8 +23,7 @@ import {
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 
-export const Route = createFileRoute("/_header-entreprise/documents/$slug")({
-  shouldReload: true,
+export const Route = createFileRoute("/entreprise/$slug/documents")({
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 
@@ -40,7 +39,7 @@ export const Route = createFileRoute("/_header-entreprise/documents/$slug")({
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/documents/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/documents`;
     return {
       meta: meta({
         title: `Documents, Actes et statuts - ${uniteLegalePageTitle(uniteLegale)}`,
