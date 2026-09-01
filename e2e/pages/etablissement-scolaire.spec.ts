@@ -13,7 +13,7 @@ test.describe("Établissement scolaire", () => {
   test("Should display info from annuaire de l'éducation nationale", async ({
     page,
   }) => {
-    await goto(page, "/etablissements-scolaires/198100125");
+    await goto(page, "/entreprise/198100125/etablissements-scolaires");
     await expect(
       page.getByText("Annuaire de l’Education Nationale").first()
     ).toBeVisible();

@@ -62,7 +62,7 @@ body: |
 
   Vous pouvez retrouver l'index Egapro d'une ou plusieurs entreprise(s) de plusieurs façons :
 
-  * En vous rendant sa fiche Annuaire des Entreprises, sur la page “Labels et certificats” d'une entreprise de plus de 50 salariés basée en France. Exemple avec l'entreprise EDF : <https://annuaire-entreprises.data.gouv.fr/labels-certificats/552081317>
+  * En vous rendant sa fiche Annuaire des Entreprises, sur la page “Labels et certificats” d'une entreprise de plus de 50 salariés basée en France. Exemple avec l'entreprise EDF : <https://annuaire-entreprises.data.gouv.fr/entreprise/552081317/labels-certificats>
   * En consultant le moteur de recherche du ministère du Travail : <https://egapro.travail.gouv.fr/index-egapro/recherche>
   * En consultant directement la base de données Egapro disponible sur [datagouv.fr](http://datagouv.fr) et utilisée par l’Annuaire des Entreprises : <https://www.data.gouv.fr/fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus/>
 

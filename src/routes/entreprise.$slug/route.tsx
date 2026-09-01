@@ -29,7 +29,7 @@ import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 import { ENTREPRISE_TAB_TO_FICHE, entrepriseFicheSchema } from "./-loader";
 
-export const Route = createFileRoute("/_header-entreprise")({
+export const Route = createFileRoute("/entreprise/$slug")({
   validateSearch: z.object({
     from: z
       .union([z.literal("entreprise"), z.literal("fondation")])
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/_header-entreprise")({
       }),
     ],
   },
-  beforeLoad: ({ params, matches }) => {
+  beforeLoad: ({ params }) => {
     const { slug } = z.object({ slug: z.string() }).parse(params);
 
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
@@ -58,32 +58,15 @@ export const Route = createFileRoute("/_header-entreprise")({
     if (!isLikelyASiren(sirenOrSiretSlug)) {
       throw notFound();
     }
-
-    const layoutMatch = matches.find(
-      ({ routeId }) => routeId === "/_header-entreprise"
-    );
-    const loaderData = z
-      .object({ uniteLegale: z.object({ siren: z.string() }) })
-      .safeParse(layoutMatch?.loaderData);
-
-    return {
-      shouldReloadUniteLegale:
-        !loaderData.success ||
-        loaderData.data.uniteLegale.siren !== sirenOrSiretSlug,
-    };
   },
-  shouldReload: ({ context }) => context.shouldReloadUniteLegale,
-  loader: {
-    staleReloadMode: "blocking",
-    handler: async ({ params }) => {
-      const { slug } = z.object({ slug: z.string() }).parse(params);
+  loader: async ({ params }) => {
+    const { slug } = z.object({ slug: z.string() }).parse(params);
 
-      const uniteLegale = await getUniteLegaleFromSlugFn({
-        data: { slug, page: 1 },
-      });
+    const uniteLegale = await getUniteLegaleFromSlugFn({
+      data: { slug, page: 1 },
+    });
 
-      return { uniteLegale };
-    },
+    return { uniteLegale };
   },
   head: ({ match }) =>
     match.status === "error" || match.status === "notFound"
@@ -139,7 +122,7 @@ function EntrepriseLayout({
   const { from } = Route.useSearch();
 
   const fiche = useMemo(() => {
-    const result = entrepriseFicheSchema.safeParse(pathname.split("/")[1]);
+    const result = entrepriseFicheSchema.safeParse(pathname.split("/")[3]);
     if (!result.success) {
       return "entreprise";
     }

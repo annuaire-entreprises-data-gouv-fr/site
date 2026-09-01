@@ -12,8 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as HeaderCompteRouteRouteImport } from './routes/_header-compte/route'
 import { Route as HeaderConnexionRouteRouteImport } from './routes/_header-connexion/route'
 import { Route as HeaderDefaultRouteRouteImport } from './routes/_header-default/route'
-import { Route as HeaderEntrepriseRouteRouteImport } from './routes/_header-entreprise/route'
-import { Route as HeaderFondationRouteRouteImport } from './routes/_header-fondation/route'
 import { Route as HeaderHomeRouteRouteImport } from './routes/_header-home/route'
 import { Route as HeaderLpAgentRouteRouteImport } from './routes/_header-lp-agent/route'
 import { Route as HeaderMinimalRouteRouteImport } from './routes/_header-minimal/route'
@@ -36,6 +34,8 @@ import { Route as ApiFeatureFlagsRouteImport } from './routes/api/feature-flags'
 import { Route as ApiHidePersonalDataRouteImport } from './routes/api/hide-personal-data'
 import { Route as ApiInpiPdfRouteImport } from './routes/api/inpi-pdf'
 import { Route as ApiProtectedSirenRouteImport } from './routes/api/protected-siren'
+import { Route as EntrepriseSlugRouteRouteImport } from './routes/entreprise.$slug/route'
+import { Route as FondationSlugRouteRouteImport } from './routes/fondation.$slug/route'
 import { Route as HeaderCompteCompteAccueilRouteImport } from './routes/_header-compte/compte.accueil'
 import { Route as HeaderCompteCompteMesGroupesRouteImport } from './routes/_header-compte/compte.mes-groupes'
 import { Route as HeaderConnexionConnexionAuRevoirRouteImport } from './routes/_header-connexion/connexion.au-revoir'
@@ -55,16 +55,6 @@ import { Route as HeaderDefaultFaqSlugRouteImport } from './routes/_header-defau
 import { Route as HeaderDefaultFaqParcoursRouteImport } from './routes/_header-default/faq.parcours'
 import { Route as HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRouteImport } from './routes/_header-default/formulaire.supprimer-donnees-personnelles-entreprise'
 import { Route as HeaderDefaultJustificatifImmatriculationPdfSlugRouteImport } from './routes/_header-default/justificatif-immatriculation-pdf.$slug'
-import { Route as HeaderEntrepriseAnnoncesSlugRouteImport } from './routes/_header-entreprise/annonces.$slug'
-import { Route as HeaderEntrepriseDirigeantsSlugRouteImport } from './routes/_header-entreprise/dirigeants.$slug'
-import { Route as HeaderEntrepriseDiversSlugRouteImport } from './routes/_header-entreprise/divers.$slug'
-import { Route as HeaderEntrepriseDocumentsSlugRouteImport } from './routes/_header-entreprise/documents.$slug'
-import { Route as HeaderEntrepriseDonneesFinancieresSlugRouteImport } from './routes/_header-entreprise/donnees-financieres.$slug'
-import { Route as HeaderEntrepriseEffectifsSlugRouteImport } from './routes/_header-entreprise/effectifs.$slug'
-import { Route as HeaderEntrepriseEntrepriseSlugRouteImport } from './routes/_header-entreprise/entreprise.$slug'
-import { Route as HeaderEntrepriseEtablissementsScolairesSlugRouteImport } from './routes/_header-entreprise/etablissements-scolaires.$slug'
-import { Route as HeaderEntrepriseLabelsCertificatsSlugRouteImport } from './routes/_header-entreprise/labels-certificats.$slug'
-import { Route as HeaderFondationFondationSlugRouteImport } from './routes/_header-fondation/fondation.$slug'
 import { Route as HeaderHomeLpSlugRouteImport } from './routes/_header-home/lp/$slug'
 import { Route as HeaderLpAgentLpAgentPublicRouteImport } from './routes/_header-lp-agent/lp.agent-public'
 import { Route as HeaderMinimalFormulaireMerciRouteImport } from './routes/_header-minimal/formulaire/merci'
@@ -76,6 +66,16 @@ import { Route as HeaderSearchRechercherFondationsRouteImport } from './routes/_
 import { Route as ApiFeedbackNpsRouteImport } from './routes/api/feedback/nps'
 import { Route as ApiPingSlugRouteImport } from './routes/api/ping/$slug'
 import { Route as ApiTestSessionRouteImport } from './routes/api/test/session'
+import { Route as EntrepriseSlugIndexRouteImport } from './routes/entreprise.$slug/index'
+import { Route as EntrepriseSlugAnnoncesRouteImport } from './routes/entreprise.$slug/annonces'
+import { Route as EntrepriseSlugDirigeantsRouteImport } from './routes/entreprise.$slug/dirigeants'
+import { Route as EntrepriseSlugDiversRouteImport } from './routes/entreprise.$slug/divers'
+import { Route as EntrepriseSlugDocumentsRouteImport } from './routes/entreprise.$slug/documents'
+import { Route as EntrepriseSlugDonneesFinancieresRouteImport } from './routes/entreprise.$slug/donnees-financieres'
+import { Route as EntrepriseSlugEffectifsRouteImport } from './routes/entreprise.$slug/effectifs'
+import { Route as EntrepriseSlugEtablissementsScolairesRouteImport } from './routes/entreprise.$slug/etablissements-scolaires'
+import { Route as EntrepriseSlugLabelsCertificatsRouteImport } from './routes/entreprise.$slug/labels-certificats'
+import { Route as FondationSlugIndexRouteImport } from './routes/fondation.$slug/index'
 import { Route as HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport } from './routes/_header-connexion/connexion.habilitation.administration-inconnue'
 import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } from './routes/_header-connexion/connexion.habilitation.prestataires'
 import { Route as HeaderConnexionConnexionHabilitationRefuseeRouteImport } from './routes/_header-connexion/connexion.habilitation.refusee'
@@ -106,14 +106,6 @@ const HeaderConnexionRouteRoute = HeaderConnexionRouteRouteImport.update({
 } as any)
 const HeaderDefaultRouteRoute = HeaderDefaultRouteRouteImport.update({
   id: '/_header-default',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HeaderEntrepriseRouteRoute = HeaderEntrepriseRouteRouteImport.update({
-  id: '/_header-entreprise',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HeaderFondationRouteRoute = HeaderFondationRouteRouteImport.update({
-  id: '/_header-fondation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HeaderHomeRouteRoute = HeaderHomeRouteRouteImport.update({
@@ -224,6 +216,16 @@ const ApiInpiPdfRoute = ApiInpiPdfRouteImport.update({
 const ApiProtectedSirenRoute = ApiProtectedSirenRouteImport.update({
   id: '/api/protected-siren',
   path: '/api/protected-siren',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntrepriseSlugRouteRoute = EntrepriseSlugRouteRouteImport.update({
+  id: '/entreprise/$slug',
+  path: '/entreprise/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FondationSlugRouteRoute = FondationSlugRouteRouteImport.update({
+  id: '/fondation/$slug',
+  path: '/fondation/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HeaderCompteCompteAccueilRoute =
@@ -340,66 +342,6 @@ const HeaderDefaultJustificatifImmatriculationPdfSlugRoute =
     path: '/justificatif-immatriculation-pdf/$slug',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
-const HeaderEntrepriseAnnoncesSlugRoute =
-  HeaderEntrepriseAnnoncesSlugRouteImport.update({
-    id: '/annonces/$slug',
-    path: '/annonces/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderEntrepriseDirigeantsSlugRoute =
-  HeaderEntrepriseDirigeantsSlugRouteImport.update({
-    id: '/dirigeants/$slug',
-    path: '/dirigeants/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderEntrepriseDiversSlugRoute =
-  HeaderEntrepriseDiversSlugRouteImport.update({
-    id: '/divers/$slug',
-    path: '/divers/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderEntrepriseDocumentsSlugRoute =
-  HeaderEntrepriseDocumentsSlugRouteImport.update({
-    id: '/documents/$slug',
-    path: '/documents/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderEntrepriseDonneesFinancieresSlugRoute =
-  HeaderEntrepriseDonneesFinancieresSlugRouteImport.update({
-    id: '/donnees-financieres/$slug',
-    path: '/donnees-financieres/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderEntrepriseEffectifsSlugRoute =
-  HeaderEntrepriseEffectifsSlugRouteImport.update({
-    id: '/effectifs/$slug',
-    path: '/effectifs/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderEntrepriseEntrepriseSlugRoute =
-  HeaderEntrepriseEntrepriseSlugRouteImport.update({
-    id: '/entreprise/$slug',
-    path: '/entreprise/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderEntrepriseEtablissementsScolairesSlugRoute =
-  HeaderEntrepriseEtablissementsScolairesSlugRouteImport.update({
-    id: '/etablissements-scolaires/$slug',
-    path: '/etablissements-scolaires/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderEntrepriseLabelsCertificatsSlugRoute =
-  HeaderEntrepriseLabelsCertificatsSlugRouteImport.update({
-    id: '/labels-certificats/$slug',
-    path: '/labels-certificats/$slug',
-    getParentRoute: () => HeaderEntrepriseRouteRoute,
-  } as any)
-const HeaderFondationFondationSlugRoute =
-  HeaderFondationFondationSlugRouteImport.update({
-    id: '/fondation/$slug',
-    path: '/fondation/$slug',
-    getParentRoute: () => HeaderFondationRouteRoute,
-  } as any)
 const HeaderHomeLpSlugRoute = HeaderHomeLpSlugRouteImport.update({
   id: '/lp/$slug',
   path: '/lp/$slug',
@@ -460,6 +402,60 @@ const ApiTestSessionRoute = ApiTestSessionRouteImport.update({
   id: '/api/test/session',
   path: '/api/test/session',
   getParentRoute: () => rootRouteImport,
+} as any)
+const EntrepriseSlugIndexRoute = EntrepriseSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EntrepriseSlugRouteRoute,
+} as any)
+const EntrepriseSlugAnnoncesRoute = EntrepriseSlugAnnoncesRouteImport.update({
+  id: '/annonces',
+  path: '/annonces',
+  getParentRoute: () => EntrepriseSlugRouteRoute,
+} as any)
+const EntrepriseSlugDirigeantsRoute =
+  EntrepriseSlugDirigeantsRouteImport.update({
+    id: '/dirigeants',
+    path: '/dirigeants',
+    getParentRoute: () => EntrepriseSlugRouteRoute,
+  } as any)
+const EntrepriseSlugDiversRoute = EntrepriseSlugDiversRouteImport.update({
+  id: '/divers',
+  path: '/divers',
+  getParentRoute: () => EntrepriseSlugRouteRoute,
+} as any)
+const EntrepriseSlugDocumentsRoute = EntrepriseSlugDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => EntrepriseSlugRouteRoute,
+} as any)
+const EntrepriseSlugDonneesFinancieresRoute =
+  EntrepriseSlugDonneesFinancieresRouteImport.update({
+    id: '/donnees-financieres',
+    path: '/donnees-financieres',
+    getParentRoute: () => EntrepriseSlugRouteRoute,
+  } as any)
+const EntrepriseSlugEffectifsRoute = EntrepriseSlugEffectifsRouteImport.update({
+  id: '/effectifs',
+  path: '/effectifs',
+  getParentRoute: () => EntrepriseSlugRouteRoute,
+} as any)
+const EntrepriseSlugEtablissementsScolairesRoute =
+  EntrepriseSlugEtablissementsScolairesRouteImport.update({
+    id: '/etablissements-scolaires',
+    path: '/etablissements-scolaires',
+    getParentRoute: () => EntrepriseSlugRouteRoute,
+  } as any)
+const EntrepriseSlugLabelsCertificatsRoute =
+  EntrepriseSlugLabelsCertificatsRouteImport.update({
+    id: '/labels-certificats',
+    path: '/labels-certificats',
+    getParentRoute: () => EntrepriseSlugRouteRoute,
+  } as any)
+const FondationSlugIndexRoute = FondationSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FondationSlugRouteRoute,
 } as any)
 const HeaderConnexionConnexionHabilitationAdministrationInconnueRoute =
   HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport.update({
@@ -580,6 +576,8 @@ export interface FileRoutesByFullPath {
   '/health': typeof HealthRoute
   '/protected-siren.txt': typeof ProtectedSirenDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/entreprise/$slug': typeof EntrepriseSlugRouteRouteWithChildren
+  '/fondation/$slug': typeof FondationSlugRouteRouteWithChildren
   '/accessibilite': typeof HeaderDefaultAccessibiliteRoute
   '/export-sirene': typeof HeaderDefaultExportSireneRoute
   '/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
@@ -609,16 +607,6 @@ export interface FileRoutesByFullPath {
   '/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
   '/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
-  '/annonces/$slug': typeof HeaderEntrepriseAnnoncesSlugRoute
-  '/dirigeants/$slug': typeof HeaderEntrepriseDirigeantsSlugRoute
-  '/divers/$slug': typeof HeaderEntrepriseDiversSlugRoute
-  '/documents/$slug': typeof HeaderEntrepriseDocumentsSlugRoute
-  '/donnees-financieres/$slug': typeof HeaderEntrepriseDonneesFinancieresSlugRoute
-  '/effectifs/$slug': typeof HeaderEntrepriseEffectifsSlugRoute
-  '/entreprise/$slug': typeof HeaderEntrepriseEntrepriseSlugRoute
-  '/etablissements-scolaires/$slug': typeof HeaderEntrepriseEtablissementsScolairesSlugRoute
-  '/labels-certificats/$slug': typeof HeaderEntrepriseLabelsCertificatsSlugRoute
-  '/fondation/$slug': typeof HeaderFondationFondationSlugRoute
   '/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
@@ -629,10 +617,20 @@ export interface FileRoutesByFullPath {
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/api/test/session': typeof ApiTestSessionRoute
+  '/entreprise/$slug/annonces': typeof EntrepriseSlugAnnoncesRoute
+  '/entreprise/$slug/dirigeants': typeof EntrepriseSlugDirigeantsRoute
+  '/entreprise/$slug/divers': typeof EntrepriseSlugDiversRoute
+  '/entreprise/$slug/documents': typeof EntrepriseSlugDocumentsRoute
+  '/entreprise/$slug/donnees-financieres': typeof EntrepriseSlugDonneesFinancieresRoute
+  '/entreprise/$slug/effectifs': typeof EntrepriseSlugEffectifsRoute
+  '/entreprise/$slug/etablissements-scolaires': typeof EntrepriseSlugEtablissementsScolairesRoute
+  '/entreprise/$slug/labels-certificats': typeof EntrepriseSlugLabelsCertificatsRoute
   '/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/definitions/': typeof HeaderDefaultDefinitionsIndexRoute
   '/faq/': typeof HeaderDefaultFaqIndexRoute
   '/rechercher/': typeof HeaderSearchRechercherIndexRoute
+  '/entreprise/$slug/': typeof EntrepriseSlugIndexRoute
+  '/fondation/$slug/': typeof FondationSlugIndexRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -687,16 +685,6 @@ export interface FileRoutesByTo {
   '/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
   '/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
-  '/annonces/$slug': typeof HeaderEntrepriseAnnoncesSlugRoute
-  '/dirigeants/$slug': typeof HeaderEntrepriseDirigeantsSlugRoute
-  '/divers/$slug': typeof HeaderEntrepriseDiversSlugRoute
-  '/documents/$slug': typeof HeaderEntrepriseDocumentsSlugRoute
-  '/donnees-financieres/$slug': typeof HeaderEntrepriseDonneesFinancieresSlugRoute
-  '/effectifs/$slug': typeof HeaderEntrepriseEffectifsSlugRoute
-  '/entreprise/$slug': typeof HeaderEntrepriseEntrepriseSlugRoute
-  '/etablissements-scolaires/$slug': typeof HeaderEntrepriseEtablissementsScolairesSlugRoute
-  '/labels-certificats/$slug': typeof HeaderEntrepriseLabelsCertificatsSlugRoute
-  '/fondation/$slug': typeof HeaderFondationFondationSlugRoute
   '/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
@@ -707,10 +695,20 @@ export interface FileRoutesByTo {
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/api/test/session': typeof ApiTestSessionRoute
+  '/entreprise/$slug/annonces': typeof EntrepriseSlugAnnoncesRoute
+  '/entreprise/$slug/dirigeants': typeof EntrepriseSlugDirigeantsRoute
+  '/entreprise/$slug/divers': typeof EntrepriseSlugDiversRoute
+  '/entreprise/$slug/documents': typeof EntrepriseSlugDocumentsRoute
+  '/entreprise/$slug/donnees-financieres': typeof EntrepriseSlugDonneesFinancieresRoute
+  '/entreprise/$slug/effectifs': typeof EntrepriseSlugEffectifsRoute
+  '/entreprise/$slug/etablissements-scolaires': typeof EntrepriseSlugEtablissementsScolairesRoute
+  '/entreprise/$slug/labels-certificats': typeof EntrepriseSlugLabelsCertificatsRoute
   '/administration': typeof HeaderDefaultAdministrationIndexRoute
   '/definitions': typeof HeaderDefaultDefinitionsIndexRoute
   '/faq': typeof HeaderDefaultFaqIndexRoute
   '/rechercher': typeof HeaderSearchRechercherIndexRoute
+  '/entreprise/$slug': typeof EntrepriseSlugIndexRoute
+  '/fondation/$slug': typeof FondationSlugIndexRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -736,8 +734,6 @@ export interface FileRoutesById {
   '/_header-compte': typeof HeaderCompteRouteRouteWithChildren
   '/_header-connexion': typeof HeaderConnexionRouteRouteWithChildren
   '/_header-default': typeof HeaderDefaultRouteRouteWithChildren
-  '/_header-entreprise': typeof HeaderEntrepriseRouteRouteWithChildren
-  '/_header-fondation': typeof HeaderFondationRouteRouteWithChildren
   '/_header-home': typeof HeaderHomeRouteRouteWithChildren
   '/_header-lp-agent': typeof HeaderLpAgentRouteRouteWithChildren
   '/_header-minimal': typeof HeaderMinimalRouteRouteWithChildren
@@ -746,6 +742,8 @@ export interface FileRoutesById {
   '/health': typeof HealthRoute
   '/protected-siren.txt': typeof ProtectedSirenDottxtRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/entreprise/$slug': typeof EntrepriseSlugRouteRouteWithChildren
+  '/fondation/$slug': typeof FondationSlugRouteRouteWithChildren
   '/_header-default/accessibilite': typeof HeaderDefaultAccessibiliteRoute
   '/_header-default/export-sirene': typeof HeaderDefaultExportSireneRoute
   '/_header-default/historique-des-modifications': typeof HeaderDefaultHistoriqueDesModificationsRoute
@@ -776,16 +774,6 @@ export interface FileRoutesById {
   '/_header-default/faq/parcours': typeof HeaderDefaultFaqParcoursRoute
   '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise': typeof HeaderDefaultFormulaireSupprimerDonneesPersonnellesEntrepriseRoute
   '/_header-default/justificatif-immatriculation-pdf/$slug': typeof HeaderDefaultJustificatifImmatriculationPdfSlugRoute
-  '/_header-entreprise/annonces/$slug': typeof HeaderEntrepriseAnnoncesSlugRoute
-  '/_header-entreprise/dirigeants/$slug': typeof HeaderEntrepriseDirigeantsSlugRoute
-  '/_header-entreprise/divers/$slug': typeof HeaderEntrepriseDiversSlugRoute
-  '/_header-entreprise/documents/$slug': typeof HeaderEntrepriseDocumentsSlugRoute
-  '/_header-entreprise/donnees-financieres/$slug': typeof HeaderEntrepriseDonneesFinancieresSlugRoute
-  '/_header-entreprise/effectifs/$slug': typeof HeaderEntrepriseEffectifsSlugRoute
-  '/_header-entreprise/entreprise/$slug': typeof HeaderEntrepriseEntrepriseSlugRoute
-  '/_header-entreprise/etablissements-scolaires/$slug': typeof HeaderEntrepriseEtablissementsScolairesSlugRoute
-  '/_header-entreprise/labels-certificats/$slug': typeof HeaderEntrepriseLabelsCertificatsSlugRoute
-  '/_header-fondation/fondation/$slug': typeof HeaderFondationFondationSlugRoute
   '/_header-home/lp/$slug': typeof HeaderHomeLpSlugRoute
   '/_header-lp-agent/lp/agent-public': typeof HeaderLpAgentLpAgentPublicRoute
   '/_header-minimal/formulaire/merci': typeof HeaderMinimalFormulaireMerciRoute
@@ -796,10 +784,20 @@ export interface FileRoutesById {
   '/api/feedback/nps': typeof ApiFeedbackNpsRoute
   '/api/ping/$slug': typeof ApiPingSlugRoute
   '/api/test/session': typeof ApiTestSessionRoute
+  '/entreprise/$slug/annonces': typeof EntrepriseSlugAnnoncesRoute
+  '/entreprise/$slug/dirigeants': typeof EntrepriseSlugDirigeantsRoute
+  '/entreprise/$slug/divers': typeof EntrepriseSlugDiversRoute
+  '/entreprise/$slug/documents': typeof EntrepriseSlugDocumentsRoute
+  '/entreprise/$slug/donnees-financieres': typeof EntrepriseSlugDonneesFinancieresRoute
+  '/entreprise/$slug/effectifs': typeof EntrepriseSlugEffectifsRoute
+  '/entreprise/$slug/etablissements-scolaires': typeof EntrepriseSlugEtablissementsScolairesRoute
+  '/entreprise/$slug/labels-certificats': typeof EntrepriseSlugLabelsCertificatsRoute
   '/_header-default/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/_header-default/definitions/': typeof HeaderDefaultDefinitionsIndexRoute
   '/_header-default/faq/': typeof HeaderDefaultFaqIndexRoute
   '/_header-search/rechercher/': typeof HeaderSearchRechercherIndexRoute
+  '/entreprise/$slug/': typeof EntrepriseSlugIndexRoute
+  '/fondation/$slug/': typeof FondationSlugIndexRoute
   '/_header-connexion/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/_header-connexion/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -827,6 +825,8 @@ export interface FileRouteTypes {
     | '/health'
     | '/protected-siren.txt'
     | '/robots.txt'
+    | '/entreprise/$slug'
+    | '/fondation/$slug'
     | '/accessibilite'
     | '/export-sirene'
     | '/historique-des-modifications'
@@ -856,16 +856,6 @@ export interface FileRouteTypes {
     | '/faq/parcours'
     | '/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/justificatif-immatriculation-pdf/$slug'
-    | '/annonces/$slug'
-    | '/dirigeants/$slug'
-    | '/divers/$slug'
-    | '/documents/$slug'
-    | '/donnees-financieres/$slug'
-    | '/effectifs/$slug'
-    | '/entreprise/$slug'
-    | '/etablissements-scolaires/$slug'
-    | '/labels-certificats/$slug'
-    | '/fondation/$slug'
     | '/lp/$slug'
     | '/lp/agent-public'
     | '/formulaire/merci'
@@ -876,10 +866,20 @@ export interface FileRouteTypes {
     | '/api/feedback/nps'
     | '/api/ping/$slug'
     | '/api/test/session'
+    | '/entreprise/$slug/annonces'
+    | '/entreprise/$slug/dirigeants'
+    | '/entreprise/$slug/divers'
+    | '/entreprise/$slug/documents'
+    | '/entreprise/$slug/donnees-financieres'
+    | '/entreprise/$slug/effectifs'
+    | '/entreprise/$slug/etablissements-scolaires'
+    | '/entreprise/$slug/labels-certificats'
     | '/administration/'
     | '/definitions/'
     | '/faq/'
     | '/rechercher/'
+    | '/entreprise/$slug/'
+    | '/fondation/$slug/'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
@@ -934,16 +934,6 @@ export interface FileRouteTypes {
     | '/faq/parcours'
     | '/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/justificatif-immatriculation-pdf/$slug'
-    | '/annonces/$slug'
-    | '/dirigeants/$slug'
-    | '/divers/$slug'
-    | '/documents/$slug'
-    | '/donnees-financieres/$slug'
-    | '/effectifs/$slug'
-    | '/entreprise/$slug'
-    | '/etablissements-scolaires/$slug'
-    | '/labels-certificats/$slug'
-    | '/fondation/$slug'
     | '/lp/$slug'
     | '/lp/agent-public'
     | '/formulaire/merci'
@@ -954,10 +944,20 @@ export interface FileRouteTypes {
     | '/api/feedback/nps'
     | '/api/ping/$slug'
     | '/api/test/session'
+    | '/entreprise/$slug/annonces'
+    | '/entreprise/$slug/dirigeants'
+    | '/entreprise/$slug/divers'
+    | '/entreprise/$slug/documents'
+    | '/entreprise/$slug/donnees-financieres'
+    | '/entreprise/$slug/effectifs'
+    | '/entreprise/$slug/etablissements-scolaires'
+    | '/entreprise/$slug/labels-certificats'
     | '/administration'
     | '/definitions'
     | '/faq'
     | '/rechercher'
+    | '/entreprise/$slug'
+    | '/fondation/$slug'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
@@ -982,8 +982,6 @@ export interface FileRouteTypes {
     | '/_header-compte'
     | '/_header-connexion'
     | '/_header-default'
-    | '/_header-entreprise'
-    | '/_header-fondation'
     | '/_header-home'
     | '/_header-lp-agent'
     | '/_header-minimal'
@@ -992,6 +990,8 @@ export interface FileRouteTypes {
     | '/health'
     | '/protected-siren.txt'
     | '/robots.txt'
+    | '/entreprise/$slug'
+    | '/fondation/$slug'
     | '/_header-default/accessibilite'
     | '/_header-default/export-sirene'
     | '/_header-default/historique-des-modifications'
@@ -1022,16 +1022,6 @@ export interface FileRouteTypes {
     | '/_header-default/faq/parcours'
     | '/_header-default/formulaire/supprimer-donnees-personnelles-entreprise'
     | '/_header-default/justificatif-immatriculation-pdf/$slug'
-    | '/_header-entreprise/annonces/$slug'
-    | '/_header-entreprise/dirigeants/$slug'
-    | '/_header-entreprise/divers/$slug'
-    | '/_header-entreprise/documents/$slug'
-    | '/_header-entreprise/donnees-financieres/$slug'
-    | '/_header-entreprise/effectifs/$slug'
-    | '/_header-entreprise/entreprise/$slug'
-    | '/_header-entreprise/etablissements-scolaires/$slug'
-    | '/_header-entreprise/labels-certificats/$slug'
-    | '/_header-fondation/fondation/$slug'
     | '/_header-home/lp/$slug'
     | '/_header-lp-agent/lp/agent-public'
     | '/_header-minimal/formulaire/merci'
@@ -1042,10 +1032,20 @@ export interface FileRouteTypes {
     | '/api/feedback/nps'
     | '/api/ping/$slug'
     | '/api/test/session'
+    | '/entreprise/$slug/annonces'
+    | '/entreprise/$slug/dirigeants'
+    | '/entreprise/$slug/divers'
+    | '/entreprise/$slug/documents'
+    | '/entreprise/$slug/donnees-financieres'
+    | '/entreprise/$slug/effectifs'
+    | '/entreprise/$slug/etablissements-scolaires'
+    | '/entreprise/$slug/labels-certificats'
     | '/_header-default/administration/'
     | '/_header-default/definitions/'
     | '/_header-default/faq/'
     | '/_header-search/rechercher/'
+    | '/entreprise/$slug/'
+    | '/fondation/$slug/'
     | '/_header-connexion/connexion/habilitation/administration-inconnue'
     | '/_header-connexion/connexion/habilitation/prestataires'
     | '/_header-connexion/connexion/habilitation/refusee'
@@ -1071,8 +1071,6 @@ export interface RootRouteChildren {
   HeaderCompteRouteRoute: typeof HeaderCompteRouteRouteWithChildren
   HeaderConnexionRouteRoute: typeof HeaderConnexionRouteRouteWithChildren
   HeaderDefaultRouteRoute: typeof HeaderDefaultRouteRouteWithChildren
-  HeaderEntrepriseRouteRoute: typeof HeaderEntrepriseRouteRouteWithChildren
-  HeaderFondationRouteRoute: typeof HeaderFondationRouteRouteWithChildren
   HeaderHomeRouteRoute: typeof HeaderHomeRouteRouteWithChildren
   HeaderLpAgentRouteRoute: typeof HeaderLpAgentRouteRouteWithChildren
   HeaderMinimalRouteRoute: typeof HeaderMinimalRouteRouteWithChildren
@@ -1081,6 +1079,8 @@ export interface RootRouteChildren {
   HealthRoute: typeof HealthRoute
   ProtectedSirenDottxtRoute: typeof ProtectedSirenDottxtRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
+  EntrepriseSlugRouteRoute: typeof EntrepriseSlugRouteRouteWithChildren
+  FondationSlugRouteRoute: typeof FondationSlugRouteRouteWithChildren
   ApiExportSireneRoute: typeof ApiExportSireneRoute
   ApiFeatureFlagsRoute: typeof ApiFeatureFlagsRoute
   ApiHidePersonalDataRoute: typeof ApiHidePersonalDataRoute
@@ -1122,20 +1122,6 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof HeaderDefaultRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_header-entreprise': {
-      id: '/_header-entreprise'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof HeaderEntrepriseRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_header-fondation': {
-      id: '/_header-fondation'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof HeaderFondationRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_header-home': {
@@ -1292,6 +1278,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiProtectedSirenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/entreprise/$slug': {
+      id: '/entreprise/$slug'
+      path: '/entreprise/$slug'
+      fullPath: '/entreprise/$slug'
+      preLoaderRoute: typeof EntrepriseSlugRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fondation/$slug': {
+      id: '/fondation/$slug'
+      path: '/fondation/$slug'
+      fullPath: '/fondation/$slug'
+      preLoaderRoute: typeof FondationSlugRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_header-compte/compte/accueil': {
       id: '/_header-compte/compte/accueil'
       path: '/compte/accueil'
@@ -1425,76 +1425,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultJustificatifImmatriculationPdfSlugRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
-    '/_header-entreprise/annonces/$slug': {
-      id: '/_header-entreprise/annonces/$slug'
-      path: '/annonces/$slug'
-      fullPath: '/annonces/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseAnnoncesSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-entreprise/dirigeants/$slug': {
-      id: '/_header-entreprise/dirigeants/$slug'
-      path: '/dirigeants/$slug'
-      fullPath: '/dirigeants/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseDirigeantsSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-entreprise/divers/$slug': {
-      id: '/_header-entreprise/divers/$slug'
-      path: '/divers/$slug'
-      fullPath: '/divers/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseDiversSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-entreprise/documents/$slug': {
-      id: '/_header-entreprise/documents/$slug'
-      path: '/documents/$slug'
-      fullPath: '/documents/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseDocumentsSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-entreprise/donnees-financieres/$slug': {
-      id: '/_header-entreprise/donnees-financieres/$slug'
-      path: '/donnees-financieres/$slug'
-      fullPath: '/donnees-financieres/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseDonneesFinancieresSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-entreprise/effectifs/$slug': {
-      id: '/_header-entreprise/effectifs/$slug'
-      path: '/effectifs/$slug'
-      fullPath: '/effectifs/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseEffectifsSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-entreprise/entreprise/$slug': {
-      id: '/_header-entreprise/entreprise/$slug'
-      path: '/entreprise/$slug'
-      fullPath: '/entreprise/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseEntrepriseSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-entreprise/etablissements-scolaires/$slug': {
-      id: '/_header-entreprise/etablissements-scolaires/$slug'
-      path: '/etablissements-scolaires/$slug'
-      fullPath: '/etablissements-scolaires/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseEtablissementsScolairesSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-entreprise/labels-certificats/$slug': {
-      id: '/_header-entreprise/labels-certificats/$slug'
-      path: '/labels-certificats/$slug'
-      fullPath: '/labels-certificats/$slug'
-      preLoaderRoute: typeof HeaderEntrepriseLabelsCertificatsSlugRouteImport
-      parentRoute: typeof HeaderEntrepriseRouteRoute
-    }
-    '/_header-fondation/fondation/$slug': {
-      id: '/_header-fondation/fondation/$slug'
-      path: '/fondation/$slug'
-      fullPath: '/fondation/$slug'
-      preLoaderRoute: typeof HeaderFondationFondationSlugRouteImport
-      parentRoute: typeof HeaderFondationRouteRoute
-    }
     '/_header-home/lp/$slug': {
       id: '/_header-home/lp/$slug'
       path: '/lp/$slug'
@@ -1571,6 +1501,76 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/test/session'
       preLoaderRoute: typeof ApiTestSessionRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/entreprise/$slug/': {
+      id: '/entreprise/$slug/'
+      path: '/'
+      fullPath: '/entreprise/$slug/'
+      preLoaderRoute: typeof EntrepriseSlugIndexRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/entreprise/$slug/annonces': {
+      id: '/entreprise/$slug/annonces'
+      path: '/annonces'
+      fullPath: '/entreprise/$slug/annonces'
+      preLoaderRoute: typeof EntrepriseSlugAnnoncesRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/entreprise/$slug/dirigeants': {
+      id: '/entreprise/$slug/dirigeants'
+      path: '/dirigeants'
+      fullPath: '/entreprise/$slug/dirigeants'
+      preLoaderRoute: typeof EntrepriseSlugDirigeantsRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/entreprise/$slug/divers': {
+      id: '/entreprise/$slug/divers'
+      path: '/divers'
+      fullPath: '/entreprise/$slug/divers'
+      preLoaderRoute: typeof EntrepriseSlugDiversRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/entreprise/$slug/documents': {
+      id: '/entreprise/$slug/documents'
+      path: '/documents'
+      fullPath: '/entreprise/$slug/documents'
+      preLoaderRoute: typeof EntrepriseSlugDocumentsRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/entreprise/$slug/donnees-financieres': {
+      id: '/entreprise/$slug/donnees-financieres'
+      path: '/donnees-financieres'
+      fullPath: '/entreprise/$slug/donnees-financieres'
+      preLoaderRoute: typeof EntrepriseSlugDonneesFinancieresRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/entreprise/$slug/effectifs': {
+      id: '/entreprise/$slug/effectifs'
+      path: '/effectifs'
+      fullPath: '/entreprise/$slug/effectifs'
+      preLoaderRoute: typeof EntrepriseSlugEffectifsRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/entreprise/$slug/etablissements-scolaires': {
+      id: '/entreprise/$slug/etablissements-scolaires'
+      path: '/etablissements-scolaires'
+      fullPath: '/entreprise/$slug/etablissements-scolaires'
+      preLoaderRoute: typeof EntrepriseSlugEtablissementsScolairesRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/entreprise/$slug/labels-certificats': {
+      id: '/entreprise/$slug/labels-certificats'
+      path: '/labels-certificats'
+      fullPath: '/entreprise/$slug/labels-certificats'
+      preLoaderRoute: typeof EntrepriseSlugLabelsCertificatsRouteImport
+      parentRoute: typeof EntrepriseSlugRouteRoute
+    }
+    '/fondation/$slug/': {
+      id: '/fondation/$slug/'
+      path: '/'
+      fullPath: '/fondation/$slug/'
+      preLoaderRoute: typeof FondationSlugIndexRouteImport
+      parentRoute: typeof FondationSlugRouteRoute
     }
     '/_header-connexion/connexion/habilitation/administration-inconnue': {
       id: '/_header-connexion/connexion/habilitation/administration-inconnue'
@@ -1818,49 +1818,6 @@ const HeaderDefaultRouteRouteChildren: HeaderDefaultRouteRouteChildren = {
 const HeaderDefaultRouteRouteWithChildren =
   HeaderDefaultRouteRoute._addFileChildren(HeaderDefaultRouteRouteChildren)
 
-interface HeaderEntrepriseRouteRouteChildren {
-  HeaderEntrepriseAnnoncesSlugRoute: typeof HeaderEntrepriseAnnoncesSlugRoute
-  HeaderEntrepriseDirigeantsSlugRoute: typeof HeaderEntrepriseDirigeantsSlugRoute
-  HeaderEntrepriseDiversSlugRoute: typeof HeaderEntrepriseDiversSlugRoute
-  HeaderEntrepriseDocumentsSlugRoute: typeof HeaderEntrepriseDocumentsSlugRoute
-  HeaderEntrepriseDonneesFinancieresSlugRoute: typeof HeaderEntrepriseDonneesFinancieresSlugRoute
-  HeaderEntrepriseEffectifsSlugRoute: typeof HeaderEntrepriseEffectifsSlugRoute
-  HeaderEntrepriseEntrepriseSlugRoute: typeof HeaderEntrepriseEntrepriseSlugRoute
-  HeaderEntrepriseEtablissementsScolairesSlugRoute: typeof HeaderEntrepriseEtablissementsScolairesSlugRoute
-  HeaderEntrepriseLabelsCertificatsSlugRoute: typeof HeaderEntrepriseLabelsCertificatsSlugRoute
-}
-
-const HeaderEntrepriseRouteRouteChildren: HeaderEntrepriseRouteRouteChildren = {
-  HeaderEntrepriseAnnoncesSlugRoute: HeaderEntrepriseAnnoncesSlugRoute,
-  HeaderEntrepriseDirigeantsSlugRoute: HeaderEntrepriseDirigeantsSlugRoute,
-  HeaderEntrepriseDiversSlugRoute: HeaderEntrepriseDiversSlugRoute,
-  HeaderEntrepriseDocumentsSlugRoute: HeaderEntrepriseDocumentsSlugRoute,
-  HeaderEntrepriseDonneesFinancieresSlugRoute:
-    HeaderEntrepriseDonneesFinancieresSlugRoute,
-  HeaderEntrepriseEffectifsSlugRoute: HeaderEntrepriseEffectifsSlugRoute,
-  HeaderEntrepriseEntrepriseSlugRoute: HeaderEntrepriseEntrepriseSlugRoute,
-  HeaderEntrepriseEtablissementsScolairesSlugRoute:
-    HeaderEntrepriseEtablissementsScolairesSlugRoute,
-  HeaderEntrepriseLabelsCertificatsSlugRoute:
-    HeaderEntrepriseLabelsCertificatsSlugRoute,
-}
-
-const HeaderEntrepriseRouteRouteWithChildren =
-  HeaderEntrepriseRouteRoute._addFileChildren(
-    HeaderEntrepriseRouteRouteChildren,
-  )
-
-interface HeaderFondationRouteRouteChildren {
-  HeaderFondationFondationSlugRoute: typeof HeaderFondationFondationSlugRoute
-}
-
-const HeaderFondationRouteRouteChildren: HeaderFondationRouteRouteChildren = {
-  HeaderFondationFondationSlugRoute: HeaderFondationFondationSlugRoute,
-}
-
-const HeaderFondationRouteRouteWithChildren =
-  HeaderFondationRouteRoute._addFileChildren(HeaderFondationRouteRouteChildren)
-
 interface HeaderHomeRouteRouteChildren {
   HeaderHomeIndexRoute: typeof HeaderHomeIndexRoute
   HeaderHomeLpSlugRoute: typeof HeaderHomeLpSlugRoute
@@ -1927,12 +1884,49 @@ const HeaderSearchRouteRouteChildren: HeaderSearchRouteRouteChildren = {
 const HeaderSearchRouteRouteWithChildren =
   HeaderSearchRouteRoute._addFileChildren(HeaderSearchRouteRouteChildren)
 
+interface EntrepriseSlugRouteRouteChildren {
+  EntrepriseSlugAnnoncesRoute: typeof EntrepriseSlugAnnoncesRoute
+  EntrepriseSlugDirigeantsRoute: typeof EntrepriseSlugDirigeantsRoute
+  EntrepriseSlugDiversRoute: typeof EntrepriseSlugDiversRoute
+  EntrepriseSlugDocumentsRoute: typeof EntrepriseSlugDocumentsRoute
+  EntrepriseSlugDonneesFinancieresRoute: typeof EntrepriseSlugDonneesFinancieresRoute
+  EntrepriseSlugEffectifsRoute: typeof EntrepriseSlugEffectifsRoute
+  EntrepriseSlugEtablissementsScolairesRoute: typeof EntrepriseSlugEtablissementsScolairesRoute
+  EntrepriseSlugLabelsCertificatsRoute: typeof EntrepriseSlugLabelsCertificatsRoute
+  EntrepriseSlugIndexRoute: typeof EntrepriseSlugIndexRoute
+}
+
+const EntrepriseSlugRouteRouteChildren: EntrepriseSlugRouteRouteChildren = {
+  EntrepriseSlugAnnoncesRoute: EntrepriseSlugAnnoncesRoute,
+  EntrepriseSlugDirigeantsRoute: EntrepriseSlugDirigeantsRoute,
+  EntrepriseSlugDiversRoute: EntrepriseSlugDiversRoute,
+  EntrepriseSlugDocumentsRoute: EntrepriseSlugDocumentsRoute,
+  EntrepriseSlugDonneesFinancieresRoute: EntrepriseSlugDonneesFinancieresRoute,
+  EntrepriseSlugEffectifsRoute: EntrepriseSlugEffectifsRoute,
+  EntrepriseSlugEtablissementsScolairesRoute:
+    EntrepriseSlugEtablissementsScolairesRoute,
+  EntrepriseSlugLabelsCertificatsRoute: EntrepriseSlugLabelsCertificatsRoute,
+  EntrepriseSlugIndexRoute: EntrepriseSlugIndexRoute,
+}
+
+const EntrepriseSlugRouteRouteWithChildren =
+  EntrepriseSlugRouteRoute._addFileChildren(EntrepriseSlugRouteRouteChildren)
+
+interface FondationSlugRouteRouteChildren {
+  FondationSlugIndexRoute: typeof FondationSlugIndexRoute
+}
+
+const FondationSlugRouteRouteChildren: FondationSlugRouteRouteChildren = {
+  FondationSlugIndexRoute: FondationSlugIndexRoute,
+}
+
+const FondationSlugRouteRouteWithChildren =
+  FondationSlugRouteRoute._addFileChildren(FondationSlugRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   HeaderCompteRouteRoute: HeaderCompteRouteRouteWithChildren,
   HeaderConnexionRouteRoute: HeaderConnexionRouteRouteWithChildren,
   HeaderDefaultRouteRoute: HeaderDefaultRouteRouteWithChildren,
-  HeaderEntrepriseRouteRoute: HeaderEntrepriseRouteRouteWithChildren,
-  HeaderFondationRouteRoute: HeaderFondationRouteRouteWithChildren,
   HeaderHomeRouteRoute: HeaderHomeRouteRouteWithChildren,
   HeaderLpAgentRouteRoute: HeaderLpAgentRouteRouteWithChildren,
   HeaderMinimalRouteRoute: HeaderMinimalRouteRouteWithChildren,
@@ -1941,6 +1935,8 @@ const rootRouteChildren: RootRouteChildren = {
   HealthRoute: HealthRoute,
   ProtectedSirenDottxtRoute: ProtectedSirenDottxtRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
+  EntrepriseSlugRouteRoute: EntrepriseSlugRouteRouteWithChildren,
+  FondationSlugRouteRoute: FondationSlugRouteRouteWithChildren,
   ApiExportSireneRoute: ApiExportSireneRoute,
   ApiFeatureFlagsRoute: ApiFeatureFlagsRoute,
   ApiHidePersonalDataRoute: ApiHidePersonalDataRoute,

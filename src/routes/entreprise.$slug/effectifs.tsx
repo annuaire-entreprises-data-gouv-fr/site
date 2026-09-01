@@ -4,11 +4,10 @@ import {
   stripSearchParams,
 } from "@tanstack/react-router";
 import z from "zod";
-import DonneesFinancieresAssociation from "#/components/screens/donnees-financieres.$slug/donnees-financieres-association";
-import DonneesFinancieresSociete from "#/components/screens/donnees-financieres.$slug/donnees-financieres-societe";
 import { NotFound } from "#/components/screens/not-found";
+import UniteLegaleEffectifsAnnuelsSection from "#/components/unite-legale-effectifs-annuels-section";
+import { natureEffectifAnnuelValues } from "#/components/unite-legale-effectifs-annuels-section/protected-effectifs-annuels-section";
 import { useAuth } from "#/contexts/auth.context";
-import { isAssociation } from "#/models/core/types";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -16,19 +15,21 @@ import {
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 
-export const Route = createFileRoute(
-  "/_header-entreprise/donnees-financieres/$slug"
-)({
+export const Route = createFileRoute("/entreprise/$slug/effectifs")({
   validateSearch: z.object({
-    "aides-ademe-page": z.number().min(1).optional().default(1).catch(1),
-    "aides-minimis-page": z.number().min(1).optional().default(1).catch(1),
+    "effectifs-annuels-nature-effectif": z
+      .enum(natureEffectifAnnuelValues)
+      .optional()
+      .default("moyen")
+      .catch("moyen"),
   }),
   search: {
     middlewares: [
-      stripSearchParams({ "aides-ademe-page": 1, "aides-minimis-page": 1 }),
+      stripSearchParams({
+        "effectifs-annuels-nature-effectif": "moyen",
+      }),
     ],
   },
-  shouldReload: true,
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 
@@ -44,10 +45,10 @@ export const Route = createFileRoute(
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/donnees-financieres/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/effectifs`;
     return {
       meta: meta({
-        title: `Données financières - ${uniteLegalePageTitle(uniteLegale)}`,
+        title: `Effectifs - ${uniteLegalePageTitle(uniteLegale)}`,
         description: uniteLegalePageDescription(uniteLegale),
         robots: "noindex",
         alternates: {
@@ -69,15 +70,10 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { uniteLegale } = Route.useLoaderData();
+
   const { user } = useAuth();
 
   return (
-    <>
-      {isAssociation(uniteLegale) ? (
-        <DonneesFinancieresAssociation uniteLegale={uniteLegale} user={user} />
-      ) : (
-        <DonneesFinancieresSociete uniteLegale={uniteLegale} user={user} />
-      )}
-    </>
+    <UniteLegaleEffectifsAnnuelsSection uniteLegale={uniteLegale} user={user} />
   );
 }

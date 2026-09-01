@@ -29,8 +29,7 @@ import {
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 
-export const Route = createFileRoute("/_header-entreprise/dirigeants/$slug")({
-  shouldReload: true,
+export const Route = createFileRoute("/entreprise/$slug/dirigeants")({
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 
@@ -46,7 +45,7 @@ export const Route = createFileRoute("/_header-entreprise/dirigeants/$slug")({
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/dirigeants`;
     return {
       meta: meta({
         title: `Dirigeants - ${uniteLegalePageTitle(uniteLegale)}`,

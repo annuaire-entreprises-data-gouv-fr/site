@@ -45,7 +45,7 @@ export default function DirigeantsContentProtected({
           <Link
             key={dirigeant.siren}
             params={{ slug: dirigeant.siren }}
-            to="/dirigeants/$slug"
+            to="/entreprise/$slug/dirigeants"
           >
             → voir les dirigeants de {defaultDenom}
           </Link>

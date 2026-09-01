@@ -25,7 +25,7 @@ const AvocatsTable = ({ avocats }: { avocats: IAvocats["avocats"] }) => (
   />
 );
 
-const avocatsRoute = getRouteApi("/_header-entreprise/entreprise/$slug");
+const avocatsRoute = getRouteApi("/entreprise/$slug/");
 
 export default function AvocatsSection({
   uniteLegale,

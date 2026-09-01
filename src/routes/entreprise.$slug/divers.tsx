@@ -27,8 +27,7 @@ const loadDiversPage = createServerFn()
     return { ccWithMetadata, sourcesLastModified };
   });
 
-export const Route = createFileRoute("/_header-entreprise/divers/$slug")({
-  shouldReload: true,
+export const Route = createFileRoute("/entreprise/$slug/divers")({
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
 
@@ -48,7 +47,7 @@ export const Route = createFileRoute("/_header-entreprise/divers/$slug")({
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/divers/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/divers`;
     return {
       meta: meta({
         title: `Conventions collectives - ${uniteLegalePageTitle(uniteLegale)}`,

@@ -84,11 +84,11 @@ test.describe("Shared entreprise layout", () => {
 
     await page.getByRole("link", { name: "Documents", exact: true }).click();
 
-    await expect(page).toHaveURL(/\/documents\/552032534$/);
+    await expect(page).toHaveURL(/\/entreprise\/danone-552032534\/documents$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("DANONE");
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
-      "https://annuaire-entreprises.data.gouv.fr/documents/552032534"
+      "https://annuaire-entreprises.data.gouv.fr/entreprise/552032534/documents"
     );
     expect(uniteLegaleRequests).toEqual([]);
   });
