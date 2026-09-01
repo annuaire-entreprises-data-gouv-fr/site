@@ -59,7 +59,11 @@ export const Route = createFileRoute("/_header-fondation/fondation/$slug")({
 
 function RouteComponent() {
   const { fondation, uniteLegale } = FondationLayoutRoute.useLoaderData();
+  const { from } = FondationLayoutRoute.useSearch();
   const { user } = useAuth();
+
+  const isFromEntrepriseSearch =
+    from === "entreprise" || (from === null && !!uniteLegale);
 
   return (
     <div className="content-container">
@@ -75,15 +79,17 @@ function RouteComponent() {
       />
       {!!uniteLegale && (
         <>
-          <div className={styles.leaveUniteLegale}>
-            <Icon size={24} slug="lightbulbFill" />
-            <span>
-              Retrouvez encore plus de Fonds et Fondations avec{" "}
-              <Link params={{ slug: "fondations" }} to="/lp/$slug">
-                notre moteur de recherche dédié
-              </Link>
-            </span>
-          </div>
+          {isFromEntrepriseSearch && (
+            <div className={styles.leaveUniteLegale}>
+              <Icon size={24} slug="lightbulbFill" />
+              <span>
+                Retrouvez encore plus de Fonds et Fondations avec{" "}
+                <Link params={{ slug: "fondations" }} to="/lp/$slug">
+                  notre moteur de recherche dédié
+                </Link>
+              </span>
+            </div>
+          )}
           <FondationInseeSection uniteLegale={uniteLegale} user={user} />
           {hasRights({ user }, ApplicationRights.isAgent) && (
             <EspaceAgentSummarySection uniteLegale={uniteLegale} user={user} />

@@ -64,11 +64,17 @@ const loadFondationPage = createServerFn({ method: "POST" })
 export const Route = createFileRoute("/_header-fondation")({
   validateSearch: z.object({
     page: z.number().min(1).optional().default(1).catch(1),
+    from: z
+      .union([z.literal("entreprise"), z.literal("fondation")])
+      .nullable()
+      .default(null)
+      .catch(null),
   }),
   search: {
     middlewares: [
       stripSearchParams({
         page: 1,
+        from: null,
       }),
     ],
   },
@@ -96,10 +102,14 @@ export const Route = createFileRoute("/_header-fondation")({
 
 function RouteComponent() {
   const { uniteLegale } = Route.useLoaderData();
+  const { from } = Route.useSearch();
+
+  const isFromEntrepriseSearch =
+    from === "entreprise" || (from === null && !!uniteLegale);
 
   return (
     <>
-      {!uniteLegale && (
+      {!isFromEntrepriseSearch && (
         <div className={styles.leaveFondations}>
           <div className="fr-container">
             <Link to="/">
@@ -111,9 +121,13 @@ function RouteComponent() {
       <NPSBanner />
       <BannerManager />
       <Header
-        searchPath={uniteLegale ? undefined : "/rechercher/fondations"}
+        searchPath={
+          isFromEntrepriseSearch ? undefined : "/rechercher/fondations"
+        }
         searchPlaceholder={
-          uniteLegale ? undefined : "Chercher un fonds ou une fondation"
+          isFromEntrepriseSearch
+            ? undefined
+            : "Chercher un fonds ou une fondation"
         }
         useAgentBanner={true}
         useAgentCTA={true}
