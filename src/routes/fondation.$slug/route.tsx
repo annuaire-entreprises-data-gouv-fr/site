@@ -60,7 +60,7 @@ const loadFondationLayout = createServerFn({ method: "POST" })
     };
   });
 
-export const Route = createFileRoute("/_header-fondation")({
+export const Route = createFileRoute("/fondation/$slug")({
   validateSearch: z.object({
     page: z.number().min(1).optional().default(1).catch(1),
     from: z
@@ -80,19 +80,15 @@ export const Route = createFileRoute("/_header-fondation")({
   loaderDeps: ({ search }) => ({
     page: search.page,
   }),
-  shouldReload: true,
-  loader: {
-    staleReloadMode: "blocking",
-    handler: async ({ params, deps }) => {
-      const { slug } = z.object({ slug: z.string() }).parse(params);
+  loader: async ({ params, deps }) => {
+    const { slug } = z.object({ slug: z.string() }).parse(params);
 
-      return await loadFondationLayout({
-        data: {
-          slug,
-          page: deps.page,
-        },
-      });
-    },
+    return await loadFondationLayout({
+      data: {
+        slug,
+        page: deps.page,
+      },
+    });
   },
   component: RouteComponent,
   errorComponent: HeaderDefaultError,

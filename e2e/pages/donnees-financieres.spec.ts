@@ -15,7 +15,7 @@ test.describe("Données financières", () => {
       fixture: "ods-metadata.json",
     });
 
-    await goto(page, "/donnees-financieres/487444697");
+    await goto(page, "/entreprise/487444697/donnees-financieres");
     await expect(
       page.getByText(
         "Les bilans de cette structure sont accompagnés d’une déclaration de confidentialité."
@@ -31,7 +31,7 @@ test.describe("Données financières", () => {
       fixture: "ods-metadata.json",
     });
 
-    await goto(page, "/donnees-financieres/552032534");
+    await goto(page, "/entreprise/552032534/donnees-financieres");
     await expect(page.getByText("Date de clôture").first()).toBeVisible();
     await expect(page.getByText("31/12/2019").first()).toBeVisible();
     await expect(page.getByText("Résultat net").first()).toBeVisible();
@@ -41,7 +41,7 @@ test.describe("Données financières", () => {
   });
 
   test("Should display dépôts de compte section (JOAFE)", async ({ page }) => {
-    await goto(page, "/donnees-financieres/338365059");
+    await goto(page, "/entreprise/338365059/donnees-financieres");
     await expect(
       page.getByText(
         /Cette structure possède [\d]+ comptes publiés au Journal Officiel des Associations/
@@ -57,7 +57,7 @@ test.describe("Bilans financiers (authenticated)", () => {
   });
 
   test('Should display "Détail des subventions"', async ({ page }) => {
-    await goto(page, "/donnees-financieres/338365059");
+    await goto(page, "/entreprise/338365059/donnees-financieres");
     await expect(page.getByText("Subventions reçues").first()).toBeVisible();
     await expect(page.getByText("État").first()).toBeVisible();
     await expect(page.getByText("Refusé").first()).toBeVisible();

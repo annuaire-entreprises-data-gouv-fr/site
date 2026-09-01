@@ -68,9 +68,7 @@ const loadLabelsCertificatsPage = createServerFn()
     }
   );
 
-export const Route = createFileRoute(
-  "/_header-entreprise/labels-certificats/$slug"
-)({
+export const Route = createFileRoute("/entreprise/$slug/labels-certificats")({
   validateSearch: z.object({
     "entrepreneur-spectacles-page": z
       .number()
@@ -85,7 +83,6 @@ export const Route = createFileRoute(
   loaderDeps: ({ search }) => ({
     entrepreneurSpectaclesPage: search["entrepreneur-spectacles-page"],
   }),
-  shouldReload: true,
   loader: async ({ parentMatchPromise, deps }) => {
     const { loaderData } = await parentMatchPromise;
 
@@ -121,7 +118,7 @@ export const Route = createFileRoute(
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/labels-certificats`;
     return {
       meta: meta({
         title: `Qualités, labels et certificats - ${uniteLegalePageTitle(uniteLegale)}`,

@@ -37,7 +37,7 @@ const natureEffectifEntries: [TNatureEffectif, string][] = Object.entries(
   natureEffectifOptions
 ) as [TNatureEffectif, string][];
 
-const entrepriseRoute = getRouteApi("/_header-entreprise/effectifs/$slug");
+const entrepriseRoute = getRouteApi("/entreprise/$slug/effectifs");
 
 const ProtectedUniteLegaleEffectifsAnnuelsSection = ({
   id,
