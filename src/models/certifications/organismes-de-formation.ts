@@ -6,8 +6,8 @@ import {
   type IAPINotRespondingError,
 } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
+import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import type { IUniteLegale } from "../core/types";
 
 export interface IOrganismeFormation {
   lastModified: string | null;
@@ -25,13 +25,14 @@ export interface IOrganismeFormation {
 }
 
 export const getOrganismesDeFormation = async (
-  uniteLegale: IUniteLegale
+  siren: Siren,
+  estOrganismeFormation: boolean
 ): Promise<IOrganismeFormation | IAPINotRespondingError> => {
   try {
-    if (!uniteLegale.complements.estOrganismeFormation) {
+    if (!estOrganismeFormation) {
       throw new HttpNotFound("Not organisme de formation");
     }
-    return await clientOrganismeFormation(uniteLegale.siren);
+    return await clientOrganismeFormation(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
@@ -41,7 +42,7 @@ export const getOrganismesDeFormation = async (
         cause: e,
         ressource: "OrganismeFormation",
         context: {
-          siren: uniteLegale.siren,
+          siren,
         },
         administration: EAdministration.MTPEI,
       })

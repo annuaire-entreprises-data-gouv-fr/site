@@ -1,20 +1,21 @@
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  notFound,
+  stripSearchParams,
+} from "@tanstack/react-router";
 import z from "zod";
 import { NotFound } from "#/components/screens/not-found";
-import Title from "#/components/title-section";
-import { FICHE } from "#/components/title-section/tabs";
 import UniteLegaleEffectifsAnnuelsSection from "#/components/unite-legale-effectifs-annuels-section";
 import { natureEffectifAnnuelValues } from "#/components/unite-legale-effectifs-annuels-section/protected-effectifs-annuels-section";
 import { useAuth } from "#/contexts/auth.context";
-import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
 import { meta } from "#/utils/seo";
-import { HeaderDefaultError } from "./-error";
+import { HeaderDefaultError } from "../_header-default/-error";
 
-export const Route = createFileRoute("/_header-default/effectifs/$slug")({
+export const Route = createFileRoute("/_header-entreprise/effectifs/$slug")({
   validateSearch: z.object({
     "effectifs-annuels-nature-effectif": z
       .enum(natureEffectifAnnuelValues)
@@ -29,12 +30,15 @@ export const Route = createFileRoute("/_header-default/effectifs/$slug")({
       }),
     ],
   },
-  loader: async ({ params }) => {
-    const uniteLegale = await getUniteLegaleFromSlugFn({
-      data: { slug: params.slug },
-    });
+  shouldReload: true,
+  loader: async ({ parentMatchPromise }) => {
+    const { loaderData } = await parentMatchPromise;
 
-    return { uniteLegale };
+    if (!loaderData) {
+      throw notFound();
+    }
+
+    return loaderData;
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -71,16 +75,6 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
-      <Title
-        ficheType={FICHE.EFFECTIFS}
-        uniteLegale={uniteLegale}
-        user={user}
-      />
-      <UniteLegaleEffectifsAnnuelsSection
-        uniteLegale={uniteLegale}
-        user={user}
-      />
-    </div>
+    <UniteLegaleEffectifsAnnuelsSection uniteLegale={uniteLegale} user={user} />
   );
 }

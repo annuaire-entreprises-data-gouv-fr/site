@@ -10,7 +10,7 @@ import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
 import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
-import { Link } from "#/components/link";
+import { LeaveFondation } from "#/components/header/leave-fondation";
 import { Question } from "#/components/question";
 import { NotFound } from "#/components/screens/not-found";
 import SocialNetworks from "#/components/social-network";
@@ -22,9 +22,8 @@ import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale
 import { extractSirenFromSiret } from "#/utils/helpers";
 import isUserAgentABot from "#/utils/user-agent";
 import { HeaderDefaultError } from "./-error";
-import styles from "./style.module.css";
 
-const loadFondationPage = createServerFn({ method: "POST" })
+const loadFondationLayout = createServerFn({ method: "POST" })
   .validator(
     z.object({
       slug: z.string(),
@@ -87,7 +86,7 @@ export const Route = createFileRoute("/_header-fondation")({
     handler: async ({ params, deps }) => {
       const { slug } = z.object({ slug: z.string() }).parse(params);
 
-      return await loadFondationPage({
+      return await loadFondationLayout({
         data: {
           slug,
           page: deps.page,
@@ -109,15 +108,7 @@ function RouteComponent() {
 
   return (
     <>
-      {!isFromEntrepriseSearch && (
-        <div className={styles.leaveFondations}>
-          <div className="fr-container">
-            <Link to="/">
-              ← Quitter les Fondations et revenir sur l'Annuaire des Entreprises
-            </Link>
-          </div>
-        </div>
-      )}
+      {!isFromEntrepriseSearch && <LeaveFondation />}
       <NPSBanner />
       <BannerManager />
       <Header
