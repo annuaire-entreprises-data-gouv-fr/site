@@ -2,7 +2,8 @@ import { clientEntrepreneursSpectacles } from "#/clients/api-data-gouv/entrepren
 import type { IEntrepreneursSpectacles } from "#/clients/api-data-gouv/entrepreneurs-spectacles/interface";
 import type { IAPINotRespondingError } from "#/models/api-not-responding";
 import { getEgapro, type IEgapro } from "#/models/certifications/egapro";
-import type { IUniteLegale } from "../core/types";
+import type { Siren } from "#/utils/helpers";
+import type { IUniteLegaleComplements } from "../core/types";
 import { getBio, type IEtablissementsBio } from "./bio";
 import {
   getEntrepriseInclusive,
@@ -23,11 +24,20 @@ export interface ICertifications {
   ess: IESS | IAPINotRespondingError;
   organismesDeFormation: IOrganismeFormation | IAPINotRespondingError;
   rge: IRGECertification | IAPINotRespondingError;
-  uniteLegale: IUniteLegale;
 }
 
 export const getCertificationsFromSlug = async (
-  uniteLegale: IUniteLegale,
+  siren: Siren,
+  complements: Pick<
+    IUniteLegaleComplements,
+    | "egaproRenseignee"
+    | "estBio"
+    | "estEntrepreneurSpectacle"
+    | "estEntrepriseInclusive"
+    | "estEss"
+    | "estOrganismeFormation"
+    | "estRge"
+  >,
   options?: { entrepreneurSpectaclesPage?: number }
 ): Promise<ICertifications> => {
   const [
@@ -39,22 +49,22 @@ export const getCertificationsFromSlug = async (
     ess,
     entrepriseInclusive,
   ] = await Promise.all([
-    getRGECertifications(uniteLegale),
+    getRGECertifications(siren, complements.estRge),
     clientEntrepreneursSpectacles(
-      uniteLegale,
+      siren,
+      complements.estEntrepreneurSpectacle,
       options?.entrepreneurSpectaclesPage
     ),
-    getBio(uniteLegale),
-    getEgapro(uniteLegale),
-    getOrganismesDeFormation(uniteLegale),
-    getEss(uniteLegale),
-    getEntrepriseInclusive(uniteLegale),
+    getBio(siren, complements.estBio),
+    getEgapro(siren, complements.egaproRenseignee),
+    getOrganismesDeFormation(siren, complements.estOrganismeFormation),
+    getEss(siren, complements.estEss),
+    getEntrepriseInclusive(siren, complements.estEntrepriseInclusive),
   ]);
 
   return {
     bio,
     egapro,
-    uniteLegale,
     rge,
     entrepreneurSpectacles,
     organismesDeFormation,
