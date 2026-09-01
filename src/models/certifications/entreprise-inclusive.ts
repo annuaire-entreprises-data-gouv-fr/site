@@ -7,8 +7,8 @@ import {
   type IAPINotRespondingError,
 } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
+import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import type { IUniteLegale } from "../core/types";
 
 export interface IEntrepriseInclusive {
   category: string;
@@ -20,13 +20,14 @@ export interface IEntrepriseInclusive {
 }
 
 export const getEntrepriseInclusive = async (
-  uniteLegale: IUniteLegale
+  siren: Siren,
+  estEntrepriseInclusive: boolean
 ): Promise<IEntrepriseInclusive[] | IAPINotRespondingError> => {
   try {
-    if (!uniteLegale.complements.estEntrepriseInclusive) {
+    if (!estEntrepriseInclusive) {
       throw new HttpNotFound("Not an entreprise inclusive");
     }
-    const entrepriseInclusiveList = await clientAPIInclusion(uniteLegale.siren);
+    const entrepriseInclusiveList = await clientAPIInclusion(siren);
     return await Promise.all(
       entrepriseInclusiveList.map(async ({ kind, ...rest }) => {
         const kindLabel = await clientInclusionKindMetadata(kind);
@@ -46,7 +47,7 @@ export const getEntrepriseInclusive = async (
         cause: e,
         ressource: "EntrepriseInclusive",
         context: {
-          siren: uniteLegale.siren,
+          siren,
         },
         administration: EAdministration.MARCHE_INCLUSION,
       })
