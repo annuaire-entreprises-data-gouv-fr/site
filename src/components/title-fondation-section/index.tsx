@@ -24,7 +24,11 @@ export function TitleFondation(props: IProps) {
       <div className="fr-grid-row fr-grid-row--gutters">
         <div className={clsx(styles.titleContainer, "fr-col-12 fr-col-md-8")}>
           <h1>
-            <Link params={{ slug: fondation.id }} to="/fondation/$slug">
+            <Link
+              params={{ slug: fondation.id }}
+              search={(params) => ({ from: params.from })}
+              to="/fondation/$slug"
+            >
               {fondation.title}
             </Link>
           </h1>

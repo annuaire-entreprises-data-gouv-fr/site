@@ -84,6 +84,7 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
         to: "/fondation/$slug",
         params: { slug: uniteLegale.complements.numeroRnf },
         search: {
+          from: "entreprise",
           page,
         },
         statusCode: 308,

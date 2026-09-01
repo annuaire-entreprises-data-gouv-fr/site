@@ -149,6 +149,7 @@ export function beforeLoadFondationsCheckTerme(searchTerm: string | undefined) {
         to: "/fondation/$slug",
         params: { slug: searchTerm },
         search: {
+          from: "fondation",
           redirected: 1,
         },
       } as any /* TODO: fix type once the page is created */
