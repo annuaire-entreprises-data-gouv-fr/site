@@ -7,13 +7,13 @@ import {
   hasRights,
 } from "#/models/authentication/user/rights";
 import constants from "#/models/constants";
-import { Information } from "#/models/exceptions";
+import { Exception, Information } from "#/models/exceptions";
 import httpClient, {
   httpGet,
   httpPost,
   type IDefaultRequestConfig,
 } from "#/utils/network";
-import { logInfoInSentry } from "#/utils/sentry";
+import logErrorInSentry, { logInfoInSentry } from "#/utils/sentry";
 import getSession from "#/utils/server-side-helper/get-session";
 
 interface IAccessToken {
@@ -27,13 +27,14 @@ interface IAccessToken {
 }
 
 class HttpInseeAccountUnavailableError extends HttpUnauthorizedError {
-  constructor() {
-    super("ACCOUNT_UNAVAILABLE");
+  constructor(name: string) {
+    super(`[${name}] ACCOUNT_UNAVAILABLE`);
   }
 }
 
 export class HttpInseeClient {
   private _token: IAccessToken | null;
+  private readonly name: string;
   private readonly token_url: string;
   private readonly credentials: {
     client_id: string | undefined;
@@ -46,6 +47,7 @@ export class HttpInseeClient {
   private _newTokenPromise: Promise<void> | null = null;
 
   constructor(
+    name: string,
     token_url: string,
     credentials: {
       client_id: string | undefined;
@@ -55,6 +57,7 @@ export class HttpInseeClient {
     },
     fallbackClient?: HttpInseeClient
   ) {
+    this.name = name;
     this.token_url = token_url;
     this.credentials = credentials;
     this.fallbackClient = fallbackClient;
@@ -69,7 +72,9 @@ export class HttpInseeClient {
       ) &&
       process.env.NODE_ENV === "production"
     ) {
-      throw new HttpServerError("An insee env variable is undefined");
+      throw new HttpServerError(
+        `[${this.name}] An insee env variable is undefined`
+      );
     }
     this._token = null;
   }
@@ -83,7 +88,7 @@ export class HttpInseeClient {
       const data = await httpClient<IAccessToken["data"]>({
         url: this.token_url,
         method: "POST",
-        timeout: constants.timeout.XXS,
+        timeout: constants.timeout.S,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -100,8 +105,18 @@ export class HttpInseeClient {
         data,
         tokenExpiryTime: Date.now() + data.expires_in * 1000,
       };
-    } catch {
+    } catch (error) {
       this._token = null;
+      logErrorInSentry(
+        new Exception({
+          name: "RefreshInseeTokenError",
+          message: `[${this.name}] Refreshing Insee token failed`,
+          cause: error,
+          context: {
+            details: error instanceof Error ? error.message : "Unknown error",
+          },
+        })
+      );
     } finally {
       resolvePromise();
       this._newTokenPromise = null;
@@ -119,7 +134,7 @@ export class HttpInseeClient {
     if (!this._token || this.isTokenExpired()) {
       logInfoInSentry(
         new Information({
-          name: "RefreshingInseeToken",
+          name: `[${this.name}] RefreshingInseeToken`,
           message: "Refreshing Insee token",
         })
       );
@@ -132,7 +147,7 @@ export class HttpInseeClient {
       }
 
       if (!this._token) {
-        throw new HttpInseeAccountUnavailableError();
+        throw new HttpInseeAccountUnavailableError(this.name);
       }
     }
     return this._token;
@@ -223,15 +238,20 @@ export class HttpInseeClient {
  */
 
 // Insee client used as a fallback in case public or agent calls fail
-const grandPublicFallbackClient = new HttpInseeClient(routes.sireneInsee.auth, {
-  client_id: process.env.INSEE_GRAND_PUBLIC_FALLBACK_CLIENT_ID,
-  client_secret: process.env.INSEE_GRAND_PUBLIC_FALLBACK_CLIENT_SECRET,
-  username: process.env.INSEE_GRAND_PUBLIC_FALLBACK_USERNAME,
-  password: process.env.INSEE_GRAND_PUBLIC_FALLBACK_PASSWORD,
-});
+const grandPublicFallbackClient = new HttpInseeClient(
+  "grand-public-fallback",
+  routes.sireneInsee.auth,
+  {
+    client_id: process.env.INSEE_GRAND_PUBLIC_FALLBACK_CLIENT_ID,
+    client_secret: process.env.INSEE_GRAND_PUBLIC_FALLBACK_CLIENT_SECRET,
+    username: process.env.INSEE_GRAND_PUBLIC_FALLBACK_USERNAME,
+    password: process.env.INSEE_GRAND_PUBLIC_FALLBACK_PASSWORD,
+  }
+);
 
 // Insee client used for public calls, will fallback to fallbackClient on failure
 const grandPublicClient = new HttpInseeClient(
+  "grand-public-main",
   routes.sireneInsee.auth,
   {
     client_id: process.env.INSEE_GRAND_PUBLIC_MAIN_CLIENT_ID,
@@ -243,15 +263,20 @@ const grandPublicClient = new HttpInseeClient(
 );
 
 // Insee client used as a fallback in case export csv calls fail
-const exportCsvFallbackClient = new HttpInseeClient(routes.sireneInsee.auth, {
-  client_id: process.env.INSEE_EXPORT_SIRENE_FALLBACK_CLIENT_ID,
-  client_secret: process.env.INSEE_EXPORT_SIRENE_FALLBACK_CLIENT_SECRET,
-  username: process.env.INSEE_EXPORT_SIRENE_FALLBACK_USERNAME,
-  password: process.env.INSEE_EXPORT_SIRENE_FALLBACK_PASSWORD,
-});
+const exportCsvFallbackClient = new HttpInseeClient(
+  "export-sirene-fallback",
+  routes.sireneInsee.auth,
+  {
+    client_id: process.env.INSEE_EXPORT_SIRENE_FALLBACK_CLIENT_ID,
+    client_secret: process.env.INSEE_EXPORT_SIRENE_FALLBACK_CLIENT_SECRET,
+    username: process.env.INSEE_EXPORT_SIRENE_FALLBACK_USERNAME,
+    password: process.env.INSEE_EXPORT_SIRENE_FALLBACK_PASSWORD,
+  }
+);
 
 // Insee client used for export csv calls
 const exportCsvClient = new HttpInseeClient(
+  "export-sirene-main",
   routes.sireneInsee.auth,
   {
     client_id: process.env.INSEE_EXPORT_SIRENE_MAIN_CLIENT_ID,
@@ -263,15 +288,20 @@ const exportCsvClient = new HttpInseeClient(
 );
 
 // Insee client used as a fallback in case agent calls fail
-const agentsFallbackClient = new HttpInseeClient(routes.sireneInsee.auth, {
-  client_id: process.env.INSEE_ESPACE_AGENT_FALLBACK_CLIENT_ID,
-  client_secret: process.env.INSEE_ESPACE_AGENT_FALLBACK_CLIENT_SECRET,
-  username: process.env.INSEE_ESPACE_AGENT_FALLBACK_USERNAME,
-  password: process.env.INSEE_ESPACE_AGENT_FALLBACK_PASSWORD,
-});
+const agentsFallbackClient = new HttpInseeClient(
+  "espace-agent-fallback",
+  routes.sireneInsee.auth,
+  {
+    client_id: process.env.INSEE_ESPACE_AGENT_FALLBACK_CLIENT_ID,
+    client_secret: process.env.INSEE_ESPACE_AGENT_FALLBACK_CLIENT_SECRET,
+    username: process.env.INSEE_ESPACE_AGENT_FALLBACK_USERNAME,
+    password: process.env.INSEE_ESPACE_AGENT_FALLBACK_PASSWORD,
+  }
+);
 
 // Insee client used for agent calls, will fallback to fallbackClient on failure
 const agentsClient = new HttpInseeClient(
+  "espace-agent-main",
   routes.sireneInsee.auth,
   {
     client_id: process.env.INSEE_ESPACE_AGENT_MAIN_CLIENT_ID,
