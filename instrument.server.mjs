@@ -4,7 +4,7 @@ import crawlers from "crawler-user-agents";
 const IGNORED_SERVER_EXCEPTION_NAMES = new Set([
   "SirenNotFoundOrInvalid",
   "FetchUniteLegaleRechercheException",
-  "RefreshingInseeToken",
+  // "RefreshingInseeToken",
   "RefreshingAgentMonitoringList",
 ]);
 

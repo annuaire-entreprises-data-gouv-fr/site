@@ -9,6 +9,7 @@ vi.mock(import("#/utils/network"), () => ({
 }));
 
 vi.mock(import("#/utils/sentry"), () => ({
+  default: vi.fn(),
   logInfoInSentry: vi.fn(),
 }));
 
@@ -46,10 +47,15 @@ const createAccessToken = (accessToken: string, expiresIn = 7200) => ({
 
 const createClient = (withFallback = true) => {
   const fallbackClient = withFallback
-    ? new HttpInseeClient(TOKEN_URL, FALLBACK_CREDENTIALS)
+    ? new HttpInseeClient("fallback", TOKEN_URL, FALLBACK_CREDENTIALS)
     : undefined;
 
-  return new HttpInseeClient(TOKEN_URL, MAIN_CREDENTIALS, fallbackClient);
+  return new HttpInseeClient(
+    "main",
+    TOKEN_URL,
+    MAIN_CREDENTIALS,
+    fallbackClient
+  );
 };
 
 const expectTokenRequestToUse = (
@@ -125,7 +131,7 @@ describe("HttpInseeClient", () => {
     const client = createClient(false);
 
     await expect(client.get(RESOURCE_URL, {})).rejects.toMatchObject({
-      message: "ACCOUNT_UNAVAILABLE",
+      message: "[main] ACCOUNT_UNAVAILABLE",
       status: 401,
     });
 
