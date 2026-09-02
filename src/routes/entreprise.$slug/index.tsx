@@ -134,6 +134,7 @@ export const Route = createFileRoute("/entreprise/$slug/")({
   },
   loaderDeps: ({ search }) => ({
     redirected: search.redirected,
+    etablissmentsPage: search["etablissments-page"],
   }),
   loader: async ({ parentMatchPromise, params: { slug }, deps }) => {
     const { loaderData } = await parentMatchPromise;
@@ -165,6 +166,7 @@ export const Route = createFileRoute("/entreprise/$slug/")({
         params: { slug: uniteLegale.chemin },
         search: {
           redirected: deps.redirected,
+          "etablissments-page": deps.etablissmentsPage,
         },
         statusCode: 308,
       });

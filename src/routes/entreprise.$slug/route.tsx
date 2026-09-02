@@ -36,14 +36,19 @@ export const Route = createFileRoute("/entreprise/$slug")({
       .nullable()
       .default(null)
       .catch(null),
+    "etablissments-page": z.number().min(1).optional().default(1).catch(1),
   }),
   search: {
     middlewares: [
       stripSearchParams({
         from: null,
+        "etablissments-page": 1,
       }),
     ],
   },
+  loaderDeps: ({ search }) => ({
+    etablissmentsPage: search["etablissments-page"],
+  }),
   beforeLoad: ({ params }) => {
     const { slug } = z.object({ slug: z.string() }).parse(params);
 
@@ -59,11 +64,11 @@ export const Route = createFileRoute("/entreprise/$slug")({
       throw notFound();
     }
   },
-  loader: async ({ params }) => {
+  loader: async ({ params, deps }) => {
     const { slug } = z.object({ slug: z.string() }).parse(params);
 
     const uniteLegale = await getUniteLegaleFromSlugFn({
-      data: { slug, page: 1 },
+      data: { slug, page: deps.etablissmentsPage },
     });
 
     return { uniteLegale };
