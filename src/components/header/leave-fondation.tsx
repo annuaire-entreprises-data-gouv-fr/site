@@ -6,7 +6,8 @@ export function LeaveFondation() {
     <div className={styles.leaveFondations}>
       <div className="fr-container">
         <Link to="/">
-          ← Quitter les Fondations et revenir sur l'Annuaire des Entreprises
+          ← Quitter la recherche thématique « fonds et fondations » et revenir à
+          la recherche d'entreprises
         </Link>
       </div>
     </div>
