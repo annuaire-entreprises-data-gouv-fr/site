@@ -18,7 +18,7 @@
 # body: le corps du texte, en markdown
 slug: fondations
 title: un fonds ou une fondation
-titleDiamondColor: var(--annuaire-colors-fondation)
+titleDiamondColor: color-mix(in srgb, var(--annuaire-colors-fondation) 50%, transparent)
 footerLabel: Fonds et fondations
 published: true
 description: Retrouvez les infos de fondations, fondations d'entreprise
