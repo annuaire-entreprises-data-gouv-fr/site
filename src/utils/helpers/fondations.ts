@@ -30,17 +30,3 @@ export const getFoundationTypeLabel = (type: string): string => {
       return type;
   }
 };
-export const getFoundationTypeColor = (type: string): string => {
-  switch (type) {
-    case "FDD":
-      return "#d4c254";
-    case "FE":
-      return "#adbffc";
-    case "FA":
-      return "#009099";
-    case "FRUP":
-      return "#faa18d";
-    default:
-      return "#e08e73";
-  }
-};
