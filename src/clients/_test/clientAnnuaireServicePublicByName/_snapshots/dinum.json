@@ -5,16 +5,16 @@
   "result": {
     "affectationPersonne": [
       {
-        "nom": "Stéphanie SCHAER",
-        "fonction": "Directrice",
+        "nom": "Walter ARNAUD",
+        "fonction": "Directeur",
         "lienTexteAffectation": {
           "libelle": "JORF n°0224 du 27 septembre 2022",
-          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046331329"
+          "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054229600"
         }
       },
       {
         "nom": "Jérémie VALLET",
-        "fonction": "Adjoint à la directrice",
+        "fonction": "Adjoint au directeur",
         "lienTexteAffectation": {
           "libelle": "JORF n°0126 du 2 juin 2023",
           "valeur": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000047619252"
