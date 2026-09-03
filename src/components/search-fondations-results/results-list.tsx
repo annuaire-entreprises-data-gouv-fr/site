@@ -1,8 +1,8 @@
 import type React from "react";
 import { Link } from "#/components/link";
-import { FoundationTypeBadge } from "#/components-ui/badge/frequent";
 import { Icon } from "#/components-ui/icon/wrapper";
 import type { IFondation } from "#/models/core/fondations.types";
+import { getFoundationTypeLabel } from "#/utils/helpers/fondations";
 import styles from "../search-results/style.module.css";
 
 interface IProps {
@@ -44,10 +44,12 @@ const ResultItem: React.FC<{
     >
       <div className={styles.title}>
         <span>{`${result.title}`}</span>
-        {!!result.foundationType && (
-          <FoundationTypeBadge small type={result.foundationType} />
-        )}
       </div>
+      {!!result.foundationType && (
+        <div className="fr-mb-1w">
+          {getFoundationTypeLabel(result.foundationType)}
+        </div>
+      )}
       <div>
         <Icon slug="mapPin">
           <span className={styles.adress}>
