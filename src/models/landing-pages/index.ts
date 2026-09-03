@@ -20,6 +20,7 @@ export interface ILandingPage {
   };
   slug: string;
   title: string;
+  titleDiamondColor?: string;
 }
 
 type LandingPageJson = Omit<ILandingPage, "slug">;

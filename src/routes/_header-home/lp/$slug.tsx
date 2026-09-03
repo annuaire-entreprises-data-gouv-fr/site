@@ -73,7 +73,10 @@ function RouteComponent() {
       >
         <h1>
           <span className={styles.diamond}>
-            <span>{diamond}</span>Rechercher
+            <span style={{ color: landingPage.titleDiamondColor }}>
+              {diamond}
+            </span>
+            Rechercher
             <br />
           </span>
           {title}
