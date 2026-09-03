@@ -17,6 +17,7 @@ import { NonDiffusibleStrictSection } from "#/components/non-diffusible-section"
 import AvocatsSection from "#/components/screens/entreprise.$slug/avocats-section";
 import { UniteLegaleImmatriculationSection } from "#/components/screens/entreprise.$slug/immatriculation-section";
 import UniteLegaleSummarySection from "#/components/screens/entreprise.$slug/summary-section";
+import { TabsReminder } from "#/components/screens/entreprise.$slug/tabs-reminder";
 import { NotFound } from "#/components/screens/not-found";
 import ServicePublicSection from "#/components/service-public-section";
 import Title from "#/components/title-section";
@@ -317,6 +318,7 @@ function RouteComponent() {
         ) : (
           <>
             <UniteLegaleSummarySection uniteLegale={uniteLegale} user={user} />
+            <TabsReminder uniteLegale={uniteLegale} user={user} />
             {hasRights({ user }, ApplicationRights.isAgent) && (
               <EspaceAgentSummarySection
                 uniteLegale={uniteLegale}
