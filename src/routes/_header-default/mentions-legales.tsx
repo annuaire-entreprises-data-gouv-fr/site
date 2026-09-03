@@ -36,10 +36,10 @@ function RouteComponent() {
         Ce site est édité par l’incubateur des services numériques, Direction
         interministérielle du numérique (DINUM), Services du Premier ministre.
       </p>
-      <h2>Directrice de la publication</h2>
+      <h2>Directeur de la publication</h2>
       <p>
-        La directrice de la publication est Stéphanie SCHAER, directrice
-        interministérielle du numérique.
+        Le directeur de la publication est Walter ARNAUD, directeur
+        interministériel du numérique.
       </p>
       <h2>Hébergement de la plateforme</h2>
       <p>Cette plateforme est hébergée par :</p>
