@@ -1,5 +1,9 @@
 import type { PropsWithChildren } from "react";
 import constants from "#/models/constants";
+import {
+  getFoundationTypeColor,
+  getFoundationTypeLabel,
+} from "#/utils/helpers/fondations";
 import { Badge, type IPartialBadgeProps } from ".";
 
 export const LabelAndCertificateBadge = ({
@@ -108,6 +112,23 @@ export const DefaultStructureBadge = ({
     icon="buildingFill"
     isSelected={isSelected}
     label={label}
+    onClick={onClick}
+    small={small}
+  />
+);
+
+export const FoundationTypeBadge = ({
+  type,
+  small = false,
+  isSelected = false,
+  onClick,
+}: IPartialBadgeProps & { type: string }) => (
+  <Badge
+    backgroundColor={getFoundationTypeColor(type)}
+    fontColor={constants.colors.frBlue}
+    icon="serviceLine"
+    isSelected={isSelected}
+    label={getFoundationTypeLabel(type)}
     onClick={onClick}
     small={small}
   />
