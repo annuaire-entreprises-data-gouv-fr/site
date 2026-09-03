@@ -11,6 +11,7 @@ import { estActif } from "#/models/core/etat-administratif";
 import {
   type IUniteLegale,
   isAssociation,
+  isFondation,
   isServicePublic,
 } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
@@ -148,7 +149,11 @@ export const UniteLegaleInscriptionRNE = ({
   user: IAgentInfo | null;
 }) => {
   if (!uniteLegale.dateMiseAJourInpi) {
-    if (isServicePublic(uniteLegale) || isAssociation(uniteLegale)) {
+    if (
+      isServicePublic(uniteLegale) ||
+      isAssociation(uniteLegale) ||
+      isFondation(uniteLegale)
+    ) {
       return null;
     }
     return (
@@ -239,7 +244,10 @@ export const UniteLegaleInscriptionRNA = ({
     <Wrapper
       link={
         <Icon slug="download">
-          <Link params={{ slug: uniteLegale.siren }} to="/documents/$slug">
+          <Link
+            params={{ slug: uniteLegale.chemin }}
+            to="/entreprise/$slug/documents"
+          >
             Annonce de création au JOAFE
           </Link>
         </Icon>

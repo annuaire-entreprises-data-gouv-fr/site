@@ -15,6 +15,7 @@ import {
   type IUniteLegale,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
+  isFondation,
   isServicePublic,
   isServicePublicImmatriculeeAuRNE,
 } from "#/models/core/types";
@@ -60,16 +61,20 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.INFORMATION,
       label: "Fiche résumé",
-      params: { slug: uniteLegale.chemin },
-      to: "/entreprise/$slug",
+      params: {
+        slug: isFondation(uniteLegale)
+          ? uniteLegale.complements.numeroRnf
+          : uniteLegale.chemin,
+      },
+      to: isFondation(uniteLegale) ? "/fondation/$slug" : "/entreprise/$slug",
       noFollow: false,
       shouldDisplay: true,
       width: "80px",
     },
     {
       ficheType: FICHE.DIRIGEANTS,
-      params: { slug: uniteLegale.siren },
-      to: "/dirigeants/$slug",
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug/dirigeants",
       noFollow: false,
       shouldDisplay: true,
       ...(isCollectiviteTerritoriale(uniteLegale)
@@ -84,8 +89,8 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.DOCUMENTS,
       label: "Documents",
-      params: { slug: uniteLegale.siren },
-      to: "/documents/$slug",
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug/documents",
       noFollow: false,
       shouldDisplay: true,
       width: "95px",
@@ -93,16 +98,16 @@ const getUniteLegaleTabs = (
     {
       ficheType: FICHE.FINANCES,
       label: "Données financières",
-      params: { slug: uniteLegale.siren },
-      to: "/donnees-financieres/$slug",
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug/donnees-financieres",
       noFollow: false,
       shouldDisplay: shouldDisplayFinances,
       width: "100px",
     },
     {
       ficheType: FICHE.ANNONCES,
-      params: { slug: uniteLegale.siren },
-      to: "/annonces/$slug",
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug/annonces",
       label: `Annonces${
         uniteLegale.dateMiseAJourInpi ? " et observations" : ""
       }`,
@@ -112,8 +117,8 @@ const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.EFFECTIFS,
-      params: { slug: uniteLegale.siren },
-      to: "/effectifs/$slug",
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug/effectifs",
       label: "Effectifs",
       noFollow: false,
       shouldDisplay: hasRights({ user }, ApplicationRights.effectifs),
@@ -121,8 +126,8 @@ const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.CERTIFICATS,
-      params: { slug: uniteLegale.siren },
-      to: "/labels-certificats/$slug",
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug/labels-certificats",
       label: `${
         checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
       }abels et certificats`,
@@ -134,16 +139,16 @@ const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
-      params: { slug: uniteLegale.siren },
-      to: "/etablissements-scolaires/$slug",
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug/etablissements-scolaires",
       label: "Établissements scolaires",
       noFollow: false,
       shouldDisplay: uniteLegale.complements.estUai,
     },
     {
       ficheType: FICHE.DIVERS,
-      params: { slug: uniteLegale.siren },
-      to: "/divers/$slug",
+      params: { slug: uniteLegale.chemin },
+      to: "/entreprise/$slug/divers",
       label: "Conventions collectives",
       noFollow: false,
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
@@ -170,6 +175,7 @@ export const Tabs: React.FC<{
               label={label}
               noFollow={noFollow}
               params={params}
+              search={(search) => ({ from: search.from })}
               to={to}
               width={width}
             />

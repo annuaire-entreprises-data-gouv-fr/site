@@ -2,7 +2,7 @@ import { expect, goto, test } from "../support/test";
 
 test.describe("Dirigeants and élus pages", () => {
   test("Dirigeant page loads", async ({ page }) => {
-    await goto(page, "/dirigeants/843701079");
+    await goto(page, "/entreprise/843701079/dirigeants");
     await expect(page.getByText("Details").first()).toBeVisible();
     await expect(
       page.getByText("Lionel, Andre BERTRAND").first()
@@ -10,7 +10,7 @@ test.describe("Dirigeants and élus pages", () => {
   });
 
   test("Elus page loads", async ({ page }) => {
-    await goto(page, "/dirigeants/217500016");
+    await goto(page, "/entreprise/217500016/dirigeants");
     await expect(page.getByText("Emmanuel GRÉGOIRE").first()).toBeVisible();
   });
 });

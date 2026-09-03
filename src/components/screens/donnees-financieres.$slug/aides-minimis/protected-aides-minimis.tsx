@@ -57,9 +57,7 @@ const AidesMinimisTable = ({
   />
 );
 
-const aidesMinimisRoute = getRouteApi(
-  "/_header-default/donnees-financieres/$slug"
-);
+const aidesMinimisRoute = getRouteApi("/entreprise/$slug/donnees-financieres");
 
 export default function AidesMinimisProtected({
   uniteLegale,

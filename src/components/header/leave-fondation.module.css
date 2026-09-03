@@ -1,0 +1,6 @@
+.leaveFondations {
+  width: 100%;
+  padding: 12px 0px;
+  color: var(--annuaire-colors-frBlue);
+  background-color: var(--annuaire-colors-fondation);
+}

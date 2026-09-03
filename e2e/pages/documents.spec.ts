@@ -2,7 +2,7 @@ import { expect, goto, login, test } from "../support/test";
 
 test.describe("Documents ESSOR ENERGIES (SOLARSUD)", () => {
   test("Bouton agent connect sur les données protégées", async ({ page }) => {
-    await goto(page, "/documents/487444697");
+    await goto(page, "/entreprise/487444697/documents");
     await expect(
       page.getByText("Réservé aux agents publics").first()
     ).toBeVisible();
@@ -13,7 +13,7 @@ test.describe("Documents ESSOR ENERGIES (SOLARSUD)", () => {
 
   test("[LOGGED] Should display documents", async ({ page, context }) => {
     await login(page, context);
-    await goto(page, "/documents/487444697");
+    await goto(page, "/entreprise/487444697/documents");
 
     await expect(
       page.getByText("Attestations de conformité sociale").first()
@@ -69,7 +69,7 @@ test.describe("Documents ESSOR ENERGIES (SOLARSUD)", () => {
     context,
   }) => {
     await login(page, context, "travaux_publics@yopmail.com");
-    await goto(page, "/documents/487444697");
+    await goto(page, "/entreprise/487444697/documents");
 
     await expect(
       page.getByText("Attestations de conformité sociale")
@@ -90,7 +90,7 @@ test.describe("Documents ESSOR ENERGIES (SOLARSUD)", () => {
     context,
   }) => {
     await login(page, context, "conformite_sociale@yopmail.com");
-    await goto(page, "/documents/487444697");
+    await goto(page, "/entreprise/487444697/documents");
 
     await expect(
       page.getByText("Attestations de conformité sociale").first()
@@ -111,7 +111,7 @@ test.describe("Documents ESSOR ENERGIES (SOLARSUD)", () => {
     context,
   }) => {
     await login(page, context, "conformite_fiscale@yopmail.com");
-    await goto(page, "/documents/487444697");
+    await goto(page, "/entreprise/487444697/documents");
 
     await expect(
       page.getByText("Attestations de conformité sociale")

@@ -16,7 +16,7 @@ test.describe("Espace agent", () => {
   });
 
   test("Bouton agent connect sur les données protégées", async ({ page }) => {
-    await goto(page, "/documents/487444697");
+    await goto(page, "/entreprise/487444697/documents");
     await expect(
       page.getByText("Réservé aux agents publics").first()
     ).toBeVisible();
