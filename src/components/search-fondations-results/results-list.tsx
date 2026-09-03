@@ -1,5 +1,6 @@
 import type React from "react";
 import { Link } from "#/components/link";
+import { FoundationTypeBadge } from "#/components-ui/badge/frequent";
 import { Icon } from "#/components-ui/icon/wrapper";
 import type { IFondation } from "#/models/core/fondations.types";
 import styles from "../search-results/style.module.css";
@@ -43,6 +44,9 @@ const ResultItem: React.FC<{
     >
       <div className={styles.title}>
         <span>{`${result.title}`}</span>
+        {!!result.foundationType && (
+          <FoundationTypeBadge small type={result.foundationType} />
+        )}
       </div>
       <div>
         <Icon slug="mapPin">

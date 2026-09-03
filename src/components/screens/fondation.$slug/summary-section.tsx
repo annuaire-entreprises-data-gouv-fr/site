@@ -24,6 +24,7 @@ import { estActif } from "#/models/core/etat-administratif";
 import type { IFondation } from "#/models/core/fondations.types";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate, formatIntFr, formatSiret } from "#/utils/helpers";
+import { getFoundationTypeLabel } from "#/utils/helpers/fondations";
 import {
   UniteLegaleInscriptionIG,
   UniteLegaleInscriptionRNA,
@@ -122,7 +123,7 @@ const FondationSummarySection: React.FC<{
           ],
         ]
       : []),
-    ["Type organisme", formatFoundationType(fondation.foundationType)],
+    ["Type organisme", getFoundationTypeLabel(fondation.foundationType)],
     ["Domaine d'intérêt", fondation.generalInterestDomain],
     [
       <Link params={{ slug: "modifier-adresse" }} to="/faq/$slug">
@@ -195,25 +196,5 @@ const FondationSummarySection: React.FC<{
     </div>
   );
 };
-
-function formatFoundationType(type: string) {
-  switch (type) {
-    case "FDD":
-      return "Fond de dotation";
-    case "FE":
-      return "Fondation d'entreprise";
-    case "FA":
-      return "Fondation abritée";
-    case "FRUP":
-      return "Fondation reconnue d’utilité publique";
-    case "FCS":
-    case "FH":
-    case "FP":
-    case "FU":
-      return `Fondation scientifique (${type})`;
-    default:
-      return type;
-  }
-}
 
 export default FondationSummarySection;
