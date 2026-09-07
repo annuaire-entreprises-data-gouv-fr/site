@@ -237,7 +237,7 @@ const Footer = () => (
       </div>
       <div className="fr-container">
         <div className="fr-footer__body">
-          <div className="fr-footer__brand fr-enlarge-link">
+          <div className="fr-footer__brand flex-wrap gap-y-4">
             <p className="fr-logo" title="république française">
               <span className="fr-logo__title">
                 république
@@ -245,10 +245,16 @@ const Footer = () => (
                 française
               </span>
             </p>
-            <Link
-              className={clsx("fr-footer__brand-link", styles.brandLinkItem)}
-              title="Aller à l'accueil du site - annuaire-entreprises.data.gouv.fr - République Française"
-              to="/"
+            <a
+              className={clsx(
+                "fr-footer__brand-link relative",
+                styles.logoLink,
+                styles.brandLinkItem
+              )}
+              href="https://www.data.gouv.fr/products"
+              rel="noreferrer noopener"
+              target="_blank"
+              title="Produits data.gouv.fr — nouvelle fenêtre"
             >
               <img
                 alt="logo data.gouv.fr"
@@ -258,7 +264,24 @@ const Footer = () => (
                 width={64}
               />
               <p>Produit de l'écosystème datagouv</p>
-            </Link>
+            </a>
+            <a
+              className={clsx(
+                "fr-footer__brand-link relative",
+                styles.logoLink
+              )}
+              href="https://www.numerique.gouv.fr/"
+              rel="noreferrer noopener"
+              target="_blank"
+              title="numerique.gouv — nouvelle fenêtre"
+            >
+              <img
+                alt="numerique.gouv — nouvelle fenêtre"
+                height={93}
+                src="/images/logos/numerique-gouv.svg"
+                width={180}
+              />
+            </a>
           </div>
           <div className="fr-footer__content">
             <p className="fr-footer__content-desc">
