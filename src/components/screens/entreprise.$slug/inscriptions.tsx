@@ -123,19 +123,21 @@ export const UniteLegaleInscriptionSirene = ({
         )}.`}
         tabIndex={undefined}
       >
-        {estActif(uniteLegale) ? (
-          <OpenClosedTag icon="open" label="Inscrite (Insee)">
-            {uniteLegale.dateCreation && (
-              <>le {formatDate(uniteLegale.dateCreation)}</>
-            )}
-          </OpenClosedTag>
-        ) : (
-          <OpenClosedTag icon="closed" label="Cessée (Insee)">
-            {uniteLegale.dateCreation && (
-              <>le {formatDate(uniteLegale.dateFermeture)}</>
-            )}
-          </OpenClosedTag>
-        )}
+        <a href="#fondation-insee">
+          {estActif(uniteLegale) ? (
+            <OpenClosedTag icon="open" label="Inscrite (Insee)">
+              {uniteLegale.dateCreation && (
+                <>le {formatDate(uniteLegale.dateCreation)}</>
+              )}
+            </OpenClosedTag>
+          ) : (
+            <OpenClosedTag icon="closed" label="Cessée (Insee)">
+              {uniteLegale.dateCreation && (
+                <>le {formatDate(uniteLegale.dateFermeture)}</>
+              )}
+            </OpenClosedTag>
+          )}
+        </a>
       </InformationTooltip>
     </Wrapper>
   );
