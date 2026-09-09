@@ -38,7 +38,7 @@ export const FICHE = {
 } as const;
 export type FICHE = (typeof FICHE)[keyof typeof FICHE];
 
-interface ITab {
+export interface ITab {
   ficheType: FICHE;
   label: string;
   noFollow: boolean;
@@ -48,7 +48,7 @@ interface ITab {
   width?: string;
 }
 
-const getUniteLegaleTabs = (
+export const getUniteLegaleTabs = (
   uniteLegale: IUniteLegale,
   user: IAgentInfo | null
 ): ITab[] => {

@@ -4,7 +4,6 @@ import EtablissementListeSection from "#/components/etablissement-liste-section"
 import EtablissementSection from "#/components/etablissement-section";
 import FondationInseeSection from "#/components/screens/fondation.$slug/insee-section";
 import FondationSummarySection from "#/components/screens/fondation.$slug/summary-section";
-import { TitleFondation } from "#/components/title-fondation-section";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { useAuth } from "#/contexts/auth.context";
@@ -66,12 +65,7 @@ function RouteComponent() {
     from === "entreprise" || (from === null && !!uniteLegale);
 
   return (
-    <div className="content-container">
-      <TitleFondation
-        fondation={fondation}
-        uniteLegale={uniteLegale}
-        user={user}
-      />
+    <>
       <FondationSummarySection
         fondation={fondation}
         uniteLegale={uniteLegale}
@@ -107,6 +101,6 @@ function RouteComponent() {
           <EtablissementListeSection uniteLegale={uniteLegale} />
         </>
       )}
-    </div>
+    </>
   );
 }

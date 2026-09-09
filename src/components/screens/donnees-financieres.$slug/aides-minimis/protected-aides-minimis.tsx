@@ -1,4 +1,4 @@
-import { getRouteApi } from "@tanstack/react-router";
+import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useCallback, useMemo } from "react";
 import type { IMinimis } from "#/clients/api-data-gouv/minimis/interface";
 import LocalPageCounter from "#/components/search-results/results-pagination/local-pagination";
@@ -57,15 +57,21 @@ const AidesMinimisTable = ({
   />
 );
 
-const aidesMinimisRoute = getRouteApi("/entreprise/$slug/donnees-financieres");
-
 export default function AidesMinimisProtected({
   uniteLegale,
 }: {
   uniteLegale: IUniteLegale;
 }) {
-  const { "aides-minimis-page": currentPage } = aidesMinimisRoute.useSearch();
-  const navigate = aidesMinimisRoute.useNavigate();
+  const { "aides-minimis-page": currentPage = 1 } = useSearch({
+    strict: false,
+  });
+  const from = useLocation({
+    select: ({ pathname }) =>
+      pathname.startsWith("/fondation/")
+        ? "/fondation/$slug/donnees-financieres"
+        : "/entreprise/$slug/donnees-financieres",
+  });
+  const navigate = useNavigate({ from });
   const onPageChange = useCallback(
     (page: number) => {
       navigate({
