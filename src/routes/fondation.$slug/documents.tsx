@@ -7,6 +7,7 @@ import {
 import JustificatifsSection from "#/components/screens/documents.$slug/justificatifs";
 import { SummaryDocuments } from "#/components/screens/documents.$slug/summary-documents";
 import TravauxPublicsSection from "#/components/screens/documents.$slug/travaux-publics";
+import DocumentsFondationSection from "#/components/screens/fondation.$slug/documents";
 import { NotFound } from "#/components/screens/not-found";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import BreakPageForPrint from "#/components-ui/print-break-page";
@@ -63,31 +64,44 @@ export const Route = createFileRoute("/fondation/$slug/documents")({
 });
 
 function RouteComponent() {
-  const { uniteLegale } = Route.useLoaderData();
+  const { fondation, uniteLegale } = Route.useLoaderData();
   const { user } = useAuth();
-
-  if (!uniteLegale) {
-    return <p>Aucune donnée disponible pour cette fondation.</p>;
-  }
 
   return (
     <>
-      <SummaryDocuments user={user} />
-      <JustificatifsSection uniteLegale={uniteLegale} user={user} />
-      <HorizontalSeparator />
-      <BreakPageForPrint />
-      <PrintNever>
-        {hasRights({ user }, ApplicationRights.conformiteSociale) && (
-          <ConformiteSocialeSection uniteLegale={uniteLegale} user={user} />
-        )}
-        {hasRights({ user }, ApplicationRights.conformiteFiscale) && (
-          <ConformiteFiscaleSection uniteLegale={uniteLegale} user={user} />
-        )}
-        <ActesSection uniteLegale={uniteLegale} user={user} />
-        {hasRights({ user }, ApplicationRights.travauxPublics) && (
-          <TravauxPublicsSection uniteLegale={uniteLegale} user={user} />
-        )}
-      </PrintNever>
+      <SummaryDocuments
+        additionalSummaryItems={
+          <li>
+            <a href="#documents-rnf">Documents du RNF</a>
+          </li>
+        }
+        showUniteLegaleDocuments={!!uniteLegale}
+        user={user}
+      />
+      <DocumentsFondationSection
+        fondation={fondation}
+        key={fondation.id}
+        user={user}
+      />
+      {uniteLegale && (
+        <>
+          <JustificatifsSection uniteLegale={uniteLegale} user={user} />
+          <HorizontalSeparator />
+          <BreakPageForPrint />
+          <PrintNever>
+            {hasRights({ user }, ApplicationRights.conformiteSociale) && (
+              <ConformiteSocialeSection uniteLegale={uniteLegale} user={user} />
+            )}
+            {hasRights({ user }, ApplicationRights.conformiteFiscale) && (
+              <ConformiteFiscaleSection uniteLegale={uniteLegale} user={user} />
+            )}
+            <ActesSection uniteLegale={uniteLegale} user={user} />
+            {hasRights({ user }, ApplicationRights.travauxPublics) && (
+              <TravauxPublicsSection uniteLegale={uniteLegale} user={user} />
+            )}
+          </PrintNever>
+        </>
+      )}
     </>
   );
 }
