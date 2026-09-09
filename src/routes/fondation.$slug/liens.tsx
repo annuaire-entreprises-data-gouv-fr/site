@@ -1,10 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
+import LiensFondationSection from "#/components/screens/fondation.$slug/liens";
+import { useAuth } from "#/contexts/auth.context";
 import { fondationPageTitle } from "#/utils/helpers/formatting/fondation-label";
 import { meta } from "#/utils/seo";
 
 export const Route = createFileRoute("/fondation/$slug/liens")({
   loader: async ({ parentMatchPromise }) => {
     const { loaderData } = await parentMatchPromise;
+    if (!loaderData) {
+      throw notFound();
+    }
     return loaderData;
   },
   head: ({ loaderData }) =>
@@ -17,13 +22,18 @@ export const Route = createFileRoute("/fondation/$slug/liens")({
           }),
         }
       : meta.notFound(),
-  component: () => (
-    <section>
-      <h2>Liens entre organismes</h2>
-      <p>
-        Les liens de cette fondation avec d’autres organismes seront disponibles
-        prochainement.
-      </p>
-    </section>
-  ),
+  component: RouteComponent,
 });
+
+function RouteComponent() {
+  const { fondation } = Route.useLoaderData();
+  const { user } = useAuth();
+
+  return (
+    <LiensFondationSection
+      fondation={fondation}
+      key={fondation.id}
+      user={user}
+    />
+  );
+}
