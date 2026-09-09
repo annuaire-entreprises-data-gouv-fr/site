@@ -98,7 +98,8 @@ describe("foundation dirigeants access", () => {
     expect(fetchData).toHaveBeenCalledWith(
       "fondations",
       { idRnf: fondation.id, useCase },
-      ApplicationRights.isAgent
+      ApplicationRights.isAgent,
+      { staleTime: 300_000, gcTime: 1_800_000 }
     );
     expect(screen.getByText(/Aucun dirigeant/)).toBeTruthy();
   });

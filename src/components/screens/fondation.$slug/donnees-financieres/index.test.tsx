@@ -124,7 +124,8 @@ it("requires an independent use case for each RNF section", () => {
   expect(fetchData).toHaveBeenLastCalledWith(
     "fondations",
     { idRnf: fondation.id, useCase: UseCase.marches },
-    ApplicationRights.isAgent
+    ApplicationRights.isAgent,
+    { staleTime: 300_000, gcTime: 1_800_000 }
   );
   expect(within(conformite).getAllByRole("radio")).toHaveLength(5);
   fireEvent.click(
@@ -133,7 +134,8 @@ it("requires an independent use case for each RNF section", () => {
   expect(fetchData).toHaveBeenLastCalledWith(
     "fondations",
     { idRnf: fondation.id, useCase: UseCase.autre },
-    ApplicationRights.isAgent
+    ApplicationRights.isAgent,
+    { staleTime: 300_000, gcTime: 1_800_000 }
   );
   expect(screen.getByText("En défaut")).toBeTruthy();
 });

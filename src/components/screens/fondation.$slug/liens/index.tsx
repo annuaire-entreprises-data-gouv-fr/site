@@ -1,16 +1,14 @@
-import { useMemo } from "react";
 import { Link } from "#/components/link";
 import { AsyncDataSectionClient } from "#/components/section/data-section/client";
 import ProtectedSectionWithUseCase, {
   type WrappedSectionFondationProps,
 } from "#/components/section-with-use-case";
-import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
+import { useFondationsRestreintes } from "#/hooks/fetch/fondations-restreintes";
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { ApplicationRights } from "#/models/authentication/user/rights";
 import type { IFondation } from "#/models/core/fondations.types";
 import { UseCase } from "#/models/use-cases";
-import { getAgentFondationsRestreintesFn } from "#/server-functions/agent/data-fetching";
 import { LiensFondationContent, NoLiensFondation } from "./content";
 
 function ProtectedLiensFondationSection({
@@ -21,15 +19,7 @@ function ProtectedLiensFondationSection({
   sources,
   isProtected,
 }: WrappedSectionFondationProps) {
-  const input = useMemo(
-    () => ({ idRnf: fondation.id, useCase }),
-    [fondation.id, useCase]
-  );
-  const data = useServerFnData(
-    getAgentFondationsRestreintesFn,
-    input,
-    ApplicationRights.isAgent
-  );
+  const data = useFondationsRestreintes(fondation.id, useCase);
 
   return (
     <AsyncDataSectionClient
