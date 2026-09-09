@@ -1,0 +1,12 @@
+.dirigeant {
+  margin-top: 2rem;
+}
+
+.dirigeant + .dirigeant {
+  padding-top: 2rem;
+  border-top: 1px solid #ddd;
+}
+
+.dirigeant h4 {
+  margin-top: 1.5rem;
+}

@@ -1,27 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { DonneesPriveesSection } from "#/components/donnees-privees-section";
-import DirigeantsAssociationSection from "#/components/screens/dirigeants.$slug/sections/association/dirigeants";
-import ElusSection from "#/components/screens/dirigeants.$slug/sections/collectivite/elus-section";
-import DPOSection from "#/components/screens/dirigeants.$slug/sections/entreprise/dpo/section";
-import DirigeantsEntrepriseSection from "#/components/screens/dirigeants.$slug/sections/entreprise/entreprise-section";
-import DirigeantSummary from "#/components/screens/dirigeants.$slug/sections/entreprise/summary";
-import ResponsablesServicePublicSection from "#/components/screens/dirigeants.$slug/sections/service-public";
+import DirigeantsFondationSection from "#/components/screens/fondation.$slug/dirigeants";
 import { NotFound } from "#/components/screens/not-found";
-import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { useAuth } from "#/contexts/auth.context";
-import type { IAgentInfo } from "#/models/authentication/agent";
-import {
-  ApplicationRights,
-  hasRights,
-} from "#/models/authentication/user/rights";
-import { estDiffusible } from "#/models/core/diffusion";
-import {
-  type IUniteLegale,
-  isAssociation,
-  isCollectiviteTerritoriale,
-  isServicePublic,
-  isServicePublicImmatriculeeAuRNE,
-} from "#/models/core/types";
 import {
   fondationPageDescription,
   fondationPageTitle,
@@ -69,63 +49,14 @@ export const Route = createFileRoute("/fondation/$slug/dirigeants")({
 });
 
 function RouteComponent() {
-  const { uniteLegale } = Route.useLoaderData();
-
+  const { fondation } = Route.useLoaderData();
   const { user } = useAuth();
 
-  if (!uniteLegale) {
-    return <p>Aucune donnée disponible pour cette fondation.</p>;
-  }
-
   return (
-    <>
-      <DirigeantSummary uniteLegale={uniteLegale} user={user} />
-      <DirigeantsContent uniteLegale={uniteLegale} user={user} />
-      <HorizontalSeparator />
-      <DPOSection uniteLegale={uniteLegale} />
-    </>
+    <DirigeantsFondationSection
+      fondation={fondation}
+      key={fondation.id}
+      user={user}
+    />
   );
 }
-
-const DirigeantsContent = ({
-  uniteLegale,
-  user,
-}: {
-  uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
-}) => {
-  // Non diffusible
-  if (
-    !(
-      estDiffusible(uniteLegale) ||
-      hasRights({ user }, ApplicationRights.nonDiffusible)
-    )
-  ) {
-    return <DonneesPriveesSection title="Dirigeant(s)" />;
-  }
-
-  // Collectivité territoriale
-  if (isCollectiviteTerritoriale(uniteLegale)) {
-    return (
-      <>
-        <ElusSection uniteLegale={uniteLegale} />
-        <ResponsablesServicePublicSection uniteLegale={uniteLegale} />
-      </>
-    );
-  }
-
-  // Service public
-  if (
-    isServicePublic(uniteLegale) &&
-    !isServicePublicImmatriculeeAuRNE(uniteLegale)
-  ) {
-    return <ResponsablesServicePublicSection uniteLegale={uniteLegale} />;
-  }
-
-  // Association
-  if (isAssociation(uniteLegale)) {
-    return <DirigeantsAssociationSection uniteLegale={uniteLegale} />;
-  }
-  // Entreprises & EI
-  return <DirigeantsEntrepriseSection uniteLegale={uniteLegale} user={user} />;
-};

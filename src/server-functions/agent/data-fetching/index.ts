@@ -16,6 +16,7 @@ import { getLiassesFiscalesProtected } from "#/models/espace-agent/dgfip/liasses
 import { getDirigeantsProtected } from "#/models/espace-agent/dirigeants-protected";
 import { getEffectifsAnnuelsProtected } from "#/models/espace-agent/effectifs/annuels";
 import { getEffectifsMensuelsProtected } from "#/models/espace-agent/effectifs/mensuels";
+import { getFondationsRestreintes } from "#/models/espace-agent/fondations-restreintes";
 import { getLiensCapitalistiquesProtected } from "#/models/espace-agent/liens-capitalistiques";
 import { getDocumentsRNEProtected } from "#/models/espace-agent/rne-protected/documents";
 import { getTravauxPublic } from "#/models/espace-agent/travaux-publics";
@@ -37,6 +38,7 @@ import {
   getAgentDocumentsRNEProtectedSchema,
   getAgentEffectifsAnnuelsProtectedSchema,
   getAgentEffectifsMensuelsProtectedSchema,
+  getAgentFondationsRestreintesSchema,
   getAgentLiassesFiscalesProtectedSchema,
   getAgentLiensCapitalistiquesProtectedSchema,
   getAgentOpqibiSchema,
@@ -45,6 +47,14 @@ import {
   getAgentTravauxPublicsSchema,
   getSubventionsAssociationSchema,
 } from "./schemas";
+
+export const getAgentFondationsRestreintesFn = createServerFn()
+  .middleware([agentFnMiddleware, withRateLimiting, withUseCase])
+  .validator(getAgentFondationsRestreintesSchema)
+  .handler(
+    async ({ data: { idRnf, useCase } }) =>
+      await getFondationsRestreintes(idRnf, { useCase })
+  );
 
 export const getAgentBeneficiairesFn = createServerFn()
   .middleware([
