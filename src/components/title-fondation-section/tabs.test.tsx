@@ -23,7 +23,7 @@ vi.mock("#/components/link", () => ({
       href={to?.replace("$slug", (params as { slug: string }).slug)}
     >
       {typeof children === "function"
-        ? children({ isActive: false, isTransitioning: false })
+        ? children({ isActive: false })
         : children}
     </a>
   ),
