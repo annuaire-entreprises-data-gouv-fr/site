@@ -6,6 +6,8 @@ import {
 import z from "zod";
 import DonneesFinancieresAssociation from "#/components/screens/donnees-financieres.$slug/donnees-financieres-association";
 import DonneesFinancieresSociete from "#/components/screens/donnees-financieres.$slug/donnees-financieres-societe";
+import ConformiteComptableFondationSection from "#/components/screens/fondation.$slug/donnees-financieres/conformite-comptable";
+import IndicateursFinanciersFondationSection from "#/components/screens/fondation.$slug/donnees-financieres/indicateurs-financiers";
 import { NotFound } from "#/components/screens/not-found";
 import { useAuth } from "#/contexts/auth.context";
 import { isAssociation } from "#/models/core/types";
@@ -65,20 +67,64 @@ export const Route = createFileRoute("/fondation/$slug/donnees-financieres")({
 });
 
 function RouteComponent() {
-  const { uniteLegale } = Route.useLoaderData();
+  const { fondation, uniteLegale } = Route.useLoaderData();
   const { user } = useAuth();
 
+  const summaryItems = (
+    <>
+      <li>
+        <a href="#indicateurs-financiers-rnf">Indicateurs financiers du RNF</a>
+      </li>
+      <li>
+        <a href="#conformite-comptable-rnf">Conformité comptable</a>
+      </li>
+    </>
+  );
+  const rnfSections = (
+    <>
+      <IndicateursFinanciersFondationSection
+        fondation={fondation}
+        key={`indicateurs-${fondation.id}`}
+        user={user}
+      />
+      <ConformiteComptableFondationSection
+        fondation={fondation}
+        key={`conformite-${fondation.id}`}
+        user={user}
+      />
+    </>
+  );
+
   if (!uniteLegale) {
-    return <p>Aucune donnée disponible pour cette fondation.</p>;
+    return (
+      <>
+        <nav aria-labelledby="finances-fondation-summary-title">
+          <strong id="finances-fondation-summary-title">
+            Informations financières disponibles :
+          </strong>
+          <ul>{summaryItems}</ul>
+          <br />
+        </nav>
+        {rnfSections}
+      </>
+    );
   }
 
-  return (
-    <>
-      {isAssociation(uniteLegale) ? (
-        <DonneesFinancieresAssociation uniteLegale={uniteLegale} user={user} />
-      ) : (
-        <DonneesFinancieresSociete uniteLegale={uniteLegale} user={user} />
-      )}
-    </>
+  return isAssociation(uniteLegale) ? (
+    <DonneesFinancieresAssociation
+      additionalSummaryItems={summaryItems}
+      uniteLegale={uniteLegale}
+      user={user}
+    >
+      {rnfSections}
+    </DonneesFinancieresAssociation>
+  ) : (
+    <DonneesFinancieresSociete
+      additionalSummaryItems={summaryItems}
+      uniteLegale={uniteLegale}
+      user={user}
+    >
+      {rnfSections}
+    </DonneesFinancieresSociete>
   );
 }

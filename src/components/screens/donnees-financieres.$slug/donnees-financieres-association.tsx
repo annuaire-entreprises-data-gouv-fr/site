@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { hasAidesADEME, type IAssociation } from "#/models/core/types";
@@ -10,17 +11,22 @@ import SubventionsAssociationSection from "./subventions-association";
 export default function DonneesFinancieresAssociation({
   uniteLegale,
   user,
+  additionalSummaryItems,
+  children,
 }: {
+  additionalSummaryItems?: ReactNode;
+  children?: ReactNode;
   user: IAgentInfo | null;
   uniteLegale: IAssociation;
 }) {
   return (
     <>
       <nav aria-labelledby="finances-association-summary-title">
-        <strong id="finances-associtation-summary-title">
+        <strong id="finances-association-summary-title">
           Informations financières disponibles :
         </strong>
         <ul>
+          {additionalSummaryItems}
           <li>
             <a href="#finances-association">Indicateurs financiers</a>
           </li>
@@ -41,6 +47,7 @@ export default function DonneesFinancieresAssociation({
         </ul>
         <br />
       </nav>
+      {children}
       <FinancesAssociationSection uniteLegale={uniteLegale} />
       <ComptesAssociationSection uniteLegale={uniteLegale} />
       <HorizontalSeparator />

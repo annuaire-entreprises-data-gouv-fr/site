@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { DonneesPriveesSection } from "#/components/donnees-privees-section";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import type { IAgentInfo } from "#/models/authentication/agent";
@@ -23,7 +24,11 @@ import { LiassesFiscales } from "./liasses-fiscales";
 export default function DonneesFinancieresSociete({
   uniteLegale,
   user,
+  additionalSummaryItems,
+  children,
 }: {
+  additionalSummaryItems?: ReactNode;
+  children?: ReactNode;
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }) {
@@ -33,10 +38,12 @@ export default function DonneesFinancieresSociete({
   return (
     <>
       <FinancesSocieteSummary
+        additionalSummaryItems={additionalSummaryItems}
         shouldShowOnlyAides={shouldShowOnlyAides}
         uniteLegale={uniteLegale}
         user={user}
       />
+      {children}
       {!shouldShowOnlyAides && (
         <>
           {estDiffusible(uniteLegale) ||
