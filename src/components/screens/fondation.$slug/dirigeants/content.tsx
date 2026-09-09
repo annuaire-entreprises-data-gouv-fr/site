@@ -20,7 +20,16 @@ function DirigeantFondationCard({
   const adresse = dirigeant.adresseDomiciliation;
   const adresseComplete = [
     adresse?.adresseComplete ||
-      [adresse?.codePostal, adresse?.commune].filter(Boolean).join(" "),
+      [
+        adresse?.complement,
+        [adresse?.numeroVoie, adresse?.typeVoie, adresse?.libelleVoie]
+          .filter(Boolean)
+          .join(" "),
+        adresse?.distribution,
+        [adresse?.codePostal, adresse?.commune].filter(Boolean).join(" "),
+      ]
+        .filter(Boolean)
+        .join(", "),
     adresse?.pays,
   ]
     .filter(Boolean)
@@ -54,7 +63,7 @@ function DirigeantFondationCard({
   ].filter(([, value]) => value);
   const personneMorale = dirigeant.personneMorale;
   const representation = [
-    ["Dénomination", personneMorale?.denomination],
+    ["Dénomination", personneMorale?.nom],
     ["Type d’organisme", personneMorale?.type],
     ["Identifiant", personneMorale?.identifiant],
     ["Pays", personneMorale?.pays],

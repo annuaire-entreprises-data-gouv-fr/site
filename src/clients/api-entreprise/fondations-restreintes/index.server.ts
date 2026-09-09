@@ -34,6 +34,12 @@ const mapToDomainObject = (
     adresseDomiciliation: dirigeant.adresse_domiciliation
       ? {
           adresseComplete: dirigeant.adresse_domiciliation.adresse_complete,
+          complement: dirigeant.adresse_domiciliation.complement,
+          numeroVoie: dirigeant.adresse_domiciliation.numero_voie,
+          typeVoie: dirigeant.adresse_domiciliation.type_voie,
+          libelleVoie: dirigeant.adresse_domiciliation.libelle_voie,
+          distribution: dirigeant.adresse_domiciliation.distribution,
+          codeInsee: dirigeant.adresse_domiciliation.code_insee,
           codePostal: dirigeant.adresse_domiciliation.code_postal,
           commune: dirigeant.adresse_domiciliation.commune,
           pays: dirigeant.adresse_domiciliation.pays,
@@ -50,39 +56,15 @@ const mapToDomainObject = (
       ? {
           type: dirigeant.personne_morale.type,
           identifiant: dirigeant.personne_morale.identifiant,
-          denomination: dirigeant.personne_morale.denomination,
+          nom: dirigeant.personne_morale.nom,
           pays: dirigeant.personne_morale.pays,
         }
       : dirigeant.personne_morale,
   })),
-  liensEntreOrganismes: {
-    organismeIssuTransformation: response.data.liens_entre_organismes
-      .organisme_issu_transformation
-      ? {
-          type: response.data.liens_entre_organismes
-            .organisme_issu_transformation.type,
-          identifiant:
-            response.data.liens_entre_organismes.organisme_issu_transformation
-              .identifiant,
-        }
-      : null,
-    organismeIssuFusion: response.data.liens_entre_organismes
-      .organisme_issu_fusion
-      ? {
-          type: response.data.liens_entre_organismes.organisme_issu_fusion.type,
-          identifiant:
-            response.data.liens_entre_organismes.organisme_issu_fusion
-              .identifiant,
-        }
-      : null,
-    organismesIssusScission:
-      response.data.liens_entre_organismes.organismes_issus_scission.map(
-        (organisme) => ({
-          type: organisme.type,
-          identifiant: organisme.identifiant,
-        })
-      ),
-  },
+  filiation: response.data.filiation.map((lien) => ({
+    typeOperation: lien.type_operation,
+    identifiant: lien.identifiant,
+  })),
   situationFinanciere: {
     anneesSubventionsPubliques:
       response.data.situation_financiere.annees_subventions_publiques,
@@ -91,10 +73,11 @@ const mapToDomainObject = (
     anneesFinancementsEtrangers:
       response.data.situation_financiere.annees_financements_etrangers,
   },
-  dossiers: {
-    etatTransmissionComptes: response.data.dossiers.etat_transmission_comptes,
-    exercicesComptablesTransmis:
-      response.data.dossiers.exercices_comptables_transmis,
+  conformiteComptable: {
+    etatTransmissionComptes:
+      response.data.conformite_comptable.etat_transmission_comptes,
+    anneesExercicesComptablesTransmis:
+      response.data.conformite_comptable.annees_exercices_comptables_transmis,
   },
   documents: response.data.documents.map((document) => ({
     id: document.id,

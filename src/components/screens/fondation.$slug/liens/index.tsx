@@ -40,9 +40,7 @@ function ProtectedLiensFondationSection({
       sources={sources}
       title={title}
     >
-      {({ liensEntreOrganismes }) => (
-        <LiensFondationContent liensEntreOrganismes={liensEntreOrganismes} />
-      )}
+      {({ filiation }) => <LiensFondationContent filiation={filiation} />}
     </AsyncDataSectionClient>
   );
 }

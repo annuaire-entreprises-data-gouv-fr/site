@@ -76,11 +76,7 @@ const user: IAgentInfo = {
 beforeEach(() => {
   fetchData.mockReset();
   fetchData.mockReturnValue({
-    liensEntreOrganismes: {
-      organismeIssuTransformation: null,
-      organismeIssuFusion: null,
-      organismesIssusScission: [],
-    },
+    filiation: [],
   });
 });
 afterEach(cleanup);
@@ -136,37 +132,21 @@ describe("foundation links access", () => {
   });
 });
 describe("foundation links content", () => {
-  it("shows all relationship types and links recognised RNF identifiers", () => {
+  it("shows every operation, including repeated operations, and links RNF identifiers", () => {
     render(
       <LiensFondationContent
-        liensEntreOrganismes={{
-          organismeIssuTransformation: {
-            type: "FRUP",
-            identifiant: "075-FRUP-00194-01",
-          },
-          organismeIssuFusion: {
-            type: "Association",
-            identifiant: "W751000001",
-          },
-          organismesIssusScission: [
-            { type: "FE", identifiant: "075-FE-00001-01" },
-            { type: "FDD", identifiant: null },
-          ],
-        }}
+        filiation={[
+          { typeOperation: "Transformation", identifiant: "075-FRUP-00194-01" },
+          { typeOperation: "Fusion", identifiant: "W751000001" },
+          { typeOperation: "Scission", identifiant: "075-FE-00001-01" },
+          { typeOperation: "Scission", identifiant: null },
+        ]}
       />
     );
-    expect(screen.getAllByRole("table")).toHaveLength(3);
-    expect(
-      screen.getByRole("heading", {
-        name: "Organisme issu d’une transformation",
-      })
-    ).toBeTruthy();
-    expect(
-      screen.getByRole("heading", { name: "Organisme issu d’une fusion" })
-    ).toBeTruthy();
-    expect(
-      screen.getByRole("heading", { name: "Organismes issus d’une scission" })
-    ).toBeTruthy();
+    expect(screen.getAllByRole("table")).toHaveLength(1);
+    expect(screen.getByText("Transformation")).toBeTruthy();
+    expect(screen.getByText("Fusion")).toBeTruthy();
+    expect(screen.getAllByText("Scission")).toHaveLength(2);
     expect(
       screen
         .getByRole("link", { name: "075-FRUP-00194-01" })
@@ -176,32 +156,20 @@ describe("foundation links content", () => {
     expect(screen.queryByRole("link", { name: "W751000001" })).toBeNull();
   });
 
-  it("retains a relationship when its identifier is missing", () => {
+  it("retains a relationship when its identifier or operation is missing", () => {
     render(
       <LiensFondationContent
-        liensEntreOrganismes={{
-          organismeIssuTransformation: null,
-          organismeIssuFusion: { type: "FRUP", identifiant: null },
-          organismesIssusScission: [],
-        }}
+        filiation={[{ typeOperation: "Fusion", identifiant: null }, {}]}
       />
     );
-    expect(screen.getAllByRole("table")).toHaveLength(1);
-    expect(screen.getByText("FRUP")).toBeTruthy();
+    expect(screen.getAllByRole("row")).toHaveLength(3);
+    expect(screen.getByText("Fusion")).toBeTruthy();
     expect(screen.queryByRole("link")).toBeNull();
     expect(screen.queryByText(/Aucun lien/)).toBeNull();
   });
 
   it("shows an empty state without empty tables", () => {
-    render(
-      <LiensFondationContent
-        liensEntreOrganismes={{
-          organismeIssuTransformation: null,
-          organismeIssuFusion: null,
-          organismesIssusScission: [],
-        }}
-      />
-    );
+    render(<LiensFondationContent filiation={[]} />);
     expect(screen.getByText(/Aucun lien/)).toBeTruthy();
     expect(screen.queryByRole("table")).toBeNull();
   });

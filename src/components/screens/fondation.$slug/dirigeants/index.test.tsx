@@ -139,9 +139,16 @@ describe("foundation dirigeants content", () => {
             dateSortieFonction: "2025-12-31",
             dateNaissance: "1975-04-12",
             nationalite: "Française",
-            adresseDomiciliation: { codePostal: "75007", commune: "Paris" },
+            adresseDomiciliation: {
+              complement: "Bâtiment A",
+              numeroVoie: "28",
+              typeVoie: "Rue",
+              libelleVoie: "Saint-Dominique",
+              codePostal: "75007",
+              commune: "Paris",
+            },
             personneMorale: {
-              denomination: "Organisation exemple",
+              nom: "Organisation exemple",
               identifiant: "784308934",
             },
           },
@@ -151,7 +158,9 @@ describe("foundation dirigeants content", () => {
     expect(screen.getByRole("heading", { name: "Marie DUPONT" })).toBeTruthy();
     expect(screen.getByText("Présidente")).toBeTruthy();
     expect(screen.getByText("Non")).toBeTruthy();
-    expect(screen.getByText("75007 Paris")).toBeTruthy();
+    expect(
+      screen.getByText("Bâtiment A, 28 Rue Saint-Dominique, 75007 Paris")
+    ).toBeTruthy();
     expect(screen.getByText("Organisation exemple")).toBeTruthy();
     expect(screen.getByText("Date de sortie de fonction")).toBeTruthy();
     expect(screen.queryByText("Profession")).toBeNull();
