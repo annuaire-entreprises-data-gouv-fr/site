@@ -33,7 +33,6 @@ function RouteComponent() {
   return (
     <>
       <h1>Nous écrire</h1>
-      <strong>Vous êtes :</strong>
       <ParcoursQuestions user={user} />
       <div style={{ marginTop: "200px" }} />
     </>
