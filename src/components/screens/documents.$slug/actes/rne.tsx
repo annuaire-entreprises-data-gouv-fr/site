@@ -1,10 +1,9 @@
-import { useMemo } from "react";
+import { useId, useMemo, useState } from "react";
 import routes from "#/clients/routes";
 import { DataSectionClient } from "#/components/section/data-section";
 import { FullTable } from "#/components/table/full";
 import { Info } from "#/components-ui/alerts";
 import ButtonLink from "#/components-ui/button";
-import ShowMore from "#/components-ui/show-more";
 import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/e-administration";
 import { ApplicationRights } from "#/models/authentication/user/rights";
@@ -52,15 +51,7 @@ export const AgentActesRNE: React.FC<{
               Cette entreprise possède {documentsRne.actes.length} document(s)
               au RNE. Chaque document peut contenir un ou plusieurs actes :
             </p>
-            {documentsRne.actes.length > 5 ? (
-              <ShowMore
-                label={`Voir tous les ${documentsRne.actes.length} documents`}
-              >
-                <ActesTable actes={documentsRne.actes} />
-              </ShowMore>
-            ) : (
-              <ActesTable actes={documentsRne.actes} />
-            )}
+            <ExpandableActesTable actes={documentsRne.actes} />
           </>
         )
       }
@@ -71,6 +62,29 @@ export const AgentActesRNE: React.FC<{
 interface IActesTableProps {
   actes: IDocumentsRNE["actes"];
 }
+function ExpandableActesTable({ actes }: IActesTableProps) {
+  const [expanded, setExpanded] = useState(false);
+  const id = useId();
+  return (
+    <>
+      {actes.length > 5 && (
+        <button
+          aria-controls={id}
+          aria-expanded={expanded}
+          className="fr-btn fr-btn--secondary fr-mb-2w"
+          onClick={() => setExpanded(!expanded)}
+          type="button"
+        >
+          {expanded ? "Voir moins" : `Voir tous les ${actes.length} documents`}
+        </button>
+      )}
+      <div id={id}>
+        <ActesTable actes={expanded ? actes : actes.slice(0, 5)} />
+      </div>
+    </>
+  );
+}
+
 export function ActesTable({ actes }: IActesTableProps) {
   return (
     <FullTable
@@ -91,6 +105,7 @@ export function ActesTable({ actes }: IActesTableProps) {
         </ul>,
         <ButtonLink
           alt
+          aria-label={`Télécharger les actes déposés le ${formatDateLong(a.dateDepot)} — nouvelle fenêtre`}
           small
           target="_blank"
           to={`${routes.espaceAgent.documents.download}${a.id}?type=acte`}
