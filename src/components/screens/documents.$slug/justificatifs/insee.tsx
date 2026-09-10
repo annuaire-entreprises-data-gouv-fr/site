@@ -5,7 +5,6 @@ import { Link } from "#/components/link";
 import { Section } from "#/components/section";
 import { FullTable } from "#/components/table/full";
 import ButtonLink from "#/components-ui/button";
-import { Tag } from "#/components-ui/tag";
 import IsActiveTag from "#/components-ui/tag/is-active-tag";
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAgentInfo } from "#/models/authentication/agent";
@@ -23,13 +22,14 @@ const AvisSituationTable: React.FC<{
 }> = ({ etablissements, user }) => (
   <FullTable
     body={etablissements.map((etablissement: IEtablissement) => [
-      <Link params={{ slug: etablissement.siret }} to="/etablissement/$slug">
+      <Link
+        aria-label={`Voir l’établissement ${formatSiret(etablissement.siret)}`}
+        params={{ slug: etablissement.siret }}
+        to="/etablissement/$slug"
+      >
         {formatSiret(etablissement.siret)}
       </Link>,
-      <>
-        {etablissement.adresse}
-        {etablissement.estSiege && <Tag color="info">siège social</Tag>}
-      </>,
+      etablissement.adresse,
       <IsActiveTag
         etatAdministratif={etablissement.etatAdministratif}
         since={etablissement.dateFermeture}
@@ -89,36 +89,50 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
           />
           .
         </p>
+        <h3>Siège social</h3>
+        <AvisSituationTable etablissements={[uniteLegale.siege]} user={user} />
         {uniteLegale.etablissements.usePagination ? (
           <AvisSituationTable
-            etablissements={uniteLegale.etablissements.all}
+            etablissements={uniteLegale.etablissements.all.filter(
+              (item) => !item.estSiege
+            )}
             user={user}
           />
         ) : (
           <>
-            {uniteLegale.etablissements.open.length > 0 && (
+            {uniteLegale.etablissements.open.some((item) => !item.estSiege) && (
               <>
-                <h3>Etablissement(s) en activité :</h3>
+                <h3>Autres établissement(s) en activité :</h3>
                 <AvisSituationTable
-                  etablissements={uniteLegale.etablissements.open}
+                  etablissements={uniteLegale.etablissements.open.filter(
+                    (item) => !item.estSiege
+                  )}
                   user={user}
                 />
               </>
             )}
-            {uniteLegale.etablissements.unknown.length > 0 && (
+            {uniteLegale.etablissements.unknown.some(
+              (item) => !item.estSiege
+            ) && (
               <>
-                <h3>Etablissement(s) non-diffusible(s) :</h3>
+                <h3>Autres établissement(s) non-diffusible(s) :</h3>
                 <AvisSituationTable
-                  etablissements={uniteLegale.etablissements.unknown}
+                  etablissements={uniteLegale.etablissements.unknown.filter(
+                    (item) => !item.estSiege
+                  )}
                   user={user}
                 />
               </>
             )}
-            {uniteLegale.etablissements.closed.length > 0 && (
+            {uniteLegale.etablissements.closed.some(
+              (item) => !item.estSiege
+            ) && (
               <>
-                <h3>Etablissement(s) fermé(s) :</h3>
+                <h3>Autres établissement(s) fermé(s) :</h3>
                 <AvisSituationTable
-                  etablissements={uniteLegale.etablissements.closed}
+                  etablissements={uniteLegale.etablissements.closed.filter(
+                    (item) => !item.estSiege
+                  )}
                   user={user}
                 />
               </>
