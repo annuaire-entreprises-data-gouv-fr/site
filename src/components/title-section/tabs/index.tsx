@@ -160,21 +160,27 @@ export const Tabs: React.FC<{
   const tabs = getUniteLegaleTabs(uniteLegale, user);
   return (
     <PrintNever>
-      <div className={styles.titleTabs}>
-        {tabs
-          .filter(({ shouldDisplay }) => shouldDisplay)
-          .map(({ to, params, ficheType, label, noFollow, width = "auto" }) => (
-            <TabLink
-              active={currentFicheType === ficheType}
-              key={label}
-              label={label}
-              noFollow={noFollow}
-              params={params}
-              to={to}
-              width={width}
-            />
-          ))}
-      </div>
+      <nav aria-label="Navigation dans la fiche">
+        <h2 className="fr-sr-only">Navigation dans la fiche</h2>
+        <ul className={styles.titleTabs}>
+          {tabs
+            .filter(({ shouldDisplay }) => shouldDisplay)
+            .map(
+              ({ to, params, ficheType, label, noFollow, width = "auto" }) => (
+                <li key={label}>
+                  <TabLink
+                    active={currentFicheType === ficheType}
+                    label={label}
+                    noFollow={noFollow}
+                    params={params}
+                    to={to}
+                    width={width}
+                  />
+                </li>
+              )
+            )}
+        </ul>
+      </nav>
     </PrintNever>
   );
 };
@@ -191,7 +197,7 @@ export const TabsForEtablissement: React.FC<{
         .map(({ to, params, label, noFollow }) => (
           <li key={label}>
             <Link params={params} rel={noFollow ? "nofollow" : ""} to={to}>
-              <h2>{label}</h2>
+              <span>{label}</span>
             </Link>
           </li>
         ))}

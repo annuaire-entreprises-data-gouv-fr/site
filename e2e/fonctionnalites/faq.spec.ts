@@ -9,8 +9,11 @@ test.describe("FAQ contextual links", () => {
 
   test("Source de données", async ({ page }) => {
     await goto(page, "/entreprise/880878145");
-    await page.getByText("Sources : INSEE").first().click();
-    await expect(page).toHaveURL(/\/administration\/insee_dgfip/);
+    const sources = page
+      .getByRole("list", { name: "Sources des données" })
+      .first();
+    await sources.locator('a[href="/administration/insee"]').click();
+    await expect(page).toHaveURL(/\/administration\/insee$/);
     await expect(
       page.getByText(
         "Comment rendre mon entreprise individuelle diffusible ou non-diffusible ?"

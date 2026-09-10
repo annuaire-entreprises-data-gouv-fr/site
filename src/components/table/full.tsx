@@ -2,6 +2,7 @@ import type React from "react";
 import styles from "./styleFull.module.css";
 
 interface ISectionProps {
+  ariaLabel?: string;
   body: any[][];
   columnWidths?: string[];
   head: (string | React.JSX.Element)[];
@@ -10,6 +11,7 @@ interface ISectionProps {
 }
 
 export const FullTable: React.FC<ISectionProps> = ({
+  ariaLabel,
   id,
   head,
   body,
@@ -17,12 +19,13 @@ export const FullTable: React.FC<ISectionProps> = ({
   columnWidths,
 }) => (
   <>
-    <table className={styles.fullTable} id={id}>
+    <table aria-label={ariaLabel} className={styles.fullTable} id={id}>
       <thead className={styles.head}>
         <tr>
           {head.map((cell, index) => (
             <th
               key={index}
+              scope="col"
               style={
                 columnWidths?.[index]
                   ? { width: columnWidths[index] }

@@ -104,8 +104,9 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({
       <tbody>
         {body.map((row, idx) => (
           <tr key={`a${idx}`}>
-            <td
+            <th
               className={styles.cell}
+              scope="row"
               style={{
                 borderColor: constants.colors.pastelBlue,
                 /* Min width does not work in table cells https://stackoverflow.com/a/29379832 */
@@ -113,7 +114,7 @@ export const TwoColumnTable: React.FC<ISectionProps> = ({
               }}
             >
               <div>{row[0]}</div>
-            </td>
+            </th>
             <Cell label={labelToString(row[0])}>{row[1]}</Cell>
           </tr>
         ))}
