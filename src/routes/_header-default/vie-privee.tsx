@@ -129,13 +129,11 @@ function RouteComponent() {
         L’Annuaire des Entreprises traite des données à caractère personnel en
         se basant sur :
       </p>
-      <ul>
-        <li>
-          L’exécution d’une mission d’intérêt public ou relevant de l’exercice
-          de l’autorité publique dont est investi le responsable de traitement
-          au sens de l’article 6-1 e) du RGPD.
-        </li>
-      </ul>
+      <p>
+        L’exécution d’une mission d’intérêt public ou relevant de l’exercice de
+        l’autorité publique dont est investi le responsable de traitement au
+        sens de l’article 6-1 e) du RGPD.
+      </p>
       <p>
         Cette mission d’intérêt public se traduit en pratique par le décret
         n°2023-304 du 22 avril 2023 modifiant le décret n°2019-1088 du 25
@@ -310,13 +308,21 @@ function RouteComponent() {
               <td>OVH</td>
               <td>France</td>
               <td>Hébergement</td>
-              <td>https://www.ovh.com/fr/protection-donnees-personnelles/</td>
+              <td>
+                <a href="https://www.ovh.com/fr/protection-donnees-personnelles/">
+                  Consulter les garanties de protection des données
+                </a>
+              </td>
             </tr>
             <tr>
               <td>Crisp</td>
               <td>France</td>
               <td>Gestion du support</td>
-              <td>https://crisp.chat/fr/privacy/</td>
+              <td>
+                <a href="https://crisp.chat/fr/privacy/">
+                  Consulter les garanties de protection des données
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -384,21 +390,33 @@ function RouteComponent() {
               <td>pk_id</td>
               <td>Mesure d’audience</td>
               <td>France</td>
-              <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
+              <td>
+                <a href="https://fr.matomo.org/matomo-cloud-dpa/">
+                  Consulter les garanties de protection des données
+                </a>
+              </td>
               <td>13 mois</td>
             </tr>
             <tr>
               <td>pk_ref</td>
               <td>Mesure d’audience</td>
               <td>France</td>
-              <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
+              <td>
+                <a href="https://fr.matomo.org/matomo-cloud-dpa/">
+                  Consulter les garanties de protection des données
+                </a>
+              </td>
               <td>6 mois</td>
             </tr>
             <tr>
               <td>pk_ses</td>
               <td>Mesure d’audience</td>
               <td>France</td>
-              <td>https://fr.matomo.org/matomo-cloud-dpa/</td>
+              <td>
+                <a href="https://fr.matomo.org/matomo-cloud-dpa/">
+                  Consulter les garanties de protection des données
+                </a>
+              </td>
               <td>30 minutes</td>
             </tr>
           </tbody>
