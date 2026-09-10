@@ -5,6 +5,7 @@ import { Icon } from "#/components-ui/icon/wrapper";
 export function Question() {
   return (
     <FloatingHelpButton>
+      <h2 className="fr-sr-only">Nous contacter</h2>
       <Link
         aria-label="Une question ? Accéder à la FAQ."
         className="no-style-link"

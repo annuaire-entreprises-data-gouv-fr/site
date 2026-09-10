@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
 import { Link } from "#/components/link";
+import SocialNetworks from "#/components/social-network";
 import Logo from "#/components-ui/logo";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { administrationsMetaData } from "#/models/administrations";
@@ -7,17 +8,22 @@ import { getAllLandingPages } from "#/models/landing-pages";
 import { getBaseUrl } from "#/utils/get-base-url";
 import styles from "./style.module.css";
 
-const Footer = () => (
+const Footer = ({
+  withSocialNetworks = false,
+}: {
+  withSocialNetworks?: boolean;
+}) => (
   <PrintNever>
     <footer className="fr-footer" id="footer">
+      {withSocialNetworks && <SocialNetworks />}
       <div className="fr-footer__top">
         <div className="fr-container">
           <div className="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <strong className="fr-footer__top-cat">
+              <h2 className="fr-footer__top-cat">
                 Vérifier les informations légales d’une entreprise ou
                 association
-              </strong>
+              </h2>
               <ul className="fr-footer__top-list">
                 {getAllLandingPages()
                   .filter((lp) => !lp.isServicePublic)
@@ -34,9 +40,9 @@ const Footer = () => (
                   ))}
               </ul>
               <br />
-              <strong className="fr-footer__top-cat">
+              <h2 className="fr-footer__top-cat">
                 Vérifier les informations légales d'une administration
-              </strong>
+              </h2>
               <ul className="fr-footer__top-list">
                 {getAllLandingPages()
                   .filter((lp) => lp.isServicePublic)
@@ -53,9 +59,9 @@ const Footer = () => (
                   ))}
               </ul>
               <br />
-              <strong className="fr-footer__top-cat">
+              <h2 className="fr-footer__top-cat">
                 Consulter la liste officielle des entreprises françaises
-              </strong>
+              </h2>
               <ul className="fr-footer__top-list">
                 <li>
                   <a
@@ -67,7 +73,7 @@ const Footer = () => (
                 </li>
               </ul>
               <br />
-              <strong className="fr-footer__top-cat">Répertoire Sirene</strong>
+              <h2 className="fr-footer__top-cat">Répertoire Sirene</h2>
               <ul className="fr-footer__top-list">
                 <li>
                   <Link className="fr-footer__top-link" to="/export-sirene">
@@ -77,9 +83,9 @@ const Footer = () => (
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <strong className="fr-footer__top-cat">
+              <h2 className="fr-footer__top-cat">
                 Développeurs & développeuses
-              </strong>
+              </h2>
               <ul className="fr-footer__top-list">
                 <li>
                   <Link className="fr-footer__top-link" to="/partager">
@@ -88,6 +94,7 @@ const Footer = () => (
                 </li>
                 <li>
                   <a
+                    aria-label="Code source — nouvelle fenêtre"
                     className="fr-footer__top-link"
                     href="https://github.com/annuaire-entreprises-data-gouv-fr"
                     rel="noreferrer noopener"
@@ -116,10 +123,11 @@ const Footer = () => (
                 </li>
               </ul>
               <br />
+              <h2 className="fr-footer__top-cat">Autres sites</h2>
               <ul className="fr-footer__top-list">
-                <strong className="fr-footer__top-cat">Autres sites</strong>
                 <li className="fr-footer__content-item">
                   <a
+                    aria-label="entreprises.gouv.fr — nouvelle fenêtre"
                     className="fr-footer__top-link"
                     href="https://entreprises.gouv.fr"
                     rel="noreferrer noopener"
@@ -130,6 +138,7 @@ const Footer = () => (
                 </li>
                 <li className="fr-footer__content-item">
                   <a
+                    aria-label="entreprendre.service-public.gouv.fr — nouvelle fenêtre"
                     className="fr-footer__top-link"
                     href="https://entreprendre.service-public.gouv.fr/"
                     rel="noreferrer noopener"
@@ -140,6 +149,7 @@ const Footer = () => (
                 </li>
                 <li className="fr-footer__content-item">
                   <a
+                    aria-label="mon-entreprise.urssaf.fr — nouvelle fenêtre"
                     className="fr-footer__top-link"
                     href="https://mon-entreprise.urssaf.fr/"
                     rel="noreferrer noopener"
@@ -150,6 +160,7 @@ const Footer = () => (
                 </li>
                 <li className="fr-footer__content-item">
                   <a
+                    aria-label="formalites.entreprises.gouv.fr — nouvelle fenêtre"
                     className="fr-footer__top-link"
                     href="https://formalites.entreprises.gouv.fr"
                     rel="noreferrer noopener"
@@ -160,6 +171,7 @@ const Footer = () => (
                 </li>
                 <li className="fr-footer__content-item">
                   <a
+                    aria-label="conseillers-entreprises.service-public.gouv.fr — nouvelle fenêtre"
                     className="fr-footer__top-link"
                     href="https://conseillers-entreprises.service-public.gouv.fr"
                     rel="noreferrer noopener"
@@ -171,7 +183,7 @@ const Footer = () => (
               </ul>
             </div>
             <div className="fr-col-12 fr-col-sm-4 fr-col-md-4">
-              <strong className="fr-footer__top-cat">Aide</strong>
+              <h2 className="fr-footer__top-cat">Aide</h2>
               <ul className="fr-footer__top-list">
                 <li>
                   <Link className="fr-footer__top-link" to="/faq">
@@ -193,9 +205,7 @@ const Footer = () => (
                 </li>
               </ul>
               <br />
-              <strong className="fr-footer__top-cat">
-                L'Annuaire des Entreprises
-              </strong>
+              <h2 className="fr-footer__top-cat">L'Annuaire des Entreprises</h2>
               <ul className="fr-footer__top-list">
                 <li>
                   <Link
@@ -296,6 +306,7 @@ const Footer = () => (
             <p className="fr-footer__content-desc">
               Il est opéré par la{" "}
               <a
+                aria-label="Direction Interministérielle du Numérique — nouvelle fenêtre"
                 href="https://numerique.gouv.fr"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -308,6 +319,7 @@ const Footer = () => (
             <ul className="fr-footer__content-list">
               <li className="fr-footer__content-item">
                 <a
+                  aria-label="legifrance.gouv.fr — nouvelle fenêtre"
                   className="fr-footer__content-link"
                   href="https://legifrance.gouv.fr"
                   rel="noopener external"
@@ -319,6 +331,7 @@ const Footer = () => (
               </li>
               <li className="fr-footer__content-item">
                 <a
+                  aria-label="info.gouv.fr — nouvelle fenêtre"
                   className="fr-footer__content-link"
                   href="https://info.gouv.fr"
                   rel="noopener external"
@@ -330,6 +343,7 @@ const Footer = () => (
               </li>
               <li className="fr-footer__content-item">
                 <a
+                  aria-label="service-public.gouv.fr — nouvelle fenêtre"
                   className="fr-footer__content-link"
                   href="https://service-public.gouv.fr"
                   rel="noopener external"
@@ -341,6 +355,7 @@ const Footer = () => (
               </li>
               <li className="fr-footer__content-item">
                 <a
+                  aria-label="data.gouv.fr — nouvelle fenêtre"
                   className="fr-footer__content-link"
                   href="https://data.gouv.fr"
                   rel="noopener external"
@@ -354,7 +369,7 @@ const Footer = () => (
           </div>
         </div>
         <div className="fr-footer__partners">
-          <strong className="fr-footer__partners-title">Nos partenaires</strong>
+          <h2 className="fr-footer__partners-title">Nos partenaires</h2>
           <div className="fr-footer__partners-logos">
             <div className="fr-footer__partners-sub">
               <ul>
@@ -450,6 +465,7 @@ const Footer = () => (
             </li>
             <li className="fr-footer__bottom-item">
               <a
+                aria-label="Code source — nouvelle fenêtre"
                 className="fr-footer__bottom-link"
                 href="https://github.com/annuaire-entreprises-data-gouv-fr"
                 rel="noreferrer noopener"
@@ -463,6 +479,7 @@ const Footer = () => (
             <p>
               Sauf mention contraire, tous les textes de ce site sont sous{" "}
               <a
+                aria-label="licence etalab-2.0 — nouvelle fenêtre"
                 href="https://github.com/etalab/licence-ouverte/blob/master/LO.md"
                 rel="noreferrer noopener"
                 target="_blank"

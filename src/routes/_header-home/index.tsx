@@ -78,10 +78,14 @@ function RouteComponent() {
           }}
         >
           <LogoAnnuaireWithEasterEgg />
-          <h2 style={{ textAlign: "center", marginTop: "30px" }}>
+          <p
+            className="fr-h2"
+            style={{ textAlign: "center", marginTop: "30px" }}
+          >
             Vérifiez les informations légales publiques des entreprises,
             associations et services publics en France
-          </h2>
+          </p>
+          <h2 className="fr-sr-only">Rechercher une entreprise</h2>
           <div
             style={{
               margin: "auto",
@@ -92,7 +96,6 @@ function RouteComponent() {
             }}
           >
             <SearchBar
-              autoFocus={true}
               defaultValue=""
               placeholder="Nom, adresse, n° SIRET/SIREN..."
             />
