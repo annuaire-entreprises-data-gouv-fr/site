@@ -1,187 +1,75 @@
 import { useState } from "react";
-import {
-  AssociationBadge,
-  CollectiviteTerritorialeBadge,
-  DefaultStructureBadge,
-  EntrepriseIndividuelleBadge,
-  LabelAndCertificateBadge,
-  ServicePublicBadge,
-} from "#/components-ui/badge/frequent";
-import { SimpleSeparator } from "#/components-ui/horizontal-separator";
 
-export const FilterStructure: React.FC<{
+export const FilterStructure = ({
+  type = "",
+  label = "",
+}: {
   type?: string;
   label?: string;
-}> = ({ type = "", label = "" }) => {
-  const [structureType, setStructureType] = useState(type);
-  const [labelsSelected, setLabelsSelected] = useState<string[]>(
-    label ? label.split(",") : []
-  );
-
-  const toggleLabel = (labelValue: string) => {
-    setLabelsSelected((prev) => {
-      if (labelValue === "") {
-        return [];
-      }
-      if (prev.includes(labelValue)) {
-        return prev.filter((l) => l !== labelValue);
-      }
-      return [...prev, labelValue];
-    });
-  };
-
+}) => {
+  const [selected, setSelected] = useState(label ? label.split(",") : []);
   return (
     <>
-      <label className="fr-label" htmlFor="structure-type-input">
-        Type de structure :
-      </label>
-      <input
-        id="structure-type-input"
-        name="type"
-        readOnly
-        type="hidden"
-        value={structureType}
-      />
-      <div className="badge-wrapper">
-        <DefaultStructureBadge
-          isSelected={structureType === ""}
-          label="Tous"
-          onClick={() => setStructureType("")}
-          small
-        />
-
-        <CollectiviteTerritorialeBadge
-          isSelected={structureType === "ct"}
-          onClick={() => setStructureType("ct")}
-          small
-        />
-
-        <AssociationBadge
-          isSelected={structureType === "asso"}
-          onClick={() => setStructureType("asso")}
-          small
-        />
-
-        <ServicePublicBadge
-          isSelected={structureType === "sp"}
-          onClick={() => setStructureType("sp")}
-          small
-        />
-
-        <EntrepriseIndividuelleBadge
-          isSelected={structureType === "ei"}
-          onClick={() => setStructureType("ei")}
-          small
-        />
-      </div>
-      <SimpleSeparator />
-      <label className="fr-label" htmlFor="structure-label-input">
-        Qualités, labels et certificats :
-      </label>
-      <input
-        id="structure-label-input"
-        name="label"
-        readOnly
-        type="hidden"
-        value={labelsSelected.join(",")}
-      />
-      <div className="badge-wrapper">
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.length === 0}
-          label="Tous"
-          onClick={() => setLabelsSelected([])}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("ess")}
-          label="ESS - Économie Sociale et Solidaire"
-          onClick={() => toggleLabel("ess")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("sm")}
-          label="Société à mission"
-          onClick={() => toggleLabel("sm")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("siae")}
-          label="Entreprise Inclusive"
-          onClick={() => toggleLabel("siae")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("finess")}
-          label="Établissements sanitaires et sociaux (Finess)"
-          onClick={() => toggleLabel("finess")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("bio")}
-          label="Professionnels du Bio"
-          onClick={() => toggleLabel("bio")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("egapro")}
-          label="Égalité professionnelle"
-          onClick={() => toggleLabel("egapro")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("rge")}
-          label="RGE - Reconnu Garant de l'Environnement"
-          onClick={() => toggleLabel("rge")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("of")}
-          label="Organisme de formation"
-          onClick={() => toggleLabel("of")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("qualiopi")}
-          label="Qualiopi"
-          onClick={() => toggleLabel("qualiopi")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("esv")}
-          label="Entrepreneur de spectacles vivants"
-          onClick={() => toggleLabel("esv")}
-          small
-        />
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("achats_responsables")}
-          label="Achats Responsables"
-          onClick={() => toggleLabel("achats_responsables")}
-          small
-        />
-
-        <LabelAndCertificateBadge
-          isSelected={labelsSelected.includes("patrimoine_vivant")}
-          label="Entreprise du Patrimoine Vivant"
-          onClick={() => toggleLabel("patrimoine_vivant")}
-          small
-        />
-      </div>
-      <style>{`
-        .badge-wrapper {
-          display: flex;
-          flex-wrap: wrap;
-        }
-      `}</style>
+      <fieldset>
+        <legend>Type de structure :</legend>
+        {[
+          ["", "Tous"],
+          ["ct", "Collectivité territoriale"],
+          ["asso", "Association"],
+          ["sp", "Service public"],
+          ["ei", "Entreprise individuelle"],
+        ].map(([value, text]) => (
+          <label className="fr-label fr-mb-1w" key={value}>
+            <input
+              defaultChecked={type === value}
+              name="type"
+              type="radio"
+              value={value}
+            />{" "}
+            {text}
+          </label>
+        ))}
+      </fieldset>
+      <fieldset>
+        <legend>Qualités, labels et certificats :</legend>
+        <input name="label" type="hidden" value={selected.join(",")} />
+        <button
+          className="fr-btn fr-btn--tertiary fr-mb-2w"
+          onClick={() => setSelected([])}
+          type="button"
+        >
+          Effacer les labels sélectionnés
+        </button>
+        {[
+          ["ess", "ESS - Économie Sociale et Solidaire"],
+          ["sm", "Société à mission"],
+          ["siae", "Entreprise Inclusive"],
+          ["finess", "Établissements sanitaires et sociaux (Finess)"],
+          ["bio", "Professionnels du Bio"],
+          ["egapro", "Égalité professionnelle"],
+          ["rge", "RGE - Reconnu Garant de l’Environnement"],
+          ["of", "Organisme de formation"],
+          ["qualiopi", "Qualiopi"],
+          ["esv", "Entrepreneur de spectacles vivants"],
+          ["achats_responsables", "Achats Responsables"],
+          ["patrimoine_vivant", "Entreprise du Patrimoine Vivant"],
+        ].map(([value, text]) => (
+          <label className="fr-label fr-mb-1w" key={value}>
+            <input
+              checked={selected.includes(value)}
+              onChange={(event) =>
+                setSelected(
+                  event.target.checked
+                    ? [...selected, value]
+                    : selected.filter((item) => item !== value)
+                )
+              }
+              type="checkbox"
+            />{" "}
+            {text}
+          </label>
+        ))}
+      </fieldset>
     </>
   );
 };

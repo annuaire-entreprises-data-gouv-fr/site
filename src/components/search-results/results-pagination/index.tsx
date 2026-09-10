@@ -33,6 +33,8 @@ const First: React.FC<IProps> = ({
 }) => (
   <li>
     <a
+      aria-disabled={currentPage <= 1}
+      aria-label="Première page"
       className="fr-pagination__link fr-pagination__link--first fr-pagination__link--lg-label"
       href={
         currentPage > 1
@@ -55,6 +57,8 @@ const Last: React.FC<IProps> = ({
 }) => (
   <li>
     <a
+      aria-disabled={currentPage >= totalPages}
+      aria-label="Dernière page"
       className="fr-pagination__link fr-pagination__link--last"
       href={
         currentPage < totalPages
@@ -75,6 +79,8 @@ const Previous: React.FC<IProps> = ({
 }) => (
   <li>
     <a
+      aria-disabled={currentPage <= 1}
+      aria-label="Page précédente"
       className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
       href={
         currentPage > 1
@@ -102,6 +108,8 @@ const Next: React.FC<IProps> = ({
 }) => (
   <li>
     <a
+      aria-disabled={currentPage >= totalPages}
+      aria-label="Page suivante"
       className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
       href={
         currentPage < totalPages
