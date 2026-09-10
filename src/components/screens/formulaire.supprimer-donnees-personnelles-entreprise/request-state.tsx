@@ -70,20 +70,16 @@ export function RequestState({ hidePersonalDataRequest }: IProps) {
       )}
       <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
         <li>
-          <ButtonLink
-            role="listitem"
-            to="/formulaire/supprimer-donnees-personnelles-entreprise"
-          >
+          <ButtonLink to="/formulaire/supprimer-donnees-personnelles-entreprise">
             Faire une autre demande
           </ButtonLink>
         </li>
         <li>
           <ButtonLink
             alt
-            role="listitem"
             to="/api/auth/france-connect/logout?pathFrom=%2Fformulaire%2Fsupprimer-donnees-personnelles-entreprise"
           >
-            Me déconnecter
+            Me déconnecter de FranceConnect
           </ButtonLink>
         </li>
       </ul>
