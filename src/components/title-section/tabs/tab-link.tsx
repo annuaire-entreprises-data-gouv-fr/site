@@ -17,13 +17,14 @@ export default function TabLink({
 }: IProps) {
   return (
     <Link
+      aria-current={active ? "page" : undefined}
       className={`${active ? styles.activeLink : ""} no-style-link`}
       rel={noFollow ? "nofollow" : ""}
       resetScroll={false}
       style={{ width }}
       {...props}
     >
-      {active ? label : <h2>{label}</h2>}
+      {label}
     </Link>
   );
 }

@@ -28,6 +28,7 @@ const EtablissementTable: React.FC<{
       )}
 
       <FullTable
+        ariaLabel={`Établissements ${label || "de la structure"}`}
         body={etablissements.map((etablissement: IEtablissement) => [
           <Link
             params={{ slug: etablissement.siret }}

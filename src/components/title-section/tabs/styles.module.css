@@ -12,7 +12,10 @@
 .titleTabs {
   display: flex;
   flex-grow: 1;
+  padding: 0;
+  margin: 0;
   font-size: 0.9rem;
+  list-style: none;
   border-bottom: 2px solid var(--annuaire-colors-pastelBlue);
 
   @media only screen and (min-width: 1px) and (max-width: 768px) {
@@ -21,7 +24,7 @@
   }
 }
 
-.titleTabs > a {
+.titleTabs > li > a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,13 +39,7 @@
   box-shadow: 0 -8px 5px -5px var(--annuaire-colors-pastelBlue) inset;
 }
 
-.titleTabs > a > h2 {
-  padding: 0;
-  margin: 0;
-}
-
-.titleTabs > a,
-.titleTabs > a > h2 {
+.titleTabs > li > a {
   max-width: 150px;
   font-size: 0.9rem;
   font-weight: bold;
@@ -57,12 +54,12 @@
   }
 }
 
-.titleTabs > a:hover,
-.titleTabs > a:focus {
+.titleTabs > li > a:hover,
+.titleTabs > li > a:focus {
   background-color: var(--annuaire-colors-pastelBlue);
 }
 
-.titleTabsEtablissement a h2 {
+.titleTabsEtablissement a span {
   display: inline-block;
   padding: 0;
   margin: 0;

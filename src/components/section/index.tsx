@@ -1,10 +1,8 @@
 import type React from "react";
 import type { PropsWithChildren } from "react";
-import { Link } from "#/components/link";
 import { Warning } from "#/components-ui/alerts";
 import { Icon } from "#/components-ui/icon/wrapper";
 import DataSourcesTooltip from "#/components-ui/information-tooltip/data-sources-tooltip";
-import Logo from "#/components-ui/logo";
 import { administrationsMetaData } from "#/models/administrations";
 import type { EAdministration } from "#/models/administrations/e-administration";
 import constants from "#/models/constants";
@@ -49,55 +47,24 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
   return (
     <SectionErrorBoundary title={title}>
-      <div
+      <section
+        aria-label={title}
         className={style["section-container"]}
         id={id}
         style={{ width: `${width}%`, borderColor }}
       >
         {isProtected && (
-          <div className={style.protected}>
+          <aside className={style.protected}>
             <Icon size={12} slug="lockFill">
               Réservé aux agents publics
             </Icon>
-          </div>
+          </aside>
         )}
-        <div className={style["section-header"]}>
+        <header className={style["section-header"]}>
           <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
             {title}
           </h2>
-          <div className={style["section-logo-wrapper"]}>
-            {dataSources.map(
-              ({ slug, long, logoType, short }) =>
-                logoType && (
-                  <Link
-                    className="no-style-link"
-                    key={long}
-                    params={{ slug: faqLink }}
-                    title={long}
-                    to="/administration/$slug"
-                  >
-                    {logoType === "portrait" ? (
-                      <Logo
-                        alt={short}
-                        height={40}
-                        slug={slug}
-                        title={long}
-                        width={70}
-                      />
-                    ) : (
-                      <Logo
-                        alt={short}
-                        height={40}
-                        slug={slug}
-                        title={long}
-                        width={170}
-                      />
-                    )}
-                  </Link>
-                )
-            )}
-          </div>
-        </div>
+        </header>
 
         {isOld && lastModified && (
           <Warning>
@@ -108,16 +75,16 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
         {header}
         <div>{children}</div>
         {dataSources.length > 0 && (
-          <div className={style["administration-page-link"]}>
+          <footer className={style["administration-page-link"]}>
             <DataSourcesTooltip
               dataSources={dataSources}
               lastUpdatedAt={formatDate(last)}
               link={faqLink}
               orientation="right"
             />
-          </div>
+          </footer>
         )}
-      </div>
+      </section>
     </SectionErrorBoundary>
   );
 };
