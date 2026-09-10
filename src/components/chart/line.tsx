@@ -24,6 +24,7 @@ ChartJS.register(
 );
 
 interface LineChartProps {
+  ariaHidden?: boolean;
   data: ChartData<"line">;
   height?: number | string;
   htmlLegendId?: string;
@@ -32,6 +33,7 @@ interface LineChartProps {
 }
 
 export const LineChart = ({
+  ariaHidden,
   data,
   options = {},
   height = "400px",
@@ -48,6 +50,7 @@ export const LineChart = ({
       )}
       <div>
         <Line
+          aria-hidden={ariaHidden}
           data={data}
           height={height}
           options={{ ...options, maintainAspectRatio: false }}

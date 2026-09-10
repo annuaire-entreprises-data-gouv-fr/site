@@ -19,9 +19,11 @@ import {
 import { BilanTypeTag } from "../bilan-tag";
 
 const ColorCircle = ({ color }: { color: string }) => (
-  <span style={{ color }}>◆</span>
+  <span aria-hidden="true" style={{ color }}>
+    ◆
+  </span>
 );
-const colorResultat = constants.chartColors[1];
+const colorResultat = "#006f95";
 const colorCA = constants.chartColors[4];
 const colorCADGFiP = constants.chartColors[3];
 
@@ -119,6 +121,7 @@ export function FinancesSocieteChartAndTable({
 
   const datasets: ChartData<"line">["datasets"] = [
     {
+      pointStyle: "circle",
       label: "Chiffre d'affaires",
       tension: 0.3,
       data: indicateurs.map(
@@ -129,6 +132,8 @@ export function FinancesSocieteChartAndTable({
     },
 
     {
+      pointStyle: "rectRot",
+      borderDash: [6, 4],
       label: "Résultat net",
       tension: 0.3,
       data: indicateurs.map(
@@ -141,6 +146,8 @@ export function FinancesSocieteChartAndTable({
 
   if (hasCADGFiP) {
     datasets.push({
+      pointStyle: "triangle",
+      borderDash: [2, 4],
       label: "Chiffre d'affaires DGFiP",
       tension: 0.3,
       data: indicateurs.map(
@@ -174,42 +181,49 @@ export function FinancesSocieteChartAndTable({
         {plural} exercice
         {plural}&nbsp;:
       </p>
-      <LineChart
-        data={{
-          labels: indicateurs.map((bilanIndicateurs) =>
-            formatDateYear(bilanIndicateurs.dateClotureExercice)
-          ),
-          datasets,
-        }}
-        height={250}
-        htmlLegendId={
-          estBilanConsolide
-            ? "data-legend-consolide"
-            : "data-legend-non-consolide"
-        }
-        options={{
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label(tooltipItem) {
-                  return formatCurrency(tooltipItem.parsed.y);
+      <figure>
+        <figcaption>
+          Évolution des résultats financiers en euros. Les valeurs sont
+          disponibles dans le tableau ci-dessous.
+        </figcaption>
+        <LineChart
+          ariaHidden
+          data={{
+            labels: indicateurs.map((bilanIndicateurs) =>
+              formatDateYear(bilanIndicateurs.dateClotureExercice)
+            ),
+            datasets,
+          }}
+          height={250}
+          htmlLegendId={
+            estBilanConsolide
+              ? "data-legend-consolide"
+              : "data-legend-non-consolide"
+          }
+          options={{
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label(tooltipItem) {
+                    return formatCurrency(tooltipItem.parsed.y);
+                  },
+                },
+              },
+              legend: { display: false },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                border: { display: false },
+                ticks: {
+                  callback: (label) => formatCurrency(label.toString()),
                 },
               },
             },
-            legend: { display: false },
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              border: { display: false },
-              ticks: {
-                callback: (label) => formatCurrency(label.toString()),
-              },
-            },
-          },
-        }}
-      />
+          }}
+        />
+      </figure>
       <br />
       <FullTable
         body={body}

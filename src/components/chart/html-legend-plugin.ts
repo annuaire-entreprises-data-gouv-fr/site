@@ -1,88 +1,73 @@
-export const htmlLegendPlugin = (htmlLegendContainerId: string) => {
-  return {
-    id: "htmlLegend",
-    afterUpdate(chart: any) {
-      const legendContainer = document.getElementById(htmlLegendContainerId);
-      let listContainer = null as any;
-
-      if (legendContainer) {
-        listContainer = legendContainer.querySelector("ul");
-
-        if (!listContainer) {
-          listContainer = document.createElement("ul");
-          listContainer.style.margin = "0";
-          listContainer.style.padding = "0";
-
-          legendContainer.appendChild(listContainer);
-        }
-      }
-
-      if (!listContainer) {
-        return;
-      }
-
-      // Remove old legend items
-      while (listContainer.firstChild) {
-        listContainer.firstChild.remove();
-      }
-
-      // Reuse the built-in legendItems generator
-      const items = chart.options.plugins.legend.labels.generateLabels(chart);
-
-      for (const item of items) {
-        const li = document.createElement("li");
-        li.style.alignItems = "center";
-        li.style.cursor = "pointer";
-        li.style.display = "flex";
-        li.style.flexDirection = "row";
-        li.style.marginLeft = "10px";
-
-        li.onclick = () => {
-          const { type } = chart.config;
-          if (type === "pie" || type === "doughnut") {
-            // Pie and doughnut charts only have a single dataset and visibility is per item
-            chart.toggleDataVisibility(item.index);
-          } else {
-            chart.setDatasetVisibility(
-              item.datasetIndex,
-              !chart.isDatasetVisible(item.datasetIndex)
-            );
-          }
-          chart.update();
-        };
-
-        // Color box
-        const boxSpan = document.createElement("span");
-        boxSpan.style.background = item.fillStyle;
-        boxSpan.style.borderColor = item.strokeStyle;
-        boxSpan.style.borderWidth = `${item.lineWidth}px`;
-        boxSpan.style.borderRadius = "50px";
-
-        boxSpan.style.display = "inline-block";
-        boxSpan.style.height = "15px";
-        boxSpan.style.marginRight = "10px";
-        boxSpan.style.width = "15px";
-
-        // Text
-        const textContainer = document.createElement("p");
-        textContainer.style.color = item.fontColor;
-        textContainer.style.fontSize = "0.9rem";
-        textContainer.style.margin = "0";
-        textContainer.style.padding = "0";
-
+export const htmlLegendPlugin = (htmlLegendContainerId: string) => ({
+  id: "htmlLegend",
+  afterUpdate(chart: any) {
+    const container = document.getElementById(htmlLegendContainerId);
+    if (!container) {
+      return;
+    }
+    let fieldset = container.querySelector("fieldset");
+    if (!fieldset) {
+      fieldset = document.createElement("fieldset");
+      fieldset.style.border = "none";
+      const legend = document.createElement("legend");
+      legend.textContent = "Indicateurs affichés dans le graphique";
+      fieldset.appendChild(legend);
+      container.appendChild(fieldset);
+    }
+    const items = chart.options.plugins.legend.labels.generateLabels(chart);
+    const keys = new Set<string>();
+    for (const item of items) {
+      const isSingleDataset =
+        chart.config.type === "pie" || chart.config.type === "doughnut";
+      const key = String(isSingleDataset ? item.index : item.datasetIndex);
+      keys.add(key);
+      let label = fieldset.querySelector<HTMLLabelElement>(
+        `label[data-key="${key}"]`
+      );
+      if (!label) {
+        label = document.createElement("label");
+        label.dataset.key = key;
+        label.style.display = "flex";
+        label.style.alignItems = "center";
+        label.style.gap = "10px";
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.style.marginRight = "10px";
-        checkbox.checked = !item.hidden;
-
-        const text = document.createTextNode(item.text);
-        textContainer.appendChild(text);
-
-        li.appendChild(checkbox);
-        li.appendChild(boxSpan);
-        li.appendChild(textContainer);
-        listContainer.appendChild(li);
+        const swatch = document.createElement("span");
+        swatch.setAttribute("aria-hidden", "true");
+        const text = document.createElement("span");
+        label.append(checkbox, swatch, text);
+        fieldset.appendChild(label);
       }
-    },
-  };
-};
+      const checkbox = label.querySelector("input");
+      if (!checkbox) {
+        continue;
+      }
+      checkbox.checked = !item.hidden;
+      checkbox.onchange = () => {
+        if (isSingleDataset) {
+          chart.toggleDataVisibility(item.index);
+        } else {
+          chart.setDatasetVisibility(item.datasetIndex, checkbox.checked);
+        }
+        chart.update();
+      };
+      const swatch = label.children[1] as HTMLElement;
+      swatch.style.color = item.strokeStyle;
+      const dataset = chart.data?.datasets[item.datasetIndex];
+      swatch.textContent =
+        dataset?.pointStyle === "triangle"
+          ? "▲"
+          : dataset?.pointStyle === "rectRot"
+            ? "◆"
+            : "●";
+      label.children[2].textContent = item.text;
+    }
+    for (const label of fieldset.querySelectorAll<HTMLLabelElement>(
+      "label[data-key]"
+    )) {
+      if (!keys.has(label.dataset.key ?? "")) {
+        label.remove();
+      }
+    }
+  },
+});
