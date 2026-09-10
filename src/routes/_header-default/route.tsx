@@ -4,7 +4,6 @@ import { NPSBanner } from "#/components/banner/nps";
 import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
 import { Question } from "#/components/question";
-import SocialNetworks from "#/components/social-network";
 import { BackToTop } from "#/components-ui/back-to-top";
 
 export const Route = createFileRoute("/_header-default")({
@@ -20,9 +19,8 @@ function RouteComponent() {
       <main className="fr-container">
         <Outlet />
       </main>
-      <SocialNetworks />
       <Question />
-      <Footer />
+      <Footer withSocialNetworks />
       <BackToTop />
     </>
   );

@@ -4,7 +4,6 @@ import { NPSBanner } from "#/components/banner/nps";
 import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
 import { Question } from "#/components/question";
-import SocialNetworks from "#/components/social-network";
 
 export const Route = createFileRoute("/_header-home")({
   component: RouteComponent,
@@ -13,6 +12,9 @@ export const Route = createFileRoute("/_header-home")({
 function RouteComponent() {
   return (
     <>
+      <a className="fr-link fr-mx-2w" href="#main-content">
+        Aller au contenu
+      </a>
       <NPSBanner />
       <BannerManager />
       <Header
@@ -21,12 +23,11 @@ function RouteComponent() {
         useExportSirene={true}
         useSearchBar={false}
       />
-      <main className="fr-container">
+      <main className="fr-container" id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
-      <SocialNetworks />
       <Question />
-      <Footer />
+      <Footer withSocialNetworks />
     </>
   );
 }
