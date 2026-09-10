@@ -53,39 +53,41 @@ function RouteComponent() {
         Voici donc la liste des données utilisées sur l’Annuaire des Entreprises
         :
       </p>
-      <strong>Sommaire</strong>
-      <ol>
-        {allAdministrations.map(({ dataSources, slug }) =>
-          dataSources.map((source, sourceIndex) => {
-            const api = allAPI[source.apiSlug];
-            const isProtected = source.isProtected || api?.isProtected;
+      <nav aria-label="Sommaire des sources">
+        <h2 className="fr-h6">Sommaire</h2>
+        <ol>
+          {allAdministrations.map(({ dataSources, slug }) =>
+            dataSources.map((source, sourceIndex) => {
+              const api = allAPI[source.apiSlug];
+              const isProtected = source.isProtected || api?.isProtected;
 
-            return (
-              <li key={`${source.label}-${slug}`}>
-                <a
-                  href={`#${slug}-${sourceIndex}`}
-                  style={{
-                    display: "inline-block",
-                  }}
-                >
-                  <span>
-                    {isProtected ? (
-                      <Icon
-                        color={constants.colors.espaceAgent}
-                        slug="lockFill"
-                      >
-                        {source.label}
-                      </Icon>
-                    ) : (
-                      source.label
-                    )}
-                  </span>
-                </a>
-              </li>
-            );
-          })
-        )}
-      </ol>
+              return (
+                <li key={`${source.label}-${slug}`}>
+                  <a
+                    href={`#${slug}-${sourceIndex}`}
+                    style={{
+                      display: "inline-block",
+                    }}
+                  >
+                    <span>
+                      {isProtected ? (
+                        <Icon
+                          color={constants.colors.espaceAgent}
+                          slug="lockFill"
+                        >
+                          {source.label}
+                        </Icon>
+                      ) : (
+                        source.label
+                      )}
+                    </span>
+                  </a>
+                </li>
+              );
+            })
+          )}
+        </ol>
+      </nav>
       {allAdministrations.map(
         ({ dataSources, administrationEnum, contact, slug, long, short }) => (
           <Fragment key={slug}>
@@ -102,14 +104,19 @@ function RouteComponent() {
                   key={label}
                   sources={[administrationEnum]}
                   title={label}
+                  titleLevel="h3"
                 >
                   <TwoColumnTable
                     body={[
                       [
                         "Données",
-                        (data || []).map(({ label }) => (
-                          <Tag key={label}>{label}</Tag>
-                        )),
+                        <ul>
+                          {(data || []).map(({ label }) => (
+                            <li key={label}>
+                              <Tag>{label}</Tag>
+                            </li>
+                          ))}
+                        </ul>,
                       ],
                       ...(isProtected
                         ? []
@@ -118,6 +125,7 @@ function RouteComponent() {
                               "Source de données",
                               datagouvLink ? (
                                 <a
+                                  aria-label={`Consulter le jeu de données ${label} — nouvelle fenêtre`}
                                   href={datagouvLink}
                                   rel="noreferrer noopener"
                                   target="_blank"
@@ -141,6 +149,7 @@ function RouteComponent() {
                                   <>
                                     {" ("}
                                     <a
+                                      aria-label={`Documentation de ${api.apiName} — nouvelle fenêtre`}
                                       href={api.apiDocumentationLink}
                                       rel="noreferrer noopener"
                                       target="_blank"
@@ -173,7 +182,15 @@ function RouteComponent() {
                         ? [
                             [
                               "Administration responsable",
-                              <a href={contact}>
+                              <a
+                                aria-label={`Contacter ${short} — ${long}`}
+                                href={
+                                  contact.includes("@") &&
+                                  !contact.startsWith("mailto:")
+                                    ? `mailto:${contact}`
+                                    : contact
+                                }
+                              >
                                 <Icon slug="mail">Contacter ({short})</Icon>
                               </a>,
                             ],

@@ -163,12 +163,12 @@ function RouteComponent() {
           </thead>
           <tbody>
             <tr>
-              <td>API Recherche d’Entreprises</td> <td>DINUM</td>{" "}
+              <th scope="row">API Recherche d’Entreprises</th> <td>DINUM</td>{" "}
               <td>100% ouverte</td> <td>400 appels/min/IP</td>
               <td>RNE, Sirene, IDCC, Ratios financiers etc.</td>
             </tr>
             <tr>
-              <td>API Entreprise</td> <td>DINUM</td>{" "}
+              <th scope="row">API Entreprise</th> <td>DINUM</td>{" "}
               <td>Réservée à l’administration</td> <td>500 appels/min/IP</td>
               <td>
                 <a href="https://entreprise.api.gouv.fr/catalogue">
@@ -177,13 +177,13 @@ function RouteComponent() {
               </td>
             </tr>
             <tr>
-              <td>API RNE</td> <td>INPI</td> <td>Création de compte</td>{" "}
-              <td>15 000 appels/jours/IP</td>
+              <th scope="row">API RNE</th> <td>INPI</td>{" "}
+              <td>Création de compte</td> <td>15 000 appels/jours/IP</td>
               <td>RNE</td>
             </tr>
             <tr>
-              <td>API Sirene</td> <td>INSEE</td> <td>Création de compte</td>{" "}
-              <td>30 appels/min/IP</td>
+              <th scope="row">API Sirene</th> <td>INSEE</td>{" "}
+              <td>Création de compte</td> <td>30 appels/min/IP</td>
               <td>Sirene</td>
             </tr>
           </tbody>
