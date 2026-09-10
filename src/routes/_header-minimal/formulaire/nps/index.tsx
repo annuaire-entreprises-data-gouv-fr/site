@@ -44,7 +44,7 @@ function RouteComponent() {
 
   return (
     <div id="page-layout">
-      <main className="fr-container">
+      <div>
         <div className="layout-center">
           <h1>Quel est votre avis sur l’Annuaire des Entreprises ?</h1>
         </div>
@@ -161,6 +161,7 @@ function RouteComponent() {
                   d‘une réponse.
                 </label>
                 <input
+                  autoComplete="email"
                   className="fr-input"
                   defaultValue={
                     isLoggedIn({ user }) ? getAgentEmail({ user }) : ""
@@ -180,7 +181,7 @@ function RouteComponent() {
             </div>
           </form>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
