@@ -53,9 +53,11 @@ export const DataInpiLinkWithExplanations = ({ uniteLegale, user }: IProps) => {
         <INPI />
         &nbsp;:
       </p>
+      <h3 className="fr-sr-only">Documents d’immatriculation à télécharger</h3>
       <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">
         <li>
           <ButtonLink
+            aria-label={`Télécharger le justificatif d’immatriculation de ${uniteLegale.nomComplet}`}
             to={`/justificatif-immatriculation-pdf/${uniteLegale.siren}`}
           >
             <Icon slug="download">
@@ -66,6 +68,7 @@ export const DataInpiLinkWithExplanations = ({ uniteLegale, user }: IProps) => {
         <li>
           <ButtonLink
             alt
+            aria-label={`Voir la fiche sur le site de l’INPI de ${uniteLegale.nomComplet} — nouvelle fenêtre`}
             target="_blank"
             to={
               siteLink || `${routes.rne.portail.entreprise}${uniteLegale.siren}`
