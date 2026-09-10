@@ -80,7 +80,9 @@ function RouteComponent() {
           <ul>
             {definition.more.map(({ href, label }) => (
               <li key={href}>
-                <a href={href}>{label}</a>
+                <a aria-label={`Lire : ${label}`} href={href}>
+                  {label}
+                </a>
               </li>
             ))}
           </ul>
