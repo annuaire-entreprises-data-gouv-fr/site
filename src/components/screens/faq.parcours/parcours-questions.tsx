@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MultiChoice } from "#/components-ui/multi-choice";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
@@ -39,18 +39,44 @@ export default function ParcoursQuestions({ user }: IProps) {
   );
   const [questionType, setQuestionType] = useState<string>("");
 
-  const updateQuestion = (q: string) => {
-    setQuestionType(q);
+  useEffect(() => {
+    const restore = () => {
+      const saved = window.history.state?.faqChoices;
+      if (saved && Object.hasOwn(FAQTargets, saved.userType)) {
+        setUserType(saved.userType);
+        setQuestionType(
+          questions.some((q) => q.key === saved.questionType)
+            ? saved.questionType
+            : ""
+        );
+      }
+    };
+    restore();
+    window.addEventListener("popstate", restore);
+    return () => window.removeEventListener("popstate", restore);
+  }, []);
+
+  const saveChoices = (nextUser: string, nextQuestion: string) => {
+    setUserType(nextUser);
+    setQuestionType(nextQuestion);
+    window.history.replaceState(
+      {
+        ...window.history.state,
+        faqChoices: { userType: nextUser, questionType: nextQuestion },
+      },
+      ""
+    );
   };
+  const updateQuestion = (q: string) => saveChoices(userType, q);
   return (
     <>
       <MultiChoice
         idPrefix="user-type"
+        legend="Vous êtes :"
         values={Object.entries(FAQTargets).map(([key, value]) => ({
           label: value,
           onClick: () => {
-            setUserType(key);
-            updateQuestion("none");
+            saveChoices(key, "");
           },
           checked: userType === key,
         }))}
@@ -58,9 +84,9 @@ export default function ParcoursQuestions({ user }: IProps) {
       {userType && (
         <>
           <br />
-          <strong>Vous voulez :</strong>
           <MultiChoice
             idPrefix="user-question"
+            legend="Vous voulez :"
             values={questions.map(({ key, label }) => ({
               label,
               onClick: () => {
@@ -72,13 +98,15 @@ export default function ParcoursQuestions({ user }: IProps) {
         </>
       )}
 
-      {questionType && questionType === "company" ? (
-        <ContactCompanyAnswer />
-      ) : questionType === "fraud" ? (
-        <FraudAnswer />
-      ) : questionType === "contact" ? (
-        <ContactAnswer user={user} userType={userType} />
-      ) : null}
+      <div aria-live="polite">
+        {questionType && questionType === "company" ? (
+          <ContactCompanyAnswer />
+        ) : questionType === "fraud" ? (
+          <FraudAnswer />
+        ) : questionType === "contact" ? (
+          <ContactAnswer user={user} userType={userType} />
+        ) : null}
+      </div>
     </>
   );
 }

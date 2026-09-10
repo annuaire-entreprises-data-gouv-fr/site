@@ -17,12 +17,6 @@ export interface IProps {
   }[];
 }
 
-const onKeyDown = (event: any, onclick?: () => void) => {
-  if (event.keyCode === 13 && onclick) {
-    onclick();
-  }
-};
-
 export const MultiChoice: React.FC<IProps> = ({
   values,
   legend = "",
@@ -31,7 +25,7 @@ export const MultiChoice: React.FC<IProps> = ({
   required = false,
   large = false,
 }) => (
-  <>
+  <fieldset style={{ border: 0, padding: 0, margin: 0 }}>
     {legend && (
       <legend>
         <h2 style={{ fontSize: "1.2rem" }}>{legend}</h2>
@@ -56,21 +50,16 @@ export const MultiChoice: React.FC<IProps> = ({
                 checked={onClick ? checked : undefined}
                 defaultChecked={onClick ? undefined : checked}
                 id={`${idPrefix}-${index}`}
-                name={name}
+                name={name || idPrefix}
                 onChange={onClick ? onClick : undefined}
                 required={required}
-                tabIndex={-1}
                 type="radio"
                 value={value}
               />
-              {/* biome-ignore lint/a11y/noNoninteractiveElementInteractions: preserve existing keyboard interaction on the associated label */}
               <label
                 className="fr-label"
                 htmlFor={`${idPrefix}-${index}`}
-                onKeyDown={(e) => onKeyDown(e, onClick)}
                 style={computeStyle(large)}
-                // biome-ignore lint/a11y/noNoninteractiveTabindex: keep label keyboard-focusable to preserve current UX
-                tabIndex={0}
               >
                 {label}
               </label>
@@ -79,7 +68,7 @@ export const MultiChoice: React.FC<IProps> = ({
         </div>
       ))}
     </div>
-  </>
+  </fieldset>
 );
 
 function computeStyle(large: boolean) {
