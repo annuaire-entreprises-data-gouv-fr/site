@@ -79,9 +79,9 @@ export const OpqibiSection: React.FC<{
               ],
             ]}
           />
-          {opqibi.qualifications.length && opqibi.qualifications.length > 0 ? (
+          {opqibi.qualifications.length > 0 ? (
             <>
-              <h4>Qualifications</h4>
+              <h3>Qualifications</h3>
               <TwoColumnTable
                 body={[
                   [
@@ -96,17 +96,16 @@ export const OpqibiSection: React.FC<{
               />
             </>
           ) : null}
-          {opqibi.qualificationsProbatoires.length &&
-          opqibi.qualificationsProbatoires.length > 0 ? (
+          {opqibi.qualificationsProbatoires.length > 0 ? (
             <>
-              <h4>
+              <h3>
                 <FAQLink tooltipLabel="Qualifications probatoires">
                   Un certificat de qualification probatoire atteste qu’une
                   structure possède l’aptitude à réaliser les prestations pour
                   lesquelles elle est qualifiée, mais qu’elle ne les a pas
                   encore ou pas suffisamment réalisées
                 </FAQLink>
-              </h4>
+              </h3>
               <p />
               <TwoColumnTable
                 body={[
@@ -139,17 +138,26 @@ function Qualification({
 }) {
   return (
     <ul style={{ listStyle: "none", padding: 0 }}>
-      {qualifications.map((qualification) => (
-        <li key={qualification.codeQualification}>
-          <FAQLink
-            tooltipLabel={`${qualification.codeQualification} : ${
-              qualification.nom
-            }${qualification.rge ? " - RGE" : ""}`}
-          >
-            {qualification.definition}
-          </FAQLink>
-        </li>
-      ))}
+      {qualifications
+        .filter(
+          (item, index, all) =>
+            all.findIndex(
+              (other) =>
+                other.codeQualification === item.codeQualification &&
+                other.definition === item.definition &&
+                other.nom === item.nom &&
+                other.rge === item.rge
+            ) === index
+        )
+        .map((qualification) => (
+          <li key={qualification.codeQualification}>
+            <strong>
+              {qualification.codeQualification} : {qualification.nom}
+              {qualification.rge ? " - RGE" : ""}
+            </strong>
+            <p>{qualification.definition}</p>
+          </li>
+        ))}
     </ul>
   );
 }
