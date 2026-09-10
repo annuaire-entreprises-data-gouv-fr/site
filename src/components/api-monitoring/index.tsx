@@ -1,8 +1,5 @@
 import type React from "react";
 import { Section } from "#/components/section";
-import { Icon } from "#/components-ui/icon/wrapper";
-import InformationTooltip from "#/components-ui/information-tooltip";
-import constants from "#/models/constants";
 import type { IMonitoringWithMetaData, IRatio } from "#/models/monitoring";
 import styles from "./styles.module.css";
 
@@ -52,53 +49,50 @@ const getHideClasses = (index: number) => {
   return `${styles["hide-mobile"]} ${styles["hide-tablet"]}`;
 };
 
-const Metric: React.FC<{
-  series: IRatio[];
-}> = ({ series }) => (
-  <div className={styles["series-wrapper"]}>
-    <div className={styles["uptime-chart"]}>
-      {series.map((serie, index) => (
-        <div
-          className={`${getHideClasses(index)} ${styles.series}`}
-          key={index}
-        >
-          <InformationTooltip
-            ariaRelation="labelledby"
-            horizontalOrientation={index < 76 ? "left" : "right"}
-            inlineBlock={false}
-            label={
-              <>
-                <strong>{serie.date}</strong>
-                <br />
-                {getUptimeLabel(serie)}
-              </>
-            }
-            tabIndex={0}
-            width={170}
+const Metric = ({ series }: { series: IRatio[] }) => (
+  <>
+    <div aria-hidden="true" className={styles["series-wrapper"]}>
+      <div className={styles["uptime-chart"]}>
+        {series.map((serie, index) => (
+          <div
+            className={`${getHideClasses(index)} ${styles.series}`}
+            key={serie.date}
           >
             <div
               className={styles["serie-rectangle"]}
               style={getUptimeColorStyles(serie)}
             />
-          </InformationTooltip>
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
-
-const RobotTooltip = () => (
-  <InformationTooltip
-    ariaRelation="labelledby"
-    horizontalOrientation="right"
-    label="Ces données sont obtenues via un robot qui interroge la source de données toutes les minutes"
-    tabIndex={0}
-  >
-    <Icon color={constants.colors.frBlue} size={12} slug="information" />
-  </InformationTooltip>
+    <details>
+      <summary>Consulter l’historique de disponibilité dans un tableau</summary>
+      <div className="fr-table">
+        <table>
+          <caption>Historique de disponibilité</caption>
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Disponibilité</th>
+            </tr>
+          </thead>
+          <tbody>
+            {series.map((serie) => (
+              <tr key={serie.date}>
+                <th scope="row">{serie.date}</th>
+                <td>{getUptimeLabel(serie)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </>
 );
 
 const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
+  apiName,
   isOnline,
   series,
   uptime,
@@ -110,6 +104,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
         title={`Disponibilité : l’API est actuellement ${
           isOnline ? "en ligne ✅" : "hors-ligne 🛑"
         }`}
+        titleLevel="h4"
       >
         {isOnline ? (
           <p>
@@ -123,25 +118,27 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
           </p>
         )}
         <div className={styles["metrics-title"]}>
-          <h3>
-            Historique de disponibilité <RobotTooltip />
-          </h3>
+          <h5>Historique de disponibilité</h5>
+          <p>
+            Ces données sont obtenues via un robot qui interroge la source de
+            données toutes les minutes.
+          </p>
           <Metric series={series} />
-          <h3>Statistiques moyennes</h3>
-          <div className={styles["mean-stats"]}>
+          <h5>Statistiques moyennes</h5>
+          <dl className={styles["mean-stats"]}>
             <div>
-              <strong>24h</strong>
-              <span>{uptime.day}%</span>
+              <dt>24h</dt>
+              <dd>{uptime.day}%</dd>
             </div>
             <div>
-              <strong>7 jours</strong>
-              <span>{uptime.week}%</span>
+              <dt>7 jours</dt>
+              <dd>{uptime.week}%</dd>
             </div>
             <div>
-              <strong>30 jours</strong>
-              <span>{uptime.month}%</span>
+              <dt>30 jours</dt>
+              <dd>{uptime.month}%</dd>
             </div>
-          </div>
+          </dl>
         </div>
 
         {apiDocumentationLink && (
@@ -150,6 +147,7 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
             Envie de réutiliser cette API ?{" "}
             {apiDocumentationLink && (
               <a
+                aria-label={`Consulter la documentation de ${apiName} — nouvelle fenêtre`}
                 href={apiDocumentationLink}
                 rel="noreferrer noopener"
                 target="_blank"
@@ -161,7 +159,10 @@ const ApiMonitoring: React.FC<IMonitoringWithMetaData> = ({
         )}
       </Section>
     ) : (
-      <Section title="Suivi des performances de l'API indisponible">
+      <Section
+        title="Suivi des performances de l'API indisponible"
+        titleLevel="h4"
+      >
         Notre service de suivi des performances est actuellement hors-ligne.
         Nous sommes désolés pour ce dérangement.
       </Section>

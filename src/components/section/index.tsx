@@ -18,6 +18,7 @@ export interface ISectionProps {
   lastModified?: string | null;
   sources?: EAdministration[];
   title: string;
+  titleLevel?: "h2" | "h3" | "h4";
   width?: number;
 }
 
@@ -25,6 +26,7 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
   id,
   children,
   title,
+  titleLevel: TitleTag = "h2",
   sources = [],
   lastModified = null,
   width = 100,
@@ -62,9 +64,9 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
           </div>
         )}
         <div className={style["section-header"]}>
-          <h2 style={{ color: titleColor, backgroundColor: borderColor }}>
+          <TitleTag style={{ color: titleColor, backgroundColor: borderColor }}>
             {title}
-          </h2>
+          </TitleTag>
           <div className={style["section-logo-wrapper"]}>
             {dataSources.map(
               ({ slug, long, logoType, short }) =>
