@@ -104,7 +104,13 @@ const AnnoncesBodacc: React.FC<{
                       </i>
                     </div>
                   </>,
-                  <ButtonLink alt small target="_blank" to={annonce.path}>
+                  <ButtonLink
+                    alt
+                    aria-label={`Consulter l’annonce BODACC n°${annonce.numeroAnnonce} du ${formatDate(annonce.datePublication)} — nouvelle fenêtre`}
+                    small
+                    target="_blank"
+                    to={annonce.path}
+                  >
                     ⇢&nbsp;Consulter
                   </ButtonLink>,
                 ])}

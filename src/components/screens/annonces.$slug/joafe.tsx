@@ -69,7 +69,13 @@ const AnnoncesJOAFESection: React.FC<{
                       </i>
                     </div>
                   </>,
-                  <ButtonLink alt small target="_blank" to={annonce.path}>
+                  <ButtonLink
+                    alt
+                    aria-label={`Consulter l’annonce JOAFE n°${annonce.numeroParution} du ${formatDate(annonce.datePublication)} — nouvelle fenêtre`}
+                    small
+                    target="_blank"
+                    to={annonce.path}
+                  >
                     ⇢&nbsp;Consulter
                   </ButtonLink>,
                 ])}
