@@ -6,8 +6,8 @@ import {
   type IAPINotRespondingError,
 } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
+import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import type { IUniteLegale } from "../core/types";
 
 export type INomCertificat =
   | "QUALIBAT-RGE"
@@ -53,13 +53,14 @@ export interface IRGECertification {
 }
 
 export const getRGECertifications = async (
-  uniteLegale: IUniteLegale
+  siren: Siren,
+  estRge: boolean
 ): Promise<IRGECertification | IAPINotRespondingError> => {
   try {
-    if (!uniteLegale.complements.estRge) {
+    if (!estRge) {
       throw new HttpNotFound("Not a RGE company");
     }
-    return await clientRGE(uniteLegale.siren);
+    return await clientRGE(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.ADEME, 404);
@@ -69,7 +70,7 @@ export const getRGECertifications = async (
         cause: e,
         ressource: "RGECertifications",
         context: {
-          siren: uniteLegale.siren,
+          siren,
         },
         administration: EAdministration.ADEME,
       })

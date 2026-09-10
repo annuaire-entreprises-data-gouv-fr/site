@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { DonneesPriveesSection } from "#/components/donnees-privees-section";
 import DirigeantsAssociationSection from "#/components/screens/dirigeants.$slug/sections/association/dirigeants";
 import ElusSection from "#/components/screens/dirigeants.$slug/sections/collectivite/elus-section";
@@ -7,8 +7,6 @@ import DirigeantsEntrepriseSection from "#/components/screens/dirigeants.$slug/s
 import DirigeantSummary from "#/components/screens/dirigeants.$slug/sections/entreprise/summary";
 import ResponsablesServicePublicSection from "#/components/screens/dirigeants.$slug/sections/service-public";
 import { NotFound } from "#/components/screens/not-found";
-import Title from "#/components/title-section";
-import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { useAuth } from "#/contexts/auth.context";
 import type { IAgentInfo } from "#/models/authentication/agent";
@@ -24,21 +22,22 @@ import {
   isServicePublic,
   isServicePublicImmatriculeeAuRNE,
 } from "#/models/core/types";
-import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
 import { meta } from "#/utils/seo";
-import { HeaderDefaultError } from "./-error";
+import { HeaderDefaultError } from "../_header-default/-error";
 
-export const Route = createFileRoute("/_header-default/dirigeants/$slug")({
-  loader: async ({ params }) => {
-    const uniteLegale = await getUniteLegaleFromSlugFn({
-      data: { slug: params.slug },
-    });
+export const Route = createFileRoute("/entreprise/$slug/dirigeants")({
+  loader: async ({ parentMatchPromise }) => {
+    const { loaderData } = await parentMatchPromise;
 
-    return { uniteLegale };
+    if (!loaderData) {
+      throw notFound();
+    }
+
+    return loaderData;
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -46,7 +45,7 @@ export const Route = createFileRoute("/_header-default/dirigeants/$slug")({
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/dirigeants/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/dirigeants`;
     return {
       meta: meta({
         title: `Dirigeants - ${uniteLegalePageTitle(uniteLegale)}`,
@@ -75,17 +74,12 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
-      <Title
-        ficheType={FICHE.DIRIGEANTS}
-        uniteLegale={uniteLegale}
-        user={user}
-      />
+    <>
       <DirigeantSummary uniteLegale={uniteLegale} user={user} />
       <DirigeantsContent uniteLegale={uniteLegale} user={user} />
       <HorizontalSeparator />
       <DPOSection uniteLegale={uniteLegale} />
-    </div>
+    </>
   );
 }
 

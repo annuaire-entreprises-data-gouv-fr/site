@@ -14,7 +14,7 @@ test.describe("Administration", () => {
   });
 
   test("Should display dirigeant information", async ({ page }) => {
-    await goto(page, "/dirigeants/130025265");
+    await goto(page, "/entreprise/130025265/dirigeants");
     await expect(
       page.getByText("responsable(s) enregistré(s) auprès de la DILA").first()
     ).toBeVisible();

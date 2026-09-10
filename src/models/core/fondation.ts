@@ -1,7 +1,9 @@
+import { decodeHTML } from "entities/decode";
 import { HttpNotFound, HttpServerError } from "#/clients/exceptions";
 import { clientFondationRechercheEntreprise } from "#/clients/recherche-entreprise/rnf";
 import { clientSIAFFondation } from "#/clients/siaf/index.server";
 import type { IFondationResult } from "#/clients/siaf/interface";
+import { extractSirenFromSiret } from "#/utils/helpers";
 import { verifyIdRnf } from "#/utils/helpers/fondations";
 import { logFatalErrorInSentry, logWarningInSentry } from "#/utils/sentry";
 import { EAdministration } from "../administrations/e-administration";
@@ -19,17 +21,16 @@ import { IdRnfNotFoundError, type IFondation } from "./fondations.types";
  */
 
 interface IFondationOptions {
-  isBot: boolean;
   page?: number;
 }
 
 /**
- * Return an uniteLegale if and only if siren is valid and exists otherwise throw SirenInvalid or SirenNotFound errors
+ * Return a fondation if and only if idRnf is valid and exists otherwise throw IdRnfInvalid or IdRnfNotFound errors
  *
  */
 export const getFondationFromSlug = async (
   slug: string,
-  options: IFondationOptions
+  options: IFondationOptions = { page: 1 }
 ): Promise<IFondation> => {
   const { page = 1 } = options;
   const builder = new FondationBuilder(slug, page);
@@ -86,19 +87,27 @@ class FondationBuilder {
     }
 
     const fondationSiafResult: IFondation = {
-      address: fondationSiaf.address.oneLine,
+      address:
+        fondationSiaf.address.oneLine &&
+        decodeHTML(fondationSiaf.address.oneLine),
       creationDate: fondationSiaf.creationAt,
       department: fondationSiaf.department,
       foundationType: fondationSiaf.foundationType,
-      generalInterestDomain: fondationSiaf.generalInterestDomain,
+      generalInterestDomain:
+        fondationSiaf.generalInterestDomain &&
+        decodeHTML(fondationSiaf.generalInterestDomain),
       hasInternationalActivity: fondationSiaf.hasInternationalActivity,
       id: fondationSiaf.id,
       postalCode: fondationSiaf.address.dsAddress.postalCode,
       siret: fondationSiaf.siret,
-      socialObject: fondationSiaf.socialObject,
+      siren: fondationSiaf.siret
+        ? extractSirenFromSiret(fondationSiaf.siret)
+        : null,
+      socialObject:
+        fondationSiaf.socialObject && decodeHTML(fondationSiaf.socialObject),
       state: fondationSiaf.state,
       stateEffectiveAt: fondationSiaf.stateEffectiveAt,
-      title: fondationSiaf.title,
+      title: fondationSiaf.title && decodeHTML(fondationSiaf.title),
     };
 
     if (isAPINotResponding(fondationRechercheEntreprise)) {
@@ -125,6 +134,8 @@ class FondationBuilder {
     return {
       ...fondationRechercheEntreprise,
       ...fondationSiafResult,
+      siret: fondationSiafResult.siret || fondationRechercheEntreprise.siret,
+      siren: fondationSiafResult.siren || fondationRechercheEntreprise.siren,
     };
   };
 }

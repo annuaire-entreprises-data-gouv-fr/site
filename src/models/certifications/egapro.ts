@@ -7,8 +7,8 @@ import {
   type IAPINotRespondingError,
 } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
+import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import type { IUniteLegale } from "../core/types";
 
 export interface IEgapro {
   index: {
@@ -39,25 +39,24 @@ export interface IEgapro {
 }
 
 export const getEgapro = async (
-  uniteLegale: IUniteLegale
+  siren: Siren,
+  egaproRenseignee: boolean
 ): Promise<IEgapro | IAPINotRespondingError> => {
   try {
-    if (!uniteLegale.complements.egaproRenseignee) {
+    if (!egaproRenseignee) {
       return APINotRespondingFactory(EAdministration.MTPEI, 404);
     }
-    const index = await clientEgapro(uniteLegale.siren);
+    const index = await clientEgapro(siren);
     return {
       index,
       representation: index.moreThan1000
-        ? await clientEgaproRepresentationEquilibre(uniteLegale.siren).catch(
-            (e) => {
-              if (e instanceof HttpNotFound) {
-                // some moreThan1000 uniteLegale dont have representation
-                return null;
-              }
-              throw e;
+        ? await clientEgaproRepresentationEquilibre(siren).catch((e) => {
+            if (e instanceof HttpNotFound) {
+              // some moreThan1000 uniteLegale dont have representation
+              return null;
             }
-          )
+            throw e;
+          })
         : null,
     };
   } catch (e: any) {
@@ -69,7 +68,7 @@ export const getEgapro = async (
         cause: e,
         ressource: "Egapro",
         context: {
-          siren: uniteLegale.siren,
+          siren,
         },
         administration: EAdministration.MTPEI,
       })

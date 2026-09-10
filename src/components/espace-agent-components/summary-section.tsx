@@ -25,8 +25,8 @@ export const EspaceAgentSummarySection = ({ uniteLegale, user }: IProps) => (
             "Documents juridiques",
             <Link
               hash="actes"
-              params={{ slug: uniteLegale.siren }}
-              to="/documents/$slug"
+              params={{ slug: uniteLegale.chemin }}
+              to="/entreprise/$slug/documents"
             >
               → Consulter les Actes et les Statuts constitutifs
             </Link>,
@@ -35,8 +35,8 @@ export const EspaceAgentSummarySection = ({ uniteLegale, user }: IProps) => (
           [
             <>Données financières</>,
             <Link
-              params={{ slug: uniteLegale.siren }}
-              to="/donnees-financieres/$slug"
+              params={{ slug: uniteLegale.chemin }}
+              to="/entreprise/$slug/donnees-financieres"
             >
               → Consulter les indicateurs financiers
             </Link>,
@@ -45,8 +45,8 @@ export const EspaceAgentSummarySection = ({ uniteLegale, user }: IProps) => (
             "",
             <Link
               hash="bilans"
-              params={{ slug: uniteLegale.siren }}
-              to="/donnees-financieres/$slug"
+              params={{ slug: uniteLegale.chemin }}
+              to="/entreprise/$slug/donnees-financieres"
             >
               <Icon slug="download">Télécharger les bilans</Icon>
             </Link>,
@@ -58,8 +58,8 @@ export const EspaceAgentSummarySection = ({ uniteLegale, user }: IProps) => (
                   "Conformité",
                   <Link
                     hash="conformite-sociale"
-                    params={{ slug: uniteLegale.siren }}
-                    to="/documents/$slug"
+                    params={{ slug: uniteLegale.chemin }}
+                    to="/entreprise/$slug/documents"
                   >
                     → Attestations de conformité sociale
                   </Link>,
@@ -73,8 +73,8 @@ export const EspaceAgentSummarySection = ({ uniteLegale, user }: IProps) => (
                   "Conformité",
                   <Link
                     hash="conformite-fiscale"
-                    params={{ slug: uniteLegale.siren }}
-                    to="/documents/$slug"
+                    params={{ slug: uniteLegale.chemin }}
+                    to="/entreprise/$slug/documents"
                   >
                     → Attestation de conformité fiscale
                   </Link>,
@@ -87,8 +87,8 @@ export const EspaceAgentSummarySection = ({ uniteLegale, user }: IProps) => (
                   "Travaux",
                   <Link
                     hash="travaux-publics"
-                    params={{ slug: uniteLegale.siren }}
-                    to="/documents/$slug"
+                    params={{ slug: uniteLegale.chemin }}
+                    to="/entreprise/$slug/documents"
                   >
                     → Justificatifs relatifs aux entreprises de travaux publics
                   </Link>,

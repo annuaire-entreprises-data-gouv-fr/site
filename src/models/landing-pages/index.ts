@@ -1,8 +1,10 @@
+import type { LinkProps as TanStackLinkProps } from "@tanstack/react-router";
+
 export interface ILandingPage {
   body: string;
   datasources: string[];
   description: string;
-  filter: {
+  filter?: {
     name: string;
     value: string;
   };
@@ -10,12 +12,15 @@ export interface ILandingPage {
   isServicePublic: boolean;
   published: boolean;
   reassurance: { title: string; body: string }[];
+  searchPath?: TanStackLinkProps["to"];
+  searchPlaceholder?: string;
   seo: {
     title: string;
     description: string;
   };
   slug: string;
   title: string;
+  titleDiamondColor?: string;
 }
 
 type LandingPageJson = Omit<ILandingPage, "slug">;
