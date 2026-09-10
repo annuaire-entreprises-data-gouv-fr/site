@@ -72,59 +72,60 @@ const ResultItem: React.FC<{
     shouldColorZipCode && result.matchingEtablissements.find((e) => e.estSiege);
 
   return (
-    <div className={styles["result-item"]}>
-      <Link
-        className="result-link no-style-link"
-        data-siren={result.siren}
-        key={result.siren}
-        params={{ slug: result.chemin }}
-        to="/entreprise/$slug"
-      >
-        <div className={styles.title}>
-          <span>{`${result.nomComplet}`}</span>
-          <UniteLegaleBadge
-            defaultBadgeShouldBeHid
-            small
-            uniteLegale={result}
+    <li className={styles["result-item"]}>
+      <div className={styles.title}>
+        <h2 className="fr-h6">
+          <Link
+            aria-label={`Voir la page de ${result.nomComplet}`}
+            className="result-link"
+            data-siren={result.siren}
+            key={result.siren}
+            params={{ slug: result.chemin }}
+            to="/entreprise/$slug"
+          >
+            <span>{`${result.nomComplet}`}</span>
+          </Link>
+        </h2>
+        <UniteLegaleBadge defaultBadgeShouldBeHid small uniteLegale={result} />
+        {!estActif(result) && (
+          <IsActiveTag
+            etatAdministratif={result.etatAdministratif}
+            statutDiffusion={result.statutDiffusion}
           />
-          {!estActif(result) && (
-            <IsActiveTag
-              etatAdministratif={result.etatAdministratif}
-              statutDiffusion={result.statutDiffusion}
+        )}
+      </div>
+      <div>
+        {result.libelleActivitePrincipale}{" "}
+        {result.activitePrincipale ? `(${result.activitePrincipale})` : null}
+      </div>
+      <DirigeantsOrElusList
+        dirigeantsOrElus={
+          isCollectiviteTerritoriale(result)
+            ? result.colter.elus
+            : result.dirigeants
+        }
+        isDiffusible={estDiffusible(result)}
+      />
+      <div>
+        <Icon slug="mapPin">
+          <span className={styles.adress}>
+            <AddressWithColouredZip
+              adress={result.siege.adressePostale}
+              zip={(shouldColorSiege && result.siege.codePostal) || ""}
             />
-          )}
-        </div>
-        <div>
-          {result.libelleActivitePrincipale}{" "}
-          {result.activitePrincipale ? `(${result.activitePrincipale})` : null}
-        </div>
-        <DirigeantsOrElusList
-          dirigeantsOrElus={
-            isCollectiviteTerritoriale(result)
-              ? result.colter.elus
-              : result.dirigeants
-          }
-          isDiffusible={estDiffusible(result)}
-        />
-        <div>
-          <Icon slug="mapPin">
-            <span className={styles.adress}>
-              <AddressWithColouredZip
-                adress={result.siege.adressePostale}
-                zip={(shouldColorSiege && result.siege.codePostal) || ""}
-              />
-            </span>
-          </Icon>
-        </div>
-      </Link>
+          </span>
+        </Icon>
+      </div>
       <ul className={styles["matching-etablissement"]}>
         {(result.matchingEtablissements || [])
           .filter((e) => !e.estSiege)
           .map((etablissement) => (
             <li key={etablissement.siret}>
               <a
+                aria-label={`Voir l’établissement ${etablissement.siret} — ${etablissement.adressePostale}`}
                 className={styles.adress}
                 href={`/etablissement/${etablissement.siret}`}
+                style={{ textDecoration: "underline" }}
               >
                 <AddressWithColouredZip
                   adress={etablissement.adressePostale}
@@ -154,7 +155,7 @@ const ResultItem: React.FC<{
           </a>
         </li>
       </ul>
-    </div>
+    </li>
   );
 };
 
@@ -163,7 +164,7 @@ const ResultsList: React.FC<IProps> = ({
   shouldColorZipCode = false,
 }) => (
   <>
-    <div className="results-list">
+    <ul className="results-list" style={{ listStyle: "none", padding: 0 }}>
       {results.map((result) => (
         <ResultItem
           key={result.siren}
@@ -171,7 +172,7 @@ const ResultsList: React.FC<IProps> = ({
           shouldColorZipCode={shouldColorZipCode}
         />
       ))}
-    </div>
+    </ul>
   </>
 );
 

@@ -14,6 +14,7 @@ test.describe("Search page", () => {
 
     await goto(page, "/");
     await page.getByText("recherche avancée").click();
+    await page.locator("#geo-search-input").waitFor({ state: "attached" });
     await page.getByRole("button", { name: /Localisation/ }).click();
     await page.locator("#geo-search-input").fill("Nice");
     await page.getByText("Nice (06000)").click();
@@ -38,8 +39,11 @@ test.describe(`Advanced search on page ${path}`, () => {
 
     await page.getByRole("button", { name: /Localisation/ }).click();
     await expect(page.locator("#geo-search-input")).toBeVisible();
-    await page.getByRole("button", { name: /Localisation/ }).click();
+    await page.keyboard.press("Escape");
     await expect(page.locator("#geo-search-input")).not.toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /Localisation/ })
+    ).toBeFocused();
 
     await page.getByRole("button", { name: /Dirigeant/ }).click();
     await expect(
@@ -48,6 +52,7 @@ test.describe(`Advanced search on page ${path}`, () => {
       )
     ).toBeVisible();
 
+    await page.getByRole("button", { name: "Fermer les filtres" }).click();
     await page
       .getByRole("button", { name: /Situation administrative/ })
       .click();
@@ -70,9 +75,9 @@ test.describe(`Advanced search on page ${path}`, () => {
       page.getByText("Qualités, labels et certificats")
     ).toBeVisible();
     await page
-      .getByRole("button", { name: "Collectivité territoriale" })
-      .click();
-    await page.getByRole("button", { name: /RGE -/ }).click();
+      .getByRole("radio", { name: "Collectivité territoriale" })
+      .check();
+    await page.getByRole("checkbox", { name: /RGE -/ }).check();
     await page.getByRole("button", { name: "Appliquer" }).first().click();
   });
 

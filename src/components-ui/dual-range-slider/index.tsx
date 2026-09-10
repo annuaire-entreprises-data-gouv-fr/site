@@ -8,6 +8,7 @@ import constants from "#/models/constants";
  * Use with react !
  */
 const DualRangeSlider: React.FC<{
+  formatValue?: (value: number) => string;
   idPrefix: string;
   label: string;
   min: number;
@@ -21,6 +22,7 @@ const DualRangeSlider: React.FC<{
   disabledColor?: boolean;
 }> = (props) => {
   const {
+    formatValue,
     idPrefix,
     label,
     min,
@@ -66,7 +68,7 @@ const DualRangeSlider: React.FC<{
   const maxPos = ((maxValue - min) / (max - min)) * 100;
 
   return (
-    <div id="dual-range-slider">
+    <div className="dual-range-slider">
       <div className="input-wrapper">
         <label
           className="fr-label fr-sr-only"
@@ -75,6 +77,7 @@ const DualRangeSlider: React.FC<{
           {label} minimum
         </label>
         <input
+          aria-valuetext={formatValue?.(minValue)}
           disabled={disabled}
           id={`${idPrefix}-min-range-input`}
           max={max}
@@ -91,6 +94,7 @@ const DualRangeSlider: React.FC<{
           {label} maximum
         </label>
         <input
+          aria-valuetext={formatValue?.(maxValue)}
           disabled={disabled}
           id={`${idPrefix}-max-range-input`}
           max={max}
@@ -113,11 +117,16 @@ const DualRangeSlider: React.FC<{
         <div className="control" style={{ left: `${maxPos}%` }} />
       </div>
       <style>{`
-        #dual-range-slider {
+        .dual-range-slider {
           position: relative;
           display: flex;
           align-items: center;
           margin: 20px 10px 0;
+        }
+
+        .dual-range-slider:has(input:focus-visible) .control {
+          outline: 2px solid #0476f5;
+          outline-offset: 3px;
         }
 
         .input-wrapper {

@@ -1,9 +1,13 @@
-import { type PropsWithChildren, useId, useState } from "react";
+import {
+  type PropsWithChildren,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import ButtonLink from "#/components-ui/button";
 import ButtonClose from "#/components-ui/button/button-close";
-import FloatingModal from "#/components-ui/floating-modal";
 import { Icon } from "#/components-ui/icon/wrapper";
-import { useOutsideClick } from "#/hooks";
 import constants from "#/models/constants";
 import {
   buildSearchQuery,
@@ -37,17 +41,25 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
 
   const [open, setOpen] = useState(false);
 
-  const ref = useOutsideClick(() => {
-    setOpen(false);
-  });
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (open) {
+      dialog?.showModal();
+    } else {
+      dialog?.close();
+    }
+  }, [open]);
   const id = useId();
 
   return (
-    <div className={styles["search-filter-label-container"]} ref={ref}>
+    <div className={styles["search-filter-label-container"]}>
       <div>
         <div>
           {activeFilter.label ? (
             <ActiveFilterLabel
+              controls={id}
+              expanded={open}
               icon={activeFilter.icon}
               label={activeFilter.label}
               onClick={() => {
@@ -57,6 +69,10 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             />
           ) : (
             <button
+              aria-controls={id}
+              aria-describedby={`${id}-description`}
+              aria-expanded={open}
+              aria-haspopup="dialog"
               className={styles["search-filter-label"]}
               onClick={() => {
                 setOpen(!open);
@@ -69,21 +85,22 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             </button>
           )}
         </div>
-        {open && (
-          <ButtonClose
-            ariaControls={id}
-            ariaLabel="Fermer les filtres"
-            className={styles["close-container"]}
-            onClick={() => setOpen(false)}
-          />
-        )}
       </div>
-      <FloatingModal
-        aria-label={`Les filtres de ${activeFilter.label}`}
-        aria-modal={false}
+      <span className="fr-sr-only" id={`${id}-description`}>
+        Affiner la recherche par {label.toLowerCase()}.
+      </span>
+      <dialog
+        aria-label={`Filtres : ${label}`}
         className={styles.container}
-        style={{ display: open ? "block" : "none" }}
+        id={id}
+        onClose={() => setOpen(false)}
+        ref={dialogRef}
       >
+        <ButtonClose
+          ariaControls={id}
+          ariaLabel="Fermer les filtres"
+          onClick={() => setOpen(false)}
+        />
         <div className={styles["filter-container"]}>{children}</div>
         {addSaveClearButton && (
           <>
@@ -101,7 +118,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
             </div>
           </>
         )}
-      </FloatingModal>
+      </dialog>
     </div>
   );
 };

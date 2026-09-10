@@ -1,213 +1,116 @@
-import {
-  type KeyboardEventHandler,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { ClientOnly } from "@tanstack/react-router";
+import { useState } from "react";
+import AsyncSelect from "react-select/async";
 import type { IGeoElement } from "#/clients/geo";
-import { Info, Warning } from "#/components-ui/alerts";
-import { Loader } from "#/components-ui/loader";
 import { useStorage } from "#/hooks";
 import { isAPI404, isAPINotResponding } from "#/models/api-not-responding";
 import { searchGeoElementByText } from "#/models/geo";
-import { debounce } from "#/utils/helpers/debounce";
 
-const Issue = {
-  NONE: 2,
-  NORESULT: 0,
-  ERROR: 1,
-} as const;
-type Issue = (typeof Issue)[keyof typeof Issue];
+const groupLabels: Record<IGeoElement["type"], string> = {
+  insee: "Communes",
+  cp: "Codes postaux",
+  dep: "Départements",
+  reg: "Régions",
+  epci: "Intercommunalités",
+};
 
-export const FilterGeo: React.FC<{
+export const FilterGeo = ({
+  cp_dep = "",
+  cp_dep_label = "",
+  cp_dep_type = "",
+}: {
   cp_dep?: string;
   cp_dep_label?: string;
   cp_dep_type?: string;
-}> = ({ cp_dep = "", cp_dep_label = "", cp_dep_type = "" }) => {
-  const [labelDep, setLabelDep] = useState(cp_dep_label);
-  const [dep, setDep] = useState(cp_dep);
-  const [typeDep, setTypeDep] = useState(cp_dep_type);
-
-  const [issue, setIssue] = useState<Issue>(Issue.NONE);
-  const [searchTerm, setSearchTerm] = useState(cp_dep_label);
-  const [isLoading, setLoading] = useState(false);
-  const [geoSuggests, setGeoSuggests] = useState<IGeoElement[]>([]);
-
-  const [suggestsHistory, setSuggestsHistory] = useStorage(
-    "local",
-    "geo-search-history-4",
-    []
-  );
-  const [showSuggestsHistory, setShowSuggestsHistory] = useState(false);
-
-  const search = useCallback(
-    debounce(async (term: string) => {
-      setLoading(true);
-      try {
-        const result = await searchGeoElementByText(term);
-
-        if (isAPI404(result)) {
-          setIssue(Issue.NORESULT);
-        } else if (isAPINotResponding(result)) {
-          setIssue(Issue.ERROR);
-        } else {
-          setGeoSuggests(result);
-          if (result.length === 0) {
-            setIssue(Issue.NORESULT);
-          }
+}) => {
+  const [selected, setSelected] = useState<IGeoElement | null>(
+    cp_dep
+      ? {
+          value: cp_dep,
+          label: cp_dep_label,
+          type: cp_dep_type as IGeoElement["type"],
         }
-      } catch (e: any) {
-        setIssue(e?.status === 404 ? Issue.NORESULT : Issue.ERROR);
-      } finally {
-        setLoading(false);
-      }
-    }),
-    []
+      : null
   );
-
-  const selectDep = ({ label, value, type }: IGeoElement) => {
-    setDep(value);
-    setLabelDep(label);
-    setTypeDep(type);
-    setGeoSuggests([]);
-    setSearchTerm(label);
-    saveSuggestsHistory({ label, value, type });
-  };
-
-  const saveSuggestsHistory = ({ label, value, type }: IGeoElement) => {
+  const [history, setHistory] = useStorage("local", "geo-search-history-4", []);
+  const [error, setError] = useState(false);
+  const loadOptions = async (term: string) => {
+    setError(false);
     try {
-      const newSuggestHistory = [
-        { label, value, type },
-        ...suggestsHistory.filter((s: IGeoElement) => s.value !== value),
-      ];
-
-      setSuggestsHistory(newSuggestHistory.slice(0, 4));
+      const results = await searchGeoElementByText(term);
+      if (isAPI404(results)) {
+        return [];
+      }
+      if (isAPINotResponding(results)) {
+        setError(true);
+        return [];
+      }
+      return Object.entries(groupLabels)
+        .map(([type, label]) => ({
+          label,
+          options: results.filter((item) => item.type === type),
+        }))
+        .filter((group) => group.options.length > 0);
     } catch {
-      // Suggest history is optional and should not block geo search.
+      setError(true);
+      return [];
     }
   };
-
-  const onChange = (inputElement: any) => {
-    setSearchTerm(inputElement.target.value);
-  };
-
-  const onKeyDown: KeyboardEventHandler = (event) => {
-    // select first entry and submit
-    if (event.keyCode === 13) {
-      if (searchTerm === labelDep) {
-        return;
-      }
-
-      event.preventDefault();
-
-      if (geoSuggests && geoSuggests.length > 0) {
-        selectDep(geoSuggests[0]);
-      } else if (
-        showSuggestsHistory &&
-        suggestsHistory &&
-        suggestsHistory.length > 0
-      ) {
-        selectDep(suggestsHistory[0]);
-      }
-    }
-  };
-
-  useEffect(() => {
-    setIssue(Issue.NONE);
-    if (!searchTerm || searchTerm === labelDep) {
-      setGeoSuggests([]);
-      // in case of remaining pending requests
-      setLoading(false);
-      return;
-    }
-    search(searchTerm);
-  }, [searchTerm, labelDep, search]);
-
-  // only show suggest history on browser to avoid rehydration conflict with server rendered html
-  useEffect(() => setShowSuggestsHistory(true), []);
-
   return (
     <>
+      <ClientOnly>
+        <AsyncSelect<IGeoElement>
+          defaultOptions={[
+            { label: "Localisations récentes", options: history },
+          ]}
+          getOptionValue={(item) => `${item.type}-${item.value}`}
+          inputId="geo-search-input"
+          instanceId="geo-search"
+          isClearable
+          loadingMessage={() => "Recherche en cours…"}
+          loadOptions={loadOptions}
+          noOptionsMessage={() =>
+            error
+              ? "Recherche géographique momentanément indisponible"
+              : "Aucune localisation trouvée"
+          }
+          onChange={(item) => {
+            setSelected(item);
+            if (item) {
+              setHistory(
+                [
+                  item,
+                  ...history.filter(
+                    (previous: IGeoElement) =>
+                      previous.value !== item.value ||
+                      previous.type !== item.type
+                  ),
+                ].slice(0, 4)
+              );
+            }
+          }}
+          placeholder="ex : Rennes"
+          value={selected}
+        />
+      </ClientOnly>
       <input
-        autoComplete="off"
-        className="fr-input"
-        id="geo-search-input"
-        onChange={onChange}
-        onFocus={() => setSearchTerm("")}
-        onKeyDown={onKeyDown}
-        placeholder="ex : Rennes"
-        type="search"
-        value={searchTerm}
+        name="cp_dep_label"
+        readOnly
+        type="hidden"
+        value={selected?.label ?? ""}
       />
-      <input name="cp_dep_label" readOnly type="hidden" value={labelDep} />
-      <input name="cp_dep_type" readOnly type="hidden" value={typeDep} />
-      <input name="cp_dep" readOnly type="hidden" value={dep} />
-      {issue === Issue.NONE ? (
-        <>
-          {showSuggestsHistory &&
-            !searchTerm &&
-            geoSuggests.length === 0 &&
-            suggestsHistory.length > 0 && (
-              <div className="drop-down">
-                <strong>Localisations récentes :</strong>
-                {suggestsHistory.map((suggest: IGeoElement) => (
-                  <button
-                    className="suggest cursor-pointer"
-                    key={`suggest-history-${suggest.label}`}
-                    onClick={() => selectDep(suggest)}
-                    type="button"
-                  >
-                    {suggest.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          <div className="drop-down">
-            {isLoading ? (
-              <div className="layout-center">
-                <Loader />
-              </div>
-            ) : (
-              geoSuggests.map((suggest: IGeoElement) => (
-                <button
-                  className="suggest cursor-pointer"
-                  key={suggest.label}
-                  onClick={() => selectDep(suggest)}
-                  type="button"
-                >
-                  {suggest.label}
-                </button>
-              ))
-            )}
-          </div>
-        </>
-      ) : issue === Issue.NORESULT ? (
-        <Info>Aucun résultat ne correspond à votre recherche.</Info>
-      ) : (
-        <Warning>
-          La recherche géographique est momentanément indisponible et devrait
-          fonctionner de nouveau dans quelques instants.
-        </Warning>
-      )}
-
-      <style>{`
-        div.drop-down {
-          overflow: auto;
-          max-height: 250px;
-          margin-top: 10px;
-        }
-        .suggest {
-          padding: 8px 4px;
-          display: block;
-          width: 100%;
-          text-align: left;
-          background: none;
-          border: none;
-        }
-        .suggest:hover {
-          background: #eee;
-        }
-      `}</style>
+      <input
+        name="cp_dep_type"
+        readOnly
+        type="hidden"
+        value={selected?.type ?? ""}
+      />
+      <input
+        name="cp_dep"
+        readOnly
+        type="hidden"
+        value={selected?.value ?? ""}
+      />
     </>
   );
 };

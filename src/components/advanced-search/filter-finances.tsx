@@ -122,6 +122,7 @@ export const FilterFinances: React.FC<{
         <DualRangeSlider
           color={constants.chartColors[4]}
           defaultValue={valueCA}
+          formatValue={(value) => formatCurrency(CA[value])}
           idPrefix="ca"
           label="Chiffre d‘affaires"
           max={CA.length - 1}
@@ -140,6 +141,7 @@ export const FilterFinances: React.FC<{
         <DualRangeSlider
           color={constants.chartColors[1]}
           defaultValue={valueRes}
+          formatValue={(value) => formatCurrency(Res[value])}
           idPrefix="res"
           label="Résultat net"
           max={Res.length - 1}

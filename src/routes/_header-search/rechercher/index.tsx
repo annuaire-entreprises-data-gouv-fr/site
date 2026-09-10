@@ -25,11 +25,19 @@ export const Route = createFileRoute("/_header-search/rechercher/")({
     middlewares: [stripSearchParams(searchDefaultParams)],
   },
   loaderDeps: searchLoaderDeps,
-  head: () => {
+  beforeLoad: async (ctx) => {
+    const searchTerm = ctx.search.terme;
+
+    beforeLoadCheckTerme(searchTerm);
+  },
+  loader: async ({ deps }) => await searchFn({ data: deps }),
+  head: ({ loaderData }) => {
     const canonical = "https://annuaire-entreprises.data.gouv.fr/rechercher";
     return {
       meta: meta({
-        title: "Résultats de recherche",
+        title: loaderData?.searchTerm
+          ? `Résultats de recherche pour ${loaderData.searchTerm}`
+          : "Rechercher une entreprise",
         alternates: {
           canonical,
         },
@@ -73,12 +81,6 @@ export const Route = createFileRoute("/_header-search/rechercher/")({
       ],
     };
   },
-  beforeLoad: async (ctx) => {
-    const searchTerm = ctx.search.terme;
-
-    beforeLoadCheckTerme(searchTerm);
-  },
-  loader: async ({ deps }) => await searchFn({ data: deps }),
   component: RouteComponent,
   errorComponent: HeaderSearchError,
 });
@@ -99,7 +101,7 @@ function RouteComponent() {
         useSearchBar={true}
       />
       <main className="fr-container">
-        <HiddenH1 title="Résultats de recherche" />
+        <HiddenH1 title="Rechercher une entreprise" />
         <div className="content-container">
           {hasSearchParam(searchFilterParamsJSON) || searchTerm ? (
             <SearchResults
