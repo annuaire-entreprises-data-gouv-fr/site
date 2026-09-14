@@ -1,10 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { setCookie } from "@tanstack/react-start/server";
 import { ProConnect2FANeeded } from "#/clients/authentication/pro-connect/exceptions";
-import {
-  proConnectAuthenticate,
-  proConnectAuthorizeUrl,
-} from "#/clients/authentication/pro-connect/strategy.server";
+import { proConnectAuthenticate } from "#/clients/authentication/pro-connect/strategy.server";
 import { AgentConnected } from "#/models/authentication/agent/agent-connected";
 import {
   AgentConnectionFailedException,
@@ -54,19 +51,9 @@ export const Route = createFileRoute("/api/auth/agent-connect/callback")({
           return redirect({ href: getBaseUrl() + path });
         } catch (e) {
           if (e instanceof ProConnect2FANeeded) {
-            try {
-              const newAuthUrl = await proConnectAuthorizeUrl({
-                force2FA: true,
-                loginHint: e.loginHint,
-                skipStateGeneration: true,
-              });
-
-              return redirect({ href: newAuthUrl });
-            } catch {
-              return redirect({
-                href: `${getBaseUrl()}/connexion/echec-connexion`,
-              });
-            }
+            return redirect({
+              href: `${getBaseUrl()}/connexion/echec-connexion`,
+            });
           }
 
           logFatalErrorInSentry(
