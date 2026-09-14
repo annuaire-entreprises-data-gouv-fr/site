@@ -114,14 +114,14 @@ test.describe("Non-diffusible", () => {
   });
 
   test("No dirigeant in non diffusible", async ({ page }) => {
-    await goto(page, "/dirigeants/908595879");
+    await goto(page, "/entreprise/908595879/dirigeants");
     await expect(page.getByText("Dirigeant(s) (données privées)")).toHaveCount(
       1
     );
   });
 
   test("No dirigeant in protected personne morale", async ({ page }) => {
-    await goto(page, "/dirigeants/908595879");
+    await goto(page, "/entreprise/908595879/dirigeants");
     await expect(page.getByText("Dirigeant(s) (données privées)")).toHaveCount(
       1
     );

@@ -161,7 +161,7 @@ function RouteComponent() {
   return (
     <div className="content-container">
       {sirenFrom && (
-        <Link params={{ slug: sirenFrom }} to="/dirigeants/$slug">
+        <Link params={{ slug: sirenFrom }} to="/entreprise/$slug/dirigeants">
           ← Retourner à la page précédente
         </Link>
       )}
@@ -219,7 +219,7 @@ function RouteComponent() {
                       <Link
                         aria-label={`Voir les dirigeants de cette entreprise (siren ${dirigeantOrElu.siren})`}
                         params={{ slug: dirigeantOrElu.siren }}
-                        to="/dirigeants/$slug"
+                        to="/entreprise/$slug/dirigeants"
                       >
                         {dirigeantOrElu.denomination}
                       </Link>

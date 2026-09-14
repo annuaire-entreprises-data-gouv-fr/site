@@ -12,12 +12,12 @@ test.describe("Annonces et observations", () => {
   });
 
   test("Should display Annonces BODACC section", async ({ page }) => {
-    await goto(page, "/annonces/880878145");
+    await goto(page, "/entreprise/880878145/annonces");
     await expect(page.getByText("Annonces BODACC").first()).toBeVisible();
   });
 
   test("Should display publication", async ({ page }) => {
-    await goto(page, "/annonces/880878145");
+    await goto(page, "/entreprise/880878145/annonces");
     await expect(page.getByText("Publication").first()).toBeVisible();
     await expect(page.getByText("23/11/2022").first()).toBeVisible();
     await expect(
@@ -42,7 +42,7 @@ test.describe("Annonces et observations", () => {
       }
     );
 
-    await goto(page, "/annonces/338365059");
+    await goto(page, "/entreprise/338365059/annonces");
     await expect(
       page.getByText(
         /Cette structure possède [\d] annonces publiées au Journal Officiel des Associations/

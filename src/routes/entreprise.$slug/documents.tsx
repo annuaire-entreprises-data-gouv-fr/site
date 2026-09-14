@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import ActesSection from "#/components/screens/documents.$slug/actes";
 import {
   ConformiteFiscaleSection,
@@ -8,8 +8,6 @@ import JustificatifsSection from "#/components/screens/documents.$slug/justifica
 import { SummaryDocuments } from "#/components/screens/documents.$slug/summary-documents";
 import TravauxPublicsSection from "#/components/screens/documents.$slug/travaux-publics";
 import { NotFound } from "#/components/screens/not-found";
-import Title from "#/components/title-section";
-import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import BreakPageForPrint from "#/components-ui/print-break-page";
 import { PrintNever } from "#/components-ui/print-visibility";
@@ -18,21 +16,22 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers/formatting/unite-legale-label";
 import { meta } from "#/utils/seo";
-import { HeaderDefaultError } from "./-error";
+import { HeaderDefaultError } from "../_header-default/-error";
 
-export const Route = createFileRoute("/_header-default/documents/$slug")({
-  loader: async ({ params }) => {
-    const uniteLegale = await getUniteLegaleFromSlugFn({
-      data: { slug: params.slug },
-    });
+export const Route = createFileRoute("/entreprise/$slug/documents")({
+  loader: async ({ parentMatchPromise }) => {
+    const { loaderData } = await parentMatchPromise;
 
-    return { uniteLegale };
+    if (!loaderData) {
+      throw notFound();
+    }
+
+    return loaderData;
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -40,7 +39,7 @@ export const Route = createFileRoute("/_header-default/documents/$slug")({
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/documents/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/documents`;
     return {
       meta: meta({
         title: `Documents, Actes et statuts - ${uniteLegalePageTitle(uniteLegale)}`,
@@ -68,12 +67,7 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
-      <Title
-        ficheType={FICHE.DOCUMENTS}
-        uniteLegale={uniteLegale}
-        user={user}
-      />
+    <>
       <SummaryDocuments user={user} />
       <JustificatifsSection uniteLegale={uniteLegale} user={user} />
       <HorizontalSeparator />
@@ -90,6 +84,6 @@ function RouteComponent() {
           <TravauxPublicsSection uniteLegale={uniteLegale} user={user} />
         )}
       </PrintNever>
-    </div>
+    </>
   );
 }

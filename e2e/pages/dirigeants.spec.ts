@@ -2,7 +2,7 @@ import { expect, goto, login, test } from "../support/test";
 
 test.describe("Dirigeants ESSOR ENERGIES (SOLARSUD)", () => {
   test("Should display dirigeants from INPI", async ({ page }) => {
-    await goto(page, "/dirigeants/487444697");
+    await goto(page, "/entreprise/487444697/dirigeants");
 
     await expect(
       page.getByText(
@@ -19,7 +19,7 @@ test.describe("Dirigeants ESSOR ENERGIES (SOLARSUD)", () => {
     context,
   }) => {
     await login(page, context);
-    await goto(page, "/dirigeants/487444697");
+    await goto(page, "/entreprise/487444697/dirigeants");
 
     await expect(
       page.getByText(
@@ -41,7 +41,7 @@ test.describe("Dirigeants ESSOR ENERGIES (SOLARSUD)", () => {
 
 test.describe("Dirigeants non-diffusible ", () => {
   test("Should not display dirigeants", async ({ page }) => {
-    await goto(page, "/dirigeants/908595879");
+    await goto(page, "/entreprise/908595879/dirigeants");
 
     await expect(
       page.getByRole("heading", { name: "SEVERNAYA", level: 1 })
@@ -56,7 +56,7 @@ test.describe("Dirigeants non-diffusible ", () => {
 
   test("[LOGGED] Should display dirigeants", async ({ page, context }) => {
     await login(page, context);
-    await goto(page, "/dirigeants/908595879");
+    await goto(page, "/entreprise/908595879/dirigeants");
 
     await expect(page.getByText("Dirigeant(s)").first()).toBeVisible();
     await expect(

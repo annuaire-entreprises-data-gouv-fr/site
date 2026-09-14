@@ -1,11 +1,7 @@
 {
   "args": [
-    {
-      "siren": "800329849",
-      "complements": {
-        "estEntrepreneurSpectacle": true
-      }
-    }
+    "800329849",
+    true
   ],
   "result": {
     "licences": [

@@ -1,6 +1,6 @@
 import { NotAnIdRnfError } from "#/models/core/fondations.types";
 
-const ID_RNF_REGEX = /^\d{3}-(FE|FDD|FRUP)-\d{5}-\d{2}$/;
+const ID_RNF_REGEX = /^\d{3}-(FE|FDD|FRUP|FA|FCS|FH|FP|FU)-\d{5}-\d{2}$/;
 
 export const isIdRnf = (slug: string): boolean => ID_RNF_REGEX.test(slug);
 
@@ -9,4 +9,24 @@ export const verifyIdRnf = (slug: string): string => {
     throw new NotAnIdRnfError(slug);
   }
   return slug;
+};
+
+export const getFoundationTypeLabel = (type: string): string => {
+  switch (type) {
+    case "FDD":
+      return "Fond de dotation";
+    case "FE":
+      return "Fondation d'entreprise";
+    case "FA":
+      return "Fondation abritée";
+    case "FRUP":
+      return "Fondation reconnue d’utilité publique";
+    case "FCS":
+    case "FH":
+    case "FP":
+    case "FU":
+      return `Fondation scientifique (${type})`;
+    default:
+      return type;
+  }
 };

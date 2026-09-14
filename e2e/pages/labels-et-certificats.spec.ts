@@ -3,7 +3,7 @@ import { expect, goto, test } from "../support/test";
 test.describe("Label et certificats", () => {
   test.describe("QUALIBAT-RGE", () => {
     test("Should display QUALIBAT-RGE", async ({ page }) => {
-      await goto(page, "/labels-certificats/843701079");
+      await goto(page, "/entreprise/843701079/labels-certificats");
       await expect(page.getByText("QUALIBAT-RGE").first()).toBeVisible();
       await expect(
         page.getByText("Domaine(s) certifié(s)").first()
@@ -18,7 +18,7 @@ test.describe("Label et certificats", () => {
 
   test.describe("ESS & Spectacles vivants", () => {
     test("Should display ESS and spectacles vivants", async ({ page }) => {
-      await goto(page, "/labels-certificats/800329849");
+      await goto(page, "/entreprise/800329849/labels-certificats");
       await expect(
         page.getByText("ESS - Économie Sociale et Solidaire").first()
       ).toBeVisible();
@@ -39,7 +39,7 @@ test.describe("Label et certificats", () => {
 
   test.describe("Professionnel du Bio", () => {
     test("Should display Professionnel du Bio", async ({ page }) => {
-      await goto(page, "/labels-certificats/302474648");
+      await goto(page, "/entreprise/302474648/labels-certificats");
       await expect(
         page.getByText("Professionnel du Bio").first()
       ).toBeVisible();
@@ -54,7 +54,7 @@ test.describe("Label et certificats", () => {
 
   test.describe("Entreprise Sociale Inclusive", () => {
     test("Should display Entreprise Sociale Inclusive", async ({ page }) => {
-      await goto(page, "/labels-certificats/533744991");
+      await goto(page, "/entreprise/533744991/labels-certificats");
       await expect(
         page.getByText("Entreprise Sociale Inclusive").first()
       ).toBeVisible();
@@ -69,7 +69,7 @@ test.describe("Label et certificats", () => {
     test("Should display Égalité professionnelle - Egapro", async ({
       page,
     }) => {
-      await goto(page, "/labels-certificats/356000000");
+      await goto(page, "/entreprise/356000000/labels-certificats");
       await expect(
         page.getByText("Égalité professionnelle - Egapro").first()
       ).toBeVisible();
@@ -82,7 +82,7 @@ test.describe("Label et certificats", () => {
 
   test.describe("Qualiopi", () => {
     test("Should display Qualiopi", async ({ page }) => {
-      await goto(page, "/labels-certificats/356000000");
+      await goto(page, "/entreprise/356000000/labels-certificats");
       await expect(
         page.getByText("Organisme de formation").first()
       ).toBeVisible();

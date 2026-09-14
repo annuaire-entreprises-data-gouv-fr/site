@@ -6,7 +6,7 @@ import type { Siren } from "#/utils/helpers";
 const TagCC = ({ siren, idcc }: { siren: Siren; idcc: string }) => (
   <Tag
     link={{
-      to: "/divers/$slug",
+      to: "/entreprise/$slug/divers",
       params: { slug: siren },
       hash: `idcc-${idcc}`,
       "aria-label": `Consulter la liste de toutes les conventions collectives de la structure, dont l'IDCC ${idcc}`,
