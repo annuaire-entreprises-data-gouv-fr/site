@@ -6,6 +6,7 @@ import {
 import { clientAPIInclusion } from "./api-inclusion/index.server";
 import { clientEORI } from "./api-proxy/eori";
 import { clientUniteLegaleIG } from "./api-proxy/greffe";
+import { clientRNEStatus } from "./api-proxy/rne";
 import { clientDocuments } from "./api-rne/documents";
 import { clientBodacc } from "./open-data-soft/clients/bodacc";
 import { clientJOAFE } from "./open-data-soft/clients/journal-officiel-associations";
@@ -31,6 +32,8 @@ const ping = async (slug: string | string[]) => {
   switch (slug) {
     case "api-proxy-ig":
       return await clientUniteLegaleIG(sirenDanone);
+    case "api-proxy-rne":
+      return await clientRNEStatus();
     case "api-sirene-insee":
       return await clientUniteLegaleInsee(sirenGanymede, 1, false);
     case "api-sirene-donnees-ouvertes":

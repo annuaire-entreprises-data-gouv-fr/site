@@ -75,6 +75,11 @@ export const clientRNEObservationsFallback = async (
   return mapObservationsToDomainObject(response);
 };
 
+export const clientRNEStatus = () =>
+  clientAPIProxy<void>(routes.proxy.rne.status, {
+    timeout: constants.timeout.XL,
+  });
+
 const mapToDomainObject = ({
   observations,
   dirigeants,
