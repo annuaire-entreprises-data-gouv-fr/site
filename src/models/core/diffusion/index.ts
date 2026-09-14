@@ -94,6 +94,11 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
   uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
   uniteLegale.chemin = uniteLegale.siren;
   uniteLegale.complements.estAvocat = false;
+
+  if ("dirigeants" in uniteLegale) {
+    uniteLegale.dirigeants = [];
+  }
+
   return uniteLegale;
 };
 
