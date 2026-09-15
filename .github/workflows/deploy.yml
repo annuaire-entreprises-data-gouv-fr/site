@@ -4,7 +4,7 @@ permissions:
 
 on:
   push:
-    branches: [main, fix/885]
+    branches: [main]
   workflow_dispatch:
     inputs:
       tag:
@@ -109,7 +109,7 @@ jobs:
           notify-on-success: false
           tchap-url: ${{ secrets.TCHAP_URL }}
           tchap-token: ${{ secrets.TCHAP_TOKEN }}
-      - name: Setup Wireguard
+      - name: Stop Wireguard
         if: always()
         uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/wireguard-down@wireguard/v1
 
@@ -156,6 +156,6 @@ jobs:
           notify-on-success: true
           tchap-url: ${{ secrets.TCHAP_URL }}
           tchap-token: ${{ secrets.TCHAP_TOKEN }}
-      - name: Setup Wireguard
+      - name: Stop Wireguard
         if: always()
         uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/wireguard-down@wireguard/v1
