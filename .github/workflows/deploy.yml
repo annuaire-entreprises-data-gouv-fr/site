@@ -95,9 +95,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup Wireguard
-        uses: niklaskeerl/easy-wireguard-action@v2
+        uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/wireguard-up@wireguard/v1
         with:
-          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
+          wg-config-file: ${{ secrets.WG_CONFIG_FILE }}
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v2.0
         with:
           app: "site"
@@ -109,6 +109,9 @@ jobs:
           notify-on-success: false
           tchap-url: ${{ secrets.TCHAP_URL }}
           tchap-token: ${{ secrets.TCHAP_TOKEN }}
+      - name: Stop Wireguard
+        if: always()
+        uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/wireguard-down@wireguard/v1
 
   trigger-production-deployment:
     name: Trigger production deployment
@@ -139,9 +142,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Setup Wireguard
-        uses: niklaskeerl/easy-wireguard-action@v2
+        uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/wireguard-up@wireguard/v1
         with:
-          WG_CONFIG_FILE: ${{ secrets.WG_CONFIG_FILE }}
+          wg-config-file: ${{ secrets.WG_CONFIG_FILE }}
       - uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/deploy@v2.0
         with:
           app: "site"
@@ -153,3 +156,6 @@ jobs:
           notify-on-success: true
           tchap-url: ${{ secrets.TCHAP_URL }}
           tchap-token: ${{ secrets.TCHAP_TOKEN }}
+      - name: Stop Wireguard
+        if: always()
+        uses: annuaire-entreprises-data-gouv-fr/github-actions/.github/actions/wireguard-down@wireguard/v1
