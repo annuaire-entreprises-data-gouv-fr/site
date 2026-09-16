@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 interface IProps {
   alt?: boolean;
   ariaLabel?: string;
+  className?: string;
   disabled?: boolean;
   hideExternalIcon?: boolean;
   id?: string;
@@ -32,8 +33,9 @@ const ButtonLink: React.FC<PropsWithChildren<IProps>> = ({
   nofollow = false,
   hideExternalIcon = false,
   onClick,
+  className: classNameProp,
 }) => {
-  const className = clsx("fr-btn", {
+  const className = clsx("fr-btn", classNameProp, {
     "fr-btn--secondary": alt,
     "fr-btn--sm": small,
   });

@@ -9,35 +9,38 @@ import { ContactAnswer } from "./answers/contact";
 import { ContactCompanyAnswer } from "./answers/contact-entreprise";
 import { FraudAnswer } from "./answers/fraud";
 
-interface IProps {
-  user: IAgentInfo | null;
-}
-
 export const FAQTargets = {
   particulier: "Particulier",
   entreprise: "Entreprise ou auto-entreprise",
   association: "Association",
   agent: "Agent public",
   none: "Autre",
-};
+} as const;
+export type FAQTarget = keyof typeof FAQTargets;
 
-const questions = [
-  {
-    label: "Joindre une entreprise",
-    key: "company",
-  },
-  {
-    label: "Nous alerter d’une fraude ou tentative d’escroquerie",
-    key: "fraud",
-  },
-  { label: "Autre", key: "contact" },
-];
+export const FAQQuestions = {
+  company: "Joindre une entreprise",
+  fraud: "Nous alerter d’une fraude ou tentative d’escroquerie",
+  contact: "Autre",
+} as const;
+export type FAQQuestion = keyof typeof FAQQuestions;
 
-export default function ParcoursQuestions({ user }: IProps) {
+interface IProps {
+  initialQuestionType?: FAQQuestion;
+  initialUserType?: FAQTarget;
+  user: IAgentInfo | null;
+}
+
+export default function ParcoursQuestions({
+  user,
+  initialUserType,
+  initialQuestionType,
+}: IProps) {
   const [userType, setUserType] = useState(
-    hasRights({ user }, ApplicationRights.isAgent) ? "agent" : ""
+    initialUserType ||
+      (hasRights({ user }, ApplicationRights.isAgent) ? "agent" : "")
   );
-  const [questionType, setQuestionType] = useState<string>("");
+  const [questionType, setQuestionType] = useState(initialQuestionType || "");
 
   const updateQuestion = (q: string) => {
     setQuestionType(q);
@@ -61,7 +64,7 @@ export default function ParcoursQuestions({ user }: IProps) {
           <strong>Vous voulez :</strong>
           <MultiChoice
             idPrefix="user-question"
-            values={questions.map(({ key, label }) => ({
+            values={Object.entries(FAQQuestions).map(([key, label]) => ({
               label,
               onClick: () => {
                 updateQuestion(key);
