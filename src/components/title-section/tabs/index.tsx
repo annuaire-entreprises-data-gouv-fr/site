@@ -47,7 +47,7 @@ interface ITab {
   width?: string;
 }
 
-const getUniteLegaleTabs = (
+export const getUniteLegaleTabs = (
   uniteLegale: IUniteLegale,
   user: IAgentInfo | null
 ): ITab[] => {
