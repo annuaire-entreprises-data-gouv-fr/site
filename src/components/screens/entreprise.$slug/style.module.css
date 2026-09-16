@@ -12,3 +12,10 @@
 .inscriptions-wrapper > div:last-of-type {
   margin: 5px 0;
 }
+
+.signaler-erreur-button {
+  margin-left: 10px;
+  color: #353553;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px #353553;
+}

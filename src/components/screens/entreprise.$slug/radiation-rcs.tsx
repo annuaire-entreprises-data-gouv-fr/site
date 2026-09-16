@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from "react";
 import { OpenClosedTag } from "#/components-ui/badge/frequent";
+import ButtonLink from "#/components-ui/button";
+import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
 import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import type { IAgentInfo } from "#/models/authentication/agent";
@@ -37,6 +39,9 @@ export const UniteLegaleRadiationRCS = ({
     return null;
   }
 
+  const shouldShowErrorDeclaration =
+    !!uniteLegale.dateMiseAJourInsee && !!uniteLegale.dateMiseAJourInpi;
+
   return (
     <Wrapper>
       <InformationTooltip
@@ -53,6 +58,19 @@ export const UniteLegaleRadiationRCS = ({
           </OpenClosedTag>
         </a>
       </InformationTooltip>
+      {shouldShowErrorDeclaration && (
+        <ButtonLink
+          alt
+          className={styles["signaler-erreur-button"]}
+          hideExternalIcon
+          small
+          target="_blank"
+          to="/faq/parcours?userType=none&questionType=contact"
+        >
+          <Icon slug="flagLine" />
+          Signaler une erreur
+        </ButtonLink>
+      )}
     </Wrapper>
   );
 };
