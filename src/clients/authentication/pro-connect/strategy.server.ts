@@ -13,6 +13,7 @@ import {
   refreshTokenGrant,
 } from "openid-client";
 import { HttpForbiddenError } from "#/clients/exceptions";
+import { InternalError } from "#/models/exceptions";
 import getSession from "#/utils/server-side-helper/get-session";
 import {
   getCurrentSession,
@@ -38,6 +39,7 @@ const getConfig = () => ({
   REDIRECT_URI: process.env.AGENTCONNECT_REDIRECT_URI,
   POST_LOGOUT_REDIRECT_URI: process.env.AGENTCONNECT_POST_LOGOUT_REDIRECT_URI,
 });
+const PROCONNECT_IDP_ID = "71144ab3-ee1a-4401-b7b3-79b44f7daeeb";
 
 const SCOPES = "openid given_name usual_name email siret idp_id";
 const ACR_VALUES_2FA = [
@@ -45,7 +47,7 @@ const ACR_VALUES_2FA = [
   "eidas3", // physical card with PIN + certificates
   "eidas0-mfa", // declarative identity + 2FA
   "eidas1-mfa", // verified identity + 2FA
-];
+].join(" ");
 
 export const getClient = createServerOnlyFn(async () => {
   if (_client) {
@@ -79,33 +81,59 @@ export const getClient = createServerOnlyFn(async () => {
   return _client;
 });
 
-export const proConnectAuthorizeUrl = createServerOnlyFn(async () => {
-  const client = await getClient();
-  const session = await getCurrentSession();
-  const { REDIRECT_URI } = getConfig();
+export const proConnectAuthorizeUrl = createServerOnlyFn(
+  async (params: {
+    force2FA?: boolean;
+    loginHint?: string;
+    skipStateGeneration?: boolean;
+  }) => {
+    const { force2FA, loginHint, skipStateGeneration } = params;
+    const client = await getClient();
+    const session = await getCurrentSession();
+    const { REDIRECT_URI } = getConfig();
 
-  const nonce = randomNonce();
-  const state = randomState();
+    if (skipStateGeneration && !(session.data.nonce && session.data.state)) {
+      throw new InternalError({
+        message:
+          "State and nonce are required when skipStateGeneration is true",
+      });
+    }
 
-  await setStateAndNonce(session, state, nonce);
+    const nonce = skipStateGeneration ? session.data.nonce : randomNonce();
+    const state = skipStateGeneration ? session.data.state : randomState();
 
-  const claims = {
-    id_token: {
-      acr: { essential: true },
-    },
-  };
+    if (!skipStateGeneration) {
+      await setStateAndNonce(session, state, nonce);
+    }
 
-  const authorizationParameters: Record<string, string> = {
-    scope: SCOPES,
-    redirect_uri: REDIRECT_URI as string,
-    nonce: nonce as string,
-    state: state as string,
-    claims: JSON.stringify(claims),
-    acr_values: ACR_VALUES_2FA.join(" "),
-  };
+    const claims = {
+      id_token: {
+        amr: {
+          essential: true,
+        },
+        ...(force2FA ? { acr: { essential: true } } : {}),
+      },
+    };
 
-  return buildAuthorizationUrl(client, authorizationParameters).toString();
-});
+    const authorizationParameters: Record<string, string> = {
+      scope: SCOPES,
+      redirect_uri: REDIRECT_URI as string,
+      nonce: nonce as string,
+      state: state as string,
+      claims: JSON.stringify(claims),
+    };
+
+    if (force2FA) {
+      authorizationParameters.acr_values = ACR_VALUES_2FA;
+    }
+
+    if (loginHint) {
+      authorizationParameters.login_hint = loginHint;
+    }
+
+    return buildAuthorizationUrl(client, authorizationParameters).toString();
+  }
+);
 
 export interface IProConnectUserInfo {
   email: string;
@@ -140,8 +168,7 @@ export const proConnectAuthenticate = createServerOnlyFn(
     );
 
     const claims = tokenSet.claims();
-    const used2FA =
-      typeof claims?.acr === "string" && ACR_VALUES_2FA.includes(claims.acr);
+    const used2FA = Array.isArray(claims?.amr) && claims.amr.includes("mfa");
 
     const accessToken = tokenSet.access_token;
 
@@ -155,7 +182,11 @@ export const proConnectAuthenticate = createServerOnlyFn(
       claims.sub
     )) as unknown as IProConnectUserInfo;
 
-    if (!(used2FA || process.env.AGENT_BYPASS_2FA?.includes(userInfo.email))) {
+    if (
+      !used2FA &&
+      userInfo.idp_id === PROCONNECT_IDP_ID &&
+      !process.env.AGENT_BYPASS_2FA?.includes(userInfo.email)
+    ) {
       throw new ProConnect2FANeeded({
         message: "2FA needed for ProConnect Identity Provider",
         loginHint: userInfo.email,
