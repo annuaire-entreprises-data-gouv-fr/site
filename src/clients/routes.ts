@@ -239,7 +239,7 @@ const routes = {
       observations: {
         fallback: (siren: string) => `/rne/observations/fallback/${siren}`,
       },
-      status: "/rne/status",
+      status: "/status/rne",
     },
     association: (rnaOrSiren: string) => `/association/${rnaOrSiren}`,
     eori: (siret: string) => `/eori/${siret}`,
