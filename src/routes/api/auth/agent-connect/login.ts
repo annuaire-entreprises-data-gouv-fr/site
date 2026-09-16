@@ -34,7 +34,7 @@ export const Route = createFileRoute("/api/auth/agent-connect/login")({
             "";
 
           await setPathFrom(session, pathFrom);
-          const url = await proConnectAuthorizeUrl();
+          const url = await proConnectAuthorizeUrl({});
 
           return redirect({ href: url });
         } catch (e) {
