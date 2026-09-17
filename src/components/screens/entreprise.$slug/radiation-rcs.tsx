@@ -29,6 +29,7 @@ export const UniteLegaleRadiationRCS = ({
   const isBodaccRadiationDisplayed = useFeatureFlag(
     "bodacc_radiation_displayed"
   );
+
   if (
     !(
       isBodaccRadiationDisplayed.isEnabled &&
@@ -59,17 +60,32 @@ export const UniteLegaleRadiationRCS = ({
         </a>
       </InformationTooltip>
       {shouldShowErrorDeclaration && (
-        <ButtonLink
-          alt
-          className={styles["signaler-erreur-button"]}
-          hideExternalIcon
-          small
-          target="_blank"
-          to="/faq/parcours?userType=none&questionType=contact"
+        <InformationTooltip
+          label={
+            <span>
+              Les informations relatives à la radiation sont issues de l’analyse
+              des annonces publiées au BODACC. Cette analyse peut comporter des
+              erreurs.
+              <br />
+              <br />
+              Vous avez identifié une erreur ? Cliquez ici pour nous la
+              signaler.
+            </span>
+          }
+          tabIndex={undefined}
         >
-          <Icon slug="flagLine" />
-          Signaler une erreur
-        </ButtonLink>
+          <ButtonLink
+            alt
+            className={styles["signaler-erreur-button"]}
+            hideExternalIcon
+            small
+            target="_blank"
+            to="/faq/parcours?userType=none&questionType=contact"
+          >
+            <Icon slug="flagLine" />
+            Signaler une erreur
+          </ButtonLink>
+        </InformationTooltip>
       )}
     </Wrapper>
   );
