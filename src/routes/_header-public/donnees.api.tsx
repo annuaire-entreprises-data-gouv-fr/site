@@ -1,6 +1,6 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import ApiMonitoring from "#/components/api-monitoring";
 import { Link } from "#/components/link";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
@@ -45,7 +45,11 @@ function RouteComponent() {
   const router = useRouter();
   const { monitors, administrationsMetaData } = Route.useLoaderData();
 
+  const [autoRefresh, setAutoRefresh] = useState(true);
   useEffect(() => {
+    if (!autoRefresh) {
+      return;
+    }
     const intervalId = window.setInterval(() => {
       router.invalidate().catch(() => {
         // Polling should not break the page if revalidation fails.
@@ -54,7 +58,7 @@ function RouteComponent() {
     return () => {
       window.clearInterval(intervalId);
     };
-  }, [router]);
+  }, [router, autoRefresh]);
 
   return (
     <div className="content-container">
@@ -70,19 +74,36 @@ function RouteComponent() {
         Cette page détaille la liste des API utilisées et leur disponibilité en
         temps réel&nbsp;:
       </p>
-      <strong>Sommaire</strong>
-      <ol>
-        {Object.keys(monitors).map((administrationEnum) =>
-          monitors[administrationEnum].map((monitor) => (
-            <li key={monitor.apiSlug}>
-              <span style={{ color: monitor.isOnline ? "#3bd671" : "#f29030" }}>
-                ●
-              </span>{" "}
-              <a href={`#${monitor.apiSlug}`}>{monitor.apiName}</a>
-            </li>
-          ))
-        )}
-      </ol>
+      <button
+        className="fr-btn fr-btn--secondary fr-mb-2w"
+        onClick={() => setAutoRefresh(!autoRefresh)}
+        type="button"
+      >
+        {autoRefresh
+          ? "Suspendre l’actualisation automatique"
+          : "Reprendre l’actualisation automatique"}
+      </button>
+      <nav aria-label="Sommaire des API">
+        <h2 className="fr-h6">Sommaire</h2>
+        <ol>
+          {Object.keys(monitors).map((administrationEnum) =>
+            monitors[administrationEnum].map((monitor) => (
+              <li key={monitor.apiSlug}>
+                <span
+                  aria-hidden="true"
+                  style={{ color: monitor.isOnline ? "#18753c" : "#b34000" }}
+                >
+                  {monitor.isOnline ? "●" : "✕"}
+                </span>
+                <span className="fr-sr-only">
+                  {monitor.isOnline ? "En ligne : " : "Hors ligne : "}
+                </span>{" "}
+                <a href={`#${monitor.apiSlug}`}>{monitor.apiName}</a>
+              </li>
+            ))
+          )}
+        </ol>
+      </nav>
       {Object.keys(monitors).map((administrationEnum) => (
         <Fragment key={administrationEnum}>
           <h2 id={administrationsMetaData[administrationEnum]?.slug}>
