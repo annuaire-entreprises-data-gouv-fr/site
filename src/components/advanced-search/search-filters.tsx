@@ -139,27 +139,27 @@ export const SearchFilters: React.FC<{
           >
             <div className="fr-input-group">
               <label className="fr-label fr-sr-only" htmlFor="date-min-input">
-                Date minimum
+                Mois et année minimum
               </label>
               <input
                 className="fr-input"
-                defaultValue={dmin}
+                defaultValue={dmin?.slice(0, 7)}
                 id="date-min-input"
                 name="dmin"
-                type="date"
+                type="month"
               />
             </div>
             &nbsp;et&nbsp;
             <div className="fr-input-group">
               <label className="fr-label fr-sr-only" htmlFor="date-max-input">
-                Date maximum
+                Mois et année maximum
               </label>
               <input
                 className="fr-input"
-                defaultValue={dmax}
+                defaultValue={dmax?.slice(0, 7)}
                 id="date-max-input"
                 name="dmax"
-                type="date"
+                type="month"
               />
             </div>
           </div>
