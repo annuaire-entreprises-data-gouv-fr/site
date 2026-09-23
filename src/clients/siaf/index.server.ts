@@ -5,14 +5,23 @@ import type { IFondationResponse, IFondationResult } from "./interface";
 export const clientSIAFFondation = async (
   idRNF: string
 ): Promise<IFondationResult> => {
-  const response = await httpGet<IFondationResponse>(
-    routes.siaf.getFondationById(idRNF),
-    {
-      headers: {
-        "x-api-key": process.env.SIAF_API_KEY,
-      },
-    }
-  );
+  if (!process.env.SIAF_API_URL) {
+    throw new Error("SIAF_API_URL is not set");
+  }
+  if (!process.env.SIAF_API_KEY) {
+    throw new Error("SIAF_API_KEY is not set");
+  }
+  if (!process.env.SIAF_AUTHORIZATION_HEADER) {
+    throw new Error("SIAF_AUTHORIZATION_HEADER is not set");
+  }
+
+  const url = `${process.env.SIAF_API_URL}${routes.siaf.getFondationById(idRNF)}`;
+
+  const response = await httpGet<IFondationResponse>(url, {
+    headers: {
+      [process.env.SIAF_AUTHORIZATION_HEADER]: process.env.SIAF_API_KEY,
+    },
+  });
 
   return mapToDomainObject(response);
 };
