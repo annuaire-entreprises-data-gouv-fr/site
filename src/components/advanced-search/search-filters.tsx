@@ -14,6 +14,7 @@ import { FilterEtat } from "./filter-etat";
 import { FilterFinances } from "./filter-finances";
 import { FilterGeo } from "./filter-geo";
 import { FilterStructure } from "./filter-structure";
+import { MonthYearField } from "./month-year-field";
 
 export const SearchFilters: React.FC<{
   searchParams?: IParams;
@@ -131,38 +132,19 @@ export const SearchFilters: React.FC<{
         </fieldset>
         <fieldset>
           <legend>Né(e) entre :</legend>
-          <div
-            style={{
-              display: "flex",
-              gap: "5px",
-            }}
-          >
-            <div className="fr-input-group">
-              <label className="fr-label fr-sr-only" htmlFor="date-min-input">
-                Mois et année minimum
-              </label>
-              <input
-                className="fr-input"
-                defaultValue={dmin?.slice(0, 7)}
-                id="date-min-input"
-                name="dmin"
-                type="month"
-              />
-            </div>
-            &nbsp;et&nbsp;
-            <div className="fr-input-group">
-              <label className="fr-label fr-sr-only" htmlFor="date-max-input">
-                Mois et année maximum
-              </label>
-              <input
-                className="fr-input"
-                defaultValue={dmax?.slice(0, 7)}
-                id="date-max-input"
-                name="dmax"
-                type="month"
-              />
-            </div>
-          </div>
+          <MonthYearField
+            defaultValue={dmin}
+            id="date-min"
+            label="minimum"
+            name="dmin"
+          />
+          <div>et</div>
+          <MonthYearField
+            defaultValue={dmax}
+            id="date-max"
+            label="maximum"
+            name="dmax"
+          />
         </fieldset>
       </FilterMenu>
       <FilterMenu
