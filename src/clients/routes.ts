@@ -278,8 +278,7 @@ const routes = {
     lastModified: "/sources/last_modified",
   },
   siaf: {
-    getFondationById: (idRNF: string) =>
-      `https://dev-api-hub-asso.sdid-app-hp.cpin.numerique-interieur.com/api/v1/fondations/${idRNF}`,
+    getFondationById: (idRNF: string) => `/api/v1/fondations/${idRNF}`,
   },
   tooling: {
     grist: "https://grist.numerique.gouv.fr/api/docs/",
