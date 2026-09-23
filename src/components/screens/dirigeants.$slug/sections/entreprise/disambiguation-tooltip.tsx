@@ -1,15 +1,21 @@
 import FAQLink from "#/components-ui/faq-link";
+import { isEESEFOrExploitationEnCommunFromNatureJuridique } from "#/utils/helpers/checks";
 
 export default function DisambiguationTooltip({
   dataType,
   isInIg,
   isInInpi,
+  natureJuridique,
 }: {
   dataType: string;
   isInIg?: boolean;
   isInInpi?: boolean;
+  natureJuridique: string;
 }) {
-  if (isInIg && isInInpi) {
+  if (
+    isEESEFOrExploitationEnCommunFromNatureJuridique(natureJuridique) ||
+    (isInIg && isInInpi)
+  ) {
     return null;
   }
 

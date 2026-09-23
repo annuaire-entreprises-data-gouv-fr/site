@@ -46,3 +46,18 @@ export const shouldNotIndex = (uniteLegale: IUniteLegale) => {
   }
   return false;
 };
+
+export const isEESEFOrExploitationEnCommunFromNatureJuridique = (
+  natureJuridique: string
+) =>
+  [
+    "2110",
+    "2120",
+    "2210",
+    "2220",
+    "2310",
+    "2320",
+    "2385",
+    "3220",
+    "9224",
+  ].indexOf(natureJuridique) > -1;
