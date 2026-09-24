@@ -28,13 +28,17 @@ export default function DirigeantsContentProtected({
   ) => {
     if (isPersonneMorale(dirigeant)) {
       const infos = [
-        <RolesInfos roles={dirigeant.roles} />,
+        <RolesInfos
+          natureJuridique={uniteLegale.natureJuridique}
+          roles={dirigeant.roles}
+        />,
         <>
           <PersonneMoraleInfos dirigeant={dirigeant} />
           <DisambiguationTooltip
             dataType="dirigeant"
             isInIg={dirigeant.isInIg}
             isInInpi={dirigeant.isInInpi}
+            natureJuridique={uniteLegale.natureJuridique}
           />
         </>,
       ];
@@ -54,13 +58,17 @@ export default function DirigeantsContentProtected({
       return infos;
     }
     const infos = [
-      <RolesInfos roles={dirigeant.roles} />,
+      <RolesInfos
+        natureJuridique={uniteLegale.natureJuridique}
+        roles={dirigeant.roles}
+      />,
       <>
         <EtatCivilInfos dirigeant={dirigeant} />
         <DisambiguationTooltip
           dataType="dirigeant"
           isInIg={dirigeant.isInIg}
           isInInpi={dirigeant.isInInpi}
+          natureJuridique={uniteLegale.natureJuridique}
         />
       </>,
     ];

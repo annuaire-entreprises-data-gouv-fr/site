@@ -1,7 +1,13 @@
 import type { IRole } from "#/models/rne/types";
 import DisambiguationTooltip from "./disambiguation-tooltip";
 
-export default function RolesInfos({ roles }: { roles: IRole[] }) {
+export default function RolesInfos({
+  roles,
+  natureJuridique,
+}: {
+  roles: IRole[];
+  natureJuridique: string;
+}) {
   return roles.map((role, index) => (
     <div key={index}>
       <span>{role.label}</span>
@@ -9,6 +15,7 @@ export default function RolesInfos({ roles }: { roles: IRole[] }) {
         dataType="rôle"
         isInIg={role.isInIg}
         isInInpi={role.isInInpi}
+        natureJuridique={natureJuridique}
       />
     </div>
   ));
