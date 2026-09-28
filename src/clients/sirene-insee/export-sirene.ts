@@ -34,7 +34,7 @@ export const clientSireneInsee = async (params: ExportCsvInput) => {
       noLink: "true",
     },
     responseType: "stream",
-    timeout: constants.timeout.XXXL,
+    timeout: constants.timeout.XXXXL,
   });
 
   return stream;

@@ -373,7 +373,7 @@ export const inseeClientGet = createServerOnlyFn(
 export const exportCsvClientPost = createServerOnlyFn(
   async <T>(route: string, config: IDefaultRequestConfig = {}): Promise<T> =>
     (await exportCsvClient.post(route, {
-      timeout: constants.timeout.XXXL,
+      timeout: constants.timeout.XXXXL,
       ...config,
     })) as T
 );
