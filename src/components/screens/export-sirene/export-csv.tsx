@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { deepEqual, getRouteApi } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import type { ExportCsvInput } from "#/clients/sirene-insee/input-validation";
 import ButtonLink from "#/components-ui/button";
 import { formatDate, formatNumber } from "#/utils/helpers";
@@ -6,21 +7,17 @@ import { getEffectifCode } from "./constants";
 import Filters from "./filters";
 import FiltersSummary from "./filters-summary";
 import InfoSection from "./info-section";
+import type { ExportSireneSearch } from "./search-params";
 import styles from "./styles.module.css";
 
-export interface ExtendedExportCsvInput extends ExportCsvInput {
-  categories: ("PME" | "ETI" | "GE")[];
-  headcount: { min: number; max: number };
-  headcountEnabled: boolean;
-  legalCategoriesNiveau1: string[];
-  legalCategoriesNiveau2: string[];
-  legalCategoriesNiveau3: string[];
-  locations: Array<{
-    type: "cp" | "dep" | "reg" | "insee";
-    value: string;
-    label: string;
-  }>;
-}
+export type ExtendedExportCsvInput = ExportSireneSearch & {
+  siretsAndSirens?: string[];
+};
+
+const exportSireneRoute = getRouteApi("/_header-default/export-sirene");
+
+/** Delay before writing filters to the URL, so that dragging a slider does not trigger a navigation on every step */
+const URL_SYNC_DELAY = 300;
 
 const getFileSize = (count: number) => Math.ceil((count * 300) / 1000);
 
@@ -28,6 +25,8 @@ const DEFAULT_ERROR_MESSAGE =
   "Une erreur est survenue. Veuillez réessayer dans quelques instants.";
 const SERVICE_UNAVAILABLE_MESSAGE =
   "Le service d’export est temporairement indisponible. Veuillez réessayer dans quelques minutes.";
+const TIMEOUT_MESSAGE =
+  "Le service d’export a mis trop de temps à répondre. Veuillez réessayer dans quelques minutes.";
 const INVALID_FILTERS_MESSAGE =
   "Certains critères saisis sont invalides. Vérifiez vos filtres puis relancez.";
 
@@ -45,6 +44,9 @@ const getStatusErrorMessage = (status: number): string => {
   }
   if (status === 429) {
     return "Le service d'export est trop sollicité. Patientez quelques instants puis réessayez.";
+  }
+  if (status === 504) {
+    return TIMEOUT_MESSAGE;
   }
   if (status >= 500) {
     return SERVICE_UNAVAILABLE_MESSAGE;
@@ -70,6 +72,9 @@ const getFriendlyErrorMessage = (
   const rawError = errorBody?.error?.trim();
 
   if (rawError) {
+    if (/timeout/i.test(rawError)) {
+      return TIMEOUT_MESSAGE;
+    }
     if (/internal server error/i.test(rawError)) {
       return SERVICE_UNAVAILABLE_MESSAGE;
     }
@@ -96,33 +101,10 @@ const getFriendlyCatchMessage = (error: unknown): string => {
   return DEFAULT_ERROR_MESSAGE;
 };
 
-const defaultFilters: ExtendedExportCsvInput = {
-  headcount: { min: 0, max: 14 },
-  headcountEnabled: false,
-  categories: [],
-  activity: "active",
-  legalUnit: "all",
-  locations: [],
-  creationDate: { from: undefined, to: undefined },
-  updateDate: { from: undefined, to: undefined },
-  legalCategoriesNiveau1: [],
-  legalCategoriesNiveau2: [],
-  legalCategoriesNiveau3: [],
-  ess: {
-    inclure: true,
-    inclureNo: true,
-    inclureNonRenseigne: true,
-  },
-  mission: {
-    inclure: true,
-    inclureNo: true,
-    inclureNonRenseigne: true,
-  },
-};
-
 export default function ExportCsv() {
-  const [filters, setFilters] =
-    useState<ExtendedExportCsvInput>(defaultFilters);
+  const search = exportSireneRoute.useSearch();
+  const navigate = exportSireneRoute.useNavigate();
+  const [filters, setFilters] = useState<ExtendedExportCsvInput>(search);
   const [filename, setFilename] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isCountLoading, setIsCountLoading] = useState(false);
@@ -133,8 +115,20 @@ export default function ExportCsv() {
   } | null>(null);
   const [showResults, setShowResults] = useState(false);
 
+  useEffect(() => {
+    const { siretsAndSirens: _, ...nextSearch } = filters;
+    if (deepEqual(nextSearch, search)) {
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      navigate({ search: nextSearch, replace: true, resetScroll: false });
+    }, URL_SYNC_DELAY);
+    return () => clearTimeout(timeoutId);
+  }, [filters, search, navigate]);
+
   const resetFilters = () => {
-    window.location.reload();
+    // full reload without query parameters, to also reset uncontrolled inputs
+    window.location.assign(window.location.pathname);
   };
 
   const modifyFilters = () => {
@@ -231,7 +225,7 @@ export default function ExportCsv() {
 
   const handleCsvExport = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!(countResult && filename)) {
+    if (!(countResult && filename) || isLoading) {
       return;
     }
 
@@ -350,8 +344,12 @@ export default function ExportCsv() {
           Modifier votre recherche
         </ButtonLink>
         {countResult.count < 200_000 && countResult.count !== 0 ? (
-          <ButtonLink onClick={handleCsvExport} type="button">
-            Télécharger le fichier
+          <ButtonLink
+            disabled={isLoading}
+            onClick={handleCsvExport}
+            type="button"
+          >
+            {isLoading ? "Export en cours..." : "Télécharger le fichier"}
           </ButtonLink>
         ) : null}
       </div>
