@@ -28,6 +28,8 @@ const DEFAULT_ERROR_MESSAGE =
   "Une erreur est survenue. Veuillez réessayer dans quelques instants.";
 const SERVICE_UNAVAILABLE_MESSAGE =
   "Le service d’export est temporairement indisponible. Veuillez réessayer dans quelques minutes.";
+const TIMEOUT_MESSAGE =
+  "Le service d’export a mis trop de temps à répondre. Veuillez réessayer dans quelques minutes.";
 const INVALID_FILTERS_MESSAGE =
   "Certains critères saisis sont invalides. Vérifiez vos filtres puis relancez.";
 
@@ -45,6 +47,9 @@ const getStatusErrorMessage = (status: number): string => {
   }
   if (status === 429) {
     return "Le service d'export est trop sollicité. Patientez quelques instants puis réessayez.";
+  }
+  if (status === 504) {
+    return TIMEOUT_MESSAGE;
   }
   if (status >= 500) {
     return SERVICE_UNAVAILABLE_MESSAGE;
@@ -70,6 +75,9 @@ const getFriendlyErrorMessage = (
   const rawError = errorBody?.error?.trim();
 
   if (rawError) {
+    if (/timeout/i.test(rawError)) {
+      return TIMEOUT_MESSAGE;
+    }
     if (/internal server error/i.test(rawError)) {
       return SERVICE_UNAVAILABLE_MESSAGE;
     }
@@ -231,7 +239,7 @@ export default function ExportCsv() {
 
   const handleCsvExport = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!(countResult && filename)) {
+    if (!(countResult && filename) || isLoading) {
       return;
     }
 
@@ -350,8 +358,12 @@ export default function ExportCsv() {
           Modifier votre recherche
         </ButtonLink>
         {countResult.count < 200_000 && countResult.count !== 0 ? (
-          <ButtonLink onClick={handleCsvExport} type="button">
-            Télécharger le fichier
+          <ButtonLink
+            disabled={isLoading}
+            onClick={handleCsvExport}
+            type="button"
+          >
+            {isLoading ? "Export en cours..." : "Télécharger le fichier"}
           </ButtonLink>
         ) : null}
       </div>

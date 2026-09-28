@@ -1,6 +1,7 @@
 import { Readable } from "node:stream";
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { HttpTimeoutError } from "#/clients/exceptions";
 import { exportCsvSchema } from "#/clients/sirene-insee/input-validation";
 import { Exception } from "#/models/exceptions";
 import {
@@ -89,6 +90,9 @@ export const Route = createFileRoute("/api/export-sirene")({
           }
 
           logErrorInSentry(new Exception({ name: "Export CSV", cause: e }));
+          if (e instanceof HttpTimeoutError) {
+            return Response.json({ error: "Timeout" }, { status: 504 });
+          }
           return Response.json(
             {
               error: "Internal server error",

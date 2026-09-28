@@ -29,6 +29,7 @@ const constants = {
     XXL: 20_000,
     XXXL: 30_000,
     XXXXL: 45_000,
+    XXXXXL: 120_000,
   },
   colors: {
     frBlue: "#000091",
