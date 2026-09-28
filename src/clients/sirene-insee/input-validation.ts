@@ -11,7 +11,7 @@ const sirenSiretValidator = z.string().refine(
   }
 );
 
-const dateValidator = z
+export const dateValidator = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, "La date doit être au format YYYY-MM-DD");
 
