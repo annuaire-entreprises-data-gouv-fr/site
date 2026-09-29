@@ -141,6 +141,7 @@ const ConventionsCollectivesSection: React.FC<{
                     {(sirets || []).map((siret) => (
                       <li key={siret}>
                         <Link
+                          aria-label={`Voir l’établissement ${formatSiret(siret)}`}
                           params={{ slug: siret }}
                           to="/etablissement/$slug"
                         >
@@ -156,9 +157,9 @@ const ConventionsCollectivesSection: React.FC<{
                   ) : (
                     <ButtonLink
                       alt
-                      aria-label={`Convention collective ${
+                      aria-label={`Consulter la convention collective ${
                         title || idcc
-                      }, consulter les informations`}
+                      } sur le Code du travail numérique — nouvelle fenêtre`}
                       small
                       target="_blank"
                       to={`${routes.conventionsCollectives.details}${idcc}?src_url=https://annuaire-entreprises.data.gouv.fr`}
