@@ -7,6 +7,7 @@ interface INavigationItem
   children?: INavigationItem[];
   id: string;
   label: string;
+  shouldDisplay?: boolean;
 }
 const navigationItems: INavigationItem[] = [
   {
@@ -25,6 +26,7 @@ const navigationItems: INavigationItem[] = [
         to: "/collectivite/$slug/urbanisme" as any,
         id: "urbanisme",
         label: "Urbanisme",
+        shouldDisplay: false,
       },
     ],
     id: "amenagement-du-territoire",
@@ -34,21 +36,25 @@ const navigationItems: INavigationItem[] = [
     to: "/collectivite/$slug/transport" as any,
     id: "transport",
     label: "Transport",
+    shouldDisplay: false,
   },
   {
     to: "/collectivite/$slug/education" as any,
     id: "education",
     label: "Éducation",
+    shouldDisplay: false,
   },
   {
     to: "/collectivite/$slug/environnement" as any,
     id: "environnement",
     label: "Environnement",
+    shouldDisplay: false,
   },
   {
     to: "/collectivite/$slug/elections" as any,
     id: "elections",
     label: "Élections",
+    shouldDisplay: false,
   },
   {
     to: "/collectivite/$slug/economie-locale",
@@ -59,6 +65,7 @@ const navigationItems: INavigationItem[] = [
     to: "/collectivite/$slug/demographie" as any,
     id: "demographie",
     label: "Démographie",
+    shouldDisplay: false,
   },
   {
     to: "/collectivite/$slug/finances",
@@ -120,6 +127,10 @@ export function CollectiviteSidenav(props: CollectiviteSidenavProps) {
           </p>
           <ul className="fr-sidemenu__list">
             {navigationItems.map((item) => {
+              if (item.shouldDisplay === false) {
+                return null;
+              }
+
               const hasChildren = !!item.children?.length;
               const isActive = !!(item.to && matchRoute({ to: item.to }));
               const hasActiveChildren = !!item.children?.some(
@@ -153,30 +164,36 @@ export function CollectiviteSidenav(props: CollectiviteSidenavProps) {
                         id={submenuId}
                       >
                         <ul className="fr-sidemenu__list">
-                          {item.children?.map((child) => (
-                            <li
-                              className={getSidemenuItemClassName(
-                                child.to
-                                  ? !!matchRoute({ to: child.to })
-                                  : false
-                              )}
-                              key={child.id}
-                            >
-                              <Link
-                                aria-current={
-                                  child.to && matchRoute({ to: child.to })
-                                    ? "page"
-                                    : undefined
-                                }
-                                className="fr-sidemenu__link"
-                                params={{ slug }}
-                                resetScroll={false}
-                                to={child.to}
+                          {item.children?.map((child) => {
+                            if (child.shouldDisplay === false) {
+                              return null;
+                            }
+
+                            return (
+                              <li
+                                className={getSidemenuItemClassName(
+                                  child.to
+                                    ? !!matchRoute({ to: child.to })
+                                    : false
+                                )}
+                                key={child.id}
                               >
-                                {child.label}
-                              </Link>
-                            </li>
-                          ))}
+                                <Link
+                                  aria-current={
+                                    child.to && matchRoute({ to: child.to })
+                                      ? "page"
+                                      : undefined
+                                  }
+                                  className="fr-sidemenu__link"
+                                  params={{ slug }}
+                                  resetScroll={false}
+                                  to={child.to}
+                                >
+                                  {child.label}
+                                </Link>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     </>

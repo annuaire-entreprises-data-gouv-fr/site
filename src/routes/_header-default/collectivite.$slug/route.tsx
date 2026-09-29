@@ -10,7 +10,6 @@ import { NonDiffusibleStrictSection } from "#/components/non-diffusible-section"
 import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
-import { useAuth } from "#/contexts/auth.context";
 import { estNonDiffusibleStrict } from "#/models/core/diffusion";
 import { isCollectiviteTerritoriale } from "#/models/core/types";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
@@ -27,11 +26,12 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "carte-facile/carte-facile.css";
 import { clientGeo } from "#/clients/api-geo";
 import { CollectiviteSidenav } from "#/components/collectivite/sidenav";
+import { getFeatureFlagFn } from "#/server-functions/public/feature-flags";
 import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import { HeaderDefaultError } from "../-error";
 
 const loadEntreprisePage = createServerFn({ method: "POST" })
-  .inputValidator(
+  .validator(
     z.object({
       slug: z.string(),
     })
@@ -69,6 +69,14 @@ export const Route = createFileRoute("/_header-default/collectivite/$slug")({
       });
     }
     if (!isLikelyASiren(sirenOrSiretSlug)) {
+      throw notFound();
+    }
+
+    const isCollectiviteTerritorialeEnabled = await getFeatureFlagFn({
+      data: { featureFlag: "collectivite_territoriale_enabled" },
+    });
+
+    if (!isCollectiviteTerritorialeEnabled) {
       throw notFound();
     }
   },
@@ -114,15 +122,10 @@ export const Route = createFileRoute("/_header-default/collectivite/$slug")({
 
 function RouteComponent() {
   const { uniteLegale } = Route.useLoaderData();
-  const { user } = useAuth();
 
   return (
     <div className="content-container" style={getUniteLegaleTheme(uniteLegale)}>
-      <Title
-        ficheType={FICHE.COLLECTIVITE}
-        uniteLegale={uniteLegale}
-        user={user}
-      />
+      <Title ficheType={FICHE.COLLECTIVITE} uniteLegale={uniteLegale} />
       {estNonDiffusibleStrict(uniteLegale) ? (
         <NonDiffusibleStrictSection />
       ) : (
