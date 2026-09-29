@@ -39,10 +39,9 @@ export function ConnectionFranceConnect({
           <div className="layout-left">
             <ButtonLink
               alt
-              role="listitem"
               to="/api/auth/france-connect/logout?pathFrom=%2Fformulaire%2Fsupprimer-donnees-personnelles-entreprise"
             >
-              Me déconnecter
+              Me déconnecter de FranceConnect
             </ButtonLink>
           </div>
         </>
