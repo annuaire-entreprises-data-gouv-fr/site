@@ -37,8 +37,8 @@ function RouteComponent() {
         l’article 47 de la loi n° 2005-102 du 11 février 2005.
         <br />À cette fin, nous mettons en œuvre la stratégie et les actions
         suivantes :{" "}
-        <a href="https://www.numerique.gouv.fr/uploads/DINUM_SchemaPluriannuel_2020.pdf">
-          Télécharger le schéma pluriannuel de la DINUM au format PDF.
+        <a href="https://datapass.api.gouv.fr/schema_pluriannuel">
+          Consulter le schéma pluriannuel 2025-2028 du Pôle Data de la DINUM.
         </a>
         <br />
         Cette déclaration d’accessibilité s’applique à
