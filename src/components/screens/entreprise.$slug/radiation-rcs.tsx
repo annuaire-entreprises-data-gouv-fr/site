@@ -52,7 +52,7 @@ export const UniteLegaleRadiationRCS = ({
         <a
           href={`https://www.bodacc.fr/pages/annonces-commerciales-detail/?q.id=id:${uniteLegale.bodacc?.radiation?.idAnnonce}`}
         >
-          <OpenClosedTag icon="closed" label="Radiée au RCS">
+          <OpenClosedTag icon="closed" label="Radiée au RCS (BODACC)">
             {uniteLegale.bodacc?.radiation?.date ? (
               <>le {formatDate(uniteLegale.bodacc?.radiation?.date)}</>
             ) : null}
