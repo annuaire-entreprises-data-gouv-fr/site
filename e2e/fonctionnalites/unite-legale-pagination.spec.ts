@@ -54,6 +54,34 @@ test.describe("Pagination for multiple etablissement company", () => {
     await expect(currentPageButton(page)).toHaveText("3");
   });
 
+  test("Waits for hydration before enabling pagination", async ({ page }) => {
+    const clientEntry = "**/@id/virtual:tanstack-start-dev-client-entry";
+    let resumeClient: (() => void) | undefined;
+    const clientReady = new Promise<void>((resolve) => {
+      resumeClient = resolve;
+    });
+    await page.route(clientEntry, async (route) => {
+      await clientReady;
+      await route.continue();
+    });
+
+    const pageThree = page.getByRole("button", { name: "3", exact: true });
+    try {
+      const clientRequest = page.waitForRequest(clientEntry);
+      await page.goto(`/entreprise/${slug}`, { waitUntil: "commit" });
+      await clientRequest;
+      await expect(pageThree).toBeDisabled();
+    } finally {
+      resumeClient?.();
+    }
+
+    // Click waits for the button to become enabled as client modules finish
+    // loading and hydrating, using the test's remaining timeout.
+    await pageThree.click();
+    await expect(page).toHaveURL(pageUrl(3));
+    await expect(currentPageButton(page)).toHaveText("3");
+  });
+
   test("Can click on previous", async ({ page }) => {
     await goto(page, `/entreprise/${slug}?etablissments-page=6`);
     await page.locator(".fr-pagination__link--prev").click();

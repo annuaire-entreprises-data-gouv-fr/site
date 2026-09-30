@@ -5,14 +5,16 @@ import constants from "#/models/constants";
 import styles from "./style.module.css";
 
 const ActiveFilterLabel: React.FC<{
+  disabled: boolean;
   label?: string;
   icon: IIconsSlug;
   query: string;
   onClick: MouseEventHandler;
-}> = ({ label, icon, query, onClick }) => (
+}> = ({ disabled, label, icon, query, onClick }) => (
   <div className={`${styles["selected-filter-container"]} cursor-pointer`}>
     <button
       className="layout-center"
+      disabled={disabled}
       onClick={onClick}
       style={{ background: "none", border: "none", padding: 0 }}
       type="button"

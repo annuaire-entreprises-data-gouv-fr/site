@@ -58,10 +58,10 @@ test.describe("Fiche résumé DANONE", () => {
     await expect(reminder.getByRole("link")).toHaveCount(6);
     await expect(
       reminder.getByRole("link", { name: /Dirigeants inscrits au RNE/ })
-    ).toHaveAttribute("href", "/dirigeants/552032534");
+    ).toHaveAttribute("href", "/entreprise/danone-552032534/dirigeants");
     await expect(
       reminder.getByRole("link", { name: /Justificatifs d’immatriculation/ })
-    ).toHaveAttribute("href", "/documents/552032534");
+    ).toHaveAttribute("href", "/entreprise/danone-552032534/documents");
     await expect(
       reminder.getByRole("link", { name: /^Effectifs\b/ })
     ).toHaveCount(0);
@@ -75,7 +75,7 @@ test.describe("Fiche résumé DANONE", () => {
     ).toBeVisible();
 
     await reminder.getByText("Justificatifs d’immatriculation").click();
-    await expect(page).toHaveURL(/\/documents\/552032534$/);
+    await expect(page).toHaveURL(/\/entreprise\/danone-552032534\/documents$/);
   });
 
   test("[LOGGED] Should display basic infos", async ({ page, context }) => {
