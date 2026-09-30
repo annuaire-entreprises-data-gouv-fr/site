@@ -38,6 +38,7 @@ import {
 import { getExtraitKbis } from "#/models/espace-agent/extrait-kbis";
 import { Exception } from "#/models/exceptions";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
+import { getFeatureFlagFn } from "#/server-functions/public/feature-flags";
 import { getBaseUrl } from "#/utils/get-base-url";
 import {
   shouldNotIndex,
@@ -146,7 +147,10 @@ export const Route = createFileRoute("/entreprise/$slug/")({
 
     const { uniteLegale } = loaderData;
 
-    if (isFondation(uniteLegale)) {
+    if (
+      isFondation(uniteLegale) &&
+      (await getFeatureFlagFn({ data: { featureFlag: "fondations_enabled" } }))
+    ) {
       throw redirect({
         to: "/fondation/$slug",
         params: { slug: uniteLegale.complements.numeroRnf },

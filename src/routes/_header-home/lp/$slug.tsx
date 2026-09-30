@@ -6,6 +6,7 @@ import { NotFound } from "#/components/screens/not-found";
 import SearchBar from "#/components/search-bar";
 import { diamond } from "#/components-ui/logo-annuaire/logo-annuaire";
 import { getLandingPage } from "#/models/landing-pages";
+import { getFeatureFlagFn } from "#/server-functions/public/feature-flags";
 import { meta } from "#/utils/seo";
 import { HeaderHomeError } from "../-error";
 import styles from "./style.module.css";
@@ -13,7 +14,13 @@ import styles from "./style.module.css";
 export const Route = createFileRoute("/_header-home/lp/$slug")({
   loader: async ({ params }) => {
     const landingPage = getLandingPage(params.slug);
-    if (!landingPage) {
+    if (
+      !landingPage ||
+      (landingPage.featureFlag &&
+        !(await getFeatureFlagFn({
+          data: { featureFlag: landingPage.featureFlag },
+        })))
+    ) {
       throw notFound();
     }
 

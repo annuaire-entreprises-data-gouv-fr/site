@@ -1,9 +1,11 @@
 import type { LinkProps as TanStackLinkProps } from "@tanstack/react-router";
+import type { FeatureFlag } from "../feature-flags";
 
 export interface ILandingPage {
   body: string;
   datasources: string[];
   description: string;
+  featureFlag?: FeatureFlag;
   filter?: {
     name: string;
     value: string;

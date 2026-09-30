@@ -16,8 +16,10 @@ import { LeaveFondation } from "#/components/header/leave-fondation";
 import { Question } from "#/components/question";
 import { NotFound } from "#/components/screens/not-found";
 import SocialNetworks from "#/components/social-network";
+import { TitleFondation } from "#/components/title-fondation-section";
 import Title from "#/components/title-section";
 import { BackToTop } from "#/components-ui/back-to-top";
+import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import { type IUniteLegale, isFondation } from "#/models/core/types";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
@@ -135,6 +137,7 @@ function EntrepriseLayout({
   }, [pathname]);
 
   const isFromFondation = isFondation(uniteLegale) && from === "fondation";
+  const isFondationsEnabled = useFeatureFlag("fondations_enabled");
 
   return (
     <>
@@ -151,10 +154,18 @@ function EntrepriseLayout({
         useSearchBar={true}
       />
       <main className="fr-container">
-        <Title
-          ficheType={ENTREPRISE_TAB_TO_FICHE[fiche]}
-          uniteLegale={uniteLegale}
-        />
+        {isFondation(uniteLegale) && isFondationsEnabled.isEnabled ? (
+          <TitleFondation
+            fondationName={uniteLegale.nomComplet}
+            fondationRNF={uniteLegale.complements.numeroRnf}
+            uniteLegale={uniteLegale}
+          />
+        ) : (
+          <Title
+            ficheType={ENTREPRISE_TAB_TO_FICHE[fiche]}
+            uniteLegale={uniteLegale}
+          />
+        )}
         {children}
       </main>
       <SocialNetworks />

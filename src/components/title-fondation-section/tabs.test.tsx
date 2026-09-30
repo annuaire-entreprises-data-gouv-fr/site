@@ -2,6 +2,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import type { ComponentProps } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Link } from "#/components/link";
+import { AuthProvider } from "#/contexts/auth.context";
 import type { IFondation } from "#/models/core/fondations.types";
 import { createDefaultUniteLegale } from "#/models/core/types";
 import { verifySiren } from "#/utils/helpers";
@@ -51,7 +52,9 @@ afterEach(cleanup);
 describe("foundation tabs", () => {
   it("shows foundation routes without an uniteLegale and marks the current tab", () => {
     render(
-      <TabsFondation fondation={fondation} uniteLegale={null} user={null} />
+      <AuthProvider user={null}>
+        <TabsFondation fondationRNF={fondation.id} uniteLegale={null} />
+      </AuthProvider>
     );
 
     expect(
@@ -78,11 +81,9 @@ describe("foundation tabs", () => {
     uniteLegale.listeIdcc = [{ idcc: "0016", title: "Transports routiers" }];
 
     render(
-      <TabsFondation
-        fondation={fondation}
-        uniteLegale={uniteLegale}
-        user={null}
-      />
+      <AuthProvider user={null}>
+        <TabsFondation fondationRNF={fondation.id} uniteLegale={uniteLegale} />
+      </AuthProvider>
     );
 
     expect(screen.getAllByRole("link", { name: "Dirigeants" })).toHaveLength(1);

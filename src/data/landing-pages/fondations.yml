@@ -21,6 +21,7 @@ title: un fonds ou une fondation
 titleDiamondColor: color-mix(in srgb, var(--annuaire-colors-fondation) 50%, transparent)
 footerLabel: Fonds et fondations
 published: true
+featureFlag: fondations_enabled
 description: Retrouvez les infos de fondations, fondations d'entreprise
 
   et fonds de dotation en France
