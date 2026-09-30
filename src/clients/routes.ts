@@ -18,6 +18,8 @@ const routes = {
   apiEntreprise: {
     association: (siren: string) =>
       `/v4/djepva/api-association/associations/${siren}`,
+    fondationsRestreintes: (sirenOrSiretOrRnf: string) =>
+      `/v3/ministere_interieur/siaf/fondations/${sirenOrSiretOrRnf}`,
     beneficiaires: (siren: string) =>
       `/v3/inpi/rne/unites_legales/${siren}/beneficiaires_effectifs`,
     carteProfessionnelleTravauxPublics: (siren: string) =>

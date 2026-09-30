@@ -6,8 +6,8 @@ import type { IFondation } from "#/models/core/fondations.types";
 import type { IUniteLegale } from "#/models/core/types";
 import { CopyPaste } from "../table/copy-paste";
 import styles from "../title-section/styles.module.css";
-import { FICHE, Tabs } from "../title-section/tabs";
 import { UniteLegaleEtablissementCountDescription } from "../unite-legale-description/etablissement-count-description";
+import { TabsFondation } from "./tabs";
 
 interface IProps {
   fondation: IFondation;
@@ -53,13 +53,11 @@ export function TitleFondation(props: IProps) {
         label={fondation.title}
         path={`https://annuaire-entreprises.data.gouv.fr/fondation/${fondation.id}`}
       />
-      {uniteLegale && (
-        <Tabs
-          currentFicheType={FICHE.INFORMATION}
-          uniteLegale={uniteLegale}
-          user={user}
-        />
-      )}
+      <TabsFondation
+        fondation={fondation}
+        uniteLegale={uniteLegale}
+        user={user}
+      />
     </div>
   );
 }

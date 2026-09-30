@@ -8,6 +8,7 @@ import {
   type ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
+import type { IFondation } from "#/models/core/fondations.types";
 import type { IEtablissement, IUniteLegale } from "#/models/core/types";
 import type { UseCase } from "#/models/use-cases";
 
@@ -26,6 +27,10 @@ interface WrappedSectionUniteLegaleProps extends WrappedSectionBaseProps {
 
 interface WrappedSectionEtablissementProps extends WrappedSectionBaseProps {
   etablissement: IEtablissement;
+}
+
+export interface WrappedSectionFondationProps extends WrappedSectionBaseProps {
+  fondation: IFondation;
 }
 
 interface ProtectedSectionWithUseCaseBaseProps
@@ -48,9 +53,16 @@ interface ProtectedSectionWithUseCaseEtablissementProps
   WrappedSection: React.ComponentType<WrappedSectionEtablissementProps>;
 }
 
+interface ProtectedSectionWithUseCaseFondationProps
+  extends ProtectedSectionWithUseCaseBaseProps {
+  fondation: IFondation;
+  WrappedSection: React.ComponentType<WrappedSectionFondationProps>;
+}
+
 type ProtectedSectionWithUseCaseProps =
   | ProtectedSectionWithUseCaseUniteLegaleProps
-  | ProtectedSectionWithUseCaseEtablissementProps;
+  | ProtectedSectionWithUseCaseEtablissementProps
+  | ProtectedSectionWithUseCaseFondationProps;
 
 const DefaultIntroContent = () => (
   <p>
@@ -104,6 +116,22 @@ const ProtectedSectionWithUseCase: React.FC<
           Ces informations ne vous sont pas accessibles dans ce cas d‘usage.
         </strong>
       </Section>
+    );
+  }
+
+  if ("fondation" in props) {
+    const WrappedSection = props.WrappedSection;
+
+    return (
+      <WrappedSection
+        fondation={props.fondation}
+        id={id}
+        isProtected
+        sources={sources}
+        title={title}
+        useCase={useCase}
+        user={user}
+      />
     );
   }
 
