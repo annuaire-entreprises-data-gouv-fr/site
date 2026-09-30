@@ -3,7 +3,7 @@ import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from "#/components/badges-section/labels-and-certificates";
-import { Link } from "#/components/link";
+import type { Link } from "#/components/link";
 import { PrintNever } from "#/components-ui/print-visibility";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
@@ -15,7 +15,6 @@ import {
   type IUniteLegale,
   isCollectiviteTerritoriale,
   isEntrepreneurIndividuel,
-  isFondation,
   isServicePublic,
   isServicePublicImmatriculeeAuRNE,
 } from "#/models/core/types";
@@ -62,11 +61,9 @@ export const getUniteLegaleTabs = (
       ficheType: FICHE.INFORMATION,
       label: "Fiche résumé",
       params: {
-        slug: isFondation(uniteLegale)
-          ? uniteLegale.complements.numeroRnf
-          : uniteLegale.chemin,
+        slug: uniteLegale.chemin,
       },
-      to: isFondation(uniteLegale) ? "/fondation/$slug" : "/entreprise/$slug",
+      to: "/entreprise/$slug",
       noFollow: false,
       shouldDisplay: true,
       width: "80px",
@@ -182,25 +179,5 @@ export const Tabs: React.FC<{
           ))}
       </div>
     </PrintNever>
-  );
-};
-
-export const TabsForEtablissement: React.FC<{
-  uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
-}> = ({ uniteLegale, user }) => {
-  const tabs = getUniteLegaleTabs(uniteLegale, user);
-  return (
-    <ul className={styles.titleTabsEtablissement}>
-      {tabs
-        .filter(({ shouldDisplay }) => shouldDisplay)
-        .map(({ to, params, label, noFollow }) => (
-          <li key={label}>
-            <Link params={params} rel={noFollow ? "nofollow" : ""} to={to}>
-              <h2>{label}</h2>
-            </Link>
-          </li>
-        ))}
-    </ul>
   );
 };

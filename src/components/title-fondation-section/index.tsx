@@ -1,8 +1,6 @@
 import { Link } from "#/components/link";
 import { FondationBadge } from "#/components-ui/badge/frequent";
 import SocialMedia from "#/components-ui/social-media";
-import type { IAgentInfo } from "#/models/authentication/agent";
-import type { IFondation } from "#/models/core/fondations.types";
 import type { IUniteLegale } from "#/models/core/types";
 import { CopyPaste } from "../table/copy-paste";
 import styles from "../title-section/styles.module.css";
@@ -10,22 +8,22 @@ import { UniteLegaleEtablissementCountDescription } from "../unite-legale-descri
 import { TabsFondation } from "./tabs";
 
 interface IProps {
-  fondation: IFondation;
+  fondationName: string;
+  fondationRNF: string;
   uniteLegale: IUniteLegale | null;
-  user: IAgentInfo | null;
 }
 
 export function TitleFondation(props: IProps) {
-  const { fondation, uniteLegale, user } = props;
+  const { fondationName, fondationRNF, uniteLegale } = props;
   return (
     <div className={styles.headerSection}>
       <h1>
         <Link
-          params={{ slug: fondation.id }}
+          params={{ slug: fondationRNF }}
           search={(params) => ({ from: params.from })}
           to="/fondation/$slug"
         >
-          {fondation.title}
+          {fondationName}
         </Link>
       </h1>
       <div className={styles.subTitle}>
@@ -38,7 +36,7 @@ export function TitleFondation(props: IProps) {
               label="ID RNF"
               shouldRemoveSpace={true}
             >
-              {fondation.id}
+              {fondationRNF}
             </CopyPaste>
           </span>
         </span>
@@ -49,15 +47,11 @@ export function TitleFondation(props: IProps) {
         </div>
       )}
       <SocialMedia
-        id={fondation.id}
-        label={fondation.title}
-        path={`https://annuaire-entreprises.data.gouv.fr/fondation/${fondation.id}`}
+        id={fondationRNF}
+        label={fondationName}
+        path={`https://annuaire-entreprises.data.gouv.fr/fondation/${fondationRNF}`}
       />
-      <TabsFondation
-        fondation={fondation}
-        uniteLegale={uniteLegale}
-        user={user}
-      />
+      <TabsFondation fondationRNF={fondationRNF} uniteLegale={uniteLegale} />
     </div>
   );
 }

@@ -16,7 +16,6 @@ import { NotFound } from "#/components/screens/not-found";
 import SocialNetworks from "#/components/social-network";
 import { TitleFondation } from "#/components/title-fondation-section";
 import { BackToTop } from "#/components-ui/back-to-top";
-import { useAuth } from "#/contexts/auth.context";
 import type { IUniteLegale } from "#/models/core/types";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getFondationFromSlugFn } from "#/server-functions/public/fondation";
@@ -99,7 +98,6 @@ export const Route = createFileRoute("/fondation/$slug")({
 
 function RouteComponent() {
   const { fondation, uniteLegale } = Route.useLoaderData();
-  const { user } = useAuth();
   const { from } = Route.useSearch();
 
   const isFromEntrepriseSearch =
@@ -126,9 +124,9 @@ function RouteComponent() {
       <main className="fr-container">
         <div className="content-container">
           <TitleFondation
-            fondation={fondation}
+            fondationName={fondation.title}
+            fondationRNF={fondation.id}
             uniteLegale={uniteLegale}
-            user={user}
           />
           <Outlet />
         </div>

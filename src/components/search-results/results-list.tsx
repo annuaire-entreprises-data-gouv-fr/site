@@ -3,6 +3,7 @@ import { Link, type LinkProps } from "#/components/link";
 import UniteLegaleBadge from "#/components/unite-legale-badge";
 import { Icon } from "#/components-ui/icon/wrapper";
 import IsActiveTag, { EtatTag } from "#/components-ui/tag/is-active-tag";
+import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import { estDiffusible } from "#/models/core/diffusion";
 import { estActif, IETATADMINSTRATIF } from "#/models/core/etat-administratif";
 import { isCollectiviteTerritoriale, isFondation } from "#/models/core/types";
@@ -67,10 +68,11 @@ const AddressWithColouredZip = ({ adress = "", zip = "" }) => {
 const ResultItem: React.FC<{
   result: ISearchResult;
   shouldColorZipCode: boolean;
-}> = ({ result, shouldColorZipCode }) => {
+  isFondationsEnabled: boolean;
+}> = ({ result, shouldColorZipCode, isFondationsEnabled }) => {
   const shouldColorSiege =
     shouldColorZipCode && result.matchingEtablissements.find((e) => e.estSiege);
-  const shouldLinkToFondation = isFondation(result);
+  const shouldLinkToFondation = isFondationsEnabled && isFondation(result);
   const linkProps: Pick<LinkProps, "params" | "search" | "to"> =
     shouldLinkToFondation
       ? {
@@ -172,18 +174,20 @@ const ResultItem: React.FC<{
 const ResultsList: React.FC<IProps> = ({
   results,
   shouldColorZipCode = false,
-}) => (
-  <>
+}) => {
+  const isFondationsEnabled = useFeatureFlag("fondations_enabled");
+  return (
     <div className="results-list">
       {results.map((result) => (
         <ResultItem
+          isFondationsEnabled={isFondationsEnabled.isEnabled}
           key={result.siren}
           result={result}
           shouldColorZipCode={shouldColorZipCode}
         />
       ))}
     </div>
-  </>
-);
+  );
+};
 
 export default ResultsList;
