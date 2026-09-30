@@ -1,4 +1,4 @@
-import { getRouteApi } from "@tanstack/react-router";
+import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useCallback } from "react";
 import type { IAidesADEME } from "#/clients/api-data-gouv/aide-ademe/interface";
 import NonRenseigne from "#/components/non-renseigne";
@@ -30,15 +30,19 @@ const AidesADEMETable = ({
   />
 );
 
-const aidesADEMERoute = getRouteApi("/entreprise/$slug/donnees-financieres");
-
 export default function AidesADEMEContent({
   uniteLegale,
 }: {
   uniteLegale: IUniteLegale;
 }) {
-  const { "aides-ademe-page": currentPage } = aidesADEMERoute.useSearch();
-  const navigate = aidesADEMERoute.useNavigate();
+  const { "aides-ademe-page": currentPage = 1 } = useSearch({ strict: false });
+  const from = useLocation({
+    select: ({ pathname }) =>
+      pathname.startsWith("/fondation/")
+        ? "/fondation/$slug/donnees-financieres"
+        : "/entreprise/$slug/donnees-financieres",
+  });
+  const navigate = useNavigate({ from });
   const onPageChange = useCallback(
     (page: number) => {
       navigate({

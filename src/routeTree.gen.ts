@@ -76,6 +76,10 @@ import { Route as EntrepriseSlugEffectifsRouteImport } from './routes/entreprise
 import { Route as EntrepriseSlugEtablissementsScolairesRouteImport } from './routes/entreprise.$slug/etablissements-scolaires'
 import { Route as EntrepriseSlugLabelsCertificatsRouteImport } from './routes/entreprise.$slug/labels-certificats'
 import { Route as FondationSlugIndexRouteImport } from './routes/fondation.$slug/index'
+import { Route as FondationSlugDirigeantsRouteImport } from './routes/fondation.$slug/dirigeants'
+import { Route as FondationSlugDocumentsRouteImport } from './routes/fondation.$slug/documents'
+import { Route as FondationSlugDonneesFinancieresRouteImport } from './routes/fondation.$slug/donnees-financieres'
+import { Route as FondationSlugLiensRouteImport } from './routes/fondation.$slug/liens'
 import { Route as HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport } from './routes/_header-connexion/connexion.habilitation.administration-inconnue'
 import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } from './routes/_header-connexion/connexion.habilitation.prestataires'
 import { Route as HeaderConnexionConnexionHabilitationRefuseeRouteImport } from './routes/_header-connexion/connexion.habilitation.refusee'
@@ -457,6 +461,27 @@ const FondationSlugIndexRoute = FondationSlugIndexRouteImport.update({
   path: '/',
   getParentRoute: () => FondationSlugRouteRoute,
 } as any)
+const FondationSlugDirigeantsRoute = FondationSlugDirigeantsRouteImport.update({
+  id: '/dirigeants',
+  path: '/dirigeants',
+  getParentRoute: () => FondationSlugRouteRoute,
+} as any)
+const FondationSlugDocumentsRoute = FondationSlugDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => FondationSlugRouteRoute,
+} as any)
+const FondationSlugDonneesFinancieresRoute =
+  FondationSlugDonneesFinancieresRouteImport.update({
+    id: '/donnees-financieres',
+    path: '/donnees-financieres',
+    getParentRoute: () => FondationSlugRouteRoute,
+  } as any)
+const FondationSlugLiensRoute = FondationSlugLiensRouteImport.update({
+  id: '/liens',
+  path: '/liens',
+  getParentRoute: () => FondationSlugRouteRoute,
+} as any)
 const HeaderConnexionConnexionHabilitationAdministrationInconnueRoute =
   HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport.update({
     id: '/connexion/habilitation/administration-inconnue',
@@ -625,6 +650,10 @@ export interface FileRoutesByFullPath {
   '/entreprise/$slug/effectifs': typeof EntrepriseSlugEffectifsRoute
   '/entreprise/$slug/etablissements-scolaires': typeof EntrepriseSlugEtablissementsScolairesRoute
   '/entreprise/$slug/labels-certificats': typeof EntrepriseSlugLabelsCertificatsRoute
+  '/fondation/$slug/dirigeants': typeof FondationSlugDirigeantsRoute
+  '/fondation/$slug/documents': typeof FondationSlugDocumentsRoute
+  '/fondation/$slug/donnees-financieres': typeof FondationSlugDonneesFinancieresRoute
+  '/fondation/$slug/liens': typeof FondationSlugLiensRoute
   '/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/definitions/': typeof HeaderDefaultDefinitionsIndexRoute
   '/faq/': typeof HeaderDefaultFaqIndexRoute
@@ -703,6 +732,10 @@ export interface FileRoutesByTo {
   '/entreprise/$slug/effectifs': typeof EntrepriseSlugEffectifsRoute
   '/entreprise/$slug/etablissements-scolaires': typeof EntrepriseSlugEtablissementsScolairesRoute
   '/entreprise/$slug/labels-certificats': typeof EntrepriseSlugLabelsCertificatsRoute
+  '/fondation/$slug/dirigeants': typeof FondationSlugDirigeantsRoute
+  '/fondation/$slug/documents': typeof FondationSlugDocumentsRoute
+  '/fondation/$slug/donnees-financieres': typeof FondationSlugDonneesFinancieresRoute
+  '/fondation/$slug/liens': typeof FondationSlugLiensRoute
   '/administration': typeof HeaderDefaultAdministrationIndexRoute
   '/definitions': typeof HeaderDefaultDefinitionsIndexRoute
   '/faq': typeof HeaderDefaultFaqIndexRoute
@@ -792,6 +825,10 @@ export interface FileRoutesById {
   '/entreprise/$slug/effectifs': typeof EntrepriseSlugEffectifsRoute
   '/entreprise/$slug/etablissements-scolaires': typeof EntrepriseSlugEtablissementsScolairesRoute
   '/entreprise/$slug/labels-certificats': typeof EntrepriseSlugLabelsCertificatsRoute
+  '/fondation/$slug/dirigeants': typeof FondationSlugDirigeantsRoute
+  '/fondation/$slug/documents': typeof FondationSlugDocumentsRoute
+  '/fondation/$slug/donnees-financieres': typeof FondationSlugDonneesFinancieresRoute
+  '/fondation/$slug/liens': typeof FondationSlugLiensRoute
   '/_header-default/administration/': typeof HeaderDefaultAdministrationIndexRoute
   '/_header-default/definitions/': typeof HeaderDefaultDefinitionsIndexRoute
   '/_header-default/faq/': typeof HeaderDefaultFaqIndexRoute
@@ -874,6 +911,10 @@ export interface FileRouteTypes {
     | '/entreprise/$slug/effectifs'
     | '/entreprise/$slug/etablissements-scolaires'
     | '/entreprise/$slug/labels-certificats'
+    | '/fondation/$slug/dirigeants'
+    | '/fondation/$slug/documents'
+    | '/fondation/$slug/donnees-financieres'
+    | '/fondation/$slug/liens'
     | '/administration/'
     | '/definitions/'
     | '/faq/'
@@ -952,6 +993,10 @@ export interface FileRouteTypes {
     | '/entreprise/$slug/effectifs'
     | '/entreprise/$slug/etablissements-scolaires'
     | '/entreprise/$slug/labels-certificats'
+    | '/fondation/$slug/dirigeants'
+    | '/fondation/$slug/documents'
+    | '/fondation/$slug/donnees-financieres'
+    | '/fondation/$slug/liens'
     | '/administration'
     | '/definitions'
     | '/faq'
@@ -1040,6 +1085,10 @@ export interface FileRouteTypes {
     | '/entreprise/$slug/effectifs'
     | '/entreprise/$slug/etablissements-scolaires'
     | '/entreprise/$slug/labels-certificats'
+    | '/fondation/$slug/dirigeants'
+    | '/fondation/$slug/documents'
+    | '/fondation/$slug/donnees-financieres'
+    | '/fondation/$slug/liens'
     | '/_header-default/administration/'
     | '/_header-default/definitions/'
     | '/_header-default/faq/'
@@ -1572,6 +1621,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FondationSlugIndexRouteImport
       parentRoute: typeof FondationSlugRouteRoute
     }
+    '/fondation/$slug/dirigeants': {
+      id: '/fondation/$slug/dirigeants'
+      path: '/dirigeants'
+      fullPath: '/fondation/$slug/dirigeants'
+      preLoaderRoute: typeof FondationSlugDirigeantsRouteImport
+      parentRoute: typeof FondationSlugRouteRoute
+    }
+    '/fondation/$slug/documents': {
+      id: '/fondation/$slug/documents'
+      path: '/documents'
+      fullPath: '/fondation/$slug/documents'
+      preLoaderRoute: typeof FondationSlugDocumentsRouteImport
+      parentRoute: typeof FondationSlugRouteRoute
+    }
+    '/fondation/$slug/donnees-financieres': {
+      id: '/fondation/$slug/donnees-financieres'
+      path: '/donnees-financieres'
+      fullPath: '/fondation/$slug/donnees-financieres'
+      preLoaderRoute: typeof FondationSlugDonneesFinancieresRouteImport
+      parentRoute: typeof FondationSlugRouteRoute
+    }
+    '/fondation/$slug/liens': {
+      id: '/fondation/$slug/liens'
+      path: '/liens'
+      fullPath: '/fondation/$slug/liens'
+      preLoaderRoute: typeof FondationSlugLiensRouteImport
+      parentRoute: typeof FondationSlugRouteRoute
+    }
     '/_header-connexion/connexion/habilitation/administration-inconnue': {
       id: '/_header-connexion/connexion/habilitation/administration-inconnue'
       path: '/connexion/habilitation/administration-inconnue'
@@ -1913,10 +1990,18 @@ const EntrepriseSlugRouteRouteWithChildren =
   EntrepriseSlugRouteRoute._addFileChildren(EntrepriseSlugRouteRouteChildren)
 
 interface FondationSlugRouteRouteChildren {
+  FondationSlugDirigeantsRoute: typeof FondationSlugDirigeantsRoute
+  FondationSlugDocumentsRoute: typeof FondationSlugDocumentsRoute
+  FondationSlugDonneesFinancieresRoute: typeof FondationSlugDonneesFinancieresRoute
+  FondationSlugLiensRoute: typeof FondationSlugLiensRoute
   FondationSlugIndexRoute: typeof FondationSlugIndexRoute
 }
 
 const FondationSlugRouteRouteChildren: FondationSlugRouteRouteChildren = {
+  FondationSlugDirigeantsRoute: FondationSlugDirigeantsRoute,
+  FondationSlugDocumentsRoute: FondationSlugDocumentsRoute,
+  FondationSlugDonneesFinancieresRoute: FondationSlugDonneesFinancieresRoute,
+  FondationSlugLiensRoute: FondationSlugLiensRoute,
   FondationSlugIndexRoute: FondationSlugIndexRoute,
 }
 

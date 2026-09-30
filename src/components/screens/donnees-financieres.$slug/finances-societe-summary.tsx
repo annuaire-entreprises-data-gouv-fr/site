@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
@@ -6,10 +7,12 @@ import {
 import { hasAidesADEME, type IUniteLegale } from "#/models/core/types";
 
 export const FinancesSocieteSummary = ({
+  additionalSummaryItems,
   shouldShowOnlyAides,
   user,
   uniteLegale,
 }: {
+  additionalSummaryItems?: ReactNode;
   shouldShowOnlyAides: boolean;
   user: IAgentInfo | null;
   uniteLegale: IUniteLegale;
@@ -19,6 +22,7 @@ export const FinancesSocieteSummary = ({
       Informations financières disponibles :
     </strong>
     <ul>
+      {additionalSummaryItems}
       {!shouldShowOnlyAides && (
         <>
           <li>

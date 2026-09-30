@@ -1,6 +1,12 @@
 import { z } from "zod";
 import { UseCase } from "#/models/use-cases";
+import { isIdRnf } from "#/utils/helpers/fondations";
 import { TNatureEffectif } from "../../../clients/api-entreprise/effectifs/types";
+
+export const getAgentFondationsRestreintesSchema = z.object({
+  idRnf: z.string().refine(isIdRnf, "Invalid RNF identifier"),
+  useCase: z.enum(UseCase),
+});
 
 export const getAgentBeneficiairesSchema = z.object({
   siren: z.string().min(1, "Siren is required"),
