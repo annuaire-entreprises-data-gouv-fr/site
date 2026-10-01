@@ -75,7 +75,7 @@ test.describe("Fiche résumé DANONE", () => {
     ).toBeVisible();
 
     await reminder.getByText("Justificatifs d’immatriculation").click();
-    await expect(page).toHaveURL(/\/entreprise\/danone-552032534\/documents$/);
+    await expect(page).toHaveURL(/\/entreprise\/552032534\/documents$/);
   });
 
   test("[LOGGED] Should display basic infos", async ({ page, context }) => {
@@ -128,7 +128,7 @@ test.describe("Shared entreprise layout", () => {
 
     await page.getByRole("link", { name: "Documents", exact: true }).click();
 
-    await expect(page).toHaveURL(/\/entreprise\/danone-552032534\/documents$/);
+    await expect(page).toHaveURL(/\/entreprise\/552032534\/documents$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("DANONE");
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
