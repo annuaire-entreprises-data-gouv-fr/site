@@ -5,10 +5,7 @@ import remarkHeadingId from "remark-heading-id";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
-
-export interface IMarkdown {
-  __typename: "Markdown";
-}
+import type { IMarkdown } from "#/models/article/type";
 
 interface IParsedMakdown {
   headings: { id: string; content: string; depth: number }[];

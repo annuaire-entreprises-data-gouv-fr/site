@@ -1,5 +1,6 @@
-import type { IMarkdown } from "#/components/markdown/parse-markdown";
-
+export interface IMarkdown {
+  __typename: "Markdown";
+}
 export interface IArticle {
   body: IMarkdown;
   cta: { label: string; to: string };
