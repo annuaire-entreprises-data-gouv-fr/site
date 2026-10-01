@@ -58,10 +58,10 @@ test.describe("Fiche résumé DANONE", () => {
     await expect(reminder.getByRole("link")).toHaveCount(6);
     await expect(
       reminder.getByRole("link", { name: /Dirigeants inscrits au RNE/ })
-    ).toHaveAttribute("href", "/entreprise/danone-552032534/dirigeants");
+    ).toHaveAttribute("href", "/entreprise/552032534/dirigeants");
     await expect(
       reminder.getByRole("link", { name: /Justificatifs d’immatriculation/ })
-    ).toHaveAttribute("href", "/entreprise/danone-552032534/documents");
+    ).toHaveAttribute("href", "/entreprise/552032534/documents");
     await expect(
       reminder.getByRole("link", { name: /^Effectifs\b/ })
     ).toHaveCount(0);
@@ -110,10 +110,10 @@ test.describe("Fiche résumé DANONE", () => {
 });
 
 test.describe("Shared entreprise layout", () => {
-  test("Does not refetch the unite legale when switching tabs", async ({
+  test("Does not refetch the unite legale when switching tabs with the same SIREN", async ({
     page,
   }) => {
-    await goto(page, "/entreprise/danone-552032534");
+    await goto(page, "/entreprise/552032534/dirigeants");
 
     const uniteLegaleRequests: string[] = [];
     page.on("request", (request) => {
