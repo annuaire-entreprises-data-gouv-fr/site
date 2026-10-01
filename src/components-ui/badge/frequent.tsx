@@ -57,8 +57,8 @@ export const CollectiviteTerritorialeBadge = ({
   onClick,
 }: IPartialBadgeProps) => (
   <Badge
-    backgroundColor="#ffe283"
-    fontColor="#563003"
+    backgroundColor="#ebe7f7"
+    fontColor="#1d0d4b"
     icon="collectiviteFill"
     isSelected={isSelected}
     label="Collectivité territoriale"

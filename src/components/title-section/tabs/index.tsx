@@ -1,10 +1,11 @@
-import type { ComponentProps } from "react";
+import { type ComponentProps, useMemo } from "react";
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
 } from "#/components/badges-section/labels-and-certificates";
 import type { Link } from "#/components/link";
 import { PrintNever } from "#/components-ui/print-visibility";
+import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   ApplicationRights,
@@ -34,10 +35,12 @@ export const FICHE = {
   DIVERS: "conventions collectives",
   ETABLISSEMENTS_SCOLAIRES: "établissements scolaires",
   ETABLISSEMENT: "fiche établissement",
+  COLLECTIVITE: "Collectivité",
 } as const;
 export type FICHE = (typeof FICHE)[keyof typeof FICHE];
 
 export interface ITab {
+  className?: string;
   ficheType: FICHE;
   label: string;
   noFollow: boolean;
@@ -49,7 +52,12 @@ export interface ITab {
 
 export const getUniteLegaleTabs = (
   uniteLegale: IUniteLegale,
-  user: IAgentInfo | null
+  user: IAgentInfo | null,
+  options: {
+    hideCollectiviteTab?: boolean;
+  } = {
+    hideCollectiviteTab: false,
+  }
 ): ITab[] => {
   const shouldDisplayFinances =
     // hide for public services
@@ -151,6 +159,17 @@ export const getUniteLegaleTabs = (
       shouldDisplay: (uniteLegale.listeIdcc || []).length > 0,
       width: "130px",
     },
+    {
+      ficheType: FICHE.COLLECTIVITE,
+      params: { slug: uniteLegale.siren },
+      to: "/collectivite/$slug/identite",
+      label: "Collectivité",
+      noFollow: false,
+      shouldDisplay:
+        !options.hideCollectiviteTab && isCollectiviteTerritoriale(uniteLegale),
+      width: "130px",
+      className: styles.collectiviteTab,
+    },
   ];
 };
 
@@ -159,24 +178,47 @@ export const Tabs: React.FC<{
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }> = ({ currentFicheType, uniteLegale, user }) => {
-  const tabs = getUniteLegaleTabs(uniteLegale, user);
+  const isCollectiviteTerritorialeEnabled = useFeatureFlag(
+    "collectivite_territoriale_enabled"
+  );
+  const tabs = useMemo(
+    () =>
+      getUniteLegaleTabs(uniteLegale, user, {
+        hideCollectiviteTab:
+          isCollectiviteTerritorialeEnabled.isLoading ||
+          !isCollectiviteTerritorialeEnabled.isEnabled,
+      }),
+    [uniteLegale, user, isCollectiviteTerritorialeEnabled]
+  );
+
   return (
     <PrintNever>
       <div className={styles.titleTabs}>
         {tabs
           .filter(({ shouldDisplay }) => shouldDisplay)
-          .map(({ to, params, ficheType, label, noFollow, width = "auto" }) => (
-            <TabLink
-              active={currentFicheType === ficheType}
-              key={label}
-              label={label}
-              noFollow={noFollow}
-              params={params}
-              search={(search) => ({ from: search.from })}
-              to={to}
-              width={width}
-            />
-          ))}
+          .map(
+            ({
+              to,
+              params,
+              ficheType,
+              label,
+              noFollow,
+              width = "auto",
+              className,
+            }) => (
+              <TabLink
+                active={currentFicheType === ficheType}
+                className={className}
+                key={label}
+                label={label}
+                noFollow={noFollow}
+                params={params}
+                search={(search) => ({ from: search.from })}
+                to={to}
+                width={width}
+              />
+            )
+          )}
       </div>
     </PrintNever>
   );

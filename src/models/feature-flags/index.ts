@@ -11,6 +11,7 @@ export const FEATURE_FLAGS = [
   "bodacc_radiation_displayed",
   "bodacc_procedure_collective_displayed",
   "fondations_enabled",
+  "collectivite_territoriale_enabled",
 ] as const;
 export type FeatureFlag = (typeof FEATURE_FLAGS)[number];
 type FeatureFlagValue = boolean | string;

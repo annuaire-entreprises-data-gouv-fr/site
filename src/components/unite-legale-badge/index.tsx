@@ -29,7 +29,10 @@ const UniteLegaleBadge: React.FC<{
     badges.push(<EntrepriseIndividuelleBadge small={small} />);
   }
 
-  if (isServicePublic(uniteLegale)) {
+  if (
+    isServicePublic(uniteLegale) &&
+    !isCollectiviteTerritoriale(uniteLegale)
+  ) {
     badges.push(<ServicePublicBadge small={small} />);
   }
 

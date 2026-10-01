@@ -42,10 +42,10 @@ export const Section: React.FC<PropsWithChildren<ISectionProps>> = ({
 
   const borderColor = isProtected
     ? constants.colors.espaceAgentPastel
-    : constants.colors.pastelBlue;
+    : "var(--unite-legale-theme-background)";
   const titleColor = isProtected
     ? constants.colors.espaceAgent
-    : constants.colors.frBlue;
+    : "var(--unite-legale-theme-text)";
 
   return (
     <SectionErrorBoundary title={title}>
