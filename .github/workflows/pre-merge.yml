@@ -89,6 +89,29 @@ jobs:
 
       - name: Build site
         run: pnpm run build
+      - name: Smoke test production server
+        env:
+          NODE_ENV: production
+          HOST: 127.0.0.1
+          PORT: 3000
+        run: |
+          pnpm start > /tmp/production-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true; cat /tmp/production-server.log' EXIT
+
+          for attempt in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:3000/health > /dev/null; then
+              break
+            fi
+            if ! kill -0 "$server_pid" 2>/dev/null; then
+              exit 1
+            fi
+            sleep 1
+          done
+
+          for route in health faq definitions; do
+            curl --fail --silent --show-error "http://127.0.0.1:3000/$route" > /dev/null
+          done
       - name: Cache site
         uses: actions/cache@v3
         id: restore-build
