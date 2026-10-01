@@ -69,7 +69,10 @@ export function TabsFondation({
             <TabLink
               active={
                 pathname.replace(/\/$/, "") ===
-                to?.replace("$slug", fondationRNF)
+                  to?.replace("$slug", fondationRNF) ||
+                (!!uniteLegale &&
+                  pathname.replace(/\/$/, "") ===
+                    to?.replace("$slug", uniteLegale?.siren))
               }
               key={label}
               label={label}

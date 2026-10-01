@@ -91,12 +91,12 @@ describe("foundation tabs", () => {
       screen
         .getByRole("link", { name: "Établissements scolaires" })
         .getAttribute("href")
-    ).toBe(`/entreprise/${uniteLegale.chemin}/etablissements-scolaires`);
+    ).toBe(`/entreprise/${uniteLegale.siren}/etablissements-scolaires`);
     expect(
       screen
         .getByRole("link", { name: "Conventions collectives" })
         .getAttribute("href")
-    ).toBe(`/entreprise/${uniteLegale.chemin}/divers`);
+    ).toBe(`/entreprise/${uniteLegale.siren}/divers`);
     expect(screen.queryByRole("link", { name: "Effectifs" })).toBeNull();
   });
 });

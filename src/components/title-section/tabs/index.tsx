@@ -78,7 +78,7 @@ export const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.DIRIGEANTS,
-      params: { slug: uniteLegale.chemin },
+      params: { slug: uniteLegale.siren },
       to: "/entreprise/$slug/dirigeants",
       noFollow: false,
       shouldDisplay: true,
@@ -94,7 +94,7 @@ export const getUniteLegaleTabs = (
     {
       ficheType: FICHE.DOCUMENTS,
       label: "Documents",
-      params: { slug: uniteLegale.chemin },
+      params: { slug: uniteLegale.siren },
       to: "/entreprise/$slug/documents",
       noFollow: false,
       shouldDisplay: true,
@@ -103,7 +103,7 @@ export const getUniteLegaleTabs = (
     {
       ficheType: FICHE.FINANCES,
       label: "Données financières",
-      params: { slug: uniteLegale.chemin },
+      params: { slug: uniteLegale.siren },
       to: "/entreprise/$slug/donnees-financieres",
       noFollow: false,
       shouldDisplay: shouldDisplayFinances,
@@ -111,7 +111,7 @@ export const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.ANNONCES,
-      params: { slug: uniteLegale.chemin },
+      params: { slug: uniteLegale.siren },
       to: "/entreprise/$slug/annonces",
       label: `Annonces${
         uniteLegale.dateMiseAJourInpi ? " et observations" : ""
@@ -122,7 +122,7 @@ export const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.EFFECTIFS,
-      params: { slug: uniteLegale.chemin },
+      params: { slug: uniteLegale.siren },
       to: "/entreprise/$slug/effectifs",
       label: "Effectifs",
       noFollow: false,
@@ -131,7 +131,7 @@ export const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.CERTIFICATS,
-      params: { slug: uniteLegale.chemin },
+      params: { slug: uniteLegale.siren },
       to: "/entreprise/$slug/labels-certificats",
       label: `${
         checkHasQuality(uniteLegale) ? "Qualités, l" : "L"
@@ -144,7 +144,7 @@ export const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.ETABLISSEMENTS_SCOLAIRES,
-      params: { slug: uniteLegale.chemin },
+      params: { slug: uniteLegale.siren },
       to: "/entreprise/$slug/etablissements-scolaires",
       label: "Établissements scolaires",
       noFollow: false,
@@ -152,7 +152,7 @@ export const getUniteLegaleTabs = (
     },
     {
       ficheType: FICHE.DIVERS,
-      params: { slug: uniteLegale.chemin },
+      params: { slug: uniteLegale.siren },
       to: "/entreprise/$slug/divers",
       label: "Conventions collectives",
       noFollow: false,
