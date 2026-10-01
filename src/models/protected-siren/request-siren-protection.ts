@@ -41,7 +41,7 @@ export async function requestSirenProtection(
       firstName,
       familyName,
       birthdate,
-      dirigeantPage: `https://annuaire-entreprises.data.gouv.fr/dirigeants/${validSiren}`,
+      dirigeantPage: `https://annuaire-entreprises.data.gouv.fr/entreprise/${validSiren}/dirigeants`,
       date: new Date().toISOString().slice(0, 10),
     },
   ]);

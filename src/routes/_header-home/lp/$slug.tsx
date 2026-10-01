@@ -6,6 +6,7 @@ import { NotFound } from "#/components/screens/not-found";
 import SearchBar from "#/components/search-bar";
 import { diamond } from "#/components-ui/logo-annuaire/logo-annuaire";
 import { getLandingPage } from "#/models/landing-pages";
+import { getFeatureFlagFn } from "#/server-functions/public/feature-flags";
 import { meta } from "#/utils/seo";
 import { HeaderHomeError } from "../-error";
 import styles from "./style.module.css";
@@ -13,7 +14,13 @@ import styles from "./style.module.css";
 export const Route = createFileRoute("/_header-home/lp/$slug")({
   loader: async ({ params }) => {
     const landingPage = getLandingPage(params.slug);
-    if (!landingPage) {
+    if (
+      !landingPage ||
+      (landingPage.featureFlag &&
+        !(await getFeatureFlagFn({
+          data: { featureFlag: landingPage.featureFlag },
+        })))
+    ) {
       throw notFound();
     }
 
@@ -57,37 +64,44 @@ function RouteComponent() {
     title,
     description,
     filter,
+    searchPath,
     reassurance = [],
     datasources = [],
     body,
+    searchPlaceholder,
   } = landingPage;
   return (
     <>
       <form
-        action={"/rechercher"}
+        action={searchPath || "/rechercher"}
         className={`${styles["centered-search"]} layout-center`}
         id="search-bar-form"
         method="get"
       >
         <h1>
           <span className={styles.diamond}>
-            <span>{diamond}</span>Rechercher
+            <span style={{ color: landingPage.titleDiamondColor }}>
+              {diamond}
+            </span>
+            Rechercher
             <br />
           </span>
           {title}
         </h1>
         <h2 className={styles["sub-title"]}>{description}</h2>
-        <input
-          name={filter.name}
-          readOnly
-          style={{ display: "none" }}
-          value={filter.value}
-        />
+        {filter && (
+          <input
+            name={filter.name}
+            readOnly
+            style={{ display: "none" }}
+            value={filter.value}
+          />
+        )}
         <div className={styles["search-bar-wrapper"]}>
           <SearchBar
             autoFocus={true}
             defaultValue=""
-            placeholder="Nom, adresse, n° SIRET/SIREN..."
+            placeholder={searchPlaceholder || "Nom, adresse, n° SIRET/SIREN..."}
           />
         </div>
       </form>

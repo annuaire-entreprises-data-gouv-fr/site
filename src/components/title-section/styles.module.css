@@ -9,7 +9,7 @@
   }
 }
 
-.headerSection > div:first-of-type {
+.titleContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,12 +20,12 @@
     margin-top: 10px;
   }
 }
-.headerSection > div:first-of-type h1 {
+.titleContainer h1 {
   margin: 0;
   margin-bottom: 7px;
   line-height: 2.5rem;
 }
-.headerSection > div:first-of-type h1 > a {
+.titleContainer h1 > a {
   padding: 0;
   margin: 0;
   font-variant: all-small-caps;
@@ -55,4 +55,17 @@
   border: 1px solid #bbb;
   border-top: none;
   border-right: none;
+}
+
+.searchFondationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 992px) {
+  .searchFondationContainer {
+    justify-content: flex-start;
+    margin: 10px 0;
+  }
 }

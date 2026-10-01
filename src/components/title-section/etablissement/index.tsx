@@ -18,7 +18,7 @@ import { formatIntFr, formatSiret } from "#/utils/helpers";
 import { estEnFrance } from "#/utils/helpers/est-en-france";
 import { INSEE } from "../../administrations";
 import TitleAlerts from "../alerts";
-import { TabsForEtablissement } from "../tabs";
+import { TabsForEtablissement } from "../etablissement/unite-legale-tabs";
 import styles from "./styles.module.css";
 
 const TitleEtablissementWithDenomination: React.FC<{
@@ -153,6 +153,7 @@ const TitleEtablissementWithDenomination: React.FC<{
     </div>
     <br />
     <SocialMedia
+      id={etablissement.siret}
       label={
         etablissement.enseigne ||
         etablissement.denomination ||

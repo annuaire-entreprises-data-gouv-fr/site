@@ -3,13 +3,14 @@ import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import { DataStore } from "#/utils/data-store";
 
-const FEATURE_FLAGS = [
+export const FEATURE_FLAGS = [
   "incident_banner_displayed",
   "proconnect_incident_banner_displayed",
   "partners_data_incident_banner_displayed",
   "proconnect_migration_banner_displayed",
   "bodacc_radiation_displayed",
   "bodacc_procedure_collective_displayed",
+  "fondations_enabled",
 ] as const;
 export type FeatureFlag = (typeof FEATURE_FLAGS)[number];
 type FeatureFlagValue = boolean | string;

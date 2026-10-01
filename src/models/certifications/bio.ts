@@ -4,8 +4,8 @@ import { HttpNotFound } from "#/clients/exceptions";
 import { EAdministration } from "#/models/administrations/e-administration";
 import { APINotRespondingFactory } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
+import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import type { IUniteLegale } from "../core/types";
 
 export interface IEtablissementsBio {
   etablissementsBio: IEtablissementBio[];
@@ -38,12 +38,12 @@ export interface IBioCertification {
   url: string;
 }
 
-export const getBio = async (uniteLegale: IUniteLegale) => {
+export const getBio = async (siren: Siren, estBio: boolean) => {
   try {
-    if (!uniteLegale.complements.estBio) {
+    if (!estBio) {
       return APINotRespondingFactory(EAdministration.AGENCE_BIO, 404);
     }
-    return await clientProfessionnelBio(uniteLegale.siren);
+    return await clientProfessionnelBio(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.AGENCE_BIO, 404);
@@ -53,7 +53,7 @@ export const getBio = async (uniteLegale: IUniteLegale) => {
         ressource: "ProfessionnelBio",
         cause: e,
         context: {
-          siren: uniteLegale.siren,
+          siren,
         },
         administration: EAdministration.AGENCE_BIO,
       })

@@ -19,3 +19,20 @@ export const useFeatureFlag = (featureFlag: FeatureFlag) => {
 
   return { isEnabled: data?.featureFlags[featureFlag] ?? false, isLoading };
 };
+
+const emptyFeatureFlags = {} as Record<FeatureFlag, boolean>;
+
+export const useFeatureFlags = () => {
+  const { data, isLoading } = useQuery<{
+    featureFlags: Record<FeatureFlag, boolean>;
+  }>({
+    gcTime: Number.POSITIVE_INFINITY,
+    queryKey: ["feature-flags"],
+    queryFn: () =>
+      fetch("/api/feature-flags").then((res) =>
+        res.ok ? res.json() : Promise.reject(res.statusText)
+      ),
+  });
+
+  return { featureFlags: data?.featureFlags ?? emptyFeatureFlags, isLoading };
+};

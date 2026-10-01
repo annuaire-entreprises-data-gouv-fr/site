@@ -25,13 +25,26 @@ import { convertErrorToFetchingState } from "#/utils/helpers/convert-error";
 export function useServerFnData<Input, Data>(
   action: RequiredFetcher<unknown, Input, Data>,
   input: Expand<IntersectAllValidatorInputs<unknown, Input>>,
-  requiredRight: ApplicationRights = ApplicationRights.opendata
+  requiredRight: ApplicationRights = ApplicationRights.opendata,
+  cacheOptions?: { staleTime: number; gcTime?: number }
 ): Awaited<Data> | IDataFetchingState {
   const { user } = useAuth();
   const execute = useServerFn(action);
 
   const { data, isPending, isLoading, isError, error } = useQuery({
-    queryKey: ["server-function", action.url, input],
+    ...cacheOptions,
+    queryKey: [
+      "server-function",
+      action.url,
+      input,
+      user && {
+        proConnectSub: user.proConnectSub,
+        email: user.email,
+        siret: user.siret,
+        scopes: user.scopes,
+        groupsScopes: user.groupsScopes,
+      },
+    ],
     queryFn: () => execute({ data: input }),
     retry: false,
     refetchOnWindowFocus: false,

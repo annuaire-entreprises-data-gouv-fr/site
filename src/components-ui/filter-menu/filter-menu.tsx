@@ -1,3 +1,4 @@
+import { useHydrated } from "@tanstack/react-router";
 import { type PropsWithChildren, useId, useState } from "react";
 import ButtonLink from "#/components-ui/button";
 import ButtonClose from "#/components-ui/button/button-close";
@@ -29,6 +30,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
   searchTerm,
   addSaveClearButton = false,
 }) => {
+  const isHydrated = useHydrated();
   const clearFilterLink = buildSearchQuery(
     searchTerm,
     searchParams,
@@ -48,6 +50,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
         <div>
           {activeFilter.label ? (
             <ActiveFilterLabel
+              disabled={!isHydrated}
               icon={activeFilter.icon}
               label={activeFilter.label}
               onClick={() => {
@@ -58,6 +61,7 @@ export const FilterMenu: React.FC<PropsWithChildren<FilterMenuProps>> = ({
           ) : (
             <button
               className={styles["search-filter-label"]}
+              disabled={!isHydrated}
               onClick={() => {
                 setOpen(!open);
               }}

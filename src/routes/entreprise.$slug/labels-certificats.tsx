@@ -1,6 +1,10 @@
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  notFound,
+  stripSearchParams,
+} from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { z } from "zod";
+import z from "zod";
 import {
   checkHasLabelsAndCertificates,
   checkHasQuality,
@@ -22,8 +26,6 @@ import { OpqibiSection } from "#/components/protected-certificates/opqibi-sectio
 import { QualibatSection } from "#/components/protected-certificates/qualibat-section";
 import { QualifelecSection } from "#/components/protected-certificates/qualifelec-section";
 import { NotFound } from "#/components/screens/not-found";
-import Title from "#/components/title-section";
-import { FICHE } from "#/components/title-section/tabs";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { useAuth } from "#/contexts/auth.context";
 import {
@@ -31,31 +33,42 @@ import {
   hasRights,
 } from "#/models/authentication/user/rights";
 import { getCertificationsFromSlug } from "#/models/certifications";
-import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers";
+import { verifySiren } from "#/utils/helpers/siren-and-siret";
 import { meta } from "#/utils/seo";
-import { HeaderDefaultError } from "./-error";
+import { HeaderDefaultError } from "../_header-default/-error";
 
 const loadLabelsCertificatsPage = createServerFn()
   .validator(
-    z.object({ slug: z.string(), entrepreneurSpectaclesPage: z.number() })
+    z.object({
+      siren: z.string().transform(verifySiren),
+      complements: z.object({
+        egaproRenseignee: z.boolean(),
+        estBio: z.boolean(),
+        estEntrepreneurSpectacle: z.boolean(),
+        estEntrepriseInclusive: z.boolean(),
+        estEss: z.boolean(),
+        estOrganismeFormation: z.boolean(),
+        estRge: z.boolean(),
+      }),
+      entrepreneurSpectaclesPage: z.number().min(1),
+    })
   )
-  .handler(async ({ data: { slug, entrepreneurSpectaclesPage } }) => {
-    const uniteLegale = await getUniteLegaleFromSlugFn({
-      data: { slug },
-    });
-    const certifications = await getCertificationsFromSlug(uniteLegale, {
-      entrepreneurSpectaclesPage,
-    });
-    return { uniteLegale, certifications };
-  });
+  .handler(
+    async ({ data: { siren, complements, entrepreneurSpectaclesPage } }) => {
+      const certifications = await getCertificationsFromSlug(
+        siren,
+        complements,
+        { entrepreneurSpectaclesPage }
+      );
+      return { certifications };
+    }
+  );
 
-export const Route = createFileRoute(
-  "/_header-default/labels-certificats/$slug"
-)({
+export const Route = createFileRoute("/entreprise/$slug/labels-certificats")({
   validateSearch: z.object({
     "entrepreneur-spectacles-page": z
       .number()
@@ -68,22 +81,44 @@ export const Route = createFileRoute(
     middlewares: [stripSearchParams({ "entrepreneur-spectacles-page": 1 })],
   },
   loaderDeps: ({ search }) => ({
-    "entrepreneur-spectacles-page": search["entrepreneur-spectacles-page"],
+    entrepreneurSpectaclesPage: search["entrepreneur-spectacles-page"],
   }),
-  loader: async ({ params, deps }) =>
-    await loadLabelsCertificatsPage({
+  loader: async ({ parentMatchPromise, deps }) => {
+    const { loaderData } = await parentMatchPromise;
+
+    if (!loaderData) {
+      throw notFound();
+    }
+
+    const { uniteLegale } = loaderData;
+
+    const pageData = await loadLabelsCertificatsPage({
       data: {
-        slug: params.slug,
-        entrepreneurSpectaclesPage: deps["entrepreneur-spectacles-page"],
+        siren: uniteLegale.siren,
+        complements: {
+          egaproRenseignee: uniteLegale.complements.egaproRenseignee,
+          estBio: uniteLegale.complements.estBio,
+          estEntrepreneurSpectacle:
+            uniteLegale.complements.estEntrepreneurSpectacle,
+          estEntrepriseInclusive:
+            uniteLegale.complements.estEntrepriseInclusive,
+          estEss: uniteLegale.complements.estEss,
+          estOrganismeFormation: uniteLegale.complements.estOrganismeFormation,
+          estRge: uniteLegale.complements.estRge,
+        },
+        entrepreneurSpectaclesPage: deps.entrepreneurSpectaclesPage,
       },
-    }),
+    });
+
+    return { ...pageData, uniteLegale };
+  },
   head: ({ loaderData }) => {
     if (!loaderData) {
       return meta.notFound();
     }
 
     const { uniteLegale } = loaderData;
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/labels-certificats/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}/labels-certificats`;
     return {
       meta: meta({
         title: `Qualités, labels et certificats - ${uniteLegalePageTitle(uniteLegale)}`,
@@ -138,12 +173,7 @@ function RouteComponent() {
   const { user } = useAuth();
 
   return (
-    <div className="content-container">
-      <Title
-        ficheType={FICHE.CERTIFICATS}
-        uniteLegale={uniteLegale}
-        user={user}
-      />
+    <>
       {!(
         checkHasLabelsAndCertificates(uniteLegale) ||
         hasRights({ user }, ApplicationRights.protectedCertificats)
@@ -182,6 +212,6 @@ function RouteComponent() {
       {estAlimConfiance && <AlimConfianceSection uniteLegale={uniteLegale} />}
 
       {bilanGesRenseigne && <BilanGesSection uniteLegale={uniteLegale} />}
-    </div>
+    </>
   );
 }

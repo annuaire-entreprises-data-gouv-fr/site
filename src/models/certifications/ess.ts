@@ -6,8 +6,8 @@ import {
   type IAPINotRespondingError,
 } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
+import type { Siren } from "#/utils/helpers";
 import logErrorInSentry from "#/utils/sentry";
-import type { IUniteLegale } from "../core/types";
 
 export interface IESS {
   familleJuridique: string;
@@ -16,13 +16,14 @@ export interface IESS {
 }
 
 export const getEss = async (
-  uniteLegale: IUniteLegale
+  siren: Siren,
+  estEss: boolean
 ): Promise<IESS | IAPINotRespondingError> => {
   try {
-    if (!uniteLegale.complements.estEss) {
+    if (!estEss) {
       return APINotRespondingFactory(EAdministration.ESSFRANCE, 404);
     }
-    return await clientEss(uniteLegale.siren);
+    return await clientEss(siren);
   } catch (e: any) {
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.ESSFRANCE, 404);
@@ -32,7 +33,7 @@ export const getEss = async (
         cause: e,
         ressource: "EconomieSocialeEtSolidaire",
         context: {
-          siren: uniteLegale.siren,
+          siren,
         },
         administration: EAdministration.ESSFRANCE,
       })

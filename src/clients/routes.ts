@@ -18,6 +18,8 @@ const routes = {
   apiEntreprise: {
     association: (siren: string) =>
       `/v4/djepva/api-association/associations/${siren}`,
+    fondationsRestreintes: (sirenOrSiretOrRnf: string) =>
+      `/v3/ministere_interieur/siaf/fondations/${sirenOrSiretOrRnf}`,
     beneficiaires: (siren: string) =>
       `/v3/inpi/rne/unites_legales/${siren}/beneficiaires_effectifs`,
     carteProfessionnelleTravauxPublics: (siren: string) =>
@@ -277,8 +279,7 @@ const routes = {
     lastModified: "/sources/last_modified",
   },
   siaf: {
-    getFondationById: (idRNF: string) =>
-      `https://dev-api-hub-asso.sdid-app-hp.cpin.numerique-interieur.com/api/v1/fondations/${idRNF}`,
+    getFondationById: (idRNF: string) => `/api/v1/fondations/${idRNF}`,
   },
   tooling: {
     grist: "https://grist.numerique.gouv.fr/api/docs/",

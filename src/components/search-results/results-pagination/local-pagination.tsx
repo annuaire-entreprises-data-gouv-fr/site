@@ -1,3 +1,4 @@
+import { useHydrated } from "@tanstack/react-router";
 import type React from "react";
 import pagesArray from "./pages-array";
 
@@ -8,11 +9,20 @@ interface IProps {
   totalPages: number;
 }
 
-const First: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
+interface IButtonProps extends IProps {
+  disabled: boolean;
+}
+
+const First: React.FC<IButtonProps> = ({
+  currentPage,
+  compact,
+  disabled,
+  onPageChange,
+}) => (
   <li>
     <button
       className="fr-pagination__link fr-pagination__link--first fr-pagination__link--lg-label"
-      disabled={currentPage <= 1}
+      disabled={disabled || currentPage <= 1}
       onClick={() => currentPage > 1 && onPageChange(1)}
       type="button"
     >
@@ -21,16 +31,17 @@ const First: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
   </li>
 );
 
-const Last: React.FC<IProps> = ({
+const Last: React.FC<IButtonProps> = ({
   currentPage,
   totalPages,
   compact,
+  disabled,
   onPageChange,
 }) => (
   <li>
     <button
       className="fr-pagination__link fr-pagination__link--last"
-      disabled={currentPage >= totalPages}
+      disabled={disabled || currentPage >= totalPages}
       onClick={() => currentPage < totalPages && onPageChange(totalPages)}
       type="button"
     >
@@ -39,11 +50,16 @@ const Last: React.FC<IProps> = ({
   </li>
 );
 
-const Previous: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
+const Previous: React.FC<IButtonProps> = ({
+  currentPage,
+  compact,
+  disabled,
+  onPageChange,
+}) => (
   <li>
     <button
       className="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label"
-      disabled={currentPage <= 1}
+      disabled={disabled || currentPage <= 1}
       onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
       type="button"
     >
@@ -52,16 +68,17 @@ const Previous: React.FC<IProps> = ({ currentPage, compact, onPageChange }) => (
   </li>
 );
 
-const Next: React.FC<IProps> = ({
+const Next: React.FC<IButtonProps> = ({
   currentPage,
   totalPages,
   compact,
+  disabled,
   onPageChange,
 }) => (
   <li>
     <button
       className="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label"
-      disabled={currentPage >= totalPages}
+      disabled={disabled || currentPage >= totalPages}
       onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
       type="button"
     >
@@ -73,12 +90,14 @@ const Next: React.FC<IProps> = ({
 const Page: React.FC<{
   pageNum: number;
   currentPage: number;
+  disabled: boolean;
   onPageChange: (page: number) => void;
-}> = ({ pageNum, currentPage, onPageChange }) => (
+}> = ({ pageNum, currentPage, disabled, onPageChange }) => (
   <li>
     <button
       aria-current={currentPage === pageNum ? "page" : undefined}
       className="fr-pagination__link"
+      disabled={disabled}
       onClick={() => onPageChange(pageNum)}
       title={`Page ${pageNum}`}
       type="button"
@@ -99,6 +118,7 @@ const LocalPageCounter: React.FC<IProps> = ({
   onPageChange,
   compact = false,
 }) => {
+  const isHydrated = useHydrated();
   const pages = pagesArray(currentPage, totalPages);
   if (pages.length === 1) {
     return null;
@@ -111,18 +131,21 @@ const LocalPageCounter: React.FC<IProps> = ({
           <First
             compact={compact}
             currentPage={currentPage}
+            disabled={!isHydrated}
             onPageChange={onPageChange}
             totalPages={totalPages}
           />
           <Previous
             compact={compact}
             currentPage={currentPage}
+            disabled={!isHydrated}
             onPageChange={onPageChange}
             totalPages={totalPages}
           />
           {pages.map((pageNum) => (
             <Page
               currentPage={currentPage}
+              disabled={!isHydrated}
               key={pageNum}
               onPageChange={onPageChange}
               pageNum={pageNum}
@@ -131,12 +154,14 @@ const LocalPageCounter: React.FC<IProps> = ({
           <Next
             compact={compact}
             currentPage={currentPage}
+            disabled={!isHydrated}
             onPageChange={onPageChange}
             totalPages={totalPages}
           />
           <Last
             compact={compact}
             currentPage={currentPage}
+            disabled={!isHydrated}
             onPageChange={onPageChange}
             totalPages={totalPages}
           />

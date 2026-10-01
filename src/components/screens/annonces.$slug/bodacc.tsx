@@ -13,7 +13,7 @@ import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 
-const bodaccRoute = getRouteApi("/_header-default/annonces/$slug");
+const bodaccRoute = getRouteApi("/entreprise/$slug/annonces");
 
 const AnnoncesBodacc: React.FC<{
   uniteLegale: IUniteLegale;

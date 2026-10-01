@@ -6,8 +6,8 @@ import {
   type IAPINotRespondingError,
 } from "#/models/api-not-responding";
 import constants from "#/models/constants";
-import type { IUniteLegale } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
+import type { Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
 import logErrorInSentry from "#/utils/sentry";
 import type {
@@ -16,13 +16,12 @@ import type {
 } from "./interface";
 
 export const clientEntrepreneursSpectacles = async (
-  uniteLegale: Pick<IUniteLegale, "siren" | "complements">,
+  siren: Siren,
+  estEntrepreneurSpectacle: boolean,
   page = 1
 ): Promise<IEntrepreneursSpectacles | IAPINotRespondingError> => {
-  const siren = uniteLegale.siren;
-
   try {
-    if (!uniteLegale.complements.estEntrepreneurSpectacle) {
+    if (!estEntrepreneurSpectacle) {
       throw new HttpNotFound("Not entrepreneur spectacle");
     }
 
@@ -50,7 +49,7 @@ export const clientEntrepreneursSpectacles = async (
         cause: e,
         ressource: "EntrepreneurSpectacles",
         context: {
-          siren: uniteLegale.siren,
+          siren,
         },
         administration: EAdministration.DINUM,
       })
