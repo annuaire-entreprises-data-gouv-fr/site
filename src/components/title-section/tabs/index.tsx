@@ -39,7 +39,7 @@ export const FICHE = {
 } as const;
 export type FICHE = (typeof FICHE)[keyof typeof FICHE];
 
-interface ITab {
+export interface ITab {
   className?: string;
   ficheType: FICHE;
   label: string;

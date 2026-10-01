@@ -225,8 +225,6 @@ h4:not(.fr-alert__title) {
   --annuaire-colors-espaceAgent: #cc007a;
   --annuaire-colors-espaceAgentPastel: #ffe8f4;
   --annuaire-colors-fondation: #9ef9be;
-  /* --unite-legale-theme-background: #ebe7f7;
-  --unite-legale-theme-text: #1d0d4b; */
   --unite-legale-theme-background: #dfdff1;
   --unite-legale-theme-text: #000091;
 }

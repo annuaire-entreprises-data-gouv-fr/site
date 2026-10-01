@@ -86,7 +86,9 @@ import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } 
 import { Route as HeaderConnexionConnexionHabilitationRefuseeRouteImport } from './routes/_header-connexion/connexion.habilitation.refusee'
 import { Route as HeaderConnexionConnexionHabilitationRequiseRouteImport } from './routes/_header-connexion/connexion.habilitation.requise'
 import { Route as HeaderDefaultAProposEquipeIndexRouteImport } from './routes/_header-default/a-propos/equipe/index'
+import { Route as HeaderDefaultCollectiviteSlugAmenagementEtBatimentRouteImport } from './routes/_header-default/collectivite.$slug/amenagement-et-batiment'
 import { Route as HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport } from './routes/_header-default/collectivite.$slug/economie-locale'
+import { Route as HeaderDefaultCollectiviteSlugFinancesRouteImport } from './routes/_header-default/collectivite.$slug/finances'
 import { Route as HeaderDefaultCollectiviteSlugIdentiteRouteImport } from './routes/_header-default/collectivite.$slug/identite'
 import { Route as HeaderDefaultErreurIntrouvableSlugRouteImport } from './routes/_header-default/erreur.introuvable.$slug'
 import { Route as HeaderDefaultFaqModifierIndexRouteImport } from './routes/_header-default/faq.modifier.index'
@@ -521,10 +523,22 @@ const HeaderDefaultAProposEquipeIndexRoute =
     path: '/a-propos/equipe/',
     getParentRoute: () => HeaderDefaultRouteRoute,
   } as any)
+const HeaderDefaultCollectiviteSlugAmenagementEtBatimentRoute =
+  HeaderDefaultCollectiviteSlugAmenagementEtBatimentRouteImport.update({
+    id: '/amenagement-et-batiment',
+    path: '/amenagement-et-batiment',
+    getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
+  } as any)
 const HeaderDefaultCollectiviteSlugEconomieLocaleRoute =
   HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport.update({
     id: '/economie-locale',
     path: '/economie-locale',
+    getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
+  } as any)
+const HeaderDefaultCollectiviteSlugFinancesRoute =
+  HeaderDefaultCollectiviteSlugFinancesRouteImport.update({
+    id: '/finances',
+    path: '/finances',
     getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
   } as any)
 const HeaderDefaultCollectiviteSlugIdentiteRoute =
@@ -1742,11 +1756,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultAProposEquipeIndexRouteImport
       parentRoute: typeof HeaderDefaultRouteRoute
     }
+    '/_header-default/collectivite/$slug/amenagement-et-batiment': {
+      id: '/_header-default/collectivite/$slug/amenagement-et-batiment'
+      path: '/amenagement-et-batiment'
+      fullPath: '/collectivite/$slug/amenagement-et-batiment'
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugAmenagementEtBatimentRouteImport
+      parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
+    }
     '/_header-default/collectivite/$slug/economie-locale': {
       id: '/_header-default/collectivite/$slug/economie-locale'
       path: '/economie-locale'
       fullPath: '/collectivite/$slug/economie-locale'
       preLoaderRoute: typeof HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport
+      parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
+    }
+    '/_header-default/collectivite/$slug/finances': {
+      id: '/_header-default/collectivite/$slug/finances'
+      path: '/finances'
+      fullPath: '/collectivite/$slug/finances'
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugFinancesRouteImport
       parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
     }
     '/_header-default/collectivite/$slug/identite': {
