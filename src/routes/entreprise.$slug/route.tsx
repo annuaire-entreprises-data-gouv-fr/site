@@ -22,6 +22,7 @@ import { BackToTop } from "#/components-ui/back-to-top";
 import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import { type IUniteLegale, isFondation } from "#/models/core/types";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
+import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import {
   extractSirenOrSiretSlugFromUrl,
   isLikelyASiren,
@@ -153,7 +154,7 @@ function EntrepriseLayout({
         useAgentCTA={true}
         useSearchBar={true}
       />
-      <main className="fr-container">
+      <main className="fr-container" style={getUniteLegaleTheme(uniteLegale)}>
         {isFondation(uniteLegale) && isFondationsEnabled.isEnabled ? (
           <TitleFondation
             fondationName={uniteLegale.nomComplet}

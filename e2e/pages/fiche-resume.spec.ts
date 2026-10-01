@@ -58,10 +58,10 @@ test.describe("Fiche résumé DANONE", () => {
     await expect(reminder.getByRole("link")).toHaveCount(6);
     await expect(
       reminder.getByRole("link", { name: /Dirigeants inscrits au RNE/ })
-    ).toHaveAttribute("href", "/entreprise/danone-552032534/dirigeants");
+    ).toHaveAttribute("href", "/entreprise/552032534/dirigeants");
     await expect(
       reminder.getByRole("link", { name: /Justificatifs d’immatriculation/ })
-    ).toHaveAttribute("href", "/entreprise/danone-552032534/documents");
+    ).toHaveAttribute("href", "/entreprise/552032534/documents");
     await expect(
       reminder.getByRole("link", { name: /^Effectifs\b/ })
     ).toHaveCount(0);
@@ -75,7 +75,7 @@ test.describe("Fiche résumé DANONE", () => {
     ).toBeVisible();
 
     await reminder.getByText("Justificatifs d’immatriculation").click();
-    await expect(page).toHaveURL(/\/entreprise\/danone-552032534\/documents$/);
+    await expect(page).toHaveURL(/\/entreprise\/552032534\/documents$/);
   });
 
   test("[LOGGED] Should display basic infos", async ({ page, context }) => {
@@ -110,10 +110,10 @@ test.describe("Fiche résumé DANONE", () => {
 });
 
 test.describe("Shared entreprise layout", () => {
-  test("Does not refetch the unite legale when switching tabs", async ({
+  test("Does not refetch the unite legale when switching tabs with the same SIREN", async ({
     page,
   }) => {
-    await goto(page, "/entreprise/danone-552032534");
+    await goto(page, "/entreprise/552032534/dirigeants");
 
     const uniteLegaleRequests: string[] = [];
     page.on("request", (request) => {
@@ -128,7 +128,7 @@ test.describe("Shared entreprise layout", () => {
 
     await page.getByRole("link", { name: "Documents", exact: true }).click();
 
-    await expect(page).toHaveURL(/\/entreprise\/danone-552032534\/documents$/);
+    await expect(page).toHaveURL(/\/entreprise\/552032534\/documents$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("DANONE");
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
