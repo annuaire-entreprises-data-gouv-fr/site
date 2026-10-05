@@ -47,8 +47,10 @@ const store = new DataStore<ICCWithMetadata>(
   mapToDomainObject
 );
 
+const LEADING_ZEROS_REGEX = /^0+(?=\d)/;
+
 export const clientIdccMetadata = createServerOnlyFn(async (idcc: string) => {
-  const cleanedIdcc = idcc.replace(/0+$/, "");
+  const cleanedIdcc = idcc.replace(LEADING_ZEROS_REGEX, "");
   let res = await store.get(cleanedIdcc);
   if (res === null) {
     res = {
