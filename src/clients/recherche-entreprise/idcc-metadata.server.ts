@@ -48,7 +48,8 @@ const store = new DataStore<ICCWithMetadata>(
 );
 
 export const clientIdccMetadata = createServerOnlyFn(async (idcc: string) => {
-  let res = await store.get(idcc);
+  const cleanedIdcc = idcc.replace(/0+$/, "");
+  let res = await store.get(cleanedIdcc);
   if (res === null) {
     res = {
       idKali: "",
