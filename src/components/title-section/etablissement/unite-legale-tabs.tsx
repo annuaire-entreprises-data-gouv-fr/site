@@ -11,11 +11,18 @@ export const TabsForEtablissement: React.FC<{
   user: IAgentInfo | null;
 }> = ({ uniteLegale, user }) => {
   const isFondationsEnabled = useFeatureFlag("fondations_enabled");
+  const isCollectiviteTerritorialeEnabled = useFeatureFlag(
+    "collectivite_territoriale_enabled"
+  );
 
   const tabs =
     isFondation(uniteLegale) && isFondationsEnabled.isEnabled
       ? getFondationTabs(uniteLegale.complements.numeroRnf, uniteLegale, user)
-      : getUniteLegaleTabs(uniteLegale, user);
+      : getUniteLegaleTabs(uniteLegale, user, {
+          hideCollectiviteTab:
+            isCollectiviteTerritorialeEnabled.isLoading ||
+            !isCollectiviteTerritorialeEnabled.isEnabled,
+        });
   return (
     <ul className={styles.titleTabsEtablissement}>
       {tabs

@@ -2,6 +2,7 @@ import { Link } from "#/components/link";
 import { FICHE, getUniteLegaleTabs } from "#/components/title-section/tabs";
 import { Icon } from "#/components-ui/icon/wrapper";
 import { PrintNever } from "#/components-ui/print-visibility";
+import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import {
   type IUniteLegale,
@@ -139,7 +140,14 @@ const getTabPreview = (
 };
 
 export const TabsReminder = ({ uniteLegale, user }: ITabsReminderProps) => {
-  const tabs = getUniteLegaleTabs(uniteLegale, user).filter(
+  const isCollectiviteTerritorialeEnabled = useFeatureFlag(
+    "collectivite_territoriale_enabled"
+  );
+  const tabs = getUniteLegaleTabs(uniteLegale, user, {
+    hideCollectiviteTab:
+      isCollectiviteTerritorialeEnabled.isLoading ||
+      !isCollectiviteTerritorialeEnabled.isEnabled,
+  }).filter(
     ({ ficheType, shouldDisplay }) =>
       shouldDisplay && ficheType !== FICHE.INFORMATION
   );
