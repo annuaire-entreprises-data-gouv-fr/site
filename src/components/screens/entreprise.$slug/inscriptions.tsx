@@ -132,7 +132,7 @@ export const UniteLegaleInscriptionSirene = ({
             </OpenClosedTag>
           ) : (
             <OpenClosedTag icon="closed" label="Cessée (Insee)">
-              {uniteLegale.dateCreation && (
+              {uniteLegale.dateFermeture && (
                 <>le {formatDate(uniteLegale.dateFermeture)}</>
               )}
             </OpenClosedTag>
