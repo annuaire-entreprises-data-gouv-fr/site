@@ -165,6 +165,14 @@ const routes = {
     regions: "https://geo.api.gouv.fr/regions",
     epcis: "https://geo.api.gouv.fr/epcis",
   },
+  economieLocale: {
+    effectifsSalaries: (codeInsee: string) =>
+      `https://ade.s3.sbg.io.cloud.ovh.net/ac/dev_02/communes/${codeInsee}/effectif_salaries.json`,
+    etablissementsSirene: (codeInsee: string) =>
+      `https://ade.s3.sbg.io.cloud.ovh.net/ac/dev_02/communes/${codeInsee}/etablissements_sirene.json`,
+    fluxOuvertureEtablissements: (codeInsee: string) =>
+      `https://ade.s3.sbg.io.cloud.ovh.net/ac/dev_02/communes/${codeInsee}/flux_ouverture_etablissements.json`,
+  },
   journalOfficielAssociations: {
     ods: {
       metadata:

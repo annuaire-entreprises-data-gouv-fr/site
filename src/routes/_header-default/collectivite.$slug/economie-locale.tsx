@@ -1,30 +1,35 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import maplibregl, { type MapLayerMouseEvent } from "maplibre-gl";
 import { useCallback, useRef } from "react";
+import z from "zod";
 import {
-  type CollectiviteEconomieLocaleEffectifsResponse,
-  CollectiviteEconomieLocaleSection,
-} from "#/components/collectivite/economie-locale";
+  clientCollectiviteEffectifsSalaries,
+  clientCollectiviteEtablissementsSirene,
+  clientCollectiviteFluxOuvertureEtablissements,
+} from "#/clients/collectivite-economie-locale";
+import type { IEtablissementSirene } from "#/clients/collectivite-economie-locale/types";
+import { CollectiviteEconomieLocaleSection } from "#/components/collectivite/economie-locale";
+import { CollectiviteFluxEtablissementsSection } from "#/components/collectivite/economie-locale/flux-etablissements";
 import { CollectiviteMap } from "#/components/collectivite/map";
 import { Section } from "#/components/section";
 import { EAdministration } from "#/models/administrations/e-administration";
-import { httpGet } from "#/utils/network";
 import { Route as CollectiviteRoute } from "./route";
 
 const etablissementsSourceId = "collectivite-economie-locale-etablissements";
 const etablissementsLayerId =
   "collectivite-economie-locale-etablissements-layer";
 
-type EtablissementSirene =
-  CollectiviteEconomieLocaleEffectifsResponse["etablissements_sirene"][number];
-
 interface EtablissementFeatureProperties {
   nom: string;
   siret: string;
 }
 
-function hasValidCoordinates(etablissement: EtablissementSirene) {
+function hasValidCoordinates(etablissement: IEtablissementSirene) {
+  if (etablissement.lat === null || etablissement.lon === null) {
+    return false;
+  }
+
   const lat = Number(etablissement.lat);
   const lon = Number(etablissement.lon);
 
@@ -39,7 +44,7 @@ function hasValidCoordinates(etablissement: EtablissementSirene) {
 }
 
 function buildEtablissementFeature(
-  etablissement: EtablissementSirene
+  etablissement: IEtablissementSirene
 ): GeoJSON.Feature<GeoJSON.Point, EtablissementFeatureProperties> {
   return {
     geometry: {
@@ -55,7 +60,7 @@ function buildEtablissementFeature(
 }
 
 function buildEtablissementsFeatureCollection(
-  etablissements: EtablissementSirene[]
+  etablissements: IEtablissementSirene[]
 ): GeoJSON.FeatureCollection<GeoJSON.Point, EtablissementFeatureProperties> {
   return {
     features: etablissements
@@ -87,31 +92,43 @@ function buildEtablissementPopupContent({
   return container;
 }
 
-const loadRouteData = createServerFn().handler(async () => {
-  const effectifs = await httpGet<CollectiviteEconomieLocaleEffectifsResponse>(
-    "https://ade.s3.sbg.io.cloud.ovh.net/ae/dev/adc/44109.json"
-    // "https://ade.s3.sbg.io.cloud.ovh.net/ae/dev/adc/13101.json"
-  );
+const loadRouteData = createServerFn()
+  .validator(
+    z.object({
+      codeInsee: z.string().regex(/^(?:\d{5}|2[AB]\d{3})$/),
+    })
+  )
+  .handler(async ({ data: { codeInsee } }) => {
+    const [effectifs, etablissements, fluxEtablissements] = await Promise.all([
+      clientCollectiviteEffectifsSalaries(codeInsee),
+      clientCollectiviteEtablissementsSirene(codeInsee),
+      clientCollectiviteFluxOuvertureEtablissements(codeInsee),
+    ]);
 
-  return {
-    effectifs,
-  };
-});
+    return { effectifs, etablissements, fluxEtablissements };
+  });
 
 export const Route = createFileRoute(
   "/_header-default/collectivite/$slug/economie-locale"
 )({
   component: RouteComponent,
-  loader: async () => {
-    const result = await loadRouteData();
+  loader: async ({ parentMatchPromise }) => {
+    const { loaderData } = await parentMatchPromise;
 
-    return result;
+    if (!loaderData) {
+      throw notFound();
+    }
+
+    return await loadRouteData({
+      data: { codeInsee: loaderData.uniteLegale.colter.codeInsee },
+    });
   },
 });
 
 function RouteComponent() {
   const { geoCommune } = CollectiviteRoute.useLoaderData();
-  const { effectifs } = Route.useLoaderData();
+  const { effectifs, etablissements, fluxEtablissements } =
+    Route.useLoaderData();
   const cleanupEtablissementsLayerRef = useRef<(() => void) | null>(null);
 
   const cleanupEtablissementsLayer = useCallback(() => {
@@ -123,9 +140,9 @@ function RouteComponent() {
     (map: maplibregl.Map) => {
       cleanupEtablissementsLayer();
 
-      const etablissements = effectifs.etablissements_sirene ?? [];
-      const featureCollection =
-        buildEtablissementsFeatureCollection(etablissements);
+      const featureCollection = buildEtablissementsFeatureCollection(
+        etablissements.donnees
+      );
 
       if (featureCollection.features.length === 0) {
         return;
@@ -193,14 +210,15 @@ function RouteComponent() {
         }
       };
     },
-    [cleanupEtablissementsLayer, effectifs]
+    [cleanupEtablissementsLayer, etablissements]
   );
 
   return (
     <>
       <Section
         id="economie-locale-etablissements"
-        sources={[EAdministration.DINUM]}
+        lastModified={etablissements.date_mise_a_jour}
+        sources={[EAdministration.INSEE]}
         title="Établissements de la collectivité"
       >
         <CollectiviteMap
@@ -210,6 +228,9 @@ function RouteComponent() {
         />
       </Section>
       <CollectiviteEconomieLocaleSection effectifs={effectifs} />
+      <CollectiviteFluxEtablissementsSection
+        fluxEtablissements={fluxEtablissements}
+      />
     </>
   );
 }

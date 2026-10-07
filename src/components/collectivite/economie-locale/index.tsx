@@ -1,24 +1,10 @@
 import type { ChartData } from "chart.js";
+import type { IEffectifsSalariesResponse } from "#/clients/collectivite-economie-locale/types";
 import { LineChart } from "#/components/chart/line";
-import { DataSectionClient } from "#/components/section/data-section";
+import { DataSection } from "#/components/section/data-section";
 import { EAdministration } from "#/models/administrations/e-administration";
 import constants from "#/models/constants";
 import { formatNumber } from "#/utils/helpers";
-
-interface CollectiviteEconomieLocaleEffectif {
-  effectif: number;
-  grand_secteur_activite: string;
-}
-
-export interface CollectiviteEconomieLocaleEffectifsResponse {
-  effectif_salaries: Record<string, CollectiviteEconomieLocaleEffectif[]>;
-  etablissements_sirene: {
-    nom: string;
-    siret: string;
-    lat: number;
-    lon: number;
-  }[];
-}
 
 function sortYears(left: string, right: string) {
   const leftYear = Number(left);
@@ -42,13 +28,13 @@ function formatEffectif(value: number | string) {
 }
 
 function buildEffectifsChartData(
-  effectifs: CollectiviteEconomieLocaleEffectifsResponse
+  effectifs: IEffectifsSalariesResponse
 ): ChartData<"line", (number | null)[], string> {
-  const years = Object.keys(effectifs.effectif_salaries).sort(sortYears);
+  const years = Object.keys(effectifs.donnees).sort(sortYears);
   const valuesBySector = new Map<string, Map<string, number>>();
 
   for (const year of years) {
-    for (const item of effectifs.effectif_salaries[year]) {
+    for (const item of effectifs.donnees[year]) {
       const sector = item.grand_secteur_activite;
 
       if (!sector) {
@@ -85,14 +71,15 @@ function buildEffectifsChartData(
 export function CollectiviteEconomieLocaleSection({
   effectifs,
 }: {
-  effectifs: CollectiviteEconomieLocaleEffectifsResponse;
+  effectifs: IEffectifsSalariesResponse;
 }) {
   return (
-    <DataSectionClient
+    <DataSection
       data={effectifs}
       id="economie-locale"
+      lastModified={effectifs.date_mise_a_jour}
       notFoundInfo="Aucune donnée d’effectifs salariés n’a été retrouvée pour cette commune."
-      sources={[EAdministration.DINUM]}
+      sources={[EAdministration.URSSAF]}
       title="Économie locale"
     >
       {(effectifs) => {
@@ -153,6 +140,6 @@ export function CollectiviteEconomieLocaleSection({
           </>
         );
       }}
-    </DataSectionClient>
+    </DataSection>
   );
 }
