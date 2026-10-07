@@ -173,6 +173,10 @@ const routes = {
     fluxOuvertureEtablissements: (codeInsee: string) =>
       `https://ade.s3.sbg.io.cloud.ovh.net/ac/dev_02/communes/${codeInsee}/flux_ouverture_etablissements.json`,
   },
+  dvf: {
+    commune: (codeInsee: string) =>
+      `https://dvf-api.data.gouv.fr/commune/${codeInsee}`,
+  },
   journalOfficielAssociations: {
     ods: {
       metadata:
