@@ -1,21 +1,28 @@
 import type { ChartData } from "chart.js";
+import { useMemo } from "react";
 import { StackedBarChart } from "#/components/chart/stack-bar";
-import { DataSection } from "#/components/section/data-section";
+import { DataSectionClient } from "#/components/section/data-section";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/e-administration";
-import type { ICollectiviteFluxOuvertureEtablissements } from "#/models/collectivite/economie-locale";
 import constants from "#/models/constants";
+import { getCollectiviteFluxOuvertureEtablissementsFn } from "#/server-functions/public/data-fetching/collectivites";
 import { formatDatePartial, formatNumber } from "#/utils/helpers";
 
 export function CollectiviteFluxEtablissementsSection({
-  fluxEtablissements,
+  codeInsee,
 }: {
-  fluxEtablissements: ICollectiviteFluxOuvertureEtablissements;
+  codeInsee: string;
 }) {
+  const input = useMemo(() => ({ codeInsee }), [codeInsee]);
+  const fluxEtablissements = useServerFnData(
+    getCollectiviteFluxOuvertureEtablissementsFn,
+    input
+  );
+
   return (
-    <DataSection
+    <DataSectionClient
       data={fluxEtablissements}
       id="economie-locale-flux-etablissements"
-      lastModified={fluxEtablissements.lastModified}
       notFoundInfo="Aucune donnée d’ouvertures et de fermetures d’établissements n’a été retrouvée pour cette commune."
       sources={[EAdministration.INSEE]}
       title="Ouvertures et fermetures d’établissements"
@@ -94,6 +101,6 @@ export function CollectiviteFluxEtablissementsSection({
           </>
         );
       }}
-    </DataSection>
+    </DataSectionClient>
   );
 }

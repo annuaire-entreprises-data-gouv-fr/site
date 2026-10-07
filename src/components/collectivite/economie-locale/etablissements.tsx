@@ -1,13 +1,12 @@
 import maplibregl, { type MapLayerMouseEvent } from "maplibre-gl";
-import { useCallback, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import type { IGeoCommune } from "#/clients/api-geo/interface";
 import { CollectiviteMap } from "#/components/collectivite/map";
-import { Section } from "#/components/section";
+import { DataSectionClient } from "#/components/section/data-section";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/e-administration";
-import type {
-  ICollectiviteEtablissementSirene,
-  ICollectiviteEtablissementsSirene,
-} from "#/models/collectivite/economie-locale";
+import type { ICollectiviteEtablissementSirene } from "#/models/collectivite/economie-locale";
+import { getCollectiviteEtablissementsSireneFn } from "#/server-functions/public/data-fetching/collectivites";
 
 const etablissementsSourceId = "collectivite-economie-locale-etablissements";
 const etablissementsLayerId =
@@ -85,11 +84,11 @@ function buildEtablissementPopupContent({
   return container;
 }
 
-export function CollectiviteEtablissementsSection({
+function CollectiviteEtablissementsMap({
   etablissements,
   geoCommune,
 }: {
-  etablissements: ICollectiviteEtablissementsSirene;
+  etablissements: ICollectiviteEtablissementSirene[];
   geoCommune: IGeoCommune;
 }) {
   const cleanupEtablissementsLayerRef = useRef<(() => void) | null>(null);
@@ -103,9 +102,8 @@ export function CollectiviteEtablissementsSection({
     (map: maplibregl.Map) => {
       cleanupEtablissementsLayer();
 
-      const featureCollection = buildEtablissementsFeatureCollection(
-        etablissements.etablissements
-      );
+      const featureCollection =
+        buildEtablissementsFeatureCollection(etablissements);
 
       if (featureCollection.features.length === 0) {
         return;
@@ -177,17 +175,42 @@ export function CollectiviteEtablissementsSection({
   );
 
   return (
-    <Section
+    <CollectiviteMap
+      geoCommune={geoCommune}
+      onMapReady={onMapLoad}
+      onMapUnload={cleanupEtablissementsLayer}
+    />
+  );
+}
+
+export function CollectiviteEtablissementsSection({
+  codeInsee,
+  geoCommune,
+}: {
+  codeInsee: string;
+  geoCommune: IGeoCommune;
+}) {
+  const input = useMemo(() => ({ codeInsee }), [codeInsee]);
+  const etablissements = useServerFnData(
+    getCollectiviteEtablissementsSireneFn,
+    input
+  );
+
+  return (
+    <DataSectionClient
+      data={etablissements}
       id="economie-locale-etablissements"
-      lastModified={etablissements.lastModified}
+      loadingMinHeight={500}
+      notFoundInfo="Aucun établissement n’a été retrouvé pour cette commune."
       sources={[EAdministration.INSEE]}
       title="Établissements de la collectivité"
     >
-      <CollectiviteMap
-        geoCommune={geoCommune}
-        onMapReady={onMapLoad}
-        onMapUnload={cleanupEtablissementsLayer}
-      />
-    </Section>
+      {({ etablissements }) => (
+        <CollectiviteEtablissementsMap
+          etablissements={etablissements}
+          geoCommune={geoCommune}
+        />
+      )}
+    </DataSectionClient>
   );
 }

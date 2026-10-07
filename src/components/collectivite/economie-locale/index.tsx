@@ -1,9 +1,12 @@
 import type { ChartData } from "chart.js";
+import { useMemo } from "react";
 import { LineChart } from "#/components/chart/line";
-import { DataSection } from "#/components/section/data-section";
+import { DataSectionClient } from "#/components/section/data-section";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { ICollectiviteEffectifsSalaries } from "#/models/collectivite/economie-locale";
 import constants from "#/models/constants";
+import { getCollectiviteEffectifsSalariesFn } from "#/server-functions/public/data-fetching/collectivites";
 import { formatNumber } from "#/utils/helpers";
 
 function sortYears(left: string, right: string) {
@@ -69,15 +72,17 @@ function buildEffectifsChartData(
 }
 
 export function CollectiviteEconomieLocaleSection({
-  effectifs,
+  codeInsee,
 }: {
-  effectifs: ICollectiviteEffectifsSalaries;
+  codeInsee: string;
 }) {
+  const input = useMemo(() => ({ codeInsee }), [codeInsee]);
+  const effectifs = useServerFnData(getCollectiviteEffectifsSalariesFn, input);
+
   return (
-    <DataSection
+    <DataSectionClient
       data={effectifs}
       id="economie-locale"
-      lastModified={effectifs.lastModified}
       notFoundInfo="Aucune donnée d’effectifs salariés n’a été retrouvée pour cette commune."
       sources={[EAdministration.URSSAF]}
       title="Économie locale"
@@ -140,6 +145,6 @@ export function CollectiviteEconomieLocaleSection({
           </>
         );
       }}
-    </DataSection>
+    </DataSectionClient>
   );
 }

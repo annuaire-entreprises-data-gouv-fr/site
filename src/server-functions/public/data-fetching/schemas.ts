@@ -15,3 +15,7 @@ export const getAssociationSchema = z.object({
 export const validateEORISchema = z.object({
   siret: z.string().min(1, "Siret is required"),
 });
+
+export const getCollectiviteEconomieLocaleSchema = z.object({
+  codeInsee: z.string().regex(/^(?:\d{5}|2[AB]\d{3})$/),
+});
