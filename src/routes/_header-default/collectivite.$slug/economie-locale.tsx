@@ -8,12 +8,12 @@ import {
   clientCollectiviteEtablissementsSirene,
   clientCollectiviteFluxOuvertureEtablissements,
 } from "#/clients/collectivite-economie-locale";
-import type { IEtablissementSirene } from "#/clients/collectivite-economie-locale/types";
 import { CollectiviteEconomieLocaleSection } from "#/components/collectivite/economie-locale";
 import { CollectiviteFluxEtablissementsSection } from "#/components/collectivite/economie-locale/flux-etablissements";
 import { CollectiviteMap } from "#/components/collectivite/map";
 import { Section } from "#/components/section";
 import { EAdministration } from "#/models/administrations/e-administration";
+import type { ICollectiviteEtablissementSirene } from "#/models/collectivite/economie-locale";
 import { Route as CollectiviteRoute } from "./route";
 
 const etablissementsSourceId = "collectivite-economie-locale-etablissements";
@@ -25,7 +25,7 @@ interface EtablissementFeatureProperties {
   siret: string;
 }
 
-function hasValidCoordinates(etablissement: IEtablissementSirene) {
+function hasValidCoordinates(etablissement: ICollectiviteEtablissementSirene) {
   if (etablissement.lat === null || etablissement.lon === null) {
     return false;
   }
@@ -44,7 +44,7 @@ function hasValidCoordinates(etablissement: IEtablissementSirene) {
 }
 
 function buildEtablissementFeature(
-  etablissement: IEtablissementSirene
+  etablissement: ICollectiviteEtablissementSirene
 ): GeoJSON.Feature<GeoJSON.Point, EtablissementFeatureProperties> {
   return {
     geometry: {
@@ -60,7 +60,7 @@ function buildEtablissementFeature(
 }
 
 function buildEtablissementsFeatureCollection(
-  etablissements: IEtablissementSirene[]
+  etablissements: ICollectiviteEtablissementSirene[]
 ): GeoJSON.FeatureCollection<GeoJSON.Point, EtablissementFeatureProperties> {
   return {
     features: etablissements
@@ -141,7 +141,7 @@ function RouteComponent() {
       cleanupEtablissementsLayer();
 
       const featureCollection = buildEtablissementsFeatureCollection(
-        etablissements.donnees
+        etablissements.etablissements
       );
 
       if (featureCollection.features.length === 0) {
@@ -217,7 +217,7 @@ function RouteComponent() {
     <>
       <Section
         id="economie-locale-etablissements"
-        lastModified={etablissements.date_mise_a_jour}
+        lastModified={etablissements.lastModified}
         sources={[EAdministration.INSEE]}
         title="Établissements de la collectivité"
       >

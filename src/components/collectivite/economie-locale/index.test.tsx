@@ -1,12 +1,12 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import type { ComponentProps, PropsWithChildren } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type {
-  IEffectifsSalariesResponse,
-  IFluxOuvertureEtablissementsResponse,
-} from "#/clients/collectivite-economie-locale/types";
 import type { LineChart } from "#/components/chart/line";
 import type { StackedBarChart } from "#/components/chart/stack-bar";
+import type {
+  ICollectiviteEffectifsSalaries,
+  ICollectiviteFluxOuvertureEtablissements,
+} from "#/models/collectivite/economie-locale";
 import { CollectiviteEconomieLocaleSection } from ".";
 import { CollectiviteFluxEtablissementsSection } from "./flux-etablissements";
 
@@ -39,16 +39,16 @@ beforeEach(() => {
 afterEach(cleanup);
 
 describe("local economy charts", () => {
-  it("reads employee counts from the new response and preserves missing sector years", () => {
-    const effectifs: IEffectifsSalariesResponse = {
-      date_mise_a_jour: "2026-05-29",
+  it("reads mapped employee counts and preserves missing sector years", () => {
+    const effectifs: ICollectiviteEffectifsSalaries = {
+      lastModified: "2026-05-29",
       source: "Urssaf",
-      donnees: {
+      effectifsSalaries: {
         "2025": [
-          { effectif: 20, grand_secteur_activite: "Commerce" },
-          { effectif: 30, grand_secteur_activite: "Industrie" },
+          { effectif: 20, grandSecteurActivite: "Commerce" },
+          { effectif: 30, grandSecteurActivite: "Industrie" },
         ],
-        "2024": [{ effectif: 15, grand_secteur_activite: "Commerce" }],
+        "2024": [{ effectif: 15, grandSecteurActivite: "Commerce" }],
       },
     };
 
@@ -63,10 +63,10 @@ describe("local economy charts", () => {
   });
 
   it("pairs monthly openings and closures chronologically without stacking or changing the response", () => {
-    const fluxEtablissements: IFluxOuvertureEtablissementsResponse = {
-      date_mise_a_jour: "2026-09-08",
+    const fluxEtablissements: ICollectiviteFluxOuvertureEtablissements = {
+      lastModified: "2026-09-08",
       source: "Insee",
-      donnees: [
+      fluxEtablissements: [
         { mois: "2026-02", ouvertures: 8, fermetures: 0 },
         { mois: "2025-12", ouvertures: 5, fermetures: 12 },
         { mois: "2026-01", ouvertures: 10, fermetures: 4 },
@@ -101,20 +101,18 @@ describe("local economy charts", () => {
       x: { stacked: false },
       y: { stacked: false, beginAtZero: true },
     });
-    expect(fluxEtablissements.donnees.map(({ mois }) => mois)).toEqual([
-      "2026-02",
-      "2025-12",
-      "2026-01",
-    ]);
+    expect(
+      fluxEtablissements.fluxEtablissements.map(({ mois }) => mois)
+    ).toEqual(["2026-02", "2025-12", "2026-01"]);
   });
 
   it("shows an empty state when no employee counts are available", () => {
     render(
       <CollectiviteEconomieLocaleSection
         effectifs={{
-          date_mise_a_jour: "2026-05-29",
+          lastModified: "2026-05-29",
           source: "Urssaf",
-          donnees: {},
+          effectifsSalaries: {},
         }}
       />
     );
@@ -127,9 +125,9 @@ describe("local economy charts", () => {
     render(
       <CollectiviteFluxEtablissementsSection
         fluxEtablissements={{
-          date_mise_a_jour: "2026-09-08",
+          lastModified: "2026-09-08",
           source: "Insee",
-          donnees: [],
+          fluxEtablissements: [],
         }}
       />
     );

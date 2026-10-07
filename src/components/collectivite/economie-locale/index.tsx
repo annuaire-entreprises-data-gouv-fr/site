@@ -1,8 +1,8 @@
 import type { ChartData } from "chart.js";
-import type { IEffectifsSalariesResponse } from "#/clients/collectivite-economie-locale/types";
 import { LineChart } from "#/components/chart/line";
 import { DataSection } from "#/components/section/data-section";
 import { EAdministration } from "#/models/administrations/e-administration";
+import type { ICollectiviteEffectifsSalaries } from "#/models/collectivite/economie-locale";
 import constants from "#/models/constants";
 import { formatNumber } from "#/utils/helpers";
 
@@ -28,14 +28,14 @@ function formatEffectif(value: number | string) {
 }
 
 function buildEffectifsChartData(
-  effectifs: IEffectifsSalariesResponse
+  effectifs: ICollectiviteEffectifsSalaries
 ): ChartData<"line", (number | null)[], string> {
-  const years = Object.keys(effectifs.donnees).sort(sortYears);
+  const years = Object.keys(effectifs.effectifsSalaries).sort(sortYears);
   const valuesBySector = new Map<string, Map<string, number>>();
 
   for (const year of years) {
-    for (const item of effectifs.donnees[year]) {
-      const sector = item.grand_secteur_activite;
+    for (const item of effectifs.effectifsSalaries[year]) {
+      const sector = item.grandSecteurActivite;
 
       if (!sector) {
         continue;
@@ -71,13 +71,13 @@ function buildEffectifsChartData(
 export function CollectiviteEconomieLocaleSection({
   effectifs,
 }: {
-  effectifs: IEffectifsSalariesResponse;
+  effectifs: ICollectiviteEffectifsSalaries;
 }) {
   return (
     <DataSection
       data={effectifs}
       id="economie-locale"
-      lastModified={effectifs.date_mise_a_jour}
+      lastModified={effectifs.lastModified}
       notFoundInfo="Aucune donnée d’effectifs salariés n’a été retrouvée pour cette commune."
       sources={[EAdministration.URSSAF]}
       title="Économie locale"

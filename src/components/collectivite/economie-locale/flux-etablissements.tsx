@@ -1,27 +1,27 @@
 import type { ChartData } from "chart.js";
-import type { IFluxOuvertureEtablissementsResponse } from "#/clients/collectivite-economie-locale/types";
 import { StackedBarChart } from "#/components/chart/stack-bar";
 import { DataSection } from "#/components/section/data-section";
 import { EAdministration } from "#/models/administrations/e-administration";
+import type { ICollectiviteFluxOuvertureEtablissements } from "#/models/collectivite/economie-locale";
 import constants from "#/models/constants";
 import { formatDatePartial, formatNumber } from "#/utils/helpers";
 
 export function CollectiviteFluxEtablissementsSection({
   fluxEtablissements,
 }: {
-  fluxEtablissements: IFluxOuvertureEtablissementsResponse;
+  fluxEtablissements: ICollectiviteFluxOuvertureEtablissements;
 }) {
   return (
     <DataSection
       data={fluxEtablissements}
       id="economie-locale-flux-etablissements"
-      lastModified={fluxEtablissements.date_mise_a_jour}
+      lastModified={fluxEtablissements.lastModified}
       notFoundInfo="Aucune donnée d’ouvertures et de fermetures d’établissements n’a été retrouvée pour cette commune."
       sources={[EAdministration.INSEE]}
       title="Ouvertures et fermetures d’établissements"
     >
-      {({ donnees }) => {
-        if (donnees.length === 0) {
+      {({ fluxEtablissements }) => {
+        if (fluxEtablissements.length === 0) {
           return (
             <p>
               Aucune donnée d’ouvertures et de fermetures d’établissements n’a
@@ -30,7 +30,7 @@ export function CollectiviteFluxEtablissementsSection({
           );
         }
 
-        const fluxByMonth = [...donnees].sort((left, right) =>
+        const fluxByMonth = [...fluxEtablissements].sort((left, right) =>
           left.mois.localeCompare(right.mois)
         );
         const chartData: ChartData<"bar", number[], string> = {
