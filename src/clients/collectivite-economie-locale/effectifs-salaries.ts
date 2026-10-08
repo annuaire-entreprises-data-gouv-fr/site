@@ -6,8 +6,14 @@ import type { IEffectifsSalariesResponse } from "./types";
 export const clientCollectiviteEffectifsSalaries = async (
   codeInsee: string
 ): Promise<ICollectiviteEffectifsSalaries> => {
+  if (!process.env.OVH_S3_AC_ENV_NAME) {
+    throw new Error("OVH_S3_AC_ENV_NAME is not set");
+  }
   const response = await httpGet<IEffectifsSalariesResponse>(
-    routes.economieLocale.effectifsSalaries(codeInsee)
+    routes.economieLocale.effectifsSalaries(
+      process.env.OVH_S3_AC_ENV_NAME,
+      codeInsee
+    )
   );
 
   return mapToDomainObject(response);
