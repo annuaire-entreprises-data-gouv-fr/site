@@ -9,7 +9,12 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  const { uniteLegale } = CollectiviteRoute.useLoaderData();
+  const { uniteLegale, geoCommune } = CollectiviteRoute.useLoaderData();
 
-  return <CollectiviteDVFSection codeInsee={uniteLegale.colter.codeInsee} />;
+  return (
+    <CollectiviteDVFSection
+      codeDepartement={geoCommune.departement.code}
+      codeInsee={uniteLegale.colter.codeInsee}
+    />
+  );
 }

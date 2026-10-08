@@ -155,7 +155,15 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
   );
 }
 
-export function CollectiviteDVFSection({ codeInsee }: { codeInsee: string }) {
+const departementWithoutDVFData = ["976", "67", "68", "57"];
+
+export function CollectiviteDVFSection({
+  codeInsee,
+  codeDepartement,
+}: {
+  codeInsee: string;
+  codeDepartement: string;
+}) {
   const input = useMemo(() => ({ codeInsee }), [codeInsee]);
   const dvf = useServerFnData(
     getCollectiviteDVFFn,
@@ -166,12 +174,23 @@ export function CollectiviteDVFSection({ codeInsee }: { codeInsee: string }) {
     }
   );
 
+  const notFoundInfo = useMemo(() => {
+    let message =
+      "Aucune donnée de transaction immobilière n’a été retrouvée pour cette commune.";
+
+    if (departementWithoutDVFData.includes(codeDepartement)) {
+      message += `Les données de DVF ne sont pas disponibles pour les départements suivants : ${departementWithoutDVFData.join(", ")}.`;
+    }
+
+    return message;
+  }, [codeDepartement]);
+
   return (
     <DataSectionClient
       data={dvf}
       id="transactions-immobilieres"
       loadingMinHeight={600}
-      notFoundInfo="Aucune donnée de transaction immobilière n’a été retrouvée pour cette commune."
+      notFoundInfo={notFoundInfo}
       sources={[EAdministration.DGFIP]}
       title="Transactions immobilières — Demandes de valeurs foncières (DVF)"
     >

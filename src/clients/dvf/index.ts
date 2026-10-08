@@ -4,6 +4,7 @@ import type {
   IDVFIndicateurMensuel,
 } from "#/models/collectivite/dvf";
 import { httpGet } from "#/utils/network";
+import { HttpNotFound } from "../exceptions";
 import type { IDVFResponse } from "./types";
 
 export const clientDVF = async (
@@ -33,6 +34,20 @@ const mapToDomainObject = (
     )
     .sort((left, right) => left.d.localeCompare(right.d));
   const latest = rows.at(-1);
+
+  const hasAtLeastOneEntry = rows.some(
+    (row) =>
+      row.a !== null ||
+      row.m !== null ||
+      row.am !== null ||
+      row.m_a !== null ||
+      row.m_m !== null ||
+      row.m_l !== null
+  );
+
+  if (!hasAtLeastOneEntry) {
+    throw new HttpNotFound(`No data found for codeInsee: ${codeInsee}`);
+  }
 
   return {
     codeInsee,
