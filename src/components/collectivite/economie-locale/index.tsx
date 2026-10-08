@@ -1,24 +1,13 @@
 import type { ChartData } from "chart.js";
+import { useMemo } from "react";
 import { LineChart } from "#/components/chart/line";
 import { DataSectionClient } from "#/components/section/data-section";
+import { useServerFnData } from "#/hooks/fetch/use-server-fn-data";
 import { EAdministration } from "#/models/administrations/e-administration";
+import type { ICollectiviteEffectifsSalaries } from "#/models/collectivite/economie-locale";
 import constants from "#/models/constants";
+import { getCollectiviteEffectifsSalariesFn } from "#/server-functions/public/data-fetching/collectivites";
 import { formatNumber } from "#/utils/helpers";
-
-interface CollectiviteEconomieLocaleEffectif {
-  effectif: number;
-  grand_secteur_activite: string;
-}
-
-export interface CollectiviteEconomieLocaleEffectifsResponse {
-  effectif_salaries: Record<string, CollectiviteEconomieLocaleEffectif[]>;
-  etablissements_sirene: {
-    nom: string;
-    siret: string;
-    lat: number;
-    lon: number;
-  }[];
-}
 
 function sortYears(left: string, right: string) {
   const leftYear = Number(left);
@@ -42,14 +31,14 @@ function formatEffectif(value: number | string) {
 }
 
 function buildEffectifsChartData(
-  effectifs: CollectiviteEconomieLocaleEffectifsResponse
+  effectifs: ICollectiviteEffectifsSalaries
 ): ChartData<"line", (number | null)[], string> {
-  const years = Object.keys(effectifs.effectif_salaries).sort(sortYears);
+  const years = Object.keys(effectifs.effectifsSalaries).sort(sortYears);
   const valuesBySector = new Map<string, Map<string, number>>();
 
   for (const year of years) {
-    for (const item of effectifs.effectif_salaries[year]) {
-      const sector = item.grand_secteur_activite;
+    for (const item of effectifs.effectifsSalaries[year]) {
+      const sector = item.grandSecteurActivite;
 
       if (!sector) {
         continue;
@@ -83,16 +72,19 @@ function buildEffectifsChartData(
 }
 
 export function CollectiviteEconomieLocaleSection({
-  effectifs,
+  codeInsee,
 }: {
-  effectifs: CollectiviteEconomieLocaleEffectifsResponse;
+  codeInsee: string;
 }) {
+  const input = useMemo(() => ({ codeInsee }), [codeInsee]);
+  const effectifs = useServerFnData(getCollectiviteEffectifsSalariesFn, input);
+
   return (
     <DataSectionClient
       data={effectifs}
       id="economie-locale"
       notFoundInfo="Aucune donnée d’effectifs salariés n’a été retrouvée pour cette commune."
-      sources={[EAdministration.DINUM]}
+      sources={[EAdministration.URSSAF]}
       title="Économie locale"
     >
       {(effectifs) => {
