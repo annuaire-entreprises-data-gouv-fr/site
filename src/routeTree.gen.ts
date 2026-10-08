@@ -90,6 +90,7 @@ import { Route as HeaderDefaultCollectiviteSlugAmenagementEtBatimentRouteImport 
 import { Route as HeaderDefaultCollectiviteSlugEconomieLocaleRouteImport } from './routes/_header-default/collectivite.$slug/economie-locale'
 import { Route as HeaderDefaultCollectiviteSlugFinancesRouteImport } from './routes/_header-default/collectivite.$slug/finances'
 import { Route as HeaderDefaultCollectiviteSlugIdentiteRouteImport } from './routes/_header-default/collectivite.$slug/identite'
+import { Route as HeaderDefaultCollectiviteSlugUrbanismeRouteImport } from './routes/_header-default/collectivite.$slug/urbanisme'
 import { Route as HeaderDefaultErreurIntrouvableSlugRouteImport } from './routes/_header-default/erreur.introuvable.$slug'
 import { Route as HeaderDefaultFaqModifierIndexRouteImport } from './routes/_header-default/faq.modifier.index'
 import { Route as HeaderDefaultFaqModifierSlugRouteImport } from './routes/_header-default/faq.modifier.$slug'
@@ -547,6 +548,12 @@ const HeaderDefaultCollectiviteSlugIdentiteRoute =
     path: '/identite',
     getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
   } as any)
+const HeaderDefaultCollectiviteSlugUrbanismeRoute =
+  HeaderDefaultCollectiviteSlugUrbanismeRouteImport.update({
+    id: '/urbanisme',
+    path: '/urbanisme',
+    getParentRoute: () => HeaderDefaultCollectiviteSlugRouteRoute,
+  } as any)
 const HeaderDefaultErreurIntrouvableSlugRoute =
   HeaderDefaultErreurIntrouvableSlugRouteImport.update({
     id: '/erreur/introuvable/$slug',
@@ -704,6 +711,7 @@ export interface FileRoutesByFullPath {
   '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
   '/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
+  '/collectivite/$slug/urbanisme': typeof HeaderDefaultCollectiviteSlugUrbanismeRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
   '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
@@ -791,6 +799,7 @@ export interface FileRoutesByTo {
   '/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
   '/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
+  '/collectivite/$slug/urbanisme': typeof HeaderDefaultCollectiviteSlugUrbanismeRoute
   '/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
   '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
@@ -889,6 +898,7 @@ export interface FileRoutesById {
   '/_header-default/collectivite/$slug/economie-locale': typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
   '/_header-default/collectivite/$slug/finances': typeof HeaderDefaultCollectiviteSlugFinancesRoute
   '/_header-default/collectivite/$slug/identite': typeof HeaderDefaultCollectiviteSlugIdentiteRoute
+  '/_header-default/collectivite/$slug/urbanisme': typeof HeaderDefaultCollectiviteSlugUrbanismeRoute
   '/_header-default/erreur/introuvable/$slug': typeof HeaderDefaultErreurIntrouvableSlugRoute
   '/_header-default/faq/modifier/$slug': typeof HeaderDefaultFaqModifierSlugRoute
   '/api/auth/agent-connect/callback': typeof ApiAuthAgentConnectCallbackRoute
@@ -980,6 +990,7 @@ export interface FileRouteTypes {
     | '/collectivite/$slug/economie-locale'
     | '/collectivite/$slug/finances'
     | '/collectivite/$slug/identite'
+    | '/collectivite/$slug/urbanisme'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
     | '/api/auth/agent-connect/callback'
@@ -1067,6 +1078,7 @@ export interface FileRouteTypes {
     | '/collectivite/$slug/economie-locale'
     | '/collectivite/$slug/finances'
     | '/collectivite/$slug/identite'
+    | '/collectivite/$slug/urbanisme'
     | '/erreur/introuvable/$slug'
     | '/faq/modifier/$slug'
     | '/api/auth/agent-connect/callback'
@@ -1164,6 +1176,7 @@ export interface FileRouteTypes {
     | '/_header-default/collectivite/$slug/economie-locale'
     | '/_header-default/collectivite/$slug/finances'
     | '/_header-default/collectivite/$slug/identite'
+    | '/_header-default/collectivite/$slug/urbanisme'
     | '/_header-default/erreur/introuvable/$slug'
     | '/_header-default/faq/modifier/$slug'
     | '/api/auth/agent-connect/callback'
@@ -1784,6 +1797,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HeaderDefaultCollectiviteSlugIdentiteRouteImport
       parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
     }
+    '/_header-default/collectivite/$slug/urbanisme': {
+      id: '/_header-default/collectivite/$slug/urbanisme'
+      path: '/urbanisme'
+      fullPath: '/collectivite/$slug/urbanisme'
+      preLoaderRoute: typeof HeaderDefaultCollectiviteSlugUrbanismeRouteImport
+      parentRoute: typeof HeaderDefaultCollectiviteSlugRouteRoute
+    }
     '/_header-default/erreur/introuvable/$slug': {
       id: '/_header-default/erreur/introuvable/$slug'
       path: '/erreur/introuvable/$slug'
@@ -1929,6 +1949,7 @@ interface HeaderDefaultCollectiviteSlugRouteRouteChildren {
   HeaderDefaultCollectiviteSlugEconomieLocaleRoute: typeof HeaderDefaultCollectiviteSlugEconomieLocaleRoute
   HeaderDefaultCollectiviteSlugFinancesRoute: typeof HeaderDefaultCollectiviteSlugFinancesRoute
   HeaderDefaultCollectiviteSlugIdentiteRoute: typeof HeaderDefaultCollectiviteSlugIdentiteRoute
+  HeaderDefaultCollectiviteSlugUrbanismeRoute: typeof HeaderDefaultCollectiviteSlugUrbanismeRoute
 }
 
 const HeaderDefaultCollectiviteSlugRouteRouteChildren: HeaderDefaultCollectiviteSlugRouteRouteChildren =
@@ -1941,6 +1962,8 @@ const HeaderDefaultCollectiviteSlugRouteRouteChildren: HeaderDefaultCollectivite
       HeaderDefaultCollectiviteSlugFinancesRoute,
     HeaderDefaultCollectiviteSlugIdentiteRoute:
       HeaderDefaultCollectiviteSlugIdentiteRoute,
+    HeaderDefaultCollectiviteSlugUrbanismeRoute:
+      HeaderDefaultCollectiviteSlugUrbanismeRoute,
   }
 
 const HeaderDefaultCollectiviteSlugRouteRouteWithChildren =

@@ -23,10 +23,9 @@ const navigationItems: INavigationItem[] = [
         label: "Aménagement et bâtiment",
       },
       {
-        to: "/collectivite/$slug/urbanisme" as any,
+        to: "/collectivite/$slug/urbanisme",
         id: "urbanisme",
         label: "Urbanisme",
-        shouldDisplay: false,
       },
     ],
     id: "amenagement-du-territoire",

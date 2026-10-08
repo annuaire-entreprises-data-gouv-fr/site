@@ -6,8 +6,14 @@ import type { IFluxOuvertureEtablissementsResponse } from "./types";
 export const clientCollectiviteFluxOuvertureEtablissements = async (
   codeInsee: string
 ): Promise<ICollectiviteFluxOuvertureEtablissements> => {
+  if (!process.env.OVH_S3_AC_ENV_NAME) {
+    throw new Error("OVH_S3_AC_ENV_NAME is not set");
+  }
   const response = await httpGet<IFluxOuvertureEtablissementsResponse>(
-    routes.economieLocale.fluxOuvertureEtablissements(codeInsee)
+    routes.economieLocale.fluxOuvertureEtablissements(
+      process.env.OVH_S3_AC_ENV_NAME,
+      codeInsee
+    )
   );
 
   return mapToDomainObject(response);

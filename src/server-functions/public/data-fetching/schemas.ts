@@ -16,6 +16,8 @@ export const validateEORISchema = z.object({
   siret: z.string().min(1, "Siret is required"),
 });
 
-export const getCollectiviteEconomieLocaleSchema = z.object({
+export const getCollectiviteCommuneSchema = z.object({
   codeInsee: z.string().regex(/^(?:\d{5}|2[AB]\d{3})$/),
 });
+
+export const getCollectiviteEconomieLocaleSchema = getCollectiviteCommuneSchema;

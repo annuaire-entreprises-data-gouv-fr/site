@@ -166,12 +166,16 @@ const routes = {
     epcis: "https://geo.api.gouv.fr/epcis",
   },
   economieLocale: {
-    effectifsSalaries: (codeInsee: string) =>
-      `https://ade.s3.sbg.io.cloud.ovh.net/ac/dev_02/communes/${codeInsee}/effectif_salaries.json`,
-    etablissementsSirene: (codeInsee: string) =>
-      `https://ade.s3.sbg.io.cloud.ovh.net/ac/dev_02/communes/${codeInsee}/etablissements_sirene.json`,
-    fluxOuvertureEtablissements: (codeInsee: string) =>
-      `https://ade.s3.sbg.io.cloud.ovh.net/ac/dev_02/communes/${codeInsee}/flux_ouverture_etablissements.json`,
+    effectifsSalaries: (envName: string, codeInsee: string) =>
+      `https://ade.s3.sbg.io.cloud.ovh.net/ac/${envName}/communes/${codeInsee}/effectif_salaries.json`,
+    etablissementsSirene: (envName: string, codeInsee: string) =>
+      `https://ade.s3.sbg.io.cloud.ovh.net/ac/${envName}/communes/${codeInsee}/etablissements_sirene.json`,
+    fluxOuvertureEtablissements: (envName: string, codeInsee: string) =>
+      `https://ade.s3.sbg.io.cloud.ovh.net/ac/${envName}/communes/${codeInsee}/flux_ouverture_etablissements.json`,
+  },
+  dvf: {
+    commune: (codeInsee: string) =>
+      `https://dvf-api.data.gouv.fr/commune/${codeInsee}`,
   },
   journalOfficielAssociations: {
     ods: {
