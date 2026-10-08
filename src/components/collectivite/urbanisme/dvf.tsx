@@ -11,6 +11,8 @@ import {
   buildDVFMonthlyTimeline,
   dvfPriceSeries,
   formatDVFPrice,
+  formatDVFPriceEvolution,
+  getDVFPriceSummary,
 } from "./chart-data";
 import { DVFChart } from "./dvf-chart";
 import styles from "./styles.module.css";
@@ -70,9 +72,23 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
       </div>
       <dl className={styles.prices}>
         {dvfPriceSeries.map(({ key, label, color }) => {
-          const observation = [...timeline]
-            .reverse()
-            .find((item) => item[key] !== null);
+          const {
+            evolution,
+            first,
+            last: observation,
+          } = getDVFPriceSummary(timeline, key);
+          const roundedEvolution =
+            evolution === null ? null : Number(evolution.toFixed(1));
+          const evolutionClassName =
+            roundedEvolution === null || roundedEvolution === 0
+              ? styles.evolutionNeutral
+              : roundedEvolution > 0
+                ? styles.evolutionIncrease
+                : styles.evolutionDecrease;
+          const evolutionTitle =
+            evolution !== null && first && observation
+              ? `Évolution du prix médian entre ${formatDatePartial(first.mois)} et ${formatDatePartial(observation.mois)}`
+              : "Deux prix renseignés sont nécessaires pour calculer l’évolution sur cette période.";
           return (
             <div className={styles.price} key={key}>
               <dt>
@@ -84,7 +100,15 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
                 {label}
               </dt>
               <dd>
-                <strong>{formatDVFPrice(observation?.[key] ?? null)}</strong>
+                <div className={styles.priceValue}>
+                  <strong>{formatDVFPrice(observation?.[key] ?? null)}</strong>
+                  <span
+                    className={`${styles.evolution} ${evolutionClassName}`}
+                    title={evolutionTitle}
+                  >
+                    {formatDVFPriceEvolution(roundedEvolution)}
+                  </span>
+                </div>
                 <span>
                   {observation
                     ? formatDatePartial(observation.mois)

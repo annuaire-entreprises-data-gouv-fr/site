@@ -76,6 +76,31 @@
   font-size: 1.1rem;
 }
 
+.priceValue {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  align-items: baseline;
+}
+
+.evolution {
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.evolutionIncrease {
+  color: var(--text-default-success, #18753c);
+}
+
+.evolutionDecrease {
+  color: var(--text-default-error, #ce0500);
+}
+
+.evolutionNeutral {
+  color: var(--text-mention-grey, #666);
+}
+
 .price dd > span,
 .note {
   font-size: 0.8rem;

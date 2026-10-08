@@ -25,6 +25,28 @@ export const dvfPriceSeries = [
   },
 ] as const;
 
+type DVFPriceKey = (typeof dvfPriceSeries)[number]["key"];
+
+export function getDVFPriceSummary(
+  timeline: IDVFIndicateurMensuel[],
+  key: DVFPriceKey
+) {
+  const observations = timeline.filter((item) => item[key] !== null);
+  const first = observations[0];
+  const last = observations.at(-1);
+  const firstPrice = first?.[key];
+  const lastPrice = last?.[key];
+  const evolution =
+    observations.length >= 2 &&
+    firstPrice != null &&
+    firstPrice > 0 &&
+    lastPrice != null
+      ? ((lastPrice - firstPrice) / firstPrice) * 100
+      : null;
+
+  return { evolution, first, last };
+}
+
 function monthIndex(mois: string) {
   const [year, month] = mois.split("-").map(Number);
   return year * 12 + month - 1;
@@ -123,6 +145,16 @@ export function buildDVFChartData(
 const priceFormatter = new Intl.NumberFormat("fr-FR", {
   maximumFractionDigits: 0,
 });
+
+const evolutionFormatter = new Intl.NumberFormat("fr-FR", {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
+  signDisplay: "exceptZero",
+});
+
+export function formatDVFPriceEvolution(value: number | null) {
+  return value === null ? "—" : `${evolutionFormatter.format(value)}\u00a0%`;
+}
 
 export function formatDVFPrice(value: number | null) {
   return value === null
