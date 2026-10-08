@@ -7,8 +7,9 @@ import {
 import type { ExportCsvInput } from "#/clients/sirene-insee/input-validation";
 
 export const getEtablissementListe = async (
-  searchParams: ExportCsvInput
-): Promise<Readable> => await clientSireneInsee(searchParams);
+  searchParams: ExportCsvInput,
+  total: number
+): Promise<Readable> => await clientSireneInsee(searchParams, total);
 
 export const getEtablissementListeCount = async (
   searchParams: ExportCsvInput

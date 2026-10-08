@@ -27,6 +27,8 @@ const SERVICE_UNAVAILABLE_MESSAGE =
   "Le service d’export est temporairement indisponible. Veuillez réessayer dans quelques minutes.";
 const TIMEOUT_MESSAGE =
   "Le service d’export a mis trop de temps à répondre. Veuillez réessayer dans quelques minutes.";
+const INTERRUPTED_DOWNLOAD_MESSAGE =
+  "Le téléchargement a été interrompu. Veuillez réessayer dans quelques minutes.";
 const INVALID_FILTERS_MESSAGE =
   "Certains critères saisis sont invalides. Vérifiez vos filtres puis relancez.";
 
@@ -253,7 +255,10 @@ export default function ExportCsv() {
         throw new Error(getFriendlyErrorMessage(undefined, response.status));
       }
 
-      const blob = await response.blob();
+      // the file is streamed page by page, so it can fail after the response started
+      const blob = await response.blob().catch(() => {
+        throw new Error(INTERRUPTED_DOWNLOAD_MESSAGE);
+      });
 
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -313,9 +318,7 @@ export default function ExportCsv() {
       ) : (
         <div className={styles.fileDownloadSection}>
           <div>
-            {isLoading ? (
-              "Export en cours..."
-            ) : (
+            {!isLoading && (
               <button
                 className="fr-link fr-link--download"
                 onClick={handleCsvExport}
