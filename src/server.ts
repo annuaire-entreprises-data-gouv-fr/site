@@ -14,6 +14,8 @@ const redirectLegacyEntrepriseTab = (request: Request) => {
 
   const [, tabPath, slug] = match;
   destination.pathname = `/entreprise/${slug}/${tabPath}`;
+  destination.protocol = import.meta.env.VITE_BASE_URL.split("://")[0];
+  destination.host = import.meta.env.VITE_BASE_URL.split("://")[1];
 
   return Response.redirect(destination, 308);
 };
