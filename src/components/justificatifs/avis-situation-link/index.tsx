@@ -25,6 +25,7 @@ const AvisSituationLink: React.FC<{
   const link = button ? (
     <ButtonLink
       alt
+      aria-label={`${label || "Avis de situation"} — établissement ${etablissement.siret}`}
       small
       to={`${routes.sireneInsee.avis}${etablissement.siret}`}
     >
@@ -32,6 +33,7 @@ const AvisSituationLink: React.FC<{
     </ButtonLink>
   ) : (
     <a
+      aria-label={`${label || "Avis de situation"} — établissement ${etablissement.siret} — nouvelle fenêtre`}
       href={`${routes.sireneInsee.avis}${etablissement.siret}`}
       rel="noopener noreferrer"
       target="_blank"
