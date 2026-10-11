@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { PrintNever } from "#/components-ui/print-visibility";
 import { useFeatureFlag } from "#/hooks/use-feature-flag";
-import { useStorage } from "#/hooks/use-storage";
 import constants from "#/models/constants";
 import styles from "./styles.module.css";
 
@@ -21,13 +20,8 @@ export default function TempIncidentBanner({
   const { isEnabled: isPartnersDataIncidentEnabled } = useFeatureFlag(
     "partners_data_incident_banner_displayed"
   );
-  const { isEnabled: isProconnectMigrationEnabled } = useFeatureFlag(
-    "proconnect_migration_banner_displayed"
-  );
-  const [proconnectMigrationClosed, saveProconnectMigrationClosed] = useStorage(
-    "local",
-    "proconnect_migration_closed",
-    false
+  const { isEnabled: isRolesMigrationEnabled } = useFeatureFlag(
+    "roles_migration_banner_displayed"
   );
 
   const TEMP_INCIDENT_BANNER = useMemo(
@@ -41,41 +35,19 @@ export default function TempIncidentBanner({
       partnersData: `
   🚨 Certains données et fonctionnalités sont temporairement indisponibles en raison d’instabilités chez nos partenaires.
     Veuillez nous excuser pour la gêne occasionnée.`,
-      proconnectMigration: (
-        <div>
-          🚧{" "}
-          <strong>Maintenance en cours chez notre partenaire ProConnect</strong>
-          <br />
-          En raison d’une opération de maintenance planifiée le{" "}
-          <strong>27 avril à partir de 18h</strong>, l’accès à l’
-          <strong>espace agent</strong> via ProConnect sera temporairement
-          indisponible.
-          <br />
-          Nous vous remercions pour votre compréhension et vous invitons à
-          réessayer ultérieurement.
-          <button
-            aria-label="Fermer la notification"
-            className={styles.closeButton}
-            onClick={() => saveProconnectMigrationClosed(true)}
-            type="button"
-          >
-            ✕
-          </button>
-        </div>
-      ),
+      rolesMigration: `
+  🚨 En raison d'une migration technique, l'Espace agent sera indisponible à partir de 16h00, pour une durée estimée d'une heure.
+    Merci de votre compréhension et veuillez nous excuser pour la gêne occasionnée.`,
     }),
-    [saveProconnectMigrationClosed]
+    []
   );
-
-  const isProConnectMigrationDisplayed =
-    isProconnectMigrationEnabled && !proconnectMigrationClosed;
 
   if (
     !(
       isDefaultIncidentEnabled ||
       isProconnectIncidentEnabled ||
       isPartnersDataIncidentEnabled ||
-      isProConnectMigrationDisplayed
+      isRolesMigrationEnabled
     )
   ) {
     return null;
@@ -87,8 +59,8 @@ export default function TempIncidentBanner({
     message = TEMP_INCIDENT_BANNER.partnersData;
   } else if (isProconnectIncidentEnabled) {
     message = TEMP_INCIDENT_BANNER.proconnect;
-  } else if (isProConnectMigrationDisplayed) {
-    message = TEMP_INCIDENT_BANNER.proconnectMigration;
+  } else if (isRolesMigrationEnabled) {
+    message = TEMP_INCIDENT_BANNER.rolesMigration;
   }
 
   return (
