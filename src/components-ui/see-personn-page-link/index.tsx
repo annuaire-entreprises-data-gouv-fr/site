@@ -11,6 +11,7 @@ export const SeePersonPageLink = ({
   sirenFrom?: Siren;
 }) => (
   <a
+    aria-label={`${label || "Voir ses entreprises"} — ${person.prenoms || person.prenom || ""} ${person.nom}`}
     href={`/personne?n=${person.nom}&fn=${
       person.prenoms || person.prenom
     }&partialDate=${person.dateNaissancePartial}${

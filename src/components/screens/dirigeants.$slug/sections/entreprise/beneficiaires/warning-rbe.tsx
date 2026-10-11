@@ -29,6 +29,7 @@ export const WarningRBE = () => (
     </a>{" "}
     peuvent{" "}
     <a
+      aria-label="Effectuer une demande d’accès au registre des bénéficiaires effectifs — nouvelle fenêtre"
       href="https://data.inpi.fr/content/editorial/acces_BE"
       rel="noopener noreferrer"
       target="_blank"
