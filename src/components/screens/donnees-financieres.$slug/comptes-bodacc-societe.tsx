@@ -56,7 +56,7 @@ export function ComptesBodaccSociete({
                   ⇢&nbsp;Consulter
                 </ButtonLink>,
               ])}
-              head={["Publication", "Details", "Annonce"]}
+              head={["Publication", "Détails", "Lien de l’annonce"]}
             />
           )}
         </>
