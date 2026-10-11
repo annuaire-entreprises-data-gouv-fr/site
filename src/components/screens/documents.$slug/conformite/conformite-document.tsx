@@ -9,7 +9,10 @@ export const ConformiteDocument: React.FC<{
   dateDelivrance: string | null;
 }> = ({ url, label, dateDelivrance }) => (
   <div>
-    <a href={url}>
+    <a
+      aria-label={label || "Télécharger l’attestation de conformité sociale"}
+      href={url}
+    >
       <Icon slug="download">{label || "télécharger"}</Icon>
     </a>
     {dateDelivrance && (

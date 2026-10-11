@@ -55,11 +55,14 @@ export function ProtectedConformiteSocialeSection({
             body={[
               [
                 "Conformité sociale",
-                <>
-                  <ConformiteVigilance data={data?.vigilance} />
-                  <br />
-                  <ConformiteMSA data={data?.msa} />
-                </>,
+                <ul>
+                  <li>
+                    <ConformiteVigilance data={data?.vigilance} />
+                  </li>
+                  <li>
+                    <ConformiteMSA data={data?.msa} />
+                  </li>
+                </ul>,
               ],
             ]}
           />
