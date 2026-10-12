@@ -71,8 +71,9 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
         </Icon>
       </h2>
       <div>
-        Plutôt que d’utiliser des critères de recherche, vous pouvez nous fournir
-        directement une liste de SIREN / SIRET. Assurez-vous que la liste soit{" "}
+        Plutôt que d’utiliser des critères de recherche, vous pouvez nous
+        fournir directement une liste de SIREN / SIRET. Assurez-vous que la
+        liste soit{" "}
         <FAQLink tooltipLabel="correctement mise en page">
           <div>
             <strong>Format requis :</strong>
