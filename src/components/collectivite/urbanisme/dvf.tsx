@@ -48,7 +48,7 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
     <>
       <p>
         Prix médians au mètre carré et volumes de ventes à {dvf.nomCommune}, sur
-        les cinq dernières années disponibles dans DVF.
+        les cinq dernières années.
       </p>
       <div className={styles.toolbar}>
         <p className={styles.period}>
