@@ -179,11 +179,20 @@ export function CollectiviteDVFSection({
   );
 
   const notFoundInfo = useMemo(() => {
-    let message =
-      "Aucune donnée de transaction immobilière n’a été retrouvée pour cette commune.";
+    const message = [
+      <p>
+        Aucune donnée de transaction immobilière n’a été retrouvée pour cette
+        commune.
+      </p>,
+    ];
 
     if (departementWithoutDVFData.includes(codeDepartement)) {
-      message += `Les données de DVF ne sont pas disponibles pour les départements suivants : ${departementWithoutDVFData.join(", ")}.`;
+      message.push(
+        <p>
+          Les données de DVF ne sont pas disponibles pour les départements
+          suivants : {departementWithoutDVFData.join(", ")}.
+        </p>
+      );
     }
 
     return message;
