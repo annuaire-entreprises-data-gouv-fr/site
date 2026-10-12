@@ -36,6 +36,8 @@
 }
 
 .activePeriod {
+  --hover-tint: #1212ff;
+  --active-tint: #2323ff;
   color: #fff;
   background: #000091;
   border-color: #000091;
