@@ -25,9 +25,13 @@ const periods = [
 
 export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
   const [monthsCount, setMonthsCount] = useState<number>(60);
+  const fullTimeline = useMemo(
+    () => buildDVFMonthlyTimeline(dvf.indicateurs),
+    [dvf.indicateurs]
+  );
   const timeline = useMemo(
-    () => buildDVFMonthlyTimeline(dvf.indicateurs, monthsCount),
-    [dvf.indicateurs, monthsCount]
+    () => fullTimeline.slice(-monthsCount),
+    [fullTimeline, monthsCount]
   );
   const latest = timeline.at(-1);
 
@@ -119,7 +123,7 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
           );
         })}
       </dl>
-      <DVFChart timeline={timeline} />
+      <DVFChart startMonth={timeline[0].mois} timeline={fullTimeline} />
       <div className={styles.volumesLegend}>
         <span>
           <span

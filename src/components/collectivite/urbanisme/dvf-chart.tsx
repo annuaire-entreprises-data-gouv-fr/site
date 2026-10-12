@@ -61,7 +61,14 @@ const dvfGuidePlugin: Plugin<"line" | "bar"> = {
   },
 };
 
-export function DVFChart({ timeline }: { timeline: IDVFIndicateurMensuel[] }) {
+export function DVFChart({
+  startMonth,
+  timeline,
+}: {
+  startMonth: string;
+  timeline: IDVFIndicateurMensuel[];
+}) {
+  // Keep monthly points stable while animating the visible date range.
   const data = useMemo(() => buildDVFChartData(timeline), [timeline]);
   const options: ChartOptions<"line" | "bar"> = {
     responsive: true,
@@ -105,6 +112,8 @@ export function DVFChart({ timeline }: { timeline: IDVFIndicateurMensuel[] }) {
     scales: {
       x: {
         type: "category",
+        min: startMonth,
+        max: timeline.at(-1)?.mois,
         offset: true,
         grid: { display: false },
         ticks: {
