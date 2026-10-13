@@ -102,6 +102,9 @@ export function CollectiviteMap({
   withSearch = false,
 }: ICollectiviteMapProps) {
   const mapRef = useRef<maplibregl.Map | null>(null);
+  // isStyleLoaded() redevient faux pendant le chargement des tuiles : on
+  // mémorise l'événement "load", qui n'est émis qu'une seule fois
+  const isMapLoadedRef = useRef(false);
   const mapContainerId = useId();
 
   useEffect(() => {
@@ -113,6 +116,10 @@ export function CollectiviteMap({
     });
 
     mapRef.current = map;
+    isMapLoadedRef.current = false;
+    map.once("load", () => {
+      isMapLoadedRef.current = true;
+    });
 
     if (withSearch) {
       map.addControl(
@@ -153,7 +160,7 @@ export function CollectiviteMap({
       onMapReady?.(map);
     };
 
-    if (map.isStyleLoaded()) {
+    if (isMapLoadedRef.current) {
       drawCommune();
     } else {
       map.once("load", drawCommune);
