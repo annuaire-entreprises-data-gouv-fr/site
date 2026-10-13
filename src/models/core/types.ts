@@ -350,6 +350,13 @@ export const isCollectiviteTerritoriale = (
 ): toBeDetermined is ICollectiviteTerritoriale =>
   (toBeDetermined as ICollectiviteTerritoriale).colter.codeColter !== null;
 
+export const isCollectiviteTerritorialeCommune = (
+  collectiviteTerritoriale: ICollectiviteTerritoriale
+): boolean =>
+  collectiviteTerritoriale.colter.niveau === "Commune" ||
+  collectiviteTerritoriale.colter.niveau === "Ville de Paris" ||
+  collectiviteTerritoriale.colter.niveau === "Métropole de Lyon";
+
 /** COMMON ERRORS */
 
 /**

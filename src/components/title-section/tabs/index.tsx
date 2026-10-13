@@ -15,6 +15,7 @@ import {
   hasAidesFinancieres,
   type IUniteLegale,
   isCollectiviteTerritoriale,
+  isCollectiviteTerritorialeCommune,
   isEntrepreneurIndividuel,
   isServicePublic,
   isServicePublicImmatriculeeAuRNE,
@@ -166,7 +167,9 @@ export const getUniteLegaleTabs = (
       label: "Collectivité",
       noFollow: false,
       shouldDisplay:
-        !options.hideCollectiviteTab && isCollectiviteTerritoriale(uniteLegale),
+        !options.hideCollectiviteTab &&
+        isCollectiviteTerritoriale(uniteLegale) &&
+        isCollectiviteTerritorialeCommune(uniteLegale),
       width: "130px",
       className: styles.collectiviteTab,
     },
