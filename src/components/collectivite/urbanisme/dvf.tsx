@@ -173,7 +173,7 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
   );
 }
 
-const departementWithoutDVFData = ["976", "67", "68", "57"];
+export const departementWithoutDVFData = ["976", "67", "68", "57"];
 
 export function CollectiviteDVFSection({
   codeInsee,

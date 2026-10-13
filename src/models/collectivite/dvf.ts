@@ -94,14 +94,26 @@ function averagePrice(
   return totalWeight === 0 ? null : total / totalWeight;
 }
 
+function getArrondissementCodes(commune: ICommuneAvecArrondissements) {
+  return Array.from({ length: commune.nombreArrondissements }, (_, index) =>
+    String(commune.premierCodeInsee + index)
+  );
+}
+
+/**
+ * Codes communes utilisés par le cadastre et DVF : les arrondissements pour
+ * Paris, Lyon et Marseille, la commune elle-même sinon.
+ */
+export function getDVFCommuneCodes(codeInsee: string) {
+  const commune = communesAvecArrondissements[codeInsee];
+  return commune ? getArrondissementCodes(commune) : [codeInsee];
+}
+
 async function getDVFArrondissements(
   codeInsee: string,
   commune: ICommuneAvecArrondissements
 ): Promise<ICollectiviteDVF> {
-  const arrondissementCodes = Array.from(
-    { length: commune.nombreArrondissements },
-    (_, index) => String(commune.premierCodeInsee + index)
-  );
+  const arrondissementCodes = getArrondissementCodes(commune);
   const arrondissements = await Promise.all(
     arrondissementCodes.map((code) => clientDVF(code))
   );

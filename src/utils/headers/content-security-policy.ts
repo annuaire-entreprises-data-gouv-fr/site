@@ -29,6 +29,7 @@ const cspDirectives = {
     "https://geo.api.gouv.fr",
     "https://data.geopf.fr",
     "https://rnb-api.beta.gouv.fr",
+    "https://dvf-api.data.gouv.fr",
     "https://tabular-api.data.gouv.fr",
     "https://koumoul.com",
     "https://dgal.opendatasoft.com",
