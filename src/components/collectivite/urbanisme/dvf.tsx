@@ -47,9 +47,17 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
   return (
     <>
       <p>
-        Prix médians au mètre carré et volumes de ventes à {dvf.nomCommune}, sur
-        les cinq dernières années.
+        {dvf.prixAgregesParArrondissement ? "Prix agrégés" : "Prix médians"} au
+        mètre carré et volumes de ventes à {dvf.nomCommune}, sur les cinq
+        dernières années.
       </p>
+      {dvf.prixAgregesParArrondissement && (
+        <p className={styles.note}>
+          Pour Paris, les prix sont estimés à partir des médianes des
+          arrondissements : moyennes pondérées par les ventes pour les
+          logements, moyenne simple pour les locaux industriels et commerciaux.
+        </p>
+      )}
       <div className={styles.toolbar}>
         <p className={styles.period}>
           {formatDatePartial(timeline[0].mois)} —{" "}
@@ -91,7 +99,7 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
                 : styles.evolutionDecrease;
           const evolutionTitle =
             evolution !== null && first && observation
-              ? `Évolution du prix médian entre ${formatDatePartial(first.mois)} et ${formatDatePartial(observation.mois)}`
+              ? `Évolution du prix ${dvf.prixAgregesParArrondissement ? "agrégé" : "médian"} entre ${formatDatePartial(first.mois)} et ${formatDatePartial(observation.mois)}`
               : "Deux prix renseignés sont nécessaires pour calculer l’évolution sur cette période.";
           return (
             <div className={styles.price} key={key}>
@@ -123,7 +131,13 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
           );
         })}
       </dl>
-      <DVFChart startMonth={timeline[0].mois} timeline={fullTimeline} />
+      <DVFChart
+        priceLabel={
+          dvf.prixAgregesParArrondissement ? "Prix agrégé (€/m²)" : undefined
+        }
+        startMonth={timeline[0].mois}
+        timeline={fullTimeline}
+      />
       <div className={styles.volumesLegend}>
         <span>
           <span

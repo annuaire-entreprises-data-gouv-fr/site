@@ -62,9 +62,11 @@ const dvfGuidePlugin: Plugin<"line" | "bar"> = {
 };
 
 export function DVFChart({
+  priceLabel = "Prix médian (€/m²)",
   startMonth,
   timeline,
 }: {
+  priceLabel?: string;
   startMonth: string;
   timeline: IDVFIndicateurMensuel[];
 }) {
@@ -140,7 +142,7 @@ export function DVFChart({
           maxTicksLimit: 6,
           callback: (value) => formatNumber(Number(value)),
         },
-        title: { display: true, text: "Prix médian (€/m²)" },
+        title: { display: true, text: priceLabel },
       },
       yVolumes: {
         type: "linear",
