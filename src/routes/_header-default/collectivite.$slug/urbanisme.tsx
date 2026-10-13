@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CollectiviteDVFSection } from "#/components/collectivite/urbanisme/dvf";
+import { getCodeInseeToUse } from "#/utils/helpers/collectivites";
 import { Route as CollectiviteRoute } from "./route";
 
 export const Route = createFileRoute(
@@ -14,7 +15,7 @@ function RouteComponent() {
   return (
     <CollectiviteDVFSection
       codeDepartement={geoCommune.departement.code}
-      codeInsee={uniteLegale.colter.codeInsee}
+      codeInsee={getCodeInseeToUse(uniteLegale.colter.codeInsee)}
     />
   );
 }

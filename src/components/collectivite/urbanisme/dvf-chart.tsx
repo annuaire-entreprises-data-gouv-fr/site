@@ -61,7 +61,16 @@ const dvfGuidePlugin: Plugin<"line" | "bar"> = {
   },
 };
 
-export function DVFChart({ timeline }: { timeline: IDVFIndicateurMensuel[] }) {
+export function DVFChart({
+  priceLabel = "Prix médian (€/m²)",
+  startMonth,
+  timeline,
+}: {
+  priceLabel?: string;
+  startMonth: string;
+  timeline: IDVFIndicateurMensuel[];
+}) {
+  // Keep monthly points stable while animating the visible date range.
   const data = useMemo(() => buildDVFChartData(timeline), [timeline]);
   const options: ChartOptions<"line" | "bar"> = {
     responsive: true,
@@ -105,6 +114,8 @@ export function DVFChart({ timeline }: { timeline: IDVFIndicateurMensuel[] }) {
     scales: {
       x: {
         type: "category",
+        min: startMonth,
+        max: timeline.at(-1)?.mois,
         offset: true,
         grid: { display: false },
         ticks: {
@@ -131,7 +142,7 @@ export function DVFChart({ timeline }: { timeline: IDVFIndicateurMensuel[] }) {
           maxTicksLimit: 6,
           callback: (value) => formatNumber(Number(value)),
         },
-        title: { display: true, text: "Prix médian (€/m²)" },
+        title: { display: true, text: priceLabel },
       },
       yVolumes: {
         type: "linear",

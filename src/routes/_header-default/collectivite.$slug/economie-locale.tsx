@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CollectiviteEconomieLocaleSection } from "#/components/collectivite/economie-locale";
 import { CollectiviteEtablissementsSection } from "#/components/collectivite/economie-locale/etablissements";
 import { CollectiviteFluxEtablissementsSection } from "#/components/collectivite/economie-locale/flux-etablissements";
+import { getCodeInseeToUse } from "#/utils/helpers/collectivites";
 import { Route as CollectiviteRoute } from "./route";
 
 export const Route = createFileRoute(
@@ -12,7 +13,7 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { geoCommune, uniteLegale } = CollectiviteRoute.useLoaderData();
-  const codeInsee = uniteLegale.colter.codeInsee;
+  const codeInsee = getCodeInseeToUse(uniteLegale.colter.codeInsee);
 
   return (
     <>

@@ -25,9 +25,13 @@ const periods = [
 
 export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
   const [monthsCount, setMonthsCount] = useState<number>(60);
+  const fullTimeline = useMemo(
+    () => buildDVFMonthlyTimeline(dvf.indicateurs),
+    [dvf.indicateurs]
+  );
   const timeline = useMemo(
-    () => buildDVFMonthlyTimeline(dvf.indicateurs, monthsCount),
-    [dvf.indicateurs, monthsCount]
+    () => fullTimeline.slice(-monthsCount),
+    [fullTimeline, monthsCount]
   );
   const latest = timeline.at(-1);
 
@@ -43,9 +47,17 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
   return (
     <>
       <p>
-        Prix médians au mètre carré et volumes de ventes à {dvf.nomCommune}, sur
-        les cinq dernières années disponibles dans DVF.
+        {dvf.prixAgregesParArrondissement ? "Prix agrégés" : "Prix médians"} au
+        mètre carré et volumes de ventes à {dvf.nomCommune}, sur les cinq
+        dernières années.
       </p>
+      {dvf.prixAgregesParArrondissement && (
+        <p className={styles.note}>
+          Pour {dvf.nomCommune}, les prix sont estimés à partir des médianes des
+          arrondissements : moyennes pondérées par les ventes pour les
+          logements, moyenne simple pour les locaux industriels et commerciaux.
+        </p>
+      )}
       <div className={styles.toolbar}>
         <p className={styles.period}>
           {formatDatePartial(timeline[0].mois)} —{" "}
@@ -87,7 +99,7 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
                 : styles.evolutionDecrease;
           const evolutionTitle =
             evolution !== null && first && observation
-              ? `Évolution du prix médian entre ${formatDatePartial(first.mois)} et ${formatDatePartial(observation.mois)}`
+              ? `Évolution du prix ${dvf.prixAgregesParArrondissement ? "agrégé" : "médian"} entre ${formatDatePartial(first.mois)} et ${formatDatePartial(observation.mois)}`
               : "Deux prix renseignés sont nécessaires pour calculer l’évolution sur cette période.";
           return (
             <div className={styles.price} key={key}>
@@ -119,7 +131,13 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
           );
         })}
       </dl>
-      <DVFChart timeline={timeline} />
+      <DVFChart
+        priceLabel={
+          dvf.prixAgregesParArrondissement ? "Prix agrégé (€/m²)" : undefined
+        }
+        startMonth={timeline[0].mois}
+        timeline={fullTimeline}
+      />
       <div className={styles.volumesLegend}>
         <span>
           <span
@@ -175,11 +193,20 @@ export function CollectiviteDVFSection({
   );
 
   const notFoundInfo = useMemo(() => {
-    let message =
-      "Aucune donnée de transaction immobilière n’a été retrouvée pour cette commune.";
+    const message = [
+      <p>
+        Aucune donnée de transaction immobilière n’a été retrouvée pour cette
+        commune.
+      </p>,
+    ];
 
     if (departementWithoutDVFData.includes(codeDepartement)) {
-      message += `Les données de DVF ne sont pas disponibles pour les départements suivants : ${departementWithoutDVFData.join(", ")}.`;
+      message.push(
+        <p>
+          Les données de DVF ne sont pas disponibles pour les départements
+          suivants : {departementWithoutDVFData.join(", ")}.
+        </p>
+      );
     }
 
     return message;

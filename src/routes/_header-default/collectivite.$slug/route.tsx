@@ -11,7 +11,10 @@ import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
 import { estNonDiffusibleStrict } from "#/models/core/diffusion";
-import { isCollectiviteTerritoriale } from "#/models/core/types";
+import {
+  isCollectiviteTerritoriale,
+  isCollectiviteTerritorialeCommune,
+} from "#/models/core/types";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import {
@@ -28,6 +31,7 @@ import { clientGeo } from "#/clients/api-geo";
 import { CollectiviteSidenav } from "#/components/collectivite/sidenav";
 import { getFeatureFlagFn } from "#/server-functions/public/feature-flags";
 import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
+import { getCodeInseeToUse } from "#/utils/helpers/collectivites";
 import { HeaderDefaultError } from "../-error";
 
 const loadEntreprisePage = createServerFn({ method: "POST" })
@@ -43,8 +47,10 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
     ]);
 
     if (
-      !isCollectiviteTerritoriale(uniteLegale) ||
-      uniteLegale.colter.niveau !== "Commune"
+      !(
+        isCollectiviteTerritoriale(uniteLegale) &&
+        isCollectiviteTerritorialeCommune(uniteLegale)
+      )
     ) {
       throw redirect({
         to: "/entreprise/$slug",
@@ -52,7 +58,9 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
       });
     }
 
-    const geoCommune = await clientGeo(uniteLegale.colter.codeInsee);
+    const geoCommune = await clientGeo(
+      getCodeInseeToUse(uniteLegale.colter.codeInsee)
+    );
 
     return { uniteLegale, sourcesLastModified, geoCommune };
   });

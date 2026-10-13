@@ -59,7 +59,7 @@ export const CollectiviteGeoSection: React.FC<{
     <Section
       id="identite"
       sources={[EAdministration.INSEE, EAdministration.DINUM]}
-      title={`Identité de la collectivité ${geoCommune.nom}`}
+      title={`Identité de la collectivité de ${geoCommune.nom}`}
     >
       <CollectiviteMap
         geoCommune={geoCommune}
