@@ -27,9 +27,31 @@ export interface ICollectiviteDVF {
   sirenEpci: string | null;
 }
 
-const parisArrondissementCodes = Array.from({ length: 20 }, (_, index) =>
-  String(75_101 + index)
-);
+interface ICommuneAvecArrondissements {
+  nombreArrondissements: number;
+  nomCommune: string;
+  premierCodeInsee: number;
+}
+
+const communesAvecArrondissements: Partial<
+  Record<string, ICommuneAvecArrondissements>
+> = {
+  "75056": {
+    nomCommune: "Paris",
+    premierCodeInsee: 75_101,
+    nombreArrondissements: 20,
+  },
+  "69123": {
+    nomCommune: "Lyon",
+    premierCodeInsee: 69_381,
+    nombreArrondissements: 9,
+  },
+  "13055": {
+    nomCommune: "Marseille",
+    premierCodeInsee: 13_201,
+    nombreArrondissements: 16,
+  },
+};
 
 type DVFCountKey = Extract<
   keyof IDVFIndicateurMensuel,
@@ -72,9 +94,16 @@ function averagePrice(
   return totalWeight === 0 ? null : total / totalWeight;
 }
 
-async function getParisDVF(): Promise<ICollectiviteDVF> {
+async function getDVFArrondissements(
+  codeInsee: string,
+  commune: ICommuneAvecArrondissements
+): Promise<ICollectiviteDVF> {
+  const arrondissementCodes = Array.from(
+    { length: commune.nombreArrondissements },
+    (_, index) => String(commune.premierCodeInsee + index)
+  );
   const arrondissements = await Promise.all(
-    parisArrondissementCodes.map((codeInsee) => clientDVF(codeInsee))
+    arrondissementCodes.map((code) => clientDVF(code))
   );
   const byMonth = new Map<string, IDVFIndicateurMensuel[]>();
 
@@ -87,8 +116,8 @@ async function getParisDVF(): Promise<ICollectiviteDVF> {
   }
 
   return {
-    codeInsee: "75056",
-    nomCommune: "Paris",
+    codeInsee,
+    nomCommune: commune.nomCommune,
     sirenEpci:
       arrondissements.find((item) => item.sirenEpci !== null)?.sirenEpci ??
       null,
@@ -130,8 +159,10 @@ export const getCollectiviteDVF = async (
   codeInsee: string
 ): Promise<ICollectiviteDVF | IAPINotRespondingError> => {
   try {
-    const dvf =
-      codeInsee === "75056" ? await getParisDVF() : await clientDVF(codeInsee);
+    const commune = communesAvecArrondissements[codeInsee];
+    const dvf = commune
+      ? await getDVFArrondissements(codeInsee, commune)
+      : await clientDVF(codeInsee);
 
     if (dvf.indicateurs.length === 0) {
       return APINotRespondingFactory(EAdministration.DGFIP, 404);

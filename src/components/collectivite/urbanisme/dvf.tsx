@@ -53,7 +53,7 @@ export function DVFBoard({ dvf }: { dvf: ICollectiviteDVF }) {
       </p>
       {dvf.prixAgregesParArrondissement && (
         <p className={styles.note}>
-          Pour Paris, les prix sont estimés à partir des médianes des
+          Pour {dvf.nomCommune}, les prix sont estimés à partir des médianes des
           arrondissements : moyennes pondérées par les ventes pour les
           logements, moyenne simple pour les locaux industriels et commerciaux.
         </p>
