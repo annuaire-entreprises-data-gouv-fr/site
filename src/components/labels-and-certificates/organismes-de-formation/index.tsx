@@ -39,36 +39,32 @@ export const OrganismeDeFormationSection = ({
             <FullTable
               body={organismesDeFormation.records.map((fields) => [
                 <Tag>{fields.nda ? fields.nda : "Inconnu"}</Tag>,
-                <>
+                <ul>
                   {fields.specialite && (
-                    <>
+                    <li>
                       <strong>Spécialité :</strong> {fields.specialite}
-                      <br />
-                    </>
+                    </li>
                   )}
                   {fields.formateurs && (
-                    <>
+                    <li>
                       <strong>Effectifs formateurs :</strong>{" "}
                       {fields.formateurs}
-                      <br />
-                    </>
+                    </li>
                   )}
                   {fields.stagiaires && (
-                    <>
+                    <li>
                       <strong>Effectifs stagiaires :</strong>{" "}
                       {fields.stagiaires}
-                      <br />
-                    </>
+                    </li>
                   )}
                   {fields.dateDeclaration && (
-                    <>
+                    <li>
                       <strong>Déclaration : </strong> le{" "}
                       {fields.dateDeclaration}
                       {fields.region && <>, en région {fields.region}</>}
-                      <br />
-                    </>
+                    </li>
                   )}
-                </>,
+                </ul>,
                 ...(qualiopiCertified
                   ? [
                       fields.certifications.map((certification) => (
