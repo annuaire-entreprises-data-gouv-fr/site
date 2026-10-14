@@ -15,6 +15,7 @@ const Breadcrumb: React.FC<{
           <li key={label}>
             <Link
               activeOptions={{ exact: true }}
+              aria-current={to === "." ? "page" : undefined}
               className="fr-breadcrumb__link"
               hash={hash}
               params={params}
