@@ -1,31 +1,107 @@
 /** biome-ignore-all lint/correctness/useHookAtTopLevel: not a hook */
 
 import { createServerOnlyFn } from "@tanstack/react-start";
-import { useSession } from "@tanstack/react-start/server";
+import { getCookie, getRequest, setCookie } from "@tanstack/react-start/server";
+import { getIronSession } from "iron-session";
 import type { IAgentInfo } from "#/models/authentication/agent";
 import type { ISession } from "#/models/authentication/user/session";
 import { isAbsoluteUrl } from "#/utils/server-side-helper/is-absolute-url";
 
-function useAppSession() {
-  if (!process.env.SESSION_PWD) {
+const COOKIE_NAME = "annuaire-entreprises-user-session-7";
+const MAX_AGE = 43_200;
+
+interface StoredSession {
+  createdAt: number;
+  data: Partial<ISession>;
+}
+
+async function useAppSession() {
+  const password = process.env.SESSION_PWD;
+  if (!password) {
     throw new Error("SESSION_PWD is not set");
   }
 
-  return useSession<ISession>({
-    password: process.env.SESSION_PWD,
-    name: "annuaire-entreprises-user-session-6",
-    cookie: {
-      secure: process.env.NODE_ENV === "production",
-      httpOnly: true, // ✅ Critical for XSS protection
-      sameSite: "lax", // ✅ CSRF protection
+  const cookieOptions = {
+    secure: process.env.NODE_ENV === "production",
+    httpOnly: true,
+    sameSite: "lax" as const,
+    path: "/",
+  };
+  const options = {
+    password,
+    cookieName: COOKIE_NAME,
+    cookieOptions,
+    ttl: MAX_AGE,
+    chunk: true,
+  };
+  const writtenCookies = new Map<string, string | undefined>();
+  const session = await getIronSession<StoredSession>(
+    {
+      read: (name) => {
+        if (writtenCookies.has(name)) {
+          return writtenCookies.get(name);
+        }
+        return getCookie(name);
+      },
+      write: (name, value, attributes) => {
+        writtenCookies.set(name, attributes.maxAge === 0 ? undefined : value);
+        setCookie(name, value, attributes);
+      },
     },
-    maxAge: 43_200, // 12h
+    options
+  );
+  const isNew =
+    !(session.createdAt && session.data) ||
+    Date.now() - session.createdAt > MAX_AGE * 1000;
+  if (isNew) {
+    Object.assign(session, {
+      createdAt: Date.now(),
+      data: {},
+    });
+  }
+
+  // Keep the 12-hour session lifetime fixed across updates.
+  const expires = new Date((session.createdAt as number) + MAX_AGE * 1000);
+  const maxAge = Math.ceil((expires.getTime() - Date.now()) / 1000);
+  session.updateConfig({
+    ...options,
+    ttl: maxAge,
+    cookieOptions: { ...cookieOptions, expires, maxAge },
   });
+  if (isNew) {
+    await session.save();
+  }
+
+  const manager = {
+    get data() {
+      return session.data ?? {};
+    },
+    update: async (update: Partial<ISession>) => {
+      session.data ??= {};
+      Object.assign(session.data, update);
+      await session.save();
+      return manager;
+    },
+    clear: async () => {
+      session.destroy();
+      return manager;
+    },
+  };
+  return manager;
 }
 
-export const getCurrentSession = createServerOnlyFn(() => useAppSession());
+type Session = Awaited<ReturnType<typeof useAppSession>>;
+const sessions = new WeakMap<Request, Promise<Session>>();
 
-type Session = Awaited<ReturnType<typeof getCurrentSession>>;
+export const getCurrentSession = createServerOnlyFn(() => {
+  const request = getRequest();
+  let session = sessions.get(request);
+  if (!session) {
+    session = useAppSession();
+    sessions.set(request, session);
+  }
+  return session;
+});
 
 /**
  * Utils for AgentConnect session

@@ -3,7 +3,18 @@ import { Exception } from "#/models/exceptions";
 import { logFatalErrorInSentry } from "#/utils/sentry";
 export type NextAppError = Error & { digest?: string };
 
-export function useLogFatalErrorAppClient(error: Error & { digest?: string }) {
+function getErrorDigest(error: unknown): string | undefined {
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "digest" in error &&
+    typeof error.digest === "string"
+  ) {
+    return error.digest;
+  }
+}
+
+export function useLogFatalErrorAppClient(error: unknown) {
   useEffect(() => {
     // Log the error to Sentry
     logFatalErrorInSentry(
@@ -11,7 +22,7 @@ export function useLogFatalErrorAppClient(error: Error & { digest?: string }) {
         name: "ClientErrorPageDisplayed",
         cause: error,
         context: {
-          digest: error.digest,
+          digest: getErrorDigest(error),
           page: window.location.pathname,
         },
       })
@@ -19,7 +30,7 @@ export function useLogFatalErrorAppClient(error: Error & { digest?: string }) {
   }, [error]);
 }
 
-export function useLog500ErrorAppClient(error: Error & { digest?: string }) {
+export function useLog500ErrorAppClient(error: unknown) {
   useEffect(() => {
     // Log the error to Sentry
     logFatalErrorInSentry(
@@ -27,7 +38,7 @@ export function useLog500ErrorAppClient(error: Error & { digest?: string }) {
         name: "Client500PageDisplayed",
         cause: error,
         context: {
-          digest: error.digest,
+          digest: getErrorDigest(error),
           page: window.location.pathname,
         },
       })

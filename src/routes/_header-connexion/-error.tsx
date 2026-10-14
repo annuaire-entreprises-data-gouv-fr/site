@@ -4,7 +4,7 @@ import connexionFailedPicture from "#/components-ui/illustrations/connexion-fail
 import { useLogFatalErrorAppClient } from "#/hooks/use-log-fatal-error-app-client";
 import constants from "#/models/constants";
 
-export function HeaderConnexionError({ error }: { error: Error }) {
+export function HeaderConnexionError({ error }: { error: unknown }) {
   useLogFatalErrorAppClient(error);
   return (
     <ConnexionSubLayout img={connexionFailedPicture}>

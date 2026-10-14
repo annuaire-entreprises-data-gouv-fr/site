@@ -3,7 +3,7 @@ import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
 import { useLogFatalErrorAppClient } from "#/hooks/use-log-fatal-error-app-client";
 
-export function HeaderSearchError({ error }: { error: Error }) {
+export function HeaderSearchError({ error }: { error: unknown }) {
   useLogFatalErrorAppClient(error);
 
   return (

@@ -26,9 +26,12 @@ const ErrorTemplate: React.FC<PropsWithChildren> = ({ children }) => (
   </div>
 );
 
-const ClientErrorExplanations = ({ error }: { error?: Error }) => (
+const ClientErrorExplanations = ({ error }: { error?: unknown }) => (
   <ErrorTemplate>
-    {error?.name === "ChunkLoadError" ? (
+    {typeof error === "object" &&
+    error !== null &&
+    "name" in error &&
+    error.name === "ChunkLoadError" ? (
       <>
         <h1>Erreur lors du chargement de la page</h1>
         <p>
