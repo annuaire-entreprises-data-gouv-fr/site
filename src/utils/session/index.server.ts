@@ -34,17 +34,10 @@ async function useAppSession() {
     ttl: MAX_AGE,
     chunk: true,
   };
-  const writtenCookies = new Map<string, string | undefined>();
   const session = await getIronSession<StoredSession>(
     {
-      read: (name) => {
-        if (writtenCookies.has(name)) {
-          return writtenCookies.get(name);
-        }
-        return getCookie(name);
-      },
+      read: (name) => getCookie(name),
       write: (name, value, attributes) => {
-        writtenCookies.set(name, attributes.maxAge === 0 ? undefined : value);
         setCookie(name, value, attributes);
       },
     },

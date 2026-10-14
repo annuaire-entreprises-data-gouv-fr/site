@@ -1,6 +1,5 @@
 import { notFound, redirect } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-import z from "zod";
+import { createServerOnlyFn } from "@tanstack/react-start";
 import { HttpNotFound } from "#/clients/exceptions";
 import { getFondationFromSlug } from "#/models/core/fondation";
 import {
@@ -11,9 +10,8 @@ import { FetchRechercheEntrepriseException } from "#/models/core/types";
 import { Exception } from "#/models/exceptions";
 import { logFatalErrorInSentry, logWarningInSentry } from "#/utils/sentry";
 
-export const getFondationFromSlugFn = createServerFn()
-  .validator(z.object({ slug: z.string(), page: z.number().default(1) }))
-  .handler(async ({ data: { slug, page } }) => {
+export const getFondationFromSlugWithErrorHandling = createServerOnlyFn(
+  async (slug: string, page = 1) => {
     try {
       return await getFondationFromSlug(slug, {
         page,
@@ -21,7 +19,8 @@ export const getFondationFromSlugFn = createServerFn()
     } catch (e) {
       handleException(e, slug);
     }
-  });
+  }
+);
 
 function handleException(e: unknown, slug: string): never {
   if (e instanceof NotAnIdRnfError || e instanceof HttpNotFound) {

@@ -18,7 +18,7 @@ import { TitleFondation } from "#/components/title-fondation-section";
 import { BackToTop } from "#/components-ui/back-to-top";
 import type { IUniteLegale } from "#/models/core/types";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
-import { getFondationFromSlugFn } from "#/server-functions/public/fondation";
+import { getFondationFromSlugWithErrorHandling } from "#/server-functions/public/fondation.server";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { extractSirenFromSiret } from "#/utils/helpers";
 import isUserAgentABot from "#/utils/user-agent";
@@ -33,7 +33,7 @@ const loadFondationLayout = createServerFn({ method: "POST" })
   )
   .handler(async ({ data: { slug, page } }) => {
     const [fondation, sourcesLastModified] = await Promise.all([
-      getFondationFromSlugFn({ data: { slug, page } }),
+      getFondationFromSlugWithErrorHandling(slug, page),
       getRechercheEntrepriseSourcesLastModified(),
     ]);
 
