@@ -13,8 +13,8 @@ class RNEClient {
   private _token = "";
 
   refreshToken = async () => {
-    const username = process.env.RNE_LOGIN_ACTES_1;
-    const password = process.env.RNE_PASSWORD_ACTES_1;
+    const username = process.env.RNE_ESPACE_AGENT_LOGIN;
+    const password = process.env.RNE_ESPACE_AGENT_PASSWORD;
 
     const response = await httpClient<{ token: string }>({
       method: "POST",
