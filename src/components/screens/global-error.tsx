@@ -4,7 +4,7 @@ import { Header } from "#/components/header/header";
 import { Question } from "#/components/question";
 import { useLog500ErrorAppClient } from "#/hooks/use-log-fatal-error-app-client";
 
-export function GlobalError({ error }: { error: Error }) {
+export function GlobalError({ error }: { error: unknown }) {
   useLog500ErrorAppClient(error);
   return (
     <>
