@@ -18,7 +18,11 @@ export function LiassesFiscales({
     <>
       <HorizontalSeparator />
       <ProtectedSectionWithUseCase
-        allowedUseCases={[UseCase.fraude]}
+        allowedUseCases={[
+          UseCase.fraude,
+          UseCase.marches,
+          UseCase.aidesPubliques,
+        ]}
         id="liasses-fiscales"
         requiredRight={ApplicationRights.liassesFiscales}
         sources={[EAdministration.DGFIP]}
