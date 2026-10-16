@@ -197,7 +197,7 @@ export const Route = createFileRoute("/entreprise/$slug/")({
 
     const { uniteLegale } = loaderData;
 
-    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.siren}`;
+    const canonical = `https://annuaire-entreprises.data.gouv.fr/entreprise/${uniteLegale.chemin}`;
     const naf = uniteLegale.activitePrincipale;
     const dep = getDepartementFromCodePostal(uniteLegale.siege.codePostal);
     const depUrl = getUrlFromDepartement(dep || "");
