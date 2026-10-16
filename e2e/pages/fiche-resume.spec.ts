@@ -178,7 +178,7 @@ test.describe("Shared entreprise layout", () => {
     ).toBeVisible();
     await expect(canonical).toHaveAttribute(
       "href",
-      "https://annuaire-entreprises.data.gouv.fr/entreprise/356000000"
+      "https://annuaire-entreprises.data.gouv.fr/entreprise/la-poste-356000000"
     );
     expect(
       await page.evaluate(() => document.documentElement.dataset.e2eDocumentId)
@@ -202,7 +202,7 @@ test.describe("Shared entreprise layout", () => {
     ).toBeVisible();
     await expect(canonical).toHaveAttribute(
       "href",
-      "https://annuaire-entreprises.data.gouv.fr/entreprise/552032534"
+      "https://annuaire-entreprises.data.gouv.fr/entreprise/danone-552032534"
     );
     expect(
       await page.evaluate(() => document.documentElement.dataset.e2eDocumentId)
