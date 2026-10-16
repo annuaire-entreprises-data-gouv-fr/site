@@ -1,9 +1,11 @@
-import type { Readable } from "node:stream";
+import { Readable } from "node:stream";
+import { HttpNotFound } from "#/clients/exceptions";
 import routes from "#/clients/routes";
 import { exportCsvClientPost } from "#/clients/sirene-insee/index.server";
 import constants from "#/models/constants";
 import { SireneQueryBuilder } from "./build-query";
 import type { ExportCsvInput } from "./input-validation";
+import { CSV_PAGE_SIZE, streamCsvPages } from "./paginated-csv";
 
 interface SireneJsonSearchResult {
   header: {
@@ -15,29 +17,58 @@ interface SireneJsonSearchResult {
   };
 }
 
-export const clientSireneInsee = async (params: ExportCsvInput) => {
-  const queryBuilder = new SireneQueryBuilder(params);
-  const q = queryBuilder.build();
-  const champs = SireneQueryBuilder.getFieldsString();
-  const url = routes.sireneInsee.listEtablissements;
+const fetchCsvPage = async (
+  q: string,
+  afterSiret?: string
+): Promise<Readable> => {
+  try {
+    return await exportCsvClientPost<Readable>(
+      routes.sireneInsee.listEtablissements,
+      {
+        headers: {
+          Accept: "text/csv",
+          "Accept-Encoding": "gzip",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        data: {
+          q: afterSiret ? `(${q}) AND siret:{${afterSiret} TO *]` : q,
+          champs: SireneQueryBuilder.getFieldsString(),
+          nombre: String(CSV_PAGE_SIZE),
+          tri: "siret",
+          noLink: "true",
+        },
+        responseType: "stream",
+        timeout: constants.timeout.XXXXXL,
+      }
+    );
+  } catch (e) {
+    // INSEE answers 404 when there are no more rows, e.g. if some were removed since the count
+    if (afterSiret && e instanceof HttpNotFound) {
+      return Readable.from([]);
+    }
+    throw e;
+  }
+};
 
-  const stream = await exportCsvClientPost<Readable>(url, {
-    headers: {
-      Accept: "text/csv",
-      "Accept-Encoding": "gzip",
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    data: {
-      q,
-      champs,
-      nombre: "200000",
-      noLink: "true",
-    },
-    responseType: "stream",
-    timeout: constants.timeout.XXXXXL,
-  });
+/**
+ * Export CSV, fetched from INSEE page by page
+ *
+ * @param total number of rows to export, as returned by clientSireneInseeCount
+ */
+export const clientSireneInsee = async (
+  params: ExportCsvInput,
+  total: number
+): Promise<Readable> => {
+  const q = new SireneQueryBuilder(params).build();
+  const firstPage = await fetchCsvPage(q);
 
-  return stream;
+  return Readable.from(
+    streamCsvPages(
+      (afterSiret) => fetchCsvPage(q, afterSiret),
+      firstPage,
+      total
+    )
+  );
 };
 
 export interface ISireneInseeCount {
