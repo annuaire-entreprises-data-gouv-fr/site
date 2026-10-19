@@ -76,7 +76,10 @@ function RouteComponent() {
       {dataToModify.form ? (
         <>
           <p>Cette administration propose une démarche en ligne&nbsp;:</p>
-          <ButtonLink to={dataToModify.form}>
+          <ButtonLink
+            aria-label={`Accéder à la démarche en ligne pour modifier : ${dataToModify.label}`}
+            to={dataToModify.form}
+          >
             Accéder à la démarche en ligne
           </ButtonLink>
         </>
