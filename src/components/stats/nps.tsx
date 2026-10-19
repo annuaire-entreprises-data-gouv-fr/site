@@ -4,6 +4,7 @@ import type { IMatomoStats } from "#/clients/matomo/index.server";
 import { LineChart } from "#/components/chart/line";
 import { StackedBarChart } from "#/components/chart/stack-bar";
 import { Link } from "#/components/link";
+import { AccessibleTable } from "#/components/table/accessible";
 import { Select } from "#/components-ui/select";
 import constants from "#/models/constants";
 
@@ -107,9 +108,10 @@ export const NpsStats: React.FC<{
       </p>
       <br />
       <div className="layout-right">
-        <div>Afficher les données par&nbsp;</div>
         <Select
           defaultValue={"avg"}
+          label="Afficher les données par"
+          name="satisfaction-type"
           onChange={onOptionChange}
           options={[
             { value: "avg", label: "note moyenne" },
@@ -118,24 +120,44 @@ export const NpsStats: React.FC<{
         />
       </div>
       <br />
-      <LineChart
-        data={dataLineChart}
-        height="250px"
-        options={{
-          responsive: true,
-          scales: {
-            y: {
-              title: {
-                display: true,
-                text: statsType === "avg" ? "Note sur 10" : "NPS",
+      <div aria-hidden="true">
+        <LineChart
+          data={dataLineChart}
+          height="250px"
+          options={{
+            responsive: true,
+            scales: {
+              y: {
+                title: {
+                  display: true,
+                  text: statsType === "avg" ? "Note sur 10" : "NPS",
+                },
+                min: 0,
+                max: npsMaxRange,
+                ticks: { stepSize: 1 },
               },
-              min: 0,
-              max: npsMaxRange,
-              ticks: { stepSize: 1 },
             },
-          },
-        }}
-      />
+          }}
+        />
+      </div>
+      <details>
+        <summary>Consulter les scores dans un tableau</summary>
+        <AccessibleTable
+          body={monthlyNps.map((item) => [
+            item.label,
+            totalAvg,
+            item.values.all?.[statsType],
+            item.values["Agent public"]?.[statsType],
+          ])}
+          caption={npsPrefixLabel}
+          head={[
+            "Mois",
+            "Moyenne annuelle",
+            "Tous les utilisateurs",
+            "Agents publics",
+          ]}
+        />
+      </details>
       <h3>Qui sont les utilisateurs de l’Annuaire des Entreprises ?</h3>
       <p>
         Les réponses au formulaire de statisfaction nous permettent de
@@ -144,33 +166,48 @@ export const NpsStats: React.FC<{
       Cependant, le formulaire est le plus souvent rempli par des{" "}
       <strong>utilisateurs récurrents</strong>. Cette “image” est donc plus
       représentative de ces derniers que de l’ensemble des utilisateurs du site.
-      <StackedBarChart
-        data={userTypesData}
-        height="300px"
-        options={{ scales: { y: { min: 1, max: 100 } } }}
-        pluginOption={{
-          legend: { onClick: disableLegendClick },
-          tooltip: {
-            callbacks: {
-              label(context) {
-                return `${context.dataset.label} ${Math.round(
-                  context.parsed.y ?? 0
-                )}%`;
+      <div aria-hidden="true">
+        <StackedBarChart
+          data={userTypesData}
+          height="300px"
+          options={{ scales: { y: { min: 1, max: 100 } } }}
+          pluginOption={{
+            legend: { onClick: disableLegendClick },
+            tooltip: {
+              callbacks: {
+                label(context) {
+                  return `${context.dataset.label} ${Math.round(
+                    context.parsed.y ?? 0
+                  )}%`;
+                },
               },
             },
-          },
-        }}
-        scales={{
-          x: {
-            stacked: true,
-          },
-          y: {
-            stacked: true,
-            min: 1,
-            max: 100,
-          },
-        }}
-      />
+          }}
+          scales={{
+            x: {
+              stacked: true,
+            },
+            y: {
+              stacked: true,
+              min: 1,
+              max: 100,
+            },
+          }}
+        />
+      </div>
+      <details>
+        <summary>
+          Consulter la répartition des répondants dans un tableau
+        </summary>
+        <AccessibleTable
+          body={monthlyNps.map((item, index) => [
+            item.label,
+            ...userTypesData.datasets.map((dataset) => dataset.data[index]?.y),
+          ])}
+          caption="Répartition des répondants (%)"
+          head={["Mois", ...userTypes.map((type) => type.label)]}
+        />
+      </details>
     </>
   );
 };
