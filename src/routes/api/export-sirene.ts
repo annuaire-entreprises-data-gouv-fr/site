@@ -51,7 +51,16 @@ export const Route = createFileRoute("/api/export-sirene")({
             );
           }
 
-          const nodeStream = await getEtablissementListe(validatedData);
+          const nodeStream = await getEtablissementListe(
+            validatedData,
+            response
+          );
+          // errors on the following pages happen once the response has started
+          nodeStream.on("error", (streamError) => {
+            logErrorInSentry(
+              new Exception({ name: "Export CSV stream", cause: streamError })
+            );
+          });
           const webStream = Readable.toWeb(nodeStream) as ReadableStream;
 
           return new Response(webStream, {
