@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { HttpConflict } from "#/clients/exceptions";
 import { clientRolesGetOrganizationsGroups } from "#/clients/roles-data/index.server";
 import {
   addUserToGroup,
@@ -21,7 +22,14 @@ export const addUserToGroupFn = createServerFn({ method: "POST" })
   .validator(addUserToGroupSchema)
   .handler(async ({ data }) => {
     const { groupId, userEmail, roleId } = data;
-    return await addUserToGroup(groupId, userEmail, roleId);
+    try {
+      return await addUserToGroup(groupId, userEmail, roleId);
+    } catch (error) {
+      if (error instanceof HttpConflict) {
+        return { error: "USER_ALREADY_IN_GROUP" as const };
+      }
+      throw error;
+    }
   });
 
 export const removeUserFromGroupFn = createServerFn({ method: "POST" })
