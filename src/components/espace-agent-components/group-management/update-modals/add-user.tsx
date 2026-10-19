@@ -13,6 +13,8 @@ import type { IAgentsGroup } from "#/models/authentication/group";
 import { addUserToGroupFn } from "#/server-functions/agent/group-management";
 
 const MODAL_ID = "add-user";
+const USER_ALREADY_IN_GROUP_ERROR =
+  "Cet utilisateur est déjà membre de ce groupe";
 
 export default function AddUserModal({
   group,
@@ -33,6 +35,16 @@ export default function AddUserModal({
   const mutation = useMutation({
     mutationFn: addUserToGroup,
     onSuccess: (result) => {
+      if ("error" in result) {
+        setValidationErrors([USER_ALREADY_IN_GROUP_ERROR]);
+        showNotification({
+          type: NotificationTypeEnum.ERROR,
+          title: "Ajout impossible",
+          message: USER_ALREADY_IN_GROUP_ERROR,
+        });
+        return;
+      }
+
       addUserToGroupState(result);
 
       showNotification({
@@ -53,16 +65,29 @@ export default function AddUserModal({
     },
   });
 
+  const userEmail = inputEmail.trim();
+  const isUserAlreadyInGroup =
+    group.users.some(
+      (user) => user.email.trim().toLowerCase() === userEmail.toLowerCase()
+    ) || validationErrors.includes(USER_ALREADY_IN_GROUP_ERROR);
+  const emailErrors = isUserAlreadyInGroup
+    ? [USER_ALREADY_IN_GROUP_ERROR]
+    : validationErrors;
+  const isAddDisabled =
+    !userEmail || mutation.isPending || isUserAlreadyInGroup;
+
   useEffect(() => {
     if (inputRef.current && isVisible) {
       inputRef.current.focus();
     }
   }, [isVisible]);
 
-  const handleAddNewUser = async () => {
-    setValidationErrors([]);
+  const handleAddNewUser = () => {
+    if (isAddDisabled) {
+      return;
+    }
 
-    const userEmail = inputEmail.trim();
+    setValidationErrors([]);
 
     const emailValidationError = validateEmail(userEmail);
     if (emailValidationError) {
@@ -71,17 +96,6 @@ export default function AddUserModal({
         type: NotificationTypeEnum.ERROR,
         title: "Ajout impossible",
         message: emailValidationError,
-      });
-      return;
-    }
-
-    // Check if user already exists in group
-    if (group.users.some((user: IRolesDataUser) => user.email === userEmail)) {
-      setValidationErrors(["Cet utilisateur est déjà membre de ce groupe"]);
-      showNotification({
-        type: NotificationTypeEnum.ERROR,
-        title: "Ajout impossible",
-        message: "Cet utilisateur est déjà membre de ce groupe",
       });
       return;
     }
@@ -122,7 +136,7 @@ export default function AddUserModal({
 
           <div
             className={`fr-input-group fr-mb-4w ${
-              validationErrors.length > 0 ? "fr-input-group--error" : ""
+              emailErrors.length > 0 ? "fr-input-group--error" : ""
             }`}
           >
             <label className="fr-label" htmlFor={`new-user-email-${group.id}`}>
@@ -131,10 +145,10 @@ export default function AddUserModal({
             <div className="fr-input-wrap">
               <input
                 aria-describedby={
-                  validationErrors.length > 0 ? `error-${group.id}` : undefined
+                  emailErrors.length > 0 ? `error-${group.id}` : undefined
                 }
                 className={`fr-input ${
-                  validationErrors.length > 0 ? "fr-input--error" : ""
+                  emailErrors.length > 0 ? "fr-input--error" : ""
                 }`}
                 disabled={mutation.isPending}
                 id={`new-user-email-${group.id}`}
@@ -145,11 +159,7 @@ export default function AddUserModal({
                   }
                 }}
                 onKeyDown={(e) => {
-                  if (
-                    e.key === "Enter" &&
-                    inputEmail?.trim() &&
-                    !mutation.isPending
-                  ) {
+                  if (e.key === "Enter" && !isAddDisabled) {
                     handleAddNewUser();
                   }
                 }}
@@ -159,9 +169,9 @@ export default function AddUserModal({
                 value={inputEmail}
               />
             </div>
-            {validationErrors.length > 0 && (
+            {emailErrors.length > 0 && (
               <div className="fr-messages-group" id={`error-${group.id}`}>
-                {validationErrors.map((errorMsg, index) => (
+                {emailErrors.map((errorMsg, index) => (
                   <p className="fr-message fr-message--error" key={index}>
                     {errorMsg}
                   </p>
@@ -171,10 +181,7 @@ export default function AddUserModal({
           </div>
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
-            <ButtonLink
-              disabled={!inputEmail?.trim() || mutation.isPending}
-              onClick={handleAddNewUser}
-            >
+            <ButtonLink disabled={isAddDisabled} onClick={handleAddNewUser}>
               {mutation.isPending ? "Ajout en cours..." : "Ajouter"}
             </ButtonLink>
             <ButtonLink alt disabled={mutation.isPending} onClick={handleClose}>
