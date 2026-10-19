@@ -40,36 +40,40 @@ function RouteComponent() {
         Retrouvez sur cette page comment rendre ces données accessibles à vos
         utilisateurs et partenaires.
       </p>
-      <p>Table des matières</p>
-      <ul>
-        <li>
-          <a href="#link">
-            Ajouter un lien vers une fiche entreprise sur son site web
-          </a>
-        </li>
-        <li>
-          <a href="#qr">Générer un QR code vers une fiche entreprise</a>
-        </li>
-        <li>
-          <a href="#link-search">Aider à la saisie de numéro de Siret/Siren</a>
-        </li>
-        {/* <li>
+      <nav aria-label="Sommaire">
+        <h2 className="fr-h6">Table des matières</h2>
+        <ul>
+          <li>
+            <a href="#link">
+              Ajouter un lien vers une fiche entreprise sur son site web
+            </a>
+          </li>
+          <li>
+            <a href="#qr">Générer un QR code vers une fiche entreprise</a>
+          </li>
+          <li>
+            <a href="#link-search">
+              Aider à la saisie de numéro de Siret/Siren
+            </a>
+          </li>
+          {/* <li>
             <a href="#search">
               Ajouter un champ d’auto complétion de numéro siren dans un
               formulaire
             </a>
           </li> */}
-        <li>
-          <a href="#browser-search-engine">
-            Ajouter le moteur de recherche à votre navigateur
-          </a>
-        </li>
-        <li>
-          <a href="#api">
-            Réutiliser les données de l’Annuaire des Entreprises
-          </a>
-        </li>
-      </ul>
+          <li>
+            <a href="#browser-search-engine">
+              Ajouter le moteur de recherche à votre navigateur
+            </a>
+          </li>
+          <li>
+            <a href="#api">
+              Réutiliser les données de l’Annuaire des Entreprises
+            </a>
+          </li>
+        </ul>
+      </nav>
       <div>
         <h2 id="link">
           Ajouter un lien vers une fiche entreprise sur son site web
@@ -106,6 +110,7 @@ function RouteComponent() {
           <code>
             {`
 <iframe
+  title="Consulter la fiche de l’entreprise dans l’Annuaire des Entreprises"
   width="290"
   height="100"
   style="border: none; max-width: 100%;"
@@ -119,6 +124,7 @@ function RouteComponent() {
           <code>
             {`
 <iframe
+  title="Consulter la fiche de l’entreprise dans l’Annuaire des Entreprises"
   width="290"
   height="100"
   style="border: none; max-width: 100%;"
@@ -165,7 +171,7 @@ function RouteComponent() {
           </li>
           <li>Trouvez l’entreprise et accédez à sa fiche</li>
           <li>
-            Cliquez en haut à droite de la page, sur le petit logo{" "}
+            Cliquez en haut à droite de la page, sur le bouton « QR code »{" "}
             <Icon slug="qrCode" />
           </li>
           <li>Sauvegardez le QR code ainsi généré</li>
