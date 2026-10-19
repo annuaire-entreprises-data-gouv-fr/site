@@ -15,7 +15,7 @@
   target:
     site: true
   body: |
-    Ajout des données relatives aux procédures collectives et aux radiations issues du BODACC.
+    Ajout des données relatives aux procédures collectives et aux radiations issues du BODACC dans l'état des inscriptions.
 - date: 22/07/2026
   target:
     site: true
