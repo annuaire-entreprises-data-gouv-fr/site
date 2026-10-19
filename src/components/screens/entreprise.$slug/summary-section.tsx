@@ -65,8 +65,8 @@ const UniteLegaleSummarySection: React.FC<{
         <UniteLegaleInscriptionRNE uniteLegale={uniteLegale} user={user} />
         <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
         <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
-        <UniteLegaleRadiationRCS uniteLegale={uniteLegale} user={user} />
-        <UniteLegaleProcedureCollective uniteLegale={uniteLegale} user={user} />
+        <UniteLegaleRadiationRCS uniteLegale={uniteLegale} />
+        <UniteLegaleProcedureCollective uniteLegale={uniteLegale} />
       </>,
     ],
     ["", <br />],

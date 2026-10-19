@@ -3,12 +3,7 @@ import { OpenClosedTag } from "#/components-ui/badge/frequent";
 import ButtonLink from "#/components-ui/button";
 import { Icon } from "#/components-ui/icon/wrapper";
 import InformationTooltip from "#/components-ui/information-tooltip";
-import { useFeatureFlag } from "#/hooks/use-feature-flag";
-import type { IAgentInfo } from "#/models/authentication/agent";
-import {
-  ApplicationRights,
-  hasRights,
-} from "#/models/authentication/user/rights";
+import { estActif } from "#/models/core/etat-administratif";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 import styles from "./style.module.css";
@@ -21,27 +16,18 @@ const Wrapper: React.FC<PropsWithChildren> = ({ children }) => (
 
 export const UniteLegaleRadiationRCS = ({
   uniteLegale,
-  user,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
 }) => {
-  const isBodaccRadiationDisplayed = useFeatureFlag(
-    "bodacc_radiation_displayed"
-  );
-
-  if (
-    !(
-      isBodaccRadiationDisplayed.isEnabled &&
-      hasRights({ user }, ApplicationRights.isAgent) &&
-      uniteLegale.bodacc?.radiation?.estRadie
-    )
-  ) {
+  if (!uniteLegale.bodacc?.radiation?.estRadie) {
     return null;
   }
 
   const shouldShowErrorDeclaration =
-    !!uniteLegale.dateMiseAJourInsee && !!uniteLegale.dateMiseAJourInpi;
+    !!uniteLegale.dateMiseAJourInsee &&
+    estActif(uniteLegale) &&
+    !!uniteLegale.dateMiseAJourInpi &&
+    !uniteLegale.immatriculation?.dateRadiation;
 
   return (
     <Wrapper>
@@ -83,7 +69,7 @@ export const UniteLegaleRadiationRCS = ({
             to="/faq/parcours?userType=none&questionType=contact"
           >
             <Icon slug="flagLine" />
-            Signaler une erreur
+            Signaler une anomalie
           </ButtonLink>
         </InformationTooltip>
       )}
