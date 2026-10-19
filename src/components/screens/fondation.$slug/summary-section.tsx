@@ -74,11 +74,8 @@ const FondationSummarySection: React.FC<{
               />
               <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
               <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />
-              <UniteLegaleRadiationRCS uniteLegale={uniteLegale} user={user} />
-              <UniteLegaleProcedureCollective
-                uniteLegale={uniteLegale}
-                user={user}
-              />
+              <UniteLegaleRadiationRCS uniteLegale={uniteLegale} />
+              <UniteLegaleProcedureCollective uniteLegale={uniteLegale} />
             </>
           )}
         </>,

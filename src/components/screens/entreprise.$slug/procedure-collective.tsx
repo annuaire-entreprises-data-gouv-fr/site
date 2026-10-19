@@ -1,12 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { OpenClosedTag } from "#/components-ui/badge/frequent";
 import InformationTooltip from "#/components-ui/information-tooltip";
-import { useFeatureFlag } from "#/hooks/use-feature-flag";
-import type { IAgentInfo } from "#/models/authentication/agent";
-import {
-  ApplicationRights,
-  hasRights,
-} from "#/models/authentication/user/rights";
 import type { IUniteLegale } from "#/models/core/types";
 import { formatDate } from "#/utils/helpers";
 import styles from "./style.module.css";
@@ -32,21 +26,10 @@ const getStatutLabel = (statut: string) => {
 
 export const UniteLegaleProcedureCollective = ({
   uniteLegale,
-  user,
 }: {
   uniteLegale: IUniteLegale;
-  user: IAgentInfo | null;
 }) => {
-  const isBodaccProcedureCollectiveDisplayed = useFeatureFlag(
-    "bodacc_procedure_collective_displayed"
-  );
-  if (
-    !(
-      isBodaccProcedureCollectiveDisplayed.isEnabled &&
-      hasRights({ user }, ApplicationRights.isAgent) &&
-      uniteLegale.bodacc?.procedureCollective?.statut
-    )
-  ) {
+  if (!uniteLegale.bodacc?.procedureCollective?.statut) {
     return null;
   }
 

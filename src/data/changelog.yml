@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 19/10/2026
+  target:
+    site: true
+  body: |
+    Ajout des données relatives aux procédures collectives et aux radiations issues du BODACC.
 - date: 22/07/2026
   target:
     site: true
