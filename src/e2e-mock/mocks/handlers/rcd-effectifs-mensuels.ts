@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import effectifs from "../../fixtures/rcd-effectifs-mensuels.json" with {
   type: "json",
 };

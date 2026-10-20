@@ -1,11 +1,18 @@
 import { addOverlay, mapStyles, Overlay, SearchControl } from "carte-facile";
-import maplibregl, { type GeoJSONSource } from "maplibre-gl";
+import type { Feature, Polygon } from "geojson";
+import {
+  type GeoJSONSource,
+  LngLatBounds,
+  Map as MapLibreMap,
+  NavigationControl,
+} from "maplibre-gl";
+import "#/components/map/maplibre-worker";
 import { useEffect, useId, useRef } from "react";
 import type { IGeoCommune } from "#/clients/api-geo/interface";
 
 interface ICollectiviteMapProps {
   geoCommune: IGeoCommune;
-  onMapReady?: (map: maplibregl.Map) => void;
+  onMapReady?: (map: MapLibreMap) => void;
   onMapUnload?: () => void;
   withCadastre?: boolean;
   withSearch?: boolean;
@@ -20,9 +27,7 @@ interface CommuneContour {
   type: "Polygon";
 }
 
-function buildCommuneFeature(
-  contour: CommuneContour
-): GeoJSON.Feature<GeoJSON.Polygon> {
+function buildCommuneFeature(contour: CommuneContour): Feature<Polygon> {
   return {
     geometry: contour,
     properties: {},
@@ -31,7 +36,7 @@ function buildCommuneFeature(
 }
 
 function getCommuneBounds(contour: CommuneContour) {
-  const bounds = new maplibregl.LngLatBounds();
+  const bounds = new LngLatBounds();
 
   for (const ring of contour.coordinates) {
     for (const coordinate of ring) {
@@ -42,7 +47,7 @@ function getCommuneBounds(contour: CommuneContour) {
   return bounds;
 }
 
-function drawCommuneOnMap(map: maplibregl.Map, contour: CommuneContour) {
+function drawCommuneOnMap(map: MapLibreMap, contour: CommuneContour) {
   const communeFeature = buildCommuneFeature(contour);
   const source = map.getSource(communeSourceId) as GeoJSONSource | undefined;
 
@@ -101,12 +106,12 @@ export function CollectiviteMap({
   withCadastre = false,
   withSearch = false,
 }: ICollectiviteMapProps) {
-  const mapRef = useRef<maplibregl.Map | null>(null);
+  const mapRef = useRef<MapLibreMap | null>(null);
   const mapContainerId = useId();
 
   useEffect(() => {
     // Création la carte
-    const map = new maplibregl.Map({
+    const map = new MapLibreMap({
       container: mapContainerId, // id du conteneur de la carte
       style: mapStyles.simple, // style de carte
       maxZoom: 18.9, // niveau de zoom maximum, adapté aux cartes utilisant les données IGN
@@ -126,7 +131,7 @@ export function CollectiviteMap({
       );
     }
 
-    map.addControl(new maplibregl.NavigationControl());
+    map.addControl(new NavigationControl());
 
     addOverlay(
       map,

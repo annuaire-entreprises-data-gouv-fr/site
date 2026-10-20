@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import mandatairesRcs from "../../fixtures/mandataires-rcs.json" with {
   type: "json",
 };

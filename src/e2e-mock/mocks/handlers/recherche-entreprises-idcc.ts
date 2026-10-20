@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import rechercheEntrepriseIdcc from "../../fixtures/recherche-entreprise-idcc.json" with {
   type: "json",
 };

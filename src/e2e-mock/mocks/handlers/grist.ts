@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 
 export const gristHandler: HttpResponseResolver = ({ request }) => {
   if (request.url.includes("NPS_Feedbacks")) {

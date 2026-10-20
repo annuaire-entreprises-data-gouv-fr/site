@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import apiInclusion from "../../fixtures/api-inclusion.json" with {
   type: "json",
 };

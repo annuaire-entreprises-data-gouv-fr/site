@@ -58,6 +58,22 @@ if (isSentryActivated) {
     },
     tracesSampleRate: 0.005,
     maxBreadcrumbs: 0, // dont log breadcrumb
+    // Sentry v11 collects user info, cookies, headers and bodies by default:
+    // keep the restrictive v10 behaviour (sendDefaultPii: false)
+    dataCollection: {
+      userInfo: false,
+      cookies: false,
+      httpHeaders: {
+        request: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+        response: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      },
+      httpBodies: [],
+      urlQueryParams: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      genAI: { inputs: false, outputs: false },
+      databaseQueryData: false,
+      queues: false,
+      graphQL: { document: false, variables: false },
+    },
     beforeSend(event, hint) {
       // Grouping logic for custom exceptions
       const originalException = hint.originalException;

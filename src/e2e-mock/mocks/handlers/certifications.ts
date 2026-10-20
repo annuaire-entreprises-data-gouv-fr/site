@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import certifications from "../../fixtures/certifications.json" with {
   type: "json",
 };

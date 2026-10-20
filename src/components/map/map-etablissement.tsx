@@ -1,4 +1,5 @@
-import maplibregl, { type Map as MapLibreMap } from "maplibre-gl";
+import { Map as MapLibreMap, Marker, Popup } from "maplibre-gl";
+import "./maplibre-worker";
 import { useFetchGeoLoc } from "#/hooks/fetch/geoloc";
 import constants from "#/models/constants";
 import type { IEtablissement } from "#/models/core/types";
@@ -25,7 +26,7 @@ export function MapEtablissement({
     if (hasAnyError(coords)) {
       return; // should not be displayed
     }
-    if (map.current || !coords) {
+    if (map.current || !coords || !mapContainer.current) {
       return; // stops map from intializing more than once
     }
     if (!hasWebGLSupport()) {
@@ -38,8 +39,7 @@ export function MapEtablissement({
 
     const zoom = etablissement ? 12 : 4.5;
 
-    map.current = new maplibregl.Map({
-      //@ts-expect-error
+    map.current = new MapLibreMap({
       container: mapContainer.current,
       style:
         "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
@@ -49,11 +49,11 @@ export function MapEtablissement({
       attributionControl: { compact: true },
     });
 
-    const popup = new maplibregl.Popup({ offset: 30 }).setHTML(
+    const popup = new Popup({ offset: 30 }).setHTML(
       `<div>📍${etablissement.adresse}</div>`
     );
 
-    new maplibregl.Marker({ color: constants.colors.frBlue })
+    new Marker({ color: constants.colors.frBlue })
       .setLngLat(coords)
       .setPopup(popup)
       .addTo(map.current);

@@ -1,4 +1,5 @@
-import maplibregl, { type Map as MapLibreMap } from "maplibre-gl";
+import { Map as MapLibreMap, Marker, Popup } from "maplibre-gl";
+import "./maplibre-worker";
 import constants from "#/models/constants";
 import type { ISearchResults } from "#/models/search";
 import { formatIntFr, formatSiret } from "#/utils/helpers";
@@ -33,7 +34,7 @@ function MapWithResults({
       return;
     }
 
-    map.current = new maplibregl.Map({
+    map.current = new MapLibreMap({
       container: mapContainer.current,
       style:
         "https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json",
@@ -57,7 +58,7 @@ function MapWithResults({
       );
 
       if (coordsSiege) {
-        const popup = new maplibregl.Popup({ offset: 25 }).setHTML(
+        const popup = new Popup({ offset: 25 }).setHTML(
           `<div><strong><a href="/entreprise/${result.chemin}">${formatIntFr(
             result.siren
           )}</a></strong><br/>${result.nomComplet}<br/>📍${
@@ -65,7 +66,7 @@ function MapWithResults({
           }</div>`
         );
 
-        new maplibregl.Marker({ color: constants.colors.frBlue })
+        new Marker({ color: constants.colors.frBlue })
           .setLngLat([
             Number.parseFloat(result.siege.longitude),
             Number.parseFloat(result.siege.latitude),
@@ -81,7 +82,7 @@ function MapWithResults({
 
         const coordsEtab = checkLatLng(match.latitude, match.longitude);
         if (coordsEtab) {
-          const popup = new maplibregl.Popup({ offset: 25 }).setHTML(
+          const popup = new Popup({ offset: 25 }).setHTML(
             `<div><strong><a href="/etablissement/${match.siret}">${formatSiret(
               match.siret
             )}</a></strong><br/>Etablissement secondaire de <a href="/entreprise/${
@@ -89,7 +90,7 @@ function MapWithResults({
             }">${result.nomComplet}</a><br/>📍${match.adresse}</div>`
           );
 
-          new maplibregl.Marker({
+          new Marker({
             color: shouldColorZipCode ? "yellow" : constants.colors.pastelBlue,
           })
             .setLngLat([

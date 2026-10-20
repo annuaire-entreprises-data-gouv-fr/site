@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import baseAdresseNationale from "../../fixtures/base-adresse-nationale.json" with {
   type: "json",
 };

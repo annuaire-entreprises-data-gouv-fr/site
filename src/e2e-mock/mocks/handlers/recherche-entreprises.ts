@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 
 function getProjectRoot() {
   return process.cwd();

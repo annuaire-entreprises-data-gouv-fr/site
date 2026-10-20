@@ -1,11 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import {
-  HttpResponse,
-  type HttpResponseResolver,
-  http,
-  type JsonBodyType,
-} from "msw";
+import type { JsonBodyType } from "msw";
+import { HttpResponse, type HttpResponseResolver, http } from "msw/http";
 import { setupServer } from "msw/node";
 import routes from "#/clients/routes";
 

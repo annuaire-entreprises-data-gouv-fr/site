@@ -73,7 +73,7 @@ if (process.env.MOCK_API_RECHERCHE_ENTREPRISE !== "false") {
     ({ rechercheEntrepriseMockServer } = await import(
       "./unit-tests/recherche-entreprise/server"
     ));
-    rechercheEntrepriseMockServer.listen({ onUnhandledRequest: "bypass" });
+    rechercheEntrepriseMockServer.listen({ onUnhandledFrame: "bypass" });
   });
 
   afterEach(() => {

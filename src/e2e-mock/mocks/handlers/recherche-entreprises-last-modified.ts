@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import rechercheEntrepriseLastModified from "../../fixtures/recherche-entreprise-last-modified.json" with {
   type: "json",
 };

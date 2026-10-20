@@ -1,5 +1,4 @@
-import type maplibregl from "maplibre-gl";
-import type { MapLayerMouseEvent } from "maplibre-gl";
+import type { MapLayerMouseEvent, Map as MapLibreMap } from "maplibre-gl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { communeLineLayerId } from "../map";
 
@@ -120,7 +119,7 @@ function createRnbBuildingIcon() {
 export function useRnbBuildings() {
   const abortControllerRef = useRef<AbortController | null>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
-  const mapRef = useRef<maplibregl.Map | null>(null);
+  const mapRef = useRef<MapLibreMap | null>(null);
   const requestIdRef = useRef(0);
   const [selectedBuilding, setSelectedBuilding] =
     useState<RnbBuildingSelection>({
@@ -164,7 +163,7 @@ export function useRnbBuildings() {
   }, [abortCurrentRequest]);
 
   const onMapLoad = useCallback(
-    (map: maplibregl.Map) => {
+    (map: MapLibreMap) => {
       if (!map.getSource(rnbBuildingsSourceId)) {
         map.addSource(rnbBuildingsSourceId, {
           minzoom: rnbBuildingsMinZoom,

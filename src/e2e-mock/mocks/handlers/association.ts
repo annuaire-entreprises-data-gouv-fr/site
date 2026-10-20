@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import apiAssociationPrivate from "../../fixtures/api-association-private.json" with {
   type: "json",
 };

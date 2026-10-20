@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import carteProfessionnelleTravauxPublics from "../../fixtures/carte-professionnelle-travaux-publics.json" with {
   type: "json",
 };
