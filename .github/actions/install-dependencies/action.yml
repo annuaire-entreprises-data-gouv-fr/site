@@ -16,11 +16,9 @@ runs:
         cache-name: cache-node-modules
       with:
         path: ./node_modules
-        key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-cache-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+        # No restore-keys: installing over a node_modules restored from an older
+        # lockfile leaves stale packages behind (e.g. an old @sentry/core)
+        key: ${{ runner.os }}-pnpm-node-modules-v2-${{ hashFiles('**/pnpm-lock.yaml') }}
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile --prod=false --ignore-scripts

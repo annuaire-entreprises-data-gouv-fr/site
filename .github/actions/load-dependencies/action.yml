@@ -15,4 +15,4 @@ runs:
         cache-name: cache-node-modules
       with:
         path: ./node_modules
-        key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
+        key: ${{ runner.os }}-pnpm-node-modules-v2-${{ hashFiles('**/pnpm-lock.yaml') }}
