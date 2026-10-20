@@ -45,6 +45,9 @@ const UniteLegaleSummarySection: React.FC<{
 }> = ({ uniteLegale, user }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
   const conventionsCollectives = uniteLegale.listeIdcc;
+  const displaysBodaccData =
+    !!uniteLegale.bodacc?.radiation?.estRadie ||
+    !!uniteLegale.bodacc?.procedureCollective?.statut;
 
   const data = [
     [
@@ -217,6 +220,7 @@ const UniteLegaleSummarySection: React.FC<{
           ...(hasRights({ user }, ApplicationRights.effectifs)
             ? [EAdministration.GIP_MDS]
             : []),
+          ...(displaysBodaccData ? [EAdministration.DILA] : []),
         ]}
         title={`Informations légales de ${uniteLegale.nomComplet}`}
       >
