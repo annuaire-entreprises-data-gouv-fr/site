@@ -7,7 +7,7 @@ export const FEATURE_FLAGS = [
   "incident_banner_displayed",
   "proconnect_incident_banner_displayed",
   "partners_data_incident_banner_displayed",
-  "proconnect_migration_banner_displayed",
+  "insee_incident_banner_displayed",
   "fondations_enabled",
   "collectivite_territoriale_enabled",
 ] as const;
