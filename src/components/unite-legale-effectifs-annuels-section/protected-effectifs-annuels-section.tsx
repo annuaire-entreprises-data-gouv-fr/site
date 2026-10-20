@@ -73,14 +73,14 @@ const ProtectedUniteLegaleEffectifsAnnuelsSection = ({
     }),
     [selectedNatureEffectif, uniteLegale.siren, useCase]
   );
-  const effectifsAnnuelsProtected = useServerFnData(
+  const effectifsAnnuelsProtectedRequest = useServerFnData(
     getAgentEffectifsAnnuelsProtectedFn,
     input
   );
 
   return (
     <AsyncDataSectionClient
-      data={effectifsAnnuelsProtected}
+      data={effectifsAnnuelsProtectedRequest}
       header={
         <div className="fr-grid-row fr-grid-row--gutters fr-mb-2w">
           <div className="fr-col-12">

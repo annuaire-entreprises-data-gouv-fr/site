@@ -20,9 +20,9 @@ import { formatDate, formatSiret, pluralize } from "#/utils/helpers";
 export const CertificationsBioSection: React.FC<{
   uniteLegale: IUniteLegale;
   bio: IEtablissementsBio | IAPINotRespondingError;
-}> = ({ bio }) => (
+}> = ({ bio: bioRequest }) => (
   <DataSection
-    data={bio}
+    data={bioRequest}
     id="professionnel-du-bio"
     notFoundInfo={
       <>

@@ -3,7 +3,7 @@ import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import { verifySiren } from "#/utils/helpers";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchAidesADEME(uniteLegale: IUniteLegale, page = 1) {

@@ -5,7 +5,7 @@ import type { IUniteLegale } from "#/models/core/types";
 import type { IDataFetchingState } from "#/models/data-fetching";
 import { FetchRessourceException } from "#/models/exceptions";
 import type { IIndicateursFinanciersSociete } from "#/models/finances-societe/types";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchFinancesSociete(

@@ -26,7 +26,7 @@ export const Route = createFileRoute("/api/auth/agent-connect/login")({
           const referer = getRequestHeader("referer") || "";
           const baseURL = getBaseUrl();
           const isFromSite = referer.indexOf(baseURL) === 0;
-          const searchParams = new URL(request.url).searchParams;
+          const { searchParams } = new URL(request.url);
 
           const pathFrom =
             searchParams.get("pathFrom") ||

@@ -7,7 +7,7 @@ import {
 } from "#/models/api-not-responding";
 import { getUniteLegaleFromSlug } from "#/models/core/unite-legale";
 import { FetchRessourceException, Information } from "#/models/exceptions";
-import logErrorInSentry, { logInfoInSentry } from "#/utils/sentry";
+import { logErrorInSentry, logInfoInSentry } from "#/utils/sentry";
 
 export type ISubventions = ISubvention[];
 
@@ -48,14 +48,14 @@ export const getSubventionsAssociationFromSlug = async (
         })
       );
       return result;
-    } catch (e) {
-      if (e instanceof HttpNotFound) {
+    } catch (eFallback) {
+      if (eFallback instanceof HttpNotFound) {
         return APINotRespondingFactory(EAdministration.DJEPVA, 404);
       }
       logErrorInSentry(
         new FetchRessourceException({
           ressource: "DataSubvention",
-          cause: e,
+          cause: eFallback,
           context: {
             siren,
           },

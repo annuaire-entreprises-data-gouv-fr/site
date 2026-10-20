@@ -9,7 +9,7 @@ import { getRequestHeader } from "@tanstack/react-start/server";
 import z from "zod";
 import AssociationSection from "#/components/association-section";
 import CollectiviteTerritorialeSection from "#/components/collectivite-territoriale-section";
-import EspaceAgentSummarySection from "#/components/espace-agent-components/summary-section";
+import { EspaceAgentSummarySection } from "#/components/espace-agent-components/summary-section";
 import EtablissementListeSection from "#/components/etablissement-liste-section";
 import EtablissementSection from "#/components/etablissement-section";
 import MatomoEventFromRedirected from "#/components/matomo-event/search-redirected";
@@ -51,7 +51,7 @@ import {
   libelleFromDepartement,
 } from "#/utils/helpers/formatting/labels";
 import { verifySiren } from "#/utils/helpers/siren-and-siret";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { meta } from "#/utils/seo";
 import getSession from "#/utils/server-side-helper/get-session";
 import isUserAgentABot from "#/utils/user-agent";

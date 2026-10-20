@@ -76,7 +76,7 @@ if (isSentryActivated) {
     },
     beforeSend(event, hint) {
       // Grouping logic for custom exceptions
-      const originalException = hint.originalException;
+      const { originalException } = hint;
       if (shouldIgnoreServerException(event, originalException)) {
         return null;
       }
@@ -89,7 +89,7 @@ if (isSentryActivated) {
         "context" in originalException &&
         "name" in originalException
       ) {
-        const name = originalException.name;
+        const { name } = originalException;
         const message =
           "message" in originalException ? originalException.message : "";
         event.fingerprint = [name, message];

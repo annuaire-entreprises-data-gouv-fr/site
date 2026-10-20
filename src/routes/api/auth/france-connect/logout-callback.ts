@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Exception } from "#/models/exceptions";
 import { getBaseUrl } from "#/utils/get-base-url";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import {
   cleanAgentSession,
   getCurrentSession,

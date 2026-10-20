@@ -53,11 +53,11 @@ export default function AidesADEMEContent({
     [navigate]
   );
 
-  const aidesADEME = useFetchAidesADEME(uniteLegale, currentPage);
+  const aidesADEMERequest = useFetchAidesADEME(uniteLegale, currentPage);
 
   return (
     <AsyncDataSectionClient
-      data={aidesADEME}
+      data={aidesADEMERequest}
       id="aides-ademe"
       notFoundInfo={null}
       sources={[EAdministration.ADEME]}

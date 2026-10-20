@@ -5,7 +5,7 @@ import {
   type IAPINotRespondingError,
 } from "#/models/api-not-responding";
 import type { Siren } from "#/utils/helpers";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { EAdministration } from "./administrations/e-administration";
 import { FetchRessourceException } from "./exceptions";
 

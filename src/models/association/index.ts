@@ -12,7 +12,7 @@ import {
   type Siret,
 } from "#/utils/helpers";
 import { isAbortError } from "#/utils/helpers/is-abort-error";
-import logErrorInSentry, { logWarningInSentry } from "#/utils/sentry";
+import { logErrorInSentry, logWarningInSentry } from "#/utils/sentry";
 import { EAdministration } from "../administrations/e-administration";
 import {
   APINotRespondingFactory,
@@ -149,11 +149,11 @@ const verifyAdressConsistency = async (
         return true;
       }
 
-      const [adress1, adress2] = await Promise.all([
+      const [geoLoc1, geoLoc2] = await Promise.all([
         clientBanGeoLoc(adress1formatted),
         clientBanGeoLoc(adress2formatted),
       ]);
-      return adress1.geoCodedAdress !== adress2.geoCodedAdress;
+      return geoLoc1.geoCodedAdress !== geoLoc2.geoCodedAdress;
     }
     return false;
   } catch (e: any) {

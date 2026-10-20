@@ -14,8 +14,7 @@ const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
 );
 
-const colorResultat = constants.chartColors[1];
-const colorCA = constants.chartColors[4];
+const { 1: colorResultat, 4: colorCA } = constants.chartColors;
 
 /**
  * We use to have finances for association but data disappeared from open data API.
@@ -32,14 +31,14 @@ export default function FinancesAssociationSection({
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const data = useServerFnData(getAssociationFn, input);
-  if (!data) {
+  const dataRequest = useServerFnData(getAssociationFn, input);
+  if (!dataRequest) {
     return null;
   }
 
   return (
     <DataSectionClient
-      data={data}
+      data={dataRequest}
       id="finances-association"
       notFoundInfo="Aucun indicateur financier n’a été retrouvé pour cette association."
       sources={[EAdministration.DJEPVA]}

@@ -39,7 +39,7 @@ test.describe("Footer navigation", () => {
   }) => {
     await goto(page, "/");
 
-    const origin = new URL(baseURL ?? "http://localhost:3000").origin;
+    const { origin } = new URL(baseURL ?? "http://localhost:3000");
     const hrefs = await page
       .locator(".fr-footer a")
       .evaluateAll((links) =>
@@ -51,6 +51,7 @@ test.describe("Footer navigation", () => {
         href.startsWith(origin) &&
         !href.includes("departements/index.html")
       ) {
+        // biome-ignore lint/performance/noAwaitInLoops: sequential requests keep the dev server from compiling every page at once
         const response = await request.get(href);
         expect(response.ok()).toBeTruthy();
       }

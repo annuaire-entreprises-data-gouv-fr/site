@@ -3,7 +3,7 @@ import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import type { IServicePublic } from "#/models/service-public";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchServicePublicSubServices(

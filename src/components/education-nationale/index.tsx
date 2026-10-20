@@ -12,9 +12,9 @@ import { pluralize } from "#/utils/helpers";
 
 export const EtablissementsScolairesSection: React.FC<{
   etablissements: IEtablissementsScolaires | IAPINotRespondingError;
-}> = ({ etablissements }) => (
+}> = ({ etablissements: etablissementsRequest }) => (
   <DataSection
-    data={etablissements}
+    data={etablissementsRequest}
     notFoundInfo={
       <p>
         Nous n’avons pas retrouvé les établissements scolaires de cette entité

@@ -187,7 +187,7 @@ export function GroupItem({
                         setGroup({
                           ...group,
                           users: group.users.filter(
-                            (user) => user.email !== userEmail
+                            (groupUser) => groupUser.email !== userEmail
                           ),
                         });
                       }

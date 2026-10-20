@@ -47,9 +47,9 @@ export const MultiSelect = ({
     return null;
   };
 
-  const handleChange = (options: MultiValue<ISelectOptions>) => {
+  const handleChange = (selectedOptions: MultiValue<ISelectOptions>) => {
     if (onChange) {
-      onChange(options.map((o) => o.value));
+      onChange(selectedOptions.map((o) => o.value));
     }
   };
 

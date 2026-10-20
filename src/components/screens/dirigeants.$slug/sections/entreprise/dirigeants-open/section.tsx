@@ -24,11 +24,11 @@ export default function DirigeantsSection({ uniteLegale }: IProps) {
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const dirigeants = useServerFnData(getRneDirigeantsFn, input);
+  const dirigeantsRequest = useServerFnData(getRneDirigeantsFn, input);
 
   return (
     <AsyncDataSectionClient
-      data={dirigeants}
+      data={dirigeantsRequest}
       id="dirigeants-section"
       isProtected={false}
       notFoundInfo={

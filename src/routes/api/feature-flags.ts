@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Exception } from "#/models/exceptions";
 import { getFeatureFlagsList } from "#/models/feature-flags";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { defaultHeadersMiddleware } from "./-middlewares";
 
 export const Route = createFileRoute("/api/feature-flags")({

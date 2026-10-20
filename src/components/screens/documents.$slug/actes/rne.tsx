@@ -20,7 +20,7 @@ export const AgentActesRNE: React.FC<{
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const documentsRne = useServerFnData(
+  const documentsRneRequest = useServerFnData(
     getAgentRneDocumentsFn,
     input,
     ApplicationRights.documentsRne
@@ -28,7 +28,7 @@ export const AgentActesRNE: React.FC<{
 
   return (
     <DataSectionClient
-      data={documentsRne}
+      data={documentsRneRequest}
       id="actes"
       isProtected
       notFoundInfo={

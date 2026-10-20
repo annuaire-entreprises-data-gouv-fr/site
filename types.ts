@@ -10,14 +10,14 @@ declare global {
   interface Window {
     _paq: any[];
     matomoAbTesting?: {
-      getVariation<T extends keyof MatomoAbTestVariations>(
+      getVariation: <T extends keyof MatomoAbTestVariations>(
         name: T
-      ): MatomoAbTestVariations[T];
-      setVariation<T extends keyof MatomoAbTestVariations>(
+      ) => MatomoAbTestVariations[T];
+      setVariation: <T extends keyof MatomoAbTestVariations>(
         name: T,
         variation: MatomoAbTestVariations[T]
-      ): void;
-      subscribe(listener: () => void): () => void;
+      ) => void;
+      subscribe: (listener: () => void) => () => void;
       variations: MatomoAbTestVariations;
     };
   }

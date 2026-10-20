@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 function generateAsciiGraph(data) {
   const frequencyMap = data.reduce((acc, value) => {
     acc[value] = (acc[value] || 0) + 1;

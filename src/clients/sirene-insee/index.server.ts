@@ -8,12 +8,13 @@ import {
 } from "#/models/authentication/user/rights";
 import constants from "#/models/constants";
 import { Exception, Information } from "#/models/exceptions";
-import httpClient, {
+import {
+  httpClient,
   httpGet,
   httpPost,
   type IDefaultRequestConfig,
 } from "#/utils/network";
-import logErrorInSentry, { logInfoInSentry } from "#/utils/sentry";
+import { logErrorInSentry, logInfoInSentry } from "#/utils/sentry";
 import getSession from "#/utils/server-side-helper/get-session";
 
 interface IAccessToken {

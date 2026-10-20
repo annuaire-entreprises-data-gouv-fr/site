@@ -40,16 +40,15 @@ export default function HidePersonalDataPageClient({
 
       const data = await response.json();
       setFormState(data);
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
       } else {
         setError("Une erreur inattendue est survenue.");
       }
     }
   };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: scroll to top only when formState changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [formState]);

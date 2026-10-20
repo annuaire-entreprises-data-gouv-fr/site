@@ -8,7 +8,7 @@ import {
 } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
 import type { Siren } from "#/utils/helpers";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 
 export interface IEgapro {
   index: {

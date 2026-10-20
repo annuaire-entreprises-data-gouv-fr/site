@@ -33,20 +33,22 @@ function DirigeantsAssociationSection({ uniteLegale }: IProps) {
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const associationProtected = useServerFnData(
+  const associationProtectedRequest = useServerFnData(
     getAgentAssociationProtectedFn,
     input,
     ApplicationRights.associationProtected
   );
 
   const etablissementsForFilter = useMemo(() => {
-    if (!isDataSuccess(associationProtected)) {
+    if (!isDataSuccess(associationProtectedRequest)) {
       return [];
     }
-    return extractAssociationEtablissements(associationProtected.dirigeants);
-  }, [associationProtected]);
+    return extractAssociationEtablissements(
+      associationProtectedRequest.dirigeants
+    );
+  }, [associationProtectedRequest]);
 
-  if (isUnauthorized(associationProtected)) {
+  if (isUnauthorized(associationProtectedRequest)) {
     return (
       <AgentWallAssociationProtected
         id="dirigeants"
@@ -58,7 +60,7 @@ function DirigeantsAssociationSection({ uniteLegale }: IProps) {
 
   return (
     <DataSectionClient
-      data={associationProtected}
+      data={associationProtectedRequest}
       id="rna-dirigeants"
       isProtected
       notFoundInfo={<NoDirigeants />}

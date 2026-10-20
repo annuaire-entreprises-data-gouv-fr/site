@@ -21,9 +21,7 @@ import { BilanTypeTag } from "../bilan-tag";
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
 );
-const colorResultat = constants.chartColors[1];
-const colorCA = constants.chartColors[4];
-const colorCADGFiP = constants.chartColors[3];
+const { 1: colorResultat, 4: colorCA, 3: colorCADGFiP } = constants.chartColors;
 
 export function FinancesSocieteChartAndTable({
   indicateurs,

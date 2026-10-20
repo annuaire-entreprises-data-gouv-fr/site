@@ -13,7 +13,8 @@ import {
   type Siret,
   verifySiret,
 } from "#/utils/helpers";
-import logErrorInSentry, {
+import {
+  logErrorInSentry,
   logFatalErrorInSentry,
   logWarningInSentry,
 } from "#/utils/sentry";
@@ -161,7 +162,7 @@ const fetchEtablissmentFromInsee = async (
       return createNonDiffusibleEtablissement(siret);
     }
     if (e instanceof HttpNotFound) {
-      throw new SiretNotFoundError(siret);
+      throw new SiretNotFoundError(siret, { cause: e });
     }
 
     if (!useFallback) {

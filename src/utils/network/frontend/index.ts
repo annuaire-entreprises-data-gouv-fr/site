@@ -5,7 +5,7 @@ import {
   type IExceptionContext,
   InternalError,
 } from "#/models/exceptions";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import type { IDefaultRequestConfig } from "..";
 import { httpErrorHandler } from "../utils/http-error-handler";
 
@@ -80,8 +80,10 @@ export async function httpFrontClient<T>(config: IDefaultRequestConfig) {
     if (e instanceof TypeError && pendingUnload) {
       // Chrome and firefox systematically throw a TypeError when aborting a fetch when the user is navigating away
       // We don't want this error to bubble though the app
+      // biome-ignore lint/style/useErrorCause: cause is passed in the Exception arguments
       throw new RequestAbortedDuringUnloadException(errorArgs);
     }
+    // biome-ignore lint/style/useErrorCause: cause is passed in the Exception arguments
     throw new FailToFetchError(errorArgs, e.status);
   } finally {
     clearTimeout(timeoutId);
@@ -119,5 +121,3 @@ export class FailToFetchError extends Exception {
     this.status = status;
   }
 }
-
-export default httpFrontClient;

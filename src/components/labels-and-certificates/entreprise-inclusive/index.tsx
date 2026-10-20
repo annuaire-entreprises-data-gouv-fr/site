@@ -11,9 +11,9 @@ import { formatSiret } from "#/utils/helpers";
 
 export const EntrepriseInclusiveSection: React.FC<{
   entrepriseInclusive: ICertifications["entrepriseInclusive"];
-}> = ({ entrepriseInclusive }) => (
+}> = ({ entrepriseInclusive: entrepriseInclusiveRequest }) => (
   <DataSection
-    data={entrepriseInclusive}
+    data={entrepriseInclusiveRequest}
     id="entreprise-inclusive"
     notFoundInfo={
       <p>Nous n’avons pas retrouvé les informations de cette structure.</p>

@@ -146,7 +146,6 @@ export class SireneQueryBuilder {
 
     if (inclureNonRenseigne) {
       this.conditions.push(`${field}:*`);
-      return;
     }
   };
 
@@ -323,8 +322,8 @@ export class SireneQueryBuilder {
 
     if (sap?.length) {
       for (const sapItem of sap) {
-        for (const naf of niv1ToNiv5Mapping[sapItem]) {
-          allLevels.add(naf);
+        for (const nafCode of niv1ToNiv5Mapping[sapItem]) {
+          allLevels.add(nafCode);
         }
       }
     }

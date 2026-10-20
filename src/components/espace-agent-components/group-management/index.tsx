@@ -23,8 +23,10 @@ export function GroupManagement({
       (groupUser) => groupUser.email.toLowerCase() === user.email
     );
     const isAdmin = Boolean(currentUserRole?.is_admin);
-    const setGroup = (group: IAgentsGroup) => {
-      setGroups(groups.map((g) => (g.id === group.id ? group : g)));
+    const setGroup = (updatedGroup: IAgentsGroup) => {
+      setGroups(
+        groups.map((g) => (g.id === updatedGroup.id ? updatedGroup : g))
+      );
     };
     const deleteGroup = (groupId: number) => {
       setGroups(groups.filter((g) => g.id !== groupId));

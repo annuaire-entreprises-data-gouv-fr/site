@@ -161,9 +161,9 @@ const RGEContent = ({
 
 export const CertificationsRGESection: React.FC<{
   certificationsRGE: IRGECertification | IAPINotRespondingError;
-}> = ({ certificationsRGE }) => (
+}> = ({ certificationsRGE: certificationsRGERequest }) => (
   <DataSection
-    data={certificationsRGE}
+    data={certificationsRGERequest}
     id="rge"
     notFoundInfo={
       <p>

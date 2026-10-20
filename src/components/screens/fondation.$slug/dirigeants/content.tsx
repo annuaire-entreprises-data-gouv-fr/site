@@ -61,7 +61,7 @@ function DirigeantFondationCard({
     ["Pays de résidence", dirigeant.paysResidence],
     ["Adresse de domiciliation", adresseComplete],
   ].filter(([, value]) => value);
-  const personneMorale = dirigeant.personneMorale;
+  const { personneMorale } = dirigeant;
   const representation = [
     ["Dénomination", personneMorale?.nom],
     ["Type d’organisme", personneMorale?.type],

@@ -40,7 +40,7 @@ class AgentRateLimiter {
   mapResponseToAgentRateLimits = (response: IAgentMonitoring[]) =>
     response.reduce(
       (acc, agentMonitoring) => {
-        const email = agentMonitoring.email;
+        const { email } = agentMonitoring;
         acc[email] = agentMonitoring.rateLimits;
         return acc;
       },

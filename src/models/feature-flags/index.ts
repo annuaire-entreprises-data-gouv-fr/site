@@ -65,8 +65,8 @@ export const getFeatureFlagsList = async () => {
   );
 
   return result.reduce(
-    (acc: { [key in FeatureFlag]: boolean }, result, index) => {
-      acc[keys[index]] = result.status === "fulfilled" ? result.value : false;
+    (acc: { [key in FeatureFlag]: boolean }, outcome, index) => {
+      acc[keys[index]] = outcome.status === "fulfilled" ? outcome.value : false;
       return acc;
     },
     {} as { [key in FeatureFlag]: boolean }

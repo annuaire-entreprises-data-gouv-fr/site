@@ -44,9 +44,9 @@ const DualRangeSlider: React.FC<{
     }
 
     setMinValue(newMinVal);
-    const min = newMinVal <= maxValue ? newMinVal : maxValue;
-    const max = newMinVal > maxValue ? newMinVal : maxValue;
-    onChange({ min, max });
+    const rangeMin = newMinVal <= maxValue ? newMinVal : maxValue;
+    const rangeMax = newMinVal > maxValue ? newMinVal : maxValue;
+    onChange({ min: rangeMin, max: rangeMax });
   };
 
   const handleMaxChange = (e: any) => {
@@ -57,9 +57,9 @@ const DualRangeSlider: React.FC<{
     }
 
     setMaxValue(newMaxVal);
-    const min = minValue <= newMaxVal ? minValue : newMaxVal;
-    const max = minValue > newMaxVal ? minValue : newMaxVal;
-    onChange({ min, max });
+    const rangeMin = minValue <= newMaxVal ? minValue : newMaxVal;
+    const rangeMax = minValue > newMaxVal ? minValue : newMaxVal;
+    onChange({ min: rangeMin, max: rangeMax });
   };
 
   const minPos = ((minValue - min) / (max - min)) * 100;

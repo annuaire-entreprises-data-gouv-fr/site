@@ -14,10 +14,10 @@ export default function ComptesAssociationSection({
 }: {
   uniteLegale: IAssociation;
 }) {
-  const comptes = useFetchComptesAssociation(uniteLegale);
+  const comptesRequest = useFetchComptesAssociation(uniteLegale);
   return (
     <AsyncDataSectionClient
-      data={comptes}
+      data={comptesRequest}
       id="comptes-association"
       sources={[EAdministration.DILA]}
       title="Dépôts des Comptes des Associations"

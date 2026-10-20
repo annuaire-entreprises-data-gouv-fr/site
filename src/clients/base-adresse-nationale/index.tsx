@@ -33,7 +33,7 @@ const mapToDomainObject = (response: IBANResponse): IGeoLoc => {
   if (features.length === 0) {
     throw new HttpNotFound("No results in API BAN");
   }
-  const coordinates = features[0].geometry.coordinates;
+  const { coordinates } = features[0].geometry;
   return {
     lat: coordinates[1].toString(),
     long: coordinates[0].toString(),

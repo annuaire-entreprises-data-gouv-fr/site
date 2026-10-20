@@ -51,7 +51,7 @@ export default function BilansDocumentsSocieteProtected({
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const documents = useServerFnData(
+  const documentsRequest = useServerFnData(
     getAgentRneDocumentsFn,
     input,
     ApplicationRights.documentsRne
@@ -59,7 +59,7 @@ export default function BilansDocumentsSocieteProtected({
 
   return (
     <AsyncDataSectionClient
-      data={documents}
+      data={documentsRequest}
       id="bilans-pdf"
       isProtected
       notFoundInfo={

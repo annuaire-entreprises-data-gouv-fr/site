@@ -13,10 +13,10 @@ import { formatDate } from "#/utils/helpers";
 const AnnoncesJOAFESection: React.FC<{
   uniteLegale: IAssociation;
 }> = ({ uniteLegale }) => {
-  const annoncesAssociation = useFetchJOAFE(uniteLegale);
+  const annoncesAssociationRequest = useFetchJOAFE(uniteLegale);
   return (
     <AsyncDataSectionClient
-      data={annoncesAssociation}
+      data={annoncesAssociationRequest}
       id="annonces-joafe"
       sources={[EAdministration.DILA]}
       title="Annonces Journal Officiel des Associations"

@@ -1,15 +1,15 @@
 import { vi } from "vitest";
-import httpClient, { httpGet, httpPost } from "#/utils/network";
+import { httpClient, httpGet, httpPost } from "#/utils/network";
 import { HttpInseeClient } from "./index.server";
 
 vi.mock(import("#/utils/network"), () => ({
-  default: vi.fn(),
+  httpClient: vi.fn(),
   httpGet: vi.fn(),
   httpPost: vi.fn(),
 }));
 
 vi.mock(import("#/utils/sentry"), () => ({
-  default: vi.fn(),
+  logErrorInSentry: vi.fn(),
   logInfoInSentry: vi.fn(),
 }));
 

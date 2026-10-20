@@ -6,23 +6,31 @@
       "!**/*.min.css",
       "!src/e2e-mock/fixtures/**/*.json",
       "!src/clients/_test/**/*.json",
-      "!src/data/**/*.json"
+      "!src/data/**/*.json",
+      // vendored icons and logos, and standalone static error pages
+      "!**/*.svg",
+      "!public/*.html"
     ]
   },
   "linter": {
     "rules": {
       "style": {
-        "noNestedTernary": "off"
+        "noNestedTernary": "off",
+        "noIncrementDecrement": "off"
       },
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "useAwait": "off",
-        "noConsole": "off"
+        "noConsole": "off",
+        // relies on TS types, which don't guarantee the shape of external API data
+        "noUnnecessaryConditions": "off",
+        "noEqualsToNull": "off"
       },
       "performance": {
         "useTopLevelRegex": "off",
-        "noBarrelFile": "off"
+        "noBarrelFile": "off",
+        "noJsxPropsBind": "off"
       },
       "complexity": {
         "noExcessiveCognitiveComplexity": "off"
@@ -35,5 +43,28 @@
         "noDangerouslySetInnerHtml": "off"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      // vitest globals (tsconfig "vitest/globals")
+      "includes": [
+        "**/*.test.{ts,tsx}",
+        "src/clients/_test/**",
+        "setup-vitest.ts"
+      ],
+      "javascript": {
+        "globals": [
+          "describe",
+          "it",
+          "test",
+          "expect",
+          "vi",
+          "beforeAll",
+          "beforeEach",
+          "afterAll",
+          "afterEach"
+        ]
+      }
+    }
+  ]
 }

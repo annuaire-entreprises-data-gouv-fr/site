@@ -193,14 +193,14 @@ export function CollectiviteEtablissementsSection({
   geoCommune: IGeoCommune;
 }) {
   const input = useMemo(() => ({ codeInsee }), [codeInsee]);
-  const etablissements = useServerFnData(
+  const etablissementsRequest = useServerFnData(
     getCollectiviteEtablissementsSireneFn,
     input
   );
 
   return (
     <DataSectionClient
-      data={etablissements}
+      data={etablissementsRequest}
       id="economie-locale-etablissements"
       loadingMinHeight={500}
       notFoundInfo="Aucun établissement n’a été retrouvé pour cette commune."

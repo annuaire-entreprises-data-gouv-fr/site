@@ -1,7 +1,7 @@
 import type React from "react";
 import { EtablissementDescription } from "#/components/etablissement-description";
 import { Link } from "#/components/link";
-import MapEtablissement from "#/components/map/map-etablissement";
+import { MapEtablissement } from "#/components/map/map-etablissement";
 import { CopyPaste } from "#/components/table/copy-paste";
 import UniteLegaleBadge from "#/components/unite-legale-badge";
 import { Warning } from "#/components-ui/alerts";

@@ -19,7 +19,7 @@ import type {
 } from "#/models/rne/types";
 import { verifySiren } from "#/utils/helpers";
 import { isPersonneMorale } from "#/utils/helpers/is-personne-morale";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { getMandatairesRCS } from "./mandataires-rcs";
 import { mergeDirigeants } from "./utils";
 

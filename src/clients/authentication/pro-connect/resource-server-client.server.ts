@@ -1,5 +1,5 @@
 import { createServerOnlyFn } from "@tanstack/react-start";
-import httpClient, { type IDefaultRequestConfig } from "#/utils/network";
+import { httpClient, type IDefaultRequestConfig } from "#/utils/network";
 import { proConnectGetOrRefreshAccessToken } from "./strategy.server";
 
 export const rolesDataResourceServerClient = createServerOnlyFn(

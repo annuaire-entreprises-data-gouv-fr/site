@@ -3,7 +3,7 @@ import { EAdministration } from "#/models/administrations/e-administration";
 import type { IEtablissement } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import { getGeoLoc } from "#/models/geo-loc";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchGeoLoc(etablissement: IEtablissement) {

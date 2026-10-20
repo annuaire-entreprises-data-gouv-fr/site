@@ -1,6 +1,6 @@
 import { useHydrated } from "@tanstack/react-router";
 import type React from "react";
-import pagesArray from "./pages-array";
+import { pagesArray } from "./pages-array";
 
 interface IProps {
   compact?: boolean;

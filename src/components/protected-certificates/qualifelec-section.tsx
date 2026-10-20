@@ -18,14 +18,14 @@ export function QualifelecSection({
     () => ({ siret: uniteLegale.siege.siret }),
     [uniteLegale.siege.siret]
   );
-  const qualifelec = useServerFnData(
+  const qualifelecRequest = useServerFnData(
     getAgentQualifelecFn,
     input,
     ApplicationRights.protectedCertificats
   );
   return (
     <DataSectionClient
-      data={qualifelec}
+      data={qualifelecRequest}
       id="qualifelec"
       isProtected
       notFoundInfo={

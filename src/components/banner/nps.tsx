@@ -43,7 +43,6 @@ export const NPSBanner: React.FC = () => {
     }
   };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: only run once
   useEffect(() => {
     const t = pathCounter();
     if (t > 2) {

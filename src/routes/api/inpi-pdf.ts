@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import routes from "#/clients/routes";
 import { EAdministration } from "#/models/administrations/e-administration";
 import { FetchRessourceException } from "#/models/exceptions";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { defaultHeadersMiddleware } from "./-middlewares";
 
 export const Route = createFileRoute("/api/inpi-pdf")({
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/api/inpi-pdf")({
     middleware: [defaultHeadersMiddleware()],
     handlers: {
       GET: async ({ request }) => {
-        const searchParams = new URL(request.url).searchParams;
+        const { searchParams } = new URL(request.url);
         const siren = searchParams.get("siren");
 
         try {

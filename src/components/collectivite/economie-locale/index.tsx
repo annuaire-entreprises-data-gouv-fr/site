@@ -77,11 +77,14 @@ export function CollectiviteEconomieLocaleSection({
   codeInsee: string;
 }) {
   const input = useMemo(() => ({ codeInsee }), [codeInsee]);
-  const effectifs = useServerFnData(getCollectiviteEffectifsSalariesFn, input);
+  const effectifsRequest = useServerFnData(
+    getCollectiviteEffectifsSalariesFn,
+    input
+  );
 
   return (
     <DataSectionClient
-      data={effectifs}
+      data={effectifsRequest}
       id="economie-locale"
       notFoundInfo="Aucune donnée d’effectifs salariés n’a été retrouvée pour cette commune."
       sources={[EAdministration.URSSAF]}

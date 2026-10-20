@@ -48,7 +48,7 @@ const dvfGuidePlugin: Plugin<"line" | "bar"> = {
     ctx.lineTo(chartArea.right, scales.yVolumes.top);
     ctx.stroke();
 
-    const active = chart.getActiveElements()[0];
+    const [active] = chart.getActiveElements();
     if (active) {
       ctx.strokeStyle = "#666666";
       ctx.setLineDash([3, 3]);

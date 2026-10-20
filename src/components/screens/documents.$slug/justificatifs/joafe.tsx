@@ -17,11 +17,11 @@ interface IProps {
 export const JustificatifImmatriculationJOAFE: React.FC<IProps> = ({
   uniteLegale,
 }) => {
-  const annoncesJOAFE = useFetchJOAFE(uniteLegale);
+  const annoncesJOAFERequest = useFetchJOAFE(uniteLegale);
 
   return (
     <AsyncDataSectionClient
-      data={annoncesJOAFE}
+      data={annoncesJOAFERequest}
       id="justificatifs"
       notFoundInfo={
         <AssociationCreationNotFoundAlert uniteLegale={uniteLegale} />

@@ -32,17 +32,17 @@ export function useMeasure(): [
   }, []);
 
   const ref = useCallback(
-    (node: HTMLElement | null) => {
-      if (!node) {
+    (element: HTMLElement | null) => {
+      if (!element) {
         return;
       }
-      setNode(node);
+      setNode(element);
       setMeasures({
-        height: node.clientHeight,
-        width: node.clientWidth,
+        height: element.clientHeight,
+        width: element.clientWidth,
       });
       if (elementObserver) {
-        elementObserver.observe(node);
+        elementObserver.observe(element);
       }
     },
     [elementObserver]

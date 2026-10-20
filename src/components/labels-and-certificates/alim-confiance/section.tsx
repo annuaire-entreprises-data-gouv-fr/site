@@ -18,7 +18,7 @@ interface IProps {
  */
 export default function AlimConfianceSection({ uniteLegale }: IProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const alimConfiance = useFetchAlimConfiance(uniteLegale, currentPage);
+  const alimConfianceRequest = useFetchAlimConfiance(uniteLegale, currentPage);
   const id = useId();
 
   const onChangePage = useCallback(
@@ -34,7 +34,7 @@ export default function AlimConfianceSection({ uniteLegale }: IProps) {
 
   return (
     <AsyncDataSectionClient
-      data={alimConfiance}
+      data={alimConfianceRequest}
       id="alim-confiance"
       isProtected={false}
       notFoundInfo={

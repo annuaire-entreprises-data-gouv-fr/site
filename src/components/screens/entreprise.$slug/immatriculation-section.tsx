@@ -25,7 +25,7 @@ export const UniteLegaleImmatriculationSection = ({
   rneLastModified: string | null;
   user: IAgentInfo | null;
 }) => {
-  const immatriculation = uniteLegale.immatriculation;
+  const { immatriculation } = uniteLegale;
 
   if (!immatriculation) {
     return null;

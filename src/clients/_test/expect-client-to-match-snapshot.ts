@@ -14,7 +14,7 @@ export async function expectClientToMatchSnapshot<T extends unknown[], U>({
   client,
   args,
   snapshotFile,
-  simplifyParams = (...args: T) => args,
+  simplifyParams = (...params: T) => params,
   postProcessResult,
 
   __dirname,

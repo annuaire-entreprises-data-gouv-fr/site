@@ -107,8 +107,8 @@ function RouteComponent() {
                     body={[
                       [
                         "Données",
-                        (data || []).map(({ label }) => (
-                          <Tag key={label}>{label}</Tag>
+                        (data || []).map(({ label: dataLabel }) => (
+                          <Tag key={dataLabel}>{dataLabel}</Tag>
                         )),
                       ],
                       ...(isProtected

@@ -212,9 +212,9 @@ const mapToDomainObject = (
 
   const defaultUniteLegale = createDefaultUniteLegale(siren);
 
-  const dateDernierTraitement = (dateDernierTraitementUniteLegale || "").split(
-    "T"
-  )[0];
+  const [dateDernierTraitement] = (
+    dateDernierTraitementUniteLegale || ""
+  ).split("T");
 
   const etatAdministratif = etatFromEtatAdministratifInsee(
     etatAdministratifUniteLegale,

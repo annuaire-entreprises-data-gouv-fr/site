@@ -20,7 +20,7 @@ const AnnoncesBodacc: React.FC<{
 }> = ({ uniteLegale }) => {
   const { "annonces-bodacc-page": currentPage } = bodaccRoute.useSearch();
   const navigate = bodaccRoute.useNavigate();
-  const bodacc = useFetchBODACC(uniteLegale, currentPage);
+  const bodaccRequest = useFetchBODACC(uniteLegale, currentPage);
 
   const onPageChange = useCallback(
     (page: number) => {
@@ -34,7 +34,7 @@ const AnnoncesBodacc: React.FC<{
 
   return (
     <AsyncDataSectionClient
-      data={bodacc}
+      data={bodaccRequest}
       id="annonces-bodacc"
       sources={[EAdministration.DILA]}
       title="Annonces BODACC"

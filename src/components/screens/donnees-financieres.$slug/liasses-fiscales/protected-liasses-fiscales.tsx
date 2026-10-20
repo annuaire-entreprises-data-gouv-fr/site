@@ -79,8 +79,10 @@ const InnerLiassesSection = ({
                     d.valeurs
                   ) : (
                     <ul>
-                      {d.valeurs.map((v, index) => (
-                        <li key={`${v}-${index}`}>{v || <NonRenseigne />}</li>
+                      {d.valeurs.map((v, valueIndex) => (
+                        <li key={`${v}-${valueIndex}`}>
+                          {v || <NonRenseigne />}
+                        </li>
                       ))}
                     </ul>
                   ),

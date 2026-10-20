@@ -5,7 +5,7 @@ import {
   getServicePublicByEtablissement,
   getServicePublicByUniteLegale,
 } from "#/models/service-public";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchServicePublic(

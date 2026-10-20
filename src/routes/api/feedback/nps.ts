@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { logInGrist } from "#/clients/external-tooling/grist.server";
 import { Exception } from "#/models/exceptions";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { defaultHeadersMiddleware } from "../-middlewares";
 
 const logAllEvents = async (request: Request) => {

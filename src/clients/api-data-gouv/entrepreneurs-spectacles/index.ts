@@ -9,7 +9,7 @@ import constants from "#/models/constants";
 import { FetchRessourceException } from "#/models/exceptions";
 import type { Siren } from "#/utils/helpers";
 import { httpGet } from "#/utils/network";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import type {
   IEntrepreneursSpectacles,
   IEntrepreneursSpectaclesDatagouvResponse,

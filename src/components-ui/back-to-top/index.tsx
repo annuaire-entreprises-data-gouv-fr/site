@@ -26,7 +26,6 @@ export function BackToTop() {
     };
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: needs to run when location.pathname changes
   useEffect(() => {
     setIsVisible(window.scrollY > VISIBILITY_SCROLL_OFFSET);
   }, [location.pathname]);

@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { deleteCookie } from "@tanstack/react-start/server";
 import { AgentConnectionFailedException } from "#/models/authentication/authentication-exceptions";
 import { getBaseUrl } from "#/utils/get-base-url";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import {
   cleanAgentSession,
   cleanPathFrom,

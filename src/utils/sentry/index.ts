@@ -52,5 +52,3 @@ export const logInfoInSentry = logInSentryFactory("info");
 export const logWarningInSentry = logInSentryFactory("warning");
 export const logErrorInSentry = logInSentryFactory("error");
 export const logFatalErrorInSentry = logInSentryFactory("fatal");
-
-export default logErrorInSentry;

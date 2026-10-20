@@ -3,7 +3,7 @@ import { EAdministration } from "#/models/administrations/e-administration";
 import type { IAssociation } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import type { IdRna } from "#/utils/helpers";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export const useFetchJOAFE = (uniteLegale: IAssociation) => {

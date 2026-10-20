@@ -20,6 +20,6 @@ export const clientEtablissementRechercheEntreprise = async (
     throw new HttpNotFound(siret);
   }
 
-  const result = results[0];
-  return result.matchingEtablissements[0];
+  const [firstResult] = results;
+  return firstResult.matchingEtablissements[0];
 };

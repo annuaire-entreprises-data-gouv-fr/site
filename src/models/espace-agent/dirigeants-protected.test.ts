@@ -5,7 +5,7 @@ import type {
   IEtatCivil,
   IPersonneMorale,
 } from "#/models/rne/types";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { getDirigeantsProtected } from "./dirigeants-protected";
 import { getMandatairesRCS } from "./mandataires-rcs";
 
@@ -14,7 +14,7 @@ vi.mock("#/models/rne/dirigeants", () => ({
 }));
 
 vi.mock("#/utils/sentry", () => ({
-  default: vi.fn(),
+  logErrorInSentry: vi.fn(),
 }));
 
 vi.mock("./mandataires-rcs", () => ({

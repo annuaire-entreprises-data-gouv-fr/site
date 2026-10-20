@@ -12,12 +12,12 @@ export async function sensitiveRequestCallerInfos(
   if (session?.user) {
     const { email, domain, scopes = [], groupsScopes = {} } = session.user;
 
-    let siret = session.user.siret;
+    let { siret } = session.user;
 
     if (scope) {
       siret =
-        Object.keys(groupsScopes).find((siret) =>
-          groupsScopes[siret as Siret].includes(scope)
+        Object.keys(groupsScopes).find((groupSiret) =>
+          groupsScopes[groupSiret as Siret].includes(scope)
         ) || session.user.siret;
     }
 

@@ -79,7 +79,7 @@ export const Route = createFileRoute("/_header-default/etablissement/$slug")({
     ],
   },
   beforeLoad: async ({ params }) => {
-    const slug = params.slug;
+    const { slug } = params;
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
 
     if (isLikelyASiren(sirenOrSiretSlug)) {

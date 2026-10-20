@@ -12,12 +12,12 @@ export default function ResponsablesServicePublicSection({
 }: {
   uniteLegale: IUniteLegale;
 }) {
-  const servicePublic = useFetchServicePublic(uniteLegale);
+  const servicePublicRequest = useFetchServicePublic(uniteLegale);
 
   return (
     <>
       <DataSectionClient
-        data={servicePublic}
+        data={servicePublicRequest}
         id="responsables-service-public"
         notFoundInfo={<NotFoundInfo />}
         sources={[EAdministration.DILA]}
@@ -105,7 +105,7 @@ export default function ResponsablesServicePublicSection({
       </DataSectionClient>
 
       <SubServicesSection
-        servicePublic={servicePublic}
+        servicePublic={servicePublicRequest}
         uniteLegale={uniteLegale}
       />
     </>

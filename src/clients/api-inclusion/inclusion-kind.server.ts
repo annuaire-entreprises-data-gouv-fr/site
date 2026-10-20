@@ -12,9 +12,9 @@ interface InclusionMetadata {
 
 function mapToDomainObject(response: { results: InclusionMetadata[] }) {
   return response.results.reduce(
-    (store, el) => {
-      store[el.id] = el;
-      return store;
+    (acc, el) => {
+      acc[el.id] = el;
+      return acc;
     },
     {} as { [key: string]: InclusionMetadata }
   );

@@ -29,7 +29,7 @@ vi.mock("@tanstack/react-start/server", async (importOriginal) => {
 
 declare module "vitest" {
   interface Assertion {
-    toMatchFile(filePath: string): void;
+    toMatchFile: (filePath: string) => void;
   }
 }
 

@@ -34,5 +34,3 @@ export const LocationTags = ({
     )}
   </div>
 );
-
-export default LocationTags;

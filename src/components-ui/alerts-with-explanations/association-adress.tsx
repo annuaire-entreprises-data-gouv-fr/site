@@ -19,7 +19,7 @@ const AssociationAdressAlert: React.FC<{
     return null;
   }
 
-  const adresseInconsistency = association.adresseInconsistency;
+  const { adresseInconsistency } = association;
 
   const associationAdresse = association.adresseSiege;
 

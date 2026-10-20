@@ -2,33 +2,29 @@
   "name": "annuaire-entreprises-site",
   "version": "0.2.0",
   "private": true,
-  "engines": {
-    "node": ">=22.22.2",
-    "pnpm": ">=11.1.2"
-  },
   "type": "module",
   "imports": {
     "#/*": "./src/*"
   },
   "scripts": {
+    "build": "pnpm run compile:data && vite build && cp instrument.server.mjs .output/server",
+    "check": "ultracite check",
     "compile:data": "node scripts/compile-data-yaml.mjs",
     "dev": "pnpm run compile:data && NODE_OPTIONS='--import ./instrument.server.mjs' vite dev --port 3000",
     "dev:e2e": "VITE_END2END_MOCKING=enabled pnpm run dev",
-    "start": "node --import ./.output/server/instrument.server.mjs .output/server/index.mjs",
-    "build": "pnpm run compile:data && vite build && cp instrument.server.mjs .output/server",
+    "fix": "ultracite fix",
+    "lint": "ultracite check",
+    "lint:fix": "ultracite fix",
     "preview": "vite preview",
-    "test:end2end:run": "playwright test",
-    "test:end2end:open": "playwright test --ui",
-    "test:unit": "MOCK_API_RECHERCHE_ENTREPRISE=true vitest run --exclude='**/(clients/_test|e2e-mock)/*'",
+    "start": "node --import ./.output/server/instrument.server.mjs .output/server/index.mjs",
     "test:api-clients": "MOCK_API_RECHERCHE_ENTREPRISE=false vitest run src/clients/_test",
     "test:api-clients:update-snapshots": "MOCK_API_RECHERCHE_ENTREPRISE=false vitest run src/clients/_test --update",
     "test:e2e:api-recherche": "MOCK_API_RECHERCHE_ENTREPRISE=false vitest run src/e2e-mock/fixtures/recherche-entreprise/generate.test.ts",
     "test:e2e:api-recherche:update-snapshots": "MOCK_API_RECHERCHE_ENTREPRISE=false vitest run src/e2e-mock/fixtures/recherche-entreprise/generate.test.ts --update",
+    "test:end2end:open": "playwright test --ui",
+    "test:end2end:run": "playwright test",
+    "test:unit": "MOCK_API_RECHERCHE_ENTREPRISE=true vitest run --exclude='**/(clients/_test|e2e-mock)/*'",
     "test:watch": "vitest",
-    "lint": "ultracite check",
-    "lint:fix": "ultracite fix",
-    "check": "ultracite check",
-    "fix": "ultracite fix",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -69,7 +65,7 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.16",
+    "@biomejs/biome": "2.5.15",
     "@commitlint/cli": "21.2.3",
     "@commitlint/config-conventional": "21.2.3",
     "@fullhuman/postcss-purgecss": "8.0.0",
@@ -93,9 +89,13 @@
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "11.6.1",
     "typescript": "7.0.2",
-    "ultracite": "7.8.3",
+    "ultracite": "8.0.1",
     "vite": "8.3.4",
     "vitest": "5.0.5"
   },
-  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
+  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499",
+  "engines": {
+    "node": ">=22.22.2",
+    "pnpm": ">=11.1.2"
+  }
 }

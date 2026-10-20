@@ -67,7 +67,7 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
 
 export const Route = createFileRoute("/_header-default/collectivite/$slug")({
   beforeLoad: async ({ params }) => {
-    const slug = params.slug;
+    const { slug } = params;
     const sirenOrSiretSlug = extractSirenOrSiretSlugFromUrl(slug);
 
     if (isLikelyASiret(sirenOrSiretSlug)) {

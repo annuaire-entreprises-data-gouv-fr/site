@@ -84,5 +84,3 @@ export function MapEtablissement({
     </div>
   );
 }
-
-export default MapEtablissement;

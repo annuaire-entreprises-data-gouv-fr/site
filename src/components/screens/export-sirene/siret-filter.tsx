@@ -139,5 +139,3 @@ export const SiretFilter: React.FC<SiretFilterProps> = ({
     </section>
   );
 };
-
-export default SiretFilter;

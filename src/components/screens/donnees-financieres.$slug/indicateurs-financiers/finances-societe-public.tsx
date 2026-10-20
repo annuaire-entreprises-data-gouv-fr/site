@@ -37,11 +37,11 @@ export function PublicFinancesSocieteSection({
   user: IAgentInfo | null;
   setUseCase: (useCase: UseCase) => void;
 }) {
-  const financesSociete = useFetchFinancesSociete(uniteLegale);
+  const financesSocieteRequest = useFetchFinancesSociete(uniteLegale);
 
   return (
     <AsyncDataSectionClient
-      data={financesSociete}
+      data={financesSocieteRequest}
       id="indicateurs-financiers"
       isProtected={false}
       notFoundInfo={

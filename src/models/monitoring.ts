@@ -40,6 +40,7 @@ const fetchMonitorsByAdministration = async (): Promise<{
   )) {
     allMonitorings = [
       ...allMonitorings,
+      // biome-ignore lint/performance/noAwaitInLoops: query updown.io one administration at a time
       ...(await Promise.all(
         apiMonitors
           .filter(({ updownIoId }) => !!updownIoId)

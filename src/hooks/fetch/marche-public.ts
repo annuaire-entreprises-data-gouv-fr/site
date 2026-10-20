@@ -2,7 +2,7 @@ import { clientMarchePublic } from "#/clients/open-data-soft/clients/marche-publ
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { ICollectiviteTerritoriale } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchMarchePublic(

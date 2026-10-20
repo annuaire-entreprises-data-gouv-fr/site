@@ -135,14 +135,10 @@ describe("httpBackClient", () => {
         method: "POST",
       })
     );
-    const requestInit = fetchSpy.mock.calls[0]?.[1];
-    expect(requestInit?.headers).toBeInstanceOf(Headers);
-    expect((requestInit?.headers as Headers).get("content-type")).toBe(
-      "application/json"
-    );
-    expect((requestInit?.headers as Headers).get("user-agent")).toBe(
-      "annuaire-entreprises-site"
-    );
+    const headers = fetchSpy.mock.calls[0]?.[1]?.headers as Headers;
+    expect(headers).toBeInstanceOf(Headers);
+    expect(headers.get("content-type")).toBe("application/json");
+    expect(headers.get("user-agent")).toBe("annuaire-entreprises-site");
   });
 
   it("serializes form-urlencoded bodies when requested", async () => {
@@ -246,30 +242,33 @@ describe("httpBackClient", () => {
       status: 504,
       statusText: "Gateway timeout",
     },
-  ])("throws $expectedName for HTTP $status responses", async ({
-    expectedMessage,
-    expectedName,
-    expectedStatus,
-    status,
-    statusText,
-  }) => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
-      new Response(null, {
-        status,
-        statusText,
-      })
-    );
+  ])(
+    "throws $expectedName for HTTP $status responses",
+    async ({
+      expectedMessage,
+      expectedName,
+      expectedStatus,
+      status,
+      statusText,
+    }) => {
+      vi.spyOn(global, "fetch").mockResolvedValue(
+        new Response(null, {
+          status,
+          statusText,
+        })
+      );
 
-    await expect(
-      httpBackClient({
-        url: "https://example.test/failure",
-      })
-    ).rejects.toMatchObject({
-      message: expectedMessage,
-      name: expectedName,
-      status: expectedStatus,
-    });
-  });
+      await expect(
+        httpBackClient({
+          url: "https://example.test/failure",
+        })
+      ).rejects.toMatchObject({
+        message: expectedMessage,
+        name: expectedName,
+        status: expectedStatus,
+      });
+    }
+  );
 
   it("throws HttpServerError for unmapped HTTP failures", async () => {
     vi.spyOn(global, "fetch").mockResolvedValue(

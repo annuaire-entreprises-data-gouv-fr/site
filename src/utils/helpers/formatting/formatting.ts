@@ -1,6 +1,6 @@
 import { InternalError } from "#/models/exceptions";
 import { libelleFromTypeVoie } from "#/utils/helpers/formatting/labels";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 
 const timeZone = "UTC";
 
@@ -13,7 +13,7 @@ const safe =
   <T extends unknown[], R>(castAndFormat: (...args: T) => R) =>
   (...args: T): R | string => {
     try {
-      return castAndFormat.apply(null, args);
+      return castAndFormat(...args);
     } catch (e: any) {
       let argsAsString = "";
       try {

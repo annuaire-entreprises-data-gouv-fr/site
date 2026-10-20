@@ -244,7 +244,7 @@ export const proConnectGetOrRefreshAccessToken = createServerOnlyFn(
 
     try {
       const client = await getClient();
-      const refreshToken = session.proConnectTokenSet.refreshToken;
+      const { refreshToken } = session.proConnectTokenSet;
 
       const tokenSet = await refreshTokenGrant(client, refreshToken);
 
@@ -257,6 +257,7 @@ export const proConnectGetOrRefreshAccessToken = createServerOnlyFn(
 
       return tokenSet.access_token as string;
     } catch (e: any) {
+      // biome-ignore lint/style/useErrorCause: cause is passed in the Exception arguments
       throw new ProConnectReconnexionNeeded({
         cause: e,
         message: "Could not refresh ProConnect token",
