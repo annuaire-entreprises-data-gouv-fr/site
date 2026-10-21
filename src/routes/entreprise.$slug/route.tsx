@@ -14,12 +14,22 @@ import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
 import { LeaveFondation } from "#/components/header/leave-fondation";
 import { Question } from "#/components/question";
+import {
+  EntreprisePageSkeleton,
+  EntrepriseSectionsSkeleton,
+} from "#/components/screens/entreprise.$slug/skeleton";
 import { NotFound } from "#/components/screens/not-found";
 import SocialNetworks from "#/components/social-network";
 import { TitleFondation } from "#/components/title-fondation-section";
 import Title from "#/components/title-section";
 import { BackToTop } from "#/components-ui/back-to-top";
 import { useFeatureFlag } from "#/hooks/use-feature-flag";
+import {
+  UNITE_LEGALE_STALE_TIME,
+  uniteLegaleQueryKey,
+  useCachedUniteLegale,
+  useSeedUniteLegaleQueryCache,
+} from "#/hooks/use-unite-legale-query-cache";
 import { type IUniteLegale, isFondation } from "#/models/core/types";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
@@ -67,11 +77,28 @@ export const Route = createFileRoute("/entreprise/$slug")({
       throw notFound();
     }
   },
-  loader: async ({ params, deps }) => {
+  loader: async ({
+    params,
+    deps,
+    context: { queryClient },
+    parentMatchPromise,
+  }) => {
     const { slug } = z.object({ slug: z.string() }).parse(params);
 
-    const uniteLegale = await getUniteLegaleFromSlugFn({
-      data: { slug, page: deps.etablissmentsPage },
+    // root loader is revalidated on every navigation: this is the current session
+    const { loaderData } = await parentMatchPromise;
+
+    const uniteLegale = await queryClient.query({
+      queryKey: uniteLegaleQueryKey(
+        loaderData?.user ?? null,
+        extractSirenOrSiretSlugFromUrl(slug),
+        deps.etablissmentsPage
+      ),
+      queryFn: () =>
+        getUniteLegaleFromSlugFn({
+          data: { slug, page: deps.etablissmentsPage },
+        }),
+      staleTime: UNITE_LEGALE_STALE_TIME,
     });
 
     return { uniteLegale };
@@ -81,6 +108,11 @@ export const Route = createFileRoute("/entreprise/$slug")({
       ? meta.notFound()
       : {},
   component: RouteComponent,
+  // Show the skeleton almost immediately instead of blocking navigation
+  // until the unité légale is fetched (default pendingMs is 1000)
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: RoutePendingComponent,
   errorComponent: ({ error }) => (
     <>
       <BannerManager />
@@ -109,8 +141,43 @@ export const Route = createFileRoute("/entreprise/$slug")({
   ),
 });
 
+function RoutePendingComponent() {
+  const { slug } = Route.useParams();
+
+  // Same company already loaded (e.g. other tab or other etablissements page):
+  // keep its title and tabs, only the content is loading
+  const cachedUniteLegale = useCachedUniteLegale(
+    extractSirenOrSiretSlugFromUrl(slug)
+  );
+
+  if (cachedUniteLegale) {
+    return (
+      <EntrepriseLayout uniteLegale={cachedUniteLegale}>
+        <EntrepriseSectionsSkeleton />
+      </EntrepriseLayout>
+    );
+  }
+
+  return (
+    <>
+      <BannerManager />
+      <Header useAgentBanner={true} useAgentCTA={true} useSearchBar={true} />
+      <main className="fr-container">
+        <EntreprisePageSkeleton />
+      </main>
+      <SocialNetworks />
+      <Question />
+      <Footer />
+      <BackToTop />
+    </>
+  );
+}
+
 function RouteComponent() {
   const { uniteLegale } = Route.useLoaderData();
+  const { etablissmentsPage } = Route.useLoaderDeps();
+
+  useSeedUniteLegaleQueryCache(uniteLegale, etablissmentsPage);
 
   return (
     <EntrepriseLayout uniteLegale={uniteLegale}>

@@ -414,6 +414,9 @@ function RouteComponent() {
         suivis même anonymement.
       </p>
       <iframe
+        // lazy: a slow or unreachable stats.data.gouv.fr must not delay the
+        // page "load" event (it is far below the fold)
+        loading="lazy"
         src="https://stats.data.gouv.fr/index.php?module=CoreAdminHome&action=optOut&language=fr&backgroundColor=&fontColor=333&fontSize=16px&fontFamily=sans-serif&overflow=visible"
         style={{
           overflow: "visible",

@@ -1,10 +1,15 @@
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import {
+  Await,
+  createFileRoute,
+  stripSearchParams,
+} from "@tanstack/react-router";
 import HiddenH1 from "#/components/a11y-components/hidden-h1";
 import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
 import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
 import SearchFondationsResults from "#/components/search-fondations-results";
+import { SearchResultsSkeleton } from "#/components/search-results/skeleton";
 import SocialNetworks from "#/components/social-network";
 import { meta } from "#/utils/seo";
 import { HeaderSearchError } from "../-error";
@@ -46,21 +51,31 @@ export const Route = createFileRoute("/_header-search/rechercher/fondations")({
 
     beforeLoadFondationsCheckTerme(searchTerm);
   },
-  loader: async ({ deps }) => await searchFondationsFn({ data: deps }),
+  // On client-side navigations, search results are deferred: the page (and
+  // its header) renders at once and the results are displayed when ready.
+  // Server-side rendering waits for them so that the page works without JS.
+  loader: async ({ deps }) => {
+    const search = searchFondationsFn({ data: deps });
+    return { search: typeof window === "undefined" ? await search : search };
+  },
   component: RouteComponent,
   errorComponent: HeaderSearchError,
 });
 
 function RouteComponent() {
-  const { searchResults, searchFilterParamsJSON, searchTerm } =
-    Route.useLoaderData();
+  const { search } = Route.useLoaderData();
+  const loaderDeps = Route.useLoaderDeps();
+  const { terme } = Route.useSearch();
 
   return (
     <>
       <NPSBanner />
       <BannerManager />
       <Header
-        currentSearchTerm={searchTerm}
+        currentSearchTerm={terme}
+        // search bar is initialised from currentSearchTerm: remount it when
+        // the search changes (e.g. browser back/forward)
+        key={terme}
         searchPath="/rechercher/fondations"
         searchPlaceholder="Nom, adresse, n° RNF..."
         useAgentBanner={false}
@@ -72,15 +87,36 @@ function RouteComponent() {
       <main className="fr-container">
         <HiddenH1 title="Résultats de recherche" />
         <div className="content-container">
-          <SearchFondationsResults
-            results={searchResults}
-            searchFilterParams={searchFilterParamsJSON}
-            searchTerm={searchTerm}
-          />
+          {search instanceof Promise ? (
+            <Await
+              fallback={<SearchResultsSkeleton />}
+              // a new search shows the skeleton instead of the previous results
+              key={JSON.stringify(loaderDeps)}
+              promise={search}
+            >
+              {renderSearchFondationsResults}
+            </Await>
+          ) : (
+            renderSearchFondationsResults(search)
+          )}
         </div>
       </main>
       <SocialNetworks />
       <Footer />
     </>
+  );
+}
+
+function renderSearchFondationsResults({
+  searchResults,
+  searchFilterParamsJSON,
+  searchTerm,
+}: Awaited<ReturnType<typeof searchFondationsFn>>) {
+  return (
+    <SearchFondationsResults
+      results={searchResults}
+      searchFilterParams={searchFilterParamsJSON}
+      searchTerm={searchTerm}
+    />
   );
 }

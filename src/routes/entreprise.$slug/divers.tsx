@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
 import ConventionsCollectivesSection from "#/components/conventions-collectives-section";
+import { EntrepriseSectionsSkeleton } from "#/components/screens/entreprise.$slug/skeleton";
 import { NotFound } from "#/components/screens/not-found";
 import { getAllIdccWithMetadata } from "#/models/conventions-collectives";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
@@ -66,6 +67,9 @@ export const Route = createFileRoute("/entreprise/$slug/divers")({
     };
   },
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: EntrepriseSectionsSkeleton,
   errorComponent: HeaderDefaultError,
   notFoundComponent: () => <NotFound withWrapper={false} />,
 });

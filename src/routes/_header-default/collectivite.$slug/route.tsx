@@ -7,6 +7,10 @@ import {
 import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
 import { NonDiffusibleStrictSection } from "#/components/non-diffusible-section";
+import {
+  EntrepriseSectionsSkeleton,
+  EntrepriseTitleSkeleton,
+} from "#/components/screens/entreprise.$slug/skeleton";
 import { NotFound } from "#/components/screens/not-found";
 import Title from "#/components/title-section";
 import { FICHE } from "#/components/title-section/tabs";
@@ -29,8 +33,15 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "carte-facile/carte-facile.css";
 import { clientGeo } from "#/clients/api-geo";
 import { CollectiviteSidenav } from "#/components/collectivite/sidenav";
+import {
+  useCachedUniteLegale,
+  useSeedUniteLegaleQueryCache,
+} from "#/hooks/use-unite-legale-query-cache";
 import { getFeatureFlagFn } from "#/server-functions/public/feature-flags";
-import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
+import {
+  collectiviteTheme,
+  getUniteLegaleTheme,
+} from "#/utils/get-unite-legale-theme";
 import { getCodeInseeToUse } from "#/utils/helpers/collectivites";
 import { HeaderDefaultError } from "../-error";
 
@@ -124,12 +135,43 @@ export const Route = createFileRoute("/_header-default/collectivite/$slug")({
     };
   },
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: RoutePendingComponent,
   errorComponent: HeaderDefaultError,
   notFoundComponent: () => <NotFound withWrapper={false} />,
 });
 
+function RoutePendingComponent() {
+  const { slug } = Route.useParams();
+  const siren = extractSirenOrSiretSlugFromUrl(slug);
+
+  // Usually coming from the entreprise page: keep its title and tabs
+  const cachedUniteLegale = useCachedUniteLegale(siren);
+
+  return (
+    <div className="content-container" style={collectiviteTheme}>
+      {cachedUniteLegale ? (
+        <Title ficheType={FICHE.COLLECTIVITE} uniteLegale={cachedUniteLegale} />
+      ) : (
+        <EntrepriseTitleSkeleton />
+      )}
+      <div className="fr-grid-row fr-grid-row--gutters fr-mt-4w">
+        <div className="fr-col-12 fr-col-md-9">
+          <EntrepriseSectionsSkeleton />
+        </div>
+        <div className="fr-col-12 fr-col-md-3">
+          <CollectiviteSidenav slug={siren} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function RouteComponent() {
   const { uniteLegale } = Route.useLoaderData();
+
+  useSeedUniteLegaleQueryCache(uniteLegale);
 
   return (
     <div className="content-container" style={getUniteLegaleTheme(uniteLegale)}>

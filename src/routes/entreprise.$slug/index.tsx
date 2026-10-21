@@ -16,6 +16,7 @@ import MatomoEventFromRedirected from "#/components/matomo-event/search-redirect
 import { NonDiffusibleStrictSection } from "#/components/non-diffusible-section";
 import AvocatsSection from "#/components/screens/entreprise.$slug/avocats-section";
 import { UniteLegaleImmatriculationSection } from "#/components/screens/entreprise.$slug/immatriculation-section";
+import { EntrepriseSectionsSkeleton } from "#/components/screens/entreprise.$slug/skeleton";
 import UniteLegaleSummarySection from "#/components/screens/entreprise.$slug/summary-section";
 import { TabsReminder } from "#/components/screens/entreprise.$slug/tabs-reminder";
 import { NotFound } from "#/components/screens/not-found";
@@ -254,6 +255,9 @@ export const Route = createFileRoute("/entreprise/$slug/")({
     };
   },
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: EntrepriseSectionsSkeleton,
   errorComponent: HeaderDefaultError,
   notFoundComponent: () => <NotFound withWrapper={false} />,
 });

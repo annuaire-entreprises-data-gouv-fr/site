@@ -1,5 +1,10 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
+import {
+  createRootRouteWithContext,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { ClientProviders } from "#/client-providers";
 import { getCurrentUserFn } from "#/server-functions/public/auth";
@@ -8,7 +13,9 @@ import appCss from "#/style/globals.css?url";
 import { getDefaultHeaders } from "#/utils/headers/default";
 import { meta } from "#/utils/seo";
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+}>()({
   loader: async () => {
     const user = await getCurrentUserFn();
 

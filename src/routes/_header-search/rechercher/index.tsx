@@ -1,4 +1,8 @@
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import {
+  Await,
+  createFileRoute,
+  stripSearchParams,
+} from "@tanstack/react-router";
 import HiddenH1 from "#/components/a11y-components/hidden-h1";
 import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
@@ -6,9 +10,12 @@ import Footer from "#/components/footer";
 import { HeaderWithAdvancedSearch } from "#/components/header/header-advanced-search";
 import SearchResults from "#/components/search-results";
 import { AdvancedSearchTutorial } from "#/components/search-results/advanced-search-tutorial";
+import { SearchResultsSkeleton } from "#/components/search-results/skeleton";
 import SocialNetworks from "#/components/social-network";
 import { BackToTop } from "#/components-ui/back-to-top";
-import { hasSearchParam } from "#/models/search/search-filter-params";
+import SearchFilterParams, {
+  hasSearchParam,
+} from "#/models/search/search-filter-params";
 import { meta } from "#/utils/seo";
 import { HeaderSearchError } from "../-error";
 import {
@@ -78,22 +85,35 @@ export const Route = createFileRoute("/_header-search/rechercher/")({
 
     beforeLoadCheckTerme(searchTerm);
   },
-  loader: async ({ deps }) => await searchFn({ data: deps }),
+  // On client-side navigations, search results are deferred: the page (and
+  // its header) renders at once and the results are displayed when ready.
+  // Server-side rendering waits for them so that the page works without JS.
+  loader: async ({ deps }) => {
+    const search = searchFn({ data: deps });
+    return { search: typeof window === "undefined" ? await search : search };
+  },
   component: RouteComponent,
   errorComponent: HeaderSearchError,
 });
 
 function RouteComponent() {
-  const { searchResults, searchFilterParamsJSON, searchTerm } =
-    Route.useLoaderData();
+  const { search } = Route.useLoaderData();
+  const loaderDeps = Route.useLoaderDeps();
+  const searchParams = Route.useSearch();
+  const searchFilterParams = new SearchFilterParams(searchParams).toJSON();
+  const searchKey = JSON.stringify([searchParams.terme, searchFilterParams]);
 
   return (
     <>
       <NPSBanner />
       <BannerManager />
       <HeaderWithAdvancedSearch
-        currentSearchTerm={searchTerm}
-        searchParams={searchFilterParamsJSON}
+        currentSearchTerm={searchParams.terme}
+        // search bar and filters keep their own state, initialised from these
+        // props: remount them when the search changes (e.g. a filter cleared
+        // client-side, or browser back/forward), as a full page load would
+        key={searchKey}
+        searchParams={searchFilterParams}
         useAgentCTA={true}
         useMap={false}
         useSearchBar={true}
@@ -101,14 +121,17 @@ function RouteComponent() {
       <main className="fr-container">
         <HiddenH1 title="Résultats de recherche" />
         <div className="content-container">
-          {hasSearchParam(searchFilterParamsJSON) || searchTerm ? (
-            <SearchResults
-              results={searchResults}
-              searchFilterParams={searchFilterParamsJSON}
-              searchTerm={searchTerm}
-            />
+          {search instanceof Promise ? (
+            <Await
+              fallback={<SearchResultsSkeleton />}
+              // a new search shows the skeleton instead of the previous results
+              key={JSON.stringify(loaderDeps)}
+              promise={search}
+            >
+              {renderSearchResults}
+            </Await>
           ) : (
-            <AdvancedSearchTutorial />
+            renderSearchResults(search)
           )}
         </div>
       </main>
@@ -116,5 +139,21 @@ function RouteComponent() {
       <Footer />
       <BackToTop />
     </>
+  );
+}
+
+function renderSearchResults({
+  searchResults,
+  searchFilterParamsJSON,
+  searchTerm,
+}: Awaited<ReturnType<typeof searchFn>>) {
+  return hasSearchParam(searchFilterParamsJSON) || searchTerm ? (
+    <SearchResults
+      results={searchResults}
+      searchFilterParams={searchFilterParamsJSON}
+      searchTerm={searchTerm}
+    />
+  ) : (
+    <AdvancedSearchTutorial />
   );
 }

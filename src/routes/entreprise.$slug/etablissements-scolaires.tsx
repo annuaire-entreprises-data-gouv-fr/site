@@ -6,6 +6,7 @@ import {
 import { createServerFn } from "@tanstack/react-start";
 import z from "zod";
 import { EtablissementsScolairesSection } from "#/components/education-nationale";
+import { EntrepriseSectionsSkeleton } from "#/components/screens/entreprise.$slug/skeleton";
 import { NotFound } from "#/components/screens/not-found";
 import { getEtablissementsScolaires } from "#/models/etablissements-scolaires";
 import {
@@ -77,6 +78,9 @@ export const Route = createFileRoute(
     };
   },
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: EntrepriseSectionsSkeleton,
   errorComponent: HeaderDefaultError,
   notFoundComponent: () => <NotFound withWrapper={false} />,
 });
