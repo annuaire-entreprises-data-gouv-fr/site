@@ -7,8 +7,10 @@ import { formatDatePartial, formatFloatFr } from "#/utils/helpers";
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
 );
-const effectifMensuelRegimeGeneralColor = constants.chartColors[4];
-const effectifMensuelRegimeAgricoleColor = constants.chartColors[1];
+const {
+  4: effectifMensuelRegimeGeneralColor,
+  1: effectifMensuelRegimeAgricoleColor,
+} = constants.chartColors;
 
 export function EffectifsMensuelsChartAndTable({
   effectifsRegimeAgricole,

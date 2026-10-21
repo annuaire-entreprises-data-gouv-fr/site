@@ -7,7 +7,7 @@ import {
   HttpServerError,
 } from "#/clients/exceptions";
 import { Exception } from "#/models/exceptions";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 
 const getBucketsLists = () => ({
   "monitoring-comptes-agents": {
@@ -46,9 +46,9 @@ export const readFromS3 = createServerOnlyFn(
 
     const client = new S3Client(config);
 
-    const getBucket = async (params: { Bucket: string; Key: string }) => {
+    const getBucket = async (bucketParams: { Bucket: string; Key: string }) => {
       try {
-        const response = await client.send(new GetObjectCommand(params));
+        const response = await client.send(new GetObjectCommand(bucketParams));
 
         // Store all of data chunks returned from the response data stream
         // into an array then use Array#join() to use the returned contents as a String
@@ -69,12 +69,12 @@ export const readFromS3 = createServerOnlyFn(
       } catch (err: any) {
         const statusCode = err.$metadata?.httpStatusCode;
         if (statusCode === 404) {
-          throw new HttpNotFound(err.Code);
+          throw new HttpNotFound(err.Code, { cause: err });
         }
         if (statusCode === 403) {
-          throw new HttpForbiddenError(err.Code);
+          throw new HttpForbiddenError(err.Code, { cause: err });
         }
-        throw new HttpServerError(err.Code);
+        throw new HttpServerError(err.Code, { cause: err });
       }
     };
 

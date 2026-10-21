@@ -170,8 +170,8 @@ export default function SubventionsAssociationSection({
       sources={[EAdministration.DJEPVA]}
       title="Subventions reçues"
     >
-      {(subventions) =>
-        !subventions || subventions?.length === 0 ? (
+      {(subventionsList) =>
+        !subventionsList || subventionsList?.length === 0 ? (
           <>
             Aucune demande de subvention n’a été trouvée pour cette association
             dans <DataSubventionLink />.
@@ -180,7 +180,7 @@ export default function SubventionsAssociationSection({
           <>
             <SubventionDetails
               siren={uniteLegale.siren}
-              subventions={subventions}
+              subventions={subventionsList}
             />
             <div className="layout-right" style={{ marginBottom: "20px" }}>
               <ul className="fr-btns-group fr-btns-group--inline-md fr-btns-group--center">

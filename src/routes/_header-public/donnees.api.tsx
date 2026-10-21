@@ -43,7 +43,8 @@ export const Route = createFileRoute("/_header-public/donnees/api")({
 
 function RouteComponent() {
   const router = useRouter();
-  const { monitors, administrationsMetaData } = Route.useLoaderData();
+  const { monitors, administrationsMetaData: administrations } =
+    Route.useLoaderData();
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
@@ -85,8 +86,8 @@ function RouteComponent() {
       </ol>
       {Object.keys(monitors).map((administrationEnum) => (
         <Fragment key={administrationEnum}>
-          <h2 id={administrationsMetaData[administrationEnum]?.slug}>
-            {administrationsMetaData[administrationEnum]?.long}
+          <h2 id={administrations[administrationEnum]?.slug}>
+            {administrations[administrationEnum]?.long}
           </h2>
           {monitors[administrationEnum].map((monitor) => (
             <Fragment key={monitor.apiName}>

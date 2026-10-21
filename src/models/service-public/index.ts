@@ -11,7 +11,7 @@ import {
 import type { IEtablissement, IUniteLegale } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
 import type { Siret } from "#/utils/helpers";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 
 export interface IServicePublic {
   adresseCourriel: string | null;

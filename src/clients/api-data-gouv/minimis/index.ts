@@ -8,7 +8,7 @@ import {
 import constants from "#/models/constants";
 import { FetchRessourceException } from "#/models/exceptions";
 import { httpGet } from "#/utils/network";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import type { IMinimis, IMinimisDatagouvResponse } from "./interface";
 
 export const clientMinimis = async (

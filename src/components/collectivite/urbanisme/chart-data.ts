@@ -32,7 +32,7 @@ export function getDVFPriceSummary(
   key: DVFPriceKey
 ) {
   const observations = timeline.filter((item) => item[key] !== null);
-  const first = observations[0];
+  const [first] = observations;
   const last = observations.at(-1);
   const firstPrice = first?.[key];
   const lastPrice = last?.[key];

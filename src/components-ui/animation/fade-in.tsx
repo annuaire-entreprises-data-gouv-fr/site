@@ -28,4 +28,3 @@ export const FadeIn = ({
     </div>
   </>
 );
-export default FadeIn;

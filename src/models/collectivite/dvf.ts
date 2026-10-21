@@ -6,7 +6,7 @@ import {
   type IAPINotRespondingError,
 } from "#/models/api-not-responding";
 import { FetchRessourceException } from "#/models/exceptions";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 
 export interface IDVFIndicateurMensuel {
   mois: string;

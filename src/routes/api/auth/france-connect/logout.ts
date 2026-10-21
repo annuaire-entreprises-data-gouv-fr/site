@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { franceConnectLogoutUrl } from "#/clients/authentication/france-connect/strategy.server";
 import { Exception } from "#/models/exceptions";
 import { getBaseUrl } from "#/utils/get-base-url";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { getCurrentSession, setPathFrom } from "#/utils/session/index.server";
 import { defaultHeadersMiddleware } from "../../-middlewares";
 
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/api/auth/france-connect/logout")({
         const session = await getCurrentSession();
 
         try {
-          const searchParams = new URL(request.url).searchParams;
+          const { searchParams } = new URL(request.url);
           await setPathFrom(session, searchParams.get("pathFrom") || "");
           const url = await franceConnectLogoutUrl();
 

@@ -90,6 +90,7 @@ const loadBarFactory = () => {
           return;
         }
         this._loader.style.width = `${positions[i]}%`;
+        // biome-ignore lint/performance/noAwaitInLoops: each step of the animation waits for the previous one
         await wait(200);
       }
     },

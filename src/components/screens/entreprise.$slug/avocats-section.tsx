@@ -44,7 +44,7 @@ export default function AvocatsSection({
     [navigate]
   );
 
-  const avocats = useFetchAvocats(uniteLegale, currentPage);
+  const avocatsRequest = useFetchAvocats(uniteLegale, currentPage);
 
   useEffect(() => {
     if (window.location.hash !== "#avocats") {
@@ -60,7 +60,7 @@ export default function AvocatsSection({
 
   return (
     <AsyncDataSectionClient
-      data={avocats}
+      data={avocatsRequest}
       id="avocats"
       notFoundInfo={null}
       sources={[EAdministration.CONSEIL_NATIONAL_DES_BARREAUX]}

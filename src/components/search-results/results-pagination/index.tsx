@@ -3,7 +3,7 @@ import {
   buildSearchQuery,
   type IParams,
 } from "#/models/search/search-filter-params";
-import pagesArray from "./pages-array";
+import { pagesArray } from "./pages-array";
 
 interface IProps {
   compact?: boolean;

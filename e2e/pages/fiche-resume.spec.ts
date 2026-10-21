@@ -1,7 +1,7 @@
 import { expect, goto, login, test } from "../support/test";
 
 function getServerFunctionName(url: string): string | null {
-  const pathname = new URL(url).pathname;
+  const { pathname } = new URL(url);
   if (!pathname.startsWith("/_serverFn/")) {
     return null;
   }

@@ -90,8 +90,8 @@ function itShouldMatchSnapshot(
 
     const cleanedResult = {
       ...result,
-      results: result.results.map(({ meta, ...result }) => ({
-        ...result,
+      results: result.results.map(({ meta, ...rest }) => ({
+        ...rest,
       })),
     };
 

@@ -2,7 +2,7 @@ import { clientFiness } from "#/clients/api-data-gouv/finess";
 import { EAdministration } from "#/models/administrations/e-administration";
 import type { IUniteLegale } from "#/models/core/types";
 import { FetchRessourceException } from "#/models/exceptions";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { useFetchExternalData } from "./use-fetch-data";
 
 export function useFetchFiness(

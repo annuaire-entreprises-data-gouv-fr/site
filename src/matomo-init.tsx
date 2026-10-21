@@ -83,7 +83,6 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
     window._paq.push(["trackPageView"]);
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: onMount effect
   useEffect(() => {
     window.matomoAbTesting = {
       variations: {

@@ -39,7 +39,7 @@ export const rechercheEntrepriseHandler: HttpResponseResolver = async ({
 
   const snapshots = await getSnapshots();
 
-  const snapshot = snapshots.find((snapshot) => snapshot.searchTerms === q);
+  const snapshot = snapshots.find((s) => s.searchTerms === q);
 
   if (!snapshot) {
     throw new Error("No snapshot found");

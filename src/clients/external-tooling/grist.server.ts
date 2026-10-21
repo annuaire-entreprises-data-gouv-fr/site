@@ -2,8 +2,8 @@ import { createServerOnlyFn } from "@tanstack/react-start";
 import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import { Exception } from "#/models/exceptions";
-import httpClient from "#/utils/network";
-import logErrorInSentry from "#/utils/sentry";
+import { httpClient } from "#/utils/network";
+import { logErrorInSentry } from "#/utils/sentry";
 
 interface IGristRecords {
   records: {

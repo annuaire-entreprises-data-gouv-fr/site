@@ -23,7 +23,7 @@ export const Route = createFileRoute(
     }),
   }),
   beforeLoad: async ({ params }) => {
-    const slug = params.slug;
+    const { slug } = params;
 
     if (!(isSiren(slug) || isSiret(slug))) {
       throw notFound();

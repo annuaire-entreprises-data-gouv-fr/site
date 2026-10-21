@@ -72,5 +72,3 @@ export async function httpPost<T>(
     ...config,
   });
 }
-
-export default httpClient;

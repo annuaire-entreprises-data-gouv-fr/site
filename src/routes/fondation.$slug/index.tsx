@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import EspaceAgentSummarySection from "#/components/espace-agent-components/summary-section";
+import { EspaceAgentSummarySection } from "#/components/espace-agent-components/summary-section";
 import EtablissementListeSection from "#/components/etablissement-liste-section";
 import EtablissementSection from "#/components/etablissement-section";
 import FondationInseeSection from "#/components/screens/fondation.$slug/insee-section";

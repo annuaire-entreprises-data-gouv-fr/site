@@ -17,12 +17,12 @@ const DPONotFound = () => <p>Aucun DPO trouvé pour cette structure.</p>;
  * DPO section
  */
 export default function DPOSection({ uniteLegale }: IProps) {
-  const dpo = useFetchDPO(uniteLegale);
+  const dpoRequest = useFetchDPO(uniteLegale);
 
   //www.data.gouv.fr/fr/datasets/organismes-ayant-designe-un-e-delegue-e-a-la-protection-des-donnees-dpd-dpo/
   return (
     <AsyncDataSectionClient
-      data={dpo}
+      data={dpoRequest}
       id="dpo-section"
       isProtected={false}
       notFoundInfo={<DPONotFound />}

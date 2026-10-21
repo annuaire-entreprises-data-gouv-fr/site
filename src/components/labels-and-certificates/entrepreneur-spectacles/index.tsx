@@ -15,9 +15,9 @@ import { EntrepreneurSpectaclesPagination } from "./pagination";
 
 export const CertificationsEntrepreneurSpectaclesSection: React.FC<{
   entrepreneurSpectacles: IEntrepreneursSpectacles | IAPINotRespondingError;
-}> = ({ entrepreneurSpectacles }) => (
+}> = ({ entrepreneurSpectacles: entrepreneurSpectaclesRequest }) => (
   <DataSection
-    data={entrepreneurSpectacles}
+    data={entrepreneurSpectaclesRequest}
     id="entrepreneur-spectacles"
     notFoundInfo={
       <>

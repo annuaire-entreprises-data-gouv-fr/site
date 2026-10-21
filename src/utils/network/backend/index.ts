@@ -237,5 +237,3 @@ async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
 }
 
 export { httpBackClient };
-
-export default httpBackClient;

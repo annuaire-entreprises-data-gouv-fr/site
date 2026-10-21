@@ -22,8 +22,7 @@ export default function ReconnectBanner({
 
   useEffect(() => {
     const wasLoggedIn = getCookieBrowser("user-was-logged-in") === "true";
-    const shouldDisplayBanner = wasLoggedIn && !currentlyLoggedIn;
-    setShouldDisplayBanner(shouldDisplayBanner);
+    setShouldDisplayBanner(wasLoggedIn && !currentlyLoggedIn);
   }, [currentlyLoggedIn]);
 
   /**

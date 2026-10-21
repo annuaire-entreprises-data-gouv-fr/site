@@ -67,8 +67,8 @@ export const clientAnnuaireServicePublicByName = async (
 
   const response = await queryAnnuaireServicePublic(`search(nom, "${name}")`);
 
-  const record = response.records.find((record: IServicePublicRecord) => {
-    const nom = removeSpecialChars(record.nom.toUpperCase());
+  const record = response.records.find((candidate: IServicePublicRecord) => {
+    const nom = removeSpecialChars(candidate.nom.toUpperCase());
     return nom === name;
   });
   if (!record) {

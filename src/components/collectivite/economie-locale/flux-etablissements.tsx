@@ -14,14 +14,14 @@ export function CollectiviteFluxEtablissementsSection({
   codeInsee: string;
 }) {
   const input = useMemo(() => ({ codeInsee }), [codeInsee]);
-  const fluxEtablissements = useServerFnData(
+  const fluxEtablissementsRequest = useServerFnData(
     getCollectiviteFluxOuvertureEtablissementsFn,
     input
   );
 
   return (
     <DataSectionClient
-      data={fluxEtablissements}
+      data={fluxEtablissementsRequest}
       id="economie-locale-flux-etablissements"
       notFoundInfo="Aucune donnée d’ouvertures et de fermetures d’établissements n’a été retrouvée pour cette commune."
       sources={[EAdministration.INSEE]}

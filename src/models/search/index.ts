@@ -96,6 +96,7 @@ const search = async (
       if (eFallback instanceof HttpNotFound) {
         return noResults;
       }
+      // biome-ignore lint/style/useErrorCause: cause is passed in the Exception arguments
       throw new FetchRechercheEntrepriseException({
         cause: eFallback,
         context: {
@@ -122,8 +123,12 @@ export const searchWithoutProtectedSiren = async (
   const results = await search(searchTerm, page, searchFilterParams);
   const newResults: ISearchResult[] = [];
 
-  for (const currentResult of results.results) {
-    const isProtected = await isProtectedSiren(currentResult.siren);
+  const protectedFlags = await Promise.all(
+    results.results.map((result) => isProtectedSiren(result.siren))
+  );
+
+  for (const [index, currentResult] of results.results.entries()) {
+    const isProtected = protectedFlags[index];
 
     if (isProtected && isPersonnePhysique(currentResult)) {
       results.resultCount -= 1;

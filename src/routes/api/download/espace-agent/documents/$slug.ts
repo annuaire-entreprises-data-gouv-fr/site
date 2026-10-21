@@ -11,7 +11,7 @@ import {
 } from "#/models/authentication/user/rights";
 import { FetchRessourceException } from "#/models/exceptions";
 import { defaultHeadersMiddleware } from "#/routes/api/-middlewares";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { getCurrentSession } from "#/utils/session/index.server";
 
 export const Route = createFileRoute(
@@ -25,7 +25,7 @@ export const Route = createFileRoute(
     ],
     handlers: {
       GET: async ({ request, params }) => {
-        const searchParams = new URL(request.url).searchParams;
+        const { searchParams } = new URL(request.url);
         const type = searchParams.get("type");
 
         try {

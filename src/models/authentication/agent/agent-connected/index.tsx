@@ -78,9 +78,9 @@ export class AgentConnected {
         if (emailParts.length !== 2) {
           return false;
         }
-        let local = emailParts[0];
+        let [local] = emailParts;
         // Remove alias part after '+'
-        local = local.split("+")[0];
+        [local] = local.split("+");
 
         // create an email without the alias
         const normalizedEmail = [local, emailParts[1]].join("@");

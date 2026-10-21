@@ -27,22 +27,24 @@ export const AgentActesAssociation: React.FC<{
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const associationProtected = useServerFnData(
+  const associationProtectedRequest = useServerFnData(
     getAgentAssociationProtectedFn,
     input,
     ApplicationRights.associationProtected
   );
 
   const etablissementsForFilter = useMemo(() => {
-    if (!isDataSuccess(associationProtected)) {
+    if (!isDataSuccess(associationProtectedRequest)) {
       return [];
     }
-    return extractAssociationEtablissements(associationProtected.documents.dac);
-  }, [associationProtected]);
+    return extractAssociationEtablissements(
+      associationProtectedRequest.documents.dac
+    );
+  }, [associationProtectedRequest]);
 
   return (
     <DataSectionClient
-      data={associationProtected}
+      data={associationProtectedRequest}
       id="actes"
       isProtected
       notFoundInfo={<NoDocument />}

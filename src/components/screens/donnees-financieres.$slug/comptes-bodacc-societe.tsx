@@ -12,11 +12,11 @@ export function ComptesBodaccSociete({
 }: {
   uniteLegale: IUniteLegale;
 }) {
-  const bodacc = useFetchBODACC(uniteLegale);
+  const bodaccRequest = useFetchBODACC(uniteLegale);
 
   return (
     <AsyncDataSectionClient
-      data={bodacc}
+      data={bodaccRequest}
       id="comptes-bodacc"
       sources={[EAdministration.DILA]}
       title="Dépôts des comptes (BODACC C)"

@@ -39,7 +39,7 @@ export function ProtectedFinancesSocieteSection({
     ApplicationRights.chiffreAffaires
   );
 
-  const mergedFinancesSociete = useMemo(
+  const mergedFinancesSocieteRequest = useMemo(
     () =>
       mergeDataSources(
         financesSociete,
@@ -51,7 +51,7 @@ export function ProtectedFinancesSocieteSection({
 
   return (
     <AsyncDataSectionClient
-      data={mergedFinancesSociete}
+      data={mergedFinancesSocieteRequest}
       id="indicateurs-financiers"
       isProtected={true}
       notFoundInfo="Aucun indicateur financier n'a été retrouvé pour cette structure."

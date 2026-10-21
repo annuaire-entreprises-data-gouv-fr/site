@@ -15,7 +15,7 @@ import type {
   IRole,
 } from "#/models/rne/types";
 import { isPersonneMorale } from "#/utils/helpers/is-personne-morale";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 
 export function handleApiEntrepriseError(
   e: any,

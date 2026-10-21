@@ -1,7 +1,7 @@
 import { clientIdccRechercheEntreprise } from "#/clients/recherche-entreprise/idcc.server";
 import { clientIdccMetadata } from "#/clients/recherche-entreprise/idcc-metadata.server";
 import type { Siren } from "#/utils/helpers";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { EAdministration } from "../administrations/e-administration";
 import {
   APINotRespondingFactory,
@@ -62,23 +62,20 @@ export const getAllIdccWithMetadata = async (
   try {
     const allIdcc = await clientIdccRechercheEntreprise(siren);
 
-    const metadata = [] as ICCWithMetadata[];
+    return await Promise.all(
+      Object.entries(allIdcc).map(async ([idcc, sirets]) => {
+        const [idccMetadata, updated] = await Promise.all([
+          clientIdccMetadata(idcc),
+          Promise.all(idccUpdates(idcc).map((cc) => clientIdccMetadata(cc))),
+        ]);
 
-    for (const [idcc, sirets] of Object.entries(allIdcc)) {
-      const idccMetadata = await clientIdccMetadata(idcc);
-
-      const updates = idccUpdates(idcc);
-      const updated = await Promise.all(
-        updates.map((cc) => clientIdccMetadata(cc))
-      );
-
-      metadata.push({
-        sirets,
-        ...idccMetadata,
-        updated,
-      });
-    }
-    return metadata;
+        return {
+          sirets,
+          ...idccMetadata,
+          updated,
+        };
+      })
+    );
   } catch (e: any) {
     logErrorInSentry(
       new FetchRessourceException({

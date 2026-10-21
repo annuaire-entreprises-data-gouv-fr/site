@@ -45,9 +45,9 @@ function CCUnknown({ ccWithMetadata }: { ccWithMetadata: ICCWithMetadata[] }) {
 const ConventionsCollectivesSection: React.FC<{
   ccWithMetadata: ICCWithMetadata[] | IAPINotRespondingError;
   ccLastModified: string | null;
-}> = ({ ccWithMetadata, ccLastModified }) => (
+}> = ({ ccWithMetadata: ccWithMetadataRequest, ccLastModified }) => (
   <DataSection
-    data={ccWithMetadata}
+    data={ccWithMetadataRequest}
     lastModified={ccLastModified}
     notFoundInfo={
       <div>

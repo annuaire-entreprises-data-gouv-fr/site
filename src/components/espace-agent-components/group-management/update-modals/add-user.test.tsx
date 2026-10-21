@@ -85,33 +85,33 @@ afterEach(() => {
 });
 
 describe("adding a group member", () => {
-  it.each([
-    existingUser.email,
-    "  EXISTING@EXAMPLE.FR  ",
-  ])("blocks an existing email while typing %s and allows editing it", (email) => {
-    const input = openModal();
-    fireEvent.change(input, { target: { value: email } });
+  it.each([existingUser.email, "  EXISTING@EXAMPLE.FR  "])(
+    "blocks an existing email while typing %s and allows editing it",
+    (email) => {
+      const input = openModal();
+      fireEvent.change(input, { target: { value: email } });
 
-    expect(screen.getByText(duplicateMessage)).toBeTruthy();
-    expect(
-      screen.getByRole<HTMLButtonElement>("button", { name: "Ajouter" })
-        .disabled
-    ).toBe(true);
-    expect(input.getAttribute("aria-describedby")).toBe(
-      screen.getByText(duplicateMessage).parentElement?.id
-    );
-    fireEvent.keyDown(input, { key: "Enter" });
-    expect(execute).not.toHaveBeenCalled();
+      expect(screen.getByText(duplicateMessage)).toBeTruthy();
+      expect(
+        screen.getByRole<HTMLButtonElement>("button", { name: "Ajouter" })
+          .disabled
+      ).toBe(true);
+      expect(input.getAttribute("aria-describedby")).toBe(
+        screen.getByText(duplicateMessage).parentElement?.id
+      );
+      fireEvent.keyDown(input, { key: "Enter" });
+      expect(execute).not.toHaveBeenCalled();
 
-    fireEvent.change(input, { target: { value: newUser.email } });
+      fireEvent.change(input, { target: { value: newUser.email } });
 
-    expect(screen.queryByText(duplicateMessage)).toBeNull();
-    expect(
-      screen.getByRole<HTMLButtonElement>("button", { name: "Ajouter" })
-        .disabled
-    ).toBe(false);
-    expect(input.getAttribute("aria-describedby")).toBeNull();
-  });
+      expect(screen.queryByText(duplicateMessage)).toBeNull();
+      expect(
+        screen.getByRole<HTMLButtonElement>("button", { name: "Ajouter" })
+          .disabled
+      ).toBe(false);
+      expect(input.getAttribute("aria-describedby")).toBeNull();
+    }
+  );
 
   it("shows a server conflict inline and keeps the modal open", async () => {
     execute.mockResolvedValue({ error: "USER_ALREADY_IN_GROUP" });

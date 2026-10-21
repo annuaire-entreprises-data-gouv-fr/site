@@ -10,12 +10,12 @@ import type { IEgapro } from "#/models/certifications/egapro";
 
 export const EgaproSection: React.FC<{
   egapro: IEgapro | IAPINotRespondingError;
-}> = ({ egapro }) => {
+}> = ({ egapro: egaproRequest }) => {
   const sectionTitle = "Égalité professionnelle - Egapro";
 
   return (
     <DataSection
-      data={egapro}
+      data={egaproRequest}
       id="egalite-professionnelle"
       notFoundInfo={
         <>

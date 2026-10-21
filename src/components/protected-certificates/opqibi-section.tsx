@@ -17,14 +17,14 @@ export const OpqibiSection: React.FC<{
     () => ({ siren: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const opqibi = useServerFnData(
+  const opqibiRequest = useServerFnData(
     getAgentOpqibiFn,
     input,
     ApplicationRights.protectedCertificats
   );
   return (
     <DataSectionClient
-      data={opqibi}
+      data={opqibiRequest}
       id="opqibi"
       isProtected
       notFoundInfo={

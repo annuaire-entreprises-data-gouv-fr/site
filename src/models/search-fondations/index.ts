@@ -70,6 +70,7 @@ export const searchFondations = async (
       if (eFallback instanceof HttpNotFound) {
         return noResults;
       }
+      // biome-ignore lint/style/useErrorCause: cause is passed in the Exception arguments
       throw new FetchRechercheEntrepriseException({
         cause: eFallback,
         context: {

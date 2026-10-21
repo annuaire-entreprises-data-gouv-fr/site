@@ -16,11 +16,14 @@ export default function ServicePublicSection({
   uniteLegale,
   etablissement,
 }: IProps) {
-  const servicePublic = useFetchServicePublic(uniteLegale, etablissement);
+  const servicePublicRequest = useFetchServicePublic(
+    uniteLegale,
+    etablissement
+  );
 
   return (
     <DataSectionClient
-      data={servicePublic}
+      data={servicePublicRequest}
       notFoundInfo={
         <p>
           Cette administration n’a pas été retrouvée dans l’

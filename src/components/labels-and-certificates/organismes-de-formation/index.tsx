@@ -12,11 +12,11 @@ interface OrganismeDeFormationSectionProps {
 }
 
 export const OrganismeDeFormationSection = ({
-  organismesDeFormation,
+  organismesDeFormation: organismesDeFormationRequest,
 }: OrganismeDeFormationSectionProps) => {
   return (
     <DataSection
-      data={organismesDeFormation}
+      data={organismesDeFormationRequest}
       id="organisme-de-formation"
       notFoundInfo={<OrganismeFormationLabel qualiopiCertified={false} />}
       sources={[EAdministration.MTPEI]}
@@ -25,7 +25,7 @@ export const OrganismeDeFormationSection = ({
     >
       {(organismesDeFormation) => {
         // we use definition from DGEFP rather than recherche entreprise which can be outdated
-        const qualiopiCertified = organismesDeFormation.qualiopiCertified;
+        const { qualiopiCertified } = organismesDeFormation;
 
         const head = [
           "Numéro Déclaration Activité (NDA)",

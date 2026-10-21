@@ -11,7 +11,7 @@ const { client, logError } = vi.hoisted(() => ({
   logError: vi.fn(),
 }));
 vi.mock("#/clients/dvf", () => ({ clientDVF: client }));
-vi.mock("#/utils/sentry", () => ({ default: logError }));
+vi.mock("#/utils/sentry", () => ({ logErrorInSentry: logError }));
 
 beforeEach(() => {
   client.mockReset();
@@ -130,171 +130,169 @@ describe("DVF commune fetching", () => {
   });
 });
 
-describe.each(cityCases)("$nomCommune DVF aggregation", ({
-  codeInsee,
-  nomCommune,
-  sirenEpci,
-  arrondissementCodes,
-}) => {
-  const arrondissementResponse = (
-    code: string,
-    indicateurs: IDVFIndicateurMensuel[]
-  ): ICollectiviteDVF => ({ ...response(code, indicateurs), sirenEpci });
-  it("starts every arrondissement request in parallel and sums sales with the agreed price weights", async () => {
-    const requests = new Map<
-      string,
-      {
-        promise: Promise<ICollectiviteDVF>;
-        resolve: (data: ICollectiviteDVF) => void;
-      }
-    >();
-    for (const code of arrondissementCodes) {
-      let resolve: (data: ICollectiviteDVF) => void = () => undefined;
-      const promise = new Promise<ICollectiviteDVF>((complete) => {
-        resolve = complete;
-      });
-      requests.set(code, { promise, resolve });
-    }
-    client.mockImplementation((code: string) => requests.get(code)?.promise);
-
-    const result = getCollectiviteDVF(codeInsee);
-    expect(client.mock.calls.map(([code]) => code)).toEqual(
-      arrondissementCodes
-    );
-
-    for (const code of arrondissementCodes) {
-      const values =
-        code === arrondissementCodes[0]
-          ? {
-              nombreVentesMaisons: 2,
-              prixMedianM2Maisons: 100,
-              nombreVentesAppartements: 1,
-              prixMedianM2Appartements: 300,
-              nombreVentesLogements: 3,
-              prixMedianM2Logements: 200,
-              prixMedianM2LocauxIndustrielsCommerciaux: 500,
-            }
-          : code === arrondissementCodes[1]
-            ? {
-                nombreVentesMaisons: 6,
-                prixMedianM2Maisons: 300,
-                nombreVentesAppartements: 3,
-                prixMedianM2Appartements: 700,
-                nombreVentesLogements: 9,
-                prixMedianM2Logements: 600,
-                prixMedianM2LocauxIndustrielsCommerciaux: 1500,
-              }
-            : {
-                nombreVentesMaisons: 0,
-                nombreVentesAppartements: 0,
-                nombreVentesLogements: 0,
-              };
-      requests
-        .get(code)
-        ?.resolve(arrondissementResponse(code, [month("2025-01", values)]));
-    }
-
-    expect(await result).toEqual({
-      codeInsee,
-      nomCommune,
-      sirenEpci,
-      prixAgregesParArrondissement: true,
-      indicateurs: [
+describe.each(cityCases)(
+  "$nomCommune DVF aggregation",
+  ({ codeInsee, nomCommune, sirenEpci, arrondissementCodes }) => {
+    const arrondissementResponse = (
+      code: string,
+      indicateurs: IDVFIndicateurMensuel[]
+    ): ICollectiviteDVF => ({ ...response(code, indicateurs), sirenEpci });
+    it("starts every arrondissement request in parallel and sums sales with the agreed price weights", async () => {
+      const requests = new Map<
+        string,
         {
-          mois: "2025-01",
-          nombreVentesMaisons: 8,
-          prixMedianM2Maisons: 250,
-          nombreVentesAppartements: 4,
-          prixMedianM2Appartements: 600,
-          nombreVentesLogements: 12,
-          prixMedianM2Logements: 500,
-          prixMedianM2LocauxIndustrielsCommerciaux: 1000,
-        },
-      ],
-    });
-    expect(client).not.toHaveBeenCalledWith(codeInsee);
-  });
-
-  it("aligns months chronologically and preserves nulls without weighting unknown or zero sales", async () => {
-    client.mockImplementation((code: string) => {
-      if (code === arrondissementCodes[0]) {
-        return arrondissementResponse(code, [
-          month("2025-02", { nombreVentesMaisons: 1 }),
-          month("2025-01", {
-            nombreVentesMaisons: 0,
-            prixMedianM2Maisons: 9000,
-            prixMedianM2Appartements: 7000,
-          }),
-        ]);
+          promise: Promise<ICollectiviteDVF>;
+          resolve: (data: ICollectiviteDVF) => void;
+        }
+      >();
+      for (const code of arrondissementCodes) {
+        let resolve: (data: ICollectiviteDVF) => void = () => undefined;
+        const promise = new Promise<ICollectiviteDVF>((complete) => {
+          resolve = complete;
+        });
+        requests.set(code, { promise, resolve });
       }
-      if (code === arrondissementCodes[1]) {
-        return arrondissementResponse(code, [
-          month("2025-03"),
-          month("2025-01", {
-            prixMedianM2Maisons: 8000,
-            nombreVentesAppartements: 2,
-            prixMedianM2Appartements: 1000,
-          }),
-        ]);
+      client.mockImplementation((code: string) => requests.get(code)?.promise);
+
+      const result = getCollectiviteDVF(codeInsee);
+      expect(client.mock.calls.map(([code]) => code)).toEqual(
+        arrondissementCodes
+      );
+
+      for (const code of arrondissementCodes) {
+        const values =
+          code === arrondissementCodes[0]
+            ? {
+                nombreVentesMaisons: 2,
+                prixMedianM2Maisons: 100,
+                nombreVentesAppartements: 1,
+                prixMedianM2Appartements: 300,
+                nombreVentesLogements: 3,
+                prixMedianM2Logements: 200,
+                prixMedianM2LocauxIndustrielsCommerciaux: 500,
+              }
+            : code === arrondissementCodes[1]
+              ? {
+                  nombreVentesMaisons: 6,
+                  prixMedianM2Maisons: 300,
+                  nombreVentesAppartements: 3,
+                  prixMedianM2Appartements: 700,
+                  nombreVentesLogements: 9,
+                  prixMedianM2Logements: 600,
+                  prixMedianM2LocauxIndustrielsCommerciaux: 1500,
+                }
+              : {
+                  nombreVentesMaisons: 0,
+                  nombreVentesAppartements: 0,
+                  nombreVentesLogements: 0,
+                };
+        requests
+          .get(code)
+          ?.resolve(arrondissementResponse(code, [month("2025-01", values)]));
       }
-      return arrondissementResponse(code, []);
+
+      expect(await result).toEqual({
+        codeInsee,
+        nomCommune,
+        sirenEpci,
+        prixAgregesParArrondissement: true,
+        indicateurs: [
+          {
+            mois: "2025-01",
+            nombreVentesMaisons: 8,
+            prixMedianM2Maisons: 250,
+            nombreVentesAppartements: 4,
+            prixMedianM2Appartements: 600,
+            nombreVentesLogements: 12,
+            prixMedianM2Logements: 500,
+            prixMedianM2LocauxIndustrielsCommerciaux: 1000,
+          },
+        ],
+      });
+      expect(client).not.toHaveBeenCalledWith(codeInsee);
     });
 
-    const result = await getCollectiviteDVF(codeInsee);
-    expect(result).toHaveProperty("indicateurs");
-    if (!("indicateurs" in result)) {
-      throw new Error("Expected DVF data");
-    }
-    expect(result.indicateurs.map(({ mois }) => mois)).toEqual([
-      "2025-01",
-      "2025-02",
-      "2025-03",
-    ]);
-    expect(result.indicateurs[0]).toMatchObject({
-      nombreVentesMaisons: 0,
-      prixMedianM2Maisons: null,
-      nombreVentesAppartements: 2,
-      prixMedianM2Appartements: 1000,
-      nombreVentesLogements: null,
-      prixMedianM2Logements: null,
-      prixMedianM2LocauxIndustrielsCommerciaux: null,
-    });
-    expect(result.indicateurs[1]).toMatchObject({
-      nombreVentesMaisons: 1,
-      prixMedianM2Maisons: null,
-    });
-    expect(result.indicateurs[2]).toEqual(month("2025-03"));
-  });
+    it("aligns months chronologically and preserves nulls without weighting unknown or zero sales", async () => {
+      client.mockImplementation((code: string) => {
+        if (code === arrondissementCodes[0]) {
+          return arrondissementResponse(code, [
+            month("2025-02", { nombreVentesMaisons: 1 }),
+            month("2025-01", {
+              nombreVentesMaisons: 0,
+              prixMedianM2Maisons: 9000,
+              prixMedianM2Appartements: 7000,
+            }),
+          ]);
+        }
+        if (code === arrondissementCodes[1]) {
+          return arrondissementResponse(code, [
+            month("2025-03"),
+            month("2025-01", {
+              prixMedianM2Maisons: 8000,
+              nombreVentesAppartements: 2,
+              prixMedianM2Appartements: 1000,
+            }),
+          ]);
+        }
+        return arrondissementResponse(code, []);
+      });
 
-  it("returns the standard not-found state when every arrondissement has no observations", async () => {
-    client.mockImplementation((code: string) =>
-      arrondissementResponse(code, [])
-    );
-    expect(await getCollectiviteDVF(codeInsee)).toEqual({
-      administration: EAdministration.DGFIP,
-      errorType: 404,
+      const result = await getCollectiviteDVF(codeInsee);
+      expect(result).toHaveProperty("indicateurs");
+      if (!("indicateurs" in result)) {
+        throw new Error("Expected DVF data");
+      }
+      expect(result.indicateurs.map(({ mois }) => mois)).toEqual([
+        "2025-01",
+        "2025-02",
+        "2025-03",
+      ]);
+      expect(result.indicateurs[0]).toMatchObject({
+        nombreVentesMaisons: 0,
+        prixMedianM2Maisons: null,
+        nombreVentesAppartements: 2,
+        prixMedianM2Appartements: 1000,
+        nombreVentesLogements: null,
+        prixMedianM2Logements: null,
+        prixMedianM2LocauxIndustrielsCommerciaux: null,
+      });
+      expect(result.indicateurs[1]).toMatchObject({
+        nombreVentesMaisons: 1,
+        prixMedianM2Maisons: null,
+      });
+      expect(result.indicateurs[2]).toEqual(month("2025-03"));
     });
-  });
 
-  it("returns the standard error rather than an incomplete total when a request fails", async () => {
-    const error = new Error("Arrondissement API unavailable");
-    client.mockImplementation((code: string) =>
-      code === arrondissementCodes[3]
-        ? Promise.reject(error)
-        : Promise.resolve(
-            arrondissementResponse(code, [
-              month("2025-01", { nombreVentesLogements: 10 }),
-            ])
-          )
-    );
-
-    expect(await getCollectiviteDVF(codeInsee)).toEqual({
-      administration: EAdministration.DGFIP,
-      errorType: 500,
+    it("returns the standard not-found state when every arrondissement has no observations", async () => {
+      client.mockImplementation((code: string) =>
+        arrondissementResponse(code, [])
+      );
+      expect(await getCollectiviteDVF(codeInsee)).toEqual({
+        administration: EAdministration.DGFIP,
+        errorType: 404,
+      });
     });
-    expect(client).toHaveBeenCalledTimes(arrondissementCodes.length);
-    expect(logError).toHaveBeenCalledWith(
-      expect.objectContaining({ cause: error, context: { codeInsee } })
-    );
-  });
-});
+
+    it("returns the standard error rather than an incomplete total when a request fails", async () => {
+      const error = new Error("Arrondissement API unavailable");
+      client.mockImplementation((code: string) =>
+        code === arrondissementCodes[3]
+          ? Promise.reject(error)
+          : Promise.resolve(
+              arrondissementResponse(code, [
+                month("2025-01", { nombreVentesLogements: 10 }),
+              ])
+            )
+      );
+
+      expect(await getCollectiviteDVF(codeInsee)).toEqual({
+        administration: EAdministration.DGFIP,
+        errorType: 500,
+      });
+      expect(client).toHaveBeenCalledTimes(arrondissementCodes.length);
+      expect(logError).toHaveBeenCalledWith(
+        expect.objectContaining({ cause: error, context: { codeInsee } })
+      );
+    });
+  }
+);

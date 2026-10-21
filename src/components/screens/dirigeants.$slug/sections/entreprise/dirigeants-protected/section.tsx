@@ -29,7 +29,7 @@ export default function DirigeantsSectionProtected({ uniteLegale }: IProps) {
     () => ({ siren: uniteLegale.siren, isEI }),
     [uniteLegale.siren, isEI]
   );
-  const dirigeants = useServerFnData(
+  const dirigeantsRequest = useServerFnData(
     getAgentDirigeantsProtectedFn,
     input,
     ApplicationRights.mandatairesRCS
@@ -37,7 +37,7 @@ export default function DirigeantsSectionProtected({ uniteLegale }: IProps) {
 
   return (
     <AsyncDataSectionClient
-      data={dirigeants}
+      data={dirigeantsRequest}
       id="dirigeants-section-protected"
       isProtected={true}
       notFoundInfo={

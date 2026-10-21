@@ -42,7 +42,7 @@ export default function ProtectedBeneficiairesSection({
     }),
     [useCase, uniteLegale.siren]
   );
-  const beneficiaires = useServerFnData(
+  const beneficiairesRequest = useServerFnData(
     getAgentBeneficiairesFn,
     input,
     ApplicationRights.beneficiaires
@@ -50,7 +50,7 @@ export default function ProtectedBeneficiairesSection({
 
   return (
     <AsyncDataSectionClient
-      data={beneficiaires}
+      data={beneficiairesRequest}
       id={id}
       isProtected={isProtected}
       notFoundInfo={

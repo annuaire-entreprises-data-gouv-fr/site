@@ -16,14 +16,14 @@ export const QualibatSection: React.FC<{
     () => ({ siret: uniteLegale.siege.siret }),
     [uniteLegale.siege.siret]
   );
-  const qualibat = useServerFnData(
+  const qualibatRequest = useServerFnData(
     getAgentQualibatFn,
     input,
     ApplicationRights.protectedCertificats
   );
   return (
     <DataSectionClient
-      data={qualibat}
+      data={qualibatRequest}
       id="qualibat"
       isProtected
       notFoundInfo={

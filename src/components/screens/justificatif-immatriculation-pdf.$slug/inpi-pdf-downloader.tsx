@@ -1,11 +1,11 @@
 import routes from "#/clients/routes";
 import { Tag } from "#/components-ui/tag";
-import usePDFDownloader from "#/hooks/fetch/download-pdf";
+import { usePDFDownloader } from "#/hooks/fetch/download-pdf";
 import { EAdministration } from "#/models/administrations/e-administration";
 import { isAPI404 } from "#/models/api-not-responding";
 import { hasAnyError, isDataLoading } from "#/models/data-fetching";
 import { FetchRessourceException } from "#/models/exceptions";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import { PDFFailed } from "./pdf-failed";
 import { PDFFLoading } from "./pdf-loading";
 import { PDFNotFound } from "./pdf-not-found";

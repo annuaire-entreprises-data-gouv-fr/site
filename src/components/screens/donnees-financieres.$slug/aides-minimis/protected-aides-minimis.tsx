@@ -87,11 +87,11 @@ export default function AidesMinimisProtected({
     [uniteLegale.siren, currentPage]
   );
 
-  const aidesMinimis = useServerFnData(getAgentAidesMinimisFn, input);
+  const aidesMinimisRequest = useServerFnData(getAgentAidesMinimisFn, input);
 
   return (
     <AsyncDataSectionClient
-      data={aidesMinimis}
+      data={aidesMinimisRequest}
       id="aides-minimis"
       isProtected
       notFoundInfo={<NoAidesMinimis />}

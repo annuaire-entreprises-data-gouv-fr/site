@@ -101,5 +101,3 @@ export const EspaceAgentSummarySection = ({ uniteLegale, user }: IProps) => (
     <HorizontalSeparator />
   </PrintNever>
 );
-
-export default EspaceAgentSummarySection;

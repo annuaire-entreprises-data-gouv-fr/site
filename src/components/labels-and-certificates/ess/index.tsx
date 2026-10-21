@@ -42,12 +42,12 @@ const ESSNotFound = () => (
 );
 
 export const CertificationESSSection = ({
-  ess,
+  ess: essRequest,
 }: {
   ess: IESS | IAPINotRespondingError;
 }) => (
   <DataSection
-    data={ess}
+    data={essRequest}
     id="ess"
     notFoundInfo={<ESSNotFound />}
     sources={[EAdministration.ESSFRANCE, EAdministration.INSEE]}

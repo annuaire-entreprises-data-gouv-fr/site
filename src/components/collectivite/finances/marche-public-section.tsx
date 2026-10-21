@@ -92,7 +92,7 @@ export const CollectiviteMarchePublicSection: React.FC<{
 }> = ({ uniteLegale }) => {
   const { "marches-publics-page": currentPage } = financesRoute.useSearch();
   const navigate = financesRoute.useNavigate();
-  const marchesPublics = useFetchMarchePublic(uniteLegale, currentPage);
+  const marchesPublicsRequest = useFetchMarchePublic(uniteLegale, currentPage);
 
   const onPageChange = useCallback(
     (page: number) => {
@@ -106,7 +106,7 @@ export const CollectiviteMarchePublicSection: React.FC<{
 
   return (
     <AsyncDataSectionClient
-      data={marchesPublics}
+      data={marchesPublicsRequest}
       id="marches-publics"
       notFoundInfo={<NoMarchePublic uniteLegale={uniteLegale} />}
       sources={[EAdministration.MEF]}

@@ -120,7 +120,7 @@ const ProtectedSectionWithUseCase: React.FC<
   }
 
   if ("fondation" in props) {
-    const WrappedSection = props.WrappedSection;
+    const { WrappedSection } = props;
 
     return (
       <WrappedSection
@@ -136,7 +136,7 @@ const ProtectedSectionWithUseCase: React.FC<
   }
 
   if ("etablissement" in props) {
-    const WrappedSection = props.WrappedSection;
+    const { WrappedSection } = props;
 
     return (
       <WrappedSection
@@ -151,7 +151,7 @@ const ProtectedSectionWithUseCase: React.FC<
     );
   }
 
-  const WrappedSection = props.WrappedSection;
+  const { WrappedSection } = props;
 
   return (
     <WrappedSection

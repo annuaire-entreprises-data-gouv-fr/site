@@ -22,11 +22,11 @@ const formatEmissions = (value: number): string => {
  */
 export default function BilanGesSection({ uniteLegale }: IProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const bilanGes = useFetchBilanGes(uniteLegale, currentPage);
+  const bilanGesRequest = useFetchBilanGes(uniteLegale, currentPage);
 
   return (
     <AsyncDataSectionClient
-      data={bilanGes}
+      data={bilanGesRequest}
       id="bilan-ges"
       notFoundInfo={
         <p>

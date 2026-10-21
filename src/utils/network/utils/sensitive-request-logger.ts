@@ -1,6 +1,6 @@
 import { Exception } from "#/models/exceptions";
 import { extractSirenOrSiretSlugFromUrl, randomId } from "#/utils/helpers";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 
 interface ISensitiveLogType {
   content: {

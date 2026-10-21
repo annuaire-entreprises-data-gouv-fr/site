@@ -402,10 +402,11 @@ export class NotASirenError extends Exception {
  * This is a valid siret but it was not found
  */
 export class SiretNotFoundError extends Exception {
-  constructor(siret: string) {
+  constructor(siret: string, options?: ErrorOptions) {
     super({
       name: "SiretNotFoundError",
       message: "This is a valid siret but it was not found",
+      cause: options?.cause,
       context: { siret },
     });
   }

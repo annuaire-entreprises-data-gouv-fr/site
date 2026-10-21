@@ -123,12 +123,12 @@ const AssociationSection = ({
     () => ({ slug: uniteLegale.siren }),
     [uniteLegale.siren]
   );
-  const association = useServerFnData(getAssociationFn, input);
+  const associationRequest = useServerFnData(getAssociationFn, input);
 
   return (
     <>
       <AsyncDataSectionClient
-        data={association}
+        data={associationRequest}
         id="association-section"
         notFoundInfo={<AssociationNotFound uniteLegale={uniteLegale} />}
         sources={[EAdministration.MI, EAdministration.DJEPVA]}

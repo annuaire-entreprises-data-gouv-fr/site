@@ -4,7 +4,7 @@ import routes from "#/clients/routes";
 import constants from "#/models/constants";
 import { FetchRessourceException, InternalError } from "#/models/exceptions";
 import { DataStore } from "#/utils/data-store";
-import httpClient from "#/utils/network";
+import { httpClient } from "#/utils/network";
 
 export interface IMatomoStats {
   copyPasteAction: { value: number; label: string }[];
@@ -214,6 +214,7 @@ const getStats = async (): Promise<IMatomoStats> => {
       ...npsRecords,
     };
   } catch (e: any) {
+    // biome-ignore lint/style/useErrorCause: cause is passed in the Exception arguments
     throw new FetchRessourceException({
       ressource: "MatomoStats",
       cause: e,
@@ -319,17 +320,8 @@ const getNpsRecords = async () => {
   const nps = { months, totals };
   const npsData: any = {};
 
-  for (const month in nps.months) {
-    if (!Object.hasOwn(nps.months, month)) {
-      continue;
-    }
-
-    for (const userTypeKey in nps.months[month]) {
-      if (!Object.hasOwn(nps.months[month], userTypeKey)) {
-        continue;
-      }
-
-      const ratings = nps.months[month][userTypeKey];
+  for (const [month, userTypes] of Object.entries(nps.months)) {
+    for (const [userTypeKey, ratings] of Object.entries(userTypes)) {
       const count = ratings.length;
 
       const promoters = ratings.filter((e) => e > 8).length;

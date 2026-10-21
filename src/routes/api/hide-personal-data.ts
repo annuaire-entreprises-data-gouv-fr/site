@@ -8,7 +8,7 @@ import { getUniteLegaleFromSlug } from "#/models/core/unite-legale";
 import { Exception } from "#/models/exceptions";
 import { requestSirenProtection } from "#/models/protected-siren/request-siren-protection";
 import { hasSirenFormat } from "#/utils/helpers";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import getSession from "#/utils/server-side-helper/get-session";
 import { getHidePersonalDataRequestFCSession } from "#/utils/session/index.server";
 import isUserAgentABot from "#/utils/user-agent";

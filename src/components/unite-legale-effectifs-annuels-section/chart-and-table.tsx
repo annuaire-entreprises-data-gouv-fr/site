@@ -11,8 +11,10 @@ import { formatFloatFr } from "#/utils/helpers";
 const ColorCircle = ({ color }: { color: string }) => (
   <span style={{ color }}>◆</span>
 );
-const effectifAnnuelRegimeGeneralColor = constants.chartColors[4];
-const effectifAnnuelRegimeAgricoleColor = constants.chartColors[1];
+const {
+  4: effectifAnnuelRegimeGeneralColor,
+  1: effectifAnnuelRegimeAgricoleColor,
+} = constants.chartColors;
 
 interface IEffectifAnnuelValue {
   annee: string;

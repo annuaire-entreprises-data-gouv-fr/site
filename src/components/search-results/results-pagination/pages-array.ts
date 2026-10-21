@@ -12,5 +12,3 @@ export const pagesArray = (
 
   return pages;
 };
-
-export default pagesArray;

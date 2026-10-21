@@ -15,14 +15,14 @@ function SubServicesDataSection({
   servicePublic: IServicePublic;
   uniteLegale: IUniteLegale;
 }) {
-  const subServices = useFetchServicePublicSubServices(
+  const subServicesRequest = useFetchServicePublicSubServices(
     servicePublic,
     uniteLegale
   );
 
   return (
     <DataSectionClient
-      data={subServices}
+      data={subServicesRequest}
       id="subservices-service-public"
       sources={[EAdministration.DILA]}
       title="Département(s)"

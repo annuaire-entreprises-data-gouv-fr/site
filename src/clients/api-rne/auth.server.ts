@@ -4,7 +4,8 @@ import {
 } from "#/clients/exceptions";
 import routes from "#/clients/routes";
 import constants from "#/models/constants";
-import httpClient, {
+import {
+  httpClient,
   httpGet,
   type IDefaultRequestConfig,
 } from "#/utils/network";
@@ -141,12 +142,12 @@ export class RNEClient {
     route: string,
     options?: IDefaultRequestConfig
   ): Promise<T> => {
-    const callback = (token: string) =>
+    const callback = (accessToken: string) =>
       httpGet<T>(route, {
         ...options,
         headers: {
           ...options?.headers,
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
 

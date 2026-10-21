@@ -11,7 +11,7 @@ export default function AgentNavigationLink({
   to: ComponentProps<typeof Link>["to"];
   label: string;
 }) {
-  const pathname = useLocation().pathname;
+  const { pathname } = useLocation();
 
   return (
     <Link

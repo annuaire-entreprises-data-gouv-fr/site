@@ -1,7 +1,7 @@
 import { readFromGrist } from "#/clients/external-tooling/grist.server";
 import { InternalError } from "#/models/exceptions";
 import { DataStore } from "#/utils/data-store";
-import logErrorInSentry from "#/utils/sentry";
+import { logErrorInSentry } from "#/utils/sentry";
 import {
   extractSirenFromSiret,
   type Siren,
@@ -31,8 +31,8 @@ class ProtectedSirenList {
       .map((record) => record.siren)
       .filter(Boolean)
       .reduce(
-        (acc: { [key: string]: boolean }, protectedSiren) => {
-          acc[protectedSiren] = true;
+        (acc: { [key: string]: boolean }, siren) => {
+          acc[siren] = true;
           return acc;
         },
         {} as { [key: string]: boolean }
