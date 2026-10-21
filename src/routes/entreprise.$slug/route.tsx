@@ -6,7 +6,7 @@ import {
   stripSearchParams,
   useLocation,
 } from "@tanstack/react-router";
-import { type ReactNode, useEffect, useMemo } from "react";
+import { type ReactNode, useMemo } from "react";
 import z from "zod";
 import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
@@ -23,10 +23,13 @@ import SocialNetworks from "#/components/social-network";
 import { TitleFondation } from "#/components/title-fondation-section";
 import Title from "#/components/title-section";
 import { BackToTop } from "#/components-ui/back-to-top";
-import { useAuth } from "#/contexts/auth.context";
 import { useFeatureFlag } from "#/hooks/use-feature-flag";
-import type { IAgentInfo } from "#/models/authentication/agent";
-import { getUserQueryKey } from "#/models/authentication/user/query-key";
+import {
+  UNITE_LEGALE_STALE_TIME,
+  uniteLegaleQueryKey,
+  useCachedUniteLegale,
+  useSeedUniteLegaleQueryCache,
+} from "#/hooks/use-unite-legale-query-cache";
 import { type IUniteLegale, isFondation } from "#/models/core/types";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
@@ -38,22 +41,6 @@ import {
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
 import { ENTREPRISE_TAB_TO_FICHE, entrepriseFicheSchema } from "./-loader";
-
-/**
- * Unité légale is cached by siren (not slug) so that switching between
- * /entreprise/{chemin} and /entreprise/{siren}/... does not refetch it.
- * It is anonymised depending on the user's rights, hence the user in the key.
- */
-const uniteLegaleQueryKey = (
-  user: IAgentInfo | null,
-  siren: string,
-  page?: number
-) => {
-  const key = ["unite-legale", getUserQueryKey(user), siren];
-  return page === undefined ? key : [...key, page];
-};
-
-const UNITE_LEGALE_STALE_TIME = 5 * 60 * 1000;
 
 export const Route = createFileRoute("/entreprise/$slug")({
   validateSearch: z.object({
@@ -156,16 +143,12 @@ export const Route = createFileRoute("/entreprise/$slug")({
 
 function RoutePendingComponent() {
   const { slug } = Route.useParams();
-  const { queryClient } = Route.useRouteContext();
-  const { user } = useAuth();
 
   // Same company already loaded (e.g. other tab or other etablissements page):
   // keep its title and tabs, only the content is loading
-  const cachedUniteLegale = queryClient
-    .getQueriesData<IUniteLegale>({
-      queryKey: uniteLegaleQueryKey(user, extractSirenOrSiretSlugFromUrl(slug)),
-    })
-    .find(([, data]) => data)?.[1];
+  const cachedUniteLegale = useCachedUniteLegale(
+    extractSirenOrSiretSlugFromUrl(slug)
+  );
 
   if (cachedUniteLegale) {
     return (
@@ -193,21 +176,8 @@ function RoutePendingComponent() {
 function RouteComponent() {
   const { uniteLegale } = Route.useLoaderData();
   const { etablissmentsPage } = Route.useLoaderDeps();
-  const { queryClient } = Route.useRouteContext();
-  const { user } = useAuth();
 
-  // Loader data from SSR is not in the client query cache: seed it so the
-  // first client navigation to another tab does not refetch the unité légale
-  useEffect(() => {
-    const queryKey = uniteLegaleQueryKey(
-      user,
-      uniteLegale.siren,
-      etablissmentsPage
-    );
-    if (!queryClient.getQueryData(queryKey)) {
-      queryClient.setQueryData(queryKey, uniteLegale);
-    }
-  }, [queryClient, user, uniteLegale, etablissmentsPage]);
+  useSeedUniteLegaleQueryCache(uniteLegale, etablissmentsPage);
 
   return (
     <EntrepriseLayout uniteLegale={uniteLegale}>

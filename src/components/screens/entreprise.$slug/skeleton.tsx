@@ -1,12 +1,7 @@
 import clsx from "clsx";
 import type React from "react";
-import constants from "#/models/constants";
+import { defaultUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import styles from "./skeleton.module.css";
-
-const defaultTheme = {
-  "--unite-legale-theme-background": constants.colors.pastelBlue,
-  "--unite-legale-theme-text": constants.colors.frBlue,
-} as React.CSSProperties;
 
 const Bone: React.FC<{
   className?: string;
@@ -23,7 +18,13 @@ const Bone: React.FC<{
 
 const TAB_COUNT = 8;
 
-const EntrepriseTitleSkeleton = () => (
+/**
+ * Placeholder for the title section (name, badges, description and tabs).
+ * Theme colors are inherited from the --unite-legale-theme-* CSS variables.
+ */
+export const EntrepriseTitleSkeleton: React.FC<{
+  withDescription?: boolean;
+}> = ({ withDescription = true }) => (
   <div style={{ marginBottom: 40 }}>
     <Bone className={styles.title} width="45%" />
     <div className={styles.row}>
@@ -39,15 +40,19 @@ const EntrepriseTitleSkeleton = () => (
         <Bone height="1.25rem" inline={true} key={i} width="1.25rem" />
       ))}
     </div>
-    <div className={styles.paragraph}>
-      <Bone width="100%" />
-      <Bone width="95%" />
-      <Bone width="60%" />
-    </div>
-    <div className={styles.paragraph}>
-      <Bone width="90%" />
-      <Bone width="40%" />
-    </div>
+    {withDescription && (
+      <>
+        <div className={styles.paragraph}>
+          <Bone width="100%" />
+          <Bone width="95%" />
+          <Bone width="60%" />
+        </div>
+        <div className={styles.paragraph}>
+          <Bone width="90%" />
+          <Bone width="40%" />
+        </div>
+      </>
+    )}
     <div aria-hidden="true" className={styles.tabs}>
       {Array.from({ length: TAB_COUNT }, (_, i) => (
         <span className={styles.tab} key={i} />
@@ -90,7 +95,7 @@ export const EntrepriseSectionsSkeleton = () => (
  * shown while the unité légale is being fetched
  */
 export const EntreprisePageSkeleton = () => (
-  <div style={defaultTheme}>
+  <div style={defaultUniteLegaleTheme}>
     <EntrepriseTitleSkeleton />
     <EntrepriseSectionsSkeleton />
   </div>
