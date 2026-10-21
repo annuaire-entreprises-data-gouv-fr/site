@@ -6,6 +6,7 @@ import {
   useServerFn,
 } from "@tanstack/react-start";
 import { useAuth } from "#/contexts/auth.context";
+import { getUserQueryKey } from "#/models/authentication/user/query-key";
 import {
   ApplicationRights,
   hasRights,
@@ -33,18 +34,7 @@ export function useServerFnData<Input, Data>(
 
   const { data, isPending, isLoading, isError, error } = useQuery({
     ...cacheOptions,
-    queryKey: [
-      "server-function",
-      action.url,
-      input,
-      user && {
-        proConnectSub: user.proConnectSub,
-        email: user.email,
-        siret: user.siret,
-        scopes: user.scopes,
-        groupsScopes: user.groupsScopes,
-      },
-    ],
+    queryKey: ["server-function", action.url, input, getUserQueryKey(user)],
     queryFn: () => execute({ data: input }),
     retry: false,
     refetchOnWindowFocus: false,

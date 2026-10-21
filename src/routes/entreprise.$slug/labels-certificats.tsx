@@ -25,6 +25,7 @@ import { CertificationSocieteMission } from "#/components/labels-and-certificate
 import { OpqibiSection } from "#/components/protected-certificates/opqibi-section";
 import { QualibatSection } from "#/components/protected-certificates/qualibat-section";
 import { QualifelecSection } from "#/components/protected-certificates/qualifelec-section";
+import { EntrepriseSectionsSkeleton } from "#/components/screens/entreprise.$slug/skeleton";
 import { NotFound } from "#/components/screens/not-found";
 import { HorizontalSeparator } from "#/components-ui/horizontal-separator";
 import { useAuth } from "#/contexts/auth.context";
@@ -137,6 +138,9 @@ export const Route = createFileRoute("/entreprise/$slug/labels-certificats")({
     };
   },
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: EntrepriseSectionsSkeleton,
   errorComponent: HeaderDefaultError,
   notFoundComponent: () => <NotFound withWrapper={false} />,
 });
