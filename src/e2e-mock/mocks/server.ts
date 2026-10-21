@@ -11,18 +11,22 @@ const shouldBypassUnhandledMockRequest = (request: Request) => {
     url.hostname === "127.0.0.1" ||
     url.hostname === "[::1]" ||
     url.hostname.endsWith(".localhost") ||
-    url.protocol === "ws:" ||
-    url.protocol === "wss:" ||
     url.hostname.endsWith(".sentry.io")
   );
 };
 
 mockServer.listen({
-  onUnhandledRequest: (request, print) => {
+  onUnhandledFrame: ({ frame, defaults }) => {
+    // WebSocket connections (e.g. Vite HMR) are never mocked
+    if (frame.protocol !== "http") {
+      return;
+    }
+
+    const { request } = frame.data as { request: Request };
     if (shouldBypassUnhandledMockRequest(request)) {
       return;
     }
 
-    print.warning();
+    defaults.warn();
   },
 });

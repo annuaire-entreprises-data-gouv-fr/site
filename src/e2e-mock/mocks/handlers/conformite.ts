@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import conformiteDgfip from "../../fixtures/conformite-dgfip.json" with {
   type: "json",
 };

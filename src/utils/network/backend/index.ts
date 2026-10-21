@@ -1,6 +1,6 @@
 import { Readable } from "node:stream";
 import type { ReadableStream as NodeReadableStream } from "node:stream/web";
-import { Agent } from "undici";
+import { Agent, Dispatcher1Wrapper } from "undici";
 import constants from "#/models/constants";
 import type { IDefaultRequestConfig } from "..";
 import errorInterceptor from "./error-interceptor";
@@ -13,12 +13,19 @@ import {
 
 /**
  * Limit the number of sockets allocated per distant hosts and reuse them.
+ *
+ * Node built-in fetch still uses the legacy dispatcher handler API that
+ * undici v8 removed, hence the Dispatcher1Wrapper bridge.
  */
-const dispatcher = new Agent({
-  connections: 128,
-  keepAliveMaxTimeout: 1000,
-  keepAliveTimeout: 1000,
-});
+const dispatcher = new Dispatcher1Wrapper(
+  new Agent({
+    // undici v8 enables HTTP/2 by default, keep HTTP/1.1 as before
+    allowH2: false,
+    connections: 128,
+    keepAliveMaxTimeout: 1000,
+    keepAliveTimeout: 1000,
+  })
+);
 
 const DEFAULT_TIMEOUT = constants.timeout.L;
 
@@ -193,7 +200,7 @@ async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
       headers,
       method: requestConfig.method,
       signal,
-    } as RequestInit & { dispatcher: Agent });
+    } as RequestInit & { dispatcher: Dispatcher1Wrapper });
 
     if (!response.ok) {
       const backendError = new BackendError(

@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import odsMetadata from "../../fixtures/ods-metadata.json" with {
   type: "json",
 };

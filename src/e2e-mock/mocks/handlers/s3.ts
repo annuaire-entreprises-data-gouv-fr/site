@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import { comptesAgentsMonitoring } from "../comptes-agents";
 
 export const s3HandlerMonitoring: HttpResponseResolver = ({

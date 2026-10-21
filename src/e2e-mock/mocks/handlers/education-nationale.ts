@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import educationNationale from "../../fixtures/education-nationale.json" with {
   type: "json",
 };

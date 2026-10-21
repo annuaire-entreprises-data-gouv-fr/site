@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import apiSireneInseeAuth from "../../fixtures/api-sirene-insee-auth.json" with {
   type: "json",
 };

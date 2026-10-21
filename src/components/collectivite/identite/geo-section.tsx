@@ -1,4 +1,4 @@
-import maplibregl from "maplibre-gl";
+import { type Map as MapLibreMap, Marker, Popup } from "maplibre-gl";
 import type React from "react";
 import { useCallback, useRef } from "react";
 import type { IGeoCommune } from "#/clients/api-geo/interface";
@@ -33,17 +33,15 @@ export const CollectiviteGeoSection: React.FC<{
     ["Région", `${geoCommune.region.nom} (${geoCommune.region.code})`],
   ];
 
-  const mairieMarkerRef = useRef<maplibregl.Marker | null>(null);
+  const mairieMarkerRef = useRef<Marker | null>(null);
 
   const onMapReady = useCallback(
-    (map: maplibregl.Map) => {
+    (map: MapLibreMap) => {
       mairieMarkerRef.current?.remove();
-      mairieMarkerRef.current = new maplibregl.Marker({ color: "#000091" })
+      mairieMarkerRef.current = new Marker({ color: "#000091" })
         .setLngLat(geoCommune.mairie.coordinates)
         .setPopup(
-          new maplibregl.Popup({ offset: 16 }).setText(
-            `Mairie de ${geoCommune.nom}`
-          )
+          new Popup({ offset: 16 }).setText(`Mairie de ${geoCommune.nom}`)
         )
         .addTo(map);
     },

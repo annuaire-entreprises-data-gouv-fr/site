@@ -1,4 +1,6 @@
-import maplibregl, { type MapLayerMouseEvent } from "maplibre-gl";
+import type { Feature, FeatureCollection, Point } from "geojson";
+import type { MapLayerMouseEvent, Map as MapLibreMap } from "maplibre-gl";
+import { Popup } from "maplibre-gl";
 import { useCallback, useMemo, useRef } from "react";
 import type { IGeoCommune } from "#/clients/api-geo/interface";
 import { CollectiviteMap } from "#/components/collectivite/map";
@@ -37,7 +39,7 @@ function hasValidCoordinates(etablissement: ICollectiviteEtablissementSirene) {
 
 function buildEtablissementFeature(
   etablissement: ICollectiviteEtablissementSirene
-): GeoJSON.Feature<GeoJSON.Point, EtablissementFeatureProperties> {
+): Feature<Point, EtablissementFeatureProperties> {
   return {
     geometry: {
       coordinates: [Number(etablissement.lon), Number(etablissement.lat)],
@@ -53,7 +55,7 @@ function buildEtablissementFeature(
 
 function buildEtablissementsFeatureCollection(
   etablissements: ICollectiviteEtablissementSirene[]
-): GeoJSON.FeatureCollection<GeoJSON.Point, EtablissementFeatureProperties> {
+): FeatureCollection<Point, EtablissementFeatureProperties> {
   return {
     features: etablissements
       .filter(hasValidCoordinates)
@@ -99,7 +101,7 @@ function CollectiviteEtablissementsMap({
   }, []);
 
   const onMapLoad = useCallback(
-    (map: maplibregl.Map) => {
+    (map: MapLibreMap) => {
       cleanupEtablissementsLayer();
 
       const featureCollection =
@@ -134,7 +136,7 @@ function CollectiviteEtablissementsMap({
           return;
         }
 
-        new maplibregl.Popup({ offset: 12 })
+        new Popup({ offset: 12 })
           .setLngLat(event.lngLat)
           .setDOMContent(
             buildEtablissementPopupContent(

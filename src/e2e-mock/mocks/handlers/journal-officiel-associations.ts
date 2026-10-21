@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import journalOfficielAssociations from "../../fixtures/journal-officiel-associations.json" with {
   type: "json",
 };

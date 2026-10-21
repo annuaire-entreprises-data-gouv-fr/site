@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import entrepreneurSpectacles from "../../fixtures/entrepreneur-spectacles.json" with {
   type: "json",
 };

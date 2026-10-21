@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 
 export const matomoReportHandler: HttpResponseResolver = ({ request }) => {
   if (request.url.includes("Events.getCategory")) {

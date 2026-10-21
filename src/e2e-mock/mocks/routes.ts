@@ -1,4 +1,4 @@
-import { http } from "msw";
+import { http } from "msw/http";
 import routes from "#/clients/routes";
 import { aidesADEMEHandler } from "./handlers/aides-ademe";
 import { annuaireServicePublicHandler } from "./handlers/annuaire-service-public";

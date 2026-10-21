@@ -1,4 +1,4 @@
-import { HttpResponse, type HttpResponseResolver } from "msw";
+import { HttpResponse, type HttpResponseResolver } from "msw/http";
 import aidesMinimis from "../../fixtures/aides-minimis.json" with {
   type: "json",
 };

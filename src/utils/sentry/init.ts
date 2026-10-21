@@ -37,6 +37,22 @@ export const initSentryClient = createClientOnlyFn(() => {
     },
     tracesSampleRate: 0.005,
     maxBreadcrumbs: 2,
+    // Sentry v11 collects user info, cookies, headers and bodies by default:
+    // keep the restrictive v10 behaviour (sendDefaultPii: false)
+    dataCollection: {
+      userInfo: false,
+      cookies: false,
+      httpHeaders: {
+        request: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+        response: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      },
+      httpBodies: [],
+      urlQueryParams: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      genAI: { inputs: false, outputs: false },
+      databaseQueryData: false,
+      queues: false,
+      graphQL: { document: false, variables: false },
+    },
     // An error can be thrown when a fetch request is aborted during a page unload
     // We don't want to log it to sentry so we ignore it.
     ignoreErrors: [/RequestAbortedDuringUnloadException/],
