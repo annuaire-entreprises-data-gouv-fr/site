@@ -5,6 +5,7 @@ import { RenderMarkdown } from "#/components/markdown";
 import { NotFound } from "#/components/screens/not-found";
 import SearchBar from "#/components/search-bar";
 import { diamond } from "#/components-ui/logo-annuaire/logo-annuaire";
+import { useClientSideSearchNavigation } from "#/hooks/use-client-side-search-navigation";
 import { getLandingPage } from "#/models/landing-pages";
 import { getFeatureFlagFn } from "#/server-functions/public/feature-flags";
 import { meta } from "#/utils/seo";
@@ -70,6 +71,8 @@ function RouteComponent() {
     body,
     searchPlaceholder,
   } = landingPage;
+  const { onSubmit } = useClientSideSearchNavigation();
+
   return (
     <>
       <form
@@ -77,6 +80,7 @@ function RouteComponent() {
         className={`${styles["centered-search"]} layout-center`}
         id="search-bar-form"
         method="get"
+        onSubmit={onSubmit}
       >
         <h1>
           <span className={styles.diamond}>

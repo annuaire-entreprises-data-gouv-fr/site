@@ -1,20 +1,7 @@
-import clsx from "clsx";
 import type React from "react";
+import { Bone } from "#/components-ui/skeleton";
 import { defaultUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
 import styles from "./skeleton.module.css";
-
-const Bone: React.FC<{
-  className?: string;
-  height?: string;
-  inline?: boolean;
-  width: string;
-}> = ({ className, height, inline = false, width }) => (
-  <span
-    aria-hidden="true"
-    className={clsx(styles.bone, inline && styles.inline, className)}
-    style={{ width, height }}
-  />
-);
 
 const TAB_COUNT = 8;
 
@@ -26,7 +13,7 @@ export const EntrepriseTitleSkeleton: React.FC<{
   withDescription?: boolean;
 }> = ({ withDescription = true }) => (
   <div style={{ marginBottom: 40 }}>
-    <Bone className={styles.title} width="45%" />
+    <Bone className={styles.title} height="2.25rem" width="45%" />
     <div className={styles.row}>
       <Bone height="1.5rem" inline={true} width="100px" />
       <Bone height="1.25rem" inline={true} width="110px" />

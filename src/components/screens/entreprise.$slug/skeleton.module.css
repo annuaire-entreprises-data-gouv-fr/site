@@ -1,32 +1,4 @@
-@keyframes shimmer {
-  0% {
-    background-position: 100% 0;
-  }
-  100% {
-    background-position: -100% 0;
-  }
-}
-
-.bone {
-  display: block;
-  height: 1rem;
-  background: linear-gradient(90deg, #eee 25%, #f6f6f6 50%, #eee 75%);
-  background-size: 200% 100%;
-  border-radius: 4px;
-  animation: shimmer 1.4s ease-in-out infinite;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}
-
-.inline {
-  display: inline-block;
-  vertical-align: middle;
-}
-
 .title {
-  height: 2.25rem;
   margin: 2.5rem 0 0.75rem;
 }
 

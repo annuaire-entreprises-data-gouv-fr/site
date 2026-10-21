@@ -1,4 +1,5 @@
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import HiddenH1 from "#/components/a11y-components/hidden-h1";
 import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
@@ -6,9 +7,13 @@ import Footer from "#/components/footer";
 import { HeaderWithAdvancedSearch } from "#/components/header/header-advanced-search";
 import SearchResults from "#/components/search-results";
 import { AdvancedSearchTutorial } from "#/components/search-results/advanced-search-tutorial";
+import { SearchResultsSkeleton } from "#/components/search-results/skeleton";
 import SocialNetworks from "#/components/social-network";
 import { BackToTop } from "#/components-ui/back-to-top";
-import { hasSearchParam } from "#/models/search/search-filter-params";
+import SearchFilterParams, {
+  hasSearchParam,
+  type IParams,
+} from "#/models/search/search-filter-params";
 import { meta } from "#/utils/seo";
 import { HeaderSearchError } from "../-error";
 import {
@@ -80,37 +85,74 @@ export const Route = createFileRoute("/_header-search/rechercher/")({
   },
   loader: async ({ deps }) => await searchFn({ data: deps }),
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: RoutePendingComponent,
   errorComponent: HeaderSearchError,
 });
+
+function RoutePendingComponent() {
+  const search = Route.useSearch();
+
+  return (
+    <SearchLayout
+      searchFilterParams={new SearchFilterParams(search).toJSON()}
+      searchTerm={search.terme}
+    >
+      <SearchResultsSkeleton />
+    </SearchLayout>
+  );
+}
 
 function RouteComponent() {
   const { searchResults, searchFilterParamsJSON, searchTerm } =
     Route.useLoaderData();
 
   return (
+    <SearchLayout
+      searchFilterParams={searchFilterParamsJSON}
+      searchTerm={searchTerm}
+    >
+      {hasSearchParam(searchFilterParamsJSON) || searchTerm ? (
+        <SearchResults
+          results={searchResults}
+          searchFilterParams={searchFilterParamsJSON}
+          searchTerm={searchTerm}
+        />
+      ) : (
+        <AdvancedSearchTutorial />
+      )}
+    </SearchLayout>
+  );
+}
+
+function SearchLayout({
+  children,
+  searchFilterParams,
+  searchTerm,
+}: {
+  children: ReactNode;
+  searchFilterParams: IParams;
+  searchTerm: string;
+}) {
+  return (
     <>
       <NPSBanner />
       <BannerManager />
       <HeaderWithAdvancedSearch
         currentSearchTerm={searchTerm}
-        searchParams={searchFilterParamsJSON}
+        // search bar and filters keep their own state, initialised from these
+        // props: remount them when the search changes (e.g. a filter cleared
+        // client-side, or browser back/forward), as a full page load would
+        key={JSON.stringify([searchTerm, searchFilterParams])}
+        searchParams={searchFilterParams}
         useAgentCTA={true}
         useMap={false}
         useSearchBar={true}
       />
       <main className="fr-container">
         <HiddenH1 title="Résultats de recherche" />
-        <div className="content-container">
-          {hasSearchParam(searchFilterParamsJSON) || searchTerm ? (
-            <SearchResults
-              results={searchResults}
-              searchFilterParams={searchFilterParamsJSON}
-              searchTerm={searchTerm}
-            />
-          ) : (
-            <AdvancedSearchTutorial />
-          )}
-        </div>
+        <div className="content-container">{children}</div>
       </main>
       <SocialNetworks />
       <Footer />

@@ -1,10 +1,12 @@
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import HiddenH1 from "#/components/a11y-components/hidden-h1";
 import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
 import Footer from "#/components/footer";
 import { Header } from "#/components/header/header";
 import SearchFondationsResults from "#/components/search-fondations-results";
+import { SearchResultsSkeleton } from "#/components/search-results/skeleton";
 import SocialNetworks from "#/components/social-network";
 import { meta } from "#/utils/seo";
 import { HeaderSearchError } from "../-error";
@@ -48,19 +50,53 @@ export const Route = createFileRoute("/_header-search/rechercher/fondations")({
   },
   loader: async ({ deps }) => await searchFondationsFn({ data: deps }),
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: RoutePendingComponent,
   errorComponent: HeaderSearchError,
 });
+
+function RoutePendingComponent() {
+  const { terme } = Route.useSearch();
+
+  return (
+    <SearchFondationsLayout searchTerm={terme}>
+      <SearchResultsSkeleton />
+    </SearchFondationsLayout>
+  );
+}
 
 function RouteComponent() {
   const { searchResults, searchFilterParamsJSON, searchTerm } =
     Route.useLoaderData();
 
   return (
+    <SearchFondationsLayout searchTerm={searchTerm}>
+      <SearchFondationsResults
+        results={searchResults}
+        searchFilterParams={searchFilterParamsJSON}
+        searchTerm={searchTerm}
+      />
+    </SearchFondationsLayout>
+  );
+}
+
+function SearchFondationsLayout({
+  children,
+  searchTerm,
+}: {
+  children: ReactNode;
+  searchTerm: string;
+}) {
+  return (
     <>
       <NPSBanner />
       <BannerManager />
       <Header
         currentSearchTerm={searchTerm}
+        // search bar is initialised from currentSearchTerm: remount it when
+        // the search changes (e.g. browser back/forward)
+        key={searchTerm}
         searchPath="/rechercher/fondations"
         searchPlaceholder="Nom, adresse, n° RNF..."
         useAgentBanner={false}
@@ -71,13 +107,7 @@ function RouteComponent() {
       />
       <main className="fr-container">
         <HiddenH1 title="Résultats de recherche" />
-        <div className="content-container">
-          <SearchFondationsResults
-            results={searchResults}
-            searchFilterParams={searchFilterParamsJSON}
-            searchTerm={searchTerm}
-          />
-        </div>
+        <div className="content-container">{children}</div>
       </main>
       <SocialNetworks />
       <Footer />

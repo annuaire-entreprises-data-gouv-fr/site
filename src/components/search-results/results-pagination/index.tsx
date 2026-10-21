@@ -1,4 +1,5 @@
 import type React from "react";
+import { useClientSideSearchNavigation } from "#/hooks/use-client-side-search-navigation";
 import {
   buildSearchQuery,
   type IParams,
@@ -157,6 +158,7 @@ const PageCounter: React.FC<IProps> = ({
   urlComplement = "",
   compact = false,
 }) => {
+  const { onClick } = useClientSideSearchNavigation();
   const pages = pagesArray(currentPage, totalPages);
   if (pages.length === 1) {
     return null;
@@ -164,7 +166,9 @@ const PageCounter: React.FC<IProps> = ({
 
   return (
     <div className="layout-center" style={{ margin: "15px auto" }}>
-      <nav aria-label="Pagination" className="fr-pagination">
+      {/* biome-ignore lint/a11y/noNoninteractiveElementInteractions: delegated click of the pagination links */}
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: links fire click on keyboard activation */}
+      <nav aria-label="Pagination" className="fr-pagination" onClick={onClick}>
         <ul className="fr-pagination__list">
           <First
             compact={compact}

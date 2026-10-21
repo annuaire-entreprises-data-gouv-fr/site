@@ -3,6 +3,7 @@ import Favourites from "#/components/favourites";
 import { Link } from "#/components/link";
 import SearchBar from "#/components/search-bar";
 import { LogoAnnuaireWithEasterEgg } from "#/components-ui/logo-annuaire/logo-with-easter-egg";
+import { useClientSideSearchNavigation } from "#/hooks/use-client-side-search-navigation";
 import { meta } from "#/utils/seo";
 import { HeaderHomeError } from "./-error";
 
@@ -64,6 +65,8 @@ export const Route = createFileRoute("/_header-home/")({
 });
 
 function RouteComponent() {
+  const { onSubmit } = useClientSideSearchNavigation();
+
   return (
     <>
       <div className="layout-center">
@@ -71,6 +74,7 @@ function RouteComponent() {
           action={"/rechercher"}
           id="search-bar-form"
           method="get"
+          onSubmit={onSubmit}
           style={{
             marginBottom: "16vh",
             marginTop: "11vh",
