@@ -133,9 +133,9 @@ export interface IUniteLegale extends IEtablissementsList {
   listeIdcc: { idcc: string; title: string }[];
   natureJuridique: string;
   nomComplet: string;
-  oldSiren: Siren;
   siege: IEtablissement;
   siren: Siren;
+  sirenConserve: Siren | null;
   statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
   trancheEffectif: string | null;
   tva: string[] | null;
@@ -147,7 +147,6 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
   return {
     aAccesEspaceAgent: false,
     siren,
-    oldSiren: siren,
     siege,
     tva: [],
     anciensSiegesSirets: [],
@@ -183,6 +182,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     immatriculation: null,
     isNbEtablissementOuvertReliable: true,
     bodacc: null,
+    sirenConserve: null,
   };
 };
 

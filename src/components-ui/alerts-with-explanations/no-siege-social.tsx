@@ -10,7 +10,7 @@ const NoSiegeSocialAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
     return null;
   }
 
-  if (uniteLegale.siege.siret !== "") {
+  if (uniteLegale.siege.siret !== "" || uniteLegale.sirenConserve) {
     return null;
   }
 

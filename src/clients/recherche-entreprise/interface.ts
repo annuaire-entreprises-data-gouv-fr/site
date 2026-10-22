@@ -54,6 +54,7 @@ export interface IResult {
   section_activite_principale: string;
   siege: ISiege;
   siren: string;
+  siren_conserve: string | null;
   statut_diffusion: "O" | "P";
   tranche_effectif_salarie: string;
   tva: string[] | null;
