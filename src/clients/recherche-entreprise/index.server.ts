@@ -13,6 +13,7 @@ import type SearchFilterParams from "#/models/search/search-filter-params";
 import {
   isEntrepreneurIndividuelFromNatureJuridique,
   isPersonneMoraleFromNatureJuridique,
+  isSiren,
   parseIntWithDefaultValue,
   verifySiren,
 } from "#/utils/helpers";
@@ -356,6 +357,10 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
             : null,
         }
       : null,
+    sirenConserve:
+      result.siren_conserve && isSiren(result.siren_conserve)
+        ? result.siren_conserve
+        : null,
   };
 };
 

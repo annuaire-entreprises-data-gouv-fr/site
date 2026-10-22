@@ -89,7 +89,7 @@ export class HttpInseeClient {
       const data = await httpClient<IAccessToken["data"]>({
         url: this.token_url,
         method: "POST",
-        timeout: constants.timeout.S,
+        timeout: constants.timeout.XL,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -171,7 +171,7 @@ export class HttpInseeClient {
       const token = await this.getToken();
 
       return httpGet(url, {
-        timeout: constants.timeout.M,
+        timeout: constants.timeout.XL,
         ...config,
         headers: {
           ...config.headers,
@@ -207,7 +207,7 @@ export class HttpInseeClient {
       const token = await this.getToken();
 
       return httpPost(url, {
-        timeout: constants.timeout.M,
+        timeout: constants.timeout.XL,
         ...config,
         headers: {
           ...config.headers,
@@ -326,7 +326,7 @@ export const inseeAgentsClientGet = createServerOnlyFn(
     (await agentsClient.get(
       route,
       {
-        timeout: constants.timeout.S,
+        timeout: constants.timeout.XL,
         ...config,
       },
       useFallback
@@ -356,7 +356,7 @@ export const inseeClientGet = createServerOnlyFn(
     return (await grandPublicClient.get(
       route,
       {
-        timeout: constants.timeout.S,
+        timeout: constants.timeout.XL,
         ...config,
       },
       useFallback

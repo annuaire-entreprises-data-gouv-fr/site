@@ -136,6 +136,7 @@ export interface IUniteLegale extends IEtablissementsList {
   oldSiren: Siren;
   siege: IEtablissement;
   siren: Siren;
+  sirenConserve: Siren | null;
   statutDiffusion: ISTATUTDIFFUSION; // diffusion des données autorisée - uniquement les EI
   trancheEffectif: string | null;
   tva: string[] | null;
@@ -183,6 +184,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     immatriculation: null,
     isNbEtablissementOuvertReliable: true,
     bodacc: null,
+    sirenConserve: null,
   };
 };
 
