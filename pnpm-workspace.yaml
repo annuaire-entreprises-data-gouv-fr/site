@@ -32,5 +32,5 @@ strictDepBuilds: true
 # SECURITY: reject dependencies sourced from git URLs
 blockExoticSubdeps: true
 
-nodeVersion: "24.22.0"
+nodeVersion: "24.22.1"
 saveExact: true

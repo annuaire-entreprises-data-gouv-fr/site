@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  node-version: 24.22.0
+  node-version: 24.22.1
 
 jobs:
   build:

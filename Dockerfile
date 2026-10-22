@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-ARG NODE_IMAGE=node:24.22-alpine
+ARG NODE_IMAGE=node:24.22.1-alpine
 ARG PNPM_VERSION=12.14.0
 ARG ENVIRONMENT=production
 ARG BUILD_DATE
@@ -21,7 +21,7 @@ LABEL org.opencontainers.image.vendor="annuaire-entreprises-data-gouv-fr"
 LABEL org.opencontainers.image.licenses="MIT License"
 LABEL org.opencontainers.image.title="Site Annuaire des Entreprises"
 LABEL org.opencontainers.image.description="Image Docker du site de l'Annuaire des Entreprises"
-LABEL org.opencontainers.image.base.name="node:24.22-alpine"
+LABEL org.opencontainers.image.base.name="node:24.22.1-alpine"
 LABEL org.opencontainers.image.base.digest=""
 
 ARG PNPM_VERSION
