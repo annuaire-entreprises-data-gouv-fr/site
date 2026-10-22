@@ -3,9 +3,10 @@ import {
   type IAPINotRespondingError,
   isAPINotResponding,
 } from "#/models/api-not-responding";
+import type { IEtablissement, IUniteLegale } from "./types";
 
 export const shouldUseInsee = createServerOnlyFn(
-  <T extends {}>(
+  <T extends IUniteLegale | IEtablissement>(
     rechercheEntrepriseResponse: T | IAPINotRespondingError,
     isBot: boolean,
     isEI: (r: T) => boolean,
@@ -27,6 +28,13 @@ export const shouldUseInsee = createServerOnlyFn(
     }
 
     if (rechercheEntrepriseResponse) {
+      if (
+        "sirenConserve" in rechercheEntrepriseResponse &&
+        rechercheEntrepriseResponse.sirenConserve
+      ) {
+        return false;
+      }
+
       if (hasInconsistencies?.(rechercheEntrepriseResponse)) {
         return true;
       }

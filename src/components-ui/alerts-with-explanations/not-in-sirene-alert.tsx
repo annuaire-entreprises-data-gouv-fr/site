@@ -12,7 +12,7 @@ const NotInSireneAlert: React.FC<{
     return null;
   }
 
-  if (uniteLegale.dateMiseAJourInsee) {
+  if (uniteLegale.dateMiseAJourInsee || uniteLegale.sirenConserve) {
     return null;
   }
 

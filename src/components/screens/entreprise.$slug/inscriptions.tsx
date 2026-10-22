@@ -14,7 +14,7 @@ import {
   isFondation,
   isServicePublic,
 } from "#/models/core/types";
-import { formatDate } from "#/utils/helpers";
+import { formatDate, formatIntFr } from "#/utils/helpers";
 import styles from "./style.module.css";
 
 const Wrapper: React.FC<PropsWithChildren<{ link: React.JSX.Element }>> = ({
@@ -86,6 +86,29 @@ export const UniteLegaleInscriptionSirene = ({
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }) => {
+  if (uniteLegale.sirenConserve) {
+    return (
+      <InformationTooltip
+        label={
+          <span>
+            Cette unité, identifiée comme un doublon, est purgée du répertoire
+            SIRENE par l’Insee. Les informations complètes figurent sur la page
+            du siren conservé{" "}
+            <Link
+              params={{ slug: uniteLegale.sirenConserve }}
+              to="/entreprise/$slug"
+            >
+              {formatIntFr(uniteLegale.sirenConserve)}
+            </Link>
+            .
+          </span>
+        }
+        tabIndex={undefined}
+      >
+        <OpenClosedTag icon="questionFill" label="Doublon (Insee)" />
+      </InformationTooltip>
+    );
+  }
   if (!uniteLegale.dateMiseAJourInsee) {
     return (
       <InformationTooltip
