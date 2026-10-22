@@ -52,7 +52,11 @@ export const useSeedUniteLegaleQueryCache = (
     if (!uniteLegale) {
       return;
     }
-    const queryKey = uniteLegaleQueryKey(user, uniteLegale.siren, page);
+    const queryKey = uniteLegaleQueryKey(
+      user,
+      uniteLegale.oldSiren || uniteLegale.siren,
+      page
+    );
     if (!queryClient.getQueryData(queryKey)) {
       queryClient.setQueryData(queryKey, uniteLegale);
     }
