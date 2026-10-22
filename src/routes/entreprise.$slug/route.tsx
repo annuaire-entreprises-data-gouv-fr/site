@@ -22,6 +22,7 @@ import { NotFound } from "#/components/screens/not-found";
 import SocialNetworks from "#/components/social-network";
 import { TitleFondation } from "#/components/title-fondation-section";
 import Title from "#/components/title-section";
+import MultipleSirenAlert from "#/components-ui/alerts-with-explanations/multiple-siren";
 import { BackToTop } from "#/components-ui/back-to-top";
 import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import {
@@ -207,6 +208,26 @@ function EntrepriseLayout({
   const isFromFondation = isFondation(uniteLegale) && from === "fondation";
   const isFondationsEnabled = useFeatureFlag("fondations_enabled");
 
+  const pageContent = uniteLegale.oldSiren ? (
+    <MultipleSirenAlert uniteLegale={uniteLegale} />
+  ) : (
+    <>
+      {isFondation(uniteLegale) && isFondationsEnabled.isEnabled ? (
+        <TitleFondation
+          fondationName={uniteLegale.nomComplet}
+          fondationRNF={uniteLegale.complements.numeroRnf}
+          uniteLegale={uniteLegale}
+        />
+      ) : (
+        <Title
+          ficheType={ENTREPRISE_TAB_TO_FICHE[fiche]}
+          uniteLegale={uniteLegale}
+        />
+      )}
+      {children}
+    </>
+  );
+
   return (
     <>
       {isFromFondation && <LeaveFondation />}
@@ -222,19 +243,7 @@ function EntrepriseLayout({
         useSearchBar={true}
       />
       <main className="fr-container" style={getUniteLegaleTheme(uniteLegale)}>
-        {isFondation(uniteLegale) && isFondationsEnabled.isEnabled ? (
-          <TitleFondation
-            fondationName={uniteLegale.nomComplet}
-            fondationRNF={uniteLegale.complements.numeroRnf}
-            uniteLegale={uniteLegale}
-          />
-        ) : (
-          <Title
-            ficheType={ENTREPRISE_TAB_TO_FICHE[fiche]}
-            uniteLegale={uniteLegale}
-          />
-        )}
-        {children}
+        {pageContent}
       </main>
       <SocialNetworks />
       <Question />

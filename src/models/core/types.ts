@@ -133,6 +133,7 @@ export interface IUniteLegale extends IEtablissementsList {
   listeIdcc: { idcc: string; title: string }[];
   natureJuridique: string;
   nomComplet: string;
+  oldSiren: Siren | null;
   siege: IEtablissement;
   siren: Siren;
   sirenConserve: Siren | null;
@@ -183,6 +184,7 @@ export const createDefaultUniteLegale = (siren: Siren): IUniteLegale => {
     isNbEtablissementOuvertReliable: true,
     bodacc: null,
     sirenConserve: null,
+    oldSiren: null,
   };
 };
 

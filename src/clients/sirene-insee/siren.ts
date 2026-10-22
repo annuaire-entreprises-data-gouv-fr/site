@@ -235,7 +235,7 @@ const mapToDomainObject = (
     uniteLegale: {
       ...defaultUniteLegale,
       siren,
-      sirenConserve: originalSiren === siren ? null : originalSiren,
+      oldSiren: originalSiren === siren ? null : originalSiren,
       siege,
       anciensSiegesSirets: Array.from(
         new Set(

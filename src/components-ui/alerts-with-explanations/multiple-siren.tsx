@@ -6,23 +6,40 @@ import { Warning } from "../alerts";
 
 const MultipleSirenAlert: React.FC<{ uniteLegale: IUniteLegale }> = ({
   uniteLegale,
-}) => (
-  <>
-    {uniteLegale.sirenConserve && (
+}) => {
+  if (uniteLegale.oldSiren) {
+    return (
       <Warning full>
         Cette unité est inscrite en double à l’
-        <INSEE /> : {formatIntFr(uniteLegale.siren)} et{" "}
-        {formatIntFr(uniteLegale.sirenConserve)}. Pour voir les informations
-        complètes, consultez la page{" "}
-        <Link
-          params={{ slug: uniteLegale.sirenConserve }}
-          to="/entreprise/$slug"
-        >
-          {formatIntFr(uniteLegale.sirenConserve)}
+        <INSEE /> : {formatIntFr(uniteLegale.oldSiren)} et{" "}
+        {formatIntFr(uniteLegale.siren)}. Pour voir les informations complètes,
+        consultez la page{" "}
+        <Link params={{ slug: uniteLegale.siren }} to="/entreprise/$slug">
+          {formatIntFr(uniteLegale.siren)}
         </Link>
         .
       </Warning>
-    )}
-  </>
-);
+    );
+  }
+
+  return (
+    <>
+      {uniteLegale.sirenConserve && (
+        <Warning full>
+          Cette unité est inscrite en double à l’
+          <INSEE /> : {formatIntFr(uniteLegale.siren)} et{" "}
+          {formatIntFr(uniteLegale.sirenConserve)}. Pour voir les informations
+          complètes, consultez la page{" "}
+          <Link
+            params={{ slug: uniteLegale.sirenConserve }}
+            to="/entreprise/$slug"
+          >
+            {formatIntFr(uniteLegale.sirenConserve)}
+          </Link>
+          .
+        </Warning>
+      )}
+    </>
+  );
+};
 export default MultipleSirenAlert;
