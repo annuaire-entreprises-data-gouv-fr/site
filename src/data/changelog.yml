@@ -11,6 +11,11 @@
 #   site: true
 
 ---
+- date: 22/10/2026
+  target:
+    site: true
+  body: |
+    Le traitement des SIREN en doublon évolue afin de distinguer clairement les SIREN purgés par l’INSEE des SIREN conservés.
 - date: 19/10/2026
   target:
     site: true
