@@ -1,5 +1,6 @@
 import {
   createFileRoute,
+  Link,
   notFound,
   Outlet,
   redirect,
@@ -8,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { type ReactNode, useMemo } from "react";
 import z from "zod";
+import { INSEE } from "#/components/administrations";
 import { BannerManager } from "#/components/banner/banner-manager";
 import { NPSBanner } from "#/components/banner/nps";
 import Footer from "#/components/footer";
@@ -22,6 +24,7 @@ import { NotFound } from "#/components/screens/not-found";
 import SocialNetworks from "#/components/social-network";
 import { TitleFondation } from "#/components/title-fondation-section";
 import Title from "#/components/title-section";
+import { Warning } from "#/components-ui/alerts";
 import { BackToTop } from "#/components-ui/back-to-top";
 import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import {
@@ -33,6 +36,7 @@ import {
 import { type IUniteLegale, isFondation } from "#/models/core/types";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { getUniteLegaleTheme } from "#/utils/get-unite-legale-theme";
+import { formatIntFr } from "#/utils/helpers";
 import {
   extractSirenOrSiretSlugFromUrl,
   isLikelyASiren,
@@ -207,6 +211,37 @@ function EntrepriseLayout({
   const isFromFondation = isFondation(uniteLegale) && from === "fondation";
   const isFondationsEnabled = useFeatureFlag("fondations_enabled");
 
+  const pageContent = uniteLegale.oldSiren ? (
+    <Warning full>
+      Le siren {formatIntFr(uniteLegale.oldSiren)} a été identifié comme un
+      doublon et purgé du répertoire SIRENE par l'
+      <INSEE />. Il n'apparaît pas non plus dans le registre national des
+      entreprises. En conséquence, il n'existe plus aucune information liée à ce
+      siren, qui ne doit plus être utilisé. Les informations de cette unité
+      légale sont disponibles sur la page du siren conservé :{" "}
+      <Link params={{ slug: uniteLegale.siren }} to="/entreprise/$slug">
+        {formatIntFr(uniteLegale.siren)}
+      </Link>
+      .
+    </Warning>
+  ) : (
+    <>
+      {isFondation(uniteLegale) && isFondationsEnabled.isEnabled ? (
+        <TitleFondation
+          fondationName={uniteLegale.nomComplet}
+          fondationRNF={uniteLegale.complements.numeroRnf}
+          uniteLegale={uniteLegale}
+        />
+      ) : (
+        <Title
+          ficheType={ENTREPRISE_TAB_TO_FICHE[fiche]}
+          uniteLegale={uniteLegale}
+        />
+      )}
+      {children}
+    </>
+  );
+
   return (
     <>
       {isFromFondation && <LeaveFondation />}
@@ -222,19 +257,7 @@ function EntrepriseLayout({
         useSearchBar={true}
       />
       <main className="fr-container" style={getUniteLegaleTheme(uniteLegale)}>
-        {isFondation(uniteLegale) && isFondationsEnabled.isEnabled ? (
-          <TitleFondation
-            fondationName={uniteLegale.nomComplet}
-            fondationRNF={uniteLegale.complements.numeroRnf}
-            uniteLegale={uniteLegale}
-          />
-        ) : (
-          <Title
-            ficheType={ENTREPRISE_TAB_TO_FICHE[fiche]}
-            uniteLegale={uniteLegale}
-          />
-        )}
-        {children}
+        {pageContent}
       </main>
       <SocialNetworks />
       <Question />
