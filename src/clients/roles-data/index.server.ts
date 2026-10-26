@@ -124,6 +124,23 @@ export const clientRolesAddUserToGroup = createServerOnlyFn(
   }
 );
 
+export const clientRolesAddUsersToGroupBatch = createServerOnlyFn(
+  async (
+    groupId: number,
+    emails: string[],
+    roleId: number
+  ): Promise<IRolesDataUser[]> => {
+    const url =
+      process.env.ROLES_DATA_URL +
+      routes.rolesData.groups.addUsersToGroupBatch(groupId);
+    return await rolesDataResourceServerClient<IRolesDataUser[]>({
+      url,
+      method: "POST",
+      data: { users: emails.map((email) => ({ email, role_id: roleId })) },
+    });
+  }
+);
+
 export const clientRolesUpdateUserFromGroup = createServerOnlyFn(
   async (
     groupId: number,

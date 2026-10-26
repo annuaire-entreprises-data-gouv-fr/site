@@ -30,7 +30,12 @@ export const Modal: React.FC<{
           className={styles.modalOverlay}
           onClick={onClose}
           onKeyDown={(event) => {
-            if (onClose && (event.key === "Enter" || event.key === " ")) {
+            // ignore keys bubbling up from controls inside the modal
+            if (
+              onClose &&
+              event.target === event.currentTarget &&
+              (event.key === "Enter" || event.key === " ")
+            ) {
               onClose();
             }
           }}

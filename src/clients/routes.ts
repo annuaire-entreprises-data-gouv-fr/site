@@ -330,6 +330,8 @@ const routes = {
         )}`,
       addUserToGroup: (groupId: number) =>
         `/resource-server/groups/${groupId}/users`,
+      addUsersToGroupBatch: (groupId: number) =>
+        `/resource-server/groups/${groupId}/users/batch`,
       updateUserFromGroup: (groupId: number, userId: number, roleId: number) =>
         `/resource-server/groups/${groupId}/users/${userId}?role_id=${roleId}`,
       removeUserFromGroup: (groupId: number, userId: number) =>

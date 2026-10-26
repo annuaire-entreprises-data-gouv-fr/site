@@ -2,6 +2,7 @@ import { redirect } from "@tanstack/react-router";
 import { ProConnectReconnexionNeeded } from "#/clients/authentication/pro-connect/exceptions";
 import { HttpNotFound } from "#/clients/exceptions";
 import {
+  clientRolesAddUsersToGroupBatch,
   clientRolesAddUserToGroup,
   clientRolesGetGroups,
   clientRolesRemoveUserFromGroup,
@@ -84,6 +85,17 @@ export async function addUserToGroup(
 ): Promise<IRolesDataUser> {
   return await run<IRolesDataUser>(
     async () => await clientRolesAddUserToGroup(groupId, userEmail, roleId)
+  );
+}
+
+export async function addUsersToGroup(
+  groupId: number,
+  userEmails: string[],
+  roleId: number
+): Promise<IRolesDataUser[]> {
+  return await run<IRolesDataUser[]>(
+    async () =>
+      await clientRolesAddUsersToGroupBatch(groupId, userEmails, roleId)
   );
 }
 
