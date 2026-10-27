@@ -61,3 +61,7 @@ export const isEESEFOrExploitationEnCommunFromNatureJuridique = (
     "3220",
     "9224",
   ].indexOf(natureJuridique) > -1;
+
+export const isActiviteDesOrganisationsOuOrganismesExtraterritoriaux = (
+  natureJuridique: string
+) => natureJuridique === "9900";

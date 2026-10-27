@@ -14,7 +14,11 @@ import {
   isFondation,
   isServicePublic,
 } from "#/models/core/types";
-import { formatDate, formatIntFr } from "#/utils/helpers";
+import {
+  formatDate,
+  formatIntFr,
+  isActiviteDesOrganisationsOuOrganismesExtraterritoriaux,
+} from "#/utils/helpers";
 import styles from "./style.module.css";
 
 const Wrapper: React.FC<PropsWithChildren<{ link: React.JSX.Element }>> = ({
@@ -177,7 +181,11 @@ export const UniteLegaleInscriptionRNE = ({
     if (
       isServicePublic(uniteLegale) ||
       isAssociation(uniteLegale) ||
-      isFondation(uniteLegale)
+      isFondation(uniteLegale) ||
+      (isActiviteDesOrganisationsOuOrganismesExtraterritoriaux(
+        uniteLegale.natureJuridique
+      ) &&
+        !uniteLegale.dateMiseAJourInpi)
     ) {
       return null;
     }
