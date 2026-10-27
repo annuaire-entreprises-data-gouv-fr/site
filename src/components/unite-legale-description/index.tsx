@@ -10,6 +10,7 @@ import {
 import { libelleCategorieEntrepriseForDescription } from "#/utils/helpers/formatting/categories-entreprise";
 import { libelleEffectifForDescription } from "#/utils/helpers/formatting/codes-effectifs";
 import { UniteLegaleEtablissementCountDescription } from "./etablissement-count-description";
+import styles from "./styles.module.css";
 
 export const UniteLegaleDescription: React.FC<{
   uniteLegale: IUniteLegale;
@@ -93,6 +94,12 @@ export const UniteLegaleDescription: React.FC<{
           </>
         )}
       </p>
+      {uniteLegale.oppositionDiffusionCommerciale && (
+        <p className={styles.oppositionDiffusionCommerciale}>
+          Cet organisme s’est opposé à l’utilisation de ses données à des fins
+          de prospection commerciale.
+        </p>
+      )}
     </>
   );
 };
