@@ -46,7 +46,7 @@
     "entities": "8.1.0",
     "fast-xml-parser": "5.11.2",
     "iron-session": "9.0.1",
-    "maplibre-gl": "6.14.0",
+    "maplibre-gl": "6.15.0",
     "nitro": "3.0.260903-beta",
     "openid-client": "6.8.8",
     "qrcode": "1.5.4",
