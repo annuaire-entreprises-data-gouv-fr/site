@@ -21,6 +21,7 @@ const { execute } = vi.hoisted(() => ({ execute: vi.fn() }));
 vi.mock("@tanstack/react-start", () => ({ useServerFn: () => execute }));
 vi.mock("#/server-functions/agent/group-management", () => ({
   addUserToGroupFn: { url: "/test/add-user-to-group" },
+  addUsersToGroupFn: { url: "/test/add-users-to-group" },
 }));
 vi.mock("#/components-ui/modal", () => ({
   Modal: ({ children, isVisible }: ComponentProps<typeof Modal>) =>
@@ -48,7 +49,7 @@ const group: IAgentsGroup = {
   users: [existingUser],
 };
 const duplicateMessage = "Cet utilisateur est déjà membre de ce groupe";
-const addUserToGroupState = vi.fn();
+const addUsersToGroupState = vi.fn();
 const showNotification = vi.fn();
 let client: QueryClient;
 
@@ -57,7 +58,7 @@ function openModal() {
     <QueryClientProvider client={client}>
       <NotificationContext.Provider value={{ showNotification }}>
         <AddUserModal
-          addUserToGroupState={addUserToGroupState}
+          addUsersToGroupState={addUsersToGroupState}
           defaultRoleId={2}
           group={group}
         />
@@ -76,7 +77,7 @@ beforeEach(() => {
   });
   execute.mockReset();
   execute.mockResolvedValue(newUser);
-  addUserToGroupState.mockReset();
+  addUsersToGroupState.mockReset();
   showNotification.mockReset();
 });
 afterEach(() => {
@@ -126,7 +127,7 @@ describe("adding a group member", () => {
       message: duplicateMessage,
     });
     expect(screen.getByRole("dialog")).toBeTruthy();
-    expect(addUserToGroupState).not.toHaveBeenCalled();
+    expect(addUsersToGroupState).not.toHaveBeenCalled();
     expect(input.value).toBe(newUser.email);
 
     fireEvent.change(input, { target: { value: "other@example.fr" } });
@@ -153,7 +154,7 @@ describe("adding a group member", () => {
     });
     expect(screen.queryByText(duplicateMessage)).toBeNull();
     expect(screen.getByRole("dialog")).toBeTruthy();
-    expect(addUserToGroupState).not.toHaveBeenCalled();
+    expect(addUsersToGroupState).not.toHaveBeenCalled();
   });
 
   it("adds a new member, announces success and resets the modal", async () => {
@@ -162,7 +163,7 @@ describe("adding a group member", () => {
     fireEvent.click(screen.getByRole("button", { name: "Ajouter" }));
 
     await waitFor(() =>
-      expect(addUserToGroupState).toHaveBeenCalledWith(newUser)
+      expect(addUsersToGroupState).toHaveBeenCalledWith([newUser])
     );
     expect(execute.mock.calls[0][0]).toEqual({
       data: { groupId: group.id, userEmail: newUser.email, roleId: 2 },
@@ -181,5 +182,116 @@ describe("adding a group member", () => {
       screen.getByRole<HTMLButtonElement>("button", { name: "Ajouter" })
         .disabled
     ).toBe(true);
+  });
+});
+
+function uploadFile(content: string, name = "membres.csv") {
+  const fileInput = screen.getByLabelText<HTMLInputElement>(
+    /Ou importer une liste de membres/
+  );
+  fireEvent.change(fileInput, {
+    target: { files: [new File([content], name, { type: "text/csv" })] },
+  });
+}
+
+describe("adding group members from a file", () => {
+  const fileContent = [
+    "\uFEFF  New@Example.fr ;",
+    "",
+    "  NEW@example.fr  ",
+    '" Other@Example.FR "',
+    "not-an-email",
+    "Existing@Example.fr",
+  ].join("\r\n");
+
+  it("shows a summary of skipped emails and adds new ones as users", async () => {
+    const otherUser = { ...newUser, email: "other@example.fr", id: 4 };
+    execute.mockResolvedValue([newUser, otherUser]);
+    openModal();
+    uploadFile(fileContent);
+
+    expect(await screen.findByText(/1 adresse invalide ignorée/)).toBeTruthy();
+    expect(screen.getByText(/1 doublon ignoré/)).toBeTruthy();
+    expect(
+      screen.getByText(/1 adresse déjà membre du groupe ignorée/)
+    ).toBeTruthy();
+    expect(screen.getByRole<HTMLInputElement>("textbox").disabled).toBe(true);
+
+    fireEvent.click(screen.getByRole("button", { name: "Ajouter 2 membres" }));
+
+    await waitFor(() =>
+      expect(addUsersToGroupState).toHaveBeenCalledWith([newUser, otherUser])
+    );
+    expect(execute.mock.calls[0][0]).toEqual({
+      data: {
+        groupId: group.id,
+        userEmails: ["new@example.fr", "other@example.fr"],
+        roleId: 2,
+      },
+    });
+    expect(showNotification).toHaveBeenCalledWith({
+      type: NotificationTypeEnum.SUCCESS,
+      title: "Membres ajoutés avec succès",
+      message: `2 membres ont été ajoutés au groupe ${group.name}`,
+    });
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it("rejects other file types", async () => {
+    openModal();
+    uploadFile("new@example.fr", "membres.xlsx");
+
+    expect(
+      await screen.findByText("Veuillez sélectionner un fichier .txt ou .csv")
+    ).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Ajouter" })).toBeTruthy();
+  });
+
+  it("disables the batch add when no new email is in the file", async () => {
+    openModal();
+    uploadFile("existing@example.fr\ninvalid", "membres.txt");
+
+    expect(
+      await screen.findByText("Aucune nouvelle adresse email valide à ajouter")
+    ).toBeTruthy();
+    expect(
+      screen.getByRole<HTMLButtonElement>("button", {
+        name: "Ajouter 0 membre",
+      }).disabled
+    ).toBe(true);
+  });
+
+  it.each([
+    ["USER_ALREADY_IN_GROUP", /déjà membre de ce groupe/],
+    ["DUPLICATE_EMAILS", /adresses en double/],
+    ["GROUP_OR_ROLE_NOT_FOUND", /introuvable/],
+  ])("explains a %s error and keeps the modal open", async (error, message) => {
+    execute.mockResolvedValue({ error });
+    openModal();
+    uploadFile("new@example.fr");
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Ajouter 1 membre" })
+    );
+
+    expect(await screen.findByText(message)).toBeTruthy();
+    expect(showNotification).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: NotificationTypeEnum.ERROR,
+        message: expect.stringContaining("Aucun membre n’a été ajouté."),
+      })
+    );
+    expect(screen.getByRole("dialog")).toBeTruthy();
+    expect(addUsersToGroupState).not.toHaveBeenCalled();
+  });
+
+  it("goes back to single add when the file is removed", async () => {
+    openModal();
+    uploadFile("new@example.fr");
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Retirer le fichier" })
+    );
+
+    expect(screen.getByRole("button", { name: "Ajouter" })).toBeTruthy();
+    expect(screen.getByRole<HTMLInputElement>("textbox").disabled).toBe(false);
   });
 });

@@ -145,10 +145,10 @@ export function GroupItem({
                 <div>
                   {defaultRoleId !== undefined && (
                     <AddUserModal
-                      addUserToGroupState={(user: IRolesDataUser) => {
+                      addUsersToGroupState={(users: IRolesDataUser[]) => {
                         setGroup({
                           ...group,
-                          users: [...group.users, user],
+                          users: [...group.users, ...users],
                         });
                       }}
                       defaultRoleId={defaultRoleId}

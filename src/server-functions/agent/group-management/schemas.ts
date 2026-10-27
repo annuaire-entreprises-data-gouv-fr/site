@@ -31,6 +31,12 @@ export const addUserToGroupSchema = z.object({
   roleId: roleIdValidator,
 });
 
+export const addUsersToGroupSchema = z.object({
+  groupId: groupIdValidator,
+  userEmails: z.array(emailValidator).min(1, "At least one email is required"),
+  roleId: roleIdValidator,
+});
+
 export const removeUserFromGroupSchema = z.object({
   groupId: groupIdValidator,
   userId: userIdValidator,
