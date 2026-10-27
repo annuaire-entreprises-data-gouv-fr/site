@@ -182,9 +182,10 @@ export const UniteLegaleInscriptionRNE = ({
       isServicePublic(uniteLegale) ||
       isAssociation(uniteLegale) ||
       isFondation(uniteLegale) ||
-      isActiviteDesOrganisationsOuOrganismesExtraterritoriaux(
+      (isActiviteDesOrganisationsOuOrganismesExtraterritoriaux(
         uniteLegale.natureJuridique
-      )
+      ) &&
+        !uniteLegale.dateMiseAJourInpi)
     ) {
       return null;
     }
