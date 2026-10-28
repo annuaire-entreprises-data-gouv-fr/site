@@ -2,6 +2,7 @@ import {
   createFileRoute,
   notFound,
   redirect,
+  useLoaderData,
   useRouter,
 } from "@tanstack/react-router";
 import z from "zod";
@@ -61,39 +62,43 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { roles, group } = Route.useLoaderData();
+  const { groups } = useLoaderData({ from: "/_header-compte" });
   const navigate = Route.useNavigate();
   const router = useRouter();
 
   return (
     <>
       <AgentNavigation />
-      <nav aria-label="vous êtes ici :" className="fr-breadcrumb">
-        <ol className="fr-breadcrumb__list">
-          <li>
-            <a className="fr-breadcrumb__link" href="/compte/mes-groupes">
-              Mes groupes
-            </a>
-          </li>
-          <li>
-            <a
-              aria-current="page"
-              className="fr-breadcrumb__link"
-              href={`/compte/mes-groupes/${group.id}`}
-            >
-              {group.name}
-            </a>
-          </li>
-        </ol>
-      </nav>
+      {/* with a single group, the groups list redirects to this page */}
+      {groups.length > 1 && (
+        <nav aria-label="vous êtes ici :" className="fr-breadcrumb fr-mb-0">
+          <ol className="fr-breadcrumb__list">
+            <li>
+              <a className="fr-breadcrumb__link" href="/compte/mes-groupes">
+                Mes groupes
+              </a>
+            </li>
+            <li>
+              <a
+                aria-current="page"
+                className="fr-breadcrumb__link"
+                href={`/compte/mes-groupes/${group.id}`}
+              >
+                {group.name}
+              </a>
+            </li>
+          </ol>
+        </nav>
+      )}
       <GroupDetails
         group={group}
         onGroupChange={() => router.invalidate()}
-        onLeaveGroup={async () => {
-          // leave the group page first: reloading it would fail, as the user
-          // is no longer a member of the group
-          await navigate({ to: "/compte/mes-groupes" });
-          await router.invalidate();
-        }}
+        onLeaveGroup={() =>
+          // Full reload: reloading this page would fail as the user is no
+          // longer a member, and the cached groups still hold this group, which
+          // the groups list could redirect to
+          navigate({ to: "/compte/mes-groupes", reloadDocument: true })
+        }
         onPageChange={(page) =>
           navigate({ search: (prev) => ({ ...prev, page }) })
         }

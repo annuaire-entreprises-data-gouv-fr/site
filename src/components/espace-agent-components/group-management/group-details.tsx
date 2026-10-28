@@ -55,9 +55,12 @@ export function GroupDetails({
 
   return (
     <>
-      <div className="fr-mb-3w">
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <h1 className="fr-mt-0 fr-mb-0">{group.name}</h1>
+      <div className="fr-mt-5w fr-mb-3w">
+        <div
+          className="fr-mb-2w"
+          style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+        >
+          <h1 className="fr-my-0">{group.name}</h1>
           {isAdmin && (
             <UpdateNameModal
               groupId={group.id}

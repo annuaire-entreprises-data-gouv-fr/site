@@ -1,5 +1,6 @@
 import {
   createFileRoute,
+  redirect,
   useLoaderData,
   useRouter,
 } from "@tanstack/react-router";
@@ -32,6 +33,18 @@ export const Route = createFileRoute("/_header-compte/compte/mes-groupes")({
   },
   beforeLoad: async () => {
     await agentAuthGuardFn({ data: { onlySuperAgent: true } });
+  },
+  loader: async ({ parentMatchPromise }) => {
+    const { loaderData } = await parentMatchPromise;
+    const groups = loaderData?.groups ?? [];
+
+    // nothing to choose from: go straight to the group page
+    if (groups.length === 1) {
+      throw redirect({
+        to: "/compte/mes-groupes/$groupId",
+        params: { groupId: String(groups[0].id) },
+      });
+    }
   },
   component: RouteComponent,
   pendingMs: 100,

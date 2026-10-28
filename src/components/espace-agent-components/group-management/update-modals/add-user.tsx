@@ -370,38 +370,6 @@ export default function AddUserModal({
                         {emails.length > 1 ? "s" : ""} : {emails.join(", ")}
                       </p>
                     ))}
-                </div>
-              )}
-              {batch && (
-                <div aria-live="polite" className="fr-mt-2w">
-                  <p className="fr-mb-1w">
-                    <strong>
-                      {plural(
-                        batch.emails.length,
-                        "nouveau membre",
-                        "nouveaux membres"
-                      )}
-                    </strong>{" "}
-                    à ajouter depuis le fichier {batch.fileName}
-                  </p>
-                  {(
-                    [
-                      [batch.invalid, "adresse invalide", "adresses invalides"],
-                      [batch.duplicates, "doublon", "doublons"],
-                      [
-                        batch.alreadyInGroup,
-                        "adresse déjà membre du groupe",
-                        "adresses déjà membres du groupe",
-                      ],
-                    ] as const
-                  )
-                    .filter(([emails]) => emails.length > 0)
-                    .map(([emails, singular, pluralForm]) => (
-                      <p className="fr-text--sm fr-mb-1w" key={singular}>
-                        {plural(emails.length, singular, pluralForm)} ignorée
-                        {emails.length > 1 ? "s" : ""} : {emails.join(", ")}
-                      </p>
-                    ))}
                   <button
                     className="fr-btn fr-btn--tertiary fr-btn--sm fr-mt-1w"
                     disabled={isPending}
