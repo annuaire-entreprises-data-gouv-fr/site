@@ -81,6 +81,7 @@ import { Route as FondationSlugDirigeantsRouteImport } from './routes/fondation.
 import { Route as FondationSlugDocumentsRouteImport } from './routes/fondation.$slug/documents'
 import { Route as FondationSlugDonneesFinancieresRouteImport } from './routes/fondation.$slug/donnees-financieres'
 import { Route as FondationSlugLiensRouteImport } from './routes/fondation.$slug/liens'
+import { Route as HeaderCompteCompteMesGroupesGroupIdRouteImport } from './routes/_header-compte/compte.mes-groupes_.$groupId'
 import { Route as HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport } from './routes/_header-connexion/connexion.habilitation.administration-inconnue'
 import { Route as HeaderConnexionConnexionHabilitationPrestatairesRouteImport } from './routes/_header-connexion/connexion.habilitation.prestataires'
 import { Route as HeaderConnexionConnexionHabilitationRefuseeRouteImport } from './routes/_header-connexion/connexion.habilitation.refusee'
@@ -494,6 +495,12 @@ const FondationSlugLiensRoute = FondationSlugLiensRouteImport.update({
   path: '/liens',
   getParentRoute: () => FondationSlugRouteRoute,
 } as any)
+const HeaderCompteCompteMesGroupesGroupIdRoute =
+  HeaderCompteCompteMesGroupesGroupIdRouteImport.update({
+    id: '/compte/mes-groupes_/$groupId',
+    path: '/compte/mes-groupes/$groupId',
+    getParentRoute: () => HeaderCompteRouteRoute,
+  } as any)
 const HeaderConnexionConnexionHabilitationAdministrationInconnueRoute =
   HeaderConnexionConnexionHabilitationAdministrationInconnueRouteImport.update({
     id: '/connexion/habilitation/administration-inconnue',
@@ -703,6 +710,7 @@ export interface FileRoutesByFullPath {
   '/rechercher/': typeof HeaderSearchRechercherIndexRoute
   '/entreprise/$slug/': typeof EntrepriseSlugIndexRoute
   '/fondation/$slug/': typeof FondationSlugIndexRoute
+  '/compte/mes-groupes/$groupId': typeof HeaderCompteCompteMesGroupesGroupIdRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -791,6 +799,7 @@ export interface FileRoutesByTo {
   '/rechercher': typeof HeaderSearchRechercherIndexRoute
   '/entreprise/$slug': typeof EntrepriseSlugIndexRoute
   '/fondation/$slug': typeof FondationSlugIndexRoute
+  '/compte/mes-groupes/$groupId': typeof HeaderCompteCompteMesGroupesGroupIdRoute
   '/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -890,6 +899,7 @@ export interface FileRoutesById {
   '/_header-search/rechercher/': typeof HeaderSearchRechercherIndexRoute
   '/entreprise/$slug/': typeof EntrepriseSlugIndexRoute
   '/fondation/$slug/': typeof FondationSlugIndexRoute
+  '/_header-compte/compte/mes-groupes_/$groupId': typeof HeaderCompteCompteMesGroupesGroupIdRoute
   '/_header-connexion/connexion/habilitation/administration-inconnue': typeof HeaderConnexionConnexionHabilitationAdministrationInconnueRoute
   '/_header-connexion/connexion/habilitation/prestataires': typeof HeaderConnexionConnexionHabilitationPrestatairesRoute
   '/_header-connexion/connexion/habilitation/refusee': typeof HeaderConnexionConnexionHabilitationRefuseeRoute
@@ -982,6 +992,7 @@ export interface FileRouteTypes {
     | '/rechercher/'
     | '/entreprise/$slug/'
     | '/fondation/$slug/'
+    | '/compte/mes-groupes/$groupId'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
@@ -1070,6 +1081,7 @@ export interface FileRouteTypes {
     | '/rechercher'
     | '/entreprise/$slug'
     | '/fondation/$slug'
+    | '/compte/mes-groupes/$groupId'
     | '/connexion/habilitation/administration-inconnue'
     | '/connexion/habilitation/prestataires'
     | '/connexion/habilitation/refusee'
@@ -1168,6 +1180,7 @@ export interface FileRouteTypes {
     | '/_header-search/rechercher/'
     | '/entreprise/$slug/'
     | '/fondation/$slug/'
+    | '/_header-compte/compte/mes-groupes_/$groupId'
     | '/_header-connexion/connexion/habilitation/administration-inconnue'
     | '/_header-connexion/connexion/habilitation/prestataires'
     | '/_header-connexion/connexion/habilitation/refusee'
@@ -1734,6 +1747,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FondationSlugLiensRouteImport
       parentRoute: typeof FondationSlugRouteRoute
     }
+    '/_header-compte/compte/mes-groupes_/$groupId': {
+      id: '/_header-compte/compte/mes-groupes_/$groupId'
+      path: '/compte/mes-groupes/$groupId'
+      fullPath: '/compte/mes-groupes/$groupId'
+      preLoaderRoute: typeof HeaderCompteCompteMesGroupesGroupIdRouteImport
+      parentRoute: typeof HeaderCompteRouteRoute
+    }
     '/_header-connexion/connexion/habilitation/administration-inconnue': {
       id: '/_header-connexion/connexion/habilitation/administration-inconnue'
       path: '/connexion/habilitation/administration-inconnue'
@@ -1908,11 +1928,14 @@ declare module '@tanstack/react-router' {
 interface HeaderCompteRouteRouteChildren {
   HeaderCompteCompteAccueilRoute: typeof HeaderCompteCompteAccueilRoute
   HeaderCompteCompteMesGroupesRoute: typeof HeaderCompteCompteMesGroupesRoute
+  HeaderCompteCompteMesGroupesGroupIdRoute: typeof HeaderCompteCompteMesGroupesGroupIdRoute
 }
 
 const HeaderCompteRouteRouteChildren: HeaderCompteRouteRouteChildren = {
   HeaderCompteCompteAccueilRoute: HeaderCompteCompteAccueilRoute,
   HeaderCompteCompteMesGroupesRoute: HeaderCompteCompteMesGroupesRoute,
+  HeaderCompteCompteMesGroupesGroupIdRoute:
+    HeaderCompteCompteMesGroupesGroupIdRoute,
 }
 
 const HeaderCompteRouteRouteWithChildren =

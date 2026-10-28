@@ -52,15 +52,12 @@ export const ActiveGroupsModal = ({
                     {groups.map((group) => (
                       <tr key={group.id}>
                         <td>{group.name}</td>
-                        <td>
-                          {group.users.find((user) => user.is_admin)?.email ||
-                            "N/A"}
-                        </td>
+                        <td>{group.admins[0]?.email || "N/A"}</td>
                         <td>
                           <ButtonLink
                             alt
                             target="_blank"
-                            to={`/compte/mes-groupes#group-${group.id}`}
+                            to={`/compte/mes-groupes/${group.id}`}
                           >
                             Voir
                           </ButtonLink>

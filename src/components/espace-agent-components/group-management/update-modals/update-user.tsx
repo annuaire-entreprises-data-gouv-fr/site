@@ -29,8 +29,8 @@ export default function UpdateUserSelect({
   const mutation = useMutation({
     mutationFn: updateUserRoleInGroup,
     onSuccess: (result) => {
+      // keep the selected role displayed while the group is reloaded
       updateUserFromGroupState(result);
-      setOptimisticRoleId(null);
 
       // Show success notification
       const roleName =
