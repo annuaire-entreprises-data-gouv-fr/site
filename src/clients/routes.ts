@@ -324,6 +324,8 @@ const routes = {
   rolesData: {
     groups: {
       getGroups: "/resource-server/groups/",
+      getGroup: (groupId: number, usersPage: number, usersSize: number) =>
+        `/resource-server/groups/${groupId}?usersPage=${usersPage}&usersSize=${usersSize}`,
       updateName: (groupId: number, groupName: string) =>
         `/resource-server/groups/${groupId}?group_name=${encodeURIComponent(
           groupName

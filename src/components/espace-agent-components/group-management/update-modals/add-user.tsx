@@ -9,11 +9,12 @@ import {
   NotificationTypeEnum,
   useNotification,
 } from "#/hooks/use-notification";
-import type { IAgentsGroup } from "#/models/authentication/group";
+import type { IAgentsGroupDetails } from "#/models/authentication/group";
 import {
   addUsersToGroupFn,
   addUserToGroupFn,
 } from "#/server-functions/agent/group-management";
+import { MAX_USERS_PER_BATCH } from "#/server-functions/agent/group-management/schemas";
 import {
   type IParsedEmailsFile,
   isAcceptedEmailsFile,
@@ -25,7 +26,7 @@ const USER_ALREADY_IN_GROUP_ERROR =
   "Cet utilisateur est déjà membre de ce groupe";
 const NO_USER_ADDED = "Aucun membre n’a été ajouté.";
 const BATCH_ERRORS = {
-  USER_ALREADY_IN_GROUP: `Au moins une des adresses est déjà membre de ce groupe. ${NO_USER_ADDED} Rechargez la page pour mettre à jour la liste des membres.`,
+  USER_ALREADY_IN_GROUP: `Au moins une des adresses est déjà membre de ce groupe. ${NO_USER_ADDED} Retirez du fichier les membres existants puis réessayez.`,
   DUPLICATE_EMAILS: `Le fichier contient des adresses en double. ${NO_USER_ADDED}`,
   GROUP_OR_ROLE_NOT_FOUND: `Le groupe ou le rôle utilisateur est introuvable. ${NO_USER_ADDED}`,
 } as const;
@@ -38,7 +39,8 @@ export default function AddUserModal({
   defaultRoleId,
   addUsersToGroupState,
 }: {
-  group: IAgentsGroup;
+  // users only holds the members of the displayed page
+  group: Pick<IAgentsGroupDetails, "id" | "name" | "users">;
   defaultRoleId: number;
   addUsersToGroupState: (users: IRolesDataUser[]) => void;
 }) {
@@ -201,6 +203,12 @@ export default function AddUserModal({
         await file.text(),
         group.users.map((user) => user.email)
       );
+      if (parsed.emails.length > MAX_USERS_PER_BATCH) {
+        setFileErrors([
+          `Le fichier contient ${parsed.emails.length} adresses : vous pouvez en ajouter ${MAX_USERS_PER_BATCH.toLocaleString("fr-FR")} au maximum à la fois`,
+        ]);
+        return;
+      }
       setBatch({ ...parsed, fileName: file.name });
       if (parsed.emails.length === 0) {
         setFileErrors(["Aucune nouvelle adresse email valide à ajouter"]);
@@ -295,9 +303,9 @@ export default function AddUserModal({
             <label className="fr-label" htmlFor={`new-users-file-${group.id}`}>
               Ou importer une liste de membres
               <span className="fr-hint-text">
-                Fichier .txt ou .csv, avec une adresse email par ligne. Les
-                adresses invalides, en double ou déjà membres du groupe sont
-                ignorées.
+                Fichier .txt ou .csv, avec une adresse email par ligne (
+                {MAX_USERS_PER_BATCH.toLocaleString("fr-FR")} au maximum). Les
+                adresses invalides ou en double sont ignorées.
               </span>
             </label>
             <input

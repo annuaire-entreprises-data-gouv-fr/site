@@ -3,12 +3,14 @@ import { rolesDataResourceServerClient } from "#/clients/authentication/pro-conn
 import routes from "#/clients/routes";
 import type {
   IAgentsGroup,
+  IAgentsGroupDetails,
   IAgentsOrganizationGroup,
 } from "#/models/authentication/group";
 import { InternalError } from "#/models/exceptions";
 import { httpGet } from "#/utils/network";
 import { logErrorInSentry } from "#/utils/sentry";
 import type {
+  IAgentsGroupDetailsResponse,
   IAgentsGroupResponse,
   IAgentsOrganizationGroupResponse,
   IRolesDataRoles,
@@ -34,22 +36,53 @@ export const clientRolesGetGroups = createServerOnlyFn(
   }
 );
 
-const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
-  response.map((group) => {
-    const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
+const parseGroupScopes = (scopes: string) => {
+  const { inValidScopes, validScopes } = parseAgentScopes(scopes);
 
-    if (inValidScopes.length > 0) {
-      logErrorInSentry(
-        new InternalError({
-          message: `Unknown agent scopes : ${inValidScopes.join(",")}`,
-        })
-      );
-    }
+  if (inValidScopes.length > 0) {
+    logErrorInSentry(
+      new InternalError({
+        message: `Unknown agent scopes : ${inValidScopes.join(",")}`,
+      })
+    );
+  }
+  return validScopes;
+};
+
+const mapToDomainObject = (response: IAgentsGroupResponse[]): IAgentsGroup[] =>
+  response.map((group) => ({
+    ...group,
+    scopes: parseGroupScopes(group.scopes),
+  }));
+
+export const clientRolesGetGroup = createServerOnlyFn(
+  async (
+    groupId: number,
+    usersPage: number,
+    usersSize: number
+  ): Promise<IAgentsGroupDetails> => {
+    const url =
+      process.env.ROLES_DATA_URL +
+      routes.rolesData.groups.getGroup(groupId, usersPage, usersSize);
+    const response =
+      await rolesDataResourceServerClient<IAgentsGroupDetailsResponse>({
+        url,
+        method: "GET",
+      });
+
+    const { users_pagination, ...group } = response;
     return {
       ...group,
-      scopes: validScopes,
+      scopes: parseGroupScopes(group.scopes),
+      usersPagination: {
+        page: users_pagination.page,
+        size: users_pagination.size,
+        total: users_pagination.total,
+        totalPages: users_pagination.total_pages,
+      },
     };
-  });
+  }
+);
 
 export const clientRolesGetOrganizationsGroups = createServerOnlyFn(
   async (): Promise<IAgentsOrganizationGroup[]> => {
@@ -69,24 +102,12 @@ export const clientRolesGetOrganizationsGroups = createServerOnlyFn(
 const mapToDomainObjectOrganizationGroups = (
   response: IAgentsOrganizationGroupResponse[]
 ): IAgentsOrganizationGroup[] =>
-  response.map((group) => {
-    const { inValidScopes, validScopes } = parseAgentScopes(group.scopes);
-
-    if (inValidScopes.length > 0) {
-      logErrorInSentry(
-        new InternalError({
-          message: `Unknown agent scopes : ${inValidScopes.join(",")}`,
-        })
-      );
-    }
-
-    return {
-      id: group.id,
-      name: group.name,
-      adminEmails: group.admin_emails,
-      scopes: validScopes,
-    };
-  });
+  response.map((group) => ({
+    id: group.id,
+    name: group.name,
+    adminEmails: group.admin_emails,
+    scopes: parseGroupScopes(group.scopes),
+  }));
 
 export const clientRolesGetMetadata = createServerOnlyFn(
   async (): Promise<IRolesDataRoles[]> => {

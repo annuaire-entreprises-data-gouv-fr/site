@@ -1,10 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import AgentNavigation from "#/components/espace-agent-components/agent-navigation";
 import { GroupManagement } from "#/components/espace-agent-components/group-management";
-import {
-  getAgentGroupsFn,
-  getAgentRolesFn,
-} from "#/server-functions/agent/group-management";
+import { getAgentGroupsFn } from "#/server-functions/agent/group-management";
 import { agentAuthGuardFn } from "#/server-functions/public/auth";
 import { pluralize } from "#/utils/helpers";
 import { meta } from "#/utils/seo";
@@ -33,19 +30,16 @@ export const Route = createFileRoute("/_header-compte/compte/mes-groupes")({
     await agentAuthGuardFn({ data: { onlySuperAgent: true } });
   },
   loader: async () => {
-    const [roles, groups] = await Promise.all([
-      getAgentRolesFn(),
-      getAgentGroupsFn(),
-    ]);
+    const groups = await getAgentGroupsFn();
 
-    return { roles, groups };
+    return { groups };
   },
   component: RouteComponent,
   errorComponent: HeaderCompteError,
 });
 
 function RouteComponent() {
-  const { roles, groups } = Route.useLoaderData();
+  const { groups } = Route.useLoaderData();
 
   return (
     <>
@@ -60,7 +54,7 @@ function RouteComponent() {
         <br />
         Vous faites partie de {groups.length} groupe{pluralize(groups)} :
       </p>
-      <GroupManagement initialGroups={groups} roles={roles} />
+      <GroupManagement initialGroups={groups} />
     </>
   );
 }
