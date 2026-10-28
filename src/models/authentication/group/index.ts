@@ -1,28 +1,51 @@
-import { redirect } from "@tanstack/react-router";
+import { notFound, redirect } from "@tanstack/react-router";
 import { ProConnectReconnexionNeeded } from "#/clients/authentication/pro-connect/exceptions";
-import { HttpNotFound } from "#/clients/exceptions";
+import { HttpForbiddenError, HttpNotFound } from "#/clients/exceptions";
 import {
   clientRolesAddUsersToGroupBatch,
   clientRolesAddUserToGroup,
+  clientRolesGetGroup,
   clientRolesGetGroups,
   clientRolesRemoveUserFromGroup,
   clientRolesUpdateName,
   clientRolesUpdateUserFromGroup,
 } from "#/clients/roles-data/index.server";
-import type { IRolesDataUser } from "#/clients/roles-data/interface";
+import type {
+  IRolesDataCurrentUserRole,
+  IRolesDataGroupAdmin,
+  IRolesDataUser,
+} from "#/clients/roles-data/interface";
 import { FetchRessourceException } from "#/models/exceptions";
 import { logFatalErrorInSentry } from "#/utils/sentry";
 import type { IAgentScope } from "../agent/scopes/constants";
 
-export interface IAgentsGroup {
+interface IAgentsGroupBase {
   contract_description: string;
   contract_url?: string;
+  current_user_role: IRolesDataCurrentUserRole;
   id: number;
   name: string;
   organisation_siret: string;
   scopes: IAgentScope[];
-  users: IRolesDataUser[];
 }
+
+export interface IAgentsGroup extends IAgentsGroupBase {
+  // at most the 3 oldest admins of the group
+  admins: IRolesDataGroupAdmin[];
+}
+
+export interface IAgentsGroupDetails extends IAgentsGroupBase {
+  // admins come first
+  users: IRolesDataUser[];
+  usersPagination: {
+    page: number;
+    size: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+export const GROUP_USERS_PAGE_SIZE = 50;
 
 export interface IAgentsOrganizationGroup {
   adminEmails: string[];
@@ -68,6 +91,30 @@ export const getAgentGroups = async ({
     }
   });
 };
+
+export async function getAgentGroup(
+  groupId: number,
+  usersPage: number
+): Promise<IAgentsGroupDetails> {
+  try {
+    return await clientRolesGetGroup(groupId, usersPage, GROUP_USERS_PAGE_SIZE);
+  } catch (error) {
+    // group does not exist or user is not a member of the group
+    if (error instanceof HttpNotFound || error instanceof HttpForbiddenError) {
+      throw notFound();
+    }
+    if (error instanceof ProConnectReconnexionNeeded) {
+      throw redirect({ to: "/api/auth/agent-connect/login" });
+    }
+    logFatalErrorInSentry(
+      new FetchRessourceException({
+        ressource: "Roles.data",
+        cause: error,
+      })
+    );
+    throw error;
+  }
+}
 
 export async function updateGroupName(
   groupId: number,

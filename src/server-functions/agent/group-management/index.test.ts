@@ -27,6 +27,7 @@ vi.mock("#/clients/roles-data/index.server", () => ({
 vi.mock("#/models/authentication/group", () => ({
   addUsersToGroup: vi.fn(),
   addUserToGroup: vi.fn(),
+  getAgentGroup: vi.fn(),
   getAgentGroups: vi.fn(),
   removeUserFromGroup: vi.fn(),
   updateGroupName: vi.fn(),

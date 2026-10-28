@@ -14,7 +14,6 @@ import {
   NotificationContext,
   NotificationTypeEnum,
 } from "#/hooks/use-notification";
-import type { IAgentsGroup } from "#/models/authentication/group";
 import AddUserModal from "./add-user";
 
 const { execute } = vi.hoisted(() => ({ execute: vi.fn() }));
@@ -40,12 +39,9 @@ const newUser: IRolesDataUser = {
   email: "new@example.fr",
   id: 2,
 };
-const group: IAgentsGroup = {
-  contract_description: "Convention exemple",
+const group = {
   id: 3,
   name: "Groupe exemple",
-  organisation_siret: "13002526500013",
-  scopes: [],
   users: [existingUser],
 };
 const duplicateMessage = "Cet utilisateur est déjà membre de ce groupe";
@@ -244,6 +240,16 @@ describe("adding group members from a file", () => {
     expect(
       await screen.findByText("Veuillez sélectionner un fichier .txt ou .csv")
     ).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Ajouter" })).toBeTruthy();
+  });
+
+  it("rejects files with more than 10 000 new emails", async () => {
+    openModal();
+    uploadFile(
+      Array.from({ length: 10_001 }, (_, i) => `user${i}@example.fr`).join("\n")
+    );
+
+    expect(await screen.findByText(/10 000 au maximum à la fois/)).toBeTruthy();
     expect(screen.getByRole("button", { name: "Ajouter" })).toBeTruthy();
   });
 

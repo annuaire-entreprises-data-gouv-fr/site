@@ -28,7 +28,8 @@ describe("AgentConnected", () => {
     id: 1,
     organisation_siret: "123456789",
     contract: "test-contract",
-    users: [],
+    admins: [],
+    current_user_role: { id: 2, is_admin: false, role_name: "utilisateur" },
     scopes: ["rne", "nonDiffusible"] as IAgentScope[],
     contract_description: "test-contract-description",
   };

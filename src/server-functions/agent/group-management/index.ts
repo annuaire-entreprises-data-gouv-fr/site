@@ -8,6 +8,7 @@ import { clientRolesGetOrganizationsGroups } from "#/clients/roles-data/index.se
 import {
   addUsersToGroup,
   addUserToGroup,
+  getAgentGroup,
   getAgentGroups,
   removeUserFromGroup,
   updateGroupName,
@@ -18,6 +19,7 @@ import { agentFnMiddleware } from "#/server-functions/middlewares";
 import {
   addUsersToGroupSchema,
   addUserToGroupSchema,
+  getAgentGroupSchema,
   removeUserFromGroupSchema,
   updateGroupNameSchema,
   updateUserRoleInGroupSchema,
@@ -92,6 +94,13 @@ export const getAgentGroupsFn = createServerFn()
   .middleware([agentFnMiddleware])
   .handler(
     async () => await getAgentGroups({ allowProConnectRedirection: true })
+  );
+
+export const getAgentGroupFn = createServerFn()
+  .middleware([agentFnMiddleware])
+  .validator(getAgentGroupSchema)
+  .handler(
+    async ({ data }) => await getAgentGroup(data.groupId, data.usersPage)
   );
 
 export const getAgentRolesFn = createServerFn()

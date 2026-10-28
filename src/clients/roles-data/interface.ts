@@ -28,9 +28,39 @@ export interface IAgentsGroupCreate {
   scopes: string;
 }
 
-export interface IAgentsGroupResponse extends IAgentsGroupCreate {
+export interface IRolesDataGroupAdmin {
+  email: string;
   id: number;
+}
+
+export interface IRolesDataCurrentUserRole {
+  id: number;
+  is_admin: boolean;
+  role_name: string;
+}
+
+interface IAgentsGroupBaseResponse {
+  contract_description: string;
+  contract_url?: string;
+  current_user_role: IRolesDataCurrentUserRole;
+  id: number;
+  name: string;
+  organisation_siret: string;
+  scopes: string;
+}
+
+export interface IAgentsGroupResponse extends IAgentsGroupBaseResponse {
+  admins: IRolesDataGroupAdmin[];
+}
+
+export interface IAgentsGroupDetailsResponse extends IAgentsGroupBaseResponse {
   users: IRolesDataUser[];
+  users_pagination: {
+    page: number;
+    size: number;
+    total: number;
+    total_pages: number;
+  };
 }
 
 export interface IAgentsOrganizationGroupResponse {
