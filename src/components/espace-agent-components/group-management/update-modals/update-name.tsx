@@ -81,26 +81,17 @@ export default function UpdateNameModal({
 
   return (
     <>
-      <h2
-        className="fr-mt-0"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "0.5rem",
-        }}
+      <button
+        className="fr-btn fr-btn--tertiary-no-outline"
+        onClick={() => setIsVisible(true)}
+        type="button"
       >
-        <button
-          className="fr-btn fr-btn--tertiary-no-outline"
-          onClick={() => setIsVisible(true)}
-          type="button"
-        >
-          (
-          <i>
-            <Icon slug="ballPenFill">renommer</Icon>
-          </i>
-          )
-        </button>
-      </h2>
+        (
+        <i>
+          <Icon slug="ballPenFill">renommer</Icon>
+        </i>
+        )
+      </button>
       <Modal
         isVisible={isVisible}
         modalId={`update-name-${groupId}`}

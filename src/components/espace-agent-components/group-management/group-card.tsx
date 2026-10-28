@@ -16,8 +16,11 @@ export function GroupCard({
     <div className="fr-card fr-mt-3w" id={`group-${group.id}`}>
       <div className="fr-card__body">
         <div className="fr-card__content">
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <h2 className="fr-mt-0">{group.name}</h2>
+          <div
+            className="fr-mb-2w"
+            style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+          >
+            <h2 className="fr-my-0">{group.name}</h2>
             {isAdmin && (
               <UpdateNameModal
                 groupId={group.id}

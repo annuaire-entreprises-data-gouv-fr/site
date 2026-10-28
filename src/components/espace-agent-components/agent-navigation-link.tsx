@@ -15,7 +15,7 @@ export default function AgentNavigationLink({
 
   return (
     <Link
-      aria-selected={pathname === to}
+      aria-selected={pathname === to || pathname.startsWith(`${to}/`)}
       className="fr-tabs__tab"
       id={id}
       key={to}
