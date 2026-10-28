@@ -19,17 +19,12 @@ const CurrentUserBadge = () => (
 export function GroupDetails({
   group,
   roles,
-  isAdmin,
-  adminCount,
   onPageChange,
   onGroupChange,
   onLeaveGroup,
 }: {
   group: IAgentsGroupDetails;
   roles: IRolesDataRoles[];
-  isAdmin: boolean;
-  // capped at 3 by roles.data, which is enough to know if there is more than one admin
-  adminCount: number;
   onPageChange: (page: number) => void;
   // reloads the group after an update
   onGroupChange: () => void;
@@ -39,6 +34,14 @@ export function GroupDetails({
   const currentUserEmail = currentUser?.email;
   const defaultRoleId = roles.find((r) => r.role_name === "utilisateur")?.id;
   const { page, total, totalPages } = group.usersPagination;
+  const isAdmin = group.current_user_role.is_admin;
+  // Admins are listed first: an admin shown on a later page means every
+  // previous page is full of admins. So the current user is the last admin
+  // only if they are the only admin of the first page.
+  const isLastAdmin =
+    isAdmin &&
+    page === 1 &&
+    group.users.filter((user) => user.is_admin).length === 1;
 
   const isCurrentUser = (user: IRolesDataUser) =>
     user.email.toLowerCase() === currentUserEmail;
@@ -80,7 +83,9 @@ export function GroupDetails({
         <FullTable
           body={group.users.map((user) => [
             <div style={{ flexGrow: 1 }}>{userCell(user)}</div>,
-            !isCurrentUser(user) || adminCount >= 2 ? (
+            isCurrentUser(user) && isLastAdmin ? (
+              <span className="fr-badge">{user.role_name}</span>
+            ) : (
               <UpdateUserSelect
                 groupId={group.id}
                 key={user.id}
@@ -88,11 +93,8 @@ export function GroupDetails({
                 updateUserFromGroupState={onGroupChange}
                 user={user}
               />
-            ) : (
-              <span className="fr-badge">{user.role_name}</span>
             ),
             <DeleteUserButton
-              adminCount={adminCount}
               deleteUserFromGroupState={() => {
                 if (isCurrentUser(user)) {
                   onLeaveGroup();
@@ -102,6 +104,7 @@ export function GroupDetails({
               }}
               groupId={group.id}
               isCurrentUser={isCurrentUser(user)}
+              isLastAdmin={isCurrentUser(user) && isLastAdmin}
               key={user.id}
               user={user}
             />,

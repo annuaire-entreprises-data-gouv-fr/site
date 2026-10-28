@@ -22,6 +22,7 @@ import type { IAgentScope } from "../agent/scopes/constants";
 interface IAgentsGroupBase {
   contract_description: string;
   contract_url?: string;
+  current_user_role: IRolesDataCurrentUserRole;
   id: number;
   name: string;
   organisation_siret: string;
@@ -31,7 +32,6 @@ interface IAgentsGroupBase {
 export interface IAgentsGroup extends IAgentsGroupBase {
   // at most the 3 oldest admins of the group
   admins: IRolesDataGroupAdmin[];
-  current_user_role: IRolesDataCurrentUserRole;
 }
 
 export interface IAgentsGroupDetails extends IAgentsGroupBase {

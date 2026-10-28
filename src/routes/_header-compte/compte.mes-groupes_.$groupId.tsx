@@ -7,9 +7,9 @@ import {
 import z from "zod";
 import AgentNavigation from "#/components/espace-agent-components/agent-navigation";
 import { GroupDetails } from "#/components/espace-agent-components/group-management/group-details";
+import { GroupDetailsPageSkeleton } from "#/components/espace-agent-components/skeleton";
 import {
   getAgentGroupFn,
-  getAgentGroupsFn,
   getAgentRolesFn,
 } from "#/server-functions/agent/group-management";
 import { agentAuthGuardFn } from "#/server-functions/public/auth";
@@ -38,17 +38,10 @@ export const Route = createFileRoute(
       throw notFound();
     }
 
-    const [roles, groups, group] = await Promise.all([
+    const [roles, group] = await Promise.all([
       getAgentRolesFn(),
-      getAgentGroupsFn(),
       getAgentGroupFn({ data: { groupId, usersPage: deps.page } }),
     ]);
-
-    // the groups list holds the current user role and the group admins
-    const groupSummary = groups.find((g) => g.id === groupId);
-    if (!groupSummary) {
-      throw notFound();
-    }
 
     const { totalPages } = group.usersPagination;
     if (totalPages > 0 && deps.page > totalPages) {
@@ -57,19 +50,17 @@ export const Route = createFileRoute(
       });
     }
 
-    return {
-      roles,
-      group,
-      isAdmin: groupSummary.current_user_role.is_admin,
-      adminCount: groupSummary.admins.length,
-    };
+    return { roles, group };
   },
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: GroupDetailsPageSkeleton,
   errorComponent: HeaderCompteError,
 });
 
 function RouteComponent() {
-  const { roles, group, isAdmin, adminCount } = Route.useLoaderData();
+  const { roles, group } = Route.useLoaderData();
   const navigate = Route.useNavigate();
   const router = useRouter();
 
@@ -95,11 +86,14 @@ function RouteComponent() {
         </ol>
       </nav>
       <GroupDetails
-        adminCount={adminCount}
         group={group}
-        isAdmin={isAdmin}
         onGroupChange={() => router.invalidate()}
-        onLeaveGroup={() => navigate({ to: "/compte/mes-groupes" })}
+        onLeaveGroup={async () => {
+          // leave the group page first: reloading it would fail, as the user
+          // is no longer a member of the group
+          await navigate({ to: "/compte/mes-groupes" });
+          await router.invalidate();
+        }}
         onPageChange={(page) =>
           navigate({ search: (prev) => ({ ...prev, page }) })
         }
