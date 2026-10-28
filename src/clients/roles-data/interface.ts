@@ -42,6 +42,7 @@ export interface IRolesDataCurrentUserRole {
 interface IAgentsGroupBaseResponse {
   contract_description: string;
   contract_url?: string;
+  current_user_role: IRolesDataCurrentUserRole;
   id: number;
   name: string;
   organisation_siret: string;
@@ -50,7 +51,6 @@ interface IAgentsGroupBaseResponse {
 
 export interface IAgentsGroupResponse extends IAgentsGroupBaseResponse {
   admins: IRolesDataGroupAdmin[];
-  current_user_role: IRolesDataCurrentUserRole;
 }
 
 export interface IAgentsGroupDetailsResponse extends IAgentsGroupBaseResponse {

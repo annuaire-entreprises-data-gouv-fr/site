@@ -1,10 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useLoaderData } from "@tanstack/react-router";
 import AgentNavigation from "#/components/espace-agent-components/agent-navigation";
 import { CardHabilitation } from "#/components/espace-agent-components/card-habilitation";
 import { HabilitationsTable } from "#/components/espace-agent-components/habilitations-table";
+import { AccueilPageSkeleton } from "#/components/espace-agent-components/skeleton";
 import { useAuth } from "#/contexts/auth.context";
 import { getAgentFullName } from "#/models/authentication/user/helpers";
-import { getAgentGroupsFn } from "#/server-functions/agent/group-management";
 import { agentAuthGuardFn } from "#/server-functions/public/auth";
 import { meta } from "#/utils/seo";
 import { HeaderCompteError } from "./-error";
@@ -32,17 +32,15 @@ export const Route = createFileRoute("/_header-compte/compte/accueil")({
   beforeLoad: async () => {
     await agentAuthGuardFn();
   },
-  loader: async () => {
-    const groups = await getAgentGroupsFn();
-
-    return { groups };
-  },
   component: RouteComponent,
+  pendingMs: 100,
+  pendingMinMs: 300,
+  pendingComponent: AccueilPageSkeleton,
   errorComponent: HeaderCompteError,
 });
 
 function RouteComponent() {
-  const { groups } = Route.useLoaderData();
+  const { groups } = useLoaderData({ from: "/_header-compte" });
 
   const { user } = useAuth();
 

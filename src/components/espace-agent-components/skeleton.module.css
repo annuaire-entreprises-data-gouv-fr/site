@@ -1,0 +1,35 @@
+.title {
+  margin-bottom: 1.5rem;
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2rem;
+  margin-top: 1.5rem;
+  border: 1px solid #ddd;
+}
+
+.table {
+  margin-top: 1.5rem;
+}
+
+.tableRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.tableRow > :first-child {
+  flex-grow: 1;
+}
