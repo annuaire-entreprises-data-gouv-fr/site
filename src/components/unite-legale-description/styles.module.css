@@ -1,0 +1,10 @@
+.oppositionDiffusionCommerciale {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  font-style: italic;
+  line-height: 1.5rem;
+  color: var(--text-action-high-blue-france);
+  background-color: var(--background-alt-grey);
+  border-radius: 4px;
+}
