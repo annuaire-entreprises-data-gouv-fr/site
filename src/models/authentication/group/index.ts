@@ -94,10 +94,16 @@ export const getAgentGroups = async ({
 
 export async function getAgentGroup(
   groupId: number,
-  usersPage: number
+  usersPage: number,
+  usersSearch?: string
 ): Promise<IAgentsGroupDetails> {
   try {
-    return await clientRolesGetGroup(groupId, usersPage, GROUP_USERS_PAGE_SIZE);
+    return await clientRolesGetGroup(
+      groupId,
+      usersPage,
+      GROUP_USERS_PAGE_SIZE,
+      usersSearch
+    );
   } catch (error) {
     // group does not exist or user is not a member of the group
     if (error instanceof HttpNotFound || error instanceof HttpForbiddenError) {

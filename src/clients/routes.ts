@@ -324,8 +324,17 @@ const routes = {
   rolesData: {
     groups: {
       getGroups: "/resource-server/groups/",
-      getGroup: (groupId: number, usersPage: number, usersSize: number) =>
-        `/resource-server/groups/${groupId}?usersPage=${usersPage}&usersSize=${usersSize}`,
+      getGroup: (
+        groupId: number,
+        usersPage: number,
+        usersSize: number,
+        usersSearch?: string
+      ) =>
+        `/resource-server/groups/${groupId}?${new URLSearchParams({
+          usersPage: String(usersPage),
+          usersSize: String(usersSize),
+          ...(usersSearch ? { usersSearch } : {}),
+        })}`,
       updateName: (groupId: number, groupName: string) =>
         `/resource-server/groups/${groupId}?group_name=${encodeURIComponent(
           groupName

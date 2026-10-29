@@ -37,6 +37,7 @@ export const MAX_USERS_PER_BATCH = 10_000;
 export const getAgentGroupSchema = z.object({
   groupId: groupIdValidator,
   usersPage: z.number().int().positive(),
+  usersSearch: z.string().trim().max(255).optional(),
 });
 
 export const addUsersToGroupSchema = z.object({

@@ -100,7 +100,8 @@ export const getAgentGroupFn = createServerFn()
   .middleware([agentFnMiddleware])
   .validator(getAgentGroupSchema)
   .handler(
-    async ({ data }) => await getAgentGroup(data.groupId, data.usersPage)
+    async ({ data }) =>
+      await getAgentGroup(data.groupId, data.usersPage, data.usersSearch)
   );
 
 export const getAgentRolesFn = createServerFn()
