@@ -9,7 +9,7 @@ interface ITempIncidentBannerProps {
 }
 
 export default function TempIncidentBanner({
-  isAgent: _,
+  isAgent,
 }: ITempIncidentBannerProps) {
   const { isEnabled: isDefaultIncidentEnabled } = useFeatureFlag(
     "incident_banner_displayed"
@@ -23,6 +23,12 @@ export default function TempIncidentBanner({
   const { isEnabled: isInseeIncidentEnabled } = useFeatureFlag(
     "insee_incident_banner_displayed"
   );
+  const { isEnabled: isAssociationsAgentIncidentEnabled } = useFeatureFlag(
+    "associations_agent_incident_banner_displayed"
+  );
+
+  const isAssociationsAgentIncidentDisplayed =
+    isAssociationsAgentIncidentEnabled && isAgent;
 
   const TEMP_INCIDENT_BANNER = useMemo(
     () => ({
@@ -38,6 +44,9 @@ export default function TempIncidentBanner({
       insee: `
   🚨 Notre partenaire l’Insee rencontre actuellement des perturbations pouvant affecter le téléchargement des avis de situation.
   Si votre demande échoue, nous vous invitons à réessayer ultérieurement.`,
+      associationsAgent: `
+  🚨 Le service de consultation des documents actes et statuts des associations rencontre actuellement des instabilités.
+  Le problème a été signalé à notre fournisseur de données. Nous sommes désolés pour la gêne occasionnée.`,
     }),
     []
   );
@@ -47,7 +56,8 @@ export default function TempIncidentBanner({
       isDefaultIncidentEnabled ||
       isProconnectIncidentEnabled ||
       isPartnersDataIncidentEnabled ||
-      isInseeIncidentEnabled
+      isInseeIncidentEnabled ||
+      isAssociationsAgentIncidentDisplayed
     )
   ) {
     return null;
@@ -61,6 +71,8 @@ export default function TempIncidentBanner({
     message = TEMP_INCIDENT_BANNER.proconnect;
   } else if (isInseeIncidentEnabled) {
     message = TEMP_INCIDENT_BANNER.insee;
+  } else if (isAssociationsAgentIncidentDisplayed) {
+    message = TEMP_INCIDENT_BANNER.associationsAgent;
   }
 
   return (

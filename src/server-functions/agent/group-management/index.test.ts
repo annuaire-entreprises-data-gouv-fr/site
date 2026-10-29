@@ -7,6 +7,7 @@ import {
 } from "#/clients/exceptions";
 import type { IRolesDataUser } from "#/clients/roles-data/interface";
 import { addUsersToGroup, addUserToGroup } from "#/models/authentication/group";
+import { isFeatureFlagEnabled } from "#/models/feature-flags";
 import { addUsersToGroupFn, addUserToGroupFn } from ".";
 
 vi.mock("@tanstack/react-start", () => ({
@@ -35,6 +36,10 @@ vi.mock("#/models/authentication/group", () => ({
 
 vi.mock("#/models/authentication/group/roles", () => ({
   rolesMetadataStore: { getRoles: vi.fn() },
+}));
+
+vi.mock("#/models/feature-flags", () => ({
+  isFeatureFlagEnabled: vi.fn(),
 }));
 
 vi.mock("#/server-functions/middlewares", () => ({
@@ -92,6 +97,22 @@ describe("addUsersToGroupFn", () => {
       roleId: 2,
     },
   };
+
+  beforeEach(() => {
+    vi.mocked(isFeatureFlagEnabled).mockResolvedValue(true);
+  });
+
+  it("refuses the batch when the feature flag is disabled", async () => {
+    vi.mocked(isFeatureFlagEnabled).mockResolvedValue(false);
+
+    await expect(addUsersToGroupFn(batchRequest)).resolves.toEqual({
+      error: "FEATURE_DISABLED",
+    });
+    expect(isFeatureFlagEnabled).toHaveBeenCalledWith(
+      "group_users_batch_add_enabled"
+    );
+    expect(addUsersToGroup).not.toHaveBeenCalled();
+  });
 
   it.each([
     [new HttpConflict("Conflict"), "USER_ALREADY_IN_GROUP"],

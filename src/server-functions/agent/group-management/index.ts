@@ -14,6 +14,7 @@ import {
   updateUserRoleInGroup,
 } from "#/models/authentication/group";
 import { rolesMetadataStore } from "#/models/authentication/group/roles";
+import { isFeatureFlagEnabled } from "#/models/feature-flags";
 import { agentFnMiddleware } from "#/server-functions/middlewares";
 import {
   addUsersToGroupSchema,
@@ -43,6 +44,9 @@ export const addUsersToGroupFn = createServerFn({ method: "POST" })
   .middleware([agentFnMiddleware])
   .validator(addUsersToGroupSchema)
   .handler(async ({ data }) => {
+    if (!(await isFeatureFlagEnabled("group_users_batch_add_enabled"))) {
+      return { error: "FEATURE_DISABLED" as const };
+    }
     const { groupId, userEmails, roleId } = data;
     try {
       return await addUsersToGroup(groupId, userEmails, roleId);

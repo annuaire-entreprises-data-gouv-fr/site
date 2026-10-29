@@ -10,6 +10,8 @@ export const FEATURE_FLAGS = [
   "insee_incident_banner_displayed",
   "fondations_enabled",
   "collectivite_territoriale_enabled",
+  "group_users_batch_add_enabled",
+  "associations_agent_incident_banner_displayed",
 ] as const;
 export type FeatureFlag = (typeof FEATURE_FLAGS)[number];
 type FeatureFlagValue = boolean | string;
