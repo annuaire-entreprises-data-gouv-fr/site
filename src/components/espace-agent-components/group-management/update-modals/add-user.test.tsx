@@ -17,7 +17,13 @@ import {
 import type { IAgentsGroup } from "#/models/authentication/group";
 import AddUserModal from "./add-user";
 
-const { execute } = vi.hoisted(() => ({ execute: vi.fn() }));
+const { execute, isBatchAddEnabled } = vi.hoisted(() => ({
+  execute: vi.fn(),
+  isBatchAddEnabled: { value: true },
+}));
+vi.mock("#/hooks/use-feature-flag", () => ({
+  useFeatureFlag: () => ({ isEnabled: isBatchAddEnabled.value }),
+}));
 vi.mock("@tanstack/react-start", () => ({ useServerFn: () => execute }));
 vi.mock("#/server-functions/agent/group-management", () => ({
   addUserToGroupFn: { url: "/test/add-user-to-group" },
@@ -76,6 +82,7 @@ beforeEach(() => {
     defaultOptions: { mutations: { retry: false } },
   });
   execute.mockReset();
+  isBatchAddEnabled.value = true;
   execute.mockResolvedValue(newUser);
   addUsersToGroupState.mockReset();
   showNotification.mockReset();
@@ -265,6 +272,7 @@ describe("adding group members from a file", () => {
     ["USER_ALREADY_IN_GROUP", /déjà membre de ce groupe/],
     ["DUPLICATE_EMAILS", /adresses en double/],
     ["GROUP_OR_ROLE_NOT_FOUND", /introuvable/],
+    ["FEATURE_DISABLED", /pas disponible/],
   ])("explains a %s error and keeps the modal open", async (error, message) => {
     execute.mockResolvedValue({ error });
     openModal();
@@ -282,6 +290,16 @@ describe("adding group members from a file", () => {
     );
     expect(screen.getByRole("dialog")).toBeTruthy();
     expect(addUsersToGroupState).not.toHaveBeenCalled();
+  });
+
+  it("hides the file upload when the feature flag is disabled", () => {
+    isBatchAddEnabled.value = false;
+    openModal();
+
+    expect(
+      screen.queryByLabelText(/Ou importer une liste de membres/)
+    ).toBeNull();
+    expect(screen.getByRole("button", { name: "Ajouter" })).toBeTruthy();
   });
 
   it("goes back to single add when the file is removed", async () => {

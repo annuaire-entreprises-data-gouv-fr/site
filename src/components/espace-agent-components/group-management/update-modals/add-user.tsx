@@ -5,6 +5,7 @@ import type { IRolesDataUser } from "#/clients/roles-data/interface";
 import { validateEmail } from "#/components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#/components-ui/button";
 import { Modal } from "#/components-ui/modal";
+import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import {
   NotificationTypeEnum,
   useNotification,
@@ -28,6 +29,7 @@ const BATCH_ERRORS = {
   USER_ALREADY_IN_GROUP: `Au moins une des adresses est déjà membre de ce groupe. ${NO_USER_ADDED} Rechargez la page pour mettre à jour la liste des membres.`,
   DUPLICATE_EMAILS: `Le fichier contient des adresses en double. ${NO_USER_ADDED}`,
   GROUP_OR_ROLE_NOT_FOUND: `Le groupe ou le rôle utilisateur est introuvable. ${NO_USER_ADDED}`,
+  FEATURE_DISABLED: `L’import de membres par fichier n’est pas disponible pour le moment. ${NO_USER_ADDED}`,
 } as const;
 
 const plural = (count: number, singular: string, pluralForm: string) =>
@@ -43,6 +45,9 @@ export default function AddUserModal({
   addUsersToGroupState: (users: IRolesDataUser[]) => void;
 }) {
   const { showNotification } = useNotification();
+  const { isEnabled: isBatchAddEnabled } = useFeatureFlag(
+    "group_users_batch_add_enabled"
+  );
   const [isVisible, setIsVisible] = useState(false);
   const [inputEmail, setInputEmail] = useState("");
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -287,84 +292,92 @@ export default function AddUserModal({
             )}
           </div>
 
-          <div
-            className={`fr-upload-group fr-mb-4w ${
-              fileErrors.length > 0 ? "fr-input-group--error" : ""
-            }`}
-          >
-            <label className="fr-label" htmlFor={`new-users-file-${group.id}`}>
-              Ou importer une liste de membres
-              <span className="fr-hint-text">
-                Fichier .txt ou .csv, avec une adresse email par ligne. Les
-                adresses invalides, en double ou déjà membres du groupe sont
-                ignorées.
-              </span>
-            </label>
-            <input
-              accept=".txt,.csv,text/plain,text/csv"
-              aria-describedby={
-                fileErrors.length > 0 ? `file-error-${group.id}` : undefined
-              }
-              className="fr-upload"
-              disabled={isPending}
-              id={`new-users-file-${group.id}`}
-              onChange={handleFileChange}
-              ref={fileInputRef}
-              type="file"
-            />
-            {fileErrors.length > 0 && (
-              <div className="fr-messages-group" id={`file-error-${group.id}`}>
-                {fileErrors.map((errorMsg, index) => (
-                  <p className="fr-message fr-message--error" key={index}>
-                    {errorMsg}
-                  </p>
-                ))}
-              </div>
-            )}
-            {batch && (
-              <div aria-live="polite" className="fr-mt-2w">
-                <p className="fr-mb-1w">
-                  <strong>
-                    {plural(
-                      batch.emails.length,
-                      "nouveau membre",
-                      "nouveaux membres"
-                    )}
-                  </strong>{" "}
-                  à ajouter depuis le fichier {batch.fileName}
-                </p>
-                {(
-                  [
-                    [batch.invalid, "adresse invalide", "adresses invalides"],
-                    [batch.duplicates, "doublon", "doublons"],
-                    [
-                      batch.alreadyInGroup,
-                      "adresse déjà membre du groupe",
-                      "adresses déjà membres du groupe",
-                    ],
-                  ] as const
-                )
-                  .filter(([emails]) => emails.length > 0)
-                  .map(([emails, singular, pluralForm]) => (
-                    <p className="fr-text--sm fr-mb-1w" key={singular}>
-                      {plural(emails.length, singular, pluralForm)} ignorée
-                      {emails.length > 1 ? "s" : ""} : {emails.join(", ")}
+          {isBatchAddEnabled && (
+            <div
+              className={`fr-upload-group fr-mb-4w ${
+                fileErrors.length > 0 ? "fr-input-group--error" : ""
+              }`}
+            >
+              <label
+                className="fr-label"
+                htmlFor={`new-users-file-${group.id}`}
+              >
+                Ou importer une liste de membres
+                <span className="fr-hint-text">
+                  Fichier .txt ou .csv, avec une adresse email par ligne. Les
+                  adresses invalides, en double ou déjà membres du groupe sont
+                  ignorées.
+                </span>
+              </label>
+              <input
+                accept=".txt,.csv,text/plain,text/csv"
+                aria-describedby={
+                  fileErrors.length > 0 ? `file-error-${group.id}` : undefined
+                }
+                className="fr-upload"
+                disabled={isPending}
+                id={`new-users-file-${group.id}`}
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                type="file"
+              />
+              {fileErrors.length > 0 && (
+                <div
+                  className="fr-messages-group"
+                  id={`file-error-${group.id}`}
+                >
+                  {fileErrors.map((errorMsg, index) => (
+                    <p className="fr-message fr-message--error" key={index}>
+                      {errorMsg}
                     </p>
                   ))}
-                <button
-                  className="fr-btn fr-btn--tertiary fr-btn--sm fr-mt-1w"
-                  disabled={isPending}
-                  onClick={resetFile}
-                  type="button"
-                >
-                  Retirer le fichier
-                </button>
-              </div>
-            )}
-          </div>
+                </div>
+              )}
+              {batch && (
+                <div aria-live="polite" className="fr-mt-2w">
+                  <p className="fr-mb-1w">
+                    <strong>
+                      {plural(
+                        batch.emails.length,
+                        "nouveau membre",
+                        "nouveaux membres"
+                      )}
+                    </strong>{" "}
+                    à ajouter depuis le fichier {batch.fileName}
+                  </p>
+                  {(
+                    [
+                      [batch.invalid, "adresse invalide", "adresses invalides"],
+                      [batch.duplicates, "doublon", "doublons"],
+                      [
+                        batch.alreadyInGroup,
+                        "adresse déjà membre du groupe",
+                        "adresses déjà membres du groupe",
+                      ],
+                    ] as const
+                  )
+                    .filter(([emails]) => emails.length > 0)
+                    .map(([emails, singular, pluralForm]) => (
+                      <p className="fr-text--sm fr-mb-1w" key={singular}>
+                        {plural(emails.length, singular, pluralForm)} ignorée
+                        {emails.length > 1 ? "s" : ""} : {emails.join(", ")}
+                      </p>
+                    ))}
+                  <button
+                    className="fr-btn fr-btn--tertiary fr-btn--sm fr-mt-1w"
+                    disabled={isPending}
+                    onClick={resetFile}
+                    type="button"
+                  >
+                    Retirer le fichier
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
-            {batch ? (
+            {isBatchAddEnabled && batch ? (
               <ButtonLink
                 disabled={isBatchAddDisabled}
                 onClick={handleAddNewUsers}
