@@ -14,7 +14,6 @@ import {
 } from "openid-client";
 import { HttpForbiddenError } from "#/clients/exceptions";
 import { InternalError } from "#/models/exceptions";
-import getSession from "#/utils/server-side-helper/get-session";
 import {
   getCurrentSession,
   setProConnectTokenSet,
@@ -219,9 +218,33 @@ export const proConnectLogoutUrl = createServerOnlyFn(async () => {
   return buildEndSessionUrl(client, logoutParameters).toString();
 });
 
+// Calls made in parallel (e.g. by the loaders of a page) share the same
+// refresh, as a refresh token may only be used once
+const pendingRefreshes = new Map<
+  string,
+  ReturnType<typeof refreshTokenGrant>
+>();
+
+const refreshAccessToken = async (refreshToken: string) => {
+  let pendingRefresh = pendingRefreshes.get(refreshToken);
+  if (!pendingRefresh) {
+    pendingRefresh = getClient().then((client) =>
+      refreshTokenGrant(client, refreshToken)
+    );
+    pendingRefreshes.set(refreshToken, pendingRefresh);
+    pendingRefresh
+      .finally(() => pendingRefreshes.delete(refreshToken))
+      .catch(() => {
+        // handled by the callers
+      });
+  }
+  return await pendingRefresh;
+};
+
 export const proConnectGetOrRefreshAccessToken = createServerOnlyFn(
   async (): Promise<string> => {
-    const session = await getSession();
+    const currentSession = await getCurrentSession();
+    const session = currentSession.data;
 
     if (
       !(
@@ -243,17 +266,18 @@ export const proConnectGetOrRefreshAccessToken = createServerOnlyFn(
     }
 
     try {
-      const client = await getClient();
       const { refreshToken } = session.proConnectTokenSet;
 
-      const tokenSet = await refreshTokenGrant(client, refreshToken);
+      const tokenSet = await refreshAccessToken(refreshToken);
 
-      session.proConnectTokenSet = {
-        idToken: tokenSet.id_token,
-        accessToken: tokenSet.access_token,
-        accessTokenExpiresAt: getAccessTokenExpiresAt(tokenSet),
-        refreshToken: tokenSet.refresh_token ?? refreshToken,
-      };
+      await currentSession.update({
+        proConnectTokenSet: {
+          idToken: tokenSet.id_token,
+          accessToken: tokenSet.access_token,
+          accessTokenExpiresAt: getAccessTokenExpiresAt(tokenSet),
+          refreshToken: tokenSet.refresh_token ?? refreshToken,
+        },
+      });
 
       return tokenSet.access_token as string;
     } catch (e: any) {
