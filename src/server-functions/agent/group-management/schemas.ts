@@ -31,9 +31,20 @@ export const addUserToGroupSchema = z.object({
   roleId: roleIdValidator,
 });
 
+// roles.data rejects batches of more than 10 000 users
+export const MAX_USERS_PER_BATCH = 10_000;
+
+export const getAgentGroupSchema = z.object({
+  groupId: groupIdValidator,
+  usersPage: z.number().int().positive(),
+});
+
 export const addUsersToGroupSchema = z.object({
   groupId: groupIdValidator,
-  userEmails: z.array(emailValidator).min(1, "At least one email is required"),
+  userEmails: z
+    .array(emailValidator)
+    .min(1, "At least one email is required")
+    .max(MAX_USERS_PER_BATCH, "Too many emails"),
   roleId: roleIdValidator,
 });
 

@@ -14,12 +14,13 @@ import { removeUserFromGroupFn } from "#/server-functions/agent/group-management
 export default function DeleteUserButton({
   isCurrentUser,
   user,
-  adminCount,
+  isLastAdmin,
   groupId,
   deleteUserFromGroupState,
 }: {
   isCurrentUser: boolean;
-  adminCount: number;
+  // the last admin can not leave the group
+  isLastAdmin: boolean;
   user: IRolesDataUser;
   groupId: number;
   deleteUserFromGroupState: (email: string) => void;
@@ -56,7 +57,7 @@ export default function DeleteUserButton({
       <ButtonLink
         alt
         aria-label={`Supprimer ${user.email}`}
-        disabled={mutation.isPending || (isCurrentUser && adminCount === 1)}
+        disabled={mutation.isPending || isLastAdmin}
         key={`remove-${user.email}`}
         onClick={openConfirmation}
         type="button"
