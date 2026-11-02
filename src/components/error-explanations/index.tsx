@@ -2,6 +2,8 @@ import type { PropsWithChildren } from "react";
 import { Link } from "#/components/link";
 import ButtonLink from "#/components-ui/button";
 import constants from "#/models/constants";
+import { formatIntFr } from "#/utils/helpers";
+import { INSEE } from "../administrations";
 
 const ErrorTemplate: React.FC<PropsWithChildren> = ({ children }) => (
   <div className="content-container">
@@ -88,8 +90,39 @@ const SearchErrorExplanations = () => (
   </div>
 );
 
+const ErrorSireneDoublonExplanations = ({
+  oldSiren,
+  newSiren,
+}: {
+  oldSiren: string;
+  newSiren: string;
+}) => (
+  <>
+    <h1>Le numéro SIREN "{formatIntFr(oldSiren)}" est un doublon</h1>
+    <p>
+      Le SIREN {formatIntFr(oldSiren)} a été identifié comme un doublon et purgé
+      du répertoire SIRENE par l'
+      <INSEE />.
+    </p>
+    <p>
+      Il n'apparaît pas non plus dans le registre national des entreprises. En
+      conséquence, il n'existe plus aucune information liée à ce SIREN, qui ne
+      doit plus être utilisé. Les informations de cette unité légale sont
+      disponibles sur la page du SIREN conservé :{" "}
+      <Link params={{ slug: newSiren }} to="/entreprise/$slug">
+        {formatIntFr(newSiren)}
+      </Link>
+      .
+    </p>
+    <ButtonLink to={`/entreprise/${newSiren}`}>
+      Voir la fiche de l'entreprise
+    </ButtonLink>
+  </>
+);
+
 export {
   ClientErrorExplanations,
   ErrorNotFoundExplanations,
+  ErrorSireneDoublonExplanations,
   SearchErrorExplanations,
 };
