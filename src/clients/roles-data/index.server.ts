@@ -59,11 +59,18 @@ export const clientRolesGetGroup = createServerOnlyFn(
   async (
     groupId: number,
     usersPage: number,
-    usersSize: number
+    usersSize: number,
+    // filters users on their email, case-insensitively
+    usersSearch?: string
   ): Promise<IAgentsGroupDetails> => {
     const url =
       process.env.ROLES_DATA_URL +
-      routes.rolesData.groups.getGroup(groupId, usersPage, usersSize);
+      routes.rolesData.groups.getGroup(
+        groupId,
+        usersPage,
+        usersSize,
+        usersSearch
+      );
     const response =
       await rolesDataResourceServerClient<IAgentsGroupDetailsResponse>({
         url,
