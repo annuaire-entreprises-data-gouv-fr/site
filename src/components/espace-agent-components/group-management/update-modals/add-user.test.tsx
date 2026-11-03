@@ -189,9 +189,8 @@ describe("adding a group member", () => {
 });
 
 function uploadFile(content: string, name = "membres.csv") {
-  const fileInput = screen.getByLabelText<HTMLInputElement>(
-    /Ou importer une liste de membres/
-  );
+  const fileInput =
+    screen.getByLabelText<HTMLInputElement>(/Ajouter un fichier/);
   fireEvent.change(fileInput, {
     target: { files: [new File([content], name, { type: "text/csv" })] },
   });
@@ -213,12 +212,24 @@ describe("adding group members from a file", () => {
     openModal();
     uploadFile(fileContent);
 
-    expect(await screen.findByText(/1 adresse invalide ignorée/)).toBeTruthy();
-    expect(screen.getByText(/1 doublon ignoré/)).toBeTruthy();
     expect(
-      screen.getByText(/1 adresse déjà membre du groupe ignorée/)
+      await screen.findByText("2 nouveaux membres à ajouter")
     ).toBeTruthy();
-    expect(screen.getByRole<HTMLInputElement>("textbox").disabled).toBe(true);
+    expect(screen.getByText("1 email invalide")).toBeTruthy();
+    expect(screen.getByText("1 email en doublon ignoré")).toBeTruthy();
+    expect(
+      screen.getByText("1 email faisant déjà partie du groupe")
+    ).toBeTruthy();
+    // each line lists its emails when opened
+    expect(
+      screen.getAllByRole("listitem").map((item) => item.textContent)
+    ).toEqual([
+      "new@example.fr",
+      "other@example.fr",
+      "new@example.fr",
+      "existing@example.fr",
+      "not-an-email",
+    ]);
 
     fireEvent.click(screen.getByRole("button", { name: "Ajouter 2 membres" }));
 
@@ -302,20 +313,29 @@ describe("adding group members from a file", () => {
     isBatchAddEnabled.value = false;
     openModal();
 
+    expect(screen.queryByLabelText(/Ajouter un fichier/)).toBeNull();
     expect(
-      screen.queryByLabelText(/Ou importer une liste de membres/)
-    ).toBeNull();
+      screen.getByRole("heading", { name: "Ajouter un membre" })
+    ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Ajouter" })).toBeTruthy();
   });
 
-  it("goes back to single add when the file is removed", async () => {
-    openModal();
-    uploadFile("new@example.fr");
-    fireEvent.click(
-      await screen.findByRole("button", { name: "Retirer le fichier" })
-    );
+  it("keeps either the typed email or the file", async () => {
+    const input = openModal();
+    fireEvent.change(input, { target: { value: newUser.email } });
+    uploadFile("other@example.fr");
 
-    expect(screen.getByRole("button", { name: "Ajouter" })).toBeTruthy();
-    expect(screen.getByRole<HTMLInputElement>("textbox").disabled).toBe(false);
+    expect(await screen.findByText("1 nouveau membre à ajouter")).toBeTruthy();
+    expect(input.value).toBe("");
+
+    fireEvent.change(input, { target: { value: newUser.email } });
+
+    expect(screen.queryByText("1 nouveau membre à ajouter")).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Ajouter" }));
+    await waitFor(() =>
+      expect(execute.mock.calls[0][0]).toEqual({
+        data: { groupId: group.id, userEmail: newUser.email, roleId: 2 },
+      })
+    );
   });
 });

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { IRolesDataUser } from "#/clients/roles-data/interface";
 import { validateEmail } from "#/components/espace-agent-components/helpers/form-validation";
 import ButtonLink from "#/components-ui/button";
+import { Icon } from "#/components-ui/icon/wrapper";
 import { Modal } from "#/components-ui/modal";
 import { useFeatureFlag } from "#/hooks/use-feature-flag";
 import {
@@ -16,6 +17,7 @@ import {
   addUserToGroupFn,
 } from "#/server-functions/agent/group-management";
 import { MAX_USERS_PER_BATCH } from "#/server-functions/agent/group-management/schemas";
+import styles from "./add-user.module.css";
 import {
   type IParsedEmailsFile,
   isAcceptedEmailsFile,
@@ -199,6 +201,9 @@ export default function AddUserModal({
     if (!file) {
       return;
     }
+    // the file replaces the email typed above
+    setInputEmail("");
+    setValidationErrors([]);
     if (!isAcceptedEmailsFile(file)) {
       setFileErrors(["Veuillez sélectionner un fichier .txt ou .csv"]);
       return;
@@ -243,19 +248,24 @@ export default function AddUserModal({
         textAlign="left"
       >
         <div className="fr-container">
-          <div className="fr-mb-4w">
-            <h2 className="fr-h2">Ajouter un membre</h2>
-            <p className="fr-text--lg">
-              Les nouveaux membres ont par défaut le{" "}
-              <strong>rôle d’utilisateur</strong>.
-              <br />
-              Vous pourrez ensuite le changer en <strong>administrateur</strong>
-              , si besoin.
-            </p>
-          </div>
+          <h2 className={`fr-h4 fr-mb-2w ${styles.title}`}>
+            <Icon size={28} slug="userAddFill" />
+            {isBatchAddEnabled
+              ? "Ajouter un ou des membres"
+              : "Ajouter un membre"}
+          </h2>
+          <p className="fr-mb-3w">
+            Par défaut, les nouveaux membres sont <strong>utilisateur</strong>.
+            <br />
+            Vous pourrez modifier leur rôle en <strong>administrateur</strong>{" "}
+            ensuite.
+          </p>
 
+          {isBatchAddEnabled && (
+            <h3 className="fr-h6 fr-mb-2w">Ajouter un membre</h3>
+          )}
           <div
-            className={`fr-input-group fr-mb-4w ${
+            className={`fr-input-group fr-mb-0 ${
               emailErrors.length > 0 ? "fr-input-group--error" : ""
             }`}
           >
@@ -270,12 +280,16 @@ export default function AddUserModal({
                 className={`fr-input ${
                   emailErrors.length > 0 ? "fr-input--error" : ""
                 }`}
-                disabled={isPending || batch !== null}
+                disabled={isPending}
                 id={`new-user-email-${group.id}`}
                 onChange={(e) => {
                   setInputEmail(e.target.value);
                   if (validationErrors.length > 0) {
                     setValidationErrors([]);
+                  }
+                  // the email replaces the selected file
+                  if (batch || fileErrors.length > 0) {
+                    resetFile();
                   }
                 }}
                 onKeyDown={(e) => {
@@ -283,7 +297,6 @@ export default function AddUserModal({
                     handleAddNewUser();
                   }
                 }}
-                placeholder="email@exemple.fr"
                 ref={inputRef}
                 type="email"
                 value={inputEmail}
@@ -299,91 +312,61 @@ export default function AddUserModal({
               </div>
             )}
           </div>
+
           {isBatchAddEnabled && (
-            <div
-              className={`fr-upload-group fr-mb-4w ${
-                fileErrors.length > 0 ? "fr-input-group--error" : ""
-              }`}
-            >
-              <label
-                className="fr-label"
-                htmlFor={`new-users-file-${group.id}`}
+            <>
+              <div className={styles.separator}>ou</div>
+
+              <h3 className="fr-h6 fr-mb-2w">
+                Ajouter plusieurs membres en important un fichier
+              </h3>
+              <div
+                className={`fr-upload-group ${
+                  fileErrors.length > 0 ? "fr-input-group--error" : ""
+                }`}
               >
-                Ou importer une liste de membres
-                <span className="fr-hint-text">
-                  Fichier .txt ou .csv, avec une adresse email par ligne (
-                  {MAX_USERS_PER_BATCH.toLocaleString("fr-FR")} au maximum). Les
-                  adresses invalides ou en double sont ignorées.
-                </span>
-              </label>
-              <input
-                accept=".txt,.csv,text/plain,text/csv"
-                aria-describedby={
-                  fileErrors.length > 0 ? `file-error-${group.id}` : undefined
-                }
-                className="fr-upload"
-                disabled={isPending}
-                id={`new-users-file-${group.id}`}
-                onChange={handleFileChange}
-                ref={fileInputRef}
-                type="file"
-              />
-              {fileErrors.length > 0 && (
-                <div
-                  className="fr-messages-group"
-                  id={`file-error-${group.id}`}
+                <label
+                  className="fr-label"
+                  htmlFor={`new-users-file-${group.id}`}
                 >
-                  {fileErrors.map((errorMsg, index) => (
-                    <p className="fr-message fr-message--error" key={index}>
-                      {errorMsg}
-                    </p>
-                  ))}
-                </div>
-              )}
-              {batch && (
-                <div aria-live="polite" className="fr-mt-2w">
-                  <p className="fr-mb-1w">
-                    <strong>
-                      {plural(
-                        batch.emails.length,
-                        "nouveau membre",
-                        "nouveaux membres"
-                      )}
-                    </strong>{" "}
-                    à ajouter depuis le fichier {batch.fileName}
-                  </p>
-                  {(
-                    [
-                      [batch.invalid, "adresse invalide", "adresses invalides"],
-                      [batch.duplicates, "doublon", "doublons"],
-                      [
-                        batch.alreadyInGroup,
-                        "adresse déjà membre du groupe",
-                        "adresses déjà membres du groupe",
-                      ],
-                    ] as const
-                  )
-                    .filter(([emails]) => emails.length > 0)
-                    .map(([emails, singular, pluralForm]) => (
-                      <p className="fr-text--sm fr-mb-1w" key={singular}>
-                        {plural(emails.length, singular, pluralForm)} ignorée
-                        {emails.length > 1 ? "s" : ""} : {emails.join(", ")}
+                  Ajouter un fichier
+                  <span className="fr-hint-text">
+                    Formats supportés : txt, csv. Un email par ligne,{" "}
+                    {MAX_USERS_PER_BATCH.toLocaleString("fr-FR")} au maximum.
+                    Les adresses invalides, en double ou déjà membres du groupe
+                    sont ignorées.
+                  </span>
+                </label>
+                <input
+                  accept=".txt,.csv,text/plain,text/csv"
+                  aria-describedby={
+                    fileErrors.length > 0 ? `file-error-${group.id}` : undefined
+                  }
+                  className="fr-upload"
+                  disabled={isPending}
+                  id={`new-users-file-${group.id}`}
+                  onChange={handleFileChange}
+                  ref={fileInputRef}
+                  type="file"
+                />
+                {fileErrors.length > 0 && (
+                  <div
+                    className="fr-messages-group"
+                    id={`file-error-${group.id}`}
+                  >
+                    {fileErrors.map((errorMsg, index) => (
+                      <p className="fr-message fr-message--error" key={index}>
+                        {errorMsg}
                       </p>
                     ))}
-                  <button
-                    className="fr-btn fr-btn--tertiary fr-btn--sm fr-mt-1w"
-                    disabled={isPending}
-                    onClick={resetFile}
-                    type="button"
-                  >
-                    Retirer le fichier
-                  </button>
-                </div>
-              )}
-            </div>
+                  </div>
+                )}
+              </div>
+              {batch && <BatchSummary batch={batch} />}
+            </>
           )}
 
-          <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse">
+          <div className="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-mt-4w">
             {isBatchAddEnabled && batch ? (
               <ButtonLink
                 disabled={isBatchAddDisabled}
@@ -405,5 +388,91 @@ export default function AddUserModal({
         </div>
       </Modal>
     </>
+  );
+}
+
+const EmailsDetails = ({
+  emails,
+  label,
+  className,
+  icon,
+}: {
+  emails: string[];
+  label: string;
+  className?: string;
+  icon?: React.ReactNode;
+}) => (
+  <details>
+    <summary className={className}>
+      {icon}
+      {label}
+      <span className={styles.chevron}>
+        <Icon size={16} slug="chevronDown" />
+      </span>
+    </summary>
+    <ul>
+      {emails.map((email) => (
+        <li key={email}>{email}</li>
+      ))}
+    </ul>
+  </details>
+);
+
+/**
+ * What the selected file adds, and the emails it ignores
+ */
+function BatchSummary({ batch }: { batch: IParsedEmailsFile }) {
+  const ignored = [
+    [
+      batch.duplicates,
+      plural(batch.duplicates.length, "email", "emails") +
+        (batch.duplicates.length > 1
+          ? " en doublon ignorés"
+          : " en doublon ignoré"),
+      undefined,
+    ],
+    [
+      batch.alreadyInGroup,
+      `${plural(batch.alreadyInGroup.length, "email", "emails")} faisant déjà partie du groupe`,
+      undefined,
+    ],
+    [
+      batch.invalid,
+      plural(batch.invalid.length, "email invalide", "emails invalides"),
+      styles.invalid,
+    ],
+  ] as const;
+
+  return (
+    <div aria-live="polite" className={styles.summary}>
+      {batch.emails.length > 0 && (
+        <EmailsDetails
+          className={styles.newMembers}
+          emails={batch.emails}
+          icon={
+            <Icon
+              color="var(--text-default-success)"
+              size={20}
+              slug="successFill"
+            />
+          }
+          label={`${plural(
+            batch.emails.length,
+            "nouveau membre",
+            "nouveaux membres"
+          )} à ajouter`}
+        />
+      )}
+      {ignored
+        .filter(([emails]) => emails.length > 0)
+        .map(([emails, label, className]) => (
+          <EmailsDetails
+            className={className}
+            emails={emails}
+            key={label}
+            label={label}
+          />
+        ))}
+    </div>
   );
 }
