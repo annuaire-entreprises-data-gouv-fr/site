@@ -51,6 +51,7 @@ export interface IResult {
   nom_raison_sociale: string;
   nombre_etablissements: number;
   nombre_etablissements_ouverts: number;
+  opposition_diffusion_commerciale: boolean;
   section_activite_principale: string;
   siege: ISiege;
   siren: string;

@@ -11,6 +11,12 @@
 #   site: true
 
 ---
+- date: 02/11/2026
+  target:
+    api: true
+    site: true
+  body: |
+    Intégration des données de l'opposition à la réutilisation des données de entrperises à des fins de prospection commerciale.
 - date: 22/10/2026
   target:
     site: true

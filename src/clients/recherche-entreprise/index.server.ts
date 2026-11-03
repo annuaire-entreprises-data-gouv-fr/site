@@ -183,6 +183,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
     nombre_etablissements_ouverts,
     tva,
     bodacc,
+    opposition_diffusion_commerciale = false,
   } = result;
 
   const {
@@ -297,6 +298,7 @@ const mapToUniteLegale = (result: IResult, pageEtablissements: number) => {
       result.activite_principale_naf25
     ),
     activitePrincipale: result.activite_principale,
+    oppositionDiffusionCommerciale: opposition_diffusion_commerciale,
     dirigeants: dirigeants.map(mapToDirigeantModel),
     complements: {
       estBio: est_bio,
