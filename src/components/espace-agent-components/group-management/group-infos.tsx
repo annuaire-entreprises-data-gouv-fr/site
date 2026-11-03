@@ -1,7 +1,18 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import NonRenseigne from "#/components/non-renseigne";
+import type { IAgentScope } from "#/models/authentication/agent/scopes/constants";
 import type { IAgentsGroup } from "#/models/authentication/group";
 import { formatSiret } from "#/utils/helpers";
+
+import styles from "./styles.module.css";
+
+function filterHiddenScopes(scopes: IAgentScope[]) {
+  return scopes.filter((scope) => !["administrateur", "agent"].includes(scope));
+}
+
+function formatScope(scope: string) {
+  return scope.replace(/_/g, " ").toUpperCase();
+}
 
 export function GroupInfos({
   group,
@@ -13,8 +24,12 @@ export function GroupInfos({
   >;
   isAdmin: boolean;
 }) {
+  const visibleScopes = useMemo(
+    () => filterHiddenScopes(group.scopes),
+    [group.scopes]
+  );
   return (
-    <>
+    <div className={styles.groupInfosContainer}>
       <div>
         <strong>Habilitation :</strong>{" "}
         {group.contract_description || <i>Aucune habilitation</i>}
@@ -45,10 +60,12 @@ export function GroupInfos({
       </div>
       <div>
         <strong>Données accessibles :</strong>{" "}
-        {group.scopes && group.scopes.length > 0 ? (
-          group.scopes.map((scope) => (
+        {visibleScopes.length > 0 ? (
+          visibleScopes.map((scope) => (
             <Fragment key={scope}>
-              <span className="fr-badge fr-badge--sm">{scope}</span>
+              <span className="fr-badge fr-badge--purple-glycine fr-badge--sm">
+                {formatScope(scope)}
+              </span>
               &nbsp;
             </Fragment>
           ))
@@ -65,6 +82,6 @@ export function GroupInfos({
           pour accèder à des données supplémentaires.
         </p>
       )}
-    </>
+    </div>
   );
 }
