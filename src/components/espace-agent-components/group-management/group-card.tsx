@@ -35,7 +35,7 @@ export function GroupCard({
             </span>
           </div>
           <GroupInfos group={group} isAdmin={isAdmin} />
-          <div>
+          <div className="fr-mt-1w">
             <strong>
               Administrateur{group.admins.length > 1 ? "s" : ""} :
             </strong>{" "}

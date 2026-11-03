@@ -209,10 +209,7 @@ export default function AddUserModal({
       return;
     }
     try {
-      const parsed = parseEmailsFile(
-        await file.text(),
-        group.users.map((user) => user.email)
-      );
+      const parsed = parseEmailsFile(await file.text());
       if (parsed.emails.length > MAX_USERS_PER_BATCH) {
         setFileErrors([
           `Le fichier contient ${parsed.emails.length} adresses : vous pouvez en ajouter ${MAX_USERS_PER_BATCH.toLocaleString("fr-FR")} au maximum à la fois`,
@@ -429,11 +426,6 @@ function BatchSummary({ batch }: { batch: IParsedEmailsFile }) {
         (batch.duplicates.length > 1
           ? " en doublon ignorés"
           : " en doublon ignoré"),
-      undefined,
-    ],
-    [
-      batch.alreadyInGroup,
-      `${plural(batch.alreadyInGroup.length, "email", "emails")} faisant déjà partie du groupe`,
       undefined,
     ],
     [

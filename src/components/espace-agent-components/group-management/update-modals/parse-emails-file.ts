@@ -1,7 +1,6 @@
 import { validateEmail } from "#/components/espace-agent-components/helpers/form-validation";
 
 export interface IParsedEmailsFile {
-  alreadyInGroup: string[];
   duplicates: string[];
   emails: string[];
   invalid: string[];
@@ -20,14 +19,9 @@ const normalizeEmail = (value: string) =>
  * For csv, only the first column is kept and surrounding quotes are removed.
  * Emails are trimmed and lowercased before comparison and sending.
  */
-export const parseEmailsFile = (
-  content: string,
-  groupEmails: string[]
-): IParsedEmailsFile => {
-  const groupEmailsSet = new Set(groupEmails.map(normalizeEmail));
+export const parseEmailsFile = (content: string): IParsedEmailsFile => {
   const seen = new Set<string>();
   const result: IParsedEmailsFile = {
-    alreadyInGroup: [],
     duplicates: [],
     emails: [],
     invalid: [],
@@ -48,10 +42,6 @@ export const parseEmailsFile = (
       continue;
     }
     seen.add(email);
-    if (groupEmailsSet.has(email)) {
-      result.alreadyInGroup.push(email);
-      continue;
-    }
     result.emails.push(email);
   }
 

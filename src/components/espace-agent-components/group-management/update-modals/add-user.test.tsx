@@ -213,25 +213,22 @@ describe("adding group members from a file", () => {
     uploadFile(fileContent);
 
     expect(
-      await screen.findByText("2 nouveaux membres à ajouter")
+      await screen.findByText("3 nouveaux membres à ajouter")
     ).toBeTruthy();
     expect(screen.getByText("1 email invalide")).toBeTruthy();
     expect(screen.getByText("1 email en doublon ignoré")).toBeTruthy();
-    expect(
-      screen.getByText("1 email faisant déjà partie du groupe")
-    ).toBeTruthy();
     // each line lists its emails when opened
     expect(
       screen.getAllByRole("listitem").map((item) => item.textContent)
     ).toEqual([
       "new@example.fr",
       "other@example.fr",
-      "new@example.fr",
       "existing@example.fr",
+      "new@example.fr",
       "not-an-email",
     ]);
 
-    fireEvent.click(screen.getByRole("button", { name: "Ajouter 2 membres" }));
+    fireEvent.click(screen.getByRole("button", { name: "Ajouter 3 membres" }));
 
     await waitFor(() =>
       expect(addUsersToGroupState).toHaveBeenCalledWith([newUser, otherUser])
@@ -239,7 +236,11 @@ describe("adding group members from a file", () => {
     expect(execute.mock.calls[0][0]).toEqual({
       data: {
         groupId: group.id,
-        userEmails: ["new@example.fr", "other@example.fr"],
+        userEmails: [
+          "new@example.fr",
+          "other@example.fr",
+          "existing@example.fr",
+        ],
         roleId: 2,
       },
     });
@@ -273,7 +274,7 @@ describe("adding group members from a file", () => {
 
   it("disables the batch add when no new email is in the file", async () => {
     openModal();
-    uploadFile("existing@example.fr\ninvalid", "membres.txt");
+    uploadFile("invalidmail", "membres.txt");
 
     expect(
       await screen.findByText("Aucune nouvelle adresse email valide à ajouter")
