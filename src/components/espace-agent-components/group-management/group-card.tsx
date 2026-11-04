@@ -47,7 +47,7 @@ export function GroupCard({
           </div>
           <div className={styles.groupCardAction}>
             <ButtonLink alt to={`/compte/mes-groupes/${group.id}`}>
-              {isAdmin ? "Gérer groupe" : "Voir groupe"}
+              {isAdmin ? "Gérer le groupe" : "Voir le groupe"}
             </ButtonLink>
           </div>
         </div>
