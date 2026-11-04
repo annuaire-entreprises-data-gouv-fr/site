@@ -11,6 +11,14 @@
 #   site: true
 
 ---
+- date: 04/11/2026
+  target:
+    api: true
+    site: true
+  body: |
+    Ajout de la possibilité d’importer des membres en masse via des fichiers TXT ou CSV, avec mise en place d’une pagination et d’une fonctionnalité de recherche au sein de chaque groupe.
+
+    Mise en place du blocage des adresses de messagerie gratuites.
 - date: 02/11/2026
   target:
     api: true
