@@ -171,6 +171,20 @@ const createFetchError = (
   return backendError;
 };
 
+// best effort: the body of an error response, if any, explains the error
+const parseErrorResponse = async (response: Response) => {
+  try {
+    const text = await response.text();
+    try {
+      return JSON.parse(text) as unknown;
+    } catch {
+      return text || undefined;
+    }
+  } catch {
+    // unreadable body: the status alone describes the error
+  }
+};
+
 async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
   const timeout = config.timeout || DEFAULT_TIMEOUT;
   const timeoutSignal = AbortSignal.timeout(timeout);
@@ -209,7 +223,7 @@ async function httpBackClient<T>(config: IDefaultRequestConfig): Promise<T> {
       backendError.config = requestConfig;
       backendError.response = {
         config: requestConfig,
-        data: undefined,
+        data: await parseErrorResponse(response),
         headers: response.headers,
         status: response.status,
         statusText: response.statusText,

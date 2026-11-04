@@ -22,6 +22,8 @@ tr.row:hover td.cell {
 
 @media only screen and (min-width: 1px) and (max-width: 992px) {
   table.fullTable,
+  table.fullTable > tbody,
+  tr.row,
   td.cell {
     display: block;
     padding-right: 0 !important;
@@ -44,8 +46,15 @@ tr.row:hover td.cell {
   }
 }
 
+.mobileTitle {
+  margin-bottom: 0;
+  font-weight: 700;
+  color: #081d35;
+}
+
 @media (min-width: 993px) {
-  .mobile {
+  .mobile,
+  .mobileTitle {
     display: none;
   }
 }

@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
 import {
   HttpBadRequestError,
   HttpConflict,
@@ -41,6 +42,19 @@ export const addUserToGroupFn = createServerFn({ method: "POST" })
     }
   });
 
+// roles.data names the users already in the group in its 409 response
+const usersAlreadyInGroupSchema = z.object({
+  detail: z.object({
+    code: z.literal("USERS_ALREADY_IN_GROUP"),
+    emails: z.array(z.string()),
+  }),
+});
+// emails from public providers (gmail, yahoo...) are not allowed. roles.data
+// answers { "detail": "PERSONAL_EMAIL_REFUSED" }, without saying which ones
+const personalEmailRefusedSchema = z.object({
+  detail: z.literal("PERSONAL_EMAIL_REFUSED"),
+});
+
 // The batch endpoint is all-or-nothing: on any error, no user has been added
 export const addUsersToGroupFn = createServerFn({ method: "POST" })
   .middleware([agentFnMiddleware])
@@ -54,10 +68,18 @@ export const addUsersToGroupFn = createServerFn({ method: "POST" })
       return await addUsersToGroup(groupId, userEmails, roleId);
     } catch (error) {
       if (error instanceof HttpConflict) {
-        return { error: "USER_ALREADY_IN_GROUP" as const };
+        const conflict = usersAlreadyInGroupSchema.safeParse(error.data);
+        return {
+          error: "USER_ALREADY_IN_GROUP" as const,
+          // empty when roles.data does not name them
+          emails: conflict.success ? conflict.data.detail.emails : [],
+        };
       }
-      if (error instanceof HttpBadRequestError) {
-        return { error: "DUPLICATE_EMAILS" as const };
+      if (
+        error instanceof HttpBadRequestError &&
+        personalEmailRefusedSchema.safeParse(error.data).success
+      ) {
+        return { error: "PERSONAL_EMAIL_REFUSED" as const };
       }
       if (error instanceof HttpNotFound) {
         return { error: "GROUP_OR_ROLE_NOT_FOUND" as const };

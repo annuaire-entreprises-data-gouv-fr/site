@@ -116,14 +116,58 @@ describe("addUsersToGroupFn", () => {
   });
 
   it.each([
-    [new HttpConflict("Conflict"), "USER_ALREADY_IN_GROUP"],
-    [new HttpBadRequestError("Bad Request"), "DUPLICATE_EMAILS"],
-    [new HttpNotFound("Not Found"), "GROUP_OR_ROLE_NOT_FOUND"],
-  ])("returns a serializable result for %s", async (error, expected) => {
-    vi.mocked(addUsersToGroup).mockRejectedValue(error);
+    [
+      {
+        detail: {
+          code: "USERS_ALREADY_IN_GROUP",
+          emails: ["a@example.fr"],
+        },
+      },
+      ["a@example.fr"],
+    ],
+    // roles.data did not name them
+    [undefined, []],
+    ["Conflict", []],
+  ])(
+    "returns the users already in the group for a conflict with body %j",
+    async (data, emails) => {
+      vi.mocked(addUsersToGroup).mockRejectedValue(
+        new HttpConflict("Conflict", { data })
+      );
+
+      await expect(addUsersToGroupFn(batchRequest)).resolves.toEqual({
+        error: "USER_ALREADY_IN_GROUP",
+        emails,
+      });
+    }
+  );
+
+  it("returns a personal email refusal", async () => {
+    vi.mocked(addUsersToGroup).mockRejectedValue(
+      new HttpBadRequestError("Bad Request", {
+        data: { detail: "PERSONAL_EMAIL_REFUSED" },
+      })
+    );
 
     await expect(addUsersToGroupFn(batchRequest)).resolves.toEqual({
-      error: expected,
+      error: "PERSONAL_EMAIL_REFUSED",
+    });
+  });
+
+  it("rethrows a bad request it can not explain", async () => {
+    const error = new HttpBadRequestError("Bad Request", {
+      data: { detail: "Invalid payload" },
+    });
+    vi.mocked(addUsersToGroup).mockRejectedValue(error);
+
+    await expect(addUsersToGroupFn(batchRequest)).rejects.toBe(error);
+  });
+
+  it("returns a serializable result for a missing group or role", async () => {
+    vi.mocked(addUsersToGroup).mockRejectedValue(new HttpNotFound("Not Found"));
+
+    await expect(addUsersToGroupFn(batchRequest)).resolves.toEqual({
+      error: "GROUP_OR_ROLE_NOT_FOUND",
     });
   });
 

@@ -270,6 +270,21 @@ describe("httpBackClient", () => {
     }
   );
 
+  it("keeps the body of a conflict, which explains it", async () => {
+    const detail = { code: "USERS_ALREADY_IN_GROUP", emails: ["a@example.fr"] };
+    vi.spyOn(global, "fetch").mockResolvedValue(
+      Response.json({ detail }, { status: 409 })
+    );
+
+    await expect(
+      httpBackClient({ url: "https://example.test/failure" })
+    ).rejects.toMatchObject({
+      name: "HttpConflict",
+      status: 409,
+      data: { detail },
+    });
+  });
+
   it("throws HttpServerError for unmapped HTTP failures", async () => {
     vi.spyOn(global, "fetch").mockResolvedValue(
       new Response(null, {

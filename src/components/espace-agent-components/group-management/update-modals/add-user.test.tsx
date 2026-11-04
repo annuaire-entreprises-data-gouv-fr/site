@@ -288,11 +288,11 @@ describe("adding group members from a file", () => {
 
   it.each([
     ["USER_ALREADY_IN_GROUP", /déjà membre de ce groupe/],
-    ["DUPLICATE_EMAILS", /adresses en double/],
+    ["PERSONAL_EMAIL_REFUSED", /adresses personnelles/],
     ["GROUP_OR_ROLE_NOT_FOUND", /introuvable/],
     ["FEATURE_DISABLED", /pas disponible/],
   ])("explains a %s error and keeps the modal open", async (error, message) => {
-    execute.mockResolvedValue({ error });
+    execute.mockResolvedValue({ error, emails: [] });
     openModal();
     uploadFile("new@example.fr");
     fireEvent.click(
@@ -308,6 +308,68 @@ describe("adding group members from a file", () => {
     );
     expect(screen.getByRole("dialog")).toBeTruthy();
     expect(addUsersToGroupState).not.toHaveBeenCalled();
+  });
+
+  it("lists the members already in the group and sends the file without them", async () => {
+    const otherUser = { ...newUser, email: "other@example.fr", id: 4 };
+    execute
+      .mockResolvedValueOnce({
+        error: "USER_ALREADY_IN_GROUP",
+        emails: ["Existing@Example.fr"],
+      })
+      .mockResolvedValueOnce([newUser, otherUser]);
+    openModal();
+    uploadFile("new@example.fr\nexisting@example.fr\nother@example.fr");
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Ajouter 3 membres" })
+    );
+
+    expect(
+      await screen.findByText(
+        "1 adresse du fichier est déjà membre du groupe. Aucun membre n’a été ajouté."
+      )
+    ).toBeTruthy();
+    expect(
+      screen.getByText("1 email faisant déjà partie du groupe")
+    ).toBeTruthy();
+    expect(screen.getByText("2 nouveaux membres à ajouter")).toBeTruthy();
+    expect(addUsersToGroupState).not.toHaveBeenCalled();
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Envoyer sans les doublons" })
+    );
+
+    await waitFor(() =>
+      expect(addUsersToGroupState).toHaveBeenCalledWith([newUser, otherUser])
+    );
+    expect(execute.mock.calls[1][0]).toEqual({
+      data: {
+        groupId: group.id,
+        userEmails: ["new@example.fr", "other@example.fr"],
+        roleId: 2,
+      },
+    });
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it("forgets the members already in the group when another file is chosen", async () => {
+    execute.mockResolvedValue({
+      error: "USER_ALREADY_IN_GROUP",
+      emails: ["existing@example.fr"],
+    });
+    openModal();
+    uploadFile("new@example.fr\nexisting@example.fr");
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Ajouter 2 membres" })
+    );
+    await screen.findByRole("button", { name: "Envoyer sans les doublons" });
+
+    uploadFile("existing@example.fr");
+
+    expect(
+      await screen.findByRole("button", { name: "Ajouter 1 membre" })
+    ).toBeTruthy();
+    expect(screen.queryByText(/faisant déjà partie du groupe/)).toBeNull();
   });
 
   it("hides the file upload when the feature flag is disabled", () => {
