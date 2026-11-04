@@ -3,3 +3,39 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.groupCard {
+  display: grid;
+  grid-template-areas:
+    "header action"
+    "body body";
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem 1.5rem;
+  align-items: center;
+}
+
+.groupCardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  grid-area: header;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.groupCardBody {
+  grid-area: body;
+}
+
+.groupCardAction {
+  grid-area: action;
+}
+
+@media only screen and (max-width: 767px) {
+  .groupCard {
+    grid-template-areas:
+      "header"
+      "body"
+      "action";
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

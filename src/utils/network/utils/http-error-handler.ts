@@ -17,7 +17,8 @@ export const httpErrorHandler = (
   url: string,
   status: number,
   statusText: string | undefined,
-  message: string
+  message: string,
+  data?: unknown
 ) => {
   switch (status) {
     case 432: {
@@ -36,7 +37,7 @@ export const httpErrorHandler = (
       throw new HttpForbiddenError("Forbidden");
     }
     case 400: {
-      throw new HttpBadRequestError(message || "Bad Request");
+      throw new HttpBadRequestError(message || "Bad Request", { data });
     }
     case 401: {
       throw new HttpUnauthorizedError("Unauthorized");
@@ -45,7 +46,7 @@ export const httpErrorHandler = (
       throw new HttpTimeoutError("Timeout");
     }
     case 409: {
-      throw new HttpConflict("Conflict");
+      throw new HttpConflict("Conflict", { data });
     }
     case 422: {
       throw new HttpUnprocessableEntity(message || "Unprocessable Entity");

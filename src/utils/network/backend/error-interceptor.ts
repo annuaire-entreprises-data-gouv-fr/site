@@ -43,7 +43,13 @@ const errorInterceptor = (error: BackendError): never => {
       )
     );
   }
-  throw httpErrorHandler(url, status, statusText, message || "");
+  throw httpErrorHandler(
+    url,
+    status,
+    statusText,
+    message || "",
+    response?.data
+  );
 };
 
 export default errorInterceptor;

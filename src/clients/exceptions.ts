@@ -1,9 +1,16 @@
+interface HttpErrorOptions extends ErrorOptions {
+  // response body, when the API explains the error
+  data?: unknown;
+}
+
 class HttpError extends Error {
   status: number;
+  data?: unknown;
 
-  constructor(message: string, status = 500, options?: ErrorOptions) {
+  constructor(message: string, status = 500, options?: HttpErrorOptions) {
     super(message, options);
     this.status = status;
+    this.data = options?.data;
     this.name = "HttpError";
   }
 }
@@ -30,14 +37,14 @@ export class HttpUnprocessableEntity extends HttpError {
 }
 
 export class HttpConflict extends HttpError {
-  constructor(message: string, options?: ErrorOptions) {
+  constructor(message: string, options?: HttpErrorOptions) {
     super(message, 409, options);
     this.name = "HttpConflict";
   }
 }
 
 export class HttpBadRequestError extends HttpError {
-  constructor(message: string, options?: ErrorOptions) {
+  constructor(message: string, options?: HttpErrorOptions) {
     super(message, 400, options);
     this.name = "HttpBadRequestError";
   }

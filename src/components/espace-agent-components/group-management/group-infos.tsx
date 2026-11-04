@@ -7,11 +7,16 @@ import { formatSiret } from "#/utils/helpers";
 import styles from "./styles.module.css";
 
 function filterHiddenScopes(scopes: IAgentScope[]) {
-  return scopes.filter((scope) => !["administrateur", "agent"].includes(scope));
+  return scopes.filter(
+    (scope) =>
+      !["agent", "rne", "pseudo_opendata", "administrateur"].includes(scope)
+  );
 }
 
 function formatScope(scope: string) {
-  return scope.replace(/_/g, " ").toUpperCase();
+  return scope === "nonDiffusible"
+    ? "NON DIFFUSIBLE"
+    : scope.replace(/_/g, " ").toUpperCase();
 }
 
 export function GroupInfos({

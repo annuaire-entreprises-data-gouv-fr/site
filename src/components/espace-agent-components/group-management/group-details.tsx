@@ -68,7 +68,7 @@ export function GroupDetails({
   const membersTable = isAdmin ? (
     <FullTable
       body={group.users.map((user) => [
-        <div style={{ flexGrow: 1 }}>{userCell(user)}</div>,
+        userCell(user),
         isCurrentUser(user) && isLastAdmin ? (
           <span className="fr-badge">{user.role_name}</span>
         ) : (
@@ -97,6 +97,8 @@ export function GroupDetails({
       ])}
       columnWidths={["65%"]}
       head={[head, "Rôle", "Action"]}
+      mobileHead={["Membre", "Rôle", "Action"]}
+      mobileTitle={head}
     />
   ) : (
     <FullTable
@@ -105,6 +107,8 @@ export function GroupDetails({
         <span className="fr-badge">{user.role_name}</span>,
       ])}
       head={[head, "Rôle"]}
+      mobileHead={["Membre", "Rôle"]}
+      mobileTitle={head}
     />
   );
 

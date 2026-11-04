@@ -30,13 +30,21 @@ const USER_ALREADY_IN_GROUP_ERROR =
 const NO_USER_ADDED = "Aucun membre n’a été ajouté.";
 const BATCH_ERRORS = {
   USER_ALREADY_IN_GROUP: `Au moins une des adresses est déjà membre de ce groupe. ${NO_USER_ADDED} Retirez du fichier les membres existants puis réessayez.`,
-  DUPLICATE_EMAILS: `Le fichier contient des adresses en double. ${NO_USER_ADDED}`,
+  PERSONAL_EMAIL_REFUSED: `Le fichier contient des adresses personnelles (Gmail, Yahoo…) : seules les adresses professionnelles sont acceptées. ${NO_USER_ADDED}`,
   GROUP_OR_ROLE_NOT_FOUND: `Le groupe ou le rôle utilisateur est introuvable. ${NO_USER_ADDED}`,
   FEATURE_DISABLED: `L’import de membres par fichier n’est pas disponible pour le moment. ${NO_USER_ADDED}`,
 } as const;
 
 const plural = (count: number, singular: string, pluralForm: string) =>
   `${count} ${count > 1 ? pluralForm : singular}`;
+
+const normalizeEmail = (email: string) => email.trim().toLowerCase();
+
+// emails reported by roles.data, kept from previous attempts: the batch
+// request is all-or-nothing
+const mergeEmails = (current: string[], reported: string[]) => [
+  ...new Set([...current, ...reported.map(normalizeEmail)]),
+];
 
 export default function AddUserModal({
   group,
@@ -59,6 +67,8 @@ export default function AddUserModal({
     (IParsedEmailsFile & { fileName: string }) | null
   >(null);
   const [fileErrors, setFileErrors] = useState<string[]>([]);
+  // file emails that roles.data reported as already in the group
+  const [alreadyInGroup, setAlreadyInGroup] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const addUserToGroup = useServerFn(addUserToGroupFn);
@@ -100,14 +110,29 @@ export default function AddUserModal({
   const batchMutation = useMutation({
     mutationFn: addUsersToGroup,
     onSuccess: (result) => {
-      if ("error" in result) {
-        const message = BATCH_ERRORS[result.error];
-        setFileErrors([message]);
-        showNotification({
-          type: NotificationTypeEnum.ERROR,
-          title: "Ajout impossible",
-          message,
-        });
+      if (result && "error" in result) {
+        const showFileError = (message: string) => {
+          setFileErrors([message]);
+          showNotification({
+            type: NotificationTypeEnum.ERROR,
+            title: "Ajout impossible",
+            message,
+          });
+        };
+        if (result.error === "USER_ALREADY_IN_GROUP" && result.emails.length) {
+          const emails = mergeEmails(alreadyInGroup, result.emails);
+          setAlreadyInGroup(emails);
+          showFileError(
+            `${plural(
+              emails.length,
+              "adresse du fichier est déjà membre",
+              "adresses du fichier sont déjà membres"
+            )} du groupe. ${NO_USER_ADDED}`
+          );
+          return;
+        }
+        console.log(result);
+        showFileError(BATCH_ERRORS[result.error]);
         return;
       }
 
@@ -140,7 +165,11 @@ export default function AddUserModal({
     ? [USER_ALREADY_IN_GROUP_ERROR]
     : validationErrors;
   const isAddDisabled = !userEmail || isPending || isUserAlreadyInGroup;
-  const isBatchAddDisabled = !batch || batch.emails.length === 0 || isPending;
+  const alreadyInGroupSet = new Set(alreadyInGroup);
+  const emailsToAdd = (batch?.emails ?? []).filter(
+    (email) => !alreadyInGroupSet.has(email)
+  );
+  const isBatchAddDisabled = !batch || emailsToAdd.length === 0 || isPending;
 
   useEffect(() => {
     if (inputRef.current && isVisible) {
@@ -179,7 +208,7 @@ export default function AddUserModal({
     batchMutation.mutate({
       data: {
         groupId: group.id,
-        userEmails: batch.emails,
+        userEmails: emailsToAdd,
         // always add as simple users, never as admin
         roleId: defaultRoleId,
       },
@@ -189,6 +218,7 @@ export default function AddUserModal({
   const resetFile = () => {
     setBatch(null);
     setFileErrors([]);
+    setAlreadyInGroup([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -198,6 +228,7 @@ export default function AddUserModal({
     const file = e.target.files?.[0];
     setBatch(null);
     setFileErrors([]);
+    setAlreadyInGroup([]);
     if (!file) {
       return;
     }
@@ -209,10 +240,7 @@ export default function AddUserModal({
       return;
     }
     try {
-      const parsed = parseEmailsFile(
-        await file.text(),
-        group.users.map((user) => user.email)
-      );
+      const parsed = parseEmailsFile(await file.text());
       if (parsed.emails.length > MAX_USERS_PER_BATCH) {
         setFileErrors([
           `Le fichier contient ${parsed.emails.length} adresses : vous pouvez en ajouter ${MAX_USERS_PER_BATCH.toLocaleString("fr-FR")} au maximum à la fois`,
@@ -234,6 +262,7 @@ export default function AddUserModal({
     setValidationErrors([]);
     setBatch(null);
     setFileErrors([]);
+    setAlreadyInGroup([]);
   };
 
   return (
@@ -362,7 +391,13 @@ export default function AddUserModal({
                   </div>
                 )}
               </div>
-              {batch && <BatchSummary batch={batch} />}
+              {batch && (
+                <BatchSummary
+                  alreadyInGroup={alreadyInGroup}
+                  batch={batch}
+                  emailsToAdd={emailsToAdd}
+                />
+              )}
             </>
           )}
 
@@ -372,9 +407,15 @@ export default function AddUserModal({
                 disabled={isBatchAddDisabled}
                 onClick={handleAddNewUsers}
               >
-                {batchMutation.isPending
-                  ? "Ajout en cours..."
-                  : `Ajouter ${plural(batch.emails.length, "membre", "membres")}`}
+                {(() => {
+                  if (batchMutation.isPending) {
+                    return "Ajout en cours...";
+                  }
+                  if (alreadyInGroup.length > 0) {
+                    return "Envoyer sans les doublons";
+                  }
+                  return `Ajouter ${plural(emailsToAdd.length, "membre", "membres")}`;
+                })()}
               </ButtonLink>
             ) : (
               <ButtonLink disabled={isAddDisabled} onClick={handleAddNewUser}>
@@ -421,19 +462,28 @@ const EmailsDetails = ({
 /**
  * What the selected file adds, and the emails it ignores
  */
-function BatchSummary({ batch }: { batch: IParsedEmailsFile }) {
+function BatchSummary({
+  batch,
+  emailsToAdd,
+  alreadyInGroup,
+}: {
+  batch: IParsedEmailsFile;
+  // the file emails, without those already in the group
+  emailsToAdd: string[];
+  alreadyInGroup: string[];
+}) {
   const ignored = [
+    [
+      alreadyInGroup,
+      `${plural(alreadyInGroup.length, "email", "emails")} faisant déjà partie du groupe`,
+      styles.invalid,
+    ],
     [
       batch.duplicates,
       plural(batch.duplicates.length, "email", "emails") +
         (batch.duplicates.length > 1
           ? " en doublon ignorés"
           : " en doublon ignoré"),
-      undefined,
-    ],
-    [
-      batch.alreadyInGroup,
-      `${plural(batch.alreadyInGroup.length, "email", "emails")} faisant déjà partie du groupe`,
       undefined,
     ],
     [
@@ -445,10 +495,10 @@ function BatchSummary({ batch }: { batch: IParsedEmailsFile }) {
 
   return (
     <div aria-live="polite" className={styles.summary}>
-      {batch.emails.length > 0 && (
+      {emailsToAdd.length > 0 && (
         <EmailsDetails
           className={styles.newMembers}
-          emails={batch.emails}
+          emails={emailsToAdd}
           icon={
             <Icon
               color="var(--text-default-success)"
@@ -457,7 +507,7 @@ function BatchSummary({ batch }: { batch: IParsedEmailsFile }) {
             />
           }
           label={`${plural(
-            batch.emails.length,
+            emailsToAdd.length,
             "nouveau membre",
             "nouveaux membres"
           )} à ajouter`}
