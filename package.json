@@ -89,7 +89,7 @@
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "11.6.1",
     "typescript": "7.0.2",
-    "ultracite": "8.0.1",
+    "ultracite": "8.0.2",
     "vite": "8.3.4",
     "vitest": "5.0.5"
   },
