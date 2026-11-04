@@ -55,6 +55,8 @@ const personalEmailRefusedSchema = z.object({
   detail: z.literal("PERSONAL_EMAIL_REFUSED"),
 });
 
+const BATCH_SIZE_ALERT = 20;
+
 // The batch endpoint is all-or-nothing: on any error, no user has been added
 export const addUsersToGroupFn = createServerFn({ method: "POST" })
   .middleware([agentFnMiddleware])
@@ -64,6 +66,13 @@ export const addUsersToGroupFn = createServerFn({ method: "POST" })
       return { error: "FEATURE_DISABLED" as const };
     }
     const { groupId, userEmails, roleId } = data;
+
+    if (userEmails.length > BATCH_SIZE_ALERT) {
+      console.warn(
+        `[roles-data-batch] Batch size alert: ${userEmails.length} emails for group ${groupId}`
+      );
+    }
+
     try {
       return await addUsersToGroup(groupId, userEmails, roleId);
     } catch (error) {
