@@ -15,6 +15,7 @@ Disallow: /`;
           robots = `User-agent: *
 Allow: /
 Allow: /entreprise/
+Disallow: /entreprise/*/
 Allow: /administration/
 Allow: /faq/
 Allow: /definitions/
