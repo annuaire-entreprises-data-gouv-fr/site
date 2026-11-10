@@ -71,7 +71,8 @@ function RouteComponent() {
               aria-label="Vidéo de présentation de l'Annuaire des Entreprises"
               className={styles["hero-video-player"]}
               controls
-              preload="metadata"
+              poster="/images/lp-agent/agent-landing-poster.jpg"
+              preload="none"
             >
               <source
                 src="/videos/agent_landing.compressed.mp4"
