@@ -2,10 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { httpGet } from "#/utils/network";
 
 interface GeoResponse {
-  contour: {
-    type: "Polygon";
-    coordinates: [number, number][][];
-  };
+  contour:
+    | {
+        type: "Polygon";
+        coordinates: [number, number][][];
+      }
+    | {
+        type: "MultiPolygon";
+        coordinates: [number, number][][][];
+      };
 }
 
 export function useGeoApi(codeInsee: string) {

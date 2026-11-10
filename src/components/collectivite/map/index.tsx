@@ -1,5 +1,5 @@
 import { addOverlay, mapStyles, Overlay, SearchControl } from "carte-facile";
-import type { Feature, Polygon } from "geojson";
+import type { Feature, MultiPolygon, Polygon } from "geojson";
 import {
   type GeoJSONSource,
   LngLatBounds,
@@ -22,12 +22,11 @@ const communeFillLayerId = "collectivite-commune-fill";
 export const communeLineLayerId = "collectivite-commune-line";
 const communeSourceId = "collectivite-commune";
 
-interface CommuneContour {
-  coordinates: [number, number][][];
-  type: "Polygon";
-}
+type CommuneContour = IGeoCommune["contour"];
 
-function buildCommuneFeature(contour: CommuneContour): Feature<Polygon> {
+function buildCommuneFeature(
+  contour: CommuneContour
+): Feature<Polygon | MultiPolygon> {
   return {
     geometry: contour,
     properties: {},
@@ -37,10 +36,15 @@ function buildCommuneFeature(contour: CommuneContour): Feature<Polygon> {
 
 function getCommuneBounds(contour: CommuneContour) {
   const bounds = new LngLatBounds();
+  // Some communes (e.g. Marseille with its islands) are MultiPolygons
+  const polygons =
+    contour.type === "Polygon" ? [contour.coordinates] : contour.coordinates;
 
-  for (const ring of contour.coordinates) {
-    for (const coordinate of ring) {
-      bounds.extend(coordinate);
+  for (const polygon of polygons) {
+    for (const ring of polygon) {
+      for (const coordinate of ring) {
+        bounds.extend(coordinate);
+      }
     }
   }
 
