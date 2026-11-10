@@ -13,6 +13,7 @@ import {
 import type {
   IRolesDataCurrentUserRole,
   IRolesDataGroupAdmin,
+  IRolesDataGroupUser,
   IRolesDataUser,
 } from "#/clients/roles-data/interface";
 import { FetchRessourceException } from "#/models/exceptions";
@@ -36,7 +37,7 @@ export interface IAgentsGroup extends IAgentsGroupBase {
 
 export interface IAgentsGroupDetails extends IAgentsGroupBase {
   // admins come first
-  users: IRolesDataUser[];
+  users: IRolesDataGroupUser[];
   usersPagination: {
     page: number;
     size: number;

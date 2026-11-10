@@ -18,6 +18,10 @@ export interface IRolesDataUser {
   role_name: string;
 }
 
+export interface IRolesDataGroupUser extends IRolesDataUser {
+  added_by_email: string | null;
+}
+
 export interface IAgentsGroupCreate {
   admin: { email: string };
   contract_description: string;
@@ -54,7 +58,7 @@ export interface IAgentsGroupResponse extends IAgentsGroupBaseResponse {
 }
 
 export interface IAgentsGroupDetailsResponse extends IAgentsGroupBaseResponse {
-  users: IRolesDataUser[];
+  users: IRolesDataGroupUser[];
   users_pagination: {
     page: number;
     size: number;
