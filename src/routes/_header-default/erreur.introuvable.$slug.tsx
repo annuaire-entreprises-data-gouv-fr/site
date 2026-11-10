@@ -62,7 +62,7 @@ function RouteComponent() {
             </li>
             <li>
               Ce numéro fait peut-être référence à une entreprise{" "}
-              <Link to="/faq">non-diffusible</Link>.
+              <Link to="/faq">non-diffusée</Link>.
             </li>
             <li>
               Ce numéro fait peut-être référence à une structure publique dont

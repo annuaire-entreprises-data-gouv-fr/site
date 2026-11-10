@@ -50,7 +50,7 @@ const AvisSituationLink: React.FC<{
     return (
       <FAQLink tooltipLabel="Document non disponible">
         L’avis de situation INSEE n’est pas disponible pour les entreprises non
-        diffusibles, y compris pour les agents publics.
+        diffusées, y compris pour les agents publics.
       </FAQLink>
     );
   }

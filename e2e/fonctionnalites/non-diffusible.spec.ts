@@ -7,7 +7,7 @@ import {
   test,
 } from "../support/test";
 
-const hiddenInfo = /▪︎ ▪︎ ▪︎ information non-diffusible ▪︎ ▪︎ ▪︎/;
+const hiddenInfo = /▪︎ ▪︎ ▪︎ information non-diffusée ▪︎ ▪︎ ▪︎/;
 const parisInfo = /▪︎ ▪︎ ▪︎ PARIS ▪︎ ▪︎ ▪︎/;
 
 async function expectLastCellButton(
@@ -21,10 +21,8 @@ async function expectLastCellButton(
   ).toBeVisible();
 }
 
-test.describe("Non-diffusible", () => {
-  test("Non diffusible EI should have no name and address", async ({
-    page,
-  }) => {
+test.describe("Non-diffusée", () => {
+  test("Non diffusée EI should have no name and address", async ({ page }) => {
     await goto(page, "/entreprise/300025764");
 
     await expect(page.getByText("ne sont pas publiquement")).toHaveCount(1);
@@ -56,7 +54,7 @@ test.describe("Non-diffusible", () => {
     ).toBeVisible();
   });
 
-  test("Non diffusible Personne morale should have name but hidden address", async ({
+  test("Non diffusée Personne morale should have name but hidden address", async ({
     page,
   }) => {
     await goto(page, "/entreprise/908595879");
@@ -113,7 +111,7 @@ test.describe("Non-diffusible", () => {
     ).toBeVisible();
   });
 
-  test("No dirigeant in non diffusible", async ({ page }) => {
+  test("No dirigeant in non diffusée", async ({ page }) => {
     await goto(page, "/entreprise/908595879/dirigeants");
     await expect(page.getByText("Dirigeant(s) (données privées)")).toHaveCount(
       1

@@ -7,7 +7,7 @@ import { Warning } from "../alerts";
 const NotInSireneAlert: React.FC<{
   uniteLegale: IUniteLegale;
 }> = ({ uniteLegale }) => {
-  /* non-diffusible = exist in insee so following do not apply */
+  /* non-diffusee = exist in insee so following do not apply */
   if (estNonDiffusibleStrict(uniteLegale)) {
     return null;
   }

@@ -7,7 +7,7 @@ test.describe("Immatriculation RNE", () => {
     await expect(page.getByText("01/03/1955").first()).toBeVisible();
   });
 
-  test("Should display immatriculation even for non diffusible", async ({
+  test("Should display immatriculation even for non diffusée", async ({
     page,
   }) => {
     await goto(page, "/entreprise/300025764");

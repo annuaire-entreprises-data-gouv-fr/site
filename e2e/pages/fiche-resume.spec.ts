@@ -230,13 +230,13 @@ test.describe("Shared entreprise layout", () => {
   });
 });
 
-test.describe("Entreprises non-diffusibles", () => {
-  test("Should be non diffusible", async ({ page }) => {
+test.describe("Entreprises non-diffusées", () => {
+  test("Should be non diffusée", async ({ page }) => {
     await goto(page, "/entreprise/300025764");
     await expect(page.getByText("ne sont pas publiquement")).toHaveCount(1);
   });
 
-  test("Should be diffusible", async ({ page }) => {
+  test("Should be diffusée", async ({ page }) => {
     await goto(page, "/entreprise/880878145");
     await expect(page.getByText("ne sont pas publiquement")).toHaveCount(0);
   });

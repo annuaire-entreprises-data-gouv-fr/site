@@ -114,7 +114,7 @@ const tooltipContent: Partial<
   >
 > = {
   [ApplicationRights.nonDiffusible]:
-    "Entreprises non-diffusibles auprès de l’Insee",
+    "Entreprises non-diffusées auprès de l’Insee",
   [ApplicationRights.beneficiaires]:
     "Liste des bénéficiaires effectifs d'une unité légale inscrite au répertoire national des entreprises (RNE)",
   [ApplicationRights.conformiteFiscale]: (

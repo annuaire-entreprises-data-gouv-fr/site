@@ -100,7 +100,7 @@ function RouteComponent() {
       <p>
         À partir de l’espace « agent public », l’utilisateur ou l’utilisatrice
         peut consulter et extraire les informations et données nécessaires à sa
-        mission, dont celles dites « non-diffusibles », de l’ensemble des
+        mission, dont celles dites « non-diffusées », de l’ensemble des
         structures disposant d’un numéro de SIRET.
       </p>
       <p>
