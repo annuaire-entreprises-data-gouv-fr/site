@@ -1,4 +1,5 @@
 import type {
+  IRolesDataGroupUser,
   IRolesDataRoles,
   IRolesDataUser,
 } from "#/clients/roles-data/interface";
@@ -8,6 +9,7 @@ import { AlertError } from "#/components-ui/alerts";
 import { useAuth } from "#/contexts/auth.context";
 import type { IAgentsGroupDetails } from "#/models/authentication/group";
 import { GroupInfos } from "./group-infos";
+import { MemberEmail } from "./member-email";
 import { MembersSearch } from "./members-search";
 import AddUserModal from "./update-modals/add-user";
 import DeleteUserButton from "./update-modals/delete-user";
@@ -57,9 +59,9 @@ export function GroupDetails({
   const isCurrentUser = (user: IRolesDataUser) =>
     user.email.toLowerCase() === currentUserEmail;
 
-  const userCell = (user: IRolesDataUser) => (
+  const userCell = (user: IRolesDataGroupUser) => (
     <>
-      {user.email}
+      <MemberEmail user={user} />
       {isCurrentUser(user) && <CurrentUserBadge />}
     </>
   );

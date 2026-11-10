@@ -8,7 +8,7 @@ import {
 } from "@testing-library/react";
 import type { ComponentProps } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { IRolesDataUser } from "#/clients/roles-data/interface";
+import type { IRolesDataGroupUser } from "#/clients/roles-data/interface";
 import type { Modal } from "#/components-ui/modal";
 import {
   NotificationContext,
@@ -33,14 +33,15 @@ vi.mock("#/components-ui/modal", () => ({
     isVisible ? <div role="dialog">{children}</div> : null,
 }));
 
-const existingUser: IRolesDataUser = {
+const existingUser: IRolesDataGroupUser = {
+  added_by_email: null,
   email: "existing@example.fr",
   id: 1,
   is_admin: false,
   role_id: 2,
   role_name: "Utilisateur",
 };
-const newUser: IRolesDataUser = {
+const newUser: IRolesDataGroupUser = {
   ...existingUser,
   email: "new@example.fr",
   id: 2,
