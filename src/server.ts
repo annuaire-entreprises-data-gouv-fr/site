@@ -17,7 +17,11 @@ const redirectLegacyEntrepriseTab = (request: Request) => {
   destination.protocol = import.meta.env.VITE_BASE_URL.split("://")[0];
   destination.host = import.meta.env.VITE_BASE_URL.split("://")[1];
 
-  return Response.redirect(destination, 308);
+  // Use the active constructor so Nitro and MSW recognize the response instance.
+  return new Response(null, {
+    status: 308,
+    headers: { Location: destination.href },
+  });
 };
 
 if (
