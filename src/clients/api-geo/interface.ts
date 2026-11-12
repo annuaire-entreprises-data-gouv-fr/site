@@ -5,10 +5,15 @@ export interface GeoResponse {
   };
   code: string;
   codesPostaux: string[];
-  contour: {
-    type: "Polygon";
-    coordinates: [number, number][][];
-  };
+  contour:
+    | {
+        type: "Polygon";
+        coordinates: [number, number][][];
+      }
+    | {
+        type: "MultiPolygon";
+        coordinates: [number, number][][][];
+      };
   departement: {
     code: string;
     nom: string;

@@ -1,3 +1,10 @@
+let timeoutIncreaseFactor = Number(
+  import.meta.env.VITE_TIMEOUT_INCREASE_FACTOR || 1
+);
+if (!timeoutIncreaseFactor || Number.isNaN(timeoutIncreaseFactor)) {
+  timeoutIncreaseFactor = 1;
+}
+
 const constants = {
   links: {
     mailtoInpi: "mailto:licences@inpi.fr",
@@ -20,16 +27,16 @@ const constants = {
   },
   resultsPerPage: { etablissements: 100, search: 30 },
   timeout: {
-    XXS: 350,
-    XS: 850,
-    S: 1500,
-    M: 3000,
-    L: 5000,
-    XL: 10_000,
-    XXL: 20_000,
-    XXXL: 30_000,
-    XXXXL: 45_000,
-    XXXXXL: 120_000,
+    XXS: 350 * timeoutIncreaseFactor,
+    XS: 850 * timeoutIncreaseFactor,
+    S: 1500 * timeoutIncreaseFactor,
+    M: 3000 * timeoutIncreaseFactor,
+    L: 5000 * timeoutIncreaseFactor,
+    XL: 10_000 * timeoutIncreaseFactor,
+    XXL: 20_000 * timeoutIncreaseFactor,
+    XXXL: 30_000 * timeoutIncreaseFactor,
+    XXXXL: 45_000 * timeoutIncreaseFactor,
+    XXXXXL: 120_000 * timeoutIncreaseFactor,
   },
   colors: {
     frBlue: "#000091",
