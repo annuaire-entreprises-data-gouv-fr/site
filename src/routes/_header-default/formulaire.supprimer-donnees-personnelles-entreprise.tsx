@@ -46,16 +46,29 @@ export const Route = createFileRoute(
   errorComponent: HeaderDefaultError,
 });
 
+const IS_FC_BUTTON_ENABLED = false;
+
 function RouteComponent() {
   const { franceConnectInfo, hasInvalidFCSession } = Route.useLoaderData();
 
   return (
     <TextWrapper>
       <h1>Demande de suppression de données personnelles</h1>
-      <HidePersonalDataPageClient
-        franceConnectInfo={franceConnectInfo}
-        hasInvalidFCSession={hasInvalidFCSession}
-      />
+      {IS_FC_BUTTON_ENABLED ? (
+        <HidePersonalDataPageClient
+          franceConnectInfo={franceConnectInfo}
+          hasInvalidFCSession={hasInvalidFCSession}
+        />
+      ) : (
+        <p>
+          Pour toute demande de suppression de données personnelles, merci de
+          bien vouloir adresser votre demande à l’adresse :{" "}
+          <a href="mailto:mesdonnees@modernisation.gouv.fr">
+            mesdonnees@modernisation.gouv.fr
+          </a>
+          .
+        </p>
+      )}
     </TextWrapper>
   );
 }
