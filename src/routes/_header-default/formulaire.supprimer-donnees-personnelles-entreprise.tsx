@@ -1,42 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-import HidePersonalDataPageClient from "#/components/screens/formulaire.supprimer-donnees-personnelles-entreprise";
+import HidePersonalDataPage from "#/components/screens/formulaire.supprimer-donnees-personnelles-entreprise";
+import Breadcrumb from "#/components-ui/breadcrumb";
 import TextWrapper from "#/components-ui/text-wrapper";
 import { meta } from "#/utils/seo";
-import {
-  getCurrentSession,
-  getHidePersonalDataRequestFCSession,
-} from "#/utils/session/index.server";
 import { HeaderDefaultError } from "./-error";
 
-const fetchHidePersonalDataRequestFn = createServerFn().handler(async () => {
-  const session = await getCurrentSession();
-
-  const franceConnectInfo = getHidePersonalDataRequestFCSession(session.data);
-
-  return franceConnectInfo
-    ? {
-        franceConnectInfo: {
-          firstName: franceConnectInfo.firstName,
-          familyName: franceConnectInfo.familyName,
-          birthdate: franceConnectInfo.birthdate,
-        },
-        hasInvalidFCSession: false,
-      }
-    : {
-        franceConnectInfo: null,
-        hasInvalidFCSession:
-          !!session.data.franceConnectHidePersonalDataSession,
-      };
-});
+const TITLE = "Comment supprimer les données personnelles de mon entreprise ?";
 
 export const Route = createFileRoute(
   "/_header-default/formulaire/supprimer-donnees-personnelles-entreprise"
 )({
-  loader: async () => await fetchHidePersonalDataRequestFn(),
   head: () => ({
     meta: meta({
-      title: "Demande de suppression de données personnelles",
+      title: TITLE,
       description:
         "Demande de suppression de données personnelles de dirigeant d’entreprise sur l’Annuaire des Entreprises",
       robots: "index, follow",
@@ -46,29 +22,17 @@ export const Route = createFileRoute(
   errorComponent: HeaderDefaultError,
 });
 
-const IS_FC_BUTTON_ENABLED = false;
-
 function RouteComponent() {
-  const { franceConnectInfo, hasInvalidFCSession } = Route.useLoaderData();
-
   return (
     <TextWrapper>
-      <h1>Demande de suppression de données personnelles</h1>
-      {IS_FC_BUTTON_ENABLED ? (
-        <HidePersonalDataPageClient
-          franceConnectInfo={franceConnectInfo}
-          hasInvalidFCSession={hasInvalidFCSession}
-        />
-      ) : (
-        <p>
-          Pour toute demande de suppression de données personnelles, merci de
-          bien vouloir adresser votre demande à l’adresse :{" "}
-          <a href="mailto:mesdonnees@modernisation.gouv.fr">
-            mesdonnees@modernisation.gouv.fr
-          </a>
-          .
-        </p>
-      )}
+      <Breadcrumb
+        links={[
+          { to: "/faq", label: "Questions fréquentes" },
+          { to: ".", label: TITLE },
+        ]}
+      />
+      <h1>{TITLE}</h1>
+      <HidePersonalDataPage />
     </TextWrapper>
   );
 }
