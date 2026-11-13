@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
 ARG NODE_IMAGE=node:24.22.1-alpine
-ARG PNPM_VERSION=12.14.0
+ARG PNPM_VERSION=12.18.0
 ARG ENVIRONMENT=production
 ARG BUILD_DATE
 ARG BUILD_VERSION=main
