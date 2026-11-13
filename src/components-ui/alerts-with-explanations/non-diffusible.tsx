@@ -10,10 +10,12 @@ import { Info, ProtectedData } from "../alerts";
 
 const DefaultNonDiffusibleAlert = () => (
   <Info full>
-    Cette structure est non-diffusible. Cela signifie que certaines informations
+    Cette structure s'est opposée, auprès de l'Insee, à la diffusion de
+    certaines informations au public. Cela signifie que certaines informations
     ne sont pas publiquement accessibles.
     <br />
-    Si c’est votre entreprise et que vous souhaitez vous la rendre diffusible,{" "}
+    Si c’est votre entreprise et que vous souhaitez vous changer le statut de
+    diffusion,{" "}
     <a href="https://statut-diffusion-sirene.insee.fr/">
       vous pouvez en faire la demande sur le site de l’Insee.
     </a>
@@ -27,8 +29,9 @@ const DefaultNonDiffusibleAlert = () => (
 
 const NonDiffusibleStrictAlert = () => (
   <Info full>
-    Cette structure est totalement non-diffusible. Cela signifie qu'aucune
-    information la concernant n'est publiquement accessible.
+    Cette structure s'est opposée à la diffusion de ses données au public auprès
+    de l'Insee. Cela signifie qu'aucune information la concernant n'est
+    publiquement accessible.
     <br />
     <br />
     Ces informations ne sont pas non plus consultables par les{" "}

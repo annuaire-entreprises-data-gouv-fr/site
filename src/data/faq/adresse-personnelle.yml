@@ -26,9 +26,9 @@ body: |
 more:
   - label: Comment modifier l’adresse de mon entreprise ou association ?
     href: /faq/modifier-adresse
-  - label: Comment rendre mon entreprise individuelle non-diffusible ?
+  - label: Comment rendre mon entreprise individuelle non-diffusée ?
     href: /faq/rendre-mon-entreprise-non-diffusible
-  - label: Qu’est-ce qu’une entreprise non-diffusible
+  - label: Qu’est-ce qu’une entreprise non-diffusée
     href: /faq/entreprise-non-diffusible
   - label: Comment supprimer les données personnelles de mon entreprise ?
     href: /faq/supprimer-donnees-personnelles-entreprise

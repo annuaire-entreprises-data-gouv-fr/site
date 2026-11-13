@@ -16,8 +16,8 @@ import {
 
 export const ISTATUTDIFFUSION = {
   PROTECTED: "protégé en diffusion",
-  PARTIAL: "partiellement diffusible",
-  NON_DIFF_STRICT: "non-diffusible",
+  PARTIAL: "diffusion partielle",
+  NON_DIFF_STRICT: "non-diffusée",
   DIFFUSIBLE: "diffusible",
 } as const;
 export type ISTATUTDIFFUSION =
@@ -174,7 +174,7 @@ const defaultNonDiffusiblePlaceHolder = (
   nonDiffusibleDataFormatter(
     estNonDiffusibleProtected(uniteLegaleOrEtablissement)
       ? "information protégée"
-      : "information non-diffusible"
+      : "information non-diffusée"
   );
 
 export const documentNonDiffusiblePlaceHolder = (
@@ -183,7 +183,7 @@ export const documentNonDiffusiblePlaceHolder = (
   nonDiffusibleDataFormatter(
     estNonDiffusibleProtected(uniteLegaleOrEtablissement)
       ? "document protégé"
-      : "document non-diffusible"
+      : "document non-diffusé"
   );
 
 const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {

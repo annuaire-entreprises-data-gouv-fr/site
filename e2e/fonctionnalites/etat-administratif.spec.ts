@@ -1,14 +1,14 @@
 import { expect, goto, test } from "../support/test";
 
 test.describe("Etat administratif", () => {
-  test("Non diffusible", async ({ page }) => {
+  test("Non diffusée", async ({ page }) => {
     await goto(page, "/entreprise/300025764");
     await expect(
-      page.getByText("information non-diffusible").first()
+      page.getByText("information non-diffusée").first()
     ).toBeVisible();
   });
 
-  test("Diffusible", async ({ page }) => {
+  test("Diffusée", async ({ page }) => {
     await goto(page, "/entreprise/356000000");
     await expect(
       page.getByRole("status").filter({ hasText: "en activité" }).first()

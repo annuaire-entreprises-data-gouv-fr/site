@@ -26,7 +26,7 @@ body: |
   - Vous avez pu faire une faute de frappe en tapant le nom de l’entreprise.
   - C’est une entreprise non-diffusible (voir l’explication ci-dessous)
 more:
-  - label: Qu’est-ce qu’une entreprise non-diffusible
+  - label: Qu’est-ce qu’une entreprise non-diffusée
     href: /faq/entreprise-non-diffusible
 cta:
   label: ⇢ Effectuer une nouvelle recherche

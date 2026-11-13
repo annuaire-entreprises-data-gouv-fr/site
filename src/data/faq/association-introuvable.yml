@@ -36,7 +36,7 @@ body: |
 
   **NB :** Le RNA (Répertoire National des Associations) est le fichier national recensant l'ensemble des informations sur les associations basées en France. Il est développé et maintenu par le ministère de l'Intérieur.
 more:
-  - label: Qu’est-ce qu’une entreprise non-diffusible
+  - label: Qu’est-ce qu’une entreprise non-diffusée
     href: /faq/entreprise-non-diffusible
 cta:
   label: ⇢ Demander l’attribution d’un numéro SIREN/SIRET

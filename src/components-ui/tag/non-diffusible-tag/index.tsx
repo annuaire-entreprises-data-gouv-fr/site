@@ -15,5 +15,5 @@ export const NonDiffusibleTag: React.FC<{
     ) ? (
     <Tag color="new">protégé</Tag>
   ) : (
-    <Tag color="new">non-diffusible</Tag>
+    <Tag color="new">diffusion partielle</Tag>
   );

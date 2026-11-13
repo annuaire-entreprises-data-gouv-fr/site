@@ -10,7 +10,7 @@ more:
   - label: 'SIREN'
     href: '/definitions/numero-siren'
 
-  - label: 'Entreprise non diffusible'
+  - label: 'Entreprise non diffusée'
     href: '/definitions/entreprise-non-diffusible'
 
 body: |
@@ -57,6 +57,6 @@ body: |
 
   Cependant, à la différence des entreprises classiques, les entreprises individuelles sont aussi des personnes physiques et les informations les concernant peuvent directement concerner leur vie privée. L’[article A123-96 du code de Commerce](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045515238) indique alors que toute personne physique peut choisir de rendre publiques ou non ses données personnelles.
 
-  Les entrepreneurs et travailleurs indépendants qui le souhaitent peuvent donc **[rendre une partie de leurs informations légales non diffusibles](https://statut-diffusion-sirene.insee.fr/),** ou ****inversement les rendre diffusibles, directement auprès de l'INSEE.
+  Les entrepreneurs et travailleurs indépendants qui le souhaitent peuvent donc **[rendre une partie de leurs informations légales non diffusées](https://statut-diffusion-sirene.insee.fr/),** ou ****inversement les rendre diffusées, directement auprès de l'INSEE.
 
   Une fois la mise à jour du statut de diffusion effectuée auprès de l'INSEE, elle est effective sur l’Annuaire des Entreprises dans un délai d'un mois maximum.

@@ -417,7 +417,7 @@ export class SireneQueryBuilder {
       this.addESSConditions(params.mission, "mission");
     }
 
-    // Retirer les établissements non diffusibles
+    // Retirer les établissements non diffusés
     this.conditions.push(
       "(statutDiffusionEtablissement:O OR statutDiffusionEtablissement:P)"
     );

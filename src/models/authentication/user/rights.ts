@@ -12,7 +12,7 @@ import type { ISession } from "./session";
 export const ApplicationRights = {
   opendata: "Données en open data",
   isAgent: "Compte agent public",
-  nonDiffusible: "Données des entreprises non diffusibles",
+  nonDiffusible: "Données des entreprises non diffusées",
   actesRne: "Actes au RNE",
   bilansRne: "Bilans au RNE",
   documentsRne: "Documents au RNE",

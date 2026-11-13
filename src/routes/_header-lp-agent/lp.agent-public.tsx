@@ -146,7 +146,7 @@ function RouteComponent() {
                       <li>N° TVA et EORI</li>
                       <li>Justificatifs d’existence</li>
                       <li>Annonces légales</li>
-                      <li>Données des non-diffusibles</li>
+                      <li>Données des non-diffusées</li>
                       <li>
                         Effectifs annuels <HabilitationTag />
                       </li>

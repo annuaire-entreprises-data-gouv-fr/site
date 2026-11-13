@@ -90,7 +90,7 @@ const DirigeantsContent = ({
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }) => {
-  // Non diffusible
+  // Non diffusée
   if (
     !(
       estDiffusible(uniteLegale) ||

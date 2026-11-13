@@ -15,7 +15,7 @@ function filterHiddenScopes(scopes: IAgentScope[]) {
 
 function formatScope(scope: string) {
   return scope === "nonDiffusible"
-    ? "NON DIFFUSIBLE"
+    ? "NON DIFFUSEE"
     : scope.replace(/_/g, " ").toUpperCase();
 }
 
