@@ -1,0 +1,49 @@
+.modalTitle {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.searchBar {
+  margin-top: 0.5rem;
+}
+
+.loading {
+  margin: 1rem 0;
+}
+
+.card {
+  padding: 1rem;
+  margin: 1rem 0 1.5rem;
+  border: 1px solid var(--border-default-grey);
+}
+
+.cardTitle {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.cardBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.question {
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.accordion .accordionTitle {
+  margin: 0;
+}
+
+.accordion .accordionButton {
+  font-weight: 400;
+  color: var(--text-default-grey);
+}
+
+.accordion .accordionButton::after {
+  background-color: var(--text-action-high-blue-france);
+}
