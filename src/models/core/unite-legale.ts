@@ -11,7 +11,7 @@ import { clientUniteLegaleInsee } from "#/clients/sirene-insee/siren";
 import { getIdccTitle } from "#/models/conventions-collectives";
 import { createEtablissementsList } from "#/models/core/etablissements-list";
 import { estActif, IETATADMINSTRATIF } from "#/models/core/etat-administratif";
-import { isProtectedSiren } from "#/models/protected-siren";
+import { getProtectedSiren, isProtectedSiren } from "#/models/protected-siren";
 import {
   isLuhnValid,
   isPersonneMoraleFromNatureJuridique,
@@ -67,7 +67,9 @@ export const getUniteLegaleFromSlug = async (
 
   const uniteLegale = await builder.build();
   const session = await getSession();
-  return anonymiseUniteLegale(uniteLegale, session);
+  const protectedSiren = await getProtectedSiren(uniteLegale.siren);
+
+  return anonymiseUniteLegale(uniteLegale, session, protectedSiren);
 };
 
 class UniteLegaleBuilder {

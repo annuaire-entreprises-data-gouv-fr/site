@@ -5,7 +5,10 @@ import {
   hasRights,
 } from "#/models/authentication/user/rights";
 import type { ISession } from "#/models/authentication/user/session";
+import type { IProtectedSiren } from "#/models/protected-siren";
+import type { IEtatCivil, IPersonneMorale } from "#/models/rne/types";
 import type { ISearchResult } from "#/models/search";
+import { normalizeName } from "#/utils/helpers/name";
 import type { IEtablissementsList } from "../etablissements-list";
 import {
   type IEtablissement,
@@ -66,7 +69,8 @@ export const estNonDiffusibleProtected = (
  */
 export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
   uniteLegale: T,
-  session: ISession | null
+  session: ISession | null,
+  protectedSiren: IProtectedSiren | null
 ): T => {
   if (canSeeNonDiffusible(session)) {
     return uniteLegale;
@@ -75,31 +79,82 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
   // a single etablissement can be non-diffusible with UL being diffusible
   uniteLegale.etablissements = anonymiseUniteLegaleEtablissements(
     uniteLegale.etablissements,
-    session
+    session,
+    protectedSiren
   );
 
   // for search results, anonymise matching etablissements
   if ("matchingEtablissements" in uniteLegale) {
     uniteLegale.matchingEtablissements = anonymiseEtablissementsList(
       uniteLegale.matchingEtablissements,
-      session
+      session,
+      protectedSiren
     );
   }
 
-  uniteLegale.siege = anonymiseEtablissement(uniteLegale.siege, session);
+  uniteLegale.siege = anonymiseEtablissement(
+    uniteLegale.siege,
+    session,
+    protectedSiren
+  );
 
   if (estDiffusible(uniteLegale)) {
     return uniteLegale;
   }
-  uniteLegale.nomComplet = getNomComplet(uniteLegale, session);
-  uniteLegale.chemin = uniteLegale.siren;
-  uniteLegale.complements.estAvocat = false;
+  uniteLegale.nomComplet = getNomComplet(uniteLegale, session, protectedSiren);
+  uniteLegale.chemin = getChemin(uniteLegale, session, protectedSiren);
+  uniteLegale.complements = getComplements(
+    uniteLegale,
+    session,
+    protectedSiren
+  );
 
   if ("dirigeants" in uniteLegale) {
-    uniteLegale.dirigeants = [];
+    uniteLegale.dirigeants = anonymiseDirigeants(
+      uniteLegale,
+      session,
+      protectedSiren
+    );
   }
 
   return uniteLegale;
+};
+
+const anonymiseDirigeants = (
+  uniteLegale: ISearchResult,
+  session: ISession | null,
+  protectedSiren: IProtectedSiren | null
+) => {
+  if ((session && canSeeNonDiffusible(session)) || estDiffusible(uniteLegale)) {
+    return uniteLegale.dirigeants;
+  }
+
+  if (
+    estNonDiffusibleProtected(uniteLegale) &&
+    protectedSiren &&
+    (!protectedSiren.isLegacy || uniteLegale.dirigeants.length > 0)
+  ) {
+    return uniteLegale.dirigeants.filter(
+      (dirigeant) => !isDirigeantProtected(dirigeant, protectedSiren)
+    );
+  }
+
+  return [];
+};
+const isDirigeantProtected = (
+  dirigeant: IEtatCivil | IPersonneMorale,
+  protectedSiren: IProtectedSiren
+) => {
+  if ("siren" in dirigeant) {
+    return false;
+  }
+
+  return protectedSiren.dirigeants.some(
+    (protectedDirigeant) =>
+      protectedDirigeant.nom === normalizeName(dirigeant.nom) &&
+      protectedDirigeant.prenoms === normalizeName(dirigeant.prenoms) &&
+      protectedDirigeant.dateDeNaissance === dirigeant.dateNaissancePartial
+  );
 };
 
 /**
@@ -111,9 +166,14 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
  */
 export const anonymiseEtablissement = (
   etablissement: IEtablissement,
-  session: ISession | null
+  session: ISession | null,
+  protectedSiren: IProtectedSiren | null
 ) => {
-  if (canSeeNonDiffusible(session) || estDiffusible(etablissement)) {
+  if (
+    canSeeNonDiffusible(session) ||
+    estDiffusible(etablissement) ||
+    (estNonDiffusibleProtected(etablissement) && !protectedSiren?.isLegacy)
+  ) {
     return etablissement;
   }
   const { adressePostale, adresse, commune } = etablissement || {};
@@ -142,25 +202,35 @@ export const anonymiseEtablissement = (
 
 const anonymiseEtablissementsList = (
   etablissements: IEtablissement[],
-  session: ISession | null
-) => etablissements.map((e) => anonymiseEtablissement(e, session));
+  session: ISession | null,
+  protectedSiren: IProtectedSiren | null
+) =>
+  etablissements.map((e) => anonymiseEtablissement(e, session, protectedSiren));
 
 const anonymiseUniteLegaleEtablissements = (
   etablissements: IEtablissementsList["etablissements"],
-  session: ISession | null
+  session: ISession | null,
+  protectedSiren: IProtectedSiren | null
 ) => {
-  etablissements.all = anonymiseEtablissementsList(etablissements.all, session);
+  etablissements.all = anonymiseEtablissementsList(
+    etablissements.all,
+    session,
+    protectedSiren
+  );
   etablissements.open = anonymiseEtablissementsList(
     etablissements.open,
-    session
+    session,
+    protectedSiren
   );
   etablissements.unknown = anonymiseEtablissementsList(
     etablissements.unknown,
-    session
+    session,
+    protectedSiren
   );
   etablissements.closed = anonymiseEtablissementsList(
     etablissements.closed,
-    session
+    session,
+    protectedSiren
   );
 
   return etablissements;
@@ -186,16 +256,65 @@ export const documentNonDiffusiblePlaceHolder = (
       : "document non-diffusible"
   );
 
-const getNomComplet = (uniteLegale: IUniteLegale, session: ISession | null) => {
+const getNomComplet = (
+  uniteLegale: IUniteLegale,
+  session: ISession | null,
+  protectedSiren: IProtectedSiren | null
+) => {
   if (session && canSeeNonDiffusible(session)) {
     return uniteLegale.nomComplet;
   }
 
-  if (estDiffusible(uniteLegale) || isPersonneMorale(uniteLegale)) {
+  if (
+    estDiffusible(uniteLegale) ||
+    isPersonneMorale(uniteLegale) ||
+    (estNonDiffusibleProtected(uniteLegale) && !protectedSiren?.isLegacy)
+  ) {
     return uniteLegale.nomComplet;
   }
 
   return defaultNonDiffusiblePlaceHolder(uniteLegale);
+};
+const getChemin = (
+  uniteLegale: IUniteLegale,
+  session: ISession | null,
+  protectedSiren: IProtectedSiren | null
+) => {
+  if (session && canSeeNonDiffusible(session)) {
+    return uniteLegale.chemin;
+  }
+
+  if (
+    estDiffusible(uniteLegale) ||
+    isPersonneMorale(uniteLegale) ||
+    (estNonDiffusibleProtected(uniteLegale) && !protectedSiren?.isLegacy)
+  ) {
+    return uniteLegale.chemin;
+  }
+
+  return uniteLegale.siren;
+};
+const getComplements = (
+  uniteLegale: IUniteLegale,
+  session: ISession | null,
+  protectedSiren: IProtectedSiren | null
+) => {
+  if (session && canSeeNonDiffusible(session)) {
+    return uniteLegale.complements;
+  }
+
+  if (
+    estDiffusible(uniteLegale) ||
+    isPersonneMorale(uniteLegale) ||
+    (estNonDiffusibleProtected(uniteLegale) && !protectedSiren?.isLegacy)
+  ) {
+    return uniteLegale.complements;
+  }
+
+  return {
+    ...uniteLegale.complements,
+    estAvocat: false,
+  };
 };
 
 const formatAdresseForDiffusion = (

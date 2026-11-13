@@ -13,7 +13,7 @@ import {
   NotEnoughParamsException,
 } from "#/models/core/types";
 import { Exception } from "#/models/exceptions";
-import { isProtectedSiren } from "#/models/protected-siren";
+import { getProtectedSiren } from "#/models/protected-siren";
 import type { IDirigeants } from "#/models/rne/types";
 import SearchFilterParams from "#/models/search/search-filter-params";
 import {
@@ -123,17 +123,17 @@ export const searchWithoutProtectedSiren = async (
   const results = await search(searchTerm, page, searchFilterParams);
   const newResults: ISearchResult[] = [];
 
-  const protectedFlags = await Promise.all(
-    results.results.map((result) => isProtectedSiren(result.siren))
+  const protectedSirens = await Promise.all(
+    results.results.map((result) => getProtectedSiren(result.siren))
   );
 
   for (const [index, currentResult] of results.results.entries()) {
-    const isProtected = protectedFlags[index];
+    const protectedSiren = protectedSirens[index];
 
-    if (isProtected && isPersonnePhysique(currentResult)) {
+    if (protectedSiren && isPersonnePhysique(currentResult)) {
       results.resultCount -= 1;
     } else {
-      if (isProtected) {
+      if (protectedSiren) {
         currentResult.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
         currentResult.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
         for (const etablissement of currentResult.matchingEtablissements) {
@@ -141,7 +141,9 @@ export const searchWithoutProtectedSiren = async (
         }
       }
 
-      newResults.push(anonymiseUniteLegale(currentResult, session));
+      newResults.push(
+        anonymiseUniteLegale(currentResult, session, protectedSiren)
+      );
     }
   }
 

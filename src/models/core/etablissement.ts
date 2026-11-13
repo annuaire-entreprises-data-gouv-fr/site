@@ -6,7 +6,7 @@ import {
 import { clientEtablissementRechercheEntreprise } from "#/clients/recherche-entreprise/siret";
 import { clientEtablissementInsee } from "#/clients/sirene-insee/siret";
 import { getUniteLegaleFromSlug } from "#/models/core/unite-legale";
-import { isProtectedSiren } from "#/models/protected-siren";
+import { getProtectedSiren, isProtectedSiren } from "#/models/protected-siren";
 import {
   extractNicFromSiret,
   extractSirenFromSiret,
@@ -60,7 +60,8 @@ const getEtablissementFromSlug = async (
   }
 
   const session = await getSession();
-  return anonymiseEtablissement(etablissement, session);
+  const protectedSiren = await getProtectedSiren(siren);
+  return anonymiseEtablissement(etablissement, session, protectedSiren);
 };
 
 /**
