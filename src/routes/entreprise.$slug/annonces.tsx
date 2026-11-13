@@ -14,7 +14,10 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import { estDiffusible } from "#/models/core/diffusion";
+import {
+  estDiffusible,
+  estNonDiffusibleProtected,
+} from "#/models/core/diffusion";
 import { isAssociation } from "#/models/core/types";
 import {
   uniteLegalePageDescription,
@@ -78,6 +81,7 @@ function RouteComponent() {
   return (
     <>
       {estDiffusible(uniteLegale) ||
+      estNonDiffusibleProtected(uniteLegale) ||
       hasRights({ user }, ApplicationRights.nonDiffusible) ? (
         <>
           <ul>

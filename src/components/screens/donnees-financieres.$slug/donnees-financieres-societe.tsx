@@ -6,7 +6,10 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import { estDiffusible } from "#/models/core/diffusion";
+import {
+  estDiffusible,
+  estNonDiffusibleProtected,
+} from "#/models/core/diffusion";
 import {
   type IUniteLegale,
   isEntrepreneurIndividuel,
@@ -47,6 +50,7 @@ export default function DonneesFinancieresSociete({
       {!shouldShowOnlyAides && (
         <>
           {estDiffusible(uniteLegale) ||
+          estNonDiffusibleProtected(uniteLegale) ||
           hasRights({ user }, ApplicationRights.nonDiffusible) ? (
             <IndicateursFinanciers uniteLegale={uniteLegale} user={user} />
           ) : (
