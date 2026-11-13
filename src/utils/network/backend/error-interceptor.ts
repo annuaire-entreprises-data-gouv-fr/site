@@ -48,7 +48,8 @@ const errorInterceptor = (error: BackendError): never => {
     status,
     statusText,
     message || "",
-    response?.data
+    response?.data,
+    error.cause
   );
 };
 

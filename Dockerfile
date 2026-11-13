@@ -62,12 +62,14 @@ FROM ${NODE_IMAGE} AS runner
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
+ENV NODE_EXTRA_CA_CERTS=/app/.certs/acr-ministere-interieur-2018.pem
 
 WORKDIR /app
 
 COPY --from=prod-deps --chown=node:node /app/package.json ./package.json
 COPY --from=prod-deps --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/.output ./.output
+COPY .certs/acr-ministere-interieur-2018.pem ./.certs/acr-ministere-interieur-2018.pem
 
 USER node
 
