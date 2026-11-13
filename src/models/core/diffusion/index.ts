@@ -6,7 +6,11 @@ import {
 } from "#/models/authentication/user/rights";
 import type { ISession } from "#/models/authentication/user/session";
 import type { IProtectedSiren } from "#/models/protected-siren";
-import type { IEtatCivil, IPersonneMorale } from "#/models/rne/types";
+import type {
+  IDirigeants,
+  IEtatCivil,
+  IPersonneMorale,
+} from "#/models/rne/types";
 import type { ISearchResult } from "#/models/search";
 import { normalizeName } from "#/utils/helpers/name";
 import type { IEtablissementsList } from "../etablissements-list";
@@ -111,8 +115,7 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
 
   if ("dirigeants" in uniteLegale) {
     uniteLegale.dirigeants = anonymiseDirigeants(
-      uniteLegale,
-      session,
+      uniteLegale.dirigeants,
       protectedSiren
     );
   }
@@ -120,22 +123,15 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
   return uniteLegale;
 };
 
-const anonymiseDirigeants = (
-  uniteLegale: ISearchResult,
-  session: ISession | null,
+export const anonymiseDirigeants = (
+  dirigeants: IDirigeants,
   protectedSiren: IProtectedSiren | null
 ) => {
-  if ((session && canSeeNonDiffusible(session)) || estDiffusible(uniteLegale)) {
-    return uniteLegale.dirigeants;
-  }
-
-  if (
-    estNonDiffusibleProtected(uniteLegale) &&
-    protectedSiren &&
-    (!protectedSiren.isLegacy || uniteLegale.dirigeants.length > 0)
-  ) {
-    return uniteLegale.dirigeants.filter(
-      (dirigeant) => !isDirigeantProtected(dirigeant, protectedSiren)
+  if (protectedSiren && (!protectedSiren.isLegacy || dirigeants.length > 0)) {
+    return dirigeants.map((dirigeant) =>
+      isDirigeantProtected(dirigeant, protectedSiren)
+        ? anonymiseDirigeant(dirigeant as IEtatCivil)
+        : dirigeant
     );
   }
 
@@ -156,7 +152,19 @@ const isDirigeantProtected = (
       protectedDirigeant.dateDeNaissance === dirigeant.dateNaissancePartial
   );
 };
-
+const anonymiseDirigeant = (dirigeant: IEtatCivil): IEtatCivil => ({
+  dateDemission: null,
+  dateNaissance: undefined,
+  dateNaissancePartial: undefined,
+  estDemissionnaire: false,
+  lieuNaissance: undefined,
+  nationalite: undefined,
+  nom: nonDiffusibleDataFormatter("nom"),
+  prenom: nonDiffusibleDataFormatter("prenom"),
+  prenoms: "",
+  role: dirigeant.role,
+  sexe: null,
+});
 /**
  * Anonymise etablissement's adresse, enseigne, denomination
  * @param uniteLegale
