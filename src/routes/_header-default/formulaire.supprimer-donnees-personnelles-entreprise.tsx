@@ -61,8 +61,8 @@ function RouteComponent() {
         />
       ) : (
         <p>
-          Pour toute demande de suppression de données personnelles, merci de
-          bien vouloir adresser votre demande à l’adresse :{" "}
+          Si vous souhaitez exercer vos droits relatives à vos données
+          personnelles veuillez contacter l’adresse :{" "}
           <a href="mailto:mesdonnees@modernisation.gouv.fr">
             mesdonnees@modernisation.gouv.fr
           </a>
