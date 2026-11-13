@@ -1,9 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
+import { isAPINotResponding } from "#/models/api-not-responding";
 import { getAssociationFromSlug } from "#/models/association";
 import { ApplicationRights } from "#/models/authentication/user/rights";
+import { anonymiseDirigeants } from "#/models/core/diffusion";
 import { getEORIValidation } from "#/models/eori-validation";
+import { getProtectedSiren } from "#/models/protected-siren";
 import { getDirigeantsRNE } from "#/models/rne/dirigeants";
 import { getRNEObservations } from "#/models/rne/observations";
+import { verifySiren } from "#/utils/helpers";
 import { withApplicationRight } from "../../middlewares";
 import {
   getAssociationSchema,
@@ -17,7 +21,20 @@ export const getRneDirigeantsFn = createServerFn()
   .validator(getDirigeantsSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
-    return await getDirigeantsRNE(siren, {});
+
+    const verifiedSiren = verifySiren(siren);
+
+    const protectedSiren = await getProtectedSiren(verifiedSiren);
+    const result = await getDirigeantsRNE(verifiedSiren, {});
+
+    if (isAPINotResponding(result)) {
+      return result;
+    }
+
+    return {
+      ...result,
+      data: anonymiseDirigeants(result.data, protectedSiren),
+    };
   });
 
 export const getRneObservationsFn = createServerFn()
