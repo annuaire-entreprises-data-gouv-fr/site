@@ -24,6 +24,10 @@ const gristTables = {
     docId: "uE2WGSjyBbSfiuSGbQiN9K",
     tableId: "Protected_siren",
   },
+  "protected-siren-dirigeants": {
+    docId: "uE2WGSjyBbSfiuSGbQiN9K",
+    tableId: "Protected_Siren_Dirigeants",
+  },
 } as const;
 
 function getGristUrl(tableKey: keyof typeof gristTables) {
