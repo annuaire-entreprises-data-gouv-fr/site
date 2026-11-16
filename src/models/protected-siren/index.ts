@@ -10,12 +10,35 @@ import {
 } from "../../utils/helpers/siren-and-siret";
 
 interface IGristProtectedSiren {
-  date_de_naissance: string;
+  date_de_naissance: number | string | null;
   legacy: boolean;
   nom: string;
   prenoms: string;
   siren: string;
 }
+
+const YEAR_MONTH_REGEX = /^\d{4}-\d{2}/;
+const DIGITS_ONLY_REGEX = /^\d+$/;
+
+/**
+ * Grist dates are unix timestamps in seconds, at midnight UTC
+ */
+const toYearMonth = (value: number | string | null) => {
+  if (!value) {
+    return "";
+  }
+  if (typeof value === "string") {
+    if (YEAR_MONTH_REGEX.test(value)) {
+      return value.slice(0, 7);
+    }
+    if (!DIGITS_ONLY_REGEX.test(value)) {
+      return "";
+    }
+  }
+  const date = new Date(Number(value) * 1000);
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  return `${date.getUTCFullYear()}-${month}`;
+};
 
 export interface IProtectedSiren {
   dirigeants: {
@@ -60,7 +83,7 @@ class ProtectedSirenList {
       protectedSiren[row.siren].dirigeants.push({
         prenoms: normalizeName(row.prenoms),
         nom: normalizeName(row.nom),
-        dateDeNaissance: row.date_de_naissance,
+        dateDeNaissance: toYearMonth(row.date_de_naissance),
       });
       if (row.legacy) {
         protectedSiren[row.siren].isLegacy = true;
