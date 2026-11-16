@@ -205,7 +205,7 @@ const Footer = () => {
                       className="fr-footer__top-link"
                       to="/formulaire/supprimer-donnees-personnelles-entreprise"
                     >
-                      Supprimer ses données personnelles
+                      Exercer mes droits
                     </Link>
                   </li>
                 </ul>

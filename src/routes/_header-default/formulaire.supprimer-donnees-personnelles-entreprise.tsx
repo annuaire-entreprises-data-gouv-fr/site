@@ -36,9 +36,9 @@ export const Route = createFileRoute(
   loader: async () => await fetchHidePersonalDataRequestFn(),
   head: () => ({
     meta: meta({
-      title: "Demande de suppression de données personnelles",
+      title: "Exercer mes droits",
       description:
-        "Demande de suppression de données personnelles de dirigeant d’entreprise sur l’Annuaire des Entreprises",
+        "Exercer mes droits relatifs à mes données personnelles de dirigeant d’entreprise sur l’Annuaire des Entreprises",
       robots: "index, follow",
     }),
   }),
@@ -53,7 +53,7 @@ function RouteComponent() {
 
   return (
     <TextWrapper>
-      <h1>Demande de suppression de données personnelles</h1>
+      <h1>Exercer mes droits</h1>
       {IS_FC_BUTTON_ENABLED ? (
         <HidePersonalDataPageClient
           franceConnectInfo={franceConnectInfo}
