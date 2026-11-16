@@ -61,7 +61,7 @@ function RouteComponent() {
         />
       ) : (
         <p>
-          Si vous souhaitez exercer vos droits relatives à vos données
+          Si vous souhaitez exercer vos droits relatifs à vos données
           personnelles veuillez contacter l’adresse :{" "}
           <a href="mailto:mesdonnees@modernisation.gouv.fr">
             mesdonnees@modernisation.gouv.fr
