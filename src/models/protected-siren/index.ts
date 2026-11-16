@@ -62,7 +62,7 @@ class ProtectedSirenList {
         nom: normalizeName(row.nom),
         dateDeNaissance: row.date_de_naissance,
       });
-      if (!protectedSiren[row.siren].isLegacy && row.legacy) {
+      if (row.legacy) {
         protectedSiren[row.siren].isLegacy = true;
       }
     }

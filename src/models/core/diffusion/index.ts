@@ -115,6 +115,8 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
 
   if ("dirigeants" in uniteLegale) {
     uniteLegale.dirigeants = anonymiseDirigeants(
+      uniteLegale,
+      session,
       uniteLegale.dirigeants,
       protectedSiren
     );
@@ -123,19 +125,27 @@ export const anonymiseUniteLegale = <T extends IUniteLegale | ISearchResult>(
   return uniteLegale;
 };
 
-export const anonymiseDirigeants = (
-  dirigeants: IDirigeants,
+export const anonymiseDirigeants = <T extends IDirigeants>(
+  uniteLegale: IUniteLegale,
+  session: ISession | null,
+  dirigeants: T,
   protectedSiren: IProtectedSiren | null
-) => {
-  if (protectedSiren && (!protectedSiren.isLegacy || dirigeants.length > 0)) {
+): T => {
+  if (estDiffusible(uniteLegale) || canSeeNonDiffusible(session)) {
+    return dirigeants;
+  }
+
+  if (protectedSiren && !protectedSiren.isLegacy) {
     return dirigeants.map((dirigeant) =>
       isDirigeantProtected(dirigeant, protectedSiren)
         ? anonymiseDirigeant(dirigeant as IEtatCivil)
         : dirigeant
-    );
+    ) as T;
   }
 
-  return [];
+  return dirigeants.map((dirigeant) =>
+    "siren" in dirigeant ? dirigeant : anonymiseDirigeant(dirigeant)
+  ) as T;
 };
 const isDirigeantProtected = (
   dirigeant: IEtatCivil | IPersonneMorale,
@@ -152,7 +162,8 @@ const isDirigeantProtected = (
       protectedDirigeant.dateDeNaissance === dirigeant.dateNaissancePartial
   );
 };
-const anonymiseDirigeant = (dirigeant: IEtatCivil): IEtatCivil => ({
+const anonymiseDirigeant = <T extends IEtatCivil>(dirigeant: T): T => ({
+  ...dirigeant,
   dateDemission: null,
   dateNaissance: undefined,
   dateNaissancePartial: undefined,

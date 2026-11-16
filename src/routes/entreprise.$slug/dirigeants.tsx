@@ -25,7 +25,6 @@ import {
   isServicePublic,
   isServicePublicImmatriculeeAuRNE,
 } from "#/models/core/types";
-import { getProtectedSiren } from "#/models/protected-siren";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
@@ -41,17 +40,7 @@ export const Route = createFileRoute("/entreprise/$slug/dirigeants")({
       throw notFound();
     }
 
-    const protectedSiren = await getProtectedSiren(
-      loaderData.uniteLegale.siren
-    );
-
-    return {
-      ...loaderData,
-      isLegacyProtectedWithoutSpecificDirigeants:
-        estNonDiffusibleProtected(loaderData.uniteLegale) &&
-        !!protectedSiren?.isLegacy &&
-        protectedSiren.dirigeants.length === 0,
-    };
+    return loaderData;
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -83,21 +72,14 @@ export const Route = createFileRoute("/entreprise/$slug/dirigeants")({
 });
 
 function RouteComponent() {
-  const { uniteLegale, isLegacyProtectedWithoutSpecificDirigeants } =
-    Route.useLoaderData();
+  const { uniteLegale } = Route.useLoaderData();
 
   const { user } = useAuth();
 
   return (
     <>
       <DirigeantSummary uniteLegale={uniteLegale} user={user} />
-      <DirigeantsContent
-        isLegacyProtectedWithoutSpecificDirigeants={
-          isLegacyProtectedWithoutSpecificDirigeants
-        }
-        uniteLegale={uniteLegale}
-        user={user}
-      />
+      <DirigeantsContent uniteLegale={uniteLegale} user={user} />
       <HorizontalSeparator />
       <DPOSection uniteLegale={uniteLegale} />
     </>
@@ -105,11 +87,9 @@ function RouteComponent() {
 }
 
 const DirigeantsContent = ({
-  isLegacyProtectedWithoutSpecificDirigeants,
   uniteLegale,
   user,
 }: {
-  isLegacyProtectedWithoutSpecificDirigeants: boolean;
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }) => {
@@ -117,10 +97,9 @@ const DirigeantsContent = ({
   if (
     !(
       estDiffusible(uniteLegale) ||
-      hasRights({ user }, ApplicationRights.nonDiffusible)
-    ) &&
-    (!estNonDiffusibleProtected(uniteLegale) ||
-      isLegacyProtectedWithoutSpecificDirigeants)
+      hasRights({ user }, ApplicationRights.nonDiffusible) ||
+      estNonDiffusibleProtected(uniteLegale)
+    )
   ) {
     return <DonneesPriveesSection title="Dirigeant(s)" />;
   }
