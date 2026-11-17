@@ -57,8 +57,8 @@ const getOptions = (uniteLegale: IUniteLegale): IOption[] => {
       content: (
         <>
           <p>
-            Pour que les nom, prénom, mois et année de naissance du dirigeant de
-            cette structure soient masqués de l’Annuaire des Entreprises,
+            Pour que les nom, prénoms, mois et année de naissance du dirigeant
+            de cette structure soient masqués de l’Annuaire des Entreprises,
             remplissez une demande qui sera étudiée par notre service juridique.
           </p>
           <div className="layout-center">
