@@ -34,6 +34,38 @@ export const getUniteLegaleFromSlugFn = createServerFn()
     }
   });
 
+/**
+ * Same as getUniteLegaleFromSlugFn but returns null instead of redirecting
+ * when the siren is invalid or unknown, so the caller can display an error
+ * without leaving the current page.
+ */
+export const getUniteLegaleFromSirenFn = createServerFn()
+  .validator(z.object({ siren: z.string() }))
+  .handler(async ({ data: { siren } }) => {
+    const userAgent = getRequestHeader("user-agent") || "";
+    const isBot = isUserAgentABot(userAgent);
+
+    try {
+      return await getUniteLegaleFromSlug(siren, { isBot });
+    } catch (e) {
+      if (
+        e instanceof NotASirenError ||
+        e instanceof SirenNotFoundError ||
+        e instanceof HttpNotFound
+      ) {
+        return null;
+      }
+      logFatalErrorInSentry(
+        new Exception({
+          name: "GetUniteLegaleFromSirenException",
+          cause: e,
+          context: { siren },
+        })
+      );
+      throw e;
+    }
+  });
+
 export const getEtablissementWithUniteLegaleFromSlugFn = createServerFn()
   .validator(z.object({ slug: z.string() }))
   .handler(async ({ data: { slug } }) => {
