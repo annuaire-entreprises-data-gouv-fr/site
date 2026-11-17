@@ -135,7 +135,7 @@ export const anonymiseDirigeants = <T extends IDirigeants>(
     return dirigeants;
   }
 
-  if (protectedSiren && !protectedSiren.isLegacy) {
+  if (protectedSiren) {
     return dirigeants.map((dirigeant) =>
       isDirigeantProtected(dirigeant, protectedSiren)
         ? anonymiseDirigeant(dirigeant as IEtatCivil)
@@ -170,8 +170,8 @@ const anonymiseDirigeant = <T extends IEtatCivil>(dirigeant: T): T => ({
   estDemissionnaire: false,
   lieuNaissance: undefined,
   nationalite: undefined,
-  nom: nonDiffusibleDataFormatter("nom"),
-  prenom: nonDiffusibleDataFormatter("prenom"),
+  nom: nonDiffusibleDataFormatter("identité protégée"),
+  prenom: "",
   prenoms: "",
   role: dirigeant.role,
   sexe: null,

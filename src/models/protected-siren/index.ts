@@ -60,7 +60,7 @@ class ProtectedSirenList {
 
   constructor() {
     this._list = new DataStore<IProtectedSiren>(
-      () => readFromGrist("protected-siren-dirigeants").catch(() => []),
+      () => readFromGrist("protected-siren-dirigeants"),
       "protected-siren-dirigeants",
       this.mapResponseToProtectedSirenList,
       this.TTL
