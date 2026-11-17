@@ -1,4 +1,4 @@
-import { useRouter } from "@tanstack/react-router";
+import { type AnyRouter, rootRouteId, useRouter } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef } from "react";
 import { getAgentUserType } from "./models/authentication/user/helpers";
 import type { ISession } from "./models/authentication/user/session";
@@ -20,6 +20,28 @@ function isDoNotTrackEnabled() {
   return doNotTrack === "1" || doNotTrack === "yes";
 }
 
+/**
+ * URL sent to Matomo: the route pattern instead of the real pathname
+ * (e.g. `/entreprise/$slug/dirigeants` instead of
+ * `/entreprise/entreprise-123456789/dirigeants`), so that visits are grouped
+ * by page regardless of the entreprise. Search params are kept.
+ */
+function getTrackedUrl({ matches, location }: AnyRouter["state"]) {
+  const leafMatch = matches.at(-1);
+
+  // No route matched (404): only the root route is in the matches
+  const isUnmatched =
+    !leafMatch ||
+    (leafMatch.routeId === rootRouteId && location.pathname !== "/");
+
+  const path = isUnmatched
+    ? location.pathname
+    : // index routes' fullPath end with a slash (e.g. `/rechercher/`)
+      leafMatch.fullPath.replace(/(.)\/$/, "$1");
+
+  return `${window.location.origin}${path}${location.searchStr}`;
+}
+
 export function useMatomoInit({ user }: IUseMatomoInitProps) {
   const siteId = import.meta.env.VITE_MATOMO_SITE_ID;
   const isMatomoEnabled =
@@ -29,21 +51,23 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
   const matomoAbTestingListeners = useRef(new Set<() => void>());
   const router = useRouter();
   const lastTrackedHref = useRef<string | null>(null);
+  const lastTrackedUrl = useRef<string | null>(null);
 
-  const trackPageView = useCallback((href: string) => {
-    // Dedupe: the initial pageview (from the init effect) and the first
-    // `onRendered` event can refer to the same URL.
+  const trackPageView = useCallback((routerState: AnyRouter["state"]) => {
+    // Dedupe on the real href: the initial pageview (from the init effect)
+    // and the first `onRendered` event can refer to the same URL.
+    const { href } = routerState.location;
     if (lastTrackedHref.current === href) {
       return;
     }
-
-    if (lastTrackedHref.current) {
-      window._paq.push([
-        "setReferrerUrl",
-        `${window.location.origin}${lastTrackedHref.current}`,
-      ]);
-    }
     lastTrackedHref.current = href;
+
+    const url = getTrackedUrl(routerState);
+    if (lastTrackedUrl.current) {
+      window._paq.push(["setReferrerUrl", lastTrackedUrl.current]);
+    }
+    lastTrackedUrl.current = url;
+    window._paq.push(["setCustomUrl", url]);
 
     window._paq.push([
       "AbTesting::create",
@@ -118,7 +142,7 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
     window._paq.push(["setTrackerUrl", "https://stats.data.gouv.fr/piwik.php"]);
     window._paq.push(["setSiteId", siteId]);
 
-    trackPageView(router.state.location.href);
+    trackPageView(router.state);
     window._paq.push(["enableLinkTracking"]);
 
     const script = document.createElement("script");
@@ -136,8 +160,8 @@ export function useMatomoInit({ user }: IUseMatomoInitProps) {
     // committed to `window.location` (unlike router state / `useRouterState`,
     // which updates as soon as navigation starts). This guarantees Matomo
     // tracks the new URL instead of the stale one.
-    const unsubscribe = router.subscribe("onRendered", (event) => {
-      trackPageView(event.toLocation.href);
+    const unsubscribe = router.subscribe("onRendered", () => {
+      trackPageView(router.state);
     });
 
     return unsubscribe;
