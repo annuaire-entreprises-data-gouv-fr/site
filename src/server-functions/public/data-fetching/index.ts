@@ -1,10 +1,17 @@
 import { createServerFn } from "@tanstack/react-start";
+import { HttpNotFound } from "#/clients/exceptions";
+import { isAPINotResponding } from "#/models/api-not-responding";
 import { getAssociationFromSlug } from "#/models/association";
 import { ApplicationRights } from "#/models/authentication/user/rights";
+import { anonymiseDirigeants } from "#/models/core/diffusion";
 import { getEORIValidation } from "#/models/eori-validation";
+import { getProtectedSiren } from "#/models/protected-siren";
 import { getDirigeantsRNE } from "#/models/rne/dirigeants";
 import { getRNEObservations } from "#/models/rne/observations";
+import { verifySiren } from "#/utils/helpers";
+import getSession from "#/utils/server-side-helper/get-session";
 import { withApplicationRight } from "../../middlewares";
+import { getUniteLegaleFromSirenFn } from "../unite-legale";
 import {
   getAssociationSchema,
   getDirigeantsSchema,
@@ -17,7 +24,33 @@ export const getRneDirigeantsFn = createServerFn()
   .validator(getDirigeantsSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
-    return await getDirigeantsRNE(siren, {});
+
+    const verifiedSiren = verifySiren(siren);
+
+    const [protectedSiren, result, uniteLegale, session] = await Promise.all([
+      getProtectedSiren(verifiedSiren),
+      getDirigeantsRNE(verifiedSiren, {}),
+      getUniteLegaleFromSirenFn({ data: { siren: verifiedSiren } }),
+      getSession(),
+    ]);
+
+    if (isAPINotResponding(result)) {
+      return result;
+    }
+
+    if (!uniteLegale) {
+      throw new HttpNotFound("Unite legale not found");
+    }
+
+    return {
+      ...result,
+      data: anonymiseDirigeants(
+        uniteLegale,
+        session,
+        result.data,
+        protectedSiren
+      ),
+    };
   });
 
 export const getRneObservationsFn = createServerFn()

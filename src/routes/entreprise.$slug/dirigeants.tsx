@@ -14,7 +14,10 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import { estDiffusible } from "#/models/core/diffusion";
+import {
+  estDiffusible,
+  estNonDiffusibleProtected,
+} from "#/models/core/diffusion";
 import {
   type IUniteLegale,
   isAssociation,
@@ -94,7 +97,8 @@ const DirigeantsContent = ({
   if (
     !(
       estDiffusible(uniteLegale) ||
-      hasRights({ user }, ApplicationRights.nonDiffusible)
+      hasRights({ user }, ApplicationRights.nonDiffusible) ||
+      estNonDiffusibleProtected(uniteLegale)
     )
   ) {
     return <DonneesPriveesSection title="Dirigeant(s)" />;
