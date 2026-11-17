@@ -49,9 +49,16 @@ export default function DirigeantsContent({
       }
       return infos;
     }
-    const infos = [dirigeant.role, <EtatCivilInfos dirigeant={dirigeant} />];
+    const etatCivilInfos = dirigeant.isProtected ? (
+      <FAQLink tooltipLabel={<EtatCivilInfos dirigeant={dirigeant} />}>
+        Ce dirigeant s’oppose à la diffusion de ses données personnelles.
+      </FAQLink>
+    ) : (
+      <EtatCivilInfos dirigeant={dirigeant} />
+    );
+    const infos = [dirigeant.role, etatCivilInfos];
 
-    if (dirigeant.dateNaissancePartial) {
+    if (!dirigeant.isProtected && dirigeant.dateNaissancePartial) {
       infos.push(
         hasRights({ user }, ApplicationRights.isAgent) ? (
           <SeePersonPageLink person={dirigeant} sirenFrom={uniteLegale.siren} />

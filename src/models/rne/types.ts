@@ -23,6 +23,7 @@ export interface IEtatCivil {
   dateNaissance?: string;
   dateNaissancePartial?: string;
   estDemissionnaire: boolean;
+  isProtected?: boolean;
   lieuNaissance?: string;
   nationalite?: string;
   nom: string;
