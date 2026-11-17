@@ -11,7 +11,7 @@ export default function EtatCivilInfos({
   }${(dirigeant.nom || "").toUpperCase()}`;
 
   return (
-    <div>
+    <span>
       <span>
         {nomComplet}
         {dirigeant.dateNaissance || dirigeant.dateNaissancePartial
@@ -23,15 +23,16 @@ export default function EtatCivilInfos({
           : ""}
       </span>
       {dirigeant.estDemissionnaire && (
-        <div>
+        <>
+          <br />
           <i>
             {dirigeant.dateDemission
               ? "démissionnaire depuis le " +
                 formatDateLong(dirigeant.dateDemission)
               : "démissionnaire"}
           </i>
-        </div>
+        </>
       )}
-    </div>
+    </span>
   );
 }

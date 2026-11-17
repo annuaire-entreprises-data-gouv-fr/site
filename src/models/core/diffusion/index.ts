@@ -132,7 +132,13 @@ export const anonymiseDirigeants = <T extends IDirigeants>(
   protectedSiren: IProtectedSiren | null
 ): T => {
   if (estDiffusible(uniteLegale) || canSeeNonDiffusible(session)) {
-    return dirigeants;
+    return dirigeants.map((dirigeant) => ({
+      ...dirigeant,
+      isProtected:
+        !(
+          estDiffusible(uniteLegale) || estNonDiffusibleProtected(uniteLegale)
+        ) || isDirigeantProtected(dirigeant, protectedSiren),
+    })) as T;
   }
 
   if (protectedSiren) {
@@ -147,10 +153,13 @@ export const anonymiseDirigeants = <T extends IDirigeants>(
     "siren" in dirigeant ? dirigeant : anonymiseDirigeant(dirigeant)
   ) as T;
 };
-const isDirigeantProtected = (
+export const isDirigeantProtected = (
   dirigeant: IEtatCivil | IPersonneMorale,
-  protectedSiren: IProtectedSiren
+  protectedSiren: IProtectedSiren | null
 ) => {
+  if (!protectedSiren) {
+    return false;
+  }
   if ("siren" in dirigeant) {
     return false;
   }
@@ -170,6 +179,7 @@ const anonymiseDirigeant = <T extends IEtatCivil>(dirigeant: T): T => ({
   estDemissionnaire: false,
   lieuNaissance: undefined,
   nationalite: undefined,
+  isProtected: true,
   nom: nonDiffusibleDataFormatter("identité protégée"),
   prenom: "",
   prenoms: "",

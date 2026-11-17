@@ -5,7 +5,8 @@ import TextWrapper from "#/components-ui/text-wrapper";
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "./-error";
 
-const TITLE = "Comment supprimer les données personnelles de mon entreprise ?";
+const TITLE =
+  "Comment exercer mes droits relatifs à mes données personnelles ?";
 
 export const Route = createFileRoute(
   "/_header-default/formulaire/supprimer-donnees-personnelles-entreprise"
