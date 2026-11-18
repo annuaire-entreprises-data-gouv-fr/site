@@ -145,7 +145,7 @@ const EtablissementListeSection: React.FC<{
             {uniteLegale.etablissements.unknown.length > 0 && (
               <EtablissementTable
                 etablissements={uniteLegale.etablissements.unknown}
-                label="non-diffusible"
+                label="non-diffusée"
               />
             )}
             {uniteLegale.etablissements.closed.length > 0 && (

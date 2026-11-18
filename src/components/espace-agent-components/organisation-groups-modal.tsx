@@ -20,7 +20,8 @@ interface IOrganisationGroupsModalProps {
 }
 
 const rewordedRights = {
-  [ApplicationRights.nonDiffusible]: "Données des entreprises non diffusibles",
+  [ApplicationRights.nonDiffusible]:
+    "Données des entreprises en diffusion partielle",
   [ApplicationRights.actesRne]: "Actes au RNE",
   [ApplicationRights.bilansRne]: "Bilans au RNE",
   [ApplicationRights.documentsRne]: "Documents au RNE",
