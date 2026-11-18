@@ -68,7 +68,7 @@ export function HidePersonalDataModalContent() {
   }
 
   return (
-    <>
+    <div className={styles.modalContent}>
       <h2 className={styles.modalTitle}>
         Je m’oppose au traitement de mes données personnelles
       </h2>
@@ -145,6 +145,6 @@ export function HidePersonalDataModalContent() {
           />
         </>
       )}
-    </>
+    </div>
   );
 }

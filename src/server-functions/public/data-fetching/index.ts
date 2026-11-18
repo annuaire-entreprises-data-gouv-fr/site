@@ -27,9 +27,10 @@ export const getRneDirigeantsFn = createServerFn()
 
     const verifiedSiren = verifySiren(siren);
 
-    const [protectedSiren, result, uniteLegale, session] = await Promise.all([
-      getProtectedSiren(verifiedSiren),
-      getDirigeantsRNE(verifiedSiren, {}),
+    const protectedSiren = await getProtectedSiren(verifiedSiren);
+
+    const [result, uniteLegale, session] = await Promise.all([
+      getDirigeantsRNE(verifiedSiren, { canFallback: !protectedSiren }),
       getUniteLegaleFromSirenFn({ data: { siren: verifiedSiren } }),
       getSession(),
     ]);

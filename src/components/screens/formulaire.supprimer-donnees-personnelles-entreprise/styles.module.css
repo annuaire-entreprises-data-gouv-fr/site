@@ -1,11 +1,10 @@
-.modalTitle {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  line-height: 2rem;
+/* scoped under .modalContent to override the global h2 margins */
+.modalContent .modalTitle {
+  margin: 0 0 1.5rem;
 }
 
-.searchBar {
-  margin-top: 0.5rem;
+.modalContent .searchBar {
+  margin-top: 1rem;
 }
 
 .loading {

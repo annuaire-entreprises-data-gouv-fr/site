@@ -24,7 +24,7 @@ const fallback = async (siren: Siren, signal?: AbortSignal) => {
  */
 export const getDirigeantsRNE = async (
   maybeSiren: string,
-  params: { signal?: AbortSignal }
+  params: { signal?: AbortSignal; canFallback: boolean }
 ): Promise<IAPINotRespondingError | IDirigeantsWithMetadata> => {
   const siren = verifySiren(maybeSiren);
 
@@ -41,6 +41,10 @@ export const getDirigeantsRNE = async (
     }
     if (e instanceof HttpNotFound) {
       return APINotRespondingFactory(EAdministration.INPI, 404);
+    }
+
+    if (!params.canFallback) {
+      return APINotRespondingFactory(EAdministration.INPI, 500);
     }
 
     try {
