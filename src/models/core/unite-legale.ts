@@ -340,7 +340,7 @@ const fetchUniteLegaleFromInsee = async (
     if (e instanceof HttpForbiddenError) {
       const uniteLegale = createDefaultUniteLegale(siren);
       uniteLegale.statutDiffusion = ISTATUTDIFFUSION.NON_DIFF_STRICT;
-      uniteLegale.nomComplet = "Entreprise non-diffusible";
+      uniteLegale.nomComplet = "Entreprise non-diffusée";
 
       return uniteLegale;
     }

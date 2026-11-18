@@ -53,7 +53,7 @@ interface IProps {
 const AvisSituationNonDiffusible = () => (
   <>
     <div className="description">
-      Bien que cette entreprise soit <strong>non-diffusible</strong>, l’
+      Bien que cette entreprise soit <strong>non-diffusée</strong>, l’
       <INSEE /> propose une téléprocédure qui permet{" "}
       <strong>au représentant légal</strong> d’une entreprise d’accéder en
       quelques clics à son avis de situation.
@@ -107,7 +107,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
             )}
             {uniteLegale.etablissements.unknown.length > 0 && (
               <>
-                <h3>Etablissement(s) non-diffusible(s) :</h3>
+                <h3>Etablissement(s) non-diffusé(s) :</h3>
                 <AvisSituationTable
                   etablissements={uniteLegale.etablissements.unknown}
                   user={user}
