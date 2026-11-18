@@ -119,7 +119,7 @@ jobs:
   trigger-production-deployment:
     name: Trigger production deployment
     runs-on: ubuntu-latest
-    needs: [deploy-staging]
+    needs: [deploy-staging, build-docker-production]
     environment:
       name: production
     timeout-minutes: 2
