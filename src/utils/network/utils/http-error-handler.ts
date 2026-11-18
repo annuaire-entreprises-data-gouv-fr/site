@@ -18,7 +18,8 @@ export const httpErrorHandler = (
   status: number,
   statusText: string | undefined,
   message: string,
-  data?: unknown
+  data?: unknown,
+  cause?: unknown
 ) => {
   switch (status) {
     case 432: {
@@ -43,7 +44,7 @@ export const httpErrorHandler = (
       throw new HttpUnauthorizedError("Unauthorized");
     }
     case 408: {
-      throw new HttpTimeoutError("Timeout");
+      throw new HttpTimeoutError("Timeout", { cause });
     }
     case 409: {
       throw new HttpConflict("Conflict", { data });
@@ -52,20 +53,22 @@ export const httpErrorHandler = (
       throw new HttpUnprocessableEntity(message || "Unprocessable Entity");
     }
     case 504: {
-      throw new HttpTimeoutError("Timeout");
+      throw new HttpTimeoutError("Timeout", { cause });
     }
     default:
       if ((message || "").indexOf("ECONNRESET") > -1) {
         throw new HttpConnectionReset(
           `ECONNRESET  while querying ${url}. ${statusText || ""} ${
             message || ""
-          }`
+          }`,
+          { cause }
         );
       }
       throw new HttpServerError(
         `Unknown server error while querying ${url}. ${statusText || ""} ${
           message || ""
-        }`
+        }`,
+        { cause }
       );
   }
 };

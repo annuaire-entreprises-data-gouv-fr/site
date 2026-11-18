@@ -81,6 +81,20 @@ Le serveur de développement est disponible par défaut sur `http://localhost:30
 
 Les commandes `pnpm dev` et `pnpm build` compilent automatiquement les données YAML en JSON via `pnpm compile:data`.
 
+#### API SIAF de production : certificat TLS
+
+L'API SIAF de production utilise une chaîne de certificats signée par l'autorité `AC RACINE MINISTERE INTERIEUR 2018`, absente du magasin de confiance par défaut de Node.js.
+
+Le certificat racine public est fourni dans [`.certs/acr-ministere-interieur-2018.pem`](.certs/acr-ministere-interieur-2018.pem).
+
+- Source : [publication officielle du ministère](https://www.interieur.gouv.fr/IGC/Certificat), entrée « AC RACINE MINISTERE INTERIEUR 2018 » ; [téléchargement du certificat](http://crl.interieur.gouv.fr/acr-ministere-interieur-2018.crt).
+- Empreinte SHA-256 : `79:A1:C9:10:20:7C:63:A9:87:56:41:C3:95:5C:CD:13:41:33:8A:5C:5E:BD:82:76:84:6F:8D:2B:3C:E1:67:27`.
+- Expiration : **6 décembre 2029 à 14:32:29 UTC**.
+
+Vérifier l'empreinte avec `openssl x509 -in .certs/acr-ministere-interieur-2018.pem -noout -fingerprint -sha256` et la comparer à celle de la publication officielle avant toute mise à jour. Si le téléchargement est au format DER, le convertir avec `openssl x509 -inform DER -in acr-ministere-interieur-2018.crt -out .certs/acr-ministere-interieur-2018.pem`. Mettre à jour le certificat avant son expiration ou lors d'un changement d'autorité annoncé par SIAF.
+
+[`NODE_EXTRA_CA_CERTS`](https://nodejs.org/docs/latest-v24.x/api/cli.html#node_extra_ca_certsfile) ajoute cette autorité aux certificats de confiance pour tout le processus Node.js tout en conservant la vérification TLS. 
+
 #### node-gyp error on mac
 
 In some case you might need to update xcode command line tools to install dependencies
