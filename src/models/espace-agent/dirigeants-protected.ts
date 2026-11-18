@@ -74,7 +74,7 @@ const haveSameDirigeants = (rneData: IDirigeants, rcsData: IDirigeants) => {
 
 export const getDirigeantsProtected = async (
   maybeSiren: string,
-  params: { isEI: boolean }
+  params: { isEI: boolean; isUniteLegaleProtected: boolean }
 ): Promise<IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
 
@@ -83,7 +83,7 @@ export const getDirigeantsProtected = async (
       siren,
       ApplicationRightsToScopes[ApplicationRights.mandatairesRCS]
     ),
-    getDirigeantsRNE(siren, {}),
+    getDirigeantsRNE(siren, { canFallback: !params.isUniteLegaleProtected }),
   ]);
 
   if (isAPI404(dirigeantsRCS) && isAPI404(dirigeantsRNE)) {

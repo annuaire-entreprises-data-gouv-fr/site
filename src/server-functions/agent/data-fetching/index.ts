@@ -225,9 +225,13 @@ export const getAgentDirigeantsProtectedFn = createServerFn()
 
     const verifiedSiren = verifySiren(siren);
 
-    const [protectedSiren, result, uniteLegale, session] = await Promise.all([
-      getProtectedSiren(verifiedSiren),
-      getDirigeantsProtected(siren, { isEI }),
+    const protectedSiren = await getProtectedSiren(verifiedSiren);
+
+    const [result, uniteLegale, session] = await Promise.all([
+      getDirigeantsProtected(siren, {
+        isEI,
+        isUniteLegaleProtected: !!protectedSiren,
+      }),
       getUniteLegaleFromSirenFn({ data: { siren: verifiedSiren } }),
       getSession(),
     ]);
