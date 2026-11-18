@@ -1,7 +1,11 @@
 import clsx from "clsx";
 import { type ReactNode, useState } from "react";
 import ButtonLink from "#/components-ui/button";
-import { type IUniteLegale, isPersonneMorale } from "#/models/core/types";
+import {
+  type IUniteLegale,
+  isEntrepreneurIndividuel,
+  isPersonneMorale,
+} from "#/models/core/types";
 import styles from "./styles.module.css";
 
 const INSEE_PROCEDURE_PERSONNE_PHYSIQUE =
@@ -18,6 +22,7 @@ interface IOption {
 }
 
 const getOptions = (uniteLegale: IUniteLegale): IOption[] => {
+  const estEntrepreneurIndividuel = isEntrepreneurIndividuel(uniteLegale);
   const estPersonneMorale = isPersonneMorale(uniteLegale);
 
   return [
@@ -53,13 +58,14 @@ const getOptions = (uniteLegale: IUniteLegale): IOption[] => {
     },
     {
       id: "hide-personal-data-option-dirigeant",
-      title: "Nom, prénom, mois et année de naissance d’un dirigeant",
+      title: "Votre nom, prénom, mois et année de naissance",
       content: (
         <>
           <p>
-            Pour que les nom, prénoms, mois et année de naissance du dirigeant
-            de cette structure soient masqués de l’Annuaire des Entreprises,
-            remplissez une demande qui sera étudiée par notre service juridique.
+            En tant que dirigeant, vous pouvez demander que vos nom, prénoms,
+            mois et année de naissance soient masqués sur l’Annuaire des
+            Entreprises en faisant une demande d’opposition. Celle-ci sera
+            examinée par notre service juridique.
           </p>
           <div className="layout-center">
             <ButtonLink
@@ -70,6 +76,29 @@ const getOptions = (uniteLegale: IUniteLegale): IOption[] => {
               Remplir une demande
             </ButtonLink>
           </div>
+          {estEntrepreneurIndividuel && (
+            <>
+              <p className="fr-mt-3w">
+                <strong>À savoir :</strong> si la dénomination de votre
+                entreprise correspond à votre nom (c’est souvent le cas des
+                entreprises individuelles), celui-ci restera visible malgré
+                votre opposition. Dans ce cas, il convient plutôt de passer
+                votre entreprise en <strong>diffusion partielle</strong> auprès
+                de l’INSEE. Vos informations seront alors masquées sur
+                l’ensemble des sites, y compris sur l’Annuaire des Entreprises.
+              </p>
+              <div className="layout-center">
+                <ButtonLink
+                  ariaLabel="Accéder à la procédure INSEE, nouvelle fenêtre"
+                  hideExternalIcon
+                  target="_blank"
+                  to={INSEE_PROCEDURE_PERSONNE_PHYSIQUE}
+                >
+                  Accéder à la procédure INSEE
+                </ButtonLink>
+              </div>
+            </>
+          )}
         </>
       ),
     },
