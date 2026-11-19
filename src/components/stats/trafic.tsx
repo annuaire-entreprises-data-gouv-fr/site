@@ -2,6 +2,7 @@ import { type ChangeEvent, useState } from "react";
 import type { IMatomoStats } from "#/clients/matomo/index.server";
 import { StackedBarChart } from "#/components/chart/stack-bar";
 import { Link } from "#/components/link";
+import { AccessibleTable } from "#/components/table/accessible";
 import { Select } from "#/components-ui/select";
 import constants from "#/models/constants";
 
@@ -93,9 +94,10 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
         <strong>récurrent</strong>.
       </p>
       <div className="layout-right">
-        <div>Afficher les données par&nbsp;</div>
         <Select
           defaultValue={"users"}
+          label="Afficher les données par"
+          name="traffic-type"
           onChange={onOptionChange}
           options={[
             { value: "users", label: "utilisateurs" },
@@ -104,7 +106,20 @@ export const TraficStats: React.FC<Partial<IMatomoStats>> = ({
           ]}
         />
       </div>
-      <StackedBarChart data={data} />
+      <div aria-hidden="true">
+        <StackedBarChart data={data} />
+      </div>
+      <details>
+        <summary>Consulter les données du graphique dans un tableau</summary>
+        <AccessibleTable
+          body={visits.map((visit, index) => [
+            visit.label,
+            ...data.datasets.map((dataset) => dataset.data[index]?.y),
+          ])}
+          caption="Utilisation du service"
+          head={["Mois", ...data.datasets.map((dataset) => dataset.label)]}
+        />
+      </details>
       <p>
         Le suivi des évolutions des visites et du nombre d’utilisateurs nous
         informe sur les tendances globales de l’utilisation du service :

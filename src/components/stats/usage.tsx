@@ -1,6 +1,7 @@
 import type { ChartData } from "chart.js";
 import { DoughnutChart } from "#/components/chart/doughnut";
 import { LineChart } from "#/components/chart/line";
+import { AccessibleTable } from "#/components/table/accessible";
 import constants from "#/models/constants";
 
 export const UsageStats: React.FC<{
@@ -49,7 +50,22 @@ export const UsageStats: React.FC<{
         </a>
         .
       </p>
-      <LineChart data={data} height="300px" />
+      <div aria-hidden="true">
+        <LineChart data={data} height="300px" />
+      </div>
+      <details>
+        <summary>Consulter les usages par mois dans un tableau</summary>
+        <AccessibleTable
+          body={redirectedSiren.map((item) => [
+            item.label,
+            item.value,
+            copyPasteAction.find((action) => action.label === item.label)
+              ?.value,
+          ])}
+          caption="Usages mensuels"
+          head={["Mois", "Recherche par SIREN/SIRET", "Copier-coller"]}
+        />
+      </details>
       <br />
       <div className="chart-container">
         <div>
@@ -71,46 +87,58 @@ export const UsageStats: React.FC<{
           </p>
         </div>
         <div>
-          <DoughnutChart
-            data={{
-              labels: mostCopied.map((el) => el.label),
-              datasets: [
-                {
-                  label: "Nombre de copier-coller",
-                  data: mostCopied.map((el) => el.count),
-                  backgroundColor: constants.chartColors,
-                  borderColor: "transparent",
-                  hoverOffset: 4,
-                },
-              ],
-            }}
-            height="200px"
-            pluginOptions={{
-              tooltip: {
-                callbacks: {
-                  label(context) {
-                    const safeData = context.dataset.data as number[];
-                    const total = safeData.reduce(
-                      (previousValue, currentValue) =>
-                        previousValue + currentValue,
-                      0
-                    );
-                    return `${Math.round((context.parsed * 100) / total)}%`;
+          <div aria-hidden="true">
+            <DoughnutChart
+              data={{
+                labels: mostCopied.map((el) => el.label),
+                datasets: [
+                  {
+                    label: "Nombre de copier-coller",
+                    data: mostCopied.map((el) => el.count),
+                    backgroundColor: constants.chartColors,
+                    borderColor: "transparent",
+                    hoverOffset: 4,
+                  },
+                ],
+              }}
+              height="200px"
+              pluginOptions={{
+                tooltip: {
+                  callbacks: {
+                    label(context) {
+                      const safeData = context.dataset.data as number[];
+                      const total = safeData.reduce(
+                        (previousValue, currentValue) =>
+                          previousValue + currentValue,
+                        0
+                      );
+                      return `${Math.round((context.parsed * 100) / total)}%`;
+                    },
                   },
                 },
-              },
-              title: {
-                display: true,
-                text: "Ci-dessus : répartition des données les plus copiées-collées.",
-                position: "bottom",
-                align: "center",
-              },
-              legend: {
-                position: "right",
-                align: "start",
-              },
-            }}
-          />
+                title: {
+                  display: true,
+                  text: "Ci-dessus : répartition des données les plus copiées-collées.",
+                  position: "bottom",
+                  align: "center",
+                },
+                legend: {
+                  position: "right",
+                  align: "start",
+                },
+              }}
+            />
+          </div>
+          <details>
+            <summary>
+              Consulter les données les plus copiées dans un tableau
+            </summary>
+            <AccessibleTable
+              body={mostCopied.map((item) => [item.label, item.count])}
+              caption="Données les plus copiées"
+              head={["Donnée", "Nombre de copies"]}
+            />
+          </details>
         </div>
       </div>
       <style>{`
