@@ -31,6 +31,7 @@ export const ApplicationRights = {
   travauxPublics: "Accès aux données relatives aux travaux publics",
   administrateur: "Administrateur",
   liassesFiscales: "Accès aux liasses fiscales (DGFiP)",
+  jourNaissanceDirigeant: "Accès aux jours de naissance des dirigeants",
 } as const;
 export type ApplicationRights =
   (typeof ApplicationRights)[keyof typeof ApplicationRights];
@@ -59,6 +60,7 @@ export const ApplicationRightsToScopes: Record<
   [ApplicationRights.isAgent]: "agent",
   [ApplicationRights.travauxPublics]: "travaux_publics",
   [ApplicationRights.administrateur]: "administrateur",
+  [ApplicationRights.jourNaissanceDirigeant]: "jour_naissance_dirigeant",
 };
 
 /**
