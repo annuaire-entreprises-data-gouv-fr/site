@@ -36,9 +36,13 @@ function RouteComponent() {
         différentes, qui nous transmettent les données qu’elles possèdent sur
         les entreprises, les associations ou les services publics&nbsp;:
       </p>
-      {Object.values(administrationsMetaData).map(({ slug }) => (
-        <AdministrationDescription key={slug} slug={slug} />
-      ))}
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {Object.values(administrationsMetaData).map(({ slug }) => (
+          <li key={slug}>
+            <AdministrationDescription slug={slug} />
+          </li>
+        ))}
+      </ul>
     </TextWrapper>
   );
 }

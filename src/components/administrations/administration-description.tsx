@@ -15,7 +15,6 @@ const AdministrationDescription: React.FC<{
     description,
     contact,
     long,
-    short,
     dataSources,
     logoType,
     estServicePublic,
@@ -25,10 +24,10 @@ const AdministrationDescription: React.FC<{
     <div className={styles["administration-wrapper"]} id={`${slug}-section`}>
       <div>
         <Logo
-          alt={`Logo ${short}`}
+          alt=""
           height={80}
           slug={logoType ? slug : "rf"}
-          title={long}
+          title=""
           width={80}
         />
       </div>
@@ -38,12 +37,16 @@ const AdministrationDescription: React.FC<{
           <p>{description}</p>
           {dataSources.length > 0 && (
             <div>
-              Données transmises :
+              <strong>Données transmises :</strong>
               <ul>
                 {dataSources.map(({ data = [] }) =>
                   data.map(({ label }) => (
                     <li key={label}>
-                      <Link hash={`${slug}-section`} to="/donnees/sources">
+                      <Link
+                        aria-label={`${label} — données transmises par ${long}`}
+                        hash={`${slug}-section`}
+                        to="/donnees/sources"
+                      >
                         {label}
                       </Link>
                     </li>
@@ -53,12 +56,17 @@ const AdministrationDescription: React.FC<{
             </div>
           )}
           <p>
-            <Link hash={`${slug}-section`} to="/donnees/sources">
+            <Link
+              aria-label={`Télécharger ou réutiliser ces données — ${long}`}
+              hash={`${slug}-section`}
+              to="/donnees/sources"
+            >
               → Télécharger ou réutiliser ces données
             </Link>
             <br />
             {contact && (
               <a
+                aria-label={`Contacter cette ${estServicePublic ? "administration" : "organisation"} — ${long}${contact.includes("@") ? " par courriel" : " — nouvelle fenêtre"}`}
                 href={
                   (contact || "").indexOf("@") > -1
                     ? `mailto:${contact}`
