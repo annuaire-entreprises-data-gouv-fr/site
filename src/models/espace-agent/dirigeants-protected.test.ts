@@ -48,10 +48,14 @@ const mockGetDirigeantsRNE = vi.mocked(getDirigeantsRNE);
 const mockGetMandatairesRCS = vi.mocked(getMandatairesRCS);
 const mockLogErrorInSentry = vi.mocked(logErrorInSentry);
 
-const compareDirigeants = async (
+const fetchDirigeants = async (
   rneData: IDirigeants,
   rcsData: IDirigeants,
-  { isEI = false, isUniteLegaleProtected = false } = {}
+  {
+    isEI = false,
+    isUniteLegaleProtected = false,
+    canSeeJourNaissanceDirigeant = false,
+  } = {}
 ) => {
   mockGetDirigeantsRNE.mockResolvedValue({
     data: rneData,
@@ -59,7 +63,11 @@ const compareDirigeants = async (
   });
   mockGetMandatairesRCS.mockResolvedValue(rcsData);
 
-  await getDirigeantsProtected(SIREN, { isEI, isUniteLegaleProtected });
+  return await getDirigeantsProtected(SIREN, {
+    isEI,
+    isUniteLegaleProtected,
+    canSeeJourNaissanceDirigeant,
+  });
 };
 
 const expectMismatchToHaveBeenLogged = () => {
@@ -84,16 +92,49 @@ describe("getDirigeantsProtected RNE fallback", () => {
   ])(
     "passes canFallback=$canFallback when isUniteLegaleProtected=$isUniteLegaleProtected",
     async ({ isUniteLegaleProtected, canFallback }) => {
-      await compareDirigeants([], [], { isUniteLegaleProtected });
+      await fetchDirigeants([], [], { isUniteLegaleProtected });
 
       expect(mockGetDirigeantsRNE).toHaveBeenCalledWith(SIREN, { canFallback });
     }
   );
 });
 
+describe("getDirigeantsProtected birthdate visibility", () => {
+  it.each([
+    {
+      canSeeJourNaissanceDirigeant: true,
+      expectedDateNaissance: personnePhysique.dateNaissance,
+    },
+    {
+      canSeeJourNaissanceDirigeant: false,
+      expectedDateNaissance: undefined,
+    },
+  ])(
+    "returns dateNaissance=$expectedDateNaissance when canSeeJourNaissanceDirigeant=$canSeeJourNaissanceDirigeant",
+    async ({ canSeeJourNaissanceDirigeant, expectedDateNaissance }) => {
+      const result = await fetchDirigeants(
+        [{ ...personnePhysique, dateNaissance: undefined }],
+        [personnePhysique],
+        { canSeeJourNaissanceDirigeant }
+      );
+
+      expect(result).toMatchObject({
+        data: [
+          {
+            dateNaissance: expectedDateNaissance,
+            dateNaissancePartial: personnePhysique.dateNaissancePartial,
+            isInIg: true,
+            isInInpi: true,
+          },
+        ],
+      });
+    }
+  );
+});
+
 describe("getDirigeantsProtected RNE/RCS mismatch", () => {
   it("does not report identical dirigeants in a different order", async () => {
-    await compareDirigeants(
+    await fetchDirigeants(
       [personnePhysique, personneMorale],
       [personneMorale, personnePhysique]
     );
@@ -102,7 +143,7 @@ describe("getDirigeantsProtected RNE/RCS mismatch", () => {
   });
 
   it("ignores accents, capitalization, and special characters", async () => {
-    await compareDirigeants(
+    await fetchDirigeants(
       [personnePhysique, personneMorale],
       [
         {
@@ -125,7 +166,7 @@ describe("getDirigeantsProtected RNE/RCS mismatch", () => {
   });
 
   it("reports a dirigeant missing from one source", async () => {
-    await compareDirigeants(
+    await fetchDirigeants(
       [personnePhysique, personneMorale],
       [personnePhysique]
     );
@@ -134,7 +175,7 @@ describe("getDirigeantsProtected RNE/RCS mismatch", () => {
   });
 
   it("reports a different role", async () => {
-    await compareDirigeants(
+    await fetchDirigeants(
       [personnePhysique],
       [{ ...personnePhysique, role: "Directrice générale" }]
     );
@@ -143,7 +184,7 @@ describe("getDirigeantsProtected RNE/RCS mismatch", () => {
   });
 
   it("reports a different birthdate", async () => {
-    await compareDirigeants(
+    await fetchDirigeants(
       [{ ...personnePhysique, dateNaissancePartial: undefined }],
       [
         {
@@ -151,14 +192,15 @@ describe("getDirigeantsProtected RNE/RCS mismatch", () => {
           dateNaissance: "1980-01-16",
           dateNaissancePartial: undefined,
         },
-      ]
+      ],
+      { canSeeJourNaissanceDirigeant: true }
     );
 
     expectMismatchToHaveBeenLogged();
   });
 
   it("reports different legal-entity details", async () => {
-    await compareDirigeants(
+    await fetchDirigeants(
       [personneMorale],
       [{ ...personneMorale, denomination: "Autre société" }]
     );
@@ -167,7 +209,7 @@ describe("getDirigeantsProtected RNE/RCS mismatch", () => {
   });
 
   it("does not compare non-standardized individual-enterprise data", async () => {
-    await compareDirigeants([personnePhysique], [personneMorale], {
+    await fetchDirigeants([personnePhysique], [personneMorale], {
       isEI: true,
     });
 

@@ -40,6 +40,8 @@ const rewordedRights = {
   [ApplicationRights.liensCapitalistiques]: "Lens capitalistiques (DGFiP)",
   [ApplicationRights.travauxPublics]: "Données relatives aux travaux publics",
   [ApplicationRights.liassesFiscales]: "Liasses fiscales (DGFiP)",
+  [ApplicationRights.jourNaissanceDirigeant]:
+    "Jours de naissance des dirigeants",
 };
 
 const ExpandableGroupRow = ({ group }: { group: IAgentsOrganizationGroup }) => {

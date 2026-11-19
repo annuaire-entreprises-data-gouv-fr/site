@@ -2,7 +2,10 @@ import { createServerFn } from "@tanstack/react-start";
 import { clientMinimis } from "#/clients/api-data-gouv/minimis";
 import { HttpNotFound } from "#/clients/exceptions";
 import { isAPINotResponding } from "#/models/api-not-responding";
-import { ApplicationRights } from "#/models/authentication/user/rights";
+import {
+  ApplicationRights,
+  hasRights,
+} from "#/models/authentication/user/rights";
 import { anonymiseDirigeants } from "#/models/core/diffusion";
 import { getAssociationProtected } from "#/models/espace-agent/association-protected";
 import { getBeneficiaires } from "#/models/espace-agent/beneficiaires";
@@ -225,15 +228,21 @@ export const getAgentDirigeantsProtectedFn = createServerFn()
 
     const verifiedSiren = verifySiren(siren);
 
-    const protectedSiren = await getProtectedSiren(verifiedSiren);
+    const [protectedSiren, session] = await Promise.all([
+      getProtectedSiren(verifiedSiren),
+      getSession(),
+    ]);
 
-    const [result, uniteLegale, session] = await Promise.all([
+    const [result, uniteLegale] = await Promise.all([
       getDirigeantsProtected(siren, {
         isEI,
         isUniteLegaleProtected: !!protectedSiren,
+        canSeeJourNaissanceDirigeant: hasRights(
+          session,
+          ApplicationRights.jourNaissanceDirigeant
+        ),
       }),
       getUniteLegaleFromSirenFn({ data: { siren: verifiedSiren } }),
-      getSession(),
     ]);
 
     if (isAPINotResponding(result)) {
