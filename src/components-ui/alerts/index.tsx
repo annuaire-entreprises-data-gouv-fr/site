@@ -68,14 +68,16 @@ export const Warning: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   full,
   children,
 }) => (
-  <Alert
-    color1={colors.warning[0]}
-    color2={colors.warning[1]}
-    full={full}
-    icon="alertFill"
-  >
-    {children}
-  </Alert>
+  <aside>
+    <Alert
+      color1={colors.warning[0]}
+      color2={colors.warning[1]}
+      full={full}
+      icon="alertFill"
+    >
+      {children}
+    </Alert>
+  </aside>
 );
 
 export const AlertError: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
@@ -96,12 +98,14 @@ export const Info: React.FC<PropsWithChildren<{ full?: boolean }>> = ({
   full,
   children,
 }) => (
-  <Alert
-    color1={colors.info[0]}
-    color2={colors.info[1]}
-    full={full}
-    icon="information"
-  >
-    {children}
-  </Alert>
+  <aside>
+    <Alert
+      color1={colors.info[0]}
+      color2={colors.info[1]}
+      full={full}
+      icon="information"
+    >
+      {children}
+    </Alert>
+  </aside>
 );
