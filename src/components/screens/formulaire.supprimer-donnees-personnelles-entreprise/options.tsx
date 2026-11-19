@@ -42,7 +42,7 @@ const getOptions = (uniteLegale: IUniteLegale): IOption[] => {
           </p>
           <div className="layout-center">
             <ButtonLink
-              ariaLabel="Accéder à la procédure INSEE, nouvelle fenêtre"
+              ariaLabel="Accéder à la procédure Insee, nouvelle fenêtre"
               target="_blank"
               to={
                 estPersonneMorale
@@ -50,7 +50,7 @@ const getOptions = (uniteLegale: IUniteLegale): IOption[] => {
                   : INSEE_PROCEDURE_PERSONNE_PHYSIQUE
               }
             >
-              Accéder à la procédure INSEE
+              Accéder à la procédure Insee
             </ButtonLink>
           </div>
         </>
