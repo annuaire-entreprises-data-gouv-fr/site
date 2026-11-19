@@ -6,9 +6,14 @@ import apiSireneInseeSiren from "../../fixtures/api-sirene-insee-siren.json" wit
   type: "json",
 };
 
+import { strictSiren } from "../../fixtures/diffusion";
+
 export const apiSireneInseeSirenHandler: HttpResponseResolver = ({
-  request: _request,
-}) => HttpResponse.json(apiSireneInseeSiren);
+  request,
+}) =>
+  new URL(request.url).pathname.endsWith(`/${strictSiren}`)
+    ? new HttpResponse(null, { status: 403 })
+    : HttpResponse.json(apiSireneInseeSiren);
 
 export const apiSireneInseeSiretHandler: HttpResponseResolver = ({
   request: _request,

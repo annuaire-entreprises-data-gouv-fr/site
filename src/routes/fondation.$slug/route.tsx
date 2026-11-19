@@ -30,6 +30,7 @@ import {
 import type { IAgentInfo } from "#/models/authentication/agent";
 import { getUserQueryKey } from "#/models/authentication/user/query-key";
 import type { IUniteLegale } from "#/models/core/types";
+import { getProtectedSiren } from "#/models/protected-siren";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getFondationFromSlugWithErrorHandling } from "#/server-functions/public/fondation.server";
 import { getUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
@@ -67,7 +68,11 @@ const loadFondationLayout = createServerFn({ method: "POST" })
     const userAgent = getRequestHeader("user-agent") || "";
     const isBot = isUserAgentABot(userAgent);
 
+    const protectedSiren = uniteLegale
+      ? await getProtectedSiren(uniteLegale.siren)
+      : null;
     return {
+      isLegacyProtected: protectedSiren?.isLegacy ?? null,
       fondation,
       uniteLegale,
       isBot,

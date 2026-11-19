@@ -38,6 +38,7 @@ import {
 } from "#/models/core/types";
 import { getExtraitKbis } from "#/models/espace-agent/extrait-kbis";
 import { Exception } from "#/models/exceptions";
+import { getProtectedSiren } from "#/models/protected-siren";
 import { getRechercheEntrepriseSourcesLastModified } from "#/models/recherche-entreprise-modified";
 import { getFeatureFlagFn } from "#/server-functions/public/feature-flags";
 import { getBaseUrl } from "#/utils/get-base-url";
@@ -76,8 +77,10 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
       estRadieBodacc,
       dateRadiationBodacc,
     } = data;
-    const sourcesLastModified =
-      await getRechercheEntrepriseSourcesLastModified();
+    const [sourcesLastModified, protectedSiren] = await Promise.all([
+      getRechercheEntrepriseSourcesLastModified(),
+      getProtectedSiren(siren),
+    ]);
 
     const isFromSite = isRedirected
       ? (getRequestHeader("referer") || "").startsWith(getBaseUrl())
@@ -120,7 +123,12 @@ const loadEntreprisePage = createServerFn({ method: "POST" })
       }
     }
 
-    return { triggerRedirectedEvent, isBot, sourcesLastModified };
+    return {
+      triggerRedirectedEvent,
+      isBot,
+      sourcesLastModified,
+      isLegacyProtected: protectedSiren?.isLegacy ?? null,
+    };
   });
 
 export const Route = createFileRoute("/entreprise/$slug/")({
@@ -263,8 +271,13 @@ export const Route = createFileRoute("/entreprise/$slug/")({
 });
 
 function RouteComponent() {
-  const { triggerRedirectedEvent, uniteLegale, isBot, sourcesLastModified } =
-    Route.useLoaderData();
+  const {
+    triggerRedirectedEvent,
+    uniteLegale,
+    isBot,
+    sourcesLastModified,
+    isLegacyProtected,
+  } = Route.useLoaderData();
   const { user } = useAuth();
 
   return (
@@ -276,7 +289,11 @@ function RouteComponent() {
         <NonDiffusibleStrictSection />
       ) : (
         <>
-          <UniteLegaleSummarySection uniteLegale={uniteLegale} user={user} />
+          <UniteLegaleSummarySection
+            isLegacyProtected={isLegacyProtected}
+            uniteLegale={uniteLegale}
+            user={user}
+          />
           <TabsReminder uniteLegale={uniteLegale} user={user} />
           {hasRights({ user }, ApplicationRights.isAgent) && (
             <EspaceAgentSummarySection uniteLegale={uniteLegale} user={user} />
@@ -304,6 +321,7 @@ function RouteComponent() {
           {uniteLegale.siege && (
             <EtablissementSection
               etablissement={uniteLegale.siege}
+              isLegacyProtected={isLegacyProtected}
               uniteLegale={uniteLegale}
               usedInEntreprisePage={true}
               user={user}

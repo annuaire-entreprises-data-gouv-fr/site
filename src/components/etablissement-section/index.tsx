@@ -24,6 +24,7 @@ import {
 
 interface IProps {
   etablissement: IEtablissement;
+  isLegacyProtected: boolean | null;
   uniteLegale: IUniteLegale;
   usedInEntreprisePage?: boolean;
   user: IAgentInfo | null;
@@ -31,6 +32,7 @@ interface IProps {
 }
 
 const EtablissementSection: React.FC<IProps> = ({
+  isLegacyProtected,
   etablissement,
   uniteLegale,
   usedInEntreprisePage,
@@ -177,6 +179,7 @@ const EtablissementSection: React.FC<IProps> = ({
           <AvisSituationLink
             button={true}
             etablissement={etablissement}
+            isLegacyProtected={isLegacyProtected}
             label="télécharger"
             user={user}
           />

@@ -11,17 +11,18 @@ import {
 } from "#/models/authentication/user/rights";
 import {
   documentNonDiffusiblePlaceHolder,
-  estDiffusible,
+  estAvisSituationPublic,
   estNonDiffusibleProtected,
 } from "#/models/core/diffusion";
 import type { IEtablissement } from "#/models/core/types";
 
 const AvisSituationLink: React.FC<{
+  isLegacyProtected: boolean | null;
   etablissement: IEtablissement;
   user: IAgentInfo | null;
   label?: string;
   button?: boolean;
-}> = ({ etablissement, label, button = false, user }) => {
+}> = ({ isLegacyProtected, etablissement, label, button = false, user }) => {
   const link = button ? (
     <ButtonLink
       alt
@@ -40,7 +41,7 @@ const AvisSituationLink: React.FC<{
     </a>
   );
 
-  if (estDiffusible(etablissement)) {
+  if (estAvisSituationPublic(etablissement, isLegacyProtected)) {
     return link;
   }
   if (hasRights({ user }, ApplicationRights.isAgent)) {

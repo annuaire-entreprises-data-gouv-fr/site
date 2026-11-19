@@ -40,9 +40,10 @@ import { UniteLegaleProcedureCollective } from "./procedure-collective";
 import { UniteLegaleRadiationRCS } from "./radiation-rcs";
 
 const UniteLegaleSummarySection: React.FC<{
+  isLegacyProtected: boolean | null;
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
-}> = ({ uniteLegale, user }) => {
+}> = ({ isLegacyProtected, uniteLegale, user }) => {
   const hasLabelsAndCertificates = checkHasLabelsAndCertificates(uniteLegale);
   const conventionsCollectives = uniteLegale.listeIdcc;
   const displaysBodaccData =
@@ -64,7 +65,11 @@ const UniteLegaleSummarySection: React.FC<{
         )}
       </FAQLink>,
       <>
-        <UniteLegaleInscriptionSirene uniteLegale={uniteLegale} user={user} />
+        <UniteLegaleInscriptionSirene
+          isLegacyProtected={isLegacyProtected}
+          uniteLegale={uniteLegale}
+          user={user}
+        />
         <UniteLegaleInscriptionRNE uniteLegale={uniteLegale} user={user} />
         <UniteLegaleInscriptionIG uniteLegale={uniteLegale} />
         <UniteLegaleInscriptionRNA uniteLegale={uniteLegale} />

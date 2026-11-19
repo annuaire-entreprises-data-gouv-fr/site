@@ -23,21 +23,41 @@ test.describe("Données financières", () => {
     ).toBeVisible();
   });
 
-  test("Should display indicateurs financiers", async ({ page }) => {
-    await mockRoute(page, `${routes.donneesFinancieres.ods.search}*`, {
-      fixture: "donnees-financieres.json",
-    });
-    await mockRoute(page, `${routes.donneesFinancieres.ods.metadata}*`, {
-      fixture: "ods-metadata.json",
-    });
+  for (const { siren, diffusion } of [
+    { siren: "552032534", diffusion: "a diffusible company" },
+    { siren: "908595879", diffusion: "a legacy protected company" },
+    { siren: "990000010", diffusion: "a newly protected company" },
+  ]) {
+    test(`Public financial indicators are visible for ${diffusion}`, async ({
+      page,
+    }) => {
+      await mockRoute(page, `${routes.donneesFinancieres.ods.search}*`, {
+        fixture: "donnees-financieres.json",
+      });
+      await mockRoute(page, `${routes.donneesFinancieres.ods.metadata}*`, {
+        fixture: "ods-metadata.json",
+      });
 
-    await goto(page, "/entreprise/552032534/donnees-financieres");
-    await expect(page.getByText("Date de clôture").first()).toBeVisible();
-    await expect(page.getByText("31/12/2019").first()).toBeVisible();
-    await expect(page.getByText("Résultat net").first()).toBeVisible();
-    await expect(page.getByText("2 Mds €").first()).toBeVisible();
-    await expect(page.getByText("MEF").first()).toBeVisible();
-    await expect(page.getByText("INPI").first()).toBeVisible();
+      await goto(page, `/entreprise/${siren}/donnees-financieres`);
+      await expect(page.getByText("Date de clôture").first()).toBeVisible();
+      await expect(page.getByText("31/12/2019").first()).toBeVisible();
+      await expect(page.getByText("Résultat net").first()).toBeVisible();
+      await expect(page.getByText("2 Mds €").first()).toBeVisible();
+      await expect(page.getByText("MEF").first()).toBeVisible();
+      await expect(page.getByText("INPI").first()).toBeVisible();
+    });
+  }
+
+  test("Partial diffusion keeps financial indicators private", async ({
+    page,
+  }) => {
+    await goto(page, "/entreprise/990000044/donnees-financieres");
+    await expect(
+      page.getByRole("heading", {
+        name: "Indicateurs financiers (données privées)",
+      })
+    ).toBeVisible();
+    await expect(page.locator("#indicateurs-financiers")).toHaveCount(0);
   });
 
   test("Should display dépôts de compte section (JOAFE)", async ({ page }) => {

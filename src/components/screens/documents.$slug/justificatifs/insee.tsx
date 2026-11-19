@@ -13,14 +13,15 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
-import { estDiffusible } from "#/models/core/diffusion";
+import { estAvisSituationPublic } from "#/models/core/diffusion";
 import type { IEtablissement, IUniteLegale } from "#/models/core/types";
 import { formatSiret } from "#/utils/helpers";
 
 const AvisSituationTable: React.FC<{
+  isLegacyProtected: boolean | null;
   etablissements: IEtablissement[];
   user: IAgentInfo | null;
-}> = ({ etablissements, user }) => (
+}> = ({ etablissements, user, isLegacyProtected }) => (
   <FullTable
     body={etablissements.map((etablissement: IEtablissement) => [
       <Link params={{ slug: etablissement.siret }} to="/etablissement/$slug">
@@ -37,6 +38,7 @@ const AvisSituationTable: React.FC<{
       />,
       <AvisSituationLink
         etablissement={etablissement}
+        isLegacyProtected={isLegacyProtected}
         label="Télécharger"
         user={user}
       />,
@@ -46,6 +48,7 @@ const AvisSituationTable: React.FC<{
 );
 
 interface IProps {
+  isLegacyProtected: boolean | null;
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }
@@ -66,13 +69,17 @@ const AvisSituationNonDiffusible = () => (
   </>
 );
 
-const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
+const AvisSituationSection: React.FC<IProps> = ({
+  uniteLegale,
+  user,
+  isLegacyProtected,
+}) => (
   <Section
     id="justificatifs-insee"
     sources={[EAdministration.INSEE]}
     title="Justificatif d’inscription à l’Insee"
   >
-    {estDiffusible(uniteLegale) ||
+    {estAvisSituationPublic(uniteLegale, isLegacyProtected) ||
     hasRights({ user }, ApplicationRights.nonDiffusible) ? (
       <>
         <div className="description">
@@ -84,6 +91,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
           situation utiliser,{" "}
           <AvisSituationLink
             etablissement={uniteLegale.siege}
+            isLegacyProtected={isLegacyProtected}
             label="téléchargez l’avis de situation Sirene du siège social"
             user={user}
           />
@@ -92,6 +100,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
         {uniteLegale.etablissements.usePagination ? (
           <AvisSituationTable
             etablissements={uniteLegale.etablissements.all}
+            isLegacyProtected={isLegacyProtected}
             user={user}
           />
         ) : (
@@ -101,6 +110,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
                 <h3>Etablissement(s) en activité :</h3>
                 <AvisSituationTable
                   etablissements={uniteLegale.etablissements.open}
+                  isLegacyProtected={isLegacyProtected}
                   user={user}
                 />
               </>
@@ -110,6 +120,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
                 <h3>Etablissement(s) en diffusion partielle :</h3>
                 <AvisSituationTable
                   etablissements={uniteLegale.etablissements.unknown}
+                  isLegacyProtected={isLegacyProtected}
                   user={user}
                 />
               </>
@@ -119,6 +130,7 @@ const AvisSituationSection: React.FC<IProps> = ({ uniteLegale, user }) => (
                 <h3>Etablissement(s) fermé(s) :</h3>
                 <AvisSituationTable
                   etablissements={uniteLegale.etablissements.closed}
+                  isLegacyProtected={isLegacyProtected}
                   user={user}
                 />
               </>

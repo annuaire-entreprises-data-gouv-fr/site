@@ -64,7 +64,7 @@ export const Route = createFileRoute("/fondation/$slug/documents")({
 });
 
 function RouteComponent() {
-  const { fondation, uniteLegale } = Route.useLoaderData();
+  const { fondation, uniteLegale, isLegacyProtected } = Route.useLoaderData();
   const { user } = useAuth();
 
   return (
@@ -85,7 +85,11 @@ function RouteComponent() {
       />
       {uniteLegale && (
         <>
-          <JustificatifsSection uniteLegale={uniteLegale} user={user} />
+          <JustificatifsSection
+            isLegacyProtected={isLegacyProtected}
+            uniteLegale={uniteLegale}
+            user={user}
+          />
           <HorizontalSeparator />
           <BreakPageForPrint />
           <PrintNever>

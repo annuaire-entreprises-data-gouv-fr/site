@@ -40,6 +40,7 @@ import {
 import { shouldUseInsee } from "./index.server";
 import {
   createDefaultUniteLegale,
+  type IEtablissement,
   type IUniteLegale,
   isEntrepreneurIndividuel,
   SirenNotFoundError,
@@ -84,21 +85,28 @@ class UniteLegaleBuilder {
   }
 
   build = async () => {
-    const uniteLegale = await this.fetchFromClients();
+    let uniteLegale = await this.fetchFromClients();
 
     if (
       (await isProtectedSiren(uniteLegale.siren)) &&
       estDiffusible(uniteLegale)
     ) {
-      uniteLegale.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-
-      uniteLegale.siege.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-
-      const allProtected = uniteLegale.etablissements.all.map((e) => {
-        e.statutDiffusion = ISTATUTDIFFUSION.PROTECTED;
-        return e;
-      });
-      uniteLegale.etablissements = createEtablissementsList(allProtected);
+      // Insee can restrict an individual establishment independently of its SIREN.
+      const protectIfDiffusible = (etablissement: IEtablissement) =>
+        estDiffusible(etablissement)
+          ? { ...etablissement, statutDiffusion: ISTATUTDIFFUSION.PROTECTED }
+          : etablissement;
+      uniteLegale = {
+        ...uniteLegale,
+        statutDiffusion: ISTATUTDIFFUSION.PROTECTED,
+        siege: protectIfDiffusible(uniteLegale.siege),
+        etablissements: createEtablissementsList(
+          uniteLegale.etablissements.all.map(protectIfDiffusible),
+          uniteLegale.etablissements.currentEtablissementPage,
+          uniteLegale.etablissements.nombreEtablissements,
+          uniteLegale.etablissements.nombreEtablissementsOuverts
+        ),
+      };
     }
 
     // en sommeil

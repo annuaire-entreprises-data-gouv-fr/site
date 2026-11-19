@@ -16,18 +16,34 @@ test.describe("Annonces et observations", () => {
     await expect(page.getByText("Annonces BODACC").first()).toBeVisible();
   });
 
-  test("Should display publication", async ({ page }) => {
-    await goto(page, "/entreprise/880878145/annonces");
-    await expect(page.getByText("Publication").first()).toBeVisible();
-    await expect(page.getByText("23/11/2022").first()).toBeVisible();
+  for (const { siren, diffusion } of [
+    { siren: "880878145", diffusion: "a diffusible company" },
+    { siren: "908595879", diffusion: "a legacy protected company" },
+    { siren: "990000010", diffusion: "a newly protected company" },
+  ]) {
+    test(`BODACC publications are visible for ${diffusion}`, async ({
+      page,
+    }) => {
+      await goto(page, `/entreprise/${siren}/annonces`);
+      await expect(page.getByText("Publication").first()).toBeVisible();
+      await expect(page.getByText("23/11/2022").first()).toBeVisible();
+      await expect(
+        page.getByText("Dépôts des comptes 2021").first()
+      ).toBeVisible();
+      await expect(page.getByText("n°446").first()).toBeVisible();
+      await expect(page.getByText("Radiations").first()).toBeVisible();
+      await expect(
+        page.getByText("Annonce n°446, BODACC B n°20220227").first()
+      ).toBeVisible();
+    });
+  }
+
+  test("Partial diffusion keeps BODACC notices private", async ({ page }) => {
+    await goto(page, "/entreprise/990000044/annonces");
     await expect(
-      page.getByText("Dépôts des comptes 2021").first()
+      page.getByRole("heading", { name: "Annonces (données privées)" })
     ).toBeVisible();
-    await expect(page.getByText("n°446").first()).toBeVisible();
-    await expect(page.getByText("Radiations").first()).toBeVisible();
-    await expect(
-      page.getByText("Annonce n°446, BODACC B n°20220227").first()
-    ).toBeVisible();
+    await expect(page.locator("#annonces-bodacc")).toHaveCount(0);
   });
 
   test("Should display JOAFE section for association", async ({ page }) => {

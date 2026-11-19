@@ -18,6 +18,7 @@ import { TitleEtablissementWithDenomination } from "#/components/title-section/e
 import { useAuth } from "#/contexts/auth.context";
 import { estNonDiffusibleStrict } from "#/models/core/diffusion";
 import { isServicePublic } from "#/models/core/types";
+import { getProtectedSiren } from "#/models/protected-siren";
 import { getEtablissementWithUniteLegaleFromSlugFn } from "#/server-functions/public/unite-legale";
 import { getBaseUrl } from "#/utils/get-base-url";
 import {
@@ -49,7 +50,14 @@ const loadEtablissementPage = createServerFn()
     const userAgent = getRequestHeader("user-agent") || "";
     const isBot = isUserAgentABot(userAgent);
 
-    return { etablissement, uniteLegale, triggerRedirectedEvent, isBot };
+    const protectedSiren = await getProtectedSiren(uniteLegale.siren);
+    return {
+      etablissement,
+      uniteLegale,
+      triggerRedirectedEvent,
+      isBot,
+      isLegacyProtected: protectedSiren?.isLegacy ?? null,
+    };
   });
 
 const currentYear = new Date().getFullYear();
@@ -133,8 +141,13 @@ export const Route = createFileRoute("/_header-default/etablissement/$slug")({
 });
 
 function RouteComponent() {
-  const { etablissement, uniteLegale, triggerRedirectedEvent, isBot } =
-    Route.useLoaderData();
+  const {
+    etablissement,
+    uniteLegale,
+    triggerRedirectedEvent,
+    isBot,
+    isLegacyProtected,
+  } = Route.useLoaderData();
   const { user } = useAuth();
 
   return (
@@ -154,6 +167,7 @@ function RouteComponent() {
           <>
             <EtablissementSection
               etablissement={etablissement}
+              isLegacyProtected={isLegacyProtected}
               uniteLegale={uniteLegale}
               usedInEntreprisePage={false}
               user={user}

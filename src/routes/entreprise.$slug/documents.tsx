@@ -1,4 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import z from "zod";
 import ActesSection from "#/components/screens/documents.$slug/actes";
 import {
   ConformiteFiscaleSection,
@@ -16,12 +18,22 @@ import {
   ApplicationRights,
   hasRights,
 } from "#/models/authentication/user/rights";
+import { estNonDiffusibleProtected } from "#/models/core/diffusion";
+import { getProtectedSiren } from "#/models/protected-siren";
 import {
   uniteLegalePageDescription,
   uniteLegalePageTitle,
 } from "#/utils/helpers/formatting/unite-legale-label";
+import { verifySiren } from "#/utils/helpers/siren-and-siret";
 import { meta } from "#/utils/seo";
 import { HeaderDefaultError } from "../_header-default/-error";
+
+const loadIsLegacyProtected = createServerFn()
+  .validator(z.string())
+  .handler(
+    async ({ data: siren }) =>
+      (await getProtectedSiren(verifySiren(siren)))?.isLegacy ?? null
+  );
 
 export const Route = createFileRoute("/entreprise/$slug/documents")({
   loader: async ({ parentMatchPromise }) => {
@@ -31,7 +43,10 @@ export const Route = createFileRoute("/entreprise/$slug/documents")({
       throw notFound();
     }
 
-    return loaderData;
+    const isLegacyProtected = estNonDiffusibleProtected(loaderData.uniteLegale)
+      ? await loadIsLegacyProtected({ data: loaderData.uniteLegale.siren })
+      : null;
+    return { ...loaderData, isLegacyProtected };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -63,13 +78,17 @@ export const Route = createFileRoute("/entreprise/$slug/documents")({
 });
 
 function RouteComponent() {
-  const { uniteLegale } = Route.useLoaderData();
+  const { uniteLegale, isLegacyProtected } = Route.useLoaderData();
   const { user } = useAuth();
 
   return (
     <>
       <SummaryDocuments user={user} />
-      <JustificatifsSection uniteLegale={uniteLegale} user={user} />
+      <JustificatifsSection
+        isLegacyProtected={isLegacyProtected}
+        uniteLegale={uniteLegale}
+        user={user}
+      />
       <HorizontalSeparator />
       <BreakPageForPrint />
       <PrintNever>
