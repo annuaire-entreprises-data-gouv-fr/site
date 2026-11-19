@@ -41,7 +41,8 @@ export default function HidePersonalDataPage() {
       </p>
       <p>
         Ainsi, pour faire disparaitre vos informations de dirigeant(e) du site
-        L’Annuaire des Entreprises vous pouvez nous en faire la demande.
+        L’Annuaire des Entreprises ou exercer d’autres droits vous pouvez nous
+        en faire la demande.
       </p>
       <div className="layout-left">
         <ButtonLink
@@ -49,7 +50,7 @@ export default function HidePersonalDataPage() {
           onClick={() => setIsModalVisible(true)}
           type="button"
         >
-          Je souhaite cacher mes informations de dirigeant(e)
+          Je souhaite exercer mes droits
         </ButtonLink>
       </div>
       <Modal
