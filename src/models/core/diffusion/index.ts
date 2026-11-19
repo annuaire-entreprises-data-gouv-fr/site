@@ -12,7 +12,7 @@ import type {
   IPersonneMorale,
 } from "#/models/rne/types";
 import type { ISearchResult } from "#/models/search";
-import { normalizeName } from "#/utils/helpers/name";
+import { normalizeName, normalizePrenoms } from "#/utils/helpers/name";
 import type { IEtablissementsList } from "../etablissements-list";
 import {
   type IEtablissement,
@@ -153,7 +153,8 @@ export const anonymiseDirigeants = <T extends IDirigeants>(
     "siren" in dirigeant ? dirigeant : anonymiseDirigeant(dirigeant)
   ) as T;
 };
-export const isDirigeantProtected = (
+
+const isDirigeantProtected = (
   dirigeant: IEtatCivil | IPersonneMorale,
   protectedSiren: IProtectedSiren | null
 ) => {
@@ -166,8 +167,9 @@ export const isDirigeantProtected = (
 
   return protectedSiren.dirigeants.some(
     (protectedDirigeant) =>
-      protectedDirigeant.nom === normalizeName(dirigeant.nom) &&
-      protectedDirigeant.prenoms === normalizeName(dirigeant.prenoms) &&
+      normalizeName(protectedDirigeant.nom) === normalizeName(dirigeant.nom) &&
+      normalizePrenoms(protectedDirigeant.prenoms) ===
+        normalizePrenoms(dirigeant.prenoms) &&
       protectedDirigeant.dateDeNaissance === dirigeant.dateNaissancePartial
   );
 };

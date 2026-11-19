@@ -9,3 +9,8 @@ export const normalizeName = (value: string | null | undefined) =>
     .replaceAll("œ", "oe")
     .replaceAll("æ", "ae")
     .replace(NON_ALPHANUMERIC_REGEX, "");
+
+export const normalizePrenoms = (prenoms: string) => {
+  const [firstPrenom] = prenoms.split(" ");
+  return firstPrenom ? normalizeName(firstPrenom) : "";
+};
