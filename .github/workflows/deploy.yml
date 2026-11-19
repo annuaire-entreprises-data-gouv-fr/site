@@ -80,6 +80,9 @@ jobs:
   deploy-staging:
     name: Deploy - staging
     runs-on: ubuntu-latest
+    concurrency:
+      group: wg-needed
+      queue: max
     timeout-minutes: 15
     needs: [build-docker-staging]
     environment:
@@ -116,7 +119,7 @@ jobs:
   trigger-production-deployment:
     name: Trigger production deployment
     runs-on: ubuntu-latest
-    needs: [deploy-staging]
+    needs: [deploy-staging, build-docker-production]
     environment:
       name: production
     timeout-minutes: 2
@@ -127,6 +130,9 @@ jobs:
   deploy-production:
     name: Deploy - production
     runs-on: ubuntu-latest
+    concurrency:
+      group: wg-needed
+      queue: max
     needs: [trigger-production-deployment]
     timeout-minutes: 15
     strategy:

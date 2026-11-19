@@ -13,10 +13,16 @@
     ]
   },
   "linter": {
+    // Preserve the existing lint policy; adopt new Biome/Ultracite rules separately.
     "rules": {
       "style": {
         "noNestedTernary": "off",
-        "noIncrementDecrement": "off"
+        "noIncrementDecrement": "off",
+        "useDomQuerySelector": "off",
+        "useNamedCaptureGroup": "off",
+        "useReduceTypeParameter": "off",
+        "useThisInClassMethods": "off",
+        "useUnicodeRegex": "off"
       },
       "suspicious": {
         "noExplicitAny": "off",
@@ -25,7 +31,9 @@
         "noConsole": "off",
         // relies on TS types, which don't guarantee the shape of external API data
         "noUnnecessaryConditions": "off",
-        "noEqualsToNull": "off"
+        "noEqualsToNull": "off",
+        "noDuplicateSelectors": "off",
+        "useBaseline": "off"
       },
       "performance": {
         "useTopLevelRegex": "off",
@@ -33,18 +41,31 @@
         "noJsxPropsBind": "off"
       },
       "complexity": {
-        "noExcessiveCognitiveComplexity": "off"
+        "noExcessiveCognitiveComplexity": "off",
+        "useArraySome": "off",
+        "useMathMinMax": "off",
+        "useRegexpTest": "off"
       },
       "correctness": {
         "useJsxKeyInIterable": "off",
         "noUnknownMediaFeatureName": "off"
       },
       "security": {
-        "noDangerouslySetInnerHtml": "off"
+        "noDangerouslySetInnerHtml": "off",
+        "useIframeSandbox": "off"
       }
     }
   },
+  "yaml": {
+    "formatter": { "enabled": false }
+  },
   "overrides": [
+    {
+      "includes": ["**/*.css"],
+      "assist": {
+        "actions": { "source": { "useSortedProperties": "off" } }
+      }
+    },
     {
       // vitest globals (tsconfig "vitest/globals")
       "includes": [

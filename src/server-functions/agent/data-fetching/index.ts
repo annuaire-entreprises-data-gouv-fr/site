@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { clientMinimis } from "#/clients/api-data-gouv/minimis";
+import { HttpNotFound } from "#/clients/exceptions";
+import { isAPINotResponding } from "#/models/api-not-responding";
 import { ApplicationRights } from "#/models/authentication/user/rights";
+import { anonymiseDirigeants } from "#/models/core/diffusion";
 import { getAssociationProtected } from "#/models/espace-agent/association-protected";
 import { getBeneficiaires } from "#/models/espace-agent/beneficiaires";
 import { getBilansProtected } from "#/models/espace-agent/bilans";
@@ -20,11 +23,15 @@ import { getFondationsRestreintes } from "#/models/espace-agent/fondations-restr
 import { getLiensCapitalistiquesProtected } from "#/models/espace-agent/liens-capitalistiques";
 import { getDocumentsRNEProtected } from "#/models/espace-agent/rne-protected/documents";
 import { getTravauxPublic } from "#/models/espace-agent/travaux-publics";
+import { getProtectedSiren } from "#/models/protected-siren";
 import { getSubventionsAssociationFromSlug } from "#/models/subventions/association";
 import {
   agentFnMiddleware,
   withApplicationRight,
 } from "#/server-functions/middlewares";
+import { getUniteLegaleFromSirenFn } from "#/server-functions/public/unite-legale";
+import { verifySiren } from "#/utils/helpers";
+import getSession from "#/utils/server-side-helper/get-session";
 import { withRateLimiting, withUseCase } from "../middlewares";
 import {
   getAgentAidesMinimisSchema,
@@ -215,7 +222,37 @@ export const getAgentDirigeantsProtectedFn = createServerFn()
   .validator(getAgentDirigeantsProtectedSchema)
   .handler(async ({ data }) => {
     const { siren, isEI } = data;
-    return await getDirigeantsProtected(siren, { isEI });
+
+    const verifiedSiren = verifySiren(siren);
+
+    const protectedSiren = await getProtectedSiren(verifiedSiren);
+
+    const [result, uniteLegale, session] = await Promise.all([
+      getDirigeantsProtected(siren, {
+        isEI,
+        isUniteLegaleProtected: !!protectedSiren,
+      }),
+      getUniteLegaleFromSirenFn({ data: { siren: verifiedSiren } }),
+      getSession(),
+    ]);
+
+    if (isAPINotResponding(result)) {
+      return result;
+    }
+
+    if (!uniteLegale) {
+      throw new HttpNotFound("Unite legale not found");
+    }
+
+    return {
+      ...result,
+      data: anonymiseDirigeants(
+        uniteLegale,
+        session,
+        result.data,
+        protectedSiren
+      ),
+    };
   });
 
 export const getAgentRneDocumentsFn = createServerFn()

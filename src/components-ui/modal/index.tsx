@@ -13,6 +13,7 @@ export const Modal: React.FC<{
   modalId: string;
   textAlign?: "center" | "left";
   onClose?: () => void;
+  closeButtonLabel?: string;
 }> = ({
   size = "medium",
   children,
@@ -20,6 +21,7 @@ export const Modal: React.FC<{
   modalId,
   onClose,
   textAlign = "center",
+  closeButtonLabel = "Fermer la modale de bienvenue",
 }) => (
   <ClientOnly>
     {isVisible ? (
@@ -57,7 +59,7 @@ export const Modal: React.FC<{
               <div className={styles.closeButton}>
                 <ButtonClose
                   ariaControls={modalId}
-                  ariaLabel="Fermer la modale de bienvenue"
+                  ariaLabel={closeButtonLabel}
                   onClick={onClose}
                 />
               </div>

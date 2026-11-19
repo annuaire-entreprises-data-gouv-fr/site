@@ -305,6 +305,31 @@ describe("httpBackClient", () => {
     });
   });
 
+  it("preserves TLS failure causes without attaching request config", async () => {
+    const tlsError = Object.assign(
+      new Error("self-signed certificate in certificate chain"),
+      { code: "SELF_SIGNED_CERT_IN_CHAIN" }
+    );
+    const fetchError = new TypeError("fetch failed", { cause: tlsError });
+    vi.spyOn(global, "fetch").mockRejectedValue(fetchError);
+
+    const request = httpBackClient({
+      headers: { Token: "secret-test-token" },
+      url: "https://example.test/failure",
+    });
+
+    await expect(request).rejects.toMatchObject({
+      name: "HttpServerError",
+      status: 500,
+      cause: {
+        cause: { code: "SELF_SIGNED_CERT_IN_CHAIN" },
+      },
+    });
+    await expect(request).rejects.toHaveProperty("cause", fetchError);
+    await expect(request).rejects.not.toHaveProperty("config");
+    await expect(request).rejects.not.toHaveProperty("cause.config");
+  });
+
   it("throws HttpConnectionReset when fetch fails with ECONNRESET", async () => {
     vi.spyOn(global, "fetch").mockRejectedValue(new Error("read ECONNRESET"));
 

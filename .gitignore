@@ -28,6 +28,8 @@ cspell.json
 # misc
 .DS_Store
 *.pem
+# Public Ministry of the Interior root CA used by SIAF
+!/.certs/acr-ministere-interieur-2018.pem
 
 # debug
 npm-debug.log*

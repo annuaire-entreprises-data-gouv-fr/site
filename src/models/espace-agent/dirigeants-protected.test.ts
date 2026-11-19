@@ -51,7 +51,7 @@ const mockLogErrorInSentry = vi.mocked(logErrorInSentry);
 const compareDirigeants = async (
   rneData: IDirigeants,
   rcsData: IDirigeants,
-  isEI = false
+  { isEI = false, isUniteLegaleProtected = false } = {}
 ) => {
   mockGetDirigeantsRNE.mockResolvedValue({
     data: rneData,
@@ -59,7 +59,7 @@ const compareDirigeants = async (
   });
   mockGetMandatairesRCS.mockResolvedValue(rcsData);
 
-  await getDirigeantsProtected(SIREN, { isEI });
+  await getDirigeantsProtected(SIREN, { isEI, isUniteLegaleProtected });
 };
 
 const expectMismatchToHaveBeenLogged = () => {
@@ -73,11 +73,25 @@ const expectMismatchToHaveBeenLogged = () => {
   );
 };
 
-describe("getDirigeantsProtected RNE/RCS mismatch", () => {
-  beforeEach(() => {
-    vi.resetAllMocks();
-  });
+beforeEach(() => {
+  vi.resetAllMocks();
+});
 
+describe("getDirigeantsProtected RNE fallback", () => {
+  it.each([
+    { isUniteLegaleProtected: true, canFallback: false },
+    { isUniteLegaleProtected: false, canFallback: true },
+  ])(
+    "passes canFallback=$canFallback when isUniteLegaleProtected=$isUniteLegaleProtected",
+    async ({ isUniteLegaleProtected, canFallback }) => {
+      await compareDirigeants([], [], { isUniteLegaleProtected });
+
+      expect(mockGetDirigeantsRNE).toHaveBeenCalledWith(SIREN, { canFallback });
+    }
+  );
+});
+
+describe("getDirigeantsProtected RNE/RCS mismatch", () => {
   it("does not report identical dirigeants in a different order", async () => {
     await compareDirigeants(
       [personnePhysique, personneMorale],
@@ -153,7 +167,9 @@ describe("getDirigeantsProtected RNE/RCS mismatch", () => {
   });
 
   it("does not compare non-standardized individual-enterprise data", async () => {
-    await compareDirigeants([personnePhysique], [personneMorale], true);
+    await compareDirigeants([personnePhysique], [personneMorale], {
+      isEI: true,
+    });
 
     expect(mockLogErrorInSentry).not.toHaveBeenCalled();
   });
