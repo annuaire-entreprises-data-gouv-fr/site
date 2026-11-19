@@ -1,10 +1,12 @@
 import { expect, goto, test } from "../support/test";
 
 test.describe("Etat administratif", () => {
-  test("Non diffusible", async ({ page }) => {
+  test("Partial diffusion keeps the administrative status visible", async ({
+    page,
+  }) => {
     await goto(page, "/entreprise/300025764");
     await expect(
-      page.getByText("information non-diffusible").first()
+      page.getByRole("status").filter({ hasText: "en activité" }).first()
     ).toBeVisible();
   });
 

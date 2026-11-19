@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { HttpResponse, type HttpResponseResolver } from "msw/http";
 
+import { diffusionSearchResponse } from "../../fixtures/diffusion";
+
 function getProjectRoot() {
   return process.cwd();
 }
@@ -36,6 +38,11 @@ export const rechercheEntrepriseHandler: HttpResponseResolver = async ({
   request,
 }) => {
   const q = new URL(request.url).searchParams.get("q");
+
+  const diffusion = diffusionSearchResponse(q);
+  if (diffusion) {
+    return HttpResponse.json(diffusion);
+  }
 
   const snapshots = await getSnapshots();
 

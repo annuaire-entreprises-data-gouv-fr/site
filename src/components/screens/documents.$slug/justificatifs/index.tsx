@@ -5,9 +5,10 @@ import { JustificatifImmatriculationJOAFE } from "./joafe";
 import { JustificatifImmatriculationRNE } from "./rne";
 
 const JustificatifsSection: React.FC<{
+  isLegacyProtected: boolean | null;
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
-}> = ({ uniteLegale, user }) => (
+}> = ({ isLegacyProtected, uniteLegale, user }) => (
   <>
     {isAssociation(uniteLegale) && (
       <JustificatifImmatriculationJOAFE uniteLegale={uniteLegale} />
@@ -15,7 +16,11 @@ const JustificatifsSection: React.FC<{
     {uniteLegale.dateMiseAJourInpi && (
       <JustificatifImmatriculationRNE uniteLegale={uniteLegale} user={user} />
     )}
-    <AvisSituationSection uniteLegale={uniteLegale} user={user} />
+    <AvisSituationSection
+      isLegacyProtected={isLegacyProtected}
+      uniteLegale={uniteLegale}
+      user={user}
+    />
   </>
 );
 export default JustificatifsSection;

@@ -86,7 +86,9 @@ export const UniteLegaleInscriptionIG = ({
 export const UniteLegaleInscriptionSirene = ({
   uniteLegale,
   user,
+  isLegacyProtected,
 }: {
+  isLegacyProtected: boolean | null;
   uniteLegale: IUniteLegale;
   user: IAgentInfo | null;
 }) => {
@@ -135,6 +137,7 @@ export const UniteLegaleInscriptionSirene = ({
         <AvisSituationLink
           button={true}
           etablissement={uniteLegale.siege}
+          isLegacyProtected={isLegacyProtected}
           label="Avis de situation"
           user={user}
         />

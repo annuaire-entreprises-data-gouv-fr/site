@@ -11,6 +11,16 @@
 #   site: true
 
 ---
+- date: 19/11/2026
+  target:
+    agent: site
+  body: |
+    Introduction d’un nouveau parcours pour exercer les droits relatifs aux données personnelles.
+- date: 10/11/2026
+  target:
+    agent: true
+  body: |
+    Gestion des groupes : Ajout de l’affichage, au survol d’un membre, de l’administrateur l’ayant ajouté au groupe (visible uniquement par les administrateurs).
 - date: 04/11/2026
   target:
     agent: true

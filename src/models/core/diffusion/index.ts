@@ -65,6 +65,13 @@ export const estNonDiffusibleProtected = (
   uniteLegaleOrEtablissement: IUniteLegaleOrEtablissement
 ) => uniteLegaleOrEtablissement.statutDiffusion === ISTATUTDIFFUSION.PROTECTED;
 
+export const estAvisSituationPublic = (
+  structure: IUniteLegaleOrEtablissement,
+  isLegacyProtected: boolean | null
+) =>
+  estDiffusible(structure) ||
+  (estNonDiffusibleProtected(structure) && isLegacyProtected === false);
+
 /**
  * Anonymise name & etablissements' adresses
  * @param uniteLegale

@@ -57,7 +57,8 @@ export const Route = createFileRoute("/fondation/$slug/")({
 });
 
 function RouteComponent() {
-  const { fondation, uniteLegale } = FondationLayoutRoute.useLoaderData();
+  const { fondation, uniteLegale, isLegacyProtected } =
+    FondationLayoutRoute.useLoaderData();
   const { from } = FondationLayoutRoute.useSearch();
   const { user } = useAuth();
 
@@ -68,6 +69,7 @@ function RouteComponent() {
     <>
       <FondationSummarySection
         fondation={fondation}
+        isLegacyProtected={isLegacyProtected}
         uniteLegale={uniteLegale}
         user={user}
       />
@@ -92,6 +94,7 @@ function RouteComponent() {
           {uniteLegale.siege && (
             <EtablissementSection
               etablissement={uniteLegale.siege}
+              isLegacyProtected={isLegacyProtected}
               uniteLegale={uniteLegale}
               usedInEntreprisePage={true}
               user={user}

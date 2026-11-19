@@ -36,10 +36,11 @@ import { UniteLegaleRadiationRCS } from "../entreprise.$slug/radiation-rcs";
 import { FondationInscriptionRNF } from "./inscriptions";
 
 const FondationSummarySection: React.FC<{
+  isLegacyProtected: boolean | null;
   fondation: IFondation;
   uniteLegale: IUniteLegale | null;
   user: IAgentInfo | null;
-}> = ({ fondation, uniteLegale, user }) => {
+}> = ({ isLegacyProtected, fondation, uniteLegale, user }) => {
   const hasLabelsAndCertificates = uniteLegale
     ? checkHasLabelsAndCertificates(uniteLegale)
     : false;
@@ -65,6 +66,7 @@ const FondationSummarySection: React.FC<{
           {uniteLegale && (
             <>
               <UniteLegaleInscriptionSirene
+                isLegacyProtected={isLegacyProtected}
                 uniteLegale={uniteLegale}
                 user={user}
               />
