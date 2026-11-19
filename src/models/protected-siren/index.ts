@@ -1,7 +1,7 @@
 import { readFromGrist } from "#/clients/external-tooling/grist.server";
 import { InternalError } from "#/models/exceptions";
 import { DataStore } from "#/utils/data-store";
-import { normalizeName } from "#/utils/helpers/name";
+import { normalizeName, normalizePrenoms } from "#/utils/helpers/name";
 import { logErrorInSentry } from "#/utils/sentry";
 import {
   extractSirenFromSiret,
@@ -81,7 +81,7 @@ class ProtectedSirenList {
         };
       }
       protectedSiren[row.siren].dirigeants.push({
-        prenoms: normalizeName(row.prenoms),
+        prenoms: normalizePrenoms(row.prenoms),
         nom: normalizeName(row.nom),
         dateDeNaissance: toYearMonth(row.date_de_naissance),
       });

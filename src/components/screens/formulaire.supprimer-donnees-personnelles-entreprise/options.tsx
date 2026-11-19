@@ -106,10 +106,19 @@ const getOptions = (uniteLegale: IUniteLegale): IOption[] => {
       id: "hide-personal-data-option-autre",
       title: "Autre donnée",
       content: (
-        <p>
-          Toutes les autres données qui concernent votre structure sont des
-          données ouvertes et ne peuvent pas être masquées.
-        </p>
+        <>
+          <p>
+            Toutes les autres données qui concernent votre structure sont des
+            données ouvertes et ne peuvent pas être masquées.
+          </p>
+          <p>
+            Si vous souhaitez exercer d’autres droits vous pouvez écrire à{" "}
+            <a href="mailto:mesdonnees@modernisation.gouv.fr">
+              mesdonnees@modernisation.gouv.fr
+            </a>
+            .
+          </p>
+        </>
       ),
     },
   ];

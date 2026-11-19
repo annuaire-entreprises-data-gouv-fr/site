@@ -52,13 +52,6 @@ export default function HidePersonalDataPage() {
           Je souhaite cacher mes informations de dirigeant(e)
         </ButtonLink>
       </div>
-      <p>
-        Si vous souhaitez exercer d’autres droits vous pouvez écrire à{" "}
-        <a href="mailto:mesdonnees@modernisation.gouv.fr">
-          mesdonnees@modernisation.gouv.fr
-        </a>
-        .
-      </p>
       <Modal
         closeButtonLabel="Fermer la fenêtre de demande de suppression de données personnelles"
         isVisible={isModalVisible}
