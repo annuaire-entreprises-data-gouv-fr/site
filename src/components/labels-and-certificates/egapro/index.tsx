@@ -1,6 +1,5 @@
 import type React from "react";
 import { DataSection } from "#/components/section/data-section";
-import { FullTable } from "#/components/table/full";
 import FAQLink from "#/components-ui/faq-link";
 import { SimpleSeparator } from "#/components-ui/horizontal-separator";
 import InformationTooltip from "#/components-ui/information-tooltip";
@@ -39,20 +38,22 @@ export const EgaproSection: React.FC<{
               l’année <strong>N-1</strong> (par exemple : les données déclarées
               en 2023 sont celles de 2022).
             </p>
-            <FullTable
+            <EgaproTable
               body={body}
+              details
               head={["Année", ...egapro.index.indexYears]}
             />
             {egapro.representation ? (
               <>
                 <br />
                 <SimpleSeparator />
+                <h3>Écarts de représentation entre les femmes et les hommes</h3>
                 <p>
                   Cette structure a également déclaré ses écarts de
                   représentation entre les femmes et les hommes dans les postes
                   de direction&nbsp;:
                 </p>
-                <FullTable
+                <EgaproTable
                   body={[
                     [
                       "Femmes parmi les cadres dirigeants (%)",
@@ -106,9 +107,9 @@ const getSectionBody = (egapro: IEgapro) => {
       "Index (sur 100)",
       ...notes
         .map((note) =>
-          note ? (
+          note == null ? null : (
             <strong style={{ color: getColor(note) }}>{note}</strong>
-          ) : null
+          )
         )
         .map(mapToNc),
     ],
@@ -189,3 +190,55 @@ const NC = () => (
 );
 
 const mapToNc = (e: any) => e ?? <NC />;
+
+function EgaproTable({
+  body,
+  head,
+  details = false,
+}: {
+  body: React.ReactNode[][];
+  head: React.ReactNode[];
+  details?: boolean;
+}) {
+  const rows = (items: React.ReactNode[][]) =>
+    items
+      .filter((row) => row.length > 0)
+      .map((row, index) => (
+        <tr key={index}>
+          <th scope="row">{row[0]}</th>
+          {row.slice(1).map((cell, cellIndex) => (
+            <td key={cellIndex}>{cell}</td>
+          ))}
+        </tr>
+      ));
+  return (
+    <div className="fr-table">
+      <table>
+        <thead>
+          <tr>
+            {head.map((cell, index) => (
+              <th key={index} scope="col">
+                {cell}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        {details ? (
+          <>
+            <tbody>{rows(body.slice(0, 1))}</tbody>
+            <tbody>
+              <tr>
+                <th colSpan={head.length} scope="rowgroup">
+                  {body[1][0]}
+                </th>
+              </tr>
+              {rows(body.slice(2))}
+            </tbody>
+          </>
+        ) : (
+          <tbody>{rows(body)}</tbody>
+        )}
+      </table>
+    </div>
+  );
+}

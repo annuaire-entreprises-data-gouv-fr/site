@@ -62,10 +62,10 @@ const EtablissementRGE = ({
             {certification.logoPath && (
               <div style={{ width: 72 }}>
                 <img
-                  alt={`Logo ${certification.nomCertificat}`}
+                  alt=""
+                  aria-hidden="true"
                   height="100%"
                   src={certification.logoPath}
-                  title={`Logo ${certification.nomCertificat}`}
                   width="100%"
                 />
               </div>
@@ -81,6 +81,7 @@ const EtablissementRGE = ({
           </ul>,
           <ButtonLink
             alt
+            aria-label={`Consulter le certificat ${certification.nomCertificat} de l’établissement ${siret} — nouvelle fenêtre`}
             small
             target="_blank"
             to={certification.urlQualification}
