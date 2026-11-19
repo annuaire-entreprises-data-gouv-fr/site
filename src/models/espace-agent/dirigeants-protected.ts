@@ -74,7 +74,11 @@ const haveSameDirigeants = (rneData: IDirigeants, rcsData: IDirigeants) => {
 
 export const getDirigeantsProtected = async (
   maybeSiren: string,
-  params: { isEI: boolean; isUniteLegaleProtected: boolean }
+  params: {
+    isEI: boolean;
+    isUniteLegaleProtected: boolean;
+    canSeeJourNaissanceDirigeants: boolean;
+  }
 ): Promise<IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
 
@@ -96,7 +100,14 @@ export const getDirigeantsProtected = async (
 
   try {
     const rneData = isAPINotResponding(dirigeantsRNE) ? [] : dirigeantsRNE.data;
-    const rcsData = isAPINotResponding(dirigeantsRCS) ? [] : dirigeantsRCS;
+    const rcsData = isAPINotResponding(dirigeantsRCS)
+      ? []
+      : params.canSeeJourNaissanceDirigeants
+        ? dirigeantsRCS
+        : dirigeantsRCS.map((dirigeant) => ({
+            ...dirigeant,
+            dateNaissance: undefined,
+          }));
 
     // EI data is not standardised. It lacks birthdate in RNE and is randomly populated in IG
     let dirigeantMerged: IDirigeantsMergedIGInpi = [];
