@@ -27,6 +27,8 @@ import {
 const MODAL_ID = "add-user";
 const USER_ALREADY_IN_GROUP_ERROR =
   "Cet utilisateur est déjà membre de ce groupe";
+const PERSONAL_EMAIL_ERROR =
+  "Les adresses personnelles (Gmail, Yahoo…) ne sont pas acceptées : utilisez une adresse professionnelle";
 const NO_USER_ADDED = "Aucun membre n’a été ajouté.";
 const BATCH_ERRORS = {
   USER_ALREADY_IN_GROUP: `Au moins une des adresses est déjà membre de ce groupe. ${NO_USER_ADDED} Retirez du fichier les membres existants puis réessayez.`,
@@ -69,6 +71,8 @@ export default function AddUserModal({
   const [fileErrors, setFileErrors] = useState<string[]>([]);
   // file emails that roles.data reported as already in the group
   const [alreadyInGroup, setAlreadyInGroup] = useState<string[]>([]);
+  // file emails that roles.data refused as personal
+  const [personalEmails, setPersonalEmails] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const addUserToGroup = useServerFn(addUserToGroupFn);
@@ -78,11 +82,15 @@ export default function AddUserModal({
     mutationFn: addUserToGroup,
     onSuccess: (result) => {
       if ("error" in result) {
-        setValidationErrors([USER_ALREADY_IN_GROUP_ERROR]);
+        const message =
+          result.error === "PERSONAL_EMAIL_REFUSED"
+            ? PERSONAL_EMAIL_ERROR
+            : USER_ALREADY_IN_GROUP_ERROR;
+        setValidationErrors([message]);
         showNotification({
           type: NotificationTypeEnum.ERROR,
           title: "Ajout impossible",
-          message: USER_ALREADY_IN_GROUP_ERROR,
+          message,
         });
         return;
       }
@@ -131,7 +139,18 @@ export default function AddUserModal({
           );
           return;
         }
-        console.log(result);
+        if (result.error === "PERSONAL_EMAIL_REFUSED" && result.emails.length) {
+          const emails = mergeEmails(personalEmails, result.emails);
+          setPersonalEmails(emails);
+          showFileError(
+            `${plural(
+              emails.length,
+              "adresse du fichier est personnelle",
+              "adresses du fichier sont personnelles"
+            )} : seules les adresses professionnelles sont acceptées. ${NO_USER_ADDED}`
+          );
+          return;
+        }
         showFileError(BATCH_ERRORS[result.error]);
         return;
       }
@@ -165,9 +184,9 @@ export default function AddUserModal({
     ? [USER_ALREADY_IN_GROUP_ERROR]
     : validationErrors;
   const isAddDisabled = !userEmail || isPending || isUserAlreadyInGroup;
-  const alreadyInGroupSet = new Set(alreadyInGroup);
+  const refusedEmails = new Set([...alreadyInGroup, ...personalEmails]);
   const emailsToAdd = (batch?.emails ?? []).filter(
-    (email) => !alreadyInGroupSet.has(email)
+    (email) => !refusedEmails.has(email)
   );
   const isBatchAddDisabled = !batch || emailsToAdd.length === 0 || isPending;
 
@@ -219,6 +238,7 @@ export default function AddUserModal({
     setBatch(null);
     setFileErrors([]);
     setAlreadyInGroup([]);
+    setPersonalEmails([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -229,6 +249,7 @@ export default function AddUserModal({
     setBatch(null);
     setFileErrors([]);
     setAlreadyInGroup([]);
+    setPersonalEmails([]);
     if (!file) {
       return;
     }
@@ -263,6 +284,7 @@ export default function AddUserModal({
     setBatch(null);
     setFileErrors([]);
     setAlreadyInGroup([]);
+    setPersonalEmails([]);
   };
 
   return (
@@ -396,6 +418,7 @@ export default function AddUserModal({
                   alreadyInGroup={alreadyInGroup}
                   batch={batch}
                   emailsToAdd={emailsToAdd}
+                  personalEmails={personalEmails}
                 />
               )}
             </>
@@ -413,6 +436,9 @@ export default function AddUserModal({
                   }
                   if (alreadyInGroup.length > 0) {
                     return "Envoyer sans les doublons";
+                  }
+                  if (personalEmails.length > 0) {
+                    return "Envoyer sans les adresses personnelles";
                   }
                   return `Ajouter ${plural(emailsToAdd.length, "membre", "membres")}`;
                 })()}
@@ -466,13 +492,24 @@ function BatchSummary({
   batch,
   emailsToAdd,
   alreadyInGroup,
+  personalEmails,
 }: {
   batch: IParsedEmailsFile;
-  // the file emails, without those already in the group
+  // the file emails, without those refused
   emailsToAdd: string[];
   alreadyInGroup: string[];
+  personalEmails: string[];
 }) {
   const ignored = [
+    [
+      personalEmails,
+      plural(
+        personalEmails.length,
+        "adresse personnelle refusée",
+        "adresses personnelles refusées"
+      ),
+      styles.invalid,
+    ],
     [
       alreadyInGroup,
       `${plural(alreadyInGroup.length, "email", "emails")} faisant déjà partie du groupe`,
