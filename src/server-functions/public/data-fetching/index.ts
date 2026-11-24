@@ -2,7 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { HttpNotFound } from "#/clients/exceptions";
 import { isAPINotResponding } from "#/models/api-not-responding";
 import { getAssociationFromSlug } from "#/models/association";
-import { ApplicationRights } from "#/models/authentication/user/rights";
 import { anonymiseDirigeants } from "#/models/core/diffusion";
 import { getEORIValidation } from "#/models/eori-validation";
 import { getProtectedSiren } from "#/models/protected-siren";
@@ -10,7 +9,7 @@ import { getDirigeantsRNE } from "#/models/rne/dirigeants";
 import { getRNEObservations } from "#/models/rne/observations";
 import { verifySiren } from "#/utils/helpers";
 import getSession from "#/utils/server-side-helper/get-session";
-import { withApplicationRight } from "../../middlewares";
+import { publicMiddlewares } from "../../middlewares";
 import { getUniteLegaleFromSirenFn } from "../unite-legale";
 import {
   getAssociationSchema,
@@ -20,7 +19,7 @@ import {
 } from "./schemas";
 
 export const getRneDirigeantsFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
+  .middleware(publicMiddlewares)
   .validator(getDirigeantsSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
@@ -55,7 +54,7 @@ export const getRneDirigeantsFn = createServerFn()
   });
 
 export const getRneObservationsFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
+  .middleware(publicMiddlewares)
   .validator(getObservationsSchema)
   .handler(async ({ data }) => {
     const { siren } = data;
@@ -63,7 +62,7 @@ export const getRneObservationsFn = createServerFn()
   });
 
 export const getAssociationFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
+  .middleware(publicMiddlewares)
   .validator(getAssociationSchema)
   .handler(async ({ data }) => {
     const { slug } = data;
@@ -71,7 +70,7 @@ export const getAssociationFn = createServerFn()
   });
 
 export const validateEORIFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
+  .middleware(publicMiddlewares)
   .validator(validateEORISchema)
   .handler(async ({ data }) => {
     const { siret } = data;

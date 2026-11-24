@@ -68,3 +68,8 @@ export const agentFnMiddleware = createMiddleware({ type: "function" })
 
     return await next();
   });
+
+export const publicMiddlewares = [
+  errorMiddleware,
+  withApplicationRight(ApplicationRights.opendata),
+];
