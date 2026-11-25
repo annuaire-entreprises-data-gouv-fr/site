@@ -204,7 +204,10 @@ function RouteComponent() {
                     <h4>Dirigeant(es)</h4>
                     <ul>
                       <li>Noms des dirigeant(es)</li>
-                      <li>Date de naissance des dirigeant(es)</li>
+                      <li>Mois et année de naissance des dirigeant(es)</li>
+                      <li>
+                        Jour de naissance des dirigeant(es) <HabilitationTag />
+                      </li>
                       <li>Comparaison des dirigeants RCS/RNE</li>
                       <li>Élus et dirigeants d’administration</li>
                     </ul>
