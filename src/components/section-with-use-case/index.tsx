@@ -93,7 +93,7 @@ const ProtectedSectionWithUseCase: React.FC<
 
   if (!hasRights({ user }, requiredRight)) {
     return noRightContent ? (
-      <Section id={id} title={title}>
+      <Section id={id} isProtected title={title}>
         {noRightContent}
       </Section>
     ) : null;
@@ -101,7 +101,7 @@ const ProtectedSectionWithUseCase: React.FC<
 
   if (!useCase) {
     return (
-      <Section id={id} isProtected={true} sources={sources} title={title}>
+      <Section id={id} isProtected sources={sources} title={title}>
         {useCaseFormContent || <DefaultIntroContent />}
         <AskUseCase idPrefix={id} setUseCase={setUseCase} useCase={useCase} />
       </Section>
@@ -110,7 +110,7 @@ const ProtectedSectionWithUseCase: React.FC<
 
   if (!allowedUseCases.includes(useCase)) {
     return (
-      <Section id={id} isProtected={true} sources={sources} title={title}>
+      <Section id={id} isProtected sources={sources} title={title}>
         {useCaseFormContent || <DefaultIntroContent />}
         <strong>
           Ces informations ne vous sont pas accessibles dans ce cas d‘usage.
