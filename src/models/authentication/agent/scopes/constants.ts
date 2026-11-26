@@ -22,7 +22,7 @@ export const allAgentScopes = [
   "administrateur",
   "liasses_fiscales",
   "liens_capitalistiques",
-  "jour_naissance_dirigeants",
+  "identite_restreinte_dirigeants",
 ] as const;
 
 export const marchePublicScopes: IAgentScope[] = [
@@ -31,7 +31,7 @@ export const marchePublicScopes: IAgentScope[] = [
   "conformite_fiscale",
   "conformite_sociale",
   "travaux_publics",
-  "jour_naissance_dirigeants",
+  "identite_restreinte_dirigeants",
 ];
 
 export const aidesPubliquesScopes: IAgentScope[] = [
@@ -40,7 +40,7 @@ export const aidesPubliquesScopes: IAgentScope[] = [
   "conformite_fiscale",
   "conformite_sociale",
   "travaux_publics",
-  "jour_naissance_dirigeants",
+  "identite_restreinte_dirigeants",
 ];
 
 export const lutteContreLaFraudeScopes: IAgentScope[] = [
@@ -50,7 +50,7 @@ export const lutteContreLaFraudeScopes: IAgentScope[] = [
   "travaux_publics",
   "bilans_bdf",
   "liasses_fiscales",
-  "jour_naissance_dirigeants",
+  "identite_restreinte_dirigeants",
 ];
 
 export const subventionsAssociationsScopes: IAgentScope[] = [];
