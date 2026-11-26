@@ -1,19 +1,18 @@
 import { createServerFn } from "@tanstack/react-start";
-import { ApplicationRights } from "#/models/authentication/user/rights";
 import { getCollectiviteDVF } from "#/models/collectivite/dvf";
 import {
   getCollectiviteEffectifsSalaries,
   getCollectiviteEtablissementsSirene,
   getCollectiviteFluxOuvertureEtablissements,
 } from "#/models/collectivite/economie-locale";
-import { withApplicationRight } from "../../middlewares";
+import { publicMiddlewares } from "../../middlewares";
 import {
   getCollectiviteCommuneSchema,
   getCollectiviteEconomieLocaleSchema,
 } from "./schemas";
 
 export const getCollectiviteEffectifsSalariesFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
+  .middleware(publicMiddlewares)
   .validator(getCollectiviteEconomieLocaleSchema)
   .handler(
     async ({ data: { codeInsee } }) =>
@@ -21,7 +20,7 @@ export const getCollectiviteEffectifsSalariesFn = createServerFn()
   );
 
 export const getCollectiviteEtablissementsSireneFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
+  .middleware(publicMiddlewares)
   .validator(getCollectiviteEconomieLocaleSchema)
   .handler(
     async ({ data: { codeInsee } }) =>
@@ -29,7 +28,7 @@ export const getCollectiviteEtablissementsSireneFn = createServerFn()
   );
 
 export const getCollectiviteFluxOuvertureEtablissementsFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
+  .middleware(publicMiddlewares)
   .validator(getCollectiviteEconomieLocaleSchema)
   .handler(
     async ({ data: { codeInsee } }) =>
@@ -37,7 +36,7 @@ export const getCollectiviteFluxOuvertureEtablissementsFn = createServerFn()
   );
 
 export const getCollectiviteDVFFn = createServerFn()
-  .middleware([withApplicationRight(ApplicationRights.opendata)])
+  .middleware(publicMiddlewares)
   .validator(getCollectiviteCommuneSchema)
   .handler(
     async ({ data: { codeInsee } }) => await getCollectiviteDVF(codeInsee)

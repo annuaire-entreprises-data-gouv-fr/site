@@ -143,6 +143,34 @@ describe("adding a group member", () => {
     ).toBe(false);
   });
 
+  it("explains a refused personal email inline and keeps the modal open", async () => {
+    const personalEmailMessage =
+      "Les adresses personnelles (Gmail, Yahoo…) ne sont pas acceptées : utilisez une adresse professionnelle";
+    execute.mockResolvedValue({
+      error: "PERSONAL_EMAIL_REFUSED",
+      emails: ["agent@gmail.com"],
+    });
+    const input = openModal();
+    fireEvent.change(input, { target: { value: "agent@gmail.com" } });
+    fireEvent.click(screen.getByRole("button", { name: "Ajouter" }));
+
+    expect(await screen.findByText(personalEmailMessage)).toBeTruthy();
+    expect(input.getAttribute("aria-describedby")).toBe(
+      screen.getByText(personalEmailMessage).parentElement?.id
+    );
+    expect(showNotification).toHaveBeenCalledWith({
+      type: NotificationTypeEnum.ERROR,
+      title: "Ajout impossible",
+      message: personalEmailMessage,
+    });
+    expect(screen.getByRole("dialog")).toBeTruthy();
+    expect(addUsersToGroupState).not.toHaveBeenCalled();
+
+    fireEvent.change(input, { target: { value: "agent@example.fr" } });
+
+    expect(screen.queryByText(personalEmailMessage)).toBeNull();
+  });
+
   it("preserves the notification for other request errors", async () => {
     execute.mockRejectedValue(new Error("Service indisponible"));
     const input = openModal();
@@ -347,6 +375,50 @@ describe("adding group members from a file", () => {
       data: {
         groupId: group.id,
         userEmails: ["new@example.fr", "other@example.fr"],
+        roleId: 2,
+      },
+    });
+    expect(screen.queryByRole("dialog")).toBeNull();
+  });
+
+  it("lists the refused personal emails and sends the file without them", async () => {
+    execute
+      .mockResolvedValueOnce({
+        error: "PERSONAL_EMAIL_REFUSED",
+        emails: ["a@gmail.com", "b@yahoo.fr"],
+      })
+      .mockResolvedValueOnce([newUser]);
+    openModal();
+    uploadFile("A@Gmail.com\nnew@example.fr\nb@yahoo.fr");
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Ajouter 3 membres" })
+    );
+
+    expect(
+      await screen.findByText(
+        "2 adresses du fichier sont personnelles : seules les adresses professionnelles sont acceptées. Aucun membre n’a été ajouté."
+      )
+    ).toBeTruthy();
+    expect(screen.getByText("2 adresses personnelles refusées")).toBeTruthy();
+    expect(screen.getByText("1 nouveau membre à ajouter")).toBeTruthy();
+    expect(
+      screen.getAllByRole("listitem").map((item) => item.textContent)
+    ).toEqual(["new@example.fr", "a@gmail.com", "b@yahoo.fr"]);
+    expect(addUsersToGroupState).not.toHaveBeenCalled();
+
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Envoyer sans les adresses personnelles",
+      })
+    );
+
+    await waitFor(() =>
+      expect(addUsersToGroupState).toHaveBeenCalledWith([newUser])
+    );
+    expect(execute.mock.calls[1][0]).toEqual({
+      data: {
+        groupId: group.id,
+        userEmails: ["new@example.fr"],
         roleId: 2,
       },
     });

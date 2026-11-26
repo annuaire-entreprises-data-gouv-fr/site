@@ -27,6 +27,28 @@ import {
   updateUserRoleInGroupSchema,
 } from "./schemas";
 
+const personalEmailRefusedSchema = z.object({
+  detail: z.object({
+    code: z.literal("PERSONAL_EMAIL_REFUSED"),
+    emails: z.array(z.string()),
+  }),
+});
+
+const toPersonalEmailRefusal = (error: unknown) => {
+  if (!(error instanceof HttpBadRequestError)) {
+    return null;
+  }
+  const refusal = personalEmailRefusedSchema.safeParse(error.data);
+  if (!refusal.success) {
+    return null;
+  }
+  const { detail } = refusal.data;
+  return {
+    error: "PERSONAL_EMAIL_REFUSED" as const,
+    emails: detail.emails,
+  };
+};
+
 export const addUserToGroupFn = createServerFn({ method: "POST" })
   .middleware([agentFnMiddleware])
   .validator(addUserToGroupSchema)
@@ -38,6 +60,10 @@ export const addUserToGroupFn = createServerFn({ method: "POST" })
       if (error instanceof HttpConflict) {
         return { error: "USER_ALREADY_IN_GROUP" as const };
       }
+      const personalEmailRefusal = toPersonalEmailRefusal(error);
+      if (personalEmailRefusal) {
+        return personalEmailRefusal;
+      }
       throw error;
     }
   });
@@ -48,11 +74,6 @@ const usersAlreadyInGroupSchema = z.object({
     code: z.literal("USERS_ALREADY_IN_GROUP"),
     emails: z.array(z.string()),
   }),
-});
-// emails from public providers (gmail, yahoo...) are not allowed. roles.data
-// answers { "detail": "PERSONAL_EMAIL_REFUSED" }, without saying which ones
-const personalEmailRefusedSchema = z.object({
-  detail: z.literal("PERSONAL_EMAIL_REFUSED"),
 });
 
 const BATCH_SIZE_ALERT = 20;
@@ -84,11 +105,9 @@ export const addUsersToGroupFn = createServerFn({ method: "POST" })
           emails: conflict.success ? conflict.data.detail.emails : [],
         };
       }
-      if (
-        error instanceof HttpBadRequestError &&
-        personalEmailRefusedSchema.safeParse(error.data).success
-      ) {
-        return { error: "PERSONAL_EMAIL_REFUSED" as const };
+      const personalEmailRefusal = toPersonalEmailRefusal(error);
+      if (personalEmailRefusal) {
+        return personalEmailRefusal;
       }
       if (error instanceof HttpNotFound) {
         return { error: "GROUP_OR_ROLE_NOT_FOUND" as const };

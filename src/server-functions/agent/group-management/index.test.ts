@@ -82,8 +82,27 @@ describe("addUserToGroupFn", () => {
     );
   });
 
-  it("rethrows other roles server errors", async () => {
-    const error = new HttpForbiddenError("Forbidden");
+  it("returns the refused personal email", async () => {
+    vi.mocked(addUserToGroup).mockRejectedValue(
+      new HttpBadRequestError("Bad Request", {
+        data: {
+          detail: { code: "PERSONAL_EMAIL_REFUSED", emails: ["a@gmail.com"] },
+        },
+      })
+    );
+
+    await expect(addUserToGroupFn(request)).resolves.toEqual({
+      error: "PERSONAL_EMAIL_REFUSED",
+      emails: ["a@gmail.com"],
+    });
+  });
+
+  it.each([
+    new HttpForbiddenError("Forbidden"),
+    new HttpBadRequestError("Bad Request", {
+      data: { detail: "Invalid payload" },
+    }),
+  ])("rethrows other roles server errors: %s", async (error) => {
     vi.mocked(addUserToGroup).mockRejectedValue(error);
 
     await expect(addUserToGroupFn(request)).rejects.toBe(error);
@@ -142,15 +161,21 @@ describe("addUsersToGroupFn", () => {
     }
   );
 
-  it("returns a personal email refusal", async () => {
+  it("returns the refused personal emails", async () => {
     vi.mocked(addUsersToGroup).mockRejectedValue(
       new HttpBadRequestError("Bad Request", {
-        data: { detail: "PERSONAL_EMAIL_REFUSED" },
+        data: {
+          detail: {
+            code: "PERSONAL_EMAIL_REFUSED",
+            emails: ["a@gmail.com", "b@yahoo.fr"],
+          },
+        },
       })
     );
 
     await expect(addUsersToGroupFn(batchRequest)).resolves.toEqual({
       error: "PERSONAL_EMAIL_REFUSED",
+      emails: ["a@gmail.com", "b@yahoo.fr"],
     });
   });
 
