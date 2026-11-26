@@ -42,7 +42,7 @@ const CollectiviteTerritorialeSection: React.FC<{
       "Élus",
       elus.length > 0 ? (
         <Link
-          params={{ slug: uniteLegale.chemin }}
+          params={{ slug: uniteLegale.siren }}
           to="/entreprise/$slug/dirigeants"
         >
           → voir les {elus.length} élu(s)
