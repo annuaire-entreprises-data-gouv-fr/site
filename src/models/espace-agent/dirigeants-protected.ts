@@ -77,7 +77,7 @@ export const getDirigeantsProtected = async (
   params: {
     isEI: boolean;
     isUniteLegaleProtected: boolean;
-    canSeeJourNaissanceDirigeants: boolean;
+    canSeeIdentiteRestreinteDirigeants: boolean;
   }
 ): Promise<IDirigeantsWithMetadataMergedIGInpi | IAPINotRespondingError> => {
   const siren = verifySiren(maybeSiren);
@@ -102,11 +102,13 @@ export const getDirigeantsProtected = async (
     const rneData = isAPINotResponding(dirigeantsRNE) ? [] : dirigeantsRNE.data;
     const rcsData = isAPINotResponding(dirigeantsRCS)
       ? []
-      : params.canSeeJourNaissanceDirigeants
+      : params.canSeeIdentiteRestreinteDirigeants
         ? dirigeantsRCS
         : dirigeantsRCS.map((dirigeant) => ({
             ...dirigeant,
             dateNaissance: undefined,
+            lieuNaissance: undefined,
+            nationalite: undefined,
           }));
 
     // EI data is not standardised. It lacks birthdate in RNE and is randomly populated in IG

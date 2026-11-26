@@ -54,7 +54,7 @@ const fetchDirigeants = async (
   {
     isEI = false,
     isUniteLegaleProtected = false,
-    canSeeJourNaissanceDirigeants = false,
+    canSeeIdentiteRestreinteDirigeants = false,
   } = {}
 ) => {
   mockGetDirigeantsRNE.mockResolvedValue({
@@ -66,7 +66,7 @@ const fetchDirigeants = async (
   return await getDirigeantsProtected(SIREN, {
     isEI,
     isUniteLegaleProtected,
-    canSeeJourNaissanceDirigeants,
+    canSeeIdentiteRestreinteDirigeants,
   });
 };
 
@@ -102,20 +102,20 @@ describe("getDirigeantsProtected RNE fallback", () => {
 describe("getDirigeantsProtected birthdate visibility", () => {
   it.each([
     {
-      canSeeJourNaissanceDirigeants: true,
+      canSeeIdentiteRestreinteDirigeants: true,
       expectedDateNaissance: personnePhysique.dateNaissance,
     },
     {
-      canSeeJourNaissanceDirigeants: false,
+      canSeeIdentiteRestreinteDirigeants: false,
       expectedDateNaissance: undefined,
     },
   ])(
-    "returns dateNaissance=$expectedDateNaissance when canSeeJourNaissanceDirigeants=$canSeeJourNaissanceDirigeants",
-    async ({ canSeeJourNaissanceDirigeants, expectedDateNaissance }) => {
+    "returns dateNaissance=$expectedDateNaissance when canSeeIdentiteRestreinteDirigeants=$canSeeIdentiteRestreinteDirigeants",
+    async ({ canSeeIdentiteRestreinteDirigeants, expectedDateNaissance }) => {
       const result = await fetchDirigeants(
         [{ ...personnePhysique, dateNaissance: undefined }],
         [personnePhysique],
-        { canSeeJourNaissanceDirigeants }
+        { canSeeIdentiteRestreinteDirigeants }
       );
 
       expect(result).toMatchObject({
@@ -193,7 +193,7 @@ describe("getDirigeantsProtected RNE/RCS mismatch", () => {
           dateNaissancePartial: undefined,
         },
       ],
-      { canSeeJourNaissanceDirigeants: true }
+      { canSeeIdentiteRestreinteDirigeants: true }
     );
 
     expectMismatchToHaveBeenLogged();

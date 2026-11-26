@@ -237,9 +237,9 @@ export const getAgentDirigeantsProtectedFn = createServerFn()
       getDirigeantsProtected(siren, {
         isEI,
         isUniteLegaleProtected: !!protectedSiren,
-        canSeeJourNaissanceDirigeants: hasRights(
+        canSeeIdentiteRestreinteDirigeants: hasRights(
           session,
-          ApplicationRights.jourNaissanceDirigeants
+          ApplicationRights.identiteRestreinteDirigeants
         ),
       }),
       getUniteLegaleFromSirenFn({ data: { siren: verifiedSiren } }),
