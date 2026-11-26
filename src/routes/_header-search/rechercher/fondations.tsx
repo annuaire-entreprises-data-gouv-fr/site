@@ -36,7 +36,7 @@ export const Route = createFileRoute("/_header-search/rechercher/fondations")({
         alternates: {
           canonical,
         },
-        robots: "noindex, nofollow",
+        robots: "noindex",
       }),
       links: [
         {

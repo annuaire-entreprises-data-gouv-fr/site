@@ -224,7 +224,7 @@ test.describe("Shared entreprise layout", () => {
     await expect(page).toHaveTitle("Page non trouvée");
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
       "content",
-      "noindex, nofollow"
+      "noindex"
     );
     await expect(page.locator("header.fr-header")).toBeVisible();
   });

@@ -16,7 +16,7 @@ export const Route = createFileRoute(
     return {
       meta: meta({
         title: "Accès à l’espace agent refusé",
-        robots: "noindex, nofollow",
+        robots: "noindex",
         alternates: {
           canonical,
         },

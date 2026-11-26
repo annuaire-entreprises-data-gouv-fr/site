@@ -215,9 +215,7 @@ export const Route = createFileRoute("/entreprise/$slug/")({
       meta: meta({
         title: uniteLegalePageTitle(uniteLegale),
         description: uniteLegalePageDescription(uniteLegale),
-        robots: shouldNotIndex(uniteLegale)
-          ? "noindex, nofollow"
-          : "index, follow",
+        robots: shouldNotIndex(uniteLegale) ? "noindex" : "index, follow",
         alternates: {
           canonical,
         },

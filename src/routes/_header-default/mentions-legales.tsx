@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_header-default/mentions-legales")({
     return {
       meta: meta({
         title: "Mentions légales",
-        robots: "noindex, nofollow",
+        robots: "noindex",
         alternates: {
           canonical,
         },

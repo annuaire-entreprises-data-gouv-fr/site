@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_header-compte/compte/mes-groupes")({
     return {
       meta: meta({
         title: "Vos groupes au sein de l’Annuaire des Entreprises",
-        robots: "noindex, nofollow",
+        robots: "noindex",
         alternates: {
           canonical,
         },

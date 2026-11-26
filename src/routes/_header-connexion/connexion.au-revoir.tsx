@@ -12,7 +12,7 @@ export const Route = createFileRoute("/_header-connexion/connexion/au-revoir")({
     return {
       meta: meta({
         title: "Vous êtes bien deconnecté",
-        robots: "noindex, nofollow",
+        robots: "noindex",
         alternates: {
           canonical,
         },
