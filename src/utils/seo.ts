@@ -145,6 +145,6 @@ export function meta(
 meta.notFound = () => ({
   meta: meta({
     title: "Page non trouvée",
-    robots: "noindex, nofollow",
+    robots: "noindex",
   }),
 });

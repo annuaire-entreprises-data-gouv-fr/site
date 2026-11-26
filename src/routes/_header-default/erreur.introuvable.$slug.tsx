@@ -19,7 +19,7 @@ export const Route = createFileRoute(
   head: () => ({
     meta: meta({
       title: "Numéro d’identification introuvable",
-      robots: "noindex, nofollow",
+      robots: "noindex",
     }),
   }),
   beforeLoad: async ({ params }) => {

@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_header-default/modalites-utilisation")({
     return {
       meta: meta({
         title: "Modalités d'utilisation",
-        robots: "noindex, nofollow",
+        robots: "noindex",
         alternates: {
           canonical,
         },

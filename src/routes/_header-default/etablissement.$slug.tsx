@@ -120,9 +120,7 @@ export const Route = createFileRoute("/_header-default/etablissement/$slug")({
       meta: meta({
         title,
         description: etablissementPageDescription(etablissement, uniteLegale),
-        robots: shouldNotIndex(uniteLegale)
-          ? "noindex, nofollow"
-          : "index, follow",
+        robots: shouldNotIndex(uniteLegale) ? "noindex" : "index, follow",
         alternates: {
           canonical,
         },

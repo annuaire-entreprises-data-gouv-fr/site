@@ -37,7 +37,7 @@ export const Route = createFileRoute(
   head: () => ({
     meta: meta({
       title: "Votre groupe au sein de l’Annuaire des Entreprises",
-      robots: "noindex, nofollow",
+      robots: "noindex",
     }),
   }),
   beforeLoad: async ({ cause, search }) => {

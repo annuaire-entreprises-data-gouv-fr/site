@@ -27,7 +27,7 @@ export const Route = createFileRoute("/_header-search/rechercher/carte")({
         alternates: {
           canonical,
         },
-        robots: "noindex, nofollow",
+        robots: "noindex",
       }),
       links: [
         {
