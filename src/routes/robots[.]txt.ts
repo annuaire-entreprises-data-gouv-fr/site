@@ -21,19 +21,12 @@ Allow: /definitions/
 Allow: /departements/
 Allow: /etablissement/
 Allow: /lp/
-Allow: /documents/
-Allow: /donnees-financieres/
-Allow: /annonces/
-Allow: /labels-certificats/
 Allow: /justificatif-immatriculation-pdf/
 Allow: /rechercher/carte
 Allow: /rechercher/
-Allow: /dirigeants/
 Allow: /personne/
-Allow: /divers/
 Allow: /erreur/
 Allow: /formulaire/
-Allow: /api/share/qr/
 Disallow: /api/
 Disallow: /admin/
 
