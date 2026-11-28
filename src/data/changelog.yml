@@ -13,7 +13,7 @@
 ---
 - date: 19/11/2026
   target:
-    agent: site
+    site: true
   body: |
     Introduction d’un nouveau parcours pour exercer les droits relatifs aux données personnelles.
 - date: 10/11/2026
